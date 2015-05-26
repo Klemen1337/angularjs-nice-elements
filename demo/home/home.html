@@ -1,13 +1,576 @@
-<script src="dist/scripts.js"></script>
+<style>
+    body{
+        background: #f3f3f3;
+    }
+
+    .headline{
+        text-align:center;
+        font-size: 60px;
+        margin: 30px;
+    }
+
+    .white-wrapper{
+        border: 1px solid #ccc;
+        padding: 25px;
+        background: white;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        margin-bottom:25px;
+    }
+
+    .white-wrapper h2{
+        margin: 0 0 25px 0;
+    }
+
+    pre{
+        margin-bottom: 20px;
+    }
+
+</style>
 
 <div ng-controller='HomeCtrl'>
-	<h1>This is test page.</h1>
+	<div class="container">
+		<h1 class="headline">Nice elements</h1>
 
-	firstName: {{firstName}}
+        <div class="white-wrapper">
+            <h2>All have in common</h2>
 
-	<!-- TODO: place directive call here -->
-	<div style="width: 300px; margin: 5px;">
-		<nice-input model="firstName" placeholder="Please enter your first name" type="text"></nice-input>
-	</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>required</td>
+                        <td>when enabled it will effect ng-form</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>field-width</td>
+                        <td>sets the width of the input field</td>
+                        <td>col-sm-8</td>
+                    </tr>
+                    <tr>
+                        <td>title-width</td>
+                        <td>sets the width of the title</td>
+                        <td>col-sm-4</td>
+                    </tr>
+                    <tr>
+                        <td>disabled</td>
+                        <td>disables the input</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>sets the label of the field</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>model</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>valid</td>
+                        <td>is actually ng-form</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+
+
+        <!-------------------------------- NICE INPUT -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice input</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>type</td>
+                        <td>Sets the input field type</td>
+                        <td>text</td>
+                    </tr>
+                    <tr>
+                        <td>regex</td>
+                        <td></td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>placeholder</td>
+                        <td></td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>minlength</td>
+                        <td>Sets the max character length</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>maxlength</td>
+                        <td>Sets the min character length</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>hideValid</td>
+                        <td>Hides valid check symbol</td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>showValid</td>
+                        <td>wtf</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>textAreaLines</td>
+                        <td>Sets text area number of lines</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>textArea</td>
+                        <td>Sets input field to text area</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>symbol</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>help</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>minDecimalsCutZeros</td>
+                        <td>Use this field to tell how much decimal places must always be, even if number is ceil.</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <pre class="prettyprint">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-input title="Text" model="inputText"></nice-input>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ inputText }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-input title="Number" model="inputNumber" type="number">&lt;/nice-input></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-input title="Number" model="inputNumber" type="number"></nice-input>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ inputNumber }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-input title="Email" model="inputEmail" type="email">&lt;/nice-input></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-input title="Email" model="inputEmail" type="email"></nice-input>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ inputEmail }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-input title="Textarea" model="inputTextArea" text-area="true">&lt;/nice-input></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-input title="Textarea" model="inputTextArea" text-area="true"></nice-input>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ inputTextArea }}</code>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-------------------------------- NICE DROPDOWN -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice dropdown</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>list</td>
+                        <td>List of available options</td>
+                        <td>REQUIRED</td>
+                    </tr>
+                    <tr>
+                        <td>addButtonEnable</td>
+                        <td>Shows the button nex to the dropdown</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>objValue</td>
+                        <td>Used only when returnOnlyKey = true</td>
+                        <td>value</td>
+                    </tr>
+                    <tr>
+                        <td>listIsObj</td>
+                        <td>True - list has objects, False - list has strings</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>selectedIsObj</td>
+                        <td></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>showTax</td>
+                        <td></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>noMargin</td>
+                        <td>margin bottom is set to 0px</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>multiple</td>
+                        <td>Can select multiple items</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>help</td>
+                        <td></td>
+                        <td>null</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-dropdown
+    title="Dropdown"
+    model="dropdown"
+    list="listObjs"
+    obj-value="value"
+    list-is-obj="true"
+    selected-is-obj="true"
+    multiple="true">
+&lt;/nice-dropdown></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-dropdown title="Dropdown" model="dropdown" list="listObjs" obj-value="value" list-is-obj="true" selected-is-obj="true" multiple="true"></nice-dropdown>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ dropdown }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-dropdown
+    title="Dropdown"
+    model="choiceDemo2"
+    list="listObjs"
+    obj-value="value"
+    list-is-obj="true"
+    selected-is-obj="true">
+&lt;/nice-dropdown></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-dropdown title="Dropdown" model="choiceDemo2" list="listObjs" obj-value="value" list-is-obj="true" selected-is-obj="true"></nice-dropdown>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ choiceDemo2 }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-dropdown title="Dropdown" model="choiceDemo4" list="listStrings">&lt;/nice-dropdown></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-dropdown title="Dropdown" model="choiceDemo4" list="listStrings"></nice-dropdown>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ choiceDemo4 }}</code>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-------------------------------- NICE DATE -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice date - FIX</h2>
+            <pre class="prettyprint">&lt;nice-date model="datepicker" min="'2015-03-16T23:00:00.000Z'">&lt;/nice-date></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-date model="datepicker" min="'2015-03-16T23:00:00.000Z'"></nice-date>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ datepicker }}</code>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-------------------------------- NICE DATE RANGE -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice date range - FIX</h2>
+            <pre class="prettyprint">&lt;nice-date-range model="date">&lt;/nice-date-range></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-date-range model="rangeDate"></nice-date-range>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ rangeDate | json }}</code>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-------------------------------- NICE CHOICE -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice choice demo</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>list</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>listIsObj</td>
+                        <td></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>selectedIsObj</td>
+                        <td></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>objValue</td>
+                        <td></td>
+                        <td>value</td>
+                    </tr>
+                    <tr>
+                        <td>objKey</td>
+                        <td></td>
+                        <td>key</td>
+                    </tr>
+                    <tr>
+                        <td>multiple</td>
+                        <td></td>
+                        <td>false</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-choice
+    title="I like fruit"
+    model="choiceDemo1"
+    multiple="true"
+    list-is-obj="true"
+    list="listObjs"
+    obj-value="value"
+    selected-is-obj="true">
+&lt;/nice-choice></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-choice title="I like fruit" model="choiceDemo1" multiple="true" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ choiceDemo1 }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-choice
+    title="I like fruit"
+    model="choiceDemo2"
+    list-is-obj="true"
+    list="listObjs"
+    obj-value="value"
+    selected-is-obj="true">
+&lt;/nice-choice></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-choice title="I like fruit" model="choiceDemo2" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ choiceDemo2 }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-choice title="I like fruit" model="choiceDemo3" multiple="true" list="listStrings">&lt;/nice-choice></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-choice title="I like fruit" model="choiceDemo3" multiple="true" list="listStrings"></nice-choice>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ choiceDemo3 }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-choice title="I like fruit" model="choiceDemo4" list="listStrings">&lt;/nice-choice></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-choice title="I like fruit" model="choiceDemo4" list="listStrings"></nice-choice>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ choiceDemo4 }}</code>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-------------------------------- NICE YES NO -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice yes no</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>yes</td>
+                        <td>Set the yes text</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>no</td>
+                        <td>Set the no text</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>options</td>
+                        <td></td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>objKey</td>
+                        <td></td>
+                        <td>key</td>
+                    </tr>
+                    <tr>
+                        <td>defaultFalse</td>
+                        <td>sets default value to false</td>
+                        <td>false</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?">&lt;/nice-yesno></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?"></nice-yesno>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ yesNoDemo }}</code>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-yesno
+    model="yesNoDemo2"
+    yes="Bleerp"
+    no="Woorp"
+    model-value="yesNoModelDemo"
+    options="['PERSON','COMPANY']"
+    title="Bloop?">
+&lt;/nice-yesno></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-yesno model="yesNoDemo2" yes="Bleerp" no="Woorp" model-value="yesNoModelDemo" options="['PERSON','COMPANY']" title="Bloop?"></nice-yesno>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ yesNoModelDemo }}</code>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-------------------------------- NICE PERCENT -------------------------------->
+        <div class="white-wrapper">
+            <h2>Nice percent - FIX</h2>
+
+            <pre class="prettyprint">&lt;nice-percent title="Percent" model="percentage">&lt;/nice-percent></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-percent title="Percent" model="percentage"></nice-percent>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ percentage }}</code>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+	</div> <!-- /container -->
 </div>

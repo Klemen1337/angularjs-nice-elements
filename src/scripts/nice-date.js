@@ -27,6 +27,7 @@ angular.module('niceElements')
 
       link: function(scope, iElement, iAttrs, ctrl){
         if(!angular.isDefined(scope.format)) scope.format = "dd.MM.yyyy";
+        if(scope.model) scope.model = new Date();
 
         scope.dateOptions = {
           formatYear: 'yy',
@@ -34,7 +35,7 @@ angular.module('niceElements')
         };
       },
 
-      controller: function($scope, gettextCatalog) {
+      controller: function($scope) {
         if(!angular.isDefined($scope.model)) $scope.model = moment().format();
 
         $scope.today = function() {

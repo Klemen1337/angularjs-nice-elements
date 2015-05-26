@@ -11,9 +11,10 @@ angular.module('niceElements')
     return {
       templateUrl: 'views/nice-dropdown.html',
       restrict: 'E',
+      transclude: true,
       scope: {
         title: '@',               // Title of the field
-        model: '=',            // Aka model
+        model: '=',               // Aka model
         list: '=',                // List of options
         isDisabled: '=',
         fieldWidth: '@',

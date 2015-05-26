@@ -18,7 +18,8 @@ angular.module('niceElements')
         title: '@?',
         required: '@',
         fieldWidth: '@',
-        labelWidth: '@'
+        labelWidth: '@',
+        placeholder: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -26,14 +27,14 @@ angular.module('niceElements')
 
       },
 
-      controller: function($rootScope, $scope, MathService) {
+      controller: function($rootScope, $scope) {
         // Link form object with valid object
         if (angular.isDefined($scope.valid)){
           $scope.valid = $scope.form;
         }
 
         if (angular.isDefined($scope.model)){
-          $scope.internalModel = MathService.roundN(angular.copy($scope.model) * 100, 6);
+          $scope.internalModel = parseFloat(String(angular.copy($scope.model) * 100)).toFixed(6);
         } else {
           $scope.internalModel = "0";
           $scope.model = 0;
@@ -41,9 +42,9 @@ angular.module('niceElements')
 
         $scope.change = function(){
           if($scope.internalModel){
-            $scope.internalModel = $scope.internalModel.replace(',', '.');
+            $scope.internalModel = String($scope.internalModel).replace(',', '.');
             if(parseFloat($scope.internalModel) > 100) $scope.internalModel = 100;
-            $scope.model = MathService.roundN(parseFloat($scope.internalModel) / 100, 6);
+            $scope.model = roundN(parseFloat($scope.internalModel) / 100, 6);
           } else {
             $scope.model = 0;
           }
@@ -66,9 +67,13 @@ angular.module('niceElements')
 
         $scope.$watch('model', function (value_new, value_old) {
           if (value_new){
-            $scope.internalModel = MathService.roundN(angular.copy($scope.model) * 100, 6);
+            $scope.internalModel = roundN(angular.copy($scope.model) * 100, 6);
           }
         });
+
+        var roundN = function(number, decimals){
+          return Number(parseFloat(String(number)).toFixed(decimals));
+        };
 
       }
     };

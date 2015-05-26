@@ -4,7 +4,7 @@
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
         </div>
 
-        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-4'">
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <div ng-class="addButtonEnable && !isDisabled ? 'input-group': ''">
                 <div class="btn-group" dropdown is-open="status.isopen" ng-class="{ 'disabled': isDisabled || emptyList }">
                     <button
@@ -14,7 +14,7 @@
                         dropdown-toggle
                         ng-disabled="isDisabled || emptyList">
 
-                        <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
+                        <!--<span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>-->
                         <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>
 
                         <span ng-if="multiple">
@@ -24,7 +24,7 @@
                             <span ng-if="internalSelected.length == 0" translate>None</span>
                         </span>
 
-                        <span ng-if="showTax && internalSelected.value">{{ internalSelected.value * 100 }}%</span>
+                        <!--<span ng-if="showTax && internalSelected.value">{{ internalSelected.value * 100 }}%</span>-->
                         <span class="caret"></span>
                     </button>
 
@@ -32,9 +32,9 @@
                         <li ng-repeat="item in internalList" ng-click="clicked(item)">
                             <a href>
                                 <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>
-                                <span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>
+                                <!--<span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>-->
                                 <span ng-class="{'multiple-item': multiple}">{{ getLabel(item) }}</span>
-                                <span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>
+                                <!--<span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>-->
                             </a>
                         </li>
                     </ul>

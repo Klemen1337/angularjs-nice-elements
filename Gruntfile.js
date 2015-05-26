@@ -55,7 +55,7 @@ module.exports = function(grunt) {
             },
             concat: {
                 build: {
-                    src:    ['src/nice.js', 'src/scripts/nice-input.js', '.tmp/nice.templates.js'],
+                    src:    ['src/nice.js', 'src/scripts/*.js', '.tmp/nice.templates.js'],
                     dest:   '<%= yeoman.dist %>/nice.js'
                 }
             },

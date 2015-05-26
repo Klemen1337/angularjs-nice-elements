@@ -5,7 +5,6 @@
 body{
   font-family: $font-family-base;
   color: $font-color;
-  background: $background-main !important;
   font-weight: lighter;
 
   p, h1, h2, h3{
@@ -16,7 +15,7 @@ body{
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
+  -html-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;

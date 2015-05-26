@@ -8648,25 +8648,24 @@ button.close {
 body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #404040;
-  background: #eceff1 !important;
   font-weight: lighter;
 }
-/* line 11, ../src/styles/nice.scss */
+/* line 10, ../src/styles/nice.scss */
 body p, body h1, body h2, body h3 {
   color: #404040;
 }
 
-/* line 16, ../src/styles/nice.scss */
+/* line 15, ../src/styles/nice.scss */
 .noselect, .nice-choice li {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
+  -html-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-/* line 25, ../src/styles/nice.scss */
+/* line 24, ../src/styles/nice.scss */
 .form-control {
   box-shadow: none;
 }
