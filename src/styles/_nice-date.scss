@@ -1,0 +1,37 @@
+.nice-date{
+  .dropdown-menu {
+    box-shadow: 0px 0px 0px;
+    padding: 10px;
+    border: 0px none;
+
+    li{
+      :focus {
+        outline: -webkit-focus-ring-color auto 0px;
+      }
+    }
+
+    .input-group-addon {
+      background: $fourth-color !important;
+    }
+
+    .btn{
+      border:0px none;
+    }
+
+    .btn-info{
+      background: $base-color;
+
+      .text-muted{
+        color: white;
+      }
+
+      .text-info{
+        color:white;
+      }
+    }
+
+    .text-info{
+      color:$base-color;
+    }
+  }
+}

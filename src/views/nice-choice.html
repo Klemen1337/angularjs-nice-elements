@@ -1,0 +1,20 @@
+<div class="nice-choice">
+    <div class="row">
+        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <ul class="list-unstyled" ng-class="{'disabled': isDisabled}">
+                <li ng-repeat="item in internalList" ng-class="{ 'selected' : isItemSelected(item) }" ng-click="toggle(item)">
+                    <div class="choice-checkbox" ng-class="{'circle' : !multiple }"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
+                    <div class="choice-label">{{ getLabel(item) }}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Needed for intercepting form changes ($dirty)!-->
+    <div ng-form="formChoice">
+    </div>
+</div>

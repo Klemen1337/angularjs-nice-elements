@@ -1,0 +1,198 @@
+label.nice{
+  color: $input-label-color;
+  text-align: right;
+  display: block;
+  line-height: 34px;
+  margin: 0px;
+  font-weight: normal;
+
+  //@media (max-width: $screen-xs-max) {
+  //  text-align: left;
+  //}
+}
+
+p.nice{
+  line-height: 34px;
+  margin: 0;
+}
+
+.nice-table{
+  hr{
+    margin: 0px;
+    margin-bottom: 10px;
+    border-color: $nice-border;
+  }
+
+  .nice-table-header{
+    font-size: $font-size-small;
+    color: $base-color;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .nice-table-row{
+    cursor: pointer;
+    line-height: 25px;
+    font-size: 14px;
+    padding: 10px 0px;
+    border-top: 1px solid $nice-border;
+
+
+
+    .list-inline{
+      margin-bottom: 0px;
+    }
+
+    &:hover{
+      background: $table-bg-hover;
+    }
+
+    .nice-table-btn{
+      line-height: 11px;
+      width: 100%;
+    }
+  }
+
+  .no-border-top{
+    border-top: none;
+  }
+
+  .active{
+    //background: $table-bg-active;
+
+    &:before{
+      content: " ";
+      background: $base-color;
+      width: 2px;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+  }
+
+  &.nice-table-settings{
+    .nice-table-row:hover{
+      background: none;
+      @extend .active;
+    }
+  }
+}
+
+.nice-list-item{
+  cursor: pointer;
+  line-height: 25px;
+  font-size: 14px;
+  padding: 15px 25px;
+  border-top: 1px solid $nice-border;
+
+  &:hover{
+    background: $table-bg-hover;
+  }
+
+  &.active{
+    background: $table-bg-active;
+  }
+}
+
+.nice-submenu{
+  background-color: $nice-submenu-bg-color;
+  // height: 50px;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  //line-height: 50px;
+
+  .nice-submenu-wrapper{
+    padding:25px;
+  }
+
+  .nice-submenu-item {
+    cursor: pointer;
+    line-height: 50px;
+
+    &:before {
+      content: " ";
+      background: $nice-submenu-gray-color;
+      height: 3px;
+      position: absolute;
+      top: 47px;
+      bottom: 0px;
+      left: 2px;
+      right: 2px;
+    }
+
+    &.active, &:hover {
+      &:before {
+        background: $base-color;
+      }
+    }
+  }
+
+  .width-200{
+    width: 200px;
+  }
+
+  .width-300{
+    width: 300px;
+  }
+
+  .nice-inline{
+    margin-right: 10px;
+    float: left;
+    line-height: 34px;
+  }
+
+  .nice-inline-right{
+    margin-left: 10px;
+    float: right;
+    line-height: 34px;
+    @media (max-width: $screen-md-min) { float: left; }
+  }
+}
+
+.nice-label{
+  display: block;
+  p.value{
+    line-height: 34px;
+  }
+}
+
+.error-message{
+  padding:5px 0px 0px 0px;
+  text-align: right;
+  font-size: $font-size-small;
+  color: $nice-input-invalid;
+}
+
+.feedback-invalid{
+  color:$nice-input-invalid !important;
+}
+
+.feedback-valid{
+  color:$nice-input-valid;
+}
+
+.has-warning{
+  .form-control{
+    border-color: $nice-input-invalid !important;
+  }
+
+  .input-group-addon{
+    background: $nice-input-invalid;
+    border: $nice-input-invalid;
+    color: white;
+  }
+}
+
+.has-success{
+  .form-control{
+    border-color: $nice-input-valid;
+  }
+
+  .input-group-addon{
+    background: $nice-input-valid;
+    border: $nice-input-valid;
+    color: white;
+  }
+}

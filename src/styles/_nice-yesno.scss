@@ -1,0 +1,82 @@
+.nice-yesno{
+  margin-bottom: 10px;
+
+  .disabled{
+    background-color: $nice-yesno-disabled-bg;
+    opacity: 0.65;
+    border: $nice-yesno-disabled-border;
+
+    .yesno-yes-bg, .yesno-no-bg, .yesno-button{
+      cursor: not-allowed !important;
+    }
+  }
+
+  .yesno-wrapper{
+    background: $nice-yesno-bg;
+    border: 1px solid #ccc;
+    color: $font-color;
+    border-radius: $border-radius-base;
+
+    height: 34px;
+    position: relative;
+
+    .yesno-yes-bg, .yesno-no-bg, .yesno-button {
+      text-align: center;
+      line-height: 34px;
+      cursor: pointer;
+    }
+
+    .yesno-yes-bg, .yesno-no-bg {
+      color: $disabled-font-color;
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+    }
+
+    .yesno-no-bg{
+      left: 50%;
+      right: 0;
+    }
+    .yesno-yes-bg{
+      left: 0;
+      right: 50%;
+    }
+
+    .yesno-button{
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      -ms-transition: all 0.5s;
+      -o-transition: all 0.5s;
+      transition: all 0.5s;
+
+      background-color: $nice-yesno-slider-bg;
+      border-radius: 1px;
+      color: white;
+      position: absolute;
+      line-height: 28px;
+    }
+
+    .yesno-button-no{
+      left: 50%;
+      top: 2px;
+      bottom: 2px;
+      right: 2px;
+    }
+
+    .yesno-button-yes{
+      left: 2px;
+      top: 2px;
+      bottom: 2px;
+      right: 50%;
+    }
+  }
+}
+
+.no-margin-bottom{
+  .nice-yesno {
+    margin-bottom: 0px;
+  }
+}
+

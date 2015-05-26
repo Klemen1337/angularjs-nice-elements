@@ -1,0 +1,102 @@
+.nice-input{
+  color:black;
+  display: block;
+  margin-bottom: 10px;
+
+  ::-webkit-input-placeholder { /* WebKit browsers */
+    color: $nice-input-placeholder-color;
+//    opacity: 0.1;
+  }
+
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $nice-input-placeholder-color;
+//    opacity: 0.1;
+  }
+
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $nice-input-placeholder-color;
+//    opacity: 0.1;
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $nice-input-placeholder-color;
+//    opacity: 0.1;
+  }
+
+  :disabled::-webkit-input-placeholder { /* WebKit browsers */
+    color: $nice-input-disabled-bg;
+  }
+
+  :disabled:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $nice-input-disabled-bg;
+//    opacity:  0;
+  }
+  :disabled::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $nice-input-disabled-bg;
+//    opacity:  0;
+  }
+  :disabled:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $nice-input-disabled-bg;
+//    opacity:  0;
+  }
+
+
+  .input-group-addon{
+    background: $fourth-color;
+    border-top-right-radius: $border-radius-base !important;
+    border-bottom-right-radius: $border-radius-base !important;
+    border-color: $fourth-color;
+    color: $font-color;
+    border: 1px solid $fourth-color;
+    border-left: 0px;
+  }
+
+  .disabled{
+    .input-group-addon{
+      background: $nice-dropdown-disabled-bg;
+      border-color: $nice-dropdown-disabled-border;
+      opacity: 0.65;
+    }
+  }
+
+  .form-control{
+    background: $nice-input-bg;
+    border: 1px solid $nice-input-border;
+
+    &:active, &:focus{
+      border-color: $nice-focus-border;
+
+      .input-group-addon &{
+        border-color: $nice-focus-border;
+      }
+    }
+
+    &:disabled {
+      background: $nice-input-disabled-bg;
+      border-color: $nice-input-disabled-border;
+      opacity: 0.65;
+    }
+  }
+
+  .form-group{
+    margin-bottom: 0px;
+  }
+
+  .symbol{
+    @extend .input-group;
+
+    input{
+      text-align: right;
+    }
+
+    .form-control-feedback {
+      left: 0;
+      right: auto;
+    }
+
+    .form-control{
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+  }
+}

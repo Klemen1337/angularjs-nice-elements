@@ -1,0 +1,52 @@
+<div class="nice-dropdown" ng-class="{ 'margin-bottom-0': noMargin }">
+    <div class="row">
+        <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-4'">
+            <div ng-class="addButtonEnable && !isDisabled ? 'input-group': ''">
+                <div class="btn-group" dropdown is-open="status.isopen" ng-class="{ 'disabled': isDisabled || emptyList }">
+                    <button
+                        type="button"
+                        class="btn btn-block btn-dropdown dropdown-toggle"
+                        title="{{ getLabel(internalSelected) }}"
+                        dropdown-toggle
+                        ng-disabled="isDisabled || emptyList">
+
+                        <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
+                        <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>
+
+                        <span ng-if="multiple">
+                            <!--<span ng-repeat="item in internalSelected"><span ng-if="$index > 0">, </span>{{ getLabel(item) }}</span>-->
+                            <span ng-if="internalSelected.length  > 1">{{ internalSelected.length }} <translate>selected</translate></span>
+                            <span ng-if="internalSelected.length  == 1">{{ getLabel(internalSelected[0]) }}</span>
+                            <span ng-if="internalSelected.length == 0" translate>None</span>
+                        </span>
+
+                        <span ng-if="showTax && internalSelected.value">{{ internalSelected.value * 100 }}%</span>
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="item in internalList" ng-click="clicked(item)">
+                            <a href>
+                                <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>
+                                <span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>
+                                <span ng-class="{'multiple-item': multiple}">{{ getLabel(item) }}</span>
+                                <span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <span class="input-group-btn" ng-if="addButtonEnable && !isDisabled">
+                    <button class="btn btn-primary" ng-click="addButtonFunction()" type="button">+</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--Needed for intercepting form changes ($dirty)!-->
+    <div ng-form="formDropdown"></div>
+</div>
+

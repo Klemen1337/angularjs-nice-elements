@@ -1,0 +1,41 @@
+
+@import "variables";
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+
+body{
+  font-family: $font-family-base;
+  color: $font-color;
+  background: $background-main !important;
+  font-weight: lighter;
+
+  p, h1, h2, h3{
+    color: $font-color;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.form-control{
+  box-shadow: none;
+}
+
+@import "nice-common";
+@import "nice-dropdown";
+@import "nice-input";
+@import "nice-search";
+@import "nice-yesno";
+@import "nice-steps";
+@import "nice-choice";
+@import "nice-datetime-picker";
+@import "nice-button-toggle";
+@import "nice-number";
+@import "nice-date-range";
+@import "nice-date";
+@import "nice-comment";

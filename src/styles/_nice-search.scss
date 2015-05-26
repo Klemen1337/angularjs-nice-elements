@@ -1,0 +1,68 @@
+.nice-search{
+  position: relative;
+
+  .symbol {
+    input{
+      text-align: left;
+    }
+    .form-control{
+      padding-left: 12px;
+    }
+  }
+
+  .nice-dropdown{
+    position: absolute;
+    z-index: 999;
+    //top: 35px;
+    left: 0;
+    // right: 0;
+    //min-width: 340px;
+    max-height: 300px;
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-base;
+    overflow-x: auto;
+
+    top: -13px;
+    margin: 15px;
+    right: 0;
+
+    .nice-search-row{
+      padding: 10px 15px;
+      z-index: 1000;
+      width: 100%;
+      &:hover {
+        color: white !important;
+        background-color: $base-color !important;
+        cursor: pointer;
+
+        p{color:white !important;}
+      }
+
+      &.active{
+        color: white;
+        background-color: $base-color;
+        cursor: pointer;
+
+        p{color:white;}
+      }
+    }
+
+    &:hover{
+      .active{
+        color: $text-color;
+        background-color: white;
+        p{
+          color:$text-color;
+        }
+      }
+    }
+  }
+
+  .nice-dropdown-empty{
+    @extend .nice-dropdown;
+    top: -13px;
+    margin: 15px;
+    right: 0;
+  }
+}

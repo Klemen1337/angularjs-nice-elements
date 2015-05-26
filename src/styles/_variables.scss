@@ -1,0 +1,146 @@
+// ---------- Fonts ----------
+$font-family-sans-serif:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-base:        $font-family-sans-serif;
+
+// ---------- Colors ----------
+$lochmara: #8BA3AD;
+$downy: #6CCAC9;
+$malibu: #57C8F2;
+$sunglow: #F8D347;
+$bittersweet: #FF6C60;
+$carrot: #FD953D;
+$tangerine: #F3AD16;
+$kurzschluss: #64DD17;
+
+$hibiscus: #F73D77;
+$portica: #FFD03A;
+$turquoise: #00C7D9;
+$scooter: #2B8DA3;
+$attol: #2C8C84;
+
+//$color1: #64DD17;
+//$color2: #26C6DA;
+//$color3: #26A69A;
+//$color4: #90A4AE;
+
+$color1: #0097A8;
+$color2: #19B7DE;
+$color3: #1DE9B6;
+$color4: #AFEB00;
+
+$zumthor: #D2D9D9;
+$solitude: #EDEFF2;
+$trout: #474F52;
+$casper: #B1BEC1;
+$botticelli: #8BA3AD;   // Badge color
+$zircon: #DFE4E7;       // Badge background
+
+$badge-bg: $zircon;
+$badge-color: $botticelli;
+$badge-border-radius: 2px;
+
+$table-bg-hover: #fafafa;
+
+// ---------- MintPos colors ----------
+$old-mint: #27bfb4;
+$mint: #4abeb4;
+$gunmetal: #2A363A;
+$atomic: #384850;
+$solitude: #EDEFF2;
+$cornflower: #3659B0;
+
+// ---------- Color override ----------
+$border-color: #eee ;//#cbd4d9;
+$hr-color: #cfd8dc;
+$font-color: #404040;
+
+$base-color: $mint;
+$second-color: $lochmara;
+$third-color: #afbec5;
+$fourth-color: gainsboro;
+
+$base-color-opaque: rgba(74, 190, 180, 0.65);
+
+$nice-submenu-bg-color: #e1e5e8;
+$nice-submenu-gray-color: #b0bec5;
+
+$disabled-spinner-color: #cfd8dd;
+
+$background-main: #eceff1;
+$background-right: $background-main;
+$background-left: $base-color;
+$text-color-left: $font-color;
+$navigation-background: #37474f;
+$navigation-background-darker: #263238;
+$navigation-color: white;
+
+$error-color: #ef5350;
+$link-color: $base-color;
+$base-font-weight: lighter;
+
+// ---------- Disabled colors ----------
+$disabled-font-color: #999999;
+$disabled-bg-color: #eeeeee;
+
+// ---------- No border radius at all ----------
+$border-radius-base:        3px;
+$border-radius-large:       8px;
+$border-radius-small:       2px;
+
+// ---------- Button color override ----------
+$btn-disabled-bg: #b0bec5;
+$btn-primary-bg: $base-color;
+$btn-danger-bg: $bittersweet;
+$btn-link-color: $base-color;
+
+
+// ---------- Nice global settings ----------
+$nice-focus-bg: white;
+$nice-focus-border: $base-color;
+$nice-focus-color: $trout;
+
+$nice-color: #404040;
+$nice-background: white;
+$nice-border: #cbd4d9;
+
+// ---------- Input colors override ----------
+$input-border-focus: $base-color;
+$input-border: $nice-border;
+$input-bg: $nice-background;
+$input-color: $font-color;
+$input-label-color: $trout;
+$nice-input-placeholder-color: $third-color;
+
+$nice-input-bg: $nice-background;
+$nice-input-border: $nice-border;
+$nice-input-disabled-bg: white;
+$nice-input-disabled-border: $solitude;
+
+$nice-input-valid: $base-color;
+$nice-input-invalid: $bittersweet;
+
+// ---------- Dropdown colors override ----------
+$nice-dropdown-bg: $nice-background;
+$nice-dropdown-border: $nice-border;
+$nice-dropdown-color: $font-color;
+
+$nice-dropdown-hover-bg: white;
+$nice-dropdown-hover-border: $nice-border;
+$nice-dropdown-hover-color: $trout;
+
+$nice-dropdown-disabled-bg: white;
+$nice-dropdown-disabled-border: $solitude;
+
+// ---------- YesNo colors override ----------
+$nice-yesno-bg: $nice-background;
+$nice-yesno-slider-bg: $base-color;
+
+$nice-yesno-disabled-color: $solitude;
+$nice-yesno-disabled-bg: white;
+$nice-yesno-disabled-border: #D2D9D9;
+
+// ---------- Choice colors override ----------
+$nice-choice-bg: $nice-background;
+$nice-choice-hover-border: $base-color;
+$nice-choice-selected-bg: $base-color;
+$nice-choice-selected-color: white;

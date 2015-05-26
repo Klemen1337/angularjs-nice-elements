@@ -1,0 +1,40 @@
+<ng-form class="nice-input" name="form">
+  <div class="row">
+    <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+        <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+    </div>
+
+    <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+        <div class="form-group has-feedback symbol"
+             ng-class="{
+                'has-warning': !isDisabled && form.$invalid && form.$dirty && !hideValid,
+                'has-success': !isDisabled && form.$valid && form.$dirty && showValid,
+                'disabled': isDisabled
+        }">
+            <input
+                class="form-control"
+                type="text"
+                max="100"
+                min="0"
+                ng-model="internalModel"
+                placeholder="{{ placeholder }}"
+                ng-required="required"
+                ng-keypress="keypress($event)"
+                ng-change="change()"
+                ng-disabled="isDisabled">
+
+            <span class="input-group-addon">%</span>
+            <!--<span ng-if="!disabled && showValid && form.$valid && form.$dirty" class="glyphicon glyphicon-ok form-control-feedback feedback-valid" aria-hidden="true"></span>-->
+            <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
+        </div>
+
+        <div ng-messages="form.$error">
+            <div class="error-message" ng-message="email" ng-if="form.$dirty">Email is not valid.</div>
+            <div class="error-message" ng-message="pattern" ng-if="form.$dirty">This field requires a specific pattern.</div>
+            <div class="error-message" ng-message="required" ng-if="form.$dirty">This field is required.</div>
+            <div class="error-message" ng-message="minlength">Your field is too short. It must contain at least {{ minlength }} characters.</div>
+            <div class="error-message" ng-message="maxlength">Your field is too long</div>
+        </div>
+    </div>
+  </div>
+</ng-form>

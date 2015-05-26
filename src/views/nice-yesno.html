@@ -1,0 +1,15 @@
+<div class="row nice-yesno">
+    <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+        <label class="nice">{{ title }}</label>
+    </div>
+    <div ng-class="fieldWidth ? fieldWidth : 'col-sm-4'">
+        <div class="yesno-wrapper noselect" ng-class="{ 'disabled': isDisabled }">
+            <div class="yesno-yes-bg" ng-click="switch()">{{ yes }}</div>
+            <div class="yesno-no-bg" ng-click="switch()">{{ no }}</div>
+            <div class="yesno-button" ng-click="switch()">{{ state }}</div>
+        </div>
+    </div>
+    <!--Needed for intercepting form changes ($dirty)!-->
+    <div ng-form="formYesno">
+    </div>
+</div>

@@ -1,0 +1,82 @@
+.nice-steps{
+  font-size: $font-size-small;
+  color: $base-color;
+  margin-top: -30px;
+  padding-bottom: 10px;
+  padding-top: 45px;
+  margin-bottom: 25px;
+  background-color: $nice-submenu-bg-color;
+
+  ul{
+    position: relative;
+  }
+
+  .progress-step{
+    position: relative;
+    display: block;
+    text-align: center;
+    //cursor: pointer;
+
+    label{
+      //cursor: pointer;
+      color: $nice-submenu-gray-color;
+    }
+
+    .circle{
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      margin-left: -9px;
+      width: 18px;
+      height: 18px;
+      background: $nice-submenu-gray-color;
+      display: block;
+      content: "";
+      z-index: 2;
+      border-radius: 100px;
+      border: 3px solid $nice-submenu-gray-color;
+    }
+  }
+
+  // This is used for drawing vertical line
+  .progress-step::before{
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -50%;
+    width: 100%;
+    height: 3px;
+    background: $nice-submenu-gray-color;
+    z-index: 1;
+  }
+
+  // Line is left from circle, so remove first line
+  .progress-step:first-child::before {
+    display: none;
+  }
+
+  // Styling of active elements (circle, line and text)
+  .active{
+    .circle {
+      background: $base-color;
+      border-color: $base-color;
+    }
+    &.progress-step::before{
+      background: $base-color;
+    }
+    label{
+      color: $base-color;
+    }
+  }
+
+  // Current element has white color inside the circle
+  .current{
+    .circle {
+      background-color: $nice-submenu-bg-color;
+    }
+  }
+
+  .progress{
+    margin-left: 50px;
+  }
+}
