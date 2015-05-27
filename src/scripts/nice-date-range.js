@@ -11,7 +11,7 @@ angular.module('niceElements')
   .directive('niceDateRange', function() {
     return {
       restrict: 'E',
-      replace: true,
+      transclude: true,
       templateUrl: 'views/nice-date-range.html',
       scope: {
         model: '=',
@@ -20,8 +20,6 @@ angular.module('niceElements')
         format: '@',
         min: '@',
         max: '@',
-        startDate: '=',
-        endDate: '=',
         labelWidth: '@',
         startOfTheYear: '@'
       },
@@ -30,16 +28,15 @@ angular.module('niceElements')
         if(!angular.isDefined(scope.model)) {
           if(!angular.isDefined(scope.startOfTheYear)){
             scope.model = {
-              startDate: moment(),
-              endDate: moment()
+              startDate: moment().format(),
+              endDate: moment().format()
             }
           } else {
             scope.model = {
-              startDate: moment([moment().year()]),
-              endDate: moment()
+              startDate: moment([moment().year()]).format(),
+              endDate: moment().format()
             }
           }
-
         }
       },
 
@@ -48,13 +45,13 @@ angular.module('niceElements')
         $scope.opts = {
           //format: 'DD.MM.YYYY',
           locale: {
-            applyClass: 'btn-green',
+            //applyClass: 'btn-green',
             //applyLabel: gettextCatalog.getString("Apply"),
             //fromLabel: gettextCatalog.getString("From"),
             //toLabel: gettextCatalog.getString("To"),
             //cancelLabel: gettextCatalog.getString("Cancel"),
             //customRangeLabel: gettextCatalog.getString("Custom range"),
-            firstDay: 1,
+            firstDay: 1
             //daysOfWeek: [
             //  gettextCatalog.getString("Sun"),
             //  gettextCatalog.getString("Mon"),

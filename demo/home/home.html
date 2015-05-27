@@ -1,22 +1,24 @@
 <style>
     body{
-        background: #f3f3f3;
+        background: #eceff1;
     }
 
     .headline{
         text-align:center;
         font-size: 60px;
         margin: 30px;
+        margin-top:80px;
     }
 
     .white-wrapper{
-        border: 1px solid #ccc;
+        /*border: 1px solid #ccc;*/
         padding: 25px;
         background: white;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
         margin-bottom:25px;
+        box-shadow: 0 0 5px #e2e2e2;
     }
 
     .white-wrapper h2{
@@ -29,14 +31,49 @@
 
 </style>
 
+
+
 <div ng-controller='HomeCtrl'>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-example">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ng-href="#/home">Nice elements</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-example">
+                <ul class="nav navbar-nav">
+                    <li><a ng-click="scrollTo('common')" href>Common</a></li>
+                    <li><a ng-click="scrollTo('nice-input')" href>Input</a></li>
+                    <li><a ng-click="scrollTo('nice-dropdown')" href>Dropdown</a></li>
+                    <li><a ng-click="scrollTo('nice-search')" href>Search</a></li>
+                    <li><a ng-click="scrollTo('nice-date-time')" href>Date time</a></li>
+                    <li><a ng-click="scrollTo('nice-date-range')" href>Date range</a></li>
+                    <li><a ng-click="scrollTo('nice-choice')" href>Choice</a></li>
+                    <li><a ng-click="scrollTo('nice-yes-no')" href>Yes no</a></li>
+                    <li><a ng-click="scrollTo('nice-percent')" href>Percent</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+
 	<div class="container">
 		<h1 class="headline">Nice elements</h1>
 
-        <div class="white-wrapper">
+        <div class="white-wrapper" id="common">
             <h2>All have in common</h2>
 
-            <table class="table">
+            <table class="table nice-table">
                 <thead>
                     <tr>
                         <th>Command</th>
@@ -87,7 +124,7 @@
 
 
         <!-------------------------------- NICE INPUT -------------------------------->
-        <div class="white-wrapper">
+        <div class="white-wrapper" id="nice-input">
             <h2>Nice input</h2>
 
             <table class="table">
@@ -167,6 +204,8 @@
                 </tbody>
             </table>
 
+            <hr>
+
             <pre class="prettyprint">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
             <div class="row">
                 <div class="col-sm-6">
@@ -217,7 +256,7 @@
 
 
         <!-------------------------------- NICE DROPDOWN -------------------------------->
-        <div class="white-wrapper">
+        <div class="white-wrapper" id="nice-dropdown">
             <h2>Nice dropdown</h2>
 
             <table class="table">
@@ -331,17 +370,105 @@
         </div>
 
 
-
-        <!-------------------------------- NICE DATE -------------------------------->
-        <div class="white-wrapper">
-            <h2>Nice date - FIX</h2>
-            <pre class="prettyprint">&lt;nice-date model="datepicker" min="'2015-03-16T23:00:00.000Z'">&lt;/nice-date></pre>
+        <!-------------------------------- NICE SEARCH -------------------------------->
+        <div class="white-wrapper" id="nice-search">
+            <h2>Nice search - TODO</h2>
+            <pre class="prettyprint">&lt;nice-search >&lt;/nice-search></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-date model="datepicker" min="'2015-03-16T23:00:00.000Z'"></nice-date>
+                    <nice-search
+                        refresh-function="getAddresses"
+                        model="searchItem"
+                        field-width="col-xs-12"
+                        placeholder="Search item"
+                        key-for-input-label="formatted_address"
+                        show-dropdown="true">
+                    <div class="row">
+                        {{ results }}
+                        <div class="col-xs-12">
+                            <div ng-if="results.length" class="nice-dropdown">
+                                <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
+                                    <span class="text-bold">{{ result.formatted_address }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </nice-search>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ datepicker }}</code>
+                    <code>{{ searchItem }}</code>
+                    <div ng-if="results.length" class="nice-dropdown">
+                                <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
+                                    <span class="text-bold">{{ result.formatted_address }}</span>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------------- NICE DATE TIME -------------------------------->
+        <div class="white-wrapper" id="nice-date-time">
+            <h2>Nice date time picker</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>startView</td>
+                        <td>possible: year, month, day, hour, minute</td>
+                        <td>day</td>
+                    </tr>
+                    <tr>
+                        <td>minView</td>
+                        <td></td>
+                        <td>day</td>
+                    </tr>
+                    <tr>
+                        <td>dateTimeFormat</td>
+                        <td>Sets the datetime ouput format</td>
+                        <td>dd.MM.yyyy | HH:mm</td>
+                    </tr>
+                    <tr>
+                        <td>hourWithMinutes</td>
+                        <td>If the input is 12:00:00</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>utc</td>
+                        <td>Enable utc datetime output</td>
+                        <td>false</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-datetime-picker
+  model="dateTimePicker"
+  title="Datetime picker"
+  utc="true"
+  min-view="day"
+  start-view="day"
+  date-time-format="dd.MM.yyyy">
+&lt;/nice-datetime-picker></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-datetime-picker
+                      model="dateTimePicker"
+                      title="Datetime picker"
+                      utc="true"
+                      min-view="day" start-view="day"
+                      date-time-format="dd.MM.yyyy">
+                    </nice-datetime-picker>
+                </div>
+                <div class="col-sm-6">
+                    <code>{{ dateTimePicker }}</code>
                 </div>
             </div>
         </div>
@@ -349,12 +476,12 @@
 
 
         <!-------------------------------- NICE DATE RANGE -------------------------------->
-        <div class="white-wrapper">
-            <h2>Nice date range - FIX</h2>
-            <pre class="prettyprint">&lt;nice-date-range model="date">&lt;/nice-date-range></pre>
+        <div class="white-wrapper" id="nice-date-range">
+            <h2>Nice date range - TODO</h2>
+            <pre class="prettyprint">&lt;nice-date-range title="Date range" model="rangeDate">&lt;/nice-date-range></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-date-range model="rangeDate"></nice-date-range>
+                    <nice-date-range title="Date range" model="rangeDate"></nice-date-range>
                 </div>
                 <div class="col-sm-6">
                     <code>{{ rangeDate | json }}</code>
@@ -365,7 +492,7 @@
 
 
         <!-------------------------------- NICE CHOICE -------------------------------->
-        <div class="white-wrapper">
+        <div class="white-wrapper" id="nice-choice">
             <h2>Nice choice demo</h2>
 
             <table class="table">
@@ -379,32 +506,32 @@
                 <tbody>
                     <tr>
                         <td>list</td>
-                        <td></td>
-                        <td></td>
+                        <td>List of objects or strings that are available</td>
+                        <td>REQUIRED</td>
                     </tr>
                     <tr>
                         <td>listIsObj</td>
-                        <td></td>
+                        <td>List has objects</td>
                         <td>false</td>
                     </tr>
                     <tr>
                         <td>selectedIsObj</td>
-                        <td></td>
+                        <td>Return object of the selected</td>
                         <td>false</td>
                     </tr>
                     <tr>
                         <td>objValue</td>
-                        <td></td>
+                        <td>Display selected parameter of the object</td>
                         <td>value</td>
                     </tr>
                     <tr>
                         <td>objKey</td>
-                        <td></td>
+                        <td>Link objects with this parameter</td>
                         <td>key</td>
                     </tr>
                     <tr>
                         <td>multiple</td>
-                        <td></td>
+                        <td>When enabled you can select multiple options</td>
                         <td>false</td>
                     </tr>
                 </tbody>
@@ -477,7 +604,7 @@
 
 
         <!-------------------------------- NICE YES NO -------------------------------->
-        <div class="white-wrapper">
+        <div class="white-wrapper" id="nice-yes-no">
             <h2>Nice yes no</h2>
 
             <table class="table">
@@ -501,13 +628,13 @@
                     </tr>
                     <tr>
                         <td>options</td>
-                        <td></td>
+                        <td>Custom options instead of true/false, format:['yes','no']</td>
                         <td>null</td>
                     </tr>
                     <tr>
-                        <td>objKey</td>
+                        <td>model-value</td>
+                        <td>Gets the custom option instead of true/false</td>
                         <td></td>
-                        <td>key</td>
                     </tr>
                     <tr>
                         <td>defaultFalse</td>
@@ -554,14 +681,15 @@
 
 
         <!-------------------------------- NICE PERCENT -------------------------------->
-        <div class="white-wrapper">
-            <h2>Nice percent - FIX</h2>
+        <div class="white-wrapper" id="nice-percent">
+            <h2>Nice percent</h2>
 
             <pre class="prettyprint">&lt;nice-percent title="Percent" model="percentage">&lt;/nice-percent></pre>
             <div class="row">
                 <div class="col-sm-6">
                     <nice-percent title="Percent" model="percentage"></nice-percent>
                 </div>
+                <div class="col-sm-6">
                 <div class="col-sm-6">
                     <code>{{ percentage }}</code>
                 </div>

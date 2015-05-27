@@ -42,12 +42,12 @@
 
 
   .input-group-addon{
-    background: $fourth-color;
-    border-top-right-radius: $border-radius-base !important;
-    border-bottom-right-radius: $border-radius-base !important;
-    border-color: $fourth-color;
-    color: $font-color;
-    border: 1px solid $fourth-color;
+    background: $nice-addon-bg;
+    border-top-right-radius: $nice-border-radius !important;
+    border-bottom-right-radius: $nice-border-radius !important;
+    border-color: $nice-border-color;
+    color: $nice-font-color;
+    border: 1px solid $nice-addon-bg;
     border-left: 0px;
   }
 

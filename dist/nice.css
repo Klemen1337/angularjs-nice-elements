@@ -1740,12 +1740,12 @@ textarea {
 
 /* line 48, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 a {
-  color: #4abeb4;
+  color: #337ab7;
   text-decoration: none;
 }
 /* line 52, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 a:hover, a:focus {
-  color: #328a82;
+  color: #23527c;
   text-decoration: underline;
 }
 /* line 58, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -1774,7 +1774,7 @@ img {
 
 /* line 86, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 .img-rounded {
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* line 93, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -1783,7 +1783,7 @@ img {
   line-height: 1.428571429;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -2290,7 +2290,7 @@ code {
   font-size: 90%;
   color: #c7254e;
   background-color: #f9f2f4;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 /* line 24, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
@@ -2299,7 +2299,7 @@ kbd {
   font-size: 90%;
   color: #fff;
   background-color: #333;
-  border-radius: 2px;
+  border-radius: 3px;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 /* line 32, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
@@ -2322,7 +2322,7 @@ pre {
   color: #333333;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 55, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
 pre code {
@@ -3553,7 +3553,7 @@ th {
 
 /* line 125, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss */
 .table-hover > tbody > tr:hover {
-  background-color: #fafafa;
+  background-color: #f5f5f5;
 }
 
 /* line 135, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss */
@@ -3591,14 +3591,14 @@ table th[class*="col-"] {
 .nice-table.nice-table-settings .table > tfoot > tr.nice-table-row:hover > td,
 .table > tfoot > tr.active > th,
 .nice-table.nice-table-settings .table > tfoot > tr.nice-table-row:hover > th {
-  background-color: #fafafa;
+  background-color: #f5f5f5;
 }
 
 /* line 20, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_table-row.scss */
 .table-hover > tbody > tr > td.active:hover, .nice-table.nice-table-settings .table-hover > tbody > tr > td.nice-table-row:hover,
 .table-hover > tbody > tr > th.active:hover,
 .nice-table.nice-table-settings .table-hover > tbody > tr > th.nice-table-row:hover, .table-hover > tbody > tr.active:hover > td, .nice-table.nice-table-settings .table-hover > tbody > tr.nice-table-row:hover > td, .table-hover > tbody > tr:hover > .active, .nice-table.nice-table-settings .table-hover > tbody > tr:hover > .nice-table-row:hover, .table-hover > tbody > tr.active:hover > th, .nice-table.nice-table-settings .table-hover > tbody > tr.nice-table-row:hover > th {
-  background-color: #ededed;
+  background-color: #e8e8e8;
 }
 
 /* line 9, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_table-row.scss */
@@ -3830,7 +3830,7 @@ output {
   background-color: white;
   background-image: none;
   border: 1px solid #cbd4d9;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
@@ -4036,7 +4036,7 @@ input[type="checkbox"] {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 /* line 79, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -4064,7 +4064,7 @@ select[multiple].input-sm,
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 /* line 79, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .form-group-sm select.form-control {
@@ -4094,7 +4094,7 @@ select[multiple].input-sm,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* line 79, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -4122,7 +4122,7 @@ select[multiple].input-lg,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 /* line 79, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .form-group-lg select.form-control {
@@ -4433,7 +4433,7 @@ select[multiple].input-lg,
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.428571429;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -4497,14 +4497,14 @@ select[multiple].input-lg,
 /* line 63, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary, .nice-dropdown .btn-dropdown, .nice-search .nice-dropdown-empty .btn-dropdown, .daterangepicker .ranges ul li {
   color: #fff;
-  background-color: #4abeb4;
-  border-color: #3fafa6;
+  background-color: #337ab7;
+  border-color: #2e6da4;
 }
 /* line 11, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:hover, .nice-dropdown .btn-dropdown:hover, .nice-search .nice-dropdown-empty .btn-dropdown:hover, .daterangepicker .ranges ul li:hover, .btn-primary:focus, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .daterangepicker .ranges ul li:focus, .btn-primary.focus, .nice-dropdown .focus.btn-dropdown, .nice-search .nice-dropdown-empty .focus.btn-dropdown, .daterangepicker .ranges ul li.focus, .btn-primary:active, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .daterangepicker .ranges ul li:active, .btn-primary.active, .nice-table.nice-table-settings .btn-primary.nice-table-row:hover, .nice-table.nice-table-settings .nice-dropdown .nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .daterangepicker .ranges ul li.nice-table-row:hover, .daterangepicker .ranges ul .nice-table.nice-table-settings li.nice-table-row:hover, .nice-dropdown .active.btn-dropdown, .nice-search .nice-dropdown-empty .active.btn-dropdown, .daterangepicker .ranges ul li.active, .open > .btn-primary.dropdown-toggle, .nice-dropdown .open > .dropdown-toggle.btn-dropdown, .nice-search .nice-dropdown-empty .open > .dropdown-toggle.btn-dropdown, .daterangepicker .ranges ul .open > li.dropdown-toggle {
   color: #fff;
-  background-color: #389d94;
-  border-color: #2f827b;
+  background-color: #286090;
+  border-color: #204d74;
 }
 /* line 21, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:active, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .daterangepicker .ranges ul li:active, .btn-primary.active, .nice-table.nice-table-settings .btn-primary.nice-table-row:hover, .nice-table.nice-table-settings .nice-dropdown .nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .daterangepicker .ranges ul li.nice-table-row:hover, .daterangepicker .ranges ul .nice-table.nice-table-settings li.nice-table-row:hover, .nice-dropdown .active.btn-dropdown, .nice-search .nice-dropdown-empty .active.btn-dropdown, .daterangepicker .ranges ul li.active, .open > .btn-primary.dropdown-toggle, .nice-dropdown .open > .dropdown-toggle.btn-dropdown, .nice-search .nice-dropdown-empty .open > .dropdown-toggle.btn-dropdown, .daterangepicker .ranges ul .open > li.dropdown-toggle {
@@ -4512,12 +4512,12 @@ select[multiple].input-lg,
 }
 /* line 29, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary.disabled, .nice-dropdown .disabled.btn-dropdown, .nice-search .nice-dropdown-empty .disabled.btn-dropdown, .daterangepicker .ranges ul li.disabled, .btn-primary.disabled:hover, .nice-dropdown .disabled.btn-dropdown:hover, .nice-search .nice-dropdown-empty .disabled.btn-dropdown:hover, .daterangepicker .ranges ul li.disabled:hover, .btn-primary.disabled:focus, .nice-dropdown .disabled.btn-dropdown:focus, .nice-search .nice-dropdown-empty .disabled.btn-dropdown:focus, .daterangepicker .ranges ul li.disabled:focus, .btn-primary.disabled.focus, .nice-dropdown .disabled.focus.btn-dropdown, .nice-search .nice-dropdown-empty .disabled.focus.btn-dropdown, .daterangepicker .ranges ul li.disabled.focus, .btn-primary.disabled:active, .nice-dropdown .disabled.btn-dropdown:active, .nice-search .nice-dropdown-empty .disabled.btn-dropdown:active, .daterangepicker .ranges ul li.disabled:active, .btn-primary.disabled.active, .nice-table.nice-table-settings .btn-primary.disabled.nice-table-row:hover, .nice-table.nice-table-settings .nice-dropdown .disabled.nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings .disabled.nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .disabled.nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .disabled.nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .daterangepicker .ranges ul li.disabled.nice-table-row:hover, .daterangepicker .ranges ul .nice-table.nice-table-settings li.disabled.nice-table-row:hover, .nice-dropdown .disabled.active.btn-dropdown, .nice-search .nice-dropdown-empty .disabled.active.btn-dropdown, .daterangepicker .ranges ul li.disabled.active, .btn-primary[disabled], .nice-dropdown [disabled].btn-dropdown, .nice-search .nice-dropdown-empty [disabled].btn-dropdown, .daterangepicker .ranges ul li[disabled], .btn-primary[disabled]:hover, .nice-dropdown [disabled].btn-dropdown:hover, .nice-search .nice-dropdown-empty [disabled].btn-dropdown:hover, .daterangepicker .ranges ul li[disabled]:hover, .btn-primary[disabled]:focus, .nice-dropdown [disabled].btn-dropdown:focus, .nice-search .nice-dropdown-empty [disabled].btn-dropdown:focus, .daterangepicker .ranges ul li[disabled]:focus, .btn-primary[disabled].focus, .nice-dropdown [disabled].focus.btn-dropdown, .nice-search .nice-dropdown-empty [disabled].focus.btn-dropdown, .daterangepicker .ranges ul li[disabled].focus, .btn-primary[disabled]:active, .nice-dropdown [disabled].btn-dropdown:active, .nice-search .nice-dropdown-empty [disabled].btn-dropdown:active, .daterangepicker .ranges ul li[disabled]:active, .btn-primary[disabled].active, .nice-table.nice-table-settings .btn-primary[disabled].nice-table-row:hover, .nice-table.nice-table-settings .nice-dropdown [disabled].nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings [disabled].nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty [disabled].nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings [disabled].nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .daterangepicker .ranges ul li[disabled].nice-table-row:hover, .daterangepicker .ranges ul .nice-table.nice-table-settings li[disabled].nice-table-row:hover, .nice-dropdown [disabled].active.btn-dropdown, .nice-search .nice-dropdown-empty [disabled].active.btn-dropdown, .daterangepicker .ranges ul li[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .nice-dropdown .btn-dropdown, .nice-dropdown fieldset[disabled] .btn-dropdown, fieldset[disabled] .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty fieldset[disabled] .btn-dropdown, fieldset[disabled] .daterangepicker .ranges ul li, .daterangepicker .ranges ul fieldset[disabled] li, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .nice-dropdown .btn-dropdown:hover, .nice-dropdown fieldset[disabled] .btn-dropdown:hover, fieldset[disabled] .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty fieldset[disabled] .btn-dropdown:hover, fieldset[disabled] .daterangepicker .ranges ul li:hover, .daterangepicker .ranges ul fieldset[disabled] li:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .nice-dropdown .btn-dropdown:focus, .nice-dropdown fieldset[disabled] .btn-dropdown:focus, fieldset[disabled] .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-search .nice-dropdown-empty fieldset[disabled] .btn-dropdown:focus, fieldset[disabled] .daterangepicker .ranges ul li:focus, .daterangepicker .ranges ul fieldset[disabled] li:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .nice-dropdown .focus.btn-dropdown, .nice-dropdown fieldset[disabled] .focus.btn-dropdown, fieldset[disabled] .nice-search .nice-dropdown-empty .focus.btn-dropdown, .nice-search .nice-dropdown-empty fieldset[disabled] .focus.btn-dropdown, fieldset[disabled] .daterangepicker .ranges ul li.focus, .daterangepicker .ranges ul fieldset[disabled] li.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .nice-dropdown .btn-dropdown:active, .nice-dropdown fieldset[disabled] .btn-dropdown:active, fieldset[disabled] .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-search .nice-dropdown-empty fieldset[disabled] .btn-dropdown:active, fieldset[disabled] .daterangepicker .ranges ul li:active, .daterangepicker .ranges ul fieldset[disabled] li:active, fieldset[disabled] .btn-primary.active, fieldset[disabled] .nice-table.nice-table-settings .btn-primary.nice-table-row:hover, .nice-table.nice-table-settings fieldset[disabled] .btn-primary.nice-table-row:hover, fieldset[disabled] .nice-table.nice-table-settings .nice-dropdown .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-dropdown fieldset[disabled] .nice-table-row.btn-dropdown:hover, fieldset[disabled] .nice-dropdown .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings fieldset[disabled] .nice-table-row.btn-dropdown:hover, fieldset[disabled] .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty fieldset[disabled] .nice-table-row.btn-dropdown:hover, fieldset[disabled] .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings fieldset[disabled] .nice-table-row.btn-dropdown:hover, fieldset[disabled] .nice-table.nice-table-settings .daterangepicker .ranges ul li.nice-table-row:hover, .nice-table.nice-table-settings .daterangepicker .ranges ul fieldset[disabled] li.nice-table-row:hover, fieldset[disabled] .daterangepicker .ranges ul .nice-table.nice-table-settings li.nice-table-row:hover, .daterangepicker .ranges ul .nice-table.nice-table-settings fieldset[disabled] li.nice-table-row:hover, fieldset[disabled] .nice-dropdown .active.btn-dropdown, .nice-dropdown fieldset[disabled] .active.btn-dropdown, fieldset[disabled] .nice-search .nice-dropdown-empty .active.btn-dropdown, .nice-search .nice-dropdown-empty fieldset[disabled] .active.btn-dropdown, fieldset[disabled] .daterangepicker .ranges ul li.active, .daterangepicker .ranges ul fieldset[disabled] li.active {
-  background-color: #4abeb4;
-  border-color: #3fafa6;
+  background-color: #337ab7;
+  border-color: #2e6da4;
 }
 /* line 40, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary .badge, .nice-dropdown .btn-dropdown .badge, .nice-search .nice-dropdown-empty .btn-dropdown .badge, .daterangepicker .ranges ul li .badge {
-  color: #4abeb4;
+  color: #337ab7;
   background-color: #fff;
 }
 
@@ -4605,14 +4605,14 @@ select[multiple].input-lg,
 /* line 79, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-danger {
   color: #fff;
-  background-color: #FF6C60;
-  border-color: #ff5447;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 /* line 11, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .nice-table.nice-table-settings .btn-danger.nice-table-row:hover, .open > .btn-danger.dropdown-toggle {
   color: #fff;
-  background-color: #ff3d2d;
-  border-color: #ff1c09;
+  background-color: #c9302c;
+  border-color: #ac2925;
 }
 /* line 21, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:active, .btn-danger.active, .nice-table.nice-table-settings .btn-danger.nice-table-row:hover, .open > .btn-danger.dropdown-toggle {
@@ -4620,18 +4620,18 @@ select[multiple].input-lg,
 }
 /* line 29, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled.focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .nice-table.nice-table-settings .btn-danger.disabled.nice-table-row:hover, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled].focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, .nice-table.nice-table-settings .btn-danger[disabled].nice-table-row:hover, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger.focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active, fieldset[disabled] .nice-table.nice-table-settings .btn-danger.nice-table-row:hover, .nice-table.nice-table-settings fieldset[disabled] .btn-danger.nice-table-row:hover {
-  background-color: #FF6C60;
-  border-color: #ff5447;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 /* line 40, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger .badge {
-  color: #FF6C60;
+  color: #d9534f;
   background-color: #fff;
 }
 
 /* line 88, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link {
-  color: #4abeb4;
+  color: #337ab7;
   font-weight: normal;
   border-radius: 0;
 }
@@ -4647,7 +4647,7 @@ select[multiple].input-lg,
 }
 /* line 107, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link:hover, .btn-link:focus {
-  color: #328a82;
+  color: #23527c;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4662,7 +4662,7 @@ select[multiple].input-lg,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* line 131, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4670,7 +4670,7 @@ select[multiple].input-lg,
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 /* line 135, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4678,7 +4678,7 @@ select[multiple].input-lg,
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 /* line 143, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4783,7 +4783,7 @@ tbody.collapse.in {
   background-color: #fff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
@@ -5113,13 +5113,13 @@ tbody.collapse.in {
 }
 /* line 174, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:first-child:not(:last-child), .daterangepicker .ranges ul .btn-group-vertical > li:first-child:not(:last-child) {
-  border-top-right-radius: 3px;
+  border-top-right-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 /* line 178, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:last-child:not(:first-child), .daterangepicker .ranges ul .btn-group-vertical > li:last-child:not(:first-child) {
-  border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 4px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
@@ -5232,7 +5232,7 @@ tbody.collapse.in {
   text-align: center;
   background-color: #eeeeee;
   border: 1px solid #cbd4d9;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 85, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon.input-sm,
@@ -5241,7 +5241,7 @@ tbody.collapse.in {
 .daterangepicker .ranges ul .input-group-sm > .input-group-btn > li.input-group-addon {
   padding: 5px 10px;
   font-size: 12px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 /* line 90, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon.input-lg,
@@ -5250,7 +5250,7 @@ tbody.collapse.in {
 .daterangepicker .ranges ul .input-group-lg > .input-group-btn > li.input-group-addon {
   padding: 10px 16px;
   font-size: 18px;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 /* line 97, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon input[type="radio"],
@@ -5374,7 +5374,7 @@ tbody.collapse.in {
 /* line 46, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #4abeb4;
+  border-color: #337ab7;
 }
 /* line 59, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav .nav-divider {
@@ -5402,7 +5402,7 @@ tbody.collapse.in {
   margin-right: 2px;
   line-height: 1.428571429;
   border: 1px solid transparent;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 /* line 89, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs > li > a:hover {
@@ -5423,7 +5423,7 @@ tbody.collapse.in {
 }
 /* line 122, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-pills > li > a {
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 125, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-pills > li + li {
@@ -5482,7 +5482,7 @@ tbody.collapse.in {
 /* line 193, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
   margin-right: 0;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 199, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a, .nice-table.nice-table-settings .nav-tabs-justified > .nice-table-row:hover > a, .nice-table.nice-table-settings .nav-tabs.nav-justified > .nice-table-row:hover > a,
@@ -5500,7 +5500,7 @@ tbody.collapse.in {
   /* line 206, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
   .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
     border-bottom: 1px solid #ddd;
-    border-radius: 3px 3px 0 0;
+    border-radius: 4px 4px 0 0;
   }
   /* line 210, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
   .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a, .nice-table.nice-table-settings .nav-tabs-justified > .nice-table-row:hover > a, .nice-table.nice-table-settings .nav-tabs.nav-justified > .nice-table-row:hover > a,
@@ -5551,7 +5551,7 @@ tbody.collapse.in {
 @media (min-width: 768px) {
   /* line 11, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar {
-    border-radius: 3px;
+    border-radius: 4px;
   }
 }
 
@@ -5725,7 +5725,7 @@ tbody.collapse.in {
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 206, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-toggle:focus {
@@ -5912,8 +5912,8 @@ tbody.collapse.in {
 /* line 332, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
   margin-bottom: 0;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -6180,7 +6180,7 @@ tbody.collapse.in {
   margin-bottom: 20px;
   list-style: none;
   background-color: #f5f5f5;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 13, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_breadcrumbs.scss */
 .breadcrumb > li {
@@ -6202,7 +6202,7 @@ tbody.collapse.in {
   display: inline-block;
   padding-left: 0;
   margin: 20px 0;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 10, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination > li {
@@ -6216,7 +6216,7 @@ tbody.collapse.in {
   padding: 6px 12px;
   line-height: 1.428571429;
   text-decoration: none;
-  color: #4abeb4;
+  color: #337ab7;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -6225,20 +6225,20 @@ tbody.collapse.in {
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
   margin-left: 0;
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 }
 /* line 32, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
 }
 /* line 41, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination > li > a:hover, .pagination > li > a:focus,
 .pagination > li > span:hover,
 .pagination > li > span:focus {
-  color: #328a82;
+  color: #23527c;
   background-color: #eeeeee;
   border-color: #ddd;
 }
@@ -6278,14 +6278,14 @@ tbody.collapse.in {
 /* line 11, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
-  border-bottom-left-radius: 8px;
-  border-top-left-radius: 8px;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
 }
 /* line 17, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:last-child > a,
 .pagination-lg > li:last-child > span {
-  border-bottom-right-radius: 8px;
-  border-top-right-radius: 8px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 /* line 5, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
@@ -6297,14 +6297,14 @@ tbody.collapse.in {
 /* line 11, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:first-child > a,
 .pagination-sm > li:first-child > span {
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 17, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:last-child > a,
 .pagination-sm > li:last-child > span {
-  border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 /* line 6, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pager.scss */
@@ -6453,13 +6453,13 @@ a.label:hover, a.label:focus {
   padding: 3px 7px;
   font-size: 12px;
   font-weight: bold;
-  color: #8BA3AD;
+  color: #fff;
   line-height: 1;
   vertical-align: baseline;
   white-space: nowrap;
   text-align: center;
-  background-color: #DFE4E7;
-  border-radius: 2px;
+  background-color: #777777;
+  border-radius: 10px;
 }
 /* line 22, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_badges.scss */
 .badge:empty {
@@ -6477,7 +6477,7 @@ a.label:hover, a.label:focus {
 }
 /* line 41, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_badges.scss */
 .list-group-item.active > .badge, .nice-table.nice-table-settings .list-group-item.nice-table-row:hover > .badge, .nav-pills > .active > a > .badge, .nice-table.nice-table-settings .nav-pills > .nice-table-row:hover > a > .badge {
-  color: #4abeb4;
+  color: #337ab7;
   background-color: #fff;
 }
 /* line 47, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_badges.scss */
@@ -6524,7 +6524,7 @@ a.badge:hover, a.badge:focus {
 }
 /* line 27, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .container .jumbotron, .container-fluid .jumbotron {
-  border-radius: 8px;
+  border-radius: 6px;
 }
 /* line 32, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron .container {
@@ -6555,7 +6555,7 @@ a.badge:hover, a.badge:focus {
   line-height: 1.428571429;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;
   -o-transition: border 0.2s ease-in-out;
   transition: border 0.2s ease-in-out;
@@ -6580,7 +6580,7 @@ a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active,
 .nice-table.nice-table-settings a.thumbnail.nice-table-row:hover {
-  border-color: #4abeb4;
+  border-color: #337ab7;
 }
 
 /* line 9, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_alerts.scss */
@@ -6588,7 +6588,7 @@ a.thumbnail.active,
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 16, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_alerts.scss */
 .alert h4 {
@@ -6705,7 +6705,7 @@ a.thumbnail.active,
   height: 20px;
   margin-bottom: 20px;
   background-color: #f5f5f5;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -6874,14 +6874,14 @@ a.thumbnail.active,
 }
 /* line 31, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item:first-child {
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 }
 /* line 34, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item:last-child {
   margin-bottom: 0;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 /* line 46, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
@@ -7062,7 +7062,7 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
   margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -7085,8 +7085,8 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
-  border-top-right-radius: 2px;
-  border-top-left-radius: 2px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 27, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-heading > .dropdown .dropdown-toggle {
@@ -7114,8 +7114,8 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
   padding: 10px 15px;
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 /* line 63, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
@@ -7133,15 +7133,15 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 .panel > .list-group:first-child .list-group-item:first-child,
 .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
   border-top: 0;
-  border-top-right-radius: 2px;
-  border-top-left-radius: 2px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 81, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .list-group:last-child .list-group-item:last-child,
 .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
   border-bottom: 0;
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 /* line 90, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
@@ -7170,16 +7170,16 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 /* line 115, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child,
 .panel > .table-responsive:first-child > .table:first-child {
-  border-top-right-radius: 2px;
-  border-top-left-radius: 2px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 121, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 /* line 125, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
@@ -7190,7 +7190,7 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
-  border-top-left-radius: 2px;
+  border-top-left-radius: 3px;
 }
 /* line 129, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
@@ -7201,21 +7201,21 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
-  border-top-right-radius: 2px;
+  border-top-right-radius: 3px;
 }
 /* line 137, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child,
 .panel > .table-responsive:last-child > .table:last-child {
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 /* line 143, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 /* line 147, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
@@ -7226,7 +7226,7 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
-  border-bottom-left-radius: 2px;
+  border-bottom-left-radius: 3px;
 }
 /* line 151, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
@@ -7237,7 +7237,7 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
-  border-bottom-right-radius: 2px;
+  border-bottom-right-radius: 3px;
 }
 /* line 158, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .panel-body + .table,
@@ -7321,7 +7321,7 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 /* line 220, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-group .panel {
   margin-bottom: 0;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 /* line 224, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-group .panel + .panel {
@@ -7529,7 +7529,7 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
-  border-radius: 3px;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -7542,13 +7542,13 @@ a.list-group-item-danger.active, .nice-table.nice-table-settings a.list-group-it
 /* line 22, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_wells.scss */
 .well-lg {
   padding: 24px;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* line 26, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_wells.scss */
 .well-sm {
   padding: 9px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 /* line 6, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_close.scss */
@@ -7636,7 +7636,7 @@ button.close {
   background-color: #fff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 6px;
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -7796,7 +7796,7 @@ button.close {
   text-align: center;
   text-decoration: none;
   background-color: #000;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 /* line 37, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
@@ -7891,7 +7891,7 @@ button.close {
   background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 6px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal;
@@ -7920,7 +7920,7 @@ button.close {
   font-size: 14px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
-  border-radius: 7px 7px 0 0;
+  border-radius: 5px 5px 0 0;
 }
 
 /* line 46, ../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
@@ -8644,18 +8644,7 @@ button.close {
     display: none !important;
   }
 }
-/* line 5, ../src/styles/nice.scss */
-body {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #404040;
-  font-weight: lighter;
-}
-/* line 10, ../src/styles/nice.scss */
-body p, body h1, body h2, body h3 {
-  color: #404040;
-}
-
-/* line 15, ../src/styles/nice.scss */
+/* line 14, ../src/styles/nice.scss */
 .noselect, .nice-choice li {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -8665,7 +8654,7 @@ body p, body h1, body h2, body h3 {
   user-select: none;
 }
 
-/* line 24, ../src/styles/nice.scss */
+/* line 23, ../src/styles/nice.scss */
 .form-control {
   box-shadow: none;
 }
@@ -8714,7 +8703,7 @@ p.nice {
 }
 /* line 47, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row:hover {
-  background: #fafafa;
+  background: #f5f5f5;
 }
 /* line 51, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .nice-table-btn {
@@ -8750,11 +8739,11 @@ p.nice {
 }
 /* line 90, ../src/styles/_nice-common.scss */
 .nice-list-item:hover {
-  background: #fafafa;
+  background: #f5f5f5;
 }
 /* line 94, ../src/styles/_nice-common.scss */
 .nice-list-item.active, .nice-table.nice-table-settings .nice-list-item.nice-table-row:hover {
-  background: #fafafa;
+  background: #f5f5f5;
 }
 
 /* line 99, ../src/styles/_nice-common.scss */
@@ -8987,22 +8976,22 @@ p.nice {
 /* line 6, ../src/styles/_nice-input.scss */
 .nice-input ::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: #afbec5;
+  color: #999999;
 }
 /* line 11, ../src/styles/_nice-input.scss */
 .nice-input :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: #afbec5;
+  color: #999999;
 }
 /* line 16, ../src/styles/_nice-input.scss */
 .nice-input ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: #afbec5;
+  color: #999999;
 }
 /* line 21, ../src/styles/_nice-input.scss */
 .nice-input :-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: #afbec5;
+  color: #999999;
 }
 /* line 26, ../src/styles/_nice-input.scss */
 .nice-input :disabled::-webkit-input-placeholder {
@@ -9026,12 +9015,12 @@ p.nice {
 }
 /* line 44, ../src/styles/_nice-input.scss */
 .nice-input .input-group-addon {
-  background: gainsboro;
+  background: #dcdcdc;
   border-top-right-radius: 3px !important;
   border-bottom-right-radius: 3px !important;
-  border-color: gainsboro;
+  border-color: #eee;
   color: #404040;
-  border: 1px solid gainsboro;
+  border: 1px solid #dcdcdc;
   border-left: 0px;
 }
 /* line 55, ../src/styles/_nice-input.scss */
@@ -9368,7 +9357,7 @@ p.nice {
 }
 /* line 5, ../src/styles/_nice-datetime-picker.scss */
 .nice-datetime-picker .input-group .input-group-addon, .nice-datetime-picker .nice-input .symbol .input-group-addon, .nice-input .nice-datetime-picker .symbol .input-group-addon {
-  background: gainsboro;
+  background: #dcdcdc;
 }
 /* line 8, ../src/styles/_nice-datetime-picker.scss */
 .nice-datetime-picker .input-group .input-group-addon:hover, .nice-datetime-picker .nice-input .symbol .input-group-addon:hover, .nice-input .nice-datetime-picker .symbol .input-group-addon:hover {
@@ -9384,16 +9373,27 @@ p.nice {
   width: 260px;
 }
 /* line 24, ../src/styles/_nice-datetime-picker.scss */
+.nice-datetime-picker .datetimepicker .day.active, .nice-datetime-picker .datetimepicker .nice-table.nice-table-settings .day.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker .datetimepicker .day.nice-table-row:hover, .nice-datetime-picker .datetimepicker .month.active, .nice-datetime-picker .datetimepicker .nice-table.nice-table-settings .month.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker .datetimepicker .month.nice-table-row:hover, .nice-datetime-picker .datetimepicker .year.active, .nice-datetime-picker .datetimepicker .nice-table.nice-table-settings .year.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker .datetimepicker .year.nice-table-row:hover {
+  background: #4abeb4;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 30, ../src/styles/_nice-datetime-picker.scss */
+.nice-datetime-picker .datetimepicker .day.active:hover, .nice-datetime-picker .datetimepicker .nice-table.nice-table-settings .day.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker .datetimepicker .day.nice-table-row:hover, .nice-datetime-picker .datetimepicker .month.active:hover, .nice-datetime-picker .datetimepicker .nice-table.nice-table-settings .month.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker .datetimepicker .month.nice-table-row:hover, .nice-datetime-picker .datetimepicker .year.active:hover, .nice-datetime-picker .datetimepicker .nice-table.nice-table-settings .year.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker .datetimepicker .year.nice-table-row:hover {
+  background: #4abeb4;
+}
+/* line 37, ../src/styles/_nice-datetime-picker.scss */
 .nice-datetime-picker table {
   width: 100%;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
 }
-/* line 30, ../src/styles/_nice-datetime-picker.scss */
+/* line 43, ../src/styles/_nice-datetime-picker.scss */
 .nice-datetime-picker table tr td {
   font-size: 12px;
 }
-/* line 34, ../src/styles/_nice-datetime-picker.scss */
+/* line 47, ../src/styles/_nice-datetime-picker.scss */
 .nice-datetime-picker table tr td .active:active, .nice-datetime-picker table tr td .nice-table.nice-table-settings .nice-table-row:active:hover, .nice-table.nice-table-settings .nice-datetime-picker table tr td .nice-table-row:active:hover, .nice-datetime-picker table tr td .active:hover:active, .nice-datetime-picker table tr td .nice-table.nice-table-settings .nice-table-row:hover:active, .nice-table.nice-table-settings .nice-datetime-picker table tr td .nice-table-row:hover:active, .nice-datetime-picker table tr td .active.disabled:active, .nice-datetime-picker table tr td .nice-table.nice-table-settings .disabled.nice-table-row:active:hover, .nice-table.nice-table-settings .nice-datetime-picker table tr td .disabled.nice-table-row:active:hover, .nice-datetime-picker table tr td .active.disabled:hover:active, .nice-datetime-picker table tr td .nice-table.nice-table-settings .disabled.nice-table-row:hover:active, .nice-table.nice-table-settings .nice-datetime-picker table tr td .disabled.nice-table-row:hover:active, .nice-datetime-picker table tr td .active.disabled:hover.active, .nice-datetime-picker table tr td .nice-table.nice-table-settings .disabled.nice-table-row:hover, .nice-table.nice-table-settings .nice-datetime-picker table tr td .disabled.nice-table-row:hover {
   background: #4abeb4 !important;
   border-radius: 3px;
@@ -9418,7 +9418,7 @@ input::-webkit-outer-spin-button {
 
 /* line 2, ../src/styles/_nice-date-range.scss */
 .nice-date-range .input-group-addon {
-  background: gainsboro;
+  background: #dcdcdc;
 }
 
 /* line 7, ../src/styles/_nice-date-range.scss */
@@ -9841,7 +9841,7 @@ input::-webkit-outer-spin-button {
 }
 /* line 13, ../src/styles/_nice-date.scss */
 .nice-date .dropdown-menu .input-group-addon {
-  background: gainsboro !important;
+  background: #dcdcdc !important;
 }
 /* line 17, ../src/styles/_nice-date.scss */
 .nice-date .dropdown-menu .btn, .nice-date .dropdown-menu .daterangepicker .ranges ul li, .daterangepicker .ranges ul .nice-date .dropdown-menu li {

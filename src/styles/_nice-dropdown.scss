@@ -20,8 +20,8 @@
   .input-group-btn{
     padding-left: 10px;
     .btn{
-      border-bottom-left-radius: $border-radius-base;
-      border-top-left-radius: $border-radius-base;
+      border-bottom-left-radius: $nice-border-radius;
+      border-top-left-radius: $nice-border-radius;
     }
   }
 
@@ -68,7 +68,7 @@
 
       &:hover{
         a{
-          background: $base-color;
+          background: $nice-base-color;
           color: white;
         }
 
@@ -81,7 +81,7 @@
     background: $nice-dropdown-bg;
     border-color: $nice-dropdown-border;
     color: $nice-dropdown-color;
-    font-weight: $base-font-weight;
+    font-weight: $nice-font-weight;
 
     text-align: left;
     padding-right: 25px;

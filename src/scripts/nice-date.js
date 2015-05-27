@@ -12,6 +12,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       replace: true,
+      transclude: true,
       templateUrl: 'views/nice-date.html',
       scope: {
         model: '=',

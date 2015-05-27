@@ -11,7 +11,7 @@
     }
 
     .input-group-addon {
-      background: $fourth-color !important;
+      background: $nice-addon-bg !important;
     }
 
     .btn{
@@ -19,7 +19,7 @@
     }
 
     .btn-info{
-      background: $base-color;
+      background: $nice-base-color;
 
       .text-muted{
         color: white;
@@ -31,7 +31,7 @@
     }
 
     .text-info{
-      color:$base-color;
+      color:$nice-base-color;
     }
   }
 }

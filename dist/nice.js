@@ -290,7 +290,7 @@ angular.module('niceElements')
   .directive('niceDateRange', function() {
     return {
       restrict: 'E',
-      replace: true,
+      transclude: true,
       templateUrl: 'views/nice-date-range.html',
       scope: {
         model: '=',
@@ -299,8 +299,6 @@ angular.module('niceElements')
         format: '@',
         min: '@',
         max: '@',
-        startDate: '=',
-        endDate: '=',
         labelWidth: '@',
         startOfTheYear: '@'
       },
@@ -309,16 +307,15 @@ angular.module('niceElements')
         if(!angular.isDefined(scope.model)) {
           if(!angular.isDefined(scope.startOfTheYear)){
             scope.model = {
-              startDate: moment(),
-              endDate: moment()
+              startDate: moment().format(),
+              endDate: moment().format()
             }
           } else {
             scope.model = {
-              startDate: moment([moment().year()]),
-              endDate: moment()
+              startDate: moment([moment().year()]).format(),
+              endDate: moment().format()
             }
           }
-
         }
       },
 
@@ -327,13 +324,13 @@ angular.module('niceElements')
         $scope.opts = {
           //format: 'DD.MM.YYYY',
           locale: {
-            applyClass: 'btn-green',
+            //applyClass: 'btn-green',
             //applyLabel: gettextCatalog.getString("Apply"),
             //fromLabel: gettextCatalog.getString("From"),
             //toLabel: gettextCatalog.getString("To"),
             //cancelLabel: gettextCatalog.getString("Cancel"),
             //customRangeLabel: gettextCatalog.getString("Custom range"),
-            firstDay: 1,
+            firstDay: 1
             //daysOfWeek: [
             //  gettextCatalog.getString("Sun"),
             //  gettextCatalog.getString("Mon"),
@@ -393,6 +390,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       replace: true,
+      transclude: true,
       templateUrl: 'views/nice-date.html',
       scope: {
         model: '=',
@@ -451,7 +449,7 @@ angular.module('niceElements')
       replace: true,
       templateUrl: 'views/nice-datetime-picker.html',
       scope: {
-        datetime: '=timeModel',
+        model: '=',
         title: '@',
         startView: '@', // default day (possible: year, month, day, hour, minute)
         minView: '@', // default: day
@@ -468,14 +466,14 @@ angular.module('niceElements')
 
           if ($scope.hourWithMinutes){
             $scope.labelValue = $filter('date')(moment(newValue).format(), $scope.dateTimeFormat);
-            $scope.datetime=$scope.labelValue;
+            $scope.model = $scope.labelValue;
           }else{
-            $scope.datetime = moment(newValue).format();
-            $scope.labelValue = $filter('date')($scope.datetime, $scope.dateTimeFormat);
+            $scope.model = moment(newValue).format();
+            $scope.labelValue = $filter('date')($scope.model, $scope.dateTimeFormat);
           }
         });
 
-        $scope.$watch('datetime', function(newValue, oldValue) {
+        $scope.$watch('model', function(newValue, oldValue) {
           if (newValue && newValue!=oldValue){
             if ($scope.hourWithMinutes){
               var parts = newValue.split(':');
@@ -500,13 +498,13 @@ angular.module('niceElements')
         // This random string is appended to dropdown id
         scope.randNum = Math.random().toString(36).substring(7);
 
-        if (scope.datetime!=null){
+        if (scope.model != null){
           if (scope.hourWithMinutes){
-            var parts = scope.datetime.split(':');
+            var parts = scope.model.split(':');
             scope.dateObj = new Date();
             scope.dateObj.setHours(parts[0], parts[1], 0, 0);
           } else {
-            scope.dateObj = new Date(Date.parse(scope.datetime));
+            scope.dateObj = new Date(Date.parse(scope.model));
           }
         }else{
           if (scope.utc) { // Underlying directive does not handle UTC properly, so we need to fix selected time to UTC
@@ -1043,6 +1041,7 @@ angular.module('niceElements')
     return {
       templateUrl: 'views/nice-percent.html',
       restrict: 'E',
+      transclude: true,
       scope: {
         model: '=',
         valid: '=',
@@ -1055,8 +1054,6 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
-
-
       },
 
       controller: function($rootScope, $scope) {
@@ -1065,8 +1062,12 @@ angular.module('niceElements')
           $scope.valid = $scope.form;
         }
 
+        var roundN = function(number, decimals){
+          return Number(new Decimal(String(number)).toFixed(decimals, 4));
+        };
+
         if (angular.isDefined($scope.model)){
-          $scope.internalModel = parseFloat(String(angular.copy($scope.model) * 100)).toFixed(6);
+          $scope.internalModel = roundN((angular.copy($scope.model) * 100), 6);
         } else {
           $scope.internalModel = "0";
           $scope.model = 0;
@@ -1084,7 +1085,7 @@ angular.module('niceElements')
 
         $scope.keypress = function(event) {
           if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
-            if(String($scope.internalModel).indexOf(".") >= 0){
+            if($scope.internalModel.indexOf(".") >= 0){
               event.preventDefault();
               return false;
             }
@@ -1093,7 +1094,6 @@ angular.module('niceElements')
           } else { // Prevent everything else
             event.preventDefault();
             return false;
-
           }
         };
 
@@ -1103,10 +1103,11 @@ angular.module('niceElements')
           }
         });
 
-        var roundN = function(number, decimals){
-          return Number(parseFloat(String(number)).toFixed(decimals));
-        };
-
+        $scope.$watch('internalModel', function (value_new, value_old) {
+          if(!$scope.internalModel){
+            $scope.internalModel = "0";
+          }
+        });
       }
     };
   });
@@ -1123,10 +1124,11 @@ angular.module('niceElements')
   .directive('niceSearch', function ($document) {
     return {
       transclude: true,
+      replace: true,
       templateUrl: 'views/nice-search.html',
-      restrict: 'AE',
+      restrict: 'E',
       scope: {
-        modelObj: '=',
+        model: '=',
 //        modelString: '=',
         isDisabled: '=',
         title: '@?',
@@ -1160,11 +1162,11 @@ angular.module('niceElements')
         });
 
         // Check if object is defined
-        if(angular.isDefined(scope.modelObj)){
+        if(angular.isDefined(scope.model)){
           if (angular.isDefined(scope.keyForInputLabel))
-            scope.modelString = scope.modelObj[scope.keyForInputLabel];
+            scope.modelString = scope.model[scope.keyForInputLabel];
           else
-            scope.modelString = scope.modelObj;
+            scope.modelString = scope.model;
         }
 
         var setValid = function(isValid){
@@ -1173,8 +1175,8 @@ angular.module('niceElements')
           }
         };
 
-        scope.$watch('modelObj', function(newValue){
-          if(scope.modelObj && scope.modelObj.id){
+        scope.$watch('model', function(newValue){
+          if(scope.model && scope.model.id){
             setValid(true);
           } else {
             setValid(false);
@@ -1187,9 +1189,9 @@ angular.module('niceElements')
           }
 
           if (angular.isDefined(scope.resetSearchInput)){
-            scope.modelObj = null;
+            scope.model = null;
           } else {
-            scope.modelObj = obj;
+            scope.model = obj;
           }
 
           if (angular.isDefined(scope.keyForInputLabel))
@@ -1289,7 +1291,7 @@ angular.module('niceElements')
         $scope.updateSearch = function () {
           $scope.loading = true;
           $scope.refreshFunction($scope.modelString).then(updateList);
-          $scope.modelObj = $scope.modelString;
+          $scope.model = $scope.modelString;
         };
 
         // If search button is clicked set focus or make request
@@ -1512,11 +1514,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "        <div class=\"input-group\">\n" +
     "            <input date-range-picker class=\"form-control date-picker\" type=\"text\" options=\"opts\" ng-model=\"model\" />\n" +
-    "            <span date-range-picker  options=\"opts\" ng-model=\"model\" class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
+    "            <span date-range-picker options=\"opts\" ng-model=\"model\" class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
-    "</ng-form>"
+    "</ng-form>\n"
   );
 
 
@@ -1787,7 +1789,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                type=\"text\"\n" +
     "                max=\"100\"\n" +
     "                min=\"0\"\n" +
-    "                ng-model=\"internalMode\"\n" +
+    "                ng-model=\"internalModel\"\n" +
     "                placeholder=\"{{ placeholder }}\"\n" +
     "                ng-required=\"required\"\n" +
     "                ng-keypress=\"keypress($event)\"\n" +
@@ -1849,7 +1851,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\"></div>\n" +
     "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div class=\"nice-dropdown-empty\" ng-if=\"noResults\">\n" +
-    "                <div class=\"nice-search-row\" translate>No results found.</div>\n" +
+    "                <div class=\"nice-search-row\">No results found.</div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +

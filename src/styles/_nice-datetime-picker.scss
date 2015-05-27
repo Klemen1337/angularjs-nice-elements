@@ -3,11 +3,11 @@
 
   .input-group{
     .input-group-addon {
-      background: $fourth-color;
+      background: $nice-addon-bg;
 
       &:hover {
         // Set icon color and background
-        background-color: $base-color;
+        background-color: $nice-base-color;
         color: white;
       }
     }
@@ -19,6 +19,19 @@
 
   .datetimepicker{
     width: 260px;
+
+    .day, .month, .year{
+      &.active{
+        background: $nice-datetime-bg;
+        -webkit-border-radius: $nice-border-radius;
+        -moz-border-radius: $nice-border-radius;
+        border-radius: $nice-border-radius;
+
+        &:hover{
+          background: $nice-datetime-bg;
+        }
+      }
+    }
   }
 
   table{
@@ -32,8 +45,8 @@
 
         span.active:active, span.active:hover:active, span.active.disabled:active, span.active.disabled:hover:active, span.active.disabled:hover.active{}
         .active:active, .active:hover:active, .active.disabled:active, .active.disabled:hover:active, .active.disabled:hover.active{
-          background: $base-color !important;
-          border-radius: $border-radius-base;
+          background: $nice-base-color !important;
+          border-radius: $nice-border-radius;
         }
       }
     }

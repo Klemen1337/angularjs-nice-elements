@@ -14,7 +14,7 @@ angular.module('niceElements')
       replace: true,
       templateUrl: 'views/nice-datetime-picker.html',
       scope: {
-        datetime: '=timeModel',
+        model: '=',
         title: '@',
         startView: '@', // default day (possible: year, month, day, hour, minute)
         minView: '@', // default: day
@@ -31,14 +31,14 @@ angular.module('niceElements')
 
           if ($scope.hourWithMinutes){
             $scope.labelValue = $filter('date')(moment(newValue).format(), $scope.dateTimeFormat);
-            $scope.datetime=$scope.labelValue;
+            $scope.model = $scope.labelValue;
           }else{
-            $scope.datetime = moment(newValue).format();
-            $scope.labelValue = $filter('date')($scope.datetime, $scope.dateTimeFormat);
+            $scope.model = moment(newValue).format();
+            $scope.labelValue = $filter('date')($scope.model, $scope.dateTimeFormat);
           }
         });
 
-        $scope.$watch('datetime', function(newValue, oldValue) {
+        $scope.$watch('model', function(newValue, oldValue) {
           if (newValue && newValue!=oldValue){
             if ($scope.hourWithMinutes){
               var parts = newValue.split(':');
@@ -63,13 +63,13 @@ angular.module('niceElements')
         // This random string is appended to dropdown id
         scope.randNum = Math.random().toString(36).substring(7);
 
-        if (scope.datetime!=null){
+        if (scope.model != null){
           if (scope.hourWithMinutes){
-            var parts = scope.datetime.split(':');
+            var parts = scope.model.split(':');
             scope.dateObj = new Date();
             scope.dateObj.setHours(parts[0], parts[1], 0, 0);
           } else {
-            scope.dateObj = new Date(Date.parse(scope.datetime));
+            scope.dateObj = new Date(Date.parse(scope.model));
           }
         }else{
           if (scope.utc) { // Underlying directive does not handle UTC properly, so we need to fix selected time to UTC

@@ -1,6 +1,6 @@
 .nice-steps{
   font-size: $font-size-small;
-  color: $base-color;
+  color: $nice-base-color;
   margin-top: -30px;
   padding-bottom: 10px;
   padding-top: 45px;
@@ -58,14 +58,14 @@
   // Styling of active elements (circle, line and text)
   .active{
     .circle {
-      background: $base-color;
-      border-color: $base-color;
+      background: $nice-base-color;
+      border-color: $nice-base-color;
     }
     &.progress-step::before{
-      background: $base-color;
+      background: $nice-base-color;
     }
     label{
-      color: $base-color;
+      color: $nice-base-color;
     }
   }
 

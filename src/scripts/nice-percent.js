@@ -11,6 +11,7 @@ angular.module('niceElements')
     return {
       templateUrl: 'views/nice-percent.html',
       restrict: 'E',
+      transclude: true,
       scope: {
         model: '=',
         valid: '=',
@@ -23,8 +24,6 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
-
-
       },
 
       controller: function($rootScope, $scope) {
@@ -33,8 +32,12 @@ angular.module('niceElements')
           $scope.valid = $scope.form;
         }
 
+        var roundN = function(number, decimals){
+          return Number(new Decimal(String(number)).toFixed(decimals, 4));
+        };
+
         if (angular.isDefined($scope.model)){
-          $scope.internalModel = parseFloat(String(angular.copy($scope.model) * 100)).toFixed(6);
+          $scope.internalModel = roundN((angular.copy($scope.model) * 100), 6);
         } else {
           $scope.internalModel = "0";
           $scope.model = 0;
@@ -52,7 +55,7 @@ angular.module('niceElements')
 
         $scope.keypress = function(event) {
           if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
-            if(String($scope.internalModel).indexOf(".") >= 0){
+            if($scope.internalModel.indexOf(".") >= 0){
               event.preventDefault();
               return false;
             }
@@ -61,7 +64,6 @@ angular.module('niceElements')
           } else { // Prevent everything else
             event.preventDefault();
             return false;
-
           }
         };
 
@@ -71,10 +73,11 @@ angular.module('niceElements')
           }
         });
 
-        var roundN = function(number, decimals){
-          return Number(parseFloat(String(number)).toFixed(decimals));
-        };
-
+        $scope.$watch('internalModel', function (value_new, value_old) {
+          if(!$scope.internalModel){
+            $scope.internalModel = "0";
+          }
+        });
       }
     };
   });

@@ -25,7 +25,7 @@ p.nice{
 
   .nice-table-header{
     font-size: $font-size-small;
-    color: $base-color;
+    color: $nice-base-color;
     padding-top: 10px;
     padding-bottom: 5px;
     text-transform: uppercase;
@@ -45,7 +45,7 @@ p.nice{
     }
 
     &:hover{
-      background: $table-bg-hover;
+      background: $nice-table-bg-hover;
     }
 
     .nice-table-btn{
@@ -63,7 +63,7 @@ p.nice{
 
     &:before{
       content: " ";
-      background: $base-color;
+      background: $nice-base-color;
       width: 2px;
       height: 100%;
       position: absolute;
@@ -88,11 +88,11 @@ p.nice{
   border-top: 1px solid $nice-border;
 
   &:hover{
-    background: $table-bg-hover;
+    background: $nice-table-bg-hover;
   }
 
   &.active{
-    background: $table-bg-active;
+    background: $nice-table-bg-active;
   }
 }
 
@@ -124,7 +124,7 @@ p.nice{
 
     &.active, &:hover {
       &:before {
-        background: $base-color;
+        background: $nice-base-color;
       }
     }
   }

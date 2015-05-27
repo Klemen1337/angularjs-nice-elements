@@ -10,10 +10,11 @@ angular.module('niceElements')
   .directive('niceSearch', function ($document) {
     return {
       transclude: true,
+      replace: true,
       templateUrl: 'views/nice-search.html',
-      restrict: 'AE',
+      restrict: 'E',
       scope: {
-        modelObj: '=',
+        model: '=',
 //        modelString: '=',
         isDisabled: '=',
         title: '@?',
@@ -47,11 +48,11 @@ angular.module('niceElements')
         });
 
         // Check if object is defined
-        if(angular.isDefined(scope.modelObj)){
+        if(angular.isDefined(scope.model)){
           if (angular.isDefined(scope.keyForInputLabel))
-            scope.modelString = scope.modelObj[scope.keyForInputLabel];
+            scope.modelString = scope.model[scope.keyForInputLabel];
           else
-            scope.modelString = scope.modelObj;
+            scope.modelString = scope.model;
         }
 
         var setValid = function(isValid){
@@ -60,8 +61,8 @@ angular.module('niceElements')
           }
         };
 
-        scope.$watch('modelObj', function(newValue){
-          if(scope.modelObj && scope.modelObj.id){
+        scope.$watch('model', function(newValue){
+          if(scope.model && scope.model.id){
             setValid(true);
           } else {
             setValid(false);
@@ -74,9 +75,9 @@ angular.module('niceElements')
           }
 
           if (angular.isDefined(scope.resetSearchInput)){
-            scope.modelObj = null;
+            scope.model = null;
           } else {
-            scope.modelObj = obj;
+            scope.model = obj;
           }
 
           if (angular.isDefined(scope.keyForInputLabel))
@@ -176,7 +177,7 @@ angular.module('niceElements')
         $scope.updateSearch = function () {
           $scope.loading = true;
           $scope.refreshFunction($scope.modelString).then(updateList);
-          $scope.modelObj = $scope.modelString;
+          $scope.model = $scope.modelString;
         };
 
         // If search button is clicked set focus or make request
