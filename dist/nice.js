@@ -1124,7 +1124,6 @@ angular.module('niceElements')
   .directive('niceSearch', function ($document) {
     return {
       transclude: true,
-      replace: true,
       templateUrl: 'views/nice-search.html',
       restrict: 'E',
       scope: {
@@ -1852,6 +1851,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div class=\"nice-dropdown-empty\" ng-if=\"noResults\">\n" +
     "                <div class=\"nice-search-row\">No results found.</div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"nice-dropdown\" ng-if=\"results.length\">\n" +
+    "                <div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectRow(result)\">\n" +
+    "                    <span class=\"text-bold\">{{ result[keyForInputLabel] }}</span>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +

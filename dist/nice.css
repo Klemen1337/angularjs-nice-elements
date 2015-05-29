@@ -8668,6 +8668,12 @@ label.nice {
   margin: 0px;
   font-weight: normal;
 }
+@media (max-width: 767px) {
+  /* line 1, ../src/styles/_nice-common.scss */
+  label.nice {
+    text-align: left;
+  }
+}
 
 /* line 14, ../src/styles/_nice-common.scss */
 p.nice {

@@ -3,6 +3,10 @@
         background: #eceff1;
     }
 
+    html { font-size: 62.5%; }
+    body { font-size: 14px; font-size: 1.4rem; } /* =14px */
+    h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
+
     .headline{
         text-align:center;
         font-size: 60px;
@@ -69,6 +73,33 @@
 
 	<div class="container">
 		<h1 class="headline">Nice elements</h1>
+
+
+        <div class="white-wrapper">
+            <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl"></nice-input>
+            <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
+            <nice-datetime-picker title="Date of birth" model="data.dateOfBirth" min-view="day" start-view="year" date-time-format="dd.MM.yyyy" disabled="disabl"></nice-datetime-picker>
+            <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
+            <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" disabled="disabl"></nice-yesno>
+
+            <nice-choice
+                title="I like"
+                model="data.likes"
+                list="listObjs"
+                multiple="true"
+                disabled="disabl"
+                list-is-obj="true"
+                list="listObjs"
+                obj-value="value"
+                selected-is-obj="true">
+            </nice-choice>
+
+            <hr>
+
+            {{ data }}
+        </div>
+
+
 
         <div class="white-wrapper" id="common">
             <h2>All have in common</h2>
@@ -384,7 +415,6 @@
                         key-for-input-label="formatted_address"
                         show-dropdown="true">
                     <div class="row">
-                        {{ results }}
                         <div class="col-xs-12">
                             <div ng-if="results.length" class="nice-dropdown">
                                 <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
@@ -397,11 +427,6 @@
                 </div>
                 <div class="col-sm-6">
                     <code>{{ searchItem }}</code>
-                    <div ng-if="results.length" class="nice-dropdown">
-                                <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
-                                    <span class="text-bold">{{ result.formatted_address }}</span>
-                                </div>
-                            </div>
                 </div>
             </div>
         </div>
@@ -702,3 +727,5 @@
 
 	</div> <!-- /container -->
 </div>
+
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>

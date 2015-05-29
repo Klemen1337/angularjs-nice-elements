@@ -36,6 +36,12 @@
             <div class="nice-dropdown-empty" ng-if="noResults">
                 <div class="nice-search-row">No results found.</div>
             </div>
+
+            <div class="nice-dropdown" ng-if="results.length">
+                <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
+                    <span class="text-bold">{{ result[keyForInputLabel] }}</span>
+                </div>
+            </div>
         </div>
     </div>
 

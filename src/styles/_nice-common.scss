@@ -6,9 +6,9 @@ label.nice{
   margin: 0px;
   font-weight: normal;
 
-  //@media (max-width: $screen-xs-max) {
-  //  text-align: left;
-  //}
+  @media (max-width: $screen-xs-max) {
+    text-align: left;
+  }
 }
 
 p.nice{

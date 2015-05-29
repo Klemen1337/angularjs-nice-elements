@@ -34,3 +34,9 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$http', '$q', functio
         }, 300);
     };
 }]);
+
+angular.filter('prettyprint', function () {
+    return function (text) {
+        return prettyPrintOne(text, '', true);
+    };
+});
