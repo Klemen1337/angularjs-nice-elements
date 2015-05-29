@@ -5,7 +5,13 @@
 
 'use strict';
 
-angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate', 'niceElements']).
+angular.module('myApp', [
+	'ngRoute',
+	'ngSanitize',
+	'ngTouch',
+	'ngAnimate',
+	'niceElements'
+]).
 config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
 	/**
 	setup - whitelist, appPath, html5Mode

@@ -237,7 +237,7 @@
 
             <hr>
 
-            <pre class="prettyprint">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
+            <pre class="prettyprint lang-html">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
             <div class="row">
                 <div class="col-sm-6">
                     <nice-input title="Text" model="inputText"></nice-input>
@@ -722,10 +722,13 @@
         </div>
 
 
-
+        <script>
+            $(function(){
+                $('pre').addClass('prettyprint');
+                prettyPrint();
+            })();
+        </script>
 
 
 	</div> <!-- /container -->
 </div>
-
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>

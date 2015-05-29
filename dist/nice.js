@@ -324,7 +324,7 @@ angular.module('niceElements')
         $scope.opts = {
           //format: 'DD.MM.YYYY',
           locale: {
-            //applyClass: 'btn-green',
+            applyClass: 'btn-green',
             //applyLabel: gettextCatalog.getString("Apply"),
             //fromLabel: gettextCatalog.getString("From"),
             //toLabel: gettextCatalog.getString("To"),

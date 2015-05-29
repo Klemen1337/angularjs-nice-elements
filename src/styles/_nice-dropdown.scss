@@ -31,6 +31,9 @@
     padding: 0px 0;
     max-height: 300px;
     overflow: auto;
+    border: 1px solid $nice-border-color;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.175);
 
     li{
       .choice-checkbox{
@@ -68,8 +71,8 @@
 
       &:hover{
         a{
-          background: $nice-base-color;
-          color: white;
+          background: $nice-hover-color;
+          //color: white;
         }
 
       }

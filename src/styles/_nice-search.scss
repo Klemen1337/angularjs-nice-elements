@@ -23,6 +23,9 @@
     border-radius: $nice-border-radius;
     overflow-x: auto;
 
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.175);
+
     top: -13px;
     margin: 15px;
     right: 0;
@@ -32,19 +35,20 @@
       z-index: 1000;
       width: 100%;
       &:hover {
-        color: white !important;
-        background-color: $nice-base-color !important;
+        //color: white !important;
+        //background-color: $nice-base-color !important;
+        background-color: $nice-hover-color;
         cursor: pointer;
 
         p{color:white !important;}
       }
 
       &.active{
-        color: white;
-        background-color: $nice-base-color;
+        // color: white;
+        background-color: $nice-hover-color;
         cursor: pointer;
 
-        p{color:white;}
+        // p{color:white;}
       }
     }
 
@@ -64,5 +68,6 @@
     top: -13px;
     margin: 15px;
     right: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   }
 }
