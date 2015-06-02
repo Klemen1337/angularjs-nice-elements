@@ -1,6 +1,19 @@
 .nice-search{
   position: relative;
 
+  .input-group{
+    .input-group-addon {
+      cursor: pointer;
+      background: $nice-addon-bg;
+
+      &:hover {
+        // Set icon color and background
+        background-color: $nice-base-color;
+        color: white;
+      }
+    }
+  }
+
   .symbol {
     input{
       text-align: left;

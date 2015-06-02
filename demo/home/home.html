@@ -74,29 +74,33 @@
 	<div class="container">
 		<h1 class="headline">Nice elements</h1>
 
-
         <div class="white-wrapper">
-            <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl"></nice-input>
-            <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
-            <nice-datetime-picker title="Date of birth" model="data.dateOfBirth" min-view="day" start-view="year" date-time-format="dd.MM.yyyy" disabled="disabl"></nice-datetime-picker>
-            <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
-            <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" disabled="disabl"></nice-yesno>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl"></nice-input>
+                    <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
+                    <nice-datetime-picker title="Date of birth" model="data.dateOfBirth" min-view="day" start-view="year" date-time-format="dd.MM.yyyy" disabled="disabl"></nice-datetime-picker>
+                    <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
+                    <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" disabled="disabl"></nice-yesno>
 
-            <nice-choice
-                title="I like"
-                model="data.likes"
-                list="listObjs"
-                multiple="true"
-                disabled="disabl"
-                list-is-obj="true"
-                list="listObjs"
-                obj-value="value"
-                selected-is-obj="true">
-            </nice-choice>
+                    <nice-choice
+                        title="I like"
+                        model="data.likes"
+                        list="listObjs"
+                        multiple="true"
+                        disabled="disabl"
+                        list-is-obj="true"
+                        list="listObjs"
+                        obj-value="value"
+                        selected-is-obj="true">
+                    </nice-choice>
+                </div>
 
-            <hr>
-
-            {{ data }}
+                <div class="col-sm-6">
+                    {{ data }}
+                </div>
+                <nice-loader></nice-loader>
+            </div>
         </div>
 
 
