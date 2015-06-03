@@ -935,6 +935,25 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name backofficeApp.directive:loader
+ * @description
+ * # loader
+ */
+angular.module('niceElements')
+  .directive('niceLoader', function () {
+    return {
+      templateUrl: 'views/nice-loader.html',
+      restrict: 'E',
+      scope: {
+          visibleWhen: '=',
+          addClass: '@'
+      }
+    };
+  });
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceNumber
  * @description
  * # niceNumber
@@ -1735,6 +1754,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "\n" +
     "</div>\n"
+  );
+
+
+  $templateCache.put('views/nice-loader.html',
+    "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">\n" +
+    "    <div class=\"spinner\">\n" +
+    "      <div class=\"double-bounce1\"></div>\n" +
+    "      <div class=\"double-bounce2\"></div>\n" +
+    "    </div>\n" +
+    "</div>"
   );
 
 

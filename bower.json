@@ -10,8 +10,8 @@
   "keywords": [],
   "license": "MIT",
   "main": [
-    "./dist/nice.js",
-    "./src/styles/_nice.scss"
+    "dist/nice.js",
+    "src/styles/_nice.scss"
   ],
   "ignore": [
     "**/.*",
