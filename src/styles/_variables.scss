@@ -1,90 +1,90 @@
 // ---------- Fonts ----------
-$nice-font-family-sans-serif:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-base: $nice-font-family-sans-serif;
+$nice-font-family-sans-serif:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-base: $nice-font-family-sans-serif !default;
 
 // ---------- Colors ----------
-$trout: #474F52;
+$trout: #474F52 !default;
 
 // ---------- Color override ----------
-$nice-base-color: #4abeb4;
-$nice-border-color: #eee;
-$nice-addon-bg: #dcdcdc;
-$nice-font-color: #404040;
-$nice-disabled-color: #EDEFF2;
-$nice-disabled-border: #D2D9D9;
-$nice-disabled-bg: white;
+$nice-base-color: #4abeb4 !default;
+$nice-border-color: #eee !default;
+$nice-addon-bg: #dcdcdc !default;
+$nice-font-color: #404040 !default;
+$nice-disabled-color: #EDEFF2 !default;
+$nice-disabled-border: #D2D9D9!default;
+$nice-disabled-bg: white !default;
 
-$nice-submenu-bg-color: #e1e5e8;
-$nice-submenu-gray-color: #b0bec5;
+$nice-submenu-bg-color: #e1e5e8 !default;
+$nice-submenu-gray-color: #b0bec5 !default;
 
-$nice-font-weight: lighter;
+$nice-font-weight: lighter !default;
 
 // ---------- Table ----------
-$nice-table-bg-hover: #f5f5f5;
-$nice-table-bg-active: #f5f5f5;
+$nice-table-bg-hover: #f5f5f5 !default;
+$nice-table-bg-active: #f5f5f5 !default;
 
 // ---------- Disabled colors ----------
-$disabled-font-color: #999999;
-$disabled-bg-color: #eeeeee;
+$disabled-font-color: #999999 !default;
+$disabled-bg-color: #eeeeee !default;
 
 // ---------- Border radius ----------
-$nice-border-radius: 3px;
+$nice-border-radius: 3px !default;
 
 
 // ---------- Nice global settings ----------
-$nice-focus-bg: white;
-$nice-focus-border: $nice-base-color;
-$nice-focus-color: $trout;
+$nice-focus-bg: white !default;
+$nice-focus-border: $nice-base-color !default;
+$nice-focus-color: $trout !default;
 
-$nice-color: #404040;
-$nice-background: white;
-$nice-border: #cbd4d9;
-$nice-hover-color: #EDEDED;
+$nice-color: #404040 !default;
+$nice-background: white !default;
+$nice-border: #cbd4d9 !default;
+$nice-hover-color: #EDEDED !default;
 
 // ---------- Input colors override ----------
-$input-border-focus: $nice-base-color;
-$input-border: $nice-border;
-$input-bg: $nice-background;
-$input-color: $nice-font-color;
-$input-label-color: $trout;
-$nice-input-placeholder-color: #999999;
+$input-border-focus: $nice-base-color !default;
+$input-border: $nice-border !default;
+$input-bg: $nice-background !default;
+$input-color: $nice-font-color !default;
+$input-label-color: $trout !default;
+$nice-input-placeholder-color: #999999 !default;
 
-$nice-input-bg: $nice-background;
-$nice-input-border: $nice-border;
-$nice-input-disabled-bg: white;
-$nice-input-disabled-border: $nice-disabled-color;
+$nice-input-bg: $nice-background !default;
+$nice-input-border: $nice-border !default;
+$nice-input-disabled-bg: white !default;
+$nice-input-disabled-border: $nice-disabled-color !default;
 
-$nice-input-valid: $nice-base-color;
-$nice-input-invalid: #FF6C60;
+$nice-input-valid: $nice-base-color !default;
+$nice-input-invalid: #FF6C60 !default;
 
 // ---------- Dropdown colors override ----------
-$nice-dropdown-bg: $nice-background;
-$nice-dropdown-border: $nice-border;
-$nice-dropdown-color: $nice-font-color;
+$nice-dropdown-bg: $nice-background !default;
+$nice-dropdown-border: $nice-border !default;
+$nice-dropdown-color: $nice-font-color !default;
 
-$nice-dropdown-hover-bg: white;
-$nice-dropdown-hover-border: $nice-border;
-$nice-dropdown-hover-color: $trout;
+$nice-dropdown-hover-bg: white !default;
+$nice-dropdown-hover-border: $nice-border !default;
+$nice-dropdown-hover-color: $trout !default;
 
-$nice-dropdown-disabled-bg: $nice-disabled-bg;
-$nice-dropdown-disabled-border: $nice-disabled-color;
+$nice-dropdown-disabled-bg: $nice-disabled-bg !default;
+$nice-dropdown-disabled-border: $nice-disabled-color !default;
 
 // ---------- YesNo colors override ----------
-$nice-yesno-bg: $nice-background;
-$nice-yesno-slider-bg: $nice-base-color;
+$nice-yesno-bg: $nice-background !default;
+$nice-yesno-slider-bg: $nice-base-color !default;
 
-$nice-yesno-disabled-color: $nice-disabled-color;
-$nice-yesno-disabled-bg: $nice-disabled-bg;
-$nice-yesno-disabled-border: $nice-disabled-border;
+$nice-yesno-disabled-color: $nice-disabled-color !default;
+$nice-yesno-disabled-bg: $nice-disabled-bg !default;
+$nice-yesno-disabled-border: $nice-disabled-border !default;
 
 // ---------- Choice colors override ----------
-$nice-choice-bg: $nice-background;
-$nice-choice-hover-border: $nice-base-color;
-$nice-choice-selected-bg: $nice-base-color;
-$nice-choice-selected-color: white;
+$nice-choice-bg: $nice-background !default;
+$nice-choice-hover-border: $nice-base-color !default;
+$nice-choice-selected-bg: $nice-base-color !default;
+$nice-choice-selected-color: white !default;
 
 // ---------- Datetime colors override ----------
-$nice-datetime-bg: $nice-base-color;
+$nice-datetime-bg: $nice-base-color !default;
 
 // ---------- Loader ----------
-$nice-loader-color: $nice-base-color;
+$nice-loader-color: $nice-base-color !default;

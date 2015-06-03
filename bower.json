@@ -1,6 +1,7 @@
 {
   "name": "nice-elements",
   "version": "0.1.0",
+  "private": true,
   "authors": [
     "Anze Brvar <anze.brvar@olaii.com>",
     "Klemen Kastelic <klemen.kastelic@olaii.com>"
@@ -8,7 +9,10 @@
   "description": "Nice elements",
   "keywords": [],
   "license": "MIT",
-  "main": ["./dist/nice.js", "./dist/nice.css"],
+  "main": [
+    "./dist/nice.js",
+    "./src/styles/_nice.scss"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
@@ -36,6 +40,5 @@
   "devDependencies": {
   },
   "resolutions": {
-
   }
 }
