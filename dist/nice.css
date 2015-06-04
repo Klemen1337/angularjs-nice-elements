@@ -9917,12 +9917,14 @@ input::-webkit-outer-spin-button {
 .nice-loader {
   padding: 25px;
   text-align: center;
+}
+/* line 5, ../src/styles/_nice-loader.scss */
+.nice-loader svg {
   width: 40px;
   height: 40px;
-  position: relative;
   margin: 0 auto;
 }
-/* line 50, ../src/styles/_nice-loader.scss */
+/* line 52, ../src/styles/_nice-loader.scss */
 .nice-loader svg path,
 .nice-loader svg rect {
   fill: #4abeb4;
