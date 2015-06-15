@@ -22,7 +22,8 @@ angular.module('niceElements')
         required: '@',
         fieldWidth: '@',
         labelWidth: '@',
-        showError: '@'
+        showError: '@',
+        noMargin: '@'
       },
 
       link: function (scope, element, attrs) {

@@ -22,6 +22,7 @@ angular.module('niceElements')
         selectedIsObj: '@',
         objValue: '@',
         objKey: '@',
+        noMargin: '@',
         multiple: '@'
       },
       link: function (scope, element, attr) {

@@ -22,6 +22,7 @@ angular.module('niceElements')
         format: '@',
         min: '@',
         max: '@',
+        noMargin: '@',
         startDate: '=',
         endDate: '='
       },

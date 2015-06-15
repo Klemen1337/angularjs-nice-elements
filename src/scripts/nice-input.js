@@ -24,6 +24,7 @@ angular.module('niceElements')
         symbol: '@',
         help: '@',
         name: '@',
+        noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         maxLength: '@?'
       },

@@ -20,7 +20,8 @@ angular.module('niceElements')
         required: '@',
         fieldWidth: '@',
         labelWidth: '@',
-        placeholder: '@'
+        placeholder: '@',
+        noMargin: '@'
       },
 
       link: function (scope, element, attrs) {

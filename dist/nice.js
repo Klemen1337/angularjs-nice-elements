@@ -55,6 +55,7 @@ angular.module('niceElements')
         selectedIsObj: '@',
         objValue: '@',
         objKey: '@',
+        noMargin: '@',
         multiple: '@'
       },
       link: function (scope, element, attr) {
@@ -299,6 +300,7 @@ angular.module('niceElements')
         format: '@',
         min: '@',
         max: '@',
+        noMargin: '@',
         labelWidth: '@',
         startOfTheYear: '@'
       },
@@ -400,6 +402,7 @@ angular.module('niceElements')
         format: '@',
         min: '@',
         max: '@',
+        noMargin: '@',
         startDate: '=',
         endDate: '='
       },
@@ -794,6 +797,7 @@ angular.module('niceElements')
         symbol: '@',
         help: '@',
         name: '@',
+        noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         maxLength: '@?'
       },
@@ -974,7 +978,8 @@ angular.module('niceElements')
         required: '@',
         fieldWidth: '@',
         labelWidth: '@',
-        showError: '@'
+        showError: '@',
+        noMargin: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -1069,7 +1074,8 @@ angular.module('niceElements')
         required: '@',
         fieldWidth: '@',
         labelWidth: '@',
-        placeholder: '@'
+        placeholder: '@',
+        noMargin: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -1387,7 +1393,8 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         options: '=',
-        defaultFalse: '@'
+        defaultFalse: '@',
+        noMargin: '@'
       },
 
       link: function postLink(scope, element, attrs) {
@@ -1472,7 +1479,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-choice.html',
-    "<div class=\"nice-choice\">\n" +
+    "<div class=\"nice-choice\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -1523,7 +1530,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-date-range.html',
-    "<ng-form class=\"nice-date-range\" name=\"form\">\n" +
+    "<ng-form class=\"nice-date-range\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -1676,7 +1683,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-input.html',
-    "<ng-form class=\"nice-input\" name=\"form\">\n" +
+    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -1758,13 +1765,6 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-loader.html',
-    "<!--<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">-->\n" +
-    "    <!--<div class=\"spinner\">-->\n" +
-    "      <!--<div class=\"double-bounce1\"></div>-->\n" +
-    "      <!--<div class=\"double-bounce2\"></div>-->\n" +
-    "    <!--</div>-->\n" +
-    "<!--</div>-->\n" +
-    "\n" +
     "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">\n" +
     "  <svg version=\"1.1\" id=\"loader-1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
     "     width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
@@ -1783,7 +1783,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-number.html',
-    "<ng-form class=\"nice-number\" name=\"form\">\n" +
+    "<ng-form class=\"nice-number\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "    <div ng-class=\"{'row' : !disableRow}\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}</label>\n" +
@@ -1814,7 +1814,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-percent.html',
-    "<ng-form class=\"nice-input\" name=\"form\">\n" +
+    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -1912,7 +1912,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-yesno.html',
-    "<div class=\"row nice-yesno\">\n" +
+    "<div class=\"row nice-yesno\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "        <label class=\"nice\">{{ title }}</label>\n" +
     "    </div>\n" +

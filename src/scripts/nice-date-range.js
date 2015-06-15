@@ -20,6 +20,7 @@ angular.module('niceElements')
         format: '@',
         min: '@',
         max: '@',
+        noMargin: '@',
         labelWidth: '@',
         startOfTheYear: '@'
       },
