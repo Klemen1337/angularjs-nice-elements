@@ -51,7 +51,7 @@ angular.module('niceElements')
         if (!attrs.maxLength) { attrs.maxLength = 42; }
 
         // Set internal type
-        scope.internalType = scope.type;
+        scope.internalType = attrs.type;
         if(attrs.type == "percent"){
           scope.internalType = "percent";
           attrs.symbol = '%';
@@ -72,7 +72,7 @@ angular.module('niceElements')
           scope.valid = scope.form;
         }
 
-        if (angular.isDefined(attrs.minDecimalsCutZeros)){
+        if (angular.isDefined(attrs.minDecimalsCutZeros) && attrs.type=='number'){
           scope.model = parseFloat(scope.model);
           if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros))
             scope.model = (parseFloat(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros));
