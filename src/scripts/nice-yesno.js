@@ -46,11 +46,11 @@ angular.module('niceElements')
         if (!attrs.yes) { attrs.yes = 'Yes'; }
         if (!attrs.no) { attrs.no = 'No'; }
         if (!attrs.title) { attrs.title = ''; }
-        attr.isDisabled = angular.isDefined(attrs.isDisabled);
+        attrs.isDisabled = angular.isDefined(attrs.isDisabled);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.defaultFalse = angular.isDefined(attrs.defaultFalse);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.defaultFalse = angular.isDefined(attrs.defaultFalse);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(!angular.isDefined(scope.model) && !angular.isDefined(scope.options)){
           scope.model = !angular.isDefined(scope.defaultFalse);

@@ -39,13 +39,13 @@ angular.module('niceElements')
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.objValue) { attrs.objValue = 'value'; }
         if (!attrs.objKey) { attrs.objKey = 'id'; }
-        attr.listIsObj = angular.isDefined(attrs.listIsObj);
-        attr.selectedIsObj = angular.isDefined(attrs.selectedIsObj);
-        attr.nullable = angular.isDefined(attrs.nullable);
-        attr.required = angular.isDefined(attrs.required);
-        attr.showTax = angular.isDefined(attrs.showTax);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
-        attr.multiple = angular.isDefined(attrs.multiple);
+        attrs.listIsObj = angular.isDefined(attrs.listIsObj);
+        attrs.selectedIsObj = angular.isDefined(attrs.selectedIsObj);
+        attrs.nullable = angular.isDefined(attrs.nullable);
+        attrs.required = angular.isDefined(attrs.required);
+        attrs.showTax = angular.isDefined(attrs.showTax);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.multiple = angular.isDefined(attrs.multiple);
         if (!attrs.help) { attrs.help = ''; }
 
         scope.valid = scope.formDropdown;

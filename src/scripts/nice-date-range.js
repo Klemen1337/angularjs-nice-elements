@@ -30,7 +30,7 @@ angular.module('niceElements')
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(!angular.isDefined(scope.model)) {
           if(!angular.isDefined(scope.startOfTheYear)){

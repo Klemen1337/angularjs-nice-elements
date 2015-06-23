@@ -31,11 +31,11 @@ angular.module('niceElements')
         //if (!attrs.min) { attrs.min = 0; }
         //if (!attrs.max) { attrs.max = 0; }
         if (!attrs.defaultValue) { attrs.defaultValue = 0; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.showError = angular.isDefined(attrs.showError);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.showError = angular.isDefined(attrs.showError);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         // Link form object with valid object
         if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }

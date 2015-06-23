@@ -37,17 +37,17 @@ angular.module('niceElements')
 
         if (!attrs.title) { attrs.title = ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.hideValid = angular.isDefined(attrs.hideValid);
+        attrs.hideValid = angular.isDefined(attrs.hideValid);
         if (!attrs.refreshDelay) { attrs.refreshDelay = 500; } // milliseconds
-        attr.showDropdown = angular.isDefined(attrs.showDropdown);
-        attr.clearInput = angular.isDefined(attrs.clearInput);
-        attr.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
+        attrs.showDropdown = angular.isDefined(attrs.showDropdown);
+        attrs.clearInput = angular.isDefined(attrs.clearInput);
+        attrs.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
         if (!attrs.keyForInputLabel) { attrs.keyForInputLabel = 'value'; }
-        attr.disableRow = angular.isDefined(attrs.disableRow);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.disableRow = angular.isDefined(attrs.disableRow);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.setText) { attrs.setText = ''; }
 
         // This is used for connecting directive's scope to transcluded html.

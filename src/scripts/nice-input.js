@@ -36,17 +36,17 @@ angular.module('niceElements')
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.minlength) { attrs.minlength = 1; }
         if (!attrs.maxlength) { attrs.maxlength = 100; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.hideValid = angular.isDefined(attrs.hideValid);
-        attr.showValid = angular.isDefined(attrs.showValid);
-        attr.textArea = angular.isDefined(attrs.textArea);
+        attrs.hideValid = angular.isDefined(attrs.hideValid);
+        attrs.showValid = angular.isDefined(attrs.showValid);
+        attrs.textArea = angular.isDefined(attrs.textArea);
         if (!attrs.textAreaLines) { attrs.textAreaLines = 3; }
         if (!attrs.symbol) { attrs.symbol = ''; }
         if (!attrs.help) { attrs.help = ''; }
         if (!attrs.name) { attrs.name = ''; }
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
         if (!attrs.maxLength) { attrs.maxLength = 42; }
 
