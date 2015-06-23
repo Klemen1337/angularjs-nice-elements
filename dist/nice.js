@@ -545,9 +545,9 @@ angular.module('niceElements')
         }
 
         scope.opts = {
-          startView: scope.startView,
-          minView: scope.minView,
-          minuteStep: scope.minuteStep,
+          startView: attrs.startView,
+          minView: attrs.minView,
+          //minuteStep: scope.minuteStep,
           dropdownSelector: '#dropdown' + scope.randNum
         };
 
