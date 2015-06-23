@@ -316,7 +316,7 @@ angular.module('niceElements')
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(!angular.isDefined(scope.model)) {
           if(!angular.isDefined(scope.startOfTheYear)){
@@ -424,7 +424,7 @@ angular.module('niceElements')
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(scope.model) scope.model = new Date();
 
@@ -518,11 +518,11 @@ angular.module('niceElements')
         if (!attrs.startView) { attrs.startView = 'day'; }
         if (!attrs.minView) { attrs.minView = 'day'; }
         if (!attrs.dateTimeFormat) { attrs.dateTimeFormat = 'dd.MM.yyyy | HH:mm'; }
-        attr.hourWithMinutes = angular.isDefined(attrs.hourWithMinutes);
+        attrs.hourWithMinutes = angular.isDefined(attrs.hourWithMinutes);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.utc = angular.isDefined(attrs.utc);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.utc = angular.isDefined(attrs.utc);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         // This random string is appended to dropdown id
         scope.randNum = Math.random().toString(36).substring(7);
@@ -597,13 +597,13 @@ angular.module('niceElements')
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.objValue) { attrs.objValue = 'value'; }
         if (!attrs.objKey) { attrs.objKey = 'id'; }
-        attr.listIsObj = angular.isDefined(attrs.listIsObj);
-        attr.selectedIsObj = angular.isDefined(attrs.selectedIsObj);
-        attr.nullable = angular.isDefined(attrs.nullable);
-        attr.required = angular.isDefined(attrs.required);
-        attr.showTax = angular.isDefined(attrs.showTax);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
-        attr.multiple = angular.isDefined(attrs.multiple);
+        attrs.listIsObj = angular.isDefined(attrs.listIsObj);
+        attrs.selectedIsObj = angular.isDefined(attrs.selectedIsObj);
+        attrs.nullable = angular.isDefined(attrs.nullable);
+        attrs.required = angular.isDefined(attrs.required);
+        attrs.showTax = angular.isDefined(attrs.showTax);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.multiple = angular.isDefined(attrs.multiple);
         if (!attrs.help) { attrs.help = ''; }
 
         scope.valid = scope.formDropdown;
@@ -834,17 +834,17 @@ angular.module('niceElements')
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.minlength) { attrs.minlength = 1; }
         if (!attrs.maxlength) { attrs.maxlength = 100; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.hideValid = angular.isDefined(attrs.hideValid);
-        attr.showValid = angular.isDefined(attrs.showValid);
-        attr.textArea = angular.isDefined(attrs.textArea);
+        attrs.hideValid = angular.isDefined(attrs.hideValid);
+        attrs.showValid = angular.isDefined(attrs.showValid);
+        attrs.textArea = angular.isDefined(attrs.textArea);
         if (!attrs.textAreaLines) { attrs.textAreaLines = 3; }
         if (!attrs.symbol) { attrs.symbol = ''; }
         if (!attrs.help) { attrs.help = ''; }
         if (!attrs.name) { attrs.name = ''; }
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
         if (!attrs.maxLength) { attrs.maxLength = 42; }
 
@@ -1007,11 +1007,11 @@ angular.module('niceElements')
         //if (!attrs.min) { attrs.min = 0; }
         //if (!attrs.max) { attrs.max = 0; }
         if (!attrs.defaultValue) { attrs.defaultValue = 0; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.showError = angular.isDefined(attrs.showError);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.showError = angular.isDefined(attrs.showError);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         // Link form object with valid object
         if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }
@@ -1108,11 +1108,11 @@ angular.module('niceElements')
 
       link: function (scope, element, attrs) {
         if (!attrs.title) { attrs.title = ''; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
       },
 
       controller: function($rootScope, $scope) {
@@ -1210,17 +1210,17 @@ angular.module('niceElements')
 
         if (!attrs.title) { attrs.title = ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
-        attr.required = angular.isDefined(attrs.required);
+        attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.hideValid = angular.isDefined(attrs.hideValid);
+        attrs.hideValid = angular.isDefined(attrs.hideValid);
         if (!attrs.refreshDelay) { attrs.refreshDelay = 500; } // milliseconds
-        attr.showDropdown = angular.isDefined(attrs.showDropdown);
-        attr.clearInput = angular.isDefined(attrs.clearInput);
-        attr.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
+        attrs.showDropdown = angular.isDefined(attrs.showDropdown);
+        attrs.clearInput = angular.isDefined(attrs.clearInput);
+        attrs.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
         if (!attrs.keyForInputLabel) { attrs.keyForInputLabel = 'value'; }
-        attr.disableRow = angular.isDefined(attrs.disableRow);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.disableRow = angular.isDefined(attrs.disableRow);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.setText) { attrs.setText = ''; }
 
         // This is used for connecting directive's scope to transcluded html.
@@ -1445,11 +1445,11 @@ angular.module('niceElements')
         if (!attrs.yes) { attrs.yes = 'Yes'; }
         if (!attrs.no) { attrs.no = 'No'; }
         if (!attrs.title) { attrs.title = ''; }
-        attr.isDisabled = angular.isDefined(attrs.isDisabled);
+        attrs.isDisabled = angular.isDefined(attrs.isDisabled);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attr.defaultFalse = angular.isDefined(attrs.defaultFalse);
-        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attrs.defaultFalse = angular.isDefined(attrs.defaultFalse);
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(!angular.isDefined(scope.model) && !angular.isDefined(scope.options)){
           scope.model = !angular.isDefined(scope.defaultFalse);
