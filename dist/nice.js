@@ -59,6 +59,15 @@ angular.module('niceElements')
         multiple: '@'
       },
       link: function (scope, element, attr) {
+        if (!attr.title) { attr.title = ''; }
+        if (!attr.fieldWidth) { attr.fieldWidth = 'col-sm-8'; }
+        if (!attr.labelWidth) { attr.labelWidth = 'col-sm-4'; }
+        attr.listIsObj = angular.isDefined(attr.listIsObj);
+        attr.selectedIsObj = angular.isDefined(attr.selectedIsObj);
+        if (!attr.objValue) { attr.objValue = 'value'; }
+        if (!attr.objKey) { attr.objKey = 'id'; }
+        attr.multiple = angular.isDefined(attr.multiple);
+
         scope.firstTime = true;
         scope.checkIfFirstTime = function(){
           if (scope.firstTime){
@@ -75,12 +84,6 @@ angular.module('niceElements')
             scope.model = [];
           }
         }
-
-        if(!angular.isDefined(scope.objValue))
-          scope.objValue = "value";
-
-        if(!angular.isDefined(scope.objKey))
-          scope.objKey = "id";
 
         // Set internalList
         if (scope.listIsObj) {
@@ -253,11 +256,14 @@ angular.module('niceElements')
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (scope.model==null)
-          scope.model =  '';
-
-        if (!scope.rows)
-          scope.rows = 3;
+        if (scope.model==null) { scope.model =  ''; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
+        if (!attrs.noMarginBottom) { angular.isDefined(attrs.noMarginBottom); }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.help) { attrs.help = ''; }
+        if (!attrs.rows) { attrs.rows = 3; }
 
         var textareas = element.find('textarea');
 
@@ -305,7 +311,13 @@ angular.module('niceElements')
         startOfTheYear: '@'
       },
 
-      link: function(scope, iElement, iAttrs, ctrl){
+      link: function(scope, iElement, attrs, ctrl){
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+
         if(!angular.isDefined(scope.model)) {
           if(!angular.isDefined(scope.startOfTheYear)){
             scope.model = {
@@ -407,8 +419,13 @@ angular.module('niceElements')
         endDate: '='
       },
 
-      link: function(scope, iElement, iAttrs, ctrl){
-        if(!angular.isDefined(scope.format)) scope.format = "dd.MM.yyyy";
+      link: function(scope, iElement, attrs, ctrl){
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+
         if(scope.model) scope.model = new Date();
 
         scope.dateOptions = {
@@ -496,7 +513,16 @@ angular.module('niceElements')
         };
 
       },
-      link: function(scope, iElement, iAttrs, ctrl){
+      link: function(scope, iElement, attrs, ctrl){
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.startView) { attrs.startView = 'day'; }
+        if (!attrs.minView) { attrs.minView = 'day'; }
+        if (!attrs.dateTimeFormat) { attrs.dateTimeFormat = 'dd.MM.yyyy | HH:mm'; }
+        attr.hourWithMinutes = angular.isDefined(attrs.hourWithMinutes);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.utc = angular.isDefined(attrs.utc);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
 
         // This random string is appended to dropdown id
         scope.randNum = Math.random().toString(36).substring(7);
@@ -517,19 +543,6 @@ angular.module('niceElements')
           }else
             scope.dateObj = new Date().setHours(0, 0, 0, 0);
         }
-
-        // Default startView value
-        if (!angular.isDefined(scope.startView))
-          scope.startView = 'day';
-
-        // Default minView value
-        if (!angular.isDefined(scope.minView))
-          scope.minView = 'day';
-
-        // Default dateTimeFormat value
-        if (!angular.isDefined(scope.dateTimeFormat))
-          scope.dateTimeFormat = 'dd.MM.yyyy | HH:mm';
-
 
         scope.opts = {
           startView: scope.startView,
@@ -578,18 +591,30 @@ angular.module('niceElements')
         help: '@'
       },
 
-      link: function (scope, element, attr) {
+      link: function (scope, element, attrs) {
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.objValue) { attrs.objValue = 'value'; }
+        if (!attrs.objKey) { attrs.objKey = 'id'; }
+        attr.listIsObj = angular.isDefined(attrs.listIsObj);
+        attr.selectedIsObj = angular.isDefined(attrs.selectedIsObj);
+        attr.nullable = angular.isDefined(attrs.nullable);
+        attr.required = angular.isDefined(attrs.required);
+        attr.showTax = angular.isDefined(attrs.showTax);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attr.multiple = angular.isDefined(attrs.multiple);
+        if (!attrs.help) { attrs.help = ''; }
+
         scope.valid = scope.formDropdown;
+
+        if(scope.multiple) { scope.internalSelected = []; }
+
+        if(!attrs.addButtonFunction) { scope.addButtonFunction = null; }
       },
 
       controller: function($rootScope, $scope) {
         $scope.internalSelected = null;
-        if($scope.multiple) $scope.internalSelected = [];
-
-        if (!$scope.objKey) $scope.objKey = 'id';
-        if(!angular.isDefined($scope.objValue)) $scope.objValue = 'value';
-        if(!angular.isDefined($scope.multiple)) $scope.multiple = false;
-        if(!$scope.addButtonFunction) $scope.addButtonFunction = null;
 
         var getFilter = function(item){
           // Create filter for finding object by objValue with _.where()
@@ -803,58 +828,52 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
-        if (!angular.isDefined(attrs.showValid)){
-          scope.showValid = false;
-        }
+        if (!attrs.type) { attrs.type = 'text'; }
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.regex) { attrs.regex = null; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        if (!attrs.minlength) { attrs.minlength = 1; }
+        if (!attrs.maxlength) { attrs.maxlength = 100; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.hideValid = angular.isDefined(attrs.hideValid);
+        attr.showValid = angular.isDefined(attrs.showValid);
+        attr.textArea = angular.isDefined(attrs.textArea);
+        if (!attrs.textAreaLines) { attrs.textAreaLines = 3; }
+        if (!attrs.symbol) { attrs.symbol = ''; }
+        if (!attrs.help) { attrs.help = ''; }
+        if (!attrs.name) { attrs.name = ''; }
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+        if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
+        if (!attrs.maxLength) { attrs.maxLength = 42; }
 
-        // If type not defined, set to text
-        if (!angular.isDefined(attrs.type)){
-          scope.type = "text";
+        // Set internal type
+        scope.internalType = scope.type;
+        if(attrs.type == "percent"){
+          scope.internalType = "percent";
+          attrs.symbol = '%';
+        }
+        else if(attrs.type == "number"){
           scope.internalType = "text";
+          scope.model = parseFloat(scope.model);
+        }
+        else if(attrs.type == "integer"){
+          scope.internalType = "text";
+          scope.model = Number(scope.model);
+        }else if(attrs.type == "email"){
+          // TODO: get rid of the errors
+          scope.regexexp = new RegExp('^[_a-zA-Z0-9]+(.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+(.[a-zA-Z]{2,4})');
         }
 
         if (angular.isDefined(attrs.valid)){
           scope.valid = scope.form;
         }
 
-        if (!angular.isDefined(attrs.maxLength)){
-          scope.maxLength = 100;
-        }
-
         if (angular.isDefined(attrs.minDecimalsCutZeros)){
           scope.model = parseFloat(scope.model);
           if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros))
             scope.model = (parseFloat(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros));
-        }
-
-        if(angular.isDefined(scope.type)){
-          scope.internalType = scope.type;
-          if(scope.type == "percent"){
-            scope.internalType = "percent";
-            scope.symbol = '%';
-          }
-          else if(scope.type == "number"){
-            scope.internalType = "text";
-            scope.model = parseFloat(scope.model);
-          }
-          else if(scope.type == "integer"){
-            scope.internalType = "text";
-            scope.model = Number(scope.model);
-          }
-        }
-
-        scope.area = angular.isDefined(attrs.textArea);
-
-        if (!angular.isDefined(attrs.textAreaLines))
-          scope.textAreaLines = 3;
-
-        if (angular.isDefined(scope.type)){
-          if(scope.type == "email"){
-            // TODO: get rid of the errors
-            scope.regexexp = new RegExp('^[_a-zA-Z0-9]+(.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+(.[a-zA-Z]{2,4})');
-          }else{
-            scope.regexexp = null;
-          }
         }
 
         if (angular.isDefined(scope.regex) && scope.regex!=''){
@@ -866,7 +885,7 @@ angular.module('niceElements')
         });
 
         scope.$watch('internalModel', function (value_new, value_old) {
-          if(scope.type == "number" && value_new) {
+          if(attrs.type == "number" && value_new) {
             if(typeof value_new != "number") {
               scope.internalModel = value_new.replace(',', '.');
               scope.model = scope.internalModel;
@@ -877,8 +896,6 @@ angular.module('niceElements')
 
       controller: function($rootScope, $scope) {
         $scope.id = Math.random().toString(36).substring(7);
-
-
 
         $scope.keypress = function(event) {
           if($scope.type == "number" || $scope.type == "integer") {
@@ -930,7 +947,10 @@ angular.module('niceElements')
         title: '@'
       },
       link: function postLink(scope, element, attrs) {
-
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.value) { attrs.labelWidth = ''; }
+        if (!attrs.title) { attrs.labelWidth = ''; }
       }
     };
   });
@@ -983,11 +1003,20 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
-        // Link form object with valid object
-        if(angular.isDefined(attrs.valid)) scope.valid = scope.form;
-        if(!angular.isDefined(attrs.showError)) scope.showError = false;
-        if(!angular.isDefined(scope.min)) scope.min = scope.defaultMin;
+        if (!attrs.title) { attrs.title = ''; }
+        //if (!attrs.min) { attrs.min = 0; }
+        //if (!attrs.max) { attrs.max = 0; }
+        if (!attrs.defaultValue) { attrs.defaultValue = 0; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.showError = angular.isDefined(attrs.showError);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
 
+        // Link form object with valid object
+        if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }
+
+        if(attrs.min) { scope.min = 0; }
 
         var setDefault = function(){
           if(angular.isDefined(scope.defaultValue)) scope.model = scope.defaultValue;
@@ -1011,7 +1040,6 @@ angular.module('niceElements')
       },
 
       controller: function($rootScope, $scope) {
-        $scope.defaultMin = 0;
         $scope.canAdd = true;
         $scope.canSubstract = true;
 
@@ -1079,6 +1107,12 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
+        if (!attrs.title) { attrs.title = ''; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        attr.noMargin = angular.isDefined(attrs.noMargin);
       },
 
       controller: function($rootScope, $scope) {
@@ -1173,6 +1207,21 @@ angular.module('niceElements')
         setText: '@'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
+
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.hideValid = angular.isDefined(attrs.hideValid);
+        if (!attrs.refreshDelay) { attrs.refreshDelay = 500; } // milliseconds
+        attr.showDropdown = angular.isDefined(attrs.showDropdown);
+        attr.clearInput = angular.isDefined(attrs.clearInput);
+        attr.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
+        if (!attrs.keyForInputLabel) { attrs.keyForInputLabel = 'value'; }
+        attr.disableRow = angular.isDefined(attrs.disableRow);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+        if (!attrs.setText) { attrs.setText = ''; }
 
         // This is used for connecting directive's scope to transcluded html.
         transcludeFn(scope, function(clone, scope) {
@@ -1280,13 +1329,8 @@ angular.module('niceElements')
       controller: function($scope, $timeout) {
         $scope.id = Math.random().toString(36).substring(7);
 
-        // Set default refresh delay
-        if (angular.isDefined($scope.currency)){
-          $scope.currency = '';
-        }
-
         $scope.modelOptions = {
-          debounce: 500 // Delay input for 0.5s
+          debounce: $scope.refreshDelay
         };
 
         // Set default refresh delay
@@ -1398,6 +1442,15 @@ angular.module('niceElements')
       },
 
       link: function postLink(scope, element, attrs) {
+        if (!attrs.yes) { attrs.yes = 'Yes'; }
+        if (!attrs.no) { attrs.no = 'No'; }
+        if (!attrs.title) { attrs.title = ''; }
+        attr.isDisabled = angular.isDefined(attrs.isDisabled);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.defaultFalse = angular.isDefined(attrs.defaultFalse);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+
         if(!angular.isDefined(scope.model) && !angular.isDefined(scope.options)){
           scope.model = !angular.isDefined(scope.defaultFalse);
         }
@@ -1698,7 +1751,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                'symbol': symbol,\n" +
     "                'disabled': isDisabled\n" +
     "        }\">\n" +
-    "            <input ng-show=\"!area\"\n" +
+    "            <input ng-show=\"!textArea\"\n" +
     "                class=\"form-control\"\n" +
     "                type=\"{{ internalType }}\"\n" +
     "                ng-model=\"model\"\n" +
@@ -1714,7 +1767,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                ng-disabled=\"isDisabled\"\n" +
     "                maxlength=\"{{maxLength}}\"\n" +
     "            >\n" +
-    "            <textarea ng-show=\"area\"\n" +
+    "            <textarea ng-show=\"textArea\"\n" +
     "                class=\"form-control\"\n" +
     "                ng-model=\"model\"\n" +
     "                title=\"{{ help }}\"\n" +

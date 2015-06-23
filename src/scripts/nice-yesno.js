@@ -43,6 +43,15 @@ angular.module('niceElements')
       },
 
       link: function postLink(scope, element, attrs) {
+        if (!attrs.yes) { attrs.yes = 'Yes'; }
+        if (!attrs.no) { attrs.no = 'No'; }
+        if (!attrs.title) { attrs.title = ''; }
+        attr.isDisabled = angular.isDefined(attrs.isDisabled);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.defaultFalse = angular.isDefined(attrs.defaultFalse);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+
         if(!angular.isDefined(scope.model) && !angular.isDefined(scope.options)){
           scope.model = !angular.isDefined(scope.defaultFalse);
         }

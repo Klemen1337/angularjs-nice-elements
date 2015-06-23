@@ -27,8 +27,13 @@ angular.module('niceElements')
         endDate: '='
       },
 
-      link: function(scope, iElement, iAttrs, ctrl){
-        if(!angular.isDefined(scope.format)) scope.format = "dd.MM.yyyy";
+      link: function(scope, iElement, attrs, ctrl){
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+
         if(scope.model) scope.model = new Date();
 
         scope.dateOptions = {

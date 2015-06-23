@@ -35,6 +35,21 @@ angular.module('niceElements')
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.hideValid = angular.isDefined(attrs.hideValid);
+        if (!attrs.refreshDelay) { attrs.refreshDelay = 500; } // milliseconds
+        attr.showDropdown = angular.isDefined(attrs.showDropdown);
+        attr.clearInput = angular.isDefined(attrs.clearInput);
+        attr.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
+        if (!attrs.keyForInputLabel) { attrs.keyForInputLabel = 'value'; }
+        attr.disableRow = angular.isDefined(attrs.disableRow);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+        if (!attrs.setText) { attrs.setText = ''; }
+
         // This is used for connecting directive's scope to transcluded html.
         transcludeFn(scope, function(clone, scope) {
           var el = element.find('.nice-search');
@@ -141,13 +156,8 @@ angular.module('niceElements')
       controller: function($scope, $timeout) {
         $scope.id = Math.random().toString(36).substring(7);
 
-        // Set default refresh delay
-        if (angular.isDefined($scope.currency)){
-          $scope.currency = '';
-        }
-
         $scope.modelOptions = {
-          debounce: 500 // Delay input for 0.5s
+          debounce: $scope.refreshDelay
         };
 
         // Set default refresh delay

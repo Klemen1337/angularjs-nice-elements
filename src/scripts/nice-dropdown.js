@@ -33,18 +33,30 @@ angular.module('niceElements')
         help: '@'
       },
 
-      link: function (scope, element, attr) {
+      link: function (scope, element, attrs) {
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.objValue) { attrs.objValue = 'value'; }
+        if (!attrs.objKey) { attrs.objKey = 'id'; }
+        attr.listIsObj = angular.isDefined(attrs.listIsObj);
+        attr.selectedIsObj = angular.isDefined(attrs.selectedIsObj);
+        attr.nullable = angular.isDefined(attrs.nullable);
+        attr.required = angular.isDefined(attrs.required);
+        attr.showTax = angular.isDefined(attrs.showTax);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
+        attr.multiple = angular.isDefined(attrs.multiple);
+        if (!attrs.help) { attrs.help = ''; }
+
         scope.valid = scope.formDropdown;
+
+        if(scope.multiple) { scope.internalSelected = []; }
+
+        if(!attrs.addButtonFunction) { scope.addButtonFunction = null; }
       },
 
       controller: function($rootScope, $scope) {
         $scope.internalSelected = null;
-        if($scope.multiple) $scope.internalSelected = [];
-
-        if (!$scope.objKey) $scope.objKey = 'id';
-        if(!angular.isDefined($scope.objValue)) $scope.objValue = 'value';
-        if(!angular.isDefined($scope.multiple)) $scope.multiple = false;
-        if(!$scope.addButtonFunction) $scope.addButtonFunction = null;
 
         var getFilter = function(item){
           // Create filter for finding object by objValue with _.where()

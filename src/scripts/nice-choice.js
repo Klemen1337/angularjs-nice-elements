@@ -26,6 +26,15 @@ angular.module('niceElements')
         multiple: '@'
       },
       link: function (scope, element, attr) {
+        if (!attr.title) { attr.title = ''; }
+        if (!attr.fieldWidth) { attr.fieldWidth = 'col-sm-8'; }
+        if (!attr.labelWidth) { attr.labelWidth = 'col-sm-4'; }
+        attr.listIsObj = angular.isDefined(attr.listIsObj);
+        attr.selectedIsObj = angular.isDefined(attr.selectedIsObj);
+        if (!attr.objValue) { attr.objValue = 'value'; }
+        if (!attr.objKey) { attr.objKey = 'id'; }
+        attr.multiple = angular.isDefined(attr.multiple);
+
         scope.firstTime = true;
         scope.checkIfFirstTime = function(){
           if (scope.firstTime){
@@ -42,12 +51,6 @@ angular.module('niceElements')
             scope.model = [];
           }
         }
-
-        if(!angular.isDefined(scope.objValue))
-          scope.objValue = "value";
-
-        if(!angular.isDefined(scope.objKey))
-          scope.objKey = "id";
 
         // Set internalList
         if (scope.listIsObj) {

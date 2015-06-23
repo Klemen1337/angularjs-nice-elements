@@ -22,11 +22,14 @@ angular.module('niceElements')
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (scope.model==null)
-          scope.model =  '';
-
-        if (!scope.rows)
-          scope.rows = 3;
+        if (scope.model==null) { scope.model =  ''; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
+        if (!attrs.noMarginBottom) { angular.isDefined(attrs.noMarginBottom); }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.help) { attrs.help = ''; }
+        if (!attrs.rows) { attrs.rows = 3; }
 
         var textareas = element.find('textarea');
 

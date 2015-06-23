@@ -58,7 +58,16 @@ angular.module('niceElements')
         };
 
       },
-      link: function(scope, iElement, iAttrs, ctrl){
+      link: function(scope, iElement, attrs, ctrl){
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.startView) { attrs.startView = 'day'; }
+        if (!attrs.minView) { attrs.minView = 'day'; }
+        if (!attrs.dateTimeFormat) { attrs.dateTimeFormat = 'dd.MM.yyyy | HH:mm'; }
+        attr.hourWithMinutes = angular.isDefined(attrs.hourWithMinutes);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.utc = angular.isDefined(attrs.utc);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
 
         // This random string is appended to dropdown id
         scope.randNum = Math.random().toString(36).substring(7);
@@ -79,19 +88,6 @@ angular.module('niceElements')
           }else
             scope.dateObj = new Date().setHours(0, 0, 0, 0);
         }
-
-        // Default startView value
-        if (!angular.isDefined(scope.startView))
-          scope.startView = 'day';
-
-        // Default minView value
-        if (!angular.isDefined(scope.minView))
-          scope.minView = 'day';
-
-        // Default dateTimeFormat value
-        if (!angular.isDefined(scope.dateTimeFormat))
-          scope.dateTimeFormat = 'dd.MM.yyyy | HH:mm';
-
 
         scope.opts = {
           startView: scope.startView,

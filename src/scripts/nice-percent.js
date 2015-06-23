@@ -25,6 +25,12 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
+        if (!attrs.title) { attrs.title = ''; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.placeholder) { attrs.placeholder = ''; }
+        attr.noMargin = angular.isDefined(attrs.noMargin);
       },
 
       controller: function($rootScope, $scope) {

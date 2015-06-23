@@ -13,7 +13,7 @@
                 'symbol': symbol,
                 'disabled': isDisabled
         }">
-            <input ng-show="!area"
+            <input ng-show="!textArea"
                 class="form-control"
                 type="{{ internalType }}"
                 ng-model="model"
@@ -29,7 +29,7 @@
                 ng-disabled="isDisabled"
                 maxlength="{{maxLength}}"
             >
-            <textarea ng-show="area"
+            <textarea ng-show="textArea"
                 class="form-control"
                 ng-model="model"
                 title="{{ help }}"

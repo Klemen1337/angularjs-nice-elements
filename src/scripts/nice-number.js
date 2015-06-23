@@ -27,11 +27,20 @@ angular.module('niceElements')
       },
 
       link: function (scope, element, attrs) {
-        // Link form object with valid object
-        if(angular.isDefined(attrs.valid)) scope.valid = scope.form;
-        if(!angular.isDefined(attrs.showError)) scope.showError = false;
-        if(!angular.isDefined(scope.min)) scope.min = scope.defaultMin;
+        if (!attrs.title) { attrs.title = ''; }
+        //if (!attrs.min) { attrs.min = 0; }
+        //if (!attrs.max) { attrs.max = 0; }
+        if (!attrs.defaultValue) { attrs.defaultValue = 0; }
+        attr.required = angular.isDefined(attrs.required);
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attr.showError = angular.isDefined(attrs.showError);
+        attr.noMargin = angular.isDefined(attrs.noMargin);
 
+        // Link form object with valid object
+        if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }
+
+        if(attrs.min) { scope.min = 0; }
 
         var setDefault = function(){
           if(angular.isDefined(scope.defaultValue)) scope.model = scope.defaultValue;
@@ -55,7 +64,6 @@ angular.module('niceElements')
       },
 
       controller: function($rootScope, $scope) {
-        $scope.defaultMin = 0;
         $scope.canAdd = true;
         $scope.canSubstract = true;
 
