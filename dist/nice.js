@@ -1016,14 +1016,11 @@ angular.module('niceElements')
         // Link form object with valid object
         if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }
 
-        if(attrs.min) { scope.min = 0; }
+        if(!attrs.min) { attrs.min = 0; }
 
         var setDefault = function(){
-          if(angular.isDefined(scope.defaultValue)) scope.model = scope.defaultValue;
-          else if(angular.isDefined(attrs.min)) scope.model = parseInt(scope.min);
-          else scope.model = 0;
+          scope.model = attrs.defaultValue;
         };
-
 
         // Check if number is defined
         if (!angular.isDefined(attrs.model)){
@@ -1055,7 +1052,7 @@ angular.module('niceElements')
 
         // Add to the value
         $scope.add = function(){
-          if(angular.isDefined($scope.max)){
+          if($scope.max){
             if(parseInt($scope.model) < $scope.max) {
               $scope.model = parseInt($scope.model) + 1;
               $scope.form.$setDirty();
@@ -1218,7 +1215,6 @@ angular.module('niceElements')
         attrs.showDropdown = angular.isDefined(attrs.showDropdown);
         attrs.clearInput = angular.isDefined(attrs.clearInput);
         attrs.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
-        if (!attrs.keyForInputLabel) { attrs.keyForInputLabel = 'value'; }
         attrs.disableRow = angular.isDefined(attrs.disableRow);
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.setText) { attrs.setText = ''; }
@@ -1243,7 +1239,7 @@ angular.module('niceElements')
         }
 
         var setValid = function(isValid){
-          if(angular.isDefined(scope.required)){
+          if(scope.required){
             scope.form.$setValidity('objectSelected', isValid);
           }
         };
@@ -1261,7 +1257,7 @@ angular.module('niceElements')
             scope.refreshSelectedCallback(obj);
           }
 
-          if (angular.isDefined(scope.resetSearchInput)){
+          if (scope.resetSearchInput){
             scope.model = null;
           } else {
             scope.model = obj;
@@ -1279,7 +1275,7 @@ angular.module('niceElements')
         scope.clear = function(){
           scope.results = [];
 
-          if(angular.isDefined(scope.clearInput)){
+          if(scope.clearInput){
             scope.modelString = "";
           }
 
@@ -1814,7 +1810,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-number.html',
-    "<ng-form class=\"nice-number\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<div ng-form=\"form\" class=\"nice-number\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div ng-class=\"{'row' : !disableRow}\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}</label>\n" +
@@ -1840,7 +1836,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</ng-form>"
+    "</div>"
   );
 
 

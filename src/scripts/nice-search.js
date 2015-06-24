@@ -45,7 +45,6 @@ angular.module('niceElements')
         attrs.showDropdown = angular.isDefined(attrs.showDropdown);
         attrs.clearInput = angular.isDefined(attrs.clearInput);
         attrs.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
-        if (!attrs.keyForInputLabel) { attrs.keyForInputLabel = 'value'; }
         attrs.disableRow = angular.isDefined(attrs.disableRow);
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.setText) { attrs.setText = ''; }
@@ -70,7 +69,7 @@ angular.module('niceElements')
         }
 
         var setValid = function(isValid){
-          if(angular.isDefined(scope.required)){
+          if(scope.required){
             scope.form.$setValidity('objectSelected', isValid);
           }
         };
@@ -88,7 +87,7 @@ angular.module('niceElements')
             scope.refreshSelectedCallback(obj);
           }
 
-          if (angular.isDefined(scope.resetSearchInput)){
+          if (scope.resetSearchInput){
             scope.model = null;
           } else {
             scope.model = obj;
@@ -106,7 +105,7 @@ angular.module('niceElements')
         scope.clear = function(){
           scope.results = [];
 
-          if(angular.isDefined(scope.clearInput)){
+          if(scope.clearInput){
             scope.modelString = "";
           }
 

@@ -40,14 +40,11 @@ angular.module('niceElements')
         // Link form object with valid object
         if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }
 
-        if(attrs.min) { scope.min = 0; }
+        if(!attrs.min) { attrs.min = 0; }
 
         var setDefault = function(){
-          if(angular.isDefined(scope.defaultValue)) scope.model = scope.defaultValue;
-          else if(angular.isDefined(attrs.min)) scope.model = parseInt(scope.min);
-          else scope.model = 0;
+          scope.model = attrs.defaultValue;
         };
-
 
         // Check if number is defined
         if (!angular.isDefined(attrs.model)){
@@ -79,7 +76,7 @@ angular.module('niceElements')
 
         // Add to the value
         $scope.add = function(){
-          if(angular.isDefined($scope.max)){
+          if($scope.max){
             if(parseInt($scope.model) < $scope.max) {
               $scope.model = parseInt($scope.model) + 1;
               $scope.form.$setDirty();
