@@ -201,25 +201,3 @@ angular.module('niceElements')
       }
     }
   });
-
-
-// Stupid animation fix
-angular.module('niceElements')
-  .directive('ngShow', function($compile, $animate) {
-    return {
-      priority: 1000,
-      link: function(scope, element, attrs) {
-
-        if (element.hasClass('fa-refresh')) {
-          // we could add no-animate and $compile per
-          // http://stackoverflow.com/questions/23879654/angularjs-exclude-certain-elements-from-animations?rq=1
-          // or we can just include that no-animate directive's code here
-          $animate.enabled(false, element);
-          scope.$watch(function() {
-            $animate.enabled(false, element)
-          })
-
-        }
-      }
-    }
-  });

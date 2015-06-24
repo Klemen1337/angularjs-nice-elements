@@ -7,7 +7,7 @@
  * # niceYesno
  */
 angular.module('niceElements')
-  .directive('niceYesno', function ($animate, $compile) {
+  .directive('niceYesno', function ($compile) {
 
     var setButtonLabel = function(scope, state){
       if (state)
@@ -21,7 +21,7 @@ angular.module('niceElements')
     };
 
      var setWidthBootstrap = function(bootstrapClass, el){
-       $animate.addClass(el, bootstrapClass);
+       $(el).addClass(bootstrapClass);
     };
 
 
@@ -67,11 +67,11 @@ angular.module('niceElements')
         var setButtonPosition = function(state) {
           var el = element[0].querySelector('.yesno-button');
           if(state) {
-            $animate.removeClass(el, 'yesno-button-no');
-            $animate.addClass(el, 'yesno-button-yes');
+            $(el).removeClass('yesno-button-no');
+            $(el).addClass('yesno-button-yes');
           } else {
-            $animate.addClass(el, 'yesno-button-no');
-            $animate.removeClass(el, 'yesno-button-yes');
+            $(el).addClass('yesno-button-no');
+            $(el).removeClass('yesno-button-yes');
           }
         };
 

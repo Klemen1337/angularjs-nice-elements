@@ -1375,28 +1375,6 @@ angular.module('niceElements')
     }
   });
 
-
-// Stupid animation fix
-angular.module('niceElements')
-  .directive('ngShow', function($compile, $animate) {
-    return {
-      priority: 1000,
-      link: function(scope, element, attrs) {
-
-        if (element.hasClass('fa-refresh')) {
-          // we could add no-animate and $compile per
-          // http://stackoverflow.com/questions/23879654/angularjs-exclude-certain-elements-from-animations?rq=1
-          // or we can just include that no-animate directive's code here
-          $animate.enabled(false, element);
-          scope.$watch(function() {
-            $animate.enabled(false, element)
-          })
-
-        }
-      }
-    }
-  });
-
 'use strict';
 
 /**
@@ -1406,7 +1384,7 @@ angular.module('niceElements')
  * # niceYesno
  */
 angular.module('niceElements')
-  .directive('niceYesno', function ($animate, $compile) {
+  .directive('niceYesno', function ($compile) {
 
     var setButtonLabel = function(scope, state){
       if (state)
@@ -1420,7 +1398,7 @@ angular.module('niceElements')
     };
 
      var setWidthBootstrap = function(bootstrapClass, el){
-       $animate.addClass(el, bootstrapClass);
+       $(el).addClass(bootstrapClass);
     };
 
 
@@ -1466,11 +1444,11 @@ angular.module('niceElements')
         var setButtonPosition = function(state) {
           var el = element[0].querySelector('.yesno-button');
           if(state) {
-            $animate.removeClass(el, 'yesno-button-no');
-            $animate.addClass(el, 'yesno-button-yes');
+            $(el).removeClass('yesno-button-no');
+            $(el).addClass('yesno-button-yes');
           } else {
-            $animate.addClass(el, 'yesno-button-no');
-            $animate.removeClass(el, 'yesno-button-yes');
+            $(el).addClass('yesno-button-no');
+            $(el).removeClass('yesno-button-yes');
           }
         };
 
