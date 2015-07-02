@@ -1528,8 +1528,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "\n" +
     "    <!--Needed for intercepting form changes ($dirty)!-->\n" +
-    "    <div ng-form=\"formChoice\">\n" +
-    "    </div>\n" +
+    "    <div ng-form=\"formChoice\"></div>\n" +
     "</div>"
   );
 

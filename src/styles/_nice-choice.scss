@@ -32,6 +32,10 @@
 
   }
 
+  ul{
+    margin-bottom: 0;
+  }
+
   li{
     padding:5px 0px;
     @extend .noselect;
