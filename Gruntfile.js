@@ -22,9 +22,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-angular-templates');
-    grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-angular-templates');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	// Configurable paths for the application
 	var appConfig = {
@@ -46,32 +46,34 @@ module.exports = function(grunt) {
 			// Project settings
 			yeoman: appConfig,
 
-            ngtemplates:  {
-                niceElements: {
-                    cwd: 'src/',
-                    src: 'views/**.html',
-                    dest: '.tmp/nice.templates.js'
-                }
-            },
-            concat: {
-                build: {
-                    src:    ['src/nice.js', 'src/scripts/*.js', '.tmp/nice.templates.js'],
-                    dest:   '<%= yeoman.dist %>/nice.js'
-                }
-            },
+			ngtemplates:  {
+				niceElements: {
+					cwd: 'src/',
+					src: 'views/**.html',
+					dest: '.tmp/nice.templates.js'
+				}
+			},
+
+			concat: {
+				build: {
+					src: ['src/nice.js', 'src/scripts/*.js', '.tmp/nice.templates.js'],
+					dest: '<%= yeoman.dist %>/nice.js'
+				}
+			},
+
 			jshint: {
 				options: {
-					//force:          true,
-					globalstrict:   true,
-					//sub:            true,
+					//force: true,
+					globalstrict: true,
+					//sub: true,
 					node: true,
 					loopfunc: true,
-					browser:        true,
-					devel:          true,
+					browser: true,
+					devel: true,
 					globals: {
-						angular:    false,
-						$:          false,
-						moment:		false,
+						angular: false,
+						$: false,
+						moment: false,
 						Pikaday: false,
 						module: false,
 						forge: false
@@ -97,6 +99,7 @@ module.exports = function(grunt) {
 					}
 				}
 			},
+
 			uglify: {
 				options: {
 					mangle: false
@@ -107,49 +110,52 @@ module.exports = function(grunt) {
 					}
 				}
 			},
-            // Compiles Sass to CSS and generates necessary files if requested
-            compass: {
-                options: {
-                    sassDir: 'src/styles',
-                    cssDir: 'dist',
-                    generatedImagesDir: 'dist/images/generated',
-                    imagesDir: 'dist/images',
-                    javascriptsDir: 'dist/scripts',
-                    fontsDir: 'dist/fonts',
-                    importPath: './bower_components',
-                    httpImagesPath: '/images',
-                    httpGeneratedImagesPath: '/images/generated',
-                    httpFontsPath: '/styles/fonts',
-                    relativeAssets: false,
-                    assetCacheBuster: false,
-                    raw: 'Sass::Script::Number.precision = 10\n'
-                },
-                dist: {
-                    options: {
-                        generatedImagesDir: '<%= yeoman.dist %>/images/generated'
-                    }
-                }
-            },
-            // Empties folders to start fresh
-            clean: {
-                dist: {
-                    files: [{
-                        dot: true,
-                        src: [
-                            'dist/',
-                            '.tmp/'
-                        ]
-                    }]
-                },
-                tmp: '.tmp/'
-            },
+
+			// Compiles Sass to CSS and generates necessary files if requested
+			compass: {
+				options: {
+					sassDir: 'src/styles/',
+					cssDir: 'dist',
+					generatedImagesDir: 'dist/images/generated',
+					imagesDir: 'dist/images',
+					javascriptsDir: 'dist/scripts',
+					fontsDir: 'dist/fonts',
+					importPath: './bower_components',
+					httpImagesPath: '/images',
+					httpGeneratedImagesPath: '/images/generated',
+					httpFontsPath: '/styles/fonts',
+					relativeAssets: false,
+					assetCacheBuster: false,
+					raw: 'Sass::Script::Number.precision = 10\n'
+				},
+				dist: {
+					options: {
+						generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+					}
+				}
+			},
+
+			// Empties folders to start fresh
+			clean: {
+				dist: {
+					files: [{
+						dot: true,
+						src: [
+							'dist/',
+							'.tmp/'
+						]
+					}]
+				},
+				tmp: '.tmp/'
+			},
 			cssmin: {
 				dev: {
 					src: ['dist/nice.css'],
 					dest: 'dist/nice.min.css'
 				}
-			}/*,
-			karma: {
+			}
+
+			/*karma: {
 				unit: {
 					configFile: publicPathRelativeRoot+'config/karma.conf.js',
 					singleRun: true,
@@ -163,14 +169,14 @@ module.exports = function(grunt) {
 		register/define grunt tasks
 		*/
 		grunt.registerTask('default', [
-            'clean:dist',
-            'ngtemplates',
-            'concat:build',
-            'jshint:beforeconcatQ',
-            'compass:dist',
-            'cssmin',
-            'clean:tmp',
-            'uglify:build'
+			'clean:dist',
+			'ngtemplates',
+			'concat:build',
+			'jshint:beforeconcatQ',
+			'compass:dist',
+			'cssmin',
+			'clean:tmp',
+			'uglify:build'
 		]);
 
 	}

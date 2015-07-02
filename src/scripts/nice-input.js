@@ -58,7 +58,11 @@ angular.module('niceElements')
         }
         else if(attrs.type == "number"){
           scope.internalType = "text";
-          scope.model = parseFloat(scope.model);
+          if(scope.model){
+            scope.model = parseFloat(scope.model);
+          } else {
+            scope.model = 0;
+          }
         }
         else if(attrs.type == "integer"){
           scope.internalType = "text";
@@ -83,12 +87,13 @@ angular.module('niceElements')
         }
 
         scope.$watch('model', function (value_new, value_old) {
-          scope.internalModel = scope.model;
+            scope.internalModel = scope.model;
         });
 
         scope.$watch('internalModel', function (value_new, value_old) {
           if(attrs.type == "number" && value_new) {
             if(typeof value_new != "number") {
+              console.log(value_new);
               scope.internalModel = value_new.replace(',', '.');
               scope.model = scope.internalModel;
             }

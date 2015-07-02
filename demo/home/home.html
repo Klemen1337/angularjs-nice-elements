@@ -79,6 +79,7 @@
                 <div class="col-sm-6">
                     <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl"></nice-input>
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
+                    <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number"></nice-input>
                     <nice-datetime-picker title="Date of birth" model="data.dateOfBirth" min-view="day" start-view="year" date-time-format="dd.MM.yyyy" disabled="disabl"></nice-datetime-picker>
                     <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
                     <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" disabled="disabl"></nice-yesno>
@@ -97,7 +98,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    {{ data }}
+                    <pre>{{ data | json }}</pre>
                     <nice-loader></nice-loader>
                 </div>
 
@@ -368,7 +369,7 @@
                     <nice-dropdown title="Dropdown" model="dropdown" list="listObjs" obj-value="value" list-is-obj="true" selected-is-obj="true" multiple="true"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ dropdown }}</code>
+                    <pre>{{ dropdown | json }}</pre>
                 </div>
             </div>
 
@@ -387,7 +388,7 @@
                     <nice-dropdown title="Dropdown" model="choiceDemo2" list="listObjs" obj-value="value" list-is-obj="true" selected-is-obj="true"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ choiceDemo2 }}</code>
+                    <pre>{{ choiceDemo2 | json }}</pre>
                 </div>
             </div>
 
@@ -399,7 +400,7 @@
                     <nice-dropdown title="Dropdown" model="choiceDemo4" list="listStrings"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ choiceDemo4 }}</code>
+                    <pre>{{ choiceDemo4 | json }}</pre>
                 </div>
             </div>
 
@@ -431,7 +432,7 @@
                     </nice-search>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ searchItem }}</code>
+                    <pre>{{ searchItem | json }}</pre>
                 </div>
             </div>
         </div>
@@ -498,7 +499,7 @@
                     </nice-datetime-picker>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ dateTimePicker }}</code>
+                    <pre>{{ dateTimePicker | json }}</pre>
                 </div>
             </div>
         </div>
@@ -514,7 +515,7 @@
                     <nice-date-range title="Date range" model="rangeDate"></nice-date-range>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ rangeDate | json }}</code>
+                    <pre>{{ rangeDate | json }}</pre>
                 </div>
             </div>
         </div>
@@ -583,7 +584,7 @@
                     <nice-choice title="I like fruit" model="choiceDemo1" multiple="true" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ choiceDemo1 }}</code>
+                    <pre>{{ choiceDemo1 | json }}</pre>
                 </div>
             </div>
 
@@ -602,7 +603,7 @@
                     <nice-choice title="I like fruit" model="choiceDemo2" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ choiceDemo2 }}</code>
+                    <pre>{{ choiceDemo2 | json }}</pre>
                 </div>
             </div>
 
@@ -614,7 +615,7 @@
                     <nice-choice title="I like fruit" model="choiceDemo3" multiple="true" list="listStrings"></nice-choice>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ choiceDemo3 }}</code>
+                    <pre>{{ choiceDemo3 | json }}</pre>
                 </div>
             </div>
 
@@ -626,7 +627,7 @@
                     <nice-choice title="I like fruit" model="choiceDemo4" list="listStrings"></nice-choice>
                 </div>
                 <div class="col-sm-6">
-                    <code>{{ choiceDemo4 }}</code>
+                    <pre>{{ choiceDemo4 | json }}</pre>
                 </div>
             </div>
         </div>
