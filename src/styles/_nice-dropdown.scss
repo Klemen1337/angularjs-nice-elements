@@ -28,12 +28,12 @@
   .dropdown-menu{
     min-width: 200px;
     width: 100%;
-    padding: 0px 0;
+    padding: 0;
     max-height: 300px;
     overflow: auto;
     border: 1px solid $nice-border-color;
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.175);
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
 
     li{
       .choice-checkbox{

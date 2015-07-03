@@ -891,7 +891,6 @@ angular.module('niceElements')
         scope.$watch('internalModel', function (value_new, value_old) {
           if(attrs.type == "number" && value_new) {
             if(typeof value_new != "number") {
-              console.log(value_new);
               scope.internalModel = value_new.replace(',', '.');
               scope.model = scope.internalModel;
             }
