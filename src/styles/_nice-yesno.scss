@@ -13,7 +13,7 @@
 
   .yesno-wrapper{
     background: $nice-yesno-bg;
-    border: 1px solid #ccc;
+    border: 1px solid $nice-border;
     color: $nice-font-color;
     border-radius: $nice-border-radius;
 
@@ -52,7 +52,7 @@
       transition: all 0.5s;
 
       background-color: $nice-yesno-slider-bg;
-      border-radius: 1px;
+      border-radius: $nice-border-radius-small;
       color: white;
       position: absolute;
       line-height: 28px;

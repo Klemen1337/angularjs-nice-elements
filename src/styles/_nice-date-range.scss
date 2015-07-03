@@ -38,6 +38,9 @@
         @extend .btn, .btn-block, .btn-sm, .btn-primary;
         border-color: $nice-base-color;
         background: $nice-base-color;
+        -webkit-border-radius: $nice-border-radius;
+        -moz-border-radius: $nice-border-radius;
+        border-radius: $nice-border-radius;
         color: white;
 
         &.active{
@@ -91,7 +94,7 @@
 
  .daterangepicker.dropdown-menu {
   max-width: auto;
-  min-width: 175px;
+  min-width: 165px;
   z-index: 3000;
 }
 

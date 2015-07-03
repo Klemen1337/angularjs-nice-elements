@@ -55,7 +55,7 @@
       height: 25px;
       border: 2px solid $nice-border;
       position: absolute;
-      border-radius: 2px;
+      border-radius: $nice-border-radius-small;
       text-align: center;
     }
 
