@@ -52,3 +52,27 @@
     }
   }
 }
+
+
+@media (max-width: $screen-md-min) {
+  .nice-datetime-picker{
+
+    .ranges, .calendar, .ranges, .calendar{
+      float: none !important;
+    }
+
+    .ranges{
+      margin: 0 auto;
+      margin-top: 5px;
+    }
+
+    .table-responsive {
+      margin-bottom: 0;
+      border: 0;
+    }
+
+    .dropdown-menu{
+      padding: 0;
+    }
+  }
+}
