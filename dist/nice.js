@@ -627,7 +627,7 @@ angular.module('niceElements')
         };
 
         var setSelected = function(selected){
-          if(selected && _.find($scope.internalList, getFilter(selected)))
+          if(selected && _.find($scope.internalList, selected))
             $scope.internalSelected = selected;
           else
             $scope.internalSelected = $scope.internalList[0];
@@ -692,7 +692,9 @@ angular.module('niceElements')
                 }else{
                   obj[$scope.objKey] = $scope.model;
                 }
-                setSelected(_.findWhere($scope.internalList, obj));
+
+                if($scope.objKey) setSelected(obj);
+                else setSelected({ id: $scope.model.id });
               } else {
                 // Select first element from internal list
                 setSelected($scope.internalList[0]);
