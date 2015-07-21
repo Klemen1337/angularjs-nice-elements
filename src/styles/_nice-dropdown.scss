@@ -98,8 +98,8 @@
 
     &:disabled{
       cursor: not-allowed;
-      background: $nice-dropdown-disabled-bg;
-      border-color: $nice-dropdown-disabled-border;
+      background: $nice-dropdown-disabled-bg !important;
+      border-color: $nice-dropdown-disabled-border !important;
     }
 
     &:hover{
