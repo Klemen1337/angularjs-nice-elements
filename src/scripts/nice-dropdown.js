@@ -146,7 +146,8 @@ angular.module('niceElements')
                 $scope.formDropdown.$setValidity('required', true);
               }
             } else {
-              $scope.internalSelected = angular.copy($scope.list);
+              //$scope.internalSelected = angular.copy($scope.list);
+              $scope.internalSelected = $scope.model;
             }
           } else {
             // Disable dropdown button if list of items is empty
