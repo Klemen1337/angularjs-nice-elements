@@ -33,6 +33,10 @@
         margin-bottom: 20px;
     }
 
+    #nice-notification .btn{
+        margin-bottom: 20px;
+    }
+
 </style>
 
 
@@ -64,6 +68,7 @@
                     <li><a ng-click="scrollTo('nice-choice')" href>Choice</a></li>
                     <li><a ng-click="scrollTo('nice-yes-no')" href>Yes no</a></li>
                     <li><a ng-click="scrollTo('nice-percent')" href>Percent</a></li>
+                    <li><a ng-click="scrollTo('nice-notification')" href>Notifications</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -99,7 +104,7 @@
 
                 <div class="col-sm-6">
                     <pre>{{ data | json }}</pre>
-                    <nice-loader></nice-loader>
+                    <button class="btn btn-danger" ng-click="error()">Error Notification</button>
                 </div>
 
             </div>
@@ -721,10 +726,32 @@
                     <nice-percent title="Percent" model="percentage"></nice-percent>
                 </div>
                 <div class="col-sm-6">
-                <div class="col-sm-6">
-                    <code>{{ percentage }}</code>
+                    <div class="col-sm-6">
+                        <code>{{ percentage }}</code>
+                    </div>
                 </div>
             </div>
+        </div>
+
+
+        <!-------------------------------- NICE NOTIFICATION -------------------------------->
+        <div class="white-wrapper" id="nice-notification">
+            <h2>Nice notification</h2>
+
+            <button class="btn btn-primary" ng-click="primary()">Primary Notification</button>
+            <button class="btn btn-danger" ng-click="error()">Error Notification</button>
+            <button class="btn btn-success" ng-click="success()">Success Notification</button>
+            <button class="btn btn-info" ng-click="info()">Information Notification</button>
+            <button class="btn btn-warning" ng-click="warning()">Warning Notification</button>
+
+            <button class="btn btn-primary" ng-click="primaryTitle()">Primary Notification</button>
+
+            <button class="btn btn-danger" ng-click="errorTime()">Error Notification 1s</button>
+            <button class="btn btn-success" ng-click="successTime()">Success Notification 20s</button>
+
+            <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
+            <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
+
         </div>
 
 
