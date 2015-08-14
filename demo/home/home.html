@@ -1,6 +1,6 @@
 <style>
     body{
-        background: #eceff1;
+        background: #f7fcfc;
     }
 
     html { font-size: 62.5%; }
@@ -12,6 +12,8 @@
         font-size: 60px;
         margin: 30px;
         margin-top:80px;
+        color: #4abeb4;
+        font-weight: bold;
     }
 
     .white-wrapper{
@@ -27,6 +29,25 @@
 
     .white-wrapper h2{
         margin: 0 0 25px 0;
+    }
+
+    .navbar-default{
+        background: #4abeb4;
+        color: white;
+    }
+
+    .navbar-default .navbar-brand{
+        color: white;
+        background: #36978f;
+    }
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        color: white;
+        background: #3ba59c;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: white;
     }
 
     pre{
@@ -100,6 +121,8 @@
                         obj-value="value"
                         selected-is-obj="true">
                     </nice-choice>
+
+                    <nice-button title="Something" loading="niceButtonLoading" ng-click="toggleNiceButton()" label-width="col-md-4" field-width="col-md-4"></nice-button>
                 </div>
 
                 <div class="col-sm-6">

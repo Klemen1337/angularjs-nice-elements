@@ -31,6 +31,32 @@ angular.module('niceElements')
     };
   });
 
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceButton
+ * @description
+ * # niceButton
+ */
+angular.module('niceElements')
+  .directive('niceButton', function () {
+    return {
+      templateUrl: 'views/nice-button.html',
+      restrict: 'E',
+      scope: {
+        loading: "=?",
+        disabled: '@',
+        title: "@",
+        noMargin: "=",
+        fieldWidth: '@',
+        labelWidth: '@'
+      },
+      link: function postLink(scope, element, attrs) {
+
+      }
+    };
+  });
+
 'use strict';
 
 /**
@@ -1631,6 +1657,23 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                <span ng-show=\"model\" class=\"glyphicon glyphicon-menu-up\"></span>\n" +
     "            </button>\n" +
     "    </div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('views/nice-button.html',
+    "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"labelWidth\"></div>\n" +
+    "\n" +
+    "        <div ng-class=\"(labelWidth && fieldWidth) ? fieldWidth : ''\">\n" +
+    "            <div type=\"button\" class=\"btn btn-block btn-primary\">\n" +
+    "                <div ng-if=\"!loading\">{{ title }}</div>\n" +
+    "                <div ng-if=\"loading\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
     "</div>\n"
   );
 

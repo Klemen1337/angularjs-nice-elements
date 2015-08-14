@@ -1,0 +1,17 @@
+.nice-button{
+  margin-bottom: 10px;
+}
+
+.nice-button-loader{
+  padding: 0;
+
+  svg{
+    width: 10px;
+    height: 10px;
+  }
+
+  svg path,
+  svg rect{
+    fill: white;
+  }
+}

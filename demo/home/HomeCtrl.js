@@ -6,6 +6,11 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     $scope.percentage = 0.22000000;
 
+    $scope.niceButtonLoading = false;
+    $scope.toggleNiceButton = function(){
+      $scope.niceButtonLoading = !$scope.niceButtonLoading;
+    };
+
     // Notification tests
     $scope.primary = function() {
         NiceNotification('Primary notification');

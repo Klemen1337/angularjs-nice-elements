@@ -5,10 +5,10 @@ $font-family-base: $nice-font-family-sans-serif !default;
 
 // ---------- Colors ----------
 $trout: #474F52 !default;
-$nice-danger-color: #FF6C60;
-$nice-success-color: #5cb85c;
-$nice-info-color: #31b0d5;
-$nice-warning-color: #ec971f;
+$nice-danger-color: #d9534f !default;
+$nice-success-color: #5cb85c !default;
+$nice-info-color: #31b0d5 !default;
+$nice-warning-color: #ec971f !default;
 
 
 // ---------- Color override ----------
@@ -66,7 +66,7 @@ $nice-input-disabled-bg: white !default;
 $nice-input-disabled-border: $nice-disabled-color !default;
 
 $nice-input-valid: $nice-base-color !default;
-$nice-input-invalid: #FF6C60 !default;
+$nice-input-invalid: $nice-danger-color !default;
 
 
 // ---------- Dropdown colors override ----------
