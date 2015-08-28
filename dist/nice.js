@@ -2653,29 +2653,29 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                <div class=\"dtp\" id=\"this.name\" ng-class=\"{'hidden': !showDtp}\">\n" +
     "                    <div class=\"dtp-content\" ng-style=\"dtp_content_style\">\n" +
     "                        <div class=\"dtp-date-view\">\n" +
-    "                            <header class=\"dtp-header\">\n" +
+    "                            <div class=\"dtp-header\">\n" +
     "                                <div class=\"dtp-actual-day\">{{actualDay}}</div>\n" +
-    "                                <div class=\"dtp-close\"><a href=\"javascript:void(0);\" ng-click=\"onCloseClick()\"><i class=\"material-icons\">clear</i></</div>\n" +
-    "                            </header>\n" +
+    "                                <div class=\"dtp-close\"><a href=\"javascript:void(0);\" ng-click=\"onCloseClick()\"><i class=\"fa fa-close\"></i></div>\n" +
+    "                            </div>\n" +
     "                            <div class=\"dtp-date\" ng-class=\"{'hidden': !showDateHeader}\">\n" +
     "                                <div>\n" +
     "                                    <div class=\"left center p10\">\n" +
-    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"material-icons\">chevron_left</i></a>\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"dtp-actual-month p80\" ng-click=\"initDate()\">{{actualMonth}}</div>\n" +
     "                                    <div class=\"right center p10\">\n" +
-    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"material-icons\">chevron_right</i></a>\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"clearfix\"></div>\n" +
     "                                </div>\n" +
     "                                <div class=\"dtp-actual-num\" ng-click=\"initDate()\">{{actualNum}}</div>\n" +
     "                                <div>\n" +
     "                                    <div class=\"left center p10\">\n" +
-    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-year-before\" ng-click=\"onYearBeforeClick()\" ng-class=\"{'disabled': !btnYearBeforeEnabled}\"\"><i class=\"material-icons\">chevron_left</i></a>\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-year-before\" ng-click=\"onYearBeforeClick()\" ng-class=\"{'disabled': !btnYearBeforeEnabled}\"\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"dtp-actual-year p80\" ng-click=\"initDate()\">{{actualYear}}</div>\n" +
     "                                    <div class=\"right center p10\">\n" +
-    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-year-after\" ng-click=\"onYearAfterClick()\" ng-class=\"{'disabled': !btnYearAfterEnabled}\"><i class=\"material-icons\">chevron_right</i></a>\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"dtp-select-year-after\" ng-click=\"onYearAfterClick()\" ng-class=\"{'disabled': !btnYearAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"clearfix\"></div>\n" +
     "                                </div>\n" +

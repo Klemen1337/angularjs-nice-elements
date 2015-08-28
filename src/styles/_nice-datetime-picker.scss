@@ -168,7 +168,7 @@ $color_gallery_approx: #eee;
       }
       .dtp-close {
         position: absolute;
-        top: 0.5em;
+        top: 0.2em;
         right: 1rem;
         > a {
           color: $white;
@@ -284,7 +284,7 @@ $color_gallery_approx: #eee;
         position: absolute;
         left: 0;
         top: 23px;
-        > .dtp-date-view > header.dtp-header {
+        > .dtp-date-view > div.dtp-header {
           background: $color_apple_approx;
           color: $white;
           text-align: center;

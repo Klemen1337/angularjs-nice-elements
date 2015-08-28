@@ -20,29 +20,29 @@
                 <div class="dtp" id="this.name" ng-class="{'hidden': !showDtp}">
                     <div class="dtp-content" ng-style="dtp_content_style">
                         <div class="dtp-date-view">
-                            <header class="dtp-header">
+                            <div class="dtp-header">
                                 <div class="dtp-actual-day">{{actualDay}}</div>
-                                <div class="dtp-close"><a href="javascript:void(0);" ng-click="onCloseClick()"><i class="material-icons">clear</i></</div>
-                            </header>
+                                <div class="dtp-close"><a href="javascript:void(0);" ng-click="onCloseClick()"><i class="fa fa-close"></i></div>
+                            </div>
                             <div class="dtp-date" ng-class="{'hidden': !showDateHeader}">
                                 <div>
                                     <div class="left center p10">
-                                        <a href="javascript:void(0);" class="dtp-select-month-before" ng-click="onMonthBeforeClick()" ng-class="{'disabled': !btnMonthBeforeEnabled}"><i class="material-icons">chevron_left</i></a>
+                                        <a href="javascript:void(0);" class="dtp-select-month-before" ng-click="onMonthBeforeClick()" ng-class="{'disabled': !btnMonthBeforeEnabled}"><i class="fa fa-chevron-left"></i></a>
                                     </div>
                                     <div class="dtp-actual-month p80" ng-click="initDate()">{{actualMonth}}</div>
                                     <div class="right center p10">
-                                        <a href="javascript:void(0);" class="dtp-select-month-after" ng-click="onMonthAfterClick()" ng-class="{'disabled': !btnMonthAfterEnabled}"><i class="material-icons">chevron_right</i></a>
+                                        <a href="javascript:void(0);" class="dtp-select-month-after" ng-click="onMonthAfterClick()" ng-class="{'disabled': !btnMonthAfterEnabled}"><i class="fa fa-chevron-right"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="dtp-actual-num" ng-click="initDate()">{{actualNum}}</div>
                                 <div>
                                     <div class="left center p10">
-                                        <a href="javascript:void(0);" class="dtp-select-year-before" ng-click="onYearBeforeClick()" ng-class="{'disabled': !btnYearBeforeEnabled}""><i class="material-icons">chevron_left</i></a>
+                                        <a href="javascript:void(0);" class="dtp-select-year-before" ng-click="onYearBeforeClick()" ng-class="{'disabled': !btnYearBeforeEnabled}""><i class="fa fa-chevron-left"></i></a>
                                     </div>
                                     <div class="dtp-actual-year p80" ng-click="initDate()">{{actualYear}}</div>
                                     <div class="right center p10">
-                                        <a href="javascript:void(0);" class="dtp-select-year-after" ng-click="onYearAfterClick()" ng-class="{'disabled': !btnYearAfterEnabled}"><i class="material-icons">chevron_right</i></a>
+                                        <a href="javascript:void(0);" class="dtp-select-year-after" ng-click="onYearAfterClick()" ng-class="{'disabled': !btnYearAfterEnabled}"><i class="fa fa-chevron-right"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
