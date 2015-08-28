@@ -30,7 +30,11 @@ angular.module('niceElements')
         if (!attrs.title) { attrs.title = ''; }
         //if (!attrs.min) { attrs.min = 0; }
         //if (!attrs.max) { attrs.max = 0; }
-        if (!attrs.defaultValue) { attrs.defaultValue = 0; }
+        if (!attrs.defaultValue) {
+          attrs.defaultValue = 0;
+        }else{
+          attrs.defaultValue = parseInt(attrs.defaultValue);
+        }
         attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }

@@ -27,6 +27,8 @@ app.configure(function(){
 app.use(express.static('demo'));
 app.use('/bower_components', express.static('bower_components'));
 app.use('/dist', express.static('dist'));
+app.use('/src', express.static('src'));
+app.use('/views', express.static('src/views'));
 
 //catch all route to serve index.html (main frontend app)
 app.get('index.html', function(req, res){

@@ -7,6 +7,8 @@
 
         <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="/bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--<link rel="stylesheet" href="/bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" />-->
         <link rel="stylesheet" href="/dist/style.css"/>
 
     </head>
@@ -28,8 +30,36 @@
         <script type="text/javascript" src="/bower_components/angular-daterangepicker/js/angular-daterangepicker.min.js"></script>
         <script type="text/javascript" src="/bower_components/decimal.js/decimal.js"></script>
         <script type="text/javascript" src="/bower_components/angular-truncate/src/truncate.js"></script>
+        <script src='/bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js'></script>
 
-        <script type="text/javascript" src="/dist/nice.js"></script>
+
+        <!--<script type="text/javascript" src="/dist/nice.js"></script>-->
+
+        <script>
+        angular.module('niceElements', [
+            'ngMessages',
+            'ui.bootstrap',
+            'ui.bootstrap.datetimepicker',
+            'daterangepicker'
+        ]);
+        </script>
+        <script type="text/javascript" src="/src/scripts/nice-button.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-button-toggle.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-choice.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-comment.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-date.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-date-range.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-datetime-picker.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-dropdown.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-input.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-label.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-loader.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-notification.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-number.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-percent.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-search.js"></script>
+        <script type="text/javascript" src="/src/scripts/nice-yesno.js"></script>
+
 
         <script type="text/javascript" src="/demo/app.js"></script>
 
