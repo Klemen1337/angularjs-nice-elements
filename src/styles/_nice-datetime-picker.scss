@@ -283,7 +283,7 @@ $color_gallery_approx: #eee;
         max-height: 500px;
         position: absolute;
         left: 0;
-        top: 23px;
+        top: 5px;
         > .dtp-date-view > div.dtp-header {
           background: $color_apple_approx;
           color: $white;
@@ -340,82 +340,4 @@ $color_gallery_approx: #eee;
       z-index: 50;
     }
   }
-
-
-
-  //.dtp-wrapper{
-  //  position: relative;
-  //
-  //  .dtp {
-  //    position: absolute;
-  //
-  //    .dtp-content {
-  //      position: absolute;
-  //      left: 0;
-  //      top: 23px;
-  //    }
-  //  }
-  //}
-
-  // NOT USED ANYMORE
-  //.datetimepicker{
-  //  width: 260px;
-  //
-  //  .day, .month, .year{
-  //    &.active{
-  //      background: $nice-datetime-bg;
-  //      -webkit-border-radius: $nice-border-radius;
-  //      -moz-border-radius: $nice-border-radius;
-  //      border-radius: $nice-border-radius;
-  //
-  //      &:hover{
-  //        background: $nice-datetime-bg;
-  //      }
-  //    }
-  //  }
-  //}
-
-  // NOT USED ANYMORE
-  //table{
-  //  width: 100%;
-  //  font-family: $font-family-base;
-  //  font-size: 12px;
-  //
-  //  tr{
-  //    td{
-  //      font-size: 12px;
-  //
-  //      span.active:active, span.active:hover:active, span.active.disabled:active, span.active.disabled:hover:active, span.active.disabled:hover.active{}
-  //      .active:active, .active:hover:active, .active.disabled:active, .active.disabled:hover:active, .active.disabled:hover.active{
-  //        background: $nice-base-color !important;
-  //        border-radius: $nice-border-radius;
-  //      }
-  //    }
-  //  }
-  //}
-
 }
-
-// NOT USED ANYMORE
-//@media (max-width: $screen-md-min) {
-//  .nice-datetime-picker{
-//
-//    .ranges, .calendar, .ranges, .calendar{
-//      float: none !important;
-//    }
-//
-//    .ranges{
-//      margin: 0 auto;
-//      margin-top: 5px;
-//    }
-//
-//    .table-responsive {
-//      margin-bottom: 0;
-//      border: 0;
-//    }
-//
-//    .dropdown-menu{
-//      padding: 0;
-//    }
-//  }
-//}
