@@ -496,6 +496,7 @@ angular.module('niceElements')
       //onChange: '&', // function called on date changed
       model: '=', // binding model
       format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+      modelFormat: '@', // default: ''
       //currentDate: '@',
       date: '@', // default: true, is date picker enabled?
       time: '@', // default: false, is time picker enabled?
@@ -522,6 +523,7 @@ angular.module('niceElements')
         fieldWidth: 'col-sm-8',
         labelWidth: 'col-sm-4',
         format: 'DD.MM.YYYY HH:mm',
+        modelFormat: 'DD-MM-YYYY HH:mmZZ',
         minDate : null, maxDate : null, lang : 'en',
         weekStart : 1, shortTime : false,
         cancelText : 'Cancel', okText : 'OK',
@@ -551,6 +553,8 @@ angular.module('niceElements')
         params.shortTime = $scope.shortTime;
       if ($scope.noMargin)
         params.noMargin = $scope.noMargin === 'true';
+      if ($scope.modelFormat)
+        params.modelFormat = $scope.modelFormat;
 
       $scope.date = params.date;
       $scope.time = params.time;
@@ -605,33 +609,42 @@ angular.module('niceElements')
           }
         },
         initDates: function () {
-          //console.log('initDates');
-          if ($scope.model) {
-            $scope.currentDate = moment($scope.model).locale(params.lang);
-          }
-          else {
-            if (typeof(params.currentDate) !== 'undefined' && params.currentDate !== null) {
-              if (typeof(params.currentDate) === 'string') {
-                $scope.currentDate = moment($scope.currentDate, params.format).locale(params.lang);
+
+          if (typeof($scope.model) === 'undefined' || $scope.model === null){
+            $scope.currentDate = moment();
+          }else{
+            if (!params.date && params.time){
+              // if only time
+              var _time = moment();
+              var i_hour = params.modelFormat.indexOf('HH:mm');
+              var i_min = params.modelFormat.indexOf('mm');
+              var hours = $scope.model.substring(i_hour, i_hour + 2);
+              var minutes = $scope.model.substring(i_min, i_min + 2);
+
+              if (i_hour > -1 && i_min > -1){
+                _time.hours(hours);
+                _time.minutes(minutes);
+              }else{
+                console.error('Cannot parse current time model with passed modelFilter. Please check if you missed ' +
+                    'modelFilter setting in directive.. Falling back to current time instead.');
+              }
+
+              $scope.currentDate = _time;
+
+
+            }else{
+              // all other combinations
+              if (typeof($scope.model) === 'string') {
+                $scope.currentDate = moment($scope.model, params.modelFormat).locale(params.lang);
               }
               else {
-                if (typeof(params.currentDate.isValid) === 'undefined' || typeof(params.currentDate.isValid) !== 'function') {
-                  var x = params.currentDate.getTime();
-                  $scope.currentDate = moment(x, "x").locale(params.lang);
-                }
-                else {
-                  $scope.currentDate = params.currentDate;
-                }
+                $scope.currentDate = moment($scope.model).locale(params.lang);
               }
             }
-            else {
-              $scope.currentDate = moment();
-            }
-
-            that.setDateModel();
-            that.setElementValue();
-
           }
+
+          that.setDateModel();
+          that.setElementValue();
 
           // Parse minDate
           if (typeof($scope.minDate) !== 'undefined' && $scope.minDate !== null) {
@@ -660,11 +673,13 @@ angular.module('niceElements')
           }
 
           // Fix currentDate if violates minDate and maxDate constraints
-          if (!that.isAfterMinDate($scope.currentDate)) {
-            $scope.currentDate = moment($scope.minDate);
-          }
-          if (!that.isBeforeMaxDate($scope.currentDate)) {
-            $scope.currentDate = moment($scope.maxDate);
+          if (params.date===true){
+            if (!that.isAfterMinDate($scope.currentDate)) {
+              $scope.currentDate = moment($scope.minDate);
+            }
+            if (!that.isBeforeMaxDate($scope.currentDate)) {
+              $scope.currentDate = moment($scope.maxDate);
+            }
           }
         },
         initDate: function () {
@@ -1087,14 +1102,16 @@ angular.module('niceElements')
           return $scope.isPM;
         },
         setElementValue: function (date) {
-          if (typeof(date) !== 'undefined'){
-            $scope.currentDate = moment(date).locale(params.lang);
-          }
+
+          //if (typeof(date) !== 'undefined'){
+          //  $scope.currentDate = moment(date).locale(params.lang);
+          //}
 
           $scope.value = moment($scope.currentDate).locale(params.lang).format(params.format);
         },
         setDateModel: function() {
-          $scope.model = angular.copy($scope.currentDate);
+          //$scope.model = angular.copy($scope.currentDate);
+          $scope.model = $scope.currentDate.format(params.modelFormat);
           $scope.formDatetimePicker.$setDirty();
         },
         toggleButtons: function (date) {
