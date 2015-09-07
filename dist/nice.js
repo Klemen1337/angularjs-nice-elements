@@ -523,7 +523,7 @@ angular.module('niceElements')
         fieldWidth: 'col-sm-8',
         labelWidth: 'col-sm-4',
         format: 'DD.MM.YYYY HH:mm',
-        modelFormat: 'DD-MM-YYYYTHH:mmZZ',
+        modelFormat: 'YYYY-MM-DDTHH:mmZZ',
         minDate : null, maxDate : null, lang : 'en',
         weekStart : 1, shortTime : false,
         cancelText : 'Cancel', okText : 'OK',
