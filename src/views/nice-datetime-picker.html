@@ -7,6 +7,9 @@
         </div>
 
         <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <!--Needed for intercepting form changes ($dirty)!-->
+            <div ng-form="formDatetimePicker"></div>
+
             <div class="dropdown">
                 <a class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="onClick()" href="javascript:void(0);">
                     <div class="input-group">

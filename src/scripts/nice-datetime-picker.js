@@ -30,7 +30,7 @@ angular.module('niceElements')
       title: '@', // default: ''
       noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
-      labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
+      labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
     },
     templateUrl: 'views/nice-datetime-picker.html',
     link: function($scope, $element, $attrs) {
@@ -73,6 +73,8 @@ angular.module('niceElements')
 
       $scope.date = params.date;
       $scope.time = params.time;
+
+      $scope.isInline = $scope.isInline === 'true';
 
       if ($scope.width){
         params.width = parseInt($scope.width);
@@ -612,6 +614,7 @@ angular.module('niceElements')
         },
         setDateModel: function() {
           $scope.model = angular.copy($scope.currentDate);
+          $scope.formDatetimePicker.$setDirty();
         },
         toggleButtons: function (date) {
           if (date && date.isValid()) {
@@ -897,6 +900,10 @@ angular.module('niceElements')
       });
 
       that.init();
+
+      if ($scope.isInline){
+        that._onClick();
+      }
     }
   };
 
