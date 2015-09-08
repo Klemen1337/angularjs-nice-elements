@@ -670,6 +670,11 @@ angular.module('niceElements')
           date: true, time: false, width: 300, enableOkButtons: false
         };
 
+        var setLabelValue = function(){
+          var _from = moment($scope.internalStart).locale(params.lang).format(params.format);
+          var _to = moment($scope.internalEnd).locale(params.lang).format(params.format);
+          $scope.value = _from + ' - ' + _to;
+        };
 
         var initCurrentDates = function () {
           if (typeof($scope.modelStart) === 'undefined' || $scope.modelStart === null) {
@@ -742,6 +747,7 @@ angular.module('niceElements')
           if ($scope.dateStart > $scope.dateEnd){
             $scope.dateEnd = moment($scope.dateStart).add(7, 'days');
           }
+
         };
 
         // prepare attributes
@@ -775,7 +781,22 @@ angular.module('niceElements')
         $scope = angular.extend($scope, params);
 
         $scope.openDtpRange = function () {
+          initCurrentDates();
           $scope.showDtpRange = true;
+        };
+
+        $scope.okClick = function(){
+          setLabelValue();
+          $scope.modelStart = angular.copy($scope.internalStart);
+          $scope.modelEnd = angular.copy($scope.internalEnd);
+          $scope.showDtpRange = false;
+        };
+
+        $scope.cancelClick = function(){
+          $scope.showDtpRange = false;
+          $scope.internalStart = angular.copy($scope.modelStart);
+          $scope.internalEnd = angular.copy($scope.modelEnd);
+          setLabelValue();
         };
 
         //$scope.$on('dateSelected', function () {
@@ -783,11 +804,16 @@ angular.module('niceElements')
         //  console.log('date selected');
         //});
         $scope.$watchGroup(['dateStart', 'dateEnd'], function (newValues) {
-          var _from = moment(newValues[0]).locale(params.lang).format(params.format);
-          var _to = moment(newValues[1]).locale(params.lang).format(params.format);
-          $scope.value = _from + ' - ' + _to;
-          $scope.modelStart = moment(newValues[0]).locale(params.lang).format(params.modelFormat);
-          $scope.modelEnd = moment(newValues[1]).locale(params.lang).format(params.modelFormat);
+          if (newValues[0]>newValues[1]){
+            // switch values
+            $scope.dateStart = newValues[1];
+            $scope.dateEnd = newValues[0];
+          }else{
+            $scope.internalStart = moment(newValues[0]).locale(params.lang).format(params.modelFormat);
+            $scope.internalEnd = moment(newValues[1]).locale(params.lang).format(params.modelFormat);
+            setLabelValue();
+          }
+
         });
 
         $scope.$watchGroup(['modelStart', 'modelEnd'], function(){
@@ -2961,8 +2987,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-xs-12 margin-top-20\">\n" +
-    "                        <a class=\"btn btn-primary pull-right\">Ok</a>\n" +
-    "                        <a class=\"btn btn-primary pull-right margin-right-20\">Cancel</a>\n" +
+    "                        <a class=\"btn btn-primary pull-right\" ng-click=\"okClick()\">Ok</a>\n" +
+    "                        <a class=\"btn btn-primary pull-right margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
