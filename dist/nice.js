@@ -493,11 +493,9 @@ angular.module('niceElements')
 
   return {
     scope: {
-      //onChange: '&', // function called on date changed
       model: '=', // binding model
       format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
       modelFormat: '@', // default: ''
-      //currentDate: '@',
       date: '@', // default: true, is date picker enabled?
       time: '@', // default: false, is time picker enabled?
       width: '@', // default: 300, width of entire dtp-picker in px
@@ -602,6 +600,11 @@ angular.module('niceElements')
       $scope.openDtp = function(){
         $scope.$broadcast('dtp-open-click');
       };
+
+      $scope.$on('dateSelected', function(){
+        $scope.formDatetimePicker.$setDirty();
+        console.log('date selected');
+      })
 
       $scope.$watch('currentDate', function(newDate){
         $scope.value = moment(newDate).locale(params.lang).format(params.format);
@@ -2230,7 +2233,7 @@ angular.module('niceElements')
           if (date) {
             $scope.currentDate = date;
             that.showDate($scope.currentDate);
-            //this.$element.trigger('dateSelected', this.currentDate);
+            $scope.$emit('dateSelected', {date: date});
           }
         },
         generateCalendar: function (date) {

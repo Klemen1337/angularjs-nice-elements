@@ -461,7 +461,7 @@ angular.module('niceElements')
           if (date) {
             $scope.currentDate = date;
             that.showDate($scope.currentDate);
-            //this.$element.trigger('dateSelected', this.currentDate);
+            $scope.$emit('dateSelected', {date: date});
           }
         },
         generateCalendar: function (date) {
