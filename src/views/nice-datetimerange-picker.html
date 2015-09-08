@@ -1,0 +1,206 @@
+
+<style>
+    .rdtp-start {
+
+    }
+    .rdtp-end {
+        left: 310px;
+    }
+</style>
+
+
+
+<div class="nice-datetime-picker" name="form" ng-class="{ 'margin-bottom-0': noMargin }">
+    <div class="row">
+        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="dropdown">
+                <a class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="open()" href="javascript:void(0);">
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{{value}}" ng-click="open()">
+                        <span class="input-group-addon"><i class="fa" ng-class="{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="rdtp" ng-show="rangePickerVisible">
+
+                <!-- <datetime-picker1> -->
+                <div class="dtp-wrapper rdtp-start">
+                    <div class="dtp" id="this.name">
+                        <div class="dtp-content" ng-style="dtp_content_style">
+                            <div class="dtp-date-view">
+                                <div class="dtp-header">
+                                    <div class="dtp-actual-day">{{actualDay}}</div>
+                                    <div class="dtp-close"><a href="javascript:void(0);" ng-click="onCloseClick()"><i class="fa fa-close"></i></div>
+                                </div>
+                                <div class="dtp-date" ng-class="{'hidden': !showDateHeader}">
+                                    <div>
+                                        <div class="left center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-month-before" ng-click="onMonthBeforeClick()" ng-class="{'disabled': !btnMonthBeforeEnabled}"><i class="fa fa-chevron-left"></i></a>
+                                        </div>
+                                        <div class="dtp-actual-month p80" ng-click="initDate()">{{actualMonth}}</div>
+                                        <div class="right center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-month-after" ng-click="onMonthAfterClick()" ng-class="{'disabled': !btnMonthAfterEnabled}"><i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="dtp-actual-num" ng-click="initDate()">{{actualNum}}</div>
+                                    <div>
+                                        <div class="left center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-year-before" ng-click="onYearBeforeClick()" ng-class="{'disabled': !btnYearBeforeEnabled}""><i class="fa fa-chevron-left"></i></a>
+                                        </div>
+                                        <div class="dtp-actual-year p80" ng-click="initDate()">{{actualYear}}</div>
+                                        <div class="right center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-year-after" ng-click="onYearAfterClick()" ng-class="{'disabled': !btnYearAfterEnabled}"><i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="dtp-time" ng-show="!showTimeHeader">
+                                    <div class="dtp-actual-maxtime">
+                                        <a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==1}" ng-click="initHours()" href="javascript:void(0);">{{actualTime.hours}}</a>:<a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==2}" ng-click="initMinutes()" href="javascript:void(0);">{{actualTime.minutes}}</a>
+                                    </div>
+                                </div>
+                                <div class="dtp-picker">
+                                    <div class="dtp-picker-calendar" ng-class="{'hidden': !showCalendar}">
+                                        <div class="dtp-picker-month">{{monthAndYear}}</div>
+                                        <table class="table dtp-picker-days">
+                                            <thead>
+                                            <th ng-repeat="weekDay in weekDays track by $index">{{weekDay}}</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="week in weeks">
+                                                <td ng-repeat="day in week">
+                                                    <span ng-if="day.disabled" class="dtp-select-day">{{day.label}}</span>
+                                                    <a ng-if="!day.disabled" ng-click="onSelectDate(day)" href="javascript:void(0);" class="dtp-select-day" ng-class="{'selected': day.selected}">{{day.label}}</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="dtp-picker-datetime" ng-class="{'hidden': !showTime}">
+                                        <div class="dtp-actual-meridien">
+                                            <div class="dtp-actual-time p60" ng-show="showTimeHeader">
+                                                <a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==1}" ng-click="initHours()" href="javascript:void(0);">{{actualTime.hours}}</a>:<a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==2}" ng-click="initMinutes()" href="javascript:void(0);">{{actualTime.minutes}}</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="dtp-picker-clock">
+                                            <div class="dtp-hand dtp-hour-hand" ng-show="currentView==1"></div>
+                                            <div class="dtp-hand dtp-minute-hand" ng-show="currentView==2"></div>
+                                            <div class="dtp-clock-center"></div>
+                                            <div ng-repeat="hour in hours" class="dtp-picker-time" ng-style="hour.style">
+                                                <a href="javascript:void(0);" class="dtp-select-hour" ng-class="{'selected': hour.selected, 'disabled': hour.disabled}" ng-click="onSelectHour(hour)">{{hour.h}}</a>
+                                            </div>
+                                            <div ng-repeat="minute in minutes" class="dtp-picker-time" ng-style="minute.style">
+                                                <a href="javascript:void(0);" class="dtp-select-minute" ng-class="{'selected': minute.selected, 'disabled': minute.disabled}" ng-click="onSelectMinute(minute)">{{minute.m}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dtp-buttons" ng-if="enableOkButtons">
+                                <button class="dtp-btn-cancel btn btn-flat" ng-click="onCancelClick()">{{cancelText}}</button>
+                                <button class="dtp-btn-ok btn btn-flat" ng-click="onOKClick()"> {{okText}} </button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </datetime-picker1> -->
+
+                <!-- <datetime-picker2> -->
+                <div class="dtp-wrapper rdtp-end">
+                    <div class="dtp" id="this.name">
+                        <div class="dtp-content" ng-style="dtp_content_style">
+                            <div class="dtp-date-view">
+                                <div class="dtp-header">
+                                    <div class="dtp-actual-day">{{actualDay}}</div>
+                                    <div class="dtp-close"><a href="javascript:void(0);" ng-click="onCloseClick()"><i class="fa fa-close"></i></div>
+                                </div>
+                                <div class="dtp-date" ng-class="{'hidden': !showDateHeader}">
+                                    <div>
+                                        <div class="left center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-month-before" ng-click="onMonthBeforeClick()" ng-class="{'disabled': !btnMonthBeforeEnabled}"><i class="fa fa-chevron-left"></i></a>
+                                        </div>
+                                        <div class="dtp-actual-month p80" ng-click="initDate()">{{actualMonth}}</div>
+                                        <div class="right center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-month-after" ng-click="onMonthAfterClick()" ng-class="{'disabled': !btnMonthAfterEnabled}"><i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="dtp-actual-num" ng-click="initDate()">{{actualNum}}</div>
+                                    <div>
+                                        <div class="left center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-year-before" ng-click="onYearBeforeClick()" ng-class="{'disabled': !btnYearBeforeEnabled}""><i class="fa fa-chevron-left"></i></a>
+                                        </div>
+                                        <div class="dtp-actual-year p80" ng-click="initDate()">{{actualYear}}</div>
+                                        <div class="right center p10">
+                                            <a href="javascript:void(0);" class="dtp-select-year-after" ng-click="onYearAfterClick()" ng-class="{'disabled': !btnYearAfterEnabled}"><i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="dtp-time" ng-show="!showTimeHeader">
+                                    <div class="dtp-actual-maxtime">
+                                        <a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==1}" ng-click="initHours()" href="javascript:void(0);">{{actualTime.hours}}</a>:<a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==2}" ng-click="initMinutes()" href="javascript:void(0);">{{actualTime.minutes}}</a>
+                                    </div>
+                                </div>
+                                <div class="dtp-picker">
+                                    <div class="dtp-picker-calendar" ng-class="{'hidden': !showCalendar}">
+                                        <div class="dtp-picker-month">{{monthAndYear}}</div>
+                                        <table class="table dtp-picker-days">
+                                            <thead>
+                                            <th ng-repeat="weekDay in weekDays track by $index">{{weekDay}}</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="week in weeks">
+                                                <td ng-repeat="day in week">
+                                                    <span ng-if="day.disabled" class="dtp-select-day">{{day.label}}</span>
+                                                    <a ng-if="!day.disabled" ng-click="onSelectDate(day)" href="javascript:void(0);" class="dtp-select-day" ng-class="{'selected': day.selected}">{{day.label}}</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="dtp-picker-datetime" ng-class="{'hidden': !showTime}">
+                                        <div class="dtp-actual-meridien">
+                                            <div class="dtp-actual-time p60" ng-show="showTimeHeader">
+                                                <a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==1}" ng-click="initHours()" href="javascript:void(0);">{{actualTime.hours}}</a>:<a class="dtp-hours-minutes-btn" ng-class="{'selected': currentView==2}" ng-click="initMinutes()" href="javascript:void(0);">{{actualTime.minutes}}</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="dtp-picker-clock">
+                                            <div class="dtp-hand dtp-hour-hand" ng-show="currentView==1"></div>
+                                            <div class="dtp-hand dtp-minute-hand" ng-show="currentView==2"></div>
+                                            <div class="dtp-clock-center"></div>
+                                            <div ng-repeat="hour in hours" class="dtp-picker-time" ng-style="hour.style">
+                                                <a href="javascript:void(0);" class="dtp-select-hour" ng-class="{'selected': hour.selected, 'disabled': hour.disabled}" ng-click="onSelectHour(hour)">{{hour.h}}</a>
+                                            </div>
+                                            <div ng-repeat="minute in minutes" class="dtp-picker-time" ng-style="minute.style">
+                                                <a href="javascript:void(0);" class="dtp-select-minute" ng-class="{'selected': minute.selected, 'disabled': minute.disabled}" ng-click="onSelectMinute(minute)">{{minute.m}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dtp-buttons" ng-if="enableOkButtons">
+                                <button class="dtp-btn-cancel btn btn-flat" ng-click="onCancelClick()">{{cancelText}}</button>
+                                <button class="dtp-btn-ok btn btn-flat" ng-click="onOKClick()"> {{okText}} </button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </datetime-picker2> -->
+
+            </div>
+        </div>
+    </div>
+</div>

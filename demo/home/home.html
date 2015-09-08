@@ -107,7 +107,21 @@
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
                     <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number"></nice-input>
 
-                    <nice-datetime-picker model="data.dateOfBirth" on-change="toggleNiceButton()" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetime-picker>
+
+                <!--max-date="2015-09-02 10:00"-->
+
+                <!-- model-format="YYYY-MM-DD"-->
+                    <nice-datetime-picker model="dt"
+
+
+                                          title="Date of birth"
+                                          field-width="col-sm-4"
+                                          date="true"
+                                          time="true"
+                            ></nice-datetime-picker>
+
+                    <pre>{{ dt }}</pre>
+                    <!--<nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetimerange-picker>-->
 
                     <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
                     <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" disabled="disabl"></nice-yesno>
@@ -560,97 +574,100 @@
 
             <hr>
 
-            <pre class="prettyprint">&lt;nice-datetime-picker
-    model="dateTimePicker"
-    title="Date picker"
-    date="true"
-    time="false"
-    format="DD.MM.YYYY">
-&lt;/nice-datetime-picker></pre>
-            <div class="row">
-                <div class="col-sm-6">
-                    <nice-datetime-picker
-                      model="dateTimePicker"
-                      title="Datetime picker"
-                      date="true"
-                      time="false"
-                      format="DD.MM.YYYY">
-                    </nice-datetime-picker>
-                </div>
-                <div class="col-sm-6">
-                    <pre>{{ dateTimePicker | json }}</pre>
-                </div>
-            </div>
+            <!--<pre class="prettyprint">&lt;nice-datetime-picker-->
+    <!--model="dateTimePicker"-->
+    <!--title="Date picker"-->
+    <!--date="true"-->
+    <!--time="false"-->
+    <!--format="DD.MM.YYYY">-->
+<!--&lt;/nice-datetime-picker></pre>-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<nice-datetime-picker-->
+                      <!--model="dateTimePicker"-->
+                      <!--title="Datetime picker"-->
+                      <!--date="true"-->
+                      <!--time="false"-->
+                      <!--format="DD.MM.YYYY"-->
+                      <!--model-format="DD-MM-YYYY HH:mmZZ">-->
+                    <!--</nice-datetime-picker>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<pre>{{ dateTimePicker | json }}</pre>-->
+                <!--</div>-->
+            <!--</div>-->
 
-            <hr>
+            <!--<hr>-->
 
-            <pre class="prettyprint">&lt;nice-datetime-picker
-    model="dateTimePicker"
-    title="Datetime picker"
-    date="true"
-    time="true"
-    maxDate="today"
-    format="DD.MM.YYYY | HH:mm">
-&lt;/nice-datetime-picker></pre>
-            <div class="row">
-                <div class="col-sm-6">
-                    <nice-datetime-picker
-                            model="dateTimePicker"
-                            title="Datetime picker"
-                            date="true"
-                            time="true"
-                            maxDate="today"
-                            format="DD.MM.YYYY | HH:mm">
-                    </nice-datetime-picker>
-                </div>
-                <div class="col-sm-6">
-                    <pre>{{ dateTimePicker | json }}</pre>
-                </div>
-            </div>
+            <!--<pre class="prettyprint">&lt;nice-datetime-picker-->
+    <!--model="dateTimePicker"-->
+    <!--title="Datetime picker"-->
+    <!--date="true"-->
+    <!--time="true"-->
+    <!--maxDate="today"-->
+    <!--format="DD.MM.YYYY | HH:mm">-->
+<!--&lt;/nice-datetime-picker></pre>-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<nice-datetime-picker-->
+                            <!--model="dateTimePicker"-->
+                            <!--title="Datetime picker"-->
+                            <!--date="true"-->
+                            <!--time="true"-->
+                            <!--maxDate="today"-->
+                            <!--model-format="DD-MM-YYYY HH:mmZZ"-->
+                            <!--format="DD.MM.YYYY | HH:mm">-->
+                    <!--</nice-datetime-picker>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<pre>{{ dateTimePicker | json }}</pre>-->
+                <!--</div>-->
+            <!--</div>-->
 
-            <hr>
+            <!--<hr>-->
 
-            <pre class="prettyprint">&lt;nice-datetime-picker
-    model="dateTimePicker"
-    title="Datetime picker"
-    date="false"
-    time="true"
-    minDate="today"
-    format="HH:mm">
-&lt;/nice-datetime-picker></pre>
-            <div class="row">
-                <div class="col-sm-6">
-                    <nice-datetime-picker
-                            model="dateTimePicker"
-                            title="Datetime picker"
-                            date="false"
-                            time="true"
-                            minDate="today"
-                            format="HH:mm">
-                    </nice-datetime-picker>
-                </div>
-                <div class="col-sm-6">
-                    <pre>{{ dateTimePicker | json }}</pre>
-                </div>
-            </div>
+            <!--<pre class="prettyprint">&lt;nice-datetime-picker-->
+    <!--model="dateTimePicker"-->
+    <!--title="Datetime picker"-->
+    <!--date="false"-->
+    <!--time="true"-->
+    <!--minDate="today"-->
+    <!--format="HH:mm">-->
+<!--&lt;/nice-datetime-picker></pre>-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<nice-datetime-picker-->
+                            <!--model="justTime"-->
+                            <!--title="Datetime picker"-->
+                            <!--date="false"-->
+                            <!--time="true"-->
+                            <!--minDate="today"-->
+                            <!--model-format="HH:mm"-->
+                            <!--format="HH:mm">-->
+                    <!--</nice-datetime-picker>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<pre>{{ dateTimePicker | json }}</pre>-->
+                <!--</div>-->
+            <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
 
 
         <!-------------------------------- NICE DATE RANGE -------------------------------->
-        <div class="white-wrapper" id="nice-date-range">
-            <h2>Nice date range</h2>
-            <pre class="prettyprint">&lt;nice-date-range title="Date range" model="rangeDate">&lt;/nice-date-range></pre>
-            <div class="row">
-                <div class="col-sm-6">
-                    <nice-date-range title="Date range" model="rangeDate"></nice-date-range>
-                </div>
-                <div class="col-sm-6">
-                    <pre>{{ rangeDate | json }}</pre>
-                </div>
-            </div>
-        </div>
+        <!--<div class="white-wrapper" id="nice-date-range">-->
+            <!--<h2>Nice date range</h2>-->
+            <!--<pre class="prettyprint">&lt;nice-date-range title="Date range" model="rangeDate">&lt;/nice-date-range></pre>-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<nice-date-range title="Date range" model="rangeDate"></nice-date-range>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<pre>{{ rangeDate | json }}</pre>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
 
