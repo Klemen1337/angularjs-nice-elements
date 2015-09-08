@@ -52,37 +52,34 @@ angular.module('niceElements')
 
       var prepareAttrs = function(){
         // prepare attributes
-        params.date = $scope.date === 'true' || $scope.date === true;
-        params.time = $scope.time === 'true' || $scope.time === true;
-        if ($scope.format && $scope.format != "")
-          params.format = $scope.format;
-        if ($scope.enableOkButtons && $scope.enableOkButtons != "")
-          params.enableOkButtons = $scope.enableOkButtons === 'true';
-        if ($scope.lang && $scope.lang != "")
-          params.lang = $scope.lang;
-        if ($scope.minDate && $scope.minDate != "")
-          params.minDate = $scope.minDate;
-        if ($scope.maxDate && $scope.maxDate != "")
-          params.maxDate = $scope.maxDate;
-        if ($scope.weekStart && $scope.weekStart != "")
-          params.weekStart = parseInt($scope.weekStart);
-        if ($scope.okText && $scope.okText != "")
-          params.okText = $scope.okText;
-        if ($scope.cancelText && $scope.cancelText != "")
-          params.cancelText = $scope.cancelText;
-        if ($scope.noMargin && $scope.noMargin != "")
-          params.noMargin = $scope.noMargin === 'true';
-        if ($scope.modelFormat && $scope.modelFormat != "")
-          params.modelFormat = $scope.modelFormat;
+        params.date = $attrs.date === 'true' || $attrs.date === true;
+        params.time = $attrs.time === 'true' || $attrs.time === true;
+        params.inline = $attrs.inline === 'true' || $attrs.inline === true;
+        if ($attrs.format && $attrs.format != "")
+          params.format = $attrs.format;
+        if ($scope.enableOkButtons && $attrs.enableOkButtons != "")
+          params.enableOkButtons = $attrs.enableOkButtons === 'true';
+        if ($attrs.lang && $attrs.lang != "")
+          params.lang = $attrs.lang;
+        if ($attrs.minDate && $attrs.minDate != "")
+          params.minDate = $attrs.minDate;
+        if ($attrs.maxDate && $attrs.maxDate != "")
+          params.maxDate = $attrs.maxDate;
+        if ($scope.weekStart && $attrs.weekStart != "")
+          params.weekStart = parseInt($attrs.weekStart);
+        if ($attrs.okText && $attrs.okText != "")
+          params.okText = $attrs.okText;
+        if ($attrs.cancelText && $attrs.cancelText != "")
+          params.cancelText = $attrs.cancelText;
+        if ($attrs.noMargin && $attrs.noMargin != "")
+          params.noMargin = $attrs.noMargin === 'true';
+        if ($attrs.modelFormat && $attrs.modelFormat != "")
+          params.modelFormat = $attrs.modelFormat;
 
-        $scope.isInline = $scope.isInline === 'true';
-
-        if ($scope.width){
-          params.width = parseInt($scope.width);
-        }else{
-          $scope.width = params.width;
+        if ($attrs.width){
+          params.width = parseInt($attrs.width);
         }
-        $scope.dtp_content_style = {width: params.width + 'px'};
+        //$scope.dtp_content_style = {width: params.width + 'px'};
 
         // copy attributes back to scope - for template usage
         $scope = angular.extend($scope, params);
@@ -108,8 +105,14 @@ angular.module('niceElements')
             $scope.days.push(i.toString());
           }
         },
+        fixMinMaxDate: function(){
+          if ($scope.minDate==="")
+            $scope.minDate = null;
+          if ($scope.maxDate==="")
+            $scope.maxDate = null;
+        },
         initDates: function () {
-
+          that.fixMinMaxDate();
           if (typeof($scope.model) === 'undefined' || $scope.model === null){
             $scope.currentDate = moment();
           }else{
@@ -124,12 +127,6 @@ angular.module('niceElements')
 
           that.setDateModel();
           that.setElementValue();
-
-          if ($scope.minDate==="")
-            $scope.minDate = null;
-          if ($scope.maxDate==="")
-            $scope.maxDate = null;
-
 
           // Parse minDate
           if (typeof($scope.minDate) !== 'undefined' && $scope.minDate !== null) {
@@ -156,7 +153,8 @@ angular.module('niceElements')
           }
         },
         initDate: function () {
-          //console.log('initDate');
+          that.fixMinMaxDate();
+
           $scope.currentView = 0;
 
           $scope.showCalendar = true;
@@ -174,7 +172,7 @@ angular.module('niceElements')
           that.showDate(_date);
         },
         initHours: function () {
-          //console.log('initHours');
+          that.fixMinMaxDate();
           $scope.currentView = 1;
           $scope.hours = [];
           $scope.minutes = [];
@@ -258,7 +256,7 @@ angular.module('niceElements')
           that.initHands(true);
         },
         initMinutes: function () {
-          //console.log('initMinutes');
+          that.fixMinMaxDate();
           $scope.currentView = 2;
           $scope.hours = [];
           $scope.minutes = [];
@@ -649,7 +647,8 @@ angular.module('niceElements')
               else {
                 that.setElementValue();
                 that.setDateModel();
-                that.hide();
+                if (!$scope.inline)
+                  that.hide();
               }
               break;
             case 1:
@@ -658,7 +657,11 @@ angular.module('niceElements')
             case 2:
               that.setElementValue();
               that.setDateModel();
-              that.hide();
+              if ($scope.inline){
+                that._onClick();
+              }else{
+                that.hide();
+              }
               break;
           }
         },
@@ -766,28 +769,6 @@ angular.module('niceElements')
             }
           }
         },
-        _onSelectAM: function (e) {
-          $scope.isPM = false;
-
-          //$('.dtp-actual-meridien').find('a').removeClass('selected');
-          //$(e.currentTarget).addClass('selected');
-
-          if ($scope.currentDate.hour() >= 12) {
-            if ($scope.currentDate.subtract(12, 'hours'))
-              that.showTime($scope.currentDate);
-          }
-          that.toggleTime(($scope.currentView === 1));
-        },
-        _onSelectPM: function (e) {
-          $scope.isPM = true;
-          //$(e.currentTarget).addClass('selected');
-
-          if ($scope.currentDate.hour() < 12) {
-            if ($scope.currentDate.add(12, 'hours'))
-              that.showTime($scope.currentDate);
-          }
-          that.toggleTime(($scope.currentView === 1));
-        },
         convertHours: function (h) {
           var _return = h;
 
@@ -809,10 +790,6 @@ angular.module('niceElements')
           params.maxDate = date;
           that.initDates();
         },
-        //destroy: function () {
-        //  this._detachEvents();
-        //  this.$dtpElement.remove();
-        //},
         show: function () {
           $scope.showDtp = true;
           that._centerBox();
@@ -848,9 +825,16 @@ angular.module('niceElements')
       $scope.initHours = that.initHours;
       $scope.initMinutes = that.initMinutes;
 
+      prepareAttrs();
+      that.init();
+
+      if ($scope.inline){
+        console.log('auto show inline');
+        that._onClick();
+      }
+
       $scope.$on('dtp-open-click', function(){
-        prepareAttrs();
-        that.init();
+
         that._onClick();
       });
     }

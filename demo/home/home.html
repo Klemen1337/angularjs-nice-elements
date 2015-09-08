@@ -102,25 +102,36 @@
 
         <div class="white-wrapper">
             <div class="row">asd
-                < class="col-sm-6">
+                <div class="col-sm-6">
                     <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl"></nice-input>
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
                     <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number"></nice-input>
 
 
-                <!--max-date="2015-09-02 10:00"-->
+                    <!--max-date="2015-09-02 10:00"-->
 
-                <!-- model-format="YYYY-MM-DD"-->
-                    <nice-datetime-picker model="dt"
+                    <!-- model-format="YYYY-MM-DD"-->
+                    <!--
+                    <nice-datetime-picker
+                        model="dt"
+                        title="Datetimepicker"
+                        field-width="col-sm-4"
+                        date="true"
+                        time="true"
+                    ></nice-datetime-picker> -->
 
 
-                                          title="Date of birth"
-                                          field-width="col-sm-4"
-                                          date="true"
-                                          time="true"
-                            ></nice-datetime-picker>
+                    <nice-datetimerange-picker
+                        model-start="dt"
+                        model-end="dtEnd"
+                        title="Range picker"
+                        field-width="col-sm-8"
+                        date="true"
+                        time="false"
+                    ></nice-datetimerange-picker>
 
-                    <pre>{{ dt }}</pre>
+                    <pre>from: {{ dt }}</pre>
+                    <pre>to: {{ dtEnd }}</pre>
                     <!--<nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetimerange-picker>-->
 
                     <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
