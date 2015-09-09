@@ -20,16 +20,16 @@
 
             <div class="dtp-range-wrapper" ng-show="showDtpRange">
 
-                <div class="row">
-                    <div class="col-xs-2">
-                        <a class="btn btn-primary btn-block">Last 24 hours</a>
-                        <a class="btn btn-primary btn-block">Last 7 days</a>
-                        <a class="btn btn-primary btn-block">Last month</a>
-                        <a class="btn btn-primary btn-block">Custom</a>
+                <div class="dtp-layer">
+                    <div class="dtp-buttons-left">
+                        <a class="btn btn-primary btn-block" ng-click="selectLastNDays(1)">Last 24 hours</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectLastNDays(7)">Last 7 days</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectLastMonth()">Last month</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectThisMonth()">This month</a>
                     </div>
 
 
-                    <div class="col-xs-5">
+                    <div class="dtp-left">
                         <!-- inject nice-dtp here -->
                         <nice-dtp
                             model="dateStart"
@@ -48,7 +48,7 @@
                             inline="true"
                         ></nice-dtp>
                     </div>
-                    <div class="col-xs-5">
+                    <div class="dtp-right">
                         <!-- inject nice-dtp here -->
                         <nice-dtp
                                 model="dateEnd"
@@ -67,11 +67,12 @@
                                 inline="true"
                          > </nice-dtp>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 margin-top-20">
-                        <a class="btn btn-primary pull-right" ng-click="okClick()">Ok</a>
-                        <a class="btn btn-primary pull-right margin-right-20" ng-click="cancelClick()">Cancel</a>
+
+                    <div class="dtp-buttons-bottom">
+                        <div class="col-xs-12 margin-top-20">
+                            <a class="btn btn-primary pull-right" ng-click="okClick()">Ok</a>
+                            <a class="btn btn-primary pull-right margin-right-20" ng-click="cancelClick()">Cancel</a>
+                        </div>
                     </div>
                 </div>
             </div>

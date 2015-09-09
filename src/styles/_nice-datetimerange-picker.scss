@@ -3,23 +3,62 @@
     position: absolute;
     left: 0;
     top: 40px;
-    width: 800px;
+    width: 620px;
+    height: 360px;
     padding: 10px;
-    background-color: gray;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
     z-index: 1000;
 
-    div.dtp{
+    div.dtp-layer {
+      width: 100%;
+      height: 100%;
       position: relative;
 
-      div.dtp-content{
-        position: relative;
-        top: 0;
 
-        div.dtp-date-view{
-          min-height: 460px;
-        }
+      .dtp-buttons-bottom, .dtp-buttons-left, .dtp-left, .dtp-right{
+        position: absolute;
+      }
+
+      div.dtp-buttons-left {
+        left: 0;
+        top: 0;
+        width: 100px;
+      }
+
+      div.dtp-left {
+        left: 110px;
+        top: 0;
+        width: 40%;
+        height: 80%;
+      }
+
+      div.dtp-right {
+        left: 360px;
+        top: 0;
+        width: 40%;
+        height: 80%;
+      }
+
+      div.dtp-buttons-bottom {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
       }
     }
+
+
+
+    div.dtp-content{
+      position: relative;
+      top: 0;
+
+      div.dtp-date-view{
+        min-height: 300px;
+      }
+    }
+
   }
 
 }

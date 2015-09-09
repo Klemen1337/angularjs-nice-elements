@@ -523,7 +523,7 @@ angular.module('niceElements')
           fieldWidth: 'col-sm-8',
           labelWidth: 'col-sm-4',
           format: 'DD.MM.YYYY HH:mm',
-          modelFormat: 'YYYY-MM-DDTHH:mmZZ',
+          modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
           minDate: null, maxDate: null, lang: 'en',
           weekStart: 1, shortTime: false,
           cancelText: 'Cancel', okText: 'OK',
@@ -557,10 +557,16 @@ angular.module('niceElements')
             } else {
               // all other combinations
               if (typeof($scope.model) === 'string') {
-                $scope.currentDate = moment($scope.model, params.modelFormat).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.currentDate = moment($scope.model, params.modelFormat).locale(params.lang);
+                else
+                  $scope.currentDate = moment.utc($scope.model, params.modelFormat).local().locale(params.lang);
               }
               else {
-                $scope.currentDate = moment($scope.model).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.currentDate = moment($scope.model).locale(params.lang);
+                else
+                  $scope.currentDate = moment.utc($scope.model).local().locale(params.lang);
               }
             }
           }
@@ -609,7 +615,10 @@ angular.module('niceElements')
 
         $scope.$watch('currentDate', function (newDate) {
           $scope.value = moment(newDate).locale(params.lang).format(params.format);
-          $scope.model = moment(newDate).locale(params.lang).format(params.modelFormat);
+          //$scope.model = moment(newDate).locale(params.lang).format(params.modelFormat);
+          var _date = moment(newDate, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          $scope.model = _date;
+
         });
 
       }
@@ -663,7 +672,7 @@ angular.module('niceElements')
           fieldWidth: 'col-sm-8',
           labelWidth: 'col-sm-4',
           format: 'DD.MM.YYYY HH:mm',
-          modelFormat: 'YYYY-MM-DDTHH:mmZZ',
+          modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
           minDate: null, maxDate: null, lang: 'en',
           weekStart: 1, shortTime: false,
           cancelText: 'Cancel', okText: 'OK',
@@ -702,10 +711,16 @@ angular.module('niceElements')
             } else {
               // all other combinations
               if (typeof($scope.modelStart) === 'string') {
-                $scope.dateStart = moment($scope.modelStart, params.modelFormat).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateStart = moment($scope.modelStart, params.modelFormat).locale(params.lang);
+                else
+                  $scope.dateStart = moment.utc($scope.modelStart, params.modelFormat).local().locale(params.lang);
               }
               else {
-                $scope.dateStart = moment($scope.modelStart).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateStart = moment($scope.modelStart).locale(params.lang);
+                else
+                  $scope.dateStart = moment.utc($scope.modelStart).local().locale(params.lang);
               }
             }
           }
@@ -735,10 +750,16 @@ angular.module('niceElements')
             } else {
               // all other combinations
               if (typeof($scope.modelEnd) === 'string') {
-                $scope.dateEnd = moment($scope.modelEnd, params.modelFormat).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateEnd = moment($scope.modelEnd, params.modelFormat).locale(params.lang);
+                else
+                  $scope.dateEnd = moment.utc($scope.modelEnd, params.modelFormat).local().locale(params.lang);
               }
               else {
-                $scope.dateEnd = moment($scope.modelEnd).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateEnd = moment($scope.modelEnd).locale(params.lang);
+                else
+                  $scope.dateEnd = moment.utc($scope.modelEnd).local().locale(params.lang);
               }
             }
           }
@@ -787,15 +808,47 @@ angular.module('niceElements')
 
         $scope.okClick = function(){
           setLabelValue();
-          $scope.modelStart = angular.copy($scope.internalStart);
-          $scope.modelEnd = angular.copy($scope.internalEnd);
+          var _start = moment($scope.internalStart, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          $scope.modelStart = _start;
+          var _end = moment($scope.internalEnd, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          $scope.modelEnd = _end;
+          //$scope.modelStart = angular.copy($scope.internalStart);
+          //$scope.modelEnd = angular.copy($scope.internalEnd);
           $scope.showDtpRange = false;
         };
 
         $scope.cancelClick = function(){
           $scope.showDtpRange = false;
-          $scope.internalStart = angular.copy($scope.modelStart);
-          $scope.internalEnd = angular.copy($scope.modelEnd);
+          //$scope.internalStart = angular.copy($scope.modelStart);
+          //$scope.internalEnd = angular.copy($scope.modelEnd);
+          var _start = moment($scope.modelStart, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+          $scope.internalStart = _start;
+          var _end = moment($scope.modelEnd, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+          $scope.internalEnd = _end;
+          setLabelValue();
+        };
+
+        $scope.selectLastNDays = function(days){
+          $scope.dateStart = moment().subtract(days, 'days');
+          $scope.dateEnd = moment();
+          $scope.internalStart = $scope.dateStart;
+          $scope.internalEnd = $scope.dateEnd;
+          setLabelValue();
+        };
+
+        $scope.selectLastMonth = function(){
+          $scope.dateStart = moment().subtract(1, 'months');
+          $scope.dateEnd = moment();
+          $scope.internalStart = $scope.dateStart;
+          $scope.internalEnd = $scope.dateEnd;
+          setLabelValue();
+        };
+
+        $scope.selectThisMonth = function(){
+          $scope.dateStart = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+          $scope.dateEnd = moment();
+          $scope.internalStart = $scope.dateStart;
+          $scope.internalEnd = $scope.dateEnd;
           setLabelValue();
         };
 
@@ -804,15 +857,15 @@ angular.module('niceElements')
         //  console.log('date selected');
         //});
         $scope.$watchGroup(['dateStart', 'dateEnd'], function (newValues) {
-          if (newValues[0]>newValues[1]){
+          //if (newValues[0]>newValues[1]){
             // switch values
-            $scope.dateStart = newValues[1];
-            $scope.dateEnd = newValues[0];
-          }else{
+            //$scope.dateStart = newValues[1];
+            //$scope.dateEnd = newValues[0];
+          //}else{
             $scope.internalStart = moment(newValues[0]).locale(params.lang).format(params.modelFormat);
             $scope.internalEnd = moment(newValues[1]).locale(params.lang).format(params.modelFormat);
             setLabelValue();
-          }
+          //}
 
         });
 
@@ -1114,7 +1167,7 @@ angular.module('niceElements')
         fieldWidth: 'col-sm-8',
         labelWidth: 'col-sm-4',
         format: 'DD.MM.YYYY HH:mm',
-        modelFormat: 'YYYY-MM-DDTHH:mmZZ',
+        modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
         minDate : null, maxDate : null, lang : 'en',
         weekStart : 1, shortTime : false,
         cancelText : 'Cancel', okText : 'OK',
@@ -1256,7 +1309,7 @@ angular.module('niceElements')
           var pl = $($element).find('.dtp-picker').css('paddingLeft').replace('px', '');
           var pr = $($element).find('.dtp-picker').css('paddingRight').replace('px', '');
 
-          $($element).find('.dtp-picker-clock').innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
+          //$($element).find('.dtp-picker-clock').innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
 
           that.showTime($scope.currentDate);
 
@@ -1907,6 +1960,12 @@ angular.module('niceElements')
       $scope.$on('dtp-open-click', function(){
 
         that._onClick();
+      });
+
+      $scope.$watch('model', function(newDate){
+        $scope.currentDate = newDate;
+        that.showDate($scope.currentDate);
+        that.initDate();
       });
     }
   };
@@ -2937,16 +2996,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "            <div class=\"dtp-range-wrapper\" ng-show=\"showDtpRange\">\n" +
     "\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-2\">\n" +
-    "                        <a class=\"btn btn-primary btn-block\">Last 24 hours</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\">Last 7 days</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\">Last month</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\">Custom</a>\n" +
+    "                <div class=\"dtp-layer\">\n" +
+    "                    <div class=\"dtp-buttons-left\">\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(1)\">Last 24 hours</a>\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\n" +
     "                    </div>\n" +
     "\n" +
     "\n" +
-    "                    <div class=\"col-xs-5\">\n" +
+    "                    <div class=\"dtp-left\">\n" +
     "                        <!-- inject nice-dtp here -->\n" +
     "                        <nice-dtp\n" +
     "                            model=\"dateStart\"\n" +
@@ -2965,7 +3024,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                            inline=\"true\"\n" +
     "                        ></nice-dtp>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-xs-5\">\n" +
+    "                    <div class=\"dtp-right\">\n" +
     "                        <!-- inject nice-dtp here -->\n" +
     "                        <nice-dtp\n" +
     "                                model=\"dateEnd\"\n" +
@@ -2984,11 +3043,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                                inline=\"true\"\n" +
     "                         > </nice-dtp>\n" +
     "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-12 margin-top-20\">\n" +
-    "                        <a class=\"btn btn-primary pull-right\" ng-click=\"okClick()\">Ok</a>\n" +
-    "                        <a class=\"btn btn-primary pull-right margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
+    "\n" +
+    "                    <div class=\"dtp-buttons-bottom\">\n" +
+    "                        <div class=\"col-xs-12 margin-top-20\">\n" +
+    "                            <a class=\"btn btn-primary pull-right\" ng-click=\"okClick()\">Ok</a>\n" +
+    "                            <a class=\"btn btn-primary pull-right margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -3060,11 +3120,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    <div class=\"dtp\" id=\"this.name\" ng-class=\"{'hidden': !showDtp}\">\n" +
     "        <div class=\"dtp-content\" ng-style=\"dtp_content_style\">\n" +
     "            <div class=\"dtp-date-view\">\n" +
-    "                <div class=\"dtp-header\">\n" +
+    "                <div class=\"dtp-header\" ng-if=\"!inline\">\n" +
     "                    <div class=\"dtp-actual-day\">{{actualDay}}</div>\n" +
     "                    <div class=\"dtp-close\" ng-if=\"!inline\"><a href=\"javascript:void(0);\" ng-click=\"onCloseClick()\"><i class=\"fa fa-close\"></i></div>\n" +
     "                </div>\n" +
-    "                <div class=\"dtp-date\" ng-class=\"{'hidden': !showDateHeader}\">\n" +
+    "                <div class=\"dtp-date\" ng-if=\"!inline\" ng-class=\"{'hidden': !showDateHeader}\">\n" +
     "                    <div>\n" +
     "                        <div class=\"left center p10\">\n" +
     "                            <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
@@ -3094,7 +3154,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <div class=\"dtp-picker\">\n" +
     "                    <div class=\"dtp-picker-calendar\" ng-class=\"{'hidden': !showCalendar}\">\n" +
-    "                        <div class=\"dtp-picker-month\">{{monthAndYear}}</div>\n" +
+    "                        <div>\n" +
+    "                            <div ng-if=\"inline\" class=\"left center p10\">\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"dtp-picker-month\" ng-class=\"{'p80': inline}\">{{monthAndYear}}</div>\n" +
+    "                            <div class=\"right center p10\" ng-if=\"inline\">\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-year-after\" ng-click=\"onYearAfterClick()\" ng-class=\"{'disabled': !btnYearAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
     "                        <table class=\"table dtp-picker-days\">\n" +
     "                            <thead>\n" +
     "                            <th ng-repeat=\"weekDay in weekDays track by $index\">{{weekDay}}</th>\n" +

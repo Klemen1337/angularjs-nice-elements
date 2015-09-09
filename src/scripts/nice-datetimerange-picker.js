@@ -43,7 +43,7 @@ angular.module('niceElements')
           fieldWidth: 'col-sm-8',
           labelWidth: 'col-sm-4',
           format: 'DD.MM.YYYY HH:mm',
-          modelFormat: 'YYYY-MM-DDTHH:mmZZ',
+          modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
           minDate: null, maxDate: null, lang: 'en',
           weekStart: 1, shortTime: false,
           cancelText: 'Cancel', okText: 'OK',
@@ -82,10 +82,16 @@ angular.module('niceElements')
             } else {
               // all other combinations
               if (typeof($scope.modelStart) === 'string') {
-                $scope.dateStart = moment($scope.modelStart, params.modelFormat).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateStart = moment($scope.modelStart, params.modelFormat).locale(params.lang);
+                else
+                  $scope.dateStart = moment.utc($scope.modelStart, params.modelFormat).local().locale(params.lang);
               }
               else {
-                $scope.dateStart = moment($scope.modelStart).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateStart = moment($scope.modelStart).locale(params.lang);
+                else
+                  $scope.dateStart = moment.utc($scope.modelStart).local().locale(params.lang);
               }
             }
           }
@@ -115,10 +121,16 @@ angular.module('niceElements')
             } else {
               // all other combinations
               if (typeof($scope.modelEnd) === 'string') {
-                $scope.dateEnd = moment($scope.modelEnd, params.modelFormat).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateEnd = moment($scope.modelEnd, params.modelFormat).locale(params.lang);
+                else
+                  $scope.dateEnd = moment.utc($scope.modelEnd, params.modelFormat).local().locale(params.lang);
               }
               else {
-                $scope.dateEnd = moment($scope.modelEnd).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.dateEnd = moment($scope.modelEnd).locale(params.lang);
+                else
+                  $scope.dateEnd = moment.utc($scope.modelEnd).local().locale(params.lang);
               }
             }
           }
@@ -167,15 +179,47 @@ angular.module('niceElements')
 
         $scope.okClick = function(){
           setLabelValue();
-          $scope.modelStart = angular.copy($scope.internalStart);
-          $scope.modelEnd = angular.copy($scope.internalEnd);
+          var _start = moment($scope.internalStart, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          $scope.modelStart = _start;
+          var _end = moment($scope.internalEnd, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          $scope.modelEnd = _end;
+          //$scope.modelStart = angular.copy($scope.internalStart);
+          //$scope.modelEnd = angular.copy($scope.internalEnd);
           $scope.showDtpRange = false;
         };
 
         $scope.cancelClick = function(){
           $scope.showDtpRange = false;
-          $scope.internalStart = angular.copy($scope.modelStart);
-          $scope.internalEnd = angular.copy($scope.modelEnd);
+          //$scope.internalStart = angular.copy($scope.modelStart);
+          //$scope.internalEnd = angular.copy($scope.modelEnd);
+          var _start = moment($scope.modelStart, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+          $scope.internalStart = _start;
+          var _end = moment($scope.modelEnd, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+          $scope.internalEnd = _end;
+          setLabelValue();
+        };
+
+        $scope.selectLastNDays = function(days){
+          $scope.dateStart = moment().subtract(days, 'days');
+          $scope.dateEnd = moment();
+          $scope.internalStart = $scope.dateStart;
+          $scope.internalEnd = $scope.dateEnd;
+          setLabelValue();
+        };
+
+        $scope.selectLastMonth = function(){
+          $scope.dateStart = moment().subtract(1, 'months');
+          $scope.dateEnd = moment();
+          $scope.internalStart = $scope.dateStart;
+          $scope.internalEnd = $scope.dateEnd;
+          setLabelValue();
+        };
+
+        $scope.selectThisMonth = function(){
+          $scope.dateStart = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+          $scope.dateEnd = moment();
+          $scope.internalStart = $scope.dateStart;
+          $scope.internalEnd = $scope.dateEnd;
           setLabelValue();
         };
 
@@ -184,15 +228,15 @@ angular.module('niceElements')
         //  console.log('date selected');
         //});
         $scope.$watchGroup(['dateStart', 'dateEnd'], function (newValues) {
-          if (newValues[0]>newValues[1]){
+          //if (newValues[0]>newValues[1]){
             // switch values
-            $scope.dateStart = newValues[1];
-            $scope.dateEnd = newValues[0];
-          }else{
+            //$scope.dateStart = newValues[1];
+            //$scope.dateEnd = newValues[0];
+          //}else{
             $scope.internalStart = moment(newValues[0]).locale(params.lang).format(params.modelFormat);
             $scope.internalEnd = moment(newValues[1]).locale(params.lang).format(params.modelFormat);
             setLabelValue();
-          }
+          //}
 
         });
 

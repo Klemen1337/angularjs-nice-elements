@@ -43,7 +43,7 @@ angular.module('niceElements')
         fieldWidth: 'col-sm-8',
         labelWidth: 'col-sm-4',
         format: 'DD.MM.YYYY HH:mm',
-        modelFormat: 'YYYY-MM-DDTHH:mmZZ',
+        modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
         minDate : null, maxDate : null, lang : 'en',
         weekStart : 1, shortTime : false,
         cancelText : 'Cancel', okText : 'OK',
@@ -185,7 +185,7 @@ angular.module('niceElements')
           var pl = $($element).find('.dtp-picker').css('paddingLeft').replace('px', '');
           var pr = $($element).find('.dtp-picker').css('paddingRight').replace('px', '');
 
-          $($element).find('.dtp-picker-clock').innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
+          //$($element).find('.dtp-picker-clock').innerWidth(w - (parseInt(ml) + parseInt(mr) + parseInt(pl) + parseInt(pr)));
 
           that.showTime($scope.currentDate);
 
@@ -836,6 +836,12 @@ angular.module('niceElements')
       $scope.$on('dtp-open-click', function(){
 
         that._onClick();
+      });
+
+      $scope.$watch('model', function(newDate){
+        $scope.currentDate = newDate;
+        that.showDate($scope.currentDate);
+        that.initDate();
       });
     }
   };

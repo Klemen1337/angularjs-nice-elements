@@ -42,7 +42,7 @@ angular.module('niceElements')
           fieldWidth: 'col-sm-8',
           labelWidth: 'col-sm-4',
           format: 'DD.MM.YYYY HH:mm',
-          modelFormat: 'YYYY-MM-DDTHH:mmZZ',
+          modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
           minDate: null, maxDate: null, lang: 'en',
           weekStart: 1, shortTime: false,
           cancelText: 'Cancel', okText: 'OK',
@@ -76,10 +76,16 @@ angular.module('niceElements')
             } else {
               // all other combinations
               if (typeof($scope.model) === 'string') {
-                $scope.currentDate = moment($scope.model, params.modelFormat).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.currentDate = moment($scope.model, params.modelFormat).locale(params.lang);
+                else
+                  $scope.currentDate = moment.utc($scope.model, params.modelFormat).local().locale(params.lang);
               }
               else {
-                $scope.currentDate = moment($scope.model).locale(params.lang);
+                if (params.modelFormat.indexOf('Z')>=0)
+                  $scope.currentDate = moment($scope.model).locale(params.lang);
+                else
+                  $scope.currentDate = moment.utc($scope.model).local().locale(params.lang);
               }
             }
           }
@@ -128,7 +134,10 @@ angular.module('niceElements')
 
         $scope.$watch('currentDate', function (newDate) {
           $scope.value = moment(newDate).locale(params.lang).format(params.format);
-          $scope.model = moment(newDate).locale(params.lang).format(params.modelFormat);
+          //$scope.model = moment(newDate).locale(params.lang).format(params.modelFormat);
+          var _date = moment(newDate, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          $scope.model = _date;
+
         });
 
       }

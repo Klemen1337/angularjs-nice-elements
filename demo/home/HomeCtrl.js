@@ -4,8 +4,10 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
     $scope.listObjs = [{id:1, value:"Apple"}, {id:2, value:"Banana"}, {id:3, value:"Orange"}];
     $scope.listStrings = ["String 1", "String 2", "String 3"];
 
-    $scope.dt = '2015-12-12T16:00:00Z';
-    $scope.dtEnd = '2015-12-14T16:00:00Z';
+    $scope.dt = '2015-12-12T16:00:00.000';
+
+    $scope.dtStart = '2015-12-10T16:00:00.000';
+    $scope.dtEnd = '2015-12-14T20:00:00.000';
 
     $scope.percentage = 0.22000000;
 
