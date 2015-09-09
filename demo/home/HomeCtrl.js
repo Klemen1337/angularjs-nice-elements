@@ -6,8 +6,8 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     $scope.dt = '2015-12-12T16:00:00.000';
 
-    $scope.dtStart = '2015-12-10T16:00:00.000';
-    $scope.dtEnd = '2015-12-14T20:00:00.000';
+    //$scope.dtStart = '2015-12-10T16:00:00.000';
+    //$scope.dtEnd = '2015-12-14T20:00:00.000';
 
     $scope.percentage = 0.22000000;
 

@@ -687,7 +687,9 @@ angular.module('niceElements')
 
         var initCurrentDates = function () {
           if (typeof($scope.modelStart) === 'undefined' || $scope.modelStart === null) {
-            $scope.dateStart = moment();
+            //$scope.dateStart = moment().subtract(1, 'days');
+            var _start = moment().subtract(1, 'days').utc().locale(params.lang).format(params.modelFormat);
+            $scope.modelStart = _start;
           } else {
             if (!params.date && params.time) {
               // if only time
@@ -727,8 +729,10 @@ angular.module('niceElements')
 
           // initialize dateEnd
           if (typeof($scope.modelEnd) === 'undefined' || $scope.modelEnd === null) {
-            $scope.dateEnd = moment();
-            $scope.dateEnd.add(7, 'days');
+            //$scope.dateEnd = moment();
+            var _end = moment().utc().locale(params.lang).format(params.modelFormat);
+            $scope.modelEnd = _end;
+
           } else {
             if (!params.date && params.time) {
               // if only time
@@ -766,7 +770,7 @@ angular.module('niceElements')
 
           // fix dateEnd if it's before dateStart
           if ($scope.dateStart > $scope.dateEnd){
-            $scope.dateEnd = moment($scope.dateStart).add(7, 'days');
+            $scope.dateEnd = moment($scope.dateStart);
           }
 
         };
