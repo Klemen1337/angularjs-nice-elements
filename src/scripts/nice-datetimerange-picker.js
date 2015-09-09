@@ -192,9 +192,15 @@ angular.module('niceElements')
           $scope.showDtpRange = false;
           //$scope.internalStart = angular.copy($scope.modelStart);
           //$scope.internalEnd = angular.copy($scope.modelEnd);
-          var _start = moment($scope.modelStart, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+          if (params.modelFormat.indexOf('Z')>=0){
+            var _start = moment($scope.modelStart, params.modelFormat).locale(params.lang).format(params.modelFormat);
+            var _end = moment($scope.modelEnd, params.modelFormat).locale(params.lang).format(params.modelFormat);
+          }else{
+            var _start = moment.utc($scope.modelStart, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+            var _end = moment.utc($scope.modelEnd, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
+          }
+
           $scope.internalStart = _start;
-          var _end = moment($scope.modelEnd, params.modelFormat).local().locale(params.lang).format(params.modelFormat);
           $scope.internalEnd = _end;
           setLabelValue();
         };
