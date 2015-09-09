@@ -15,7 +15,7 @@ angular.module('niceElements')
       modelStart: '=', // binding model
       modelEnd: '=', // binding model
       format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
-      //currentDate: '@',
+      modelFormat: '@',
       date: '@', // default: true, is date picker enabled?
       time: '@', // default: false, is time picker enabled?
       width: '@', // default: 300, width of entire dtp-picker in px
