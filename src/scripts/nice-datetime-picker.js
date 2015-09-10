@@ -140,6 +140,10 @@ angular.module('niceElements')
 
         });
 
+        $scope.$watch('model', function(){
+          initCurrentDate();
+        });
+
       }
     }
   };
