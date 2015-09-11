@@ -747,7 +747,7 @@ angular.module('niceElements')
               that._onOKClick();
             }
           }else{
-            console.log('hour disabled');
+            //console.log('hour disabled');
           }
         },
         _onSelectMinute: function (minuteSelected) {
@@ -829,7 +829,7 @@ angular.module('niceElements')
       that.init();
 
       if ($scope.inline){
-        console.log('auto show inline');
+        //console.log('auto show inline');
         that._onClick();
       }
 

@@ -1,6 +1,10 @@
 .nice-search{
   position: relative;
 
+  i.ng-hide {
+    -webkit-animation: 0;
+  }
+
   .input-group{
     .input-group-addon {
       cursor: pointer;

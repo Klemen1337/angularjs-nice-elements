@@ -1885,7 +1885,7 @@ angular.module('niceElements')
               that._onOKClick();
             }
           }else{
-            console.log('hour disabled');
+            //console.log('hour disabled');
           }
         },
         _onSelectMinute: function (minuteSelected) {
@@ -1967,7 +1967,7 @@ angular.module('niceElements')
       that.init();
 
       if ($scope.inline){
-        console.log('auto show inline');
+        //console.log('auto show inline');
         that._onClick();
       }
 
@@ -2515,7 +2515,6 @@ angular.module('niceElements')
         hideValid: '@',
         refreshFunction: '=',
         refreshSelectedCallback: '=',
-        refreshDelay: '@',
         showDropdown: '@?',
         clearInput: '@',
         resetSearchInput: '@?',
@@ -2532,7 +2531,6 @@ angular.module('niceElements')
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         attrs.hideValid = angular.isDefined(attrs.hideValid);
-        if (!attrs.refreshDelay) { attrs.refreshDelay = 500; } // milliseconds
         attrs.showDropdown = angular.isDefined(attrs.showDropdown);
         attrs.clearInput = angular.isDefined(attrs.clearInput);
         attrs.resetSearchInput = angular.isDefined(attrs.resetSearchInput);
@@ -2645,16 +2643,7 @@ angular.module('niceElements')
       },
       controller: function($scope, $timeout) {
         $scope.id = Math.random().toString(36).substring(7);
-
-        $scope.modelOptions = {
-          debounce: $scope.refreshDelay
-        };
-
-        // Set default refresh delay
-        if (angular.isDefined($scope.refreshDelay)){
-          $scope.modelOptions.debounce = $scope.refreshDelay;
-        }
-
+        
         $scope.loading = false;
         $scope.noResults = false;
 
@@ -2675,8 +2664,16 @@ angular.module('niceElements')
         // ng-change function
         $scope.updateSearch = function () {
           $scope.loading = true;
-          $scope.refreshFunction($scope.modelString).then(updateList);
-          $scope.model = $scope.modelString;
+
+          if ($scope.timer_promise)
+            $timeout.cancel($scope.timer_promise);
+
+          $scope.timer_promise = $timeout(function(){
+            $scope.refreshFunction($scope.modelString).then(updateList);
+            $scope.model = $scope.modelString;
+          }, 300);
+
+
         };
 
         // If search button is clicked set focus or make request
@@ -3426,7 +3423,6 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    id=\"{{ id }}\"\n" +
     "                    ng-model=\"modelString\"\n" +
     "                    ng-keypress=\"keypress($event)\"\n" +
-    "                    ng-model-options=\"modelOptions\"\n" +
     "                    placeholder=\"{{ placeholder }}\"\n" +
     "                    ng-disabled=\"isDisabled\"\n" +
     "                    ng-change=\"updateSearch()\"\n" +
