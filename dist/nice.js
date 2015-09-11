@@ -2643,7 +2643,7 @@ angular.module('niceElements')
       },
       controller: function($scope, $timeout) {
         $scope.id = Math.random().toString(36).substring(7);
-        
+
         $scope.loading = false;
         $scope.noResults = false;
 
@@ -2671,7 +2671,7 @@ angular.module('niceElements')
           $scope.timer_promise = $timeout(function(){
             $scope.refreshFunction($scope.modelString).then(updateList);
             $scope.model = $scope.modelString;
-          }, 300);
+          }, 200);
 
 
         };
