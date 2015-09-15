@@ -227,7 +227,7 @@ angular.module('niceElements')
 
         $scope.selectThisMonth = function(){
           $scope.dateStart = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
-          $scope.dateEnd = moment();
+          $scope.dateEnd = moment().endOf('month');
           $scope.internalStart = $scope.dateStart;
           $scope.internalEnd = $scope.dateEnd;
           setLabelValue();

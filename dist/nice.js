@@ -860,7 +860,7 @@ angular.module('niceElements')
 
         $scope.selectThisMonth = function(){
           $scope.dateStart = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
-          $scope.dateEnd = moment();
+          $scope.dateEnd = moment().endOf('month');
           $scope.internalStart = $scope.dateStart;
           $scope.internalEnd = $scope.dateEnd;
           setLabelValue();
@@ -3193,7 +3193,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                            </div>\n" +
     "                            <div class=\"dtp-picker-month\" ng-class=\"{'p80': inline}\">{{monthAndYear}}</div>\n" +
     "                            <div class=\"right center p10\" ng-if=\"inline\">\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-year-after\" ng-click=\"onYearAfterClick()\" ng-class=\"{'disabled': !btnYearAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "\n" +
