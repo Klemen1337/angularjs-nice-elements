@@ -1,11 +1,22 @@
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceNotification) {
+angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceNotification, $timeout) {
     $scope.listObjs = [{id:1, value:"Apple"}, {id:2, value:"Banana"}, {id:3, value:"Orange"}];
-    $scope.listStrings = ["String 1", "String 2", "String 3"];
+    //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
     $scope.dt = '2015-12-12T16:00:00.000';
 
+    //$scope.choiceDemo2 = 2;
+    //$scope.choiceDemo2 = {id:3, value:"Orange"};
+    $scope.dropdownMulti = [];
+
+    $scope.change_options = function(){
+        $scope.listObjs = [{id:4, value:"CD"}, {id:5, value:"DVD"}, {id:6, value:"Cassete"}];
+    };
+    //$timeout(function(){
+    //    $scope.choiceDemo2 = 2;
+    //    console.log('setting dropdown value')
+    //}, 6000);
     //$scope.dtStart = '2015-12-10T16:00:00.000';
     //$scope.dtEnd = '2015-12-14T20:00:00.000';
 

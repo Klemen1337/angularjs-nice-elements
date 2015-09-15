@@ -101,16 +101,12 @@
 		<h1 class="headline">Nice elements</h1>
 
         <div class="white-wrapper">
-            <div class="row">asd
+            <div class="row">
                 <div class="col-sm-6">
                     <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl"></nice-input>
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required=true disabled="disabl"></nice-input>
                     <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number"></nice-input>
 
-
-                    <!--max-date="2015-09-02 10:00"-->
-
-                    <!-- model-format="YYYY-MM-DD"-->
                     <nice-datetime-picker
                         model="dt"
                         title="Datetimepicker"
@@ -159,6 +155,7 @@
                 </div>
 
                 <div class="col-sm-6">
+                    <pre>$scope.listObjs: {{listObjs}}</pre>
                     <pre>{{ data | json }}</pre>
                     <button class="btn btn-danger" ng-click="error()">Error Notification</button>
                 </div>
@@ -381,11 +378,12 @@
                         <td>Used only when returnOnlyKey = true</td>
                         <td>value</td>
                     </tr>
-                    <tr>
-                        <td>listIsObj</td>
-                        <td>True - list has objects, False - list has strings</td>
-                        <td>false</td>
-                    </tr>
+                    <!-- DEPRECATED -->
+                    <!--<tr>-->
+                        <!--<td>listIsObj</td>-->
+                        <!--<td>True - list has objects, False - list has strings</td>-->
+                        <!--<td>false</td>-->
+                    <!--</tr>-->
                     <tr>
                         <td>selectedIsObj</td>
                         <td></td>
@@ -414,20 +412,21 @@
                 </tbody>
             </table>
 
+
+            <button ng-click="change_options()">change options and test how dropdowns updates internal list</button>
+
             <hr>
 
             <pre class="prettyprint">&lt;nice-dropdown
     title="Dropdown"
     model="dropdown"
     list="listObjs"
-    obj-value="value"
-    list-is-obj="true"
     selected-is-obj="true"
     multiple="true">
 &lt;/nice-dropdown></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-dropdown title="Dropdown" model="dropdown" list="listObjs" obj-value="value" list-is-obj="true" selected-is-obj="true" multiple="true"></nice-dropdown>
+                    <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" selected-is-obj="true" multiple="true"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
                     <pre>{{ dropdown | json }}</pre>
@@ -438,7 +437,7 @@
 
             <pre class="prettyprint">&lt;nice-dropdown
     title="Dropdown"
-    model="choiceDemo2"
+    model="dropdown2"
     list="listObjs"
     obj-value="value"
     list-is-obj="true"
@@ -446,22 +445,34 @@
 &lt;/nice-dropdown></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-dropdown title="Dropdown" model="choiceDemo2" list="listObjs" obj-value="value" list-is-obj="true" selected-is-obj="true"></nice-dropdown>
+                    <nice-dropdown title="Dropdown" model="dropdown2" list="listObjs" selected-is-obj="true"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
-                    <pre>{{ choiceDemo2 | json }}</pre>
+                    <pre>{{ dropdown2 | json }}</pre>
                 </div>
             </div>
 
             <hr>
 
-            <pre class="prettyprint">&lt;nice-dropdown title="Dropdown" model="choiceDemo4" list="listStrings">&lt;/nice-dropdown></pre>
+            <pre class="prettyprint">&lt;nice-dropdown title="Dropdown" model="dropdown3" list="listObjs">&lt;/nice-dropdown></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-dropdown title="Dropdown" model="choiceDemo4" list="listStrings"></nice-dropdown>
+                    <nice-dropdown title="Dropdown" model="dropdown3" list="listObjs"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
-                    <pre>{{ choiceDemo4 | json }}</pre>
+                    <pre>{{ dropdown3 | json }}</pre>
+                </div>
+            </div>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-dropdown title="Dropdown" model="dropdown4" list="listObjs" nullable="true">&lt;/nice-dropdown></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-dropdown title="Dropdown" model="dropdown4" list="listObjs" nullable="true"></nice-dropdown>
+                </div>
+                <div class="col-sm-6">
+                    <pre>{{ dropdown4 | json }}</pre>
                 </div>
             </div>
 
@@ -766,7 +777,7 @@
 &lt;/nice-choice></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-choice title="I like fruit" model="choiceDemo2" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
+                    <!--<nice-choice title="I like fruit" model="choiceDemo2" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>-->
                 </div>
                 <div class="col-sm-6">
                     <pre>{{ choiceDemo2 | json }}</pre>
