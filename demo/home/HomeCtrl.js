@@ -5,6 +5,7 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
     $scope.dt = '2015-12-12T16:00:00.000';
+    $scope.dtTime = '02:00:00';
 
     //$scope.choiceDemo2 = 2;
     //$scope.choiceDemo2 = {id:3, value:"Orange"};
@@ -12,6 +13,10 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     $scope.change_options = function(){
         $scope.listObjs = [{id:4, value:"CD"}, {id:5, value:"DVD"}, {id:6, value:"Cassete"}];
+    };
+
+    $scope.change_hour = function(){
+        $scope.dtTime = '22:00:00';
     };
     //$timeout(function(){
     //    $scope.choiceDemo2 = 2;

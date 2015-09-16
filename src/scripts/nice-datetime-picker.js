@@ -92,8 +92,8 @@ angular.module('niceElements')
         };
 
         // prepare attributes
-        params.date = $scope.date === 'true';
-        params.time = $scope.time === 'true';
+        params.date = $scope.date === 'true' || $scope.date === true;
+        params.time = $scope.time === 'true' || $scope.time === true;
         if ($scope.format && $scope.format != "")
           params.format = $scope.format;
         if ($scope.enableOkButtons)
@@ -129,13 +129,17 @@ angular.module('niceElements')
 
         $scope.$on('dateSelected', function () {
           $scope.formDatetimePicker.$setDirty();
-          console.log('date selected');
+          //console.log('date selected');
         });
 
         $scope.$watch('currentDate', function (newDate) {
           $scope.value = moment(newDate).locale(params.lang).format(params.format);
+          if (!params.date && params.time){
+            var _date = moment(newDate, params.modelFormat).locale(params.lang).format(params.modelFormat);
+          }else{
+            var _date = moment(newDate, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
+          }
           //$scope.model = moment(newDate).locale(params.lang).format(params.modelFormat);
-          var _date = moment(newDate, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
           $scope.model = _date;
 
         });
