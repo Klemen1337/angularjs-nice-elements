@@ -89,7 +89,7 @@ angular.module('niceElements')
       // functions are defined in a variable 'var that', not in $scope
       var that = {
         init: function () {
-          console.log('init', $scope);
+          //console.log('init', $scope);
 
           $scope.showDtp = false;
           that.initDays();
