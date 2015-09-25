@@ -604,8 +604,16 @@ angular.module('niceElements')
 
         initCurrentDate();
 
+        $scope.opened = false;
+
         $scope.openDtp = function () {
           $scope.$broadcast('dtp-open-click');
+          $scope.opened = true;
+        };
+
+        $scope.closeDtp = function(response) {
+          $scope.$broadcast('dtp-close-click');
+          $scope.opened = false;
         };
 
         $scope.$on('dateSelected', function () {
@@ -1005,7 +1013,7 @@ angular.module('niceElements')
           var obj = {};
 
           var selectedObj = _get_selected_object(selected);
-          console.log('_set_internal_selected_one', selected, selectedObj);
+          // console.log('_set_internal_selected_one', selected, selectedObj);
           if(selectedObj && _.find($scope.internalList, getFilter(selected))){
               obj = selectedObj;
           }else{
@@ -1172,7 +1180,7 @@ angular.module('niceElements')
  */
 angular.module('niceElements')
 
-.directive('niceDtp', function($window, $parse) {
+.directive('niceDtp', function($window, $parse, $document) {
 
   return {
     scope: {
@@ -1196,6 +1204,7 @@ angular.module('niceElements')
       noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
+      closed: '='
     },
     templateUrl: 'views/nice-dtp.html',
     link: function($scope, $element, $attrs) {
@@ -1253,7 +1262,7 @@ angular.module('niceElements')
       // functions are defined in a variable 'var that', not in $scope
       var that = {
         init: function () {
-          console.log('init', $scope);
+          //console.log('init', $scope);
 
           $scope.showDtp = false;
           that.initDays();
@@ -1801,6 +1810,7 @@ angular.module('niceElements')
         },
         _onCloseClick: function () {
           that.hide();
+          if($scope.closed) $scope.closed(true);
         },
         _onOKClick: function () {
           switch ($scope.currentView) {
@@ -1998,8 +2008,11 @@ angular.module('niceElements')
       }
 
       $scope.$on('dtp-open-click', function(){
-
         that._onClick();
+      });
+
+      $scope.$on('dtp-close-click', function(){
+        that.hide();
       });
 
       $scope.$watch('model', function(newDate){
@@ -2007,6 +2020,16 @@ angular.module('niceElements')
         that.showDate($scope.currentDate);
         that.initDate();
       });
+
+
+      // Close the dropdown if clicked outside
+      //$document.bind('click', function(event){
+      //  console.log($element.find(event.target));
+      //  var isClickedElementChildOfPopup = $element.find(event.target).length == 0;
+      //  if (isClickedElementChildOfPopup){
+      //    that.hide();
+      //  }
+      //});
     }
   };
 
@@ -2759,7 +2782,7 @@ angular.module('niceElements')
       if (angular.isDefined($scope.modelFormat) && $scope.modelFormat)
         params.modelFormat = $scope.modelFormat;
 
-      console.log(params);
+      // console.log(params);
       // functions are defined in a variable 'var that', not in $scope
       var that = {
         init: function () {
@@ -3469,9 +3492,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-datetime-picker.html',
-    "\n" +
-    "\n" +
     "<div class=\"nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"opened\"></div>\n" +
+    "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -3505,6 +3529,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    week-start=\"{{weekStart}}\"\n" +
     "                    ok-text=\"{{okText}}\"\n" +
     "                    cancel-text=\"{{cancelText}}\"\n" +
+    "                    closed=\"closeDtp\"\n" +
     "            ></nice-dtp>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -3514,8 +3539,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-datetimerange-picker.html',
-    "\n" +
     "<div class=\"nice-datetime-picker nice-datetimerange-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"cancelClick()\" ng-if=\"showDtpRange\"></div>\n" +
+    "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -3585,10 +3612,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"dtp-buttons-bottom\">\n" +
-    "                        <div class=\"col-xs-12 margin-top-20\">\n" +
-    "                            <a class=\"btn btn-primary pull-right\" ng-click=\"okClick()\">Ok</a>\n" +
-    "                            <a class=\"btn btn-primary pull-right margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
-    "                        </div>\n" +
+    "                        <a class=\"btn btn-danger btn-block margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
+    "                        <a class=\"btn btn-success btn-block\" ng-click=\"okClick()\">Ok</a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +

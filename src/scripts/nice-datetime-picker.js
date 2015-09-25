@@ -123,8 +123,16 @@ angular.module('niceElements')
 
         initCurrentDate();
 
+        $scope.opened = false;
+
         $scope.openDtp = function () {
           $scope.$broadcast('dtp-open-click');
+          $scope.opened = true;
+        };
+
+        $scope.closeDtp = function(response) {
+          $scope.$broadcast('dtp-close-click');
+          $scope.opened = false;
         };
 
         $scope.$on('dateSelected', function () {

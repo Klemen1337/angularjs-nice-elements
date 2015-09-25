@@ -26,7 +26,7 @@ $color_gallery_approx: #eee;
 %extend_2 {
   color: $color_log_cabin_approx;
   text-decoration: none;
-  padding: 0.4rem 0.5rem 0.5rem 0.6rem;
+  padding: 8px;
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 50%!important;
 }
@@ -297,15 +297,17 @@ $color_gallery_approx: #eee;
       table.dtp-picker-days {
         margin: 0;
         border: none;
+        margin-top: 5px;
+
         tr {
           border: none;
           > {
             td {
               border: none;
-              font-weight: 700;
+              font-weight: normal;
               font-size: 1.2rem;
               text-align: center;
-              padding: 1rem 0.3rem;
+              padding: 7px 0;
               > {
                 a {
                   @extend %extend_2;
@@ -322,7 +324,7 @@ $color_gallery_approx: #eee;
             th {
               color: $color_tapa_approx;
               text-align: center;
-              font-weight: 700;
+              font-weight: normal;
               padding: 0.4rem 0.3rem;
             }
           }
@@ -343,7 +345,31 @@ $color_gallery_approx: #eee;
       z-index: 50;
     }
   }
+
+  .btn-primary{
+    background: $nice-base-color;
+    border-color: darken($nice-base-color, 5%);
+    color: white;
+
+    &:hover{
+      background: darken($nice-base-color, 5%);
+    }
+  }
+
+  .dtp-select-day, .dtp-picker-time {
+    &:hover{
+      background: lighten($nice-base-color, 10%);
+      color: white !important;
+      a{ color: white !important; }
+    }
+  }
 }
 
-
-
+.nice-dtp-background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 800;
+  height: 100%;
+}

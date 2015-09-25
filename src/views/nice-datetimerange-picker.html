@@ -1,5 +1,7 @@
-
 <div class="nice-datetime-picker nice-datetimerange-picker" name="form" ng-class="{ 'margin-bottom-0': noMargin }">
+
+    <div class="nice-dtp-background" ng-click="cancelClick()" ng-if="showDtpRange"></div>
+
     <div class="row">
         <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
@@ -69,10 +71,8 @@
                     </div>
 
                     <div class="dtp-buttons-bottom">
-                        <div class="col-xs-12 margin-top-20">
-                            <a class="btn btn-primary pull-right" ng-click="okClick()">Ok</a>
-                            <a class="btn btn-primary pull-right margin-right-20" ng-click="cancelClick()">Cancel</a>
-                        </div>
+                        <a class="btn btn-danger btn-block margin-right-20" ng-click="cancelClick()">Cancel</a>
+                        <a class="btn btn-success btn-block" ng-click="okClick()">Ok</a>
                     </div>
                 </div>
             </div>

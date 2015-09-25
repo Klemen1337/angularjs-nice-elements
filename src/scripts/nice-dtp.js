@@ -8,7 +8,7 @@
  */
 angular.module('niceElements')
 
-.directive('niceDtp', function($window, $parse) {
+.directive('niceDtp', function($window, $parse, $document) {
 
   return {
     scope: {
@@ -32,6 +32,7 @@ angular.module('niceElements')
       noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
+      closed: '='
     },
     templateUrl: 'views/nice-dtp.html',
     link: function($scope, $element, $attrs) {
@@ -637,6 +638,7 @@ angular.module('niceElements')
         },
         _onCloseClick: function () {
           that.hide();
+          if($scope.closed) $scope.closed(true);
         },
         _onOKClick: function () {
           switch ($scope.currentView) {
@@ -834,8 +836,11 @@ angular.module('niceElements')
       }
 
       $scope.$on('dtp-open-click', function(){
-
         that._onClick();
+      });
+
+      $scope.$on('dtp-close-click', function(){
+        that.hide();
       });
 
       $scope.$watch('model', function(newDate){
@@ -843,6 +848,16 @@ angular.module('niceElements')
         that.showDate($scope.currentDate);
         that.initDate();
       });
+
+
+      // Close the dropdown if clicked outside
+      //$document.bind('click', function(event){
+      //  console.log($element.find(event.target));
+      //  var isClickedElementChildOfPopup = $element.find(event.target).length == 0;
+      //  if (isClickedElementChildOfPopup){
+      //    that.hide();
+      //  }
+      //});
     }
   };
 

@@ -1,6 +1,7 @@
-
-
 <div class="nice-datetime-picker" name="form" ng-class="{ 'margin-bottom-0': noMargin }">
+
+    <div class="nice-dtp-background" ng-click="closeDtp(true)" ng-if="opened"></div>
+
     <div class="row">
         <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
@@ -34,6 +35,7 @@
                     week-start="{{weekStart}}"
                     ok-text="{{okText}}"
                     cancel-text="{{cancelText}}"
+                    closed="closeDtp"
             ></nice-dtp>
         </div>
     </div>

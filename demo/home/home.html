@@ -114,6 +114,7 @@
                         date="true"
                         time="true">
                     </nice-datetime-picker>
+
                     <nice-datetime-picker
                             model="dt"
                             title="Datetimepicker"
@@ -121,7 +122,6 @@
                             date="true"
                             time="false">
                             </nice-datetime-picker>
-                    <pre>from: {{ dt }}</pre>
 
                     <nice-datetimerange-picker
                         model-start="dtStart"
@@ -132,8 +132,6 @@
                         time="true">
                     </nice-datetimerange-picker>
 
-                    <pre>from: {{ dtStart }}</pre>
-                    <pre>to: {{ dtEnd }}</pre>
                     <!--<nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetimerange-picker>-->
 
                     <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
@@ -613,7 +611,7 @@
                 <div class="col-sm-6">
                     <nice-datetime-picker
                       model="dateTimePicker"
-                      title="Datetime picker"
+                      title="Date picker"
                       date="true"
                       time="false"
                       format="DD.MM.YYYY"
@@ -657,13 +655,26 @@
         <!-------------------------------- NICE DATE RANGE -------------------------------->
         <div class="white-wrapper" id="nice-date-range">
             <h2>Nice date range</h2>
-            <pre class="prettyprint">&lt;nice-date-range title="Date range" model="rangeDate">&lt;/nice-date-range></pre>
+            <pre class="prettyprint">&lt;nice-datetimerange-picker
+model-start="dtStart"
+model-end="dtEnd"
+title="Date range"
+field-width="col-sm-8"
+date="true"
+time="true">&lt;/nice-date-range></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-date-range title="Date range" model="rangeDate"></nice-date-range>
+                    <nice-datetimerange-picker
+                        model-start="dtStart"
+                        model-end="dtEnd"
+                        title="Date range"
+                        field-width="col-sm-8"
+                        date="true"
+                        time="true">
+                    </nice-datetimerange-picker>
                 </div>
                 <div class="col-sm-6">
-                    <pre>{{ rangeDate | json }}</pre>
+                    <pre>{{ dtStart }}<br> {{ dtEnd }}</pre>
                 </div>
             </div>
         </div>

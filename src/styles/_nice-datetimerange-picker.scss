@@ -1,60 +1,66 @@
 .nice-datetimerange-picker {
-  div.dtp-range-wrapper{
+  .btn{
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: $nice-border-radius;
+  }
+
+  .dtp-range-wrapper{
+    border-radius: $nice-border-radius;
     position: absolute;
     left: 0;
     top: 40px;
-    width: 620px;
-    height: 360px;
+    width: 625px;
+    height: 325px;
     padding: 10px;
-    background-color: #eeeeee;
-    border: 1px solid #ccc;
-    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ddd;
+    z-index: 900;
 
-    div.dtp-layer {
+    .dtp-layer {
       width: 100%;
       height: 100%;
       position: relative;
-
 
       .dtp-buttons-bottom, .dtp-buttons-left, .dtp-left, .dtp-right{
         position: absolute;
       }
 
-      div.dtp-buttons-left {
+      .dtp-buttons-left {
         left: 0;
         top: 0;
         width: 100px;
       }
 
-      div.dtp-left {
+      .dtp-left {
         left: 110px;
         top: 0;
         width: 40%;
         height: 80%;
       }
 
-      div.dtp-right {
+      .dtp-right {
         left: 360px;
         top: 0;
         width: 40%;
         height: 80%;
       }
 
-      div.dtp-buttons-bottom {
+      .dtp-buttons-bottom {
         bottom: 0;
         left: 0;
-        width: 100%;
-        height: 50px;
+        width: 100px;
       }
     }
 
 
 
-    div.dtp-content{
+    .dtp-content{
       position: relative;
+      box-shadow: 0 0 0;
       top: 0;
 
-      div.dtp-date-view{
+      .dtp-date-view{
         min-height: 300px;
       }
     }

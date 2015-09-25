@@ -42,7 +42,7 @@ angular.module('niceElements')
       if (angular.isDefined($scope.modelFormat) && $scope.modelFormat)
         params.modelFormat = $scope.modelFormat;
 
-      console.log(params);
+      // console.log(params);
       // functions are defined in a variable 'var that', not in $scope
       var that = {
         init: function () {

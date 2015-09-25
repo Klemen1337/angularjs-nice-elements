@@ -106,7 +106,7 @@ angular.module('niceElements')
           var obj = {};
 
           var selectedObj = _get_selected_object(selected);
-          console.log('_set_internal_selected_one', selected, selectedObj);
+          // console.log('_set_internal_selected_one', selected, selectedObj);
           if(selectedObj && _.find($scope.internalList, getFilter(selected))){
               obj = selectedObj;
           }else{
