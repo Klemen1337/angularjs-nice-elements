@@ -1173,7 +1173,6 @@ angular.module('niceElements')
             // bind to keypress events if dropdown list is opened
             if ($scope.status['isopen']) {
               var char = String.fromCharCode(e.which).toLowerCase();
-              console.log('keypress', char);
 
               // find first element with value starting on selected char
               var index = _.findIndex($scope.internalList, function (item) {
