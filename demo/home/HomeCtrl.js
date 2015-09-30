@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceNotification, $timeout) {
-    $scope.listObjs = [{id:1, value:"Apple"}, {id:2, value:"Banana"}, {id:3, value:"Orange"}];
+    $scope.listObjs = [{id:0, value:"Yeoman"}, {id:1, value:"Apple"}, {id:2, value:"Banana"}, {id:3, value:"Orange"},
+        {id:4, value:"Apple"}, {id:5, value:"Banana"}, {id:6, value:"Orange"},
+        {id:7, value:"Apple"}, {id:8, value:"Banana"}, {id:9, value:"Orange"},
+        {id:10, value:"Slovenia"}, {id:11, value:"Slovakia"}, {id:12, value:"Zimbabwe"}];
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
     $scope.dt = '2015-12-12T16:00:00.000';

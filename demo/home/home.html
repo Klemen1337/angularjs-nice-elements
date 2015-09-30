@@ -408,6 +408,11 @@
                         <td></td>
                         <td>null</td>
                     </tr>
+                    <tr>
+                        <td>listenKeydown</td>
+                        <td>If set to true, dropdown listens to keydown events and scrolls to first occurence that starts with pressed character.</td>
+                        <td>null</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -435,6 +440,7 @@
             <hr>
 
             <pre class="prettyprint">&lt;nice-dropdown
+    listen-keydown="true"
     title="Dropdown"
     model="dropdown2"
     list="listObjs"
@@ -444,7 +450,7 @@
 &lt;/nice-dropdown></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-dropdown title="Dropdown" model="dropdown2" list="listObjs" selected-is-obj="true"></nice-dropdown>
+                    <nice-dropdown listen-keydown="true" title="Dropdown" model="dropdown2" list="listObjs" selected-is-obj="true"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
                     <pre>{{ dropdown2 | json }}</pre>

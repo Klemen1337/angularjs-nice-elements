@@ -28,8 +28,8 @@
                         <span class="caret"></span>
                     </button>
 
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="item in internalList" ng-click="clicked(item)">
+                    <ul id="{{id}}" class="dropdown-menu" role="menu">
+                        <li id="{{id}}-{{$index}}" ng-repeat="item in internalList" ng-click="clicked(item)">
                             <a href>
                                 <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>
                                 <!--<span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>-->

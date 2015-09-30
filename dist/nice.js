@@ -938,7 +938,8 @@ angular.module('niceElements')
         showTax: '@',             // Shows tax rate
         noMargin: '@',            // margin-bottom: 0px
         multiple: '@',            // Can select multiple items
-        help: '@'
+        help: '@',
+        listenKeydown: '@',
       },
 
       compile: function(element, attrs){
@@ -954,7 +955,7 @@ angular.module('niceElements')
         if(!attrs.addButtonFunction) { attrs.addButtonFunction = null; }
       },
 
-      controller: function($rootScope, $scope) {
+      controller: function($rootScope, $scope, $document) {
         $scope.selectedIsObj = $scope.selectedIsObj === 'true' || $scope.selectedIsObj === true;
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;
@@ -963,6 +964,7 @@ angular.module('niceElements')
         $scope.multiple = $scope.multiple === 'true' || $scope.multiple === true;
 
         $scope.internalSelected = null;
+        $scope.id = Math.random().toString(36).substring(7);
 
         var getFilter = function(item){
           // Create filter for finding object by objValue with _.where()
@@ -1165,7 +1167,31 @@ angular.module('niceElements')
           }
         });
 
+        if ($scope.listenKeydown) {
+          $document.bind('keypress', function (e) {
 
+            // bind to keypress events if dropdown list is opened
+            if ($scope.status['isopen']) {
+              var char = String.fromCharCode(e.which).toLowerCase();
+              console.log('keypress', char);
+
+              // find first element with value starting on selected char
+              var index = _.findIndex($scope.internalList, function (item) {
+                var _name = item[$scope.objValue].toLowerCase();
+                return _name.indexOf(char) === 0;
+              });
+
+              if (index > 0) {
+                // scroll within dropdown list to selected index
+                var _id_name = '#' + $scope.id + '-' + index;
+                var _relative_top = $(_id_name).offset().top - $("#" + $scope.id).offset().top;
+                //console.log(index, _id_name, _relative_top);
+                if (_relative_top != 0)
+                  $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
+              }
+            }
+          });
+        }
       }
     };
   });
@@ -3630,6 +3656,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
+    "        {{status.isopen}}\n" +
     "\n" +
     "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div ng-class=\"addButtonEnable && !isDisabled ? 'input-group': ''\">\n" +
@@ -3655,8 +3682,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        <span class=\"caret\"></span>\n" +
     "                    </button>\n" +
     "\n" +
-    "                    <ul class=\"dropdown-menu\" role=\"menu\">\n" +
-    "                        <li ng-repeat=\"item in internalList\" ng-click=\"clicked(item)\">\n" +
+    "                    <ul id=\"{{id}}\" class=\"dropdown-menu\" role=\"menu\">\n" +
+    "                        <li id=\"{{id}}-{{$index}}\" ng-repeat=\"item in internalList\" ng-click=\"clicked(item)\">\n" +
     "                            <a href>\n" +
     "                                <span class=\"choice-checkbox\" ng-if=\"multiple\" ng-class=\"{ 'selected' : isItemSelected(item) }\"><i class=\"fa fa-check\"></i></span>\n" +
     "                                <!--<span ng-if=\"item.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': item.color_hex_code}\"></span>-->\n" +
