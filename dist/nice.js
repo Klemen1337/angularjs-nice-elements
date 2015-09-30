@@ -3656,7 +3656,6 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
-    "        {{status.isopen}}\n" +
     "\n" +
     "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div ng-class=\"addButtonEnable && !isDisabled ? 'input-group': ''\">\n" +
