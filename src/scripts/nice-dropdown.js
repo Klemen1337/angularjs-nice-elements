@@ -273,12 +273,12 @@ angular.module('niceElements')
                 return _name.indexOf(char) === 0;
               });
 
-              if (index > 0) {
+              if (index >= 0) {
                 // scroll within dropdown list to selected index
                 var _id_name = '#' + $scope.id + '-' + index;
-                var _relative_top = $(_id_name).offset().top - $("#" + $scope.id).offset().top;
-                //console.log(index, _id_name, _relative_top);
-                if (_relative_top != 0)
+                var _id_first = '#' + $scope.id + '-0';
+                var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
+                if (_relative_top >= 0)
                   $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
               }
             }

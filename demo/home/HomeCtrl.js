@@ -1,10 +1,16 @@
 'use strict';
 
 angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceNotification, $timeout) {
-    $scope.listObjs = [{id:0, value:"Yeoman"}, {id:1, value:"Apple"}, {id:2, value:"Banana"}, {id:3, value:"Orange"},
-        {id:4, value:"Apple"}, {id:5, value:"Banana"}, {id:6, value:"Orange"},
-        {id:7, value:"Apple"}, {id:8, value:"Banana"}, {id:9, value:"Orange"},
-        {id:10, value:"Slovenia"}, {id:11, value:"Slovakia"}, {id:12, value:"Zimbabwe"}];
+    $scope.listObjs = [
+        {id:0, value:"Afganistan"}, {id:1, value:"Azerbajdzan"}, {id:2, value:"Belgija"},
+        {id:3, value:"Belorusija"}, {id:4, value:"Bolgarija"}, {id:5, value:"Burundi"},
+        {id:6, value:"Cambodia"}, {id:7, value:"Canada"}, {id:8, value:"Chile"},
+        {id:9, value:"China"}, {id:10, value:"Colombia"}, {id:11, value:"Costa Rica"},
+        {id:12, value:"Croatia"}, {id:13, value:"China"}, {id:14, value:"Denmark"}, {id:15, value:"Dominican Republic"},
+        {id:16, value:"Fiji"}, {id:17, value:"France"}, {id:18, value:"Germani"},
+        {id:19, value:"Ghana"}, {id:20, value:"Greece"}, {id:21, value:"Haiti"},
+        {id:22, value:"Hong kong"}, {id:23, value:"Ireland"}, {id:24, value:"Japan"}
+    ];
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
     $scope.dt = '2015-12-12T16:00:00.000';
