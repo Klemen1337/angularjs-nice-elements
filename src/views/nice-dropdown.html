@@ -14,7 +14,7 @@
                         dropdown-toggle
                         ng-disabled="isDisabled || emptyList">
 
-                        <!--<span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>-->
+                        <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
                         <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>
 
                         <span ng-if="multiple">
@@ -32,7 +32,7 @@
                         <li id="{{id}}-{{$index}}" ng-repeat="item in internalList" ng-click="clicked(item)">
                             <a href>
                                 <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>
-                                <!--<span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>-->
+                                <span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>
                                 <span ng-class="{'multiple-item': multiple}">{{ getLabel(item) }}</span>
                                 <!--<span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>-->
                             </a>

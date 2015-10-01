@@ -3666,7 +3666,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        dropdown-toggle\n" +
     "                        ng-disabled=\"isDisabled || emptyList\">\n" +
     "\n" +
-    "                        <!--<span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>-->\n" +
+    "                        <span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>\n" +
     "                        <span ng-if=\"!multiple\">{{ getLabel(internalSelected) }}</span>\n" +
     "\n" +
     "                        <span ng-if=\"multiple\">\n" +
@@ -3684,7 +3684,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        <li id=\"{{id}}-{{$index}}\" ng-repeat=\"item in internalList\" ng-click=\"clicked(item)\">\n" +
     "                            <a href>\n" +
     "                                <span class=\"choice-checkbox\" ng-if=\"multiple\" ng-class=\"{ 'selected' : isItemSelected(item) }\"><i class=\"fa fa-check\"></i></span>\n" +
-    "                                <!--<span ng-if=\"item.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': item.color_hex_code}\"></span>-->\n" +
+    "                                <span ng-if=\"item.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': item.color_hex_code}\"></span>\n" +
     "                                <span ng-class=\"{'multiple-item': multiple}\">{{ getLabel(item) }}</span>\n" +
     "                                <!--<span ng-if=\"showTax && item.value\">{{ item.value * 100 }}%</span>-->\n" +
     "                            </a>\n" +
