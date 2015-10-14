@@ -2074,8 +2074,8 @@ angular.module('niceElements')
         title: '@?',
         regex: '@?',
         placeholder: '@',
-        minlength: '@',
-        maxlength: '@',
+        minlength: '@?',
+        maxlength: '@?',
         required: '@',
         fieldWidth: '@',
         labelWidth: '@',
@@ -2088,7 +2088,6 @@ angular.module('niceElements')
         name: '@',
         noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
-        maxLength: '@?'
       },
 
       link: function (scope, element, attrs) {
@@ -2110,7 +2109,6 @@ angular.module('niceElements')
         if (!attrs.name) { attrs.name = ''; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
-        if (!attrs.maxLength) { attrs.maxLength = 42; }
 
         // Set internal type
         scope.internalType = attrs.type;
@@ -3831,7 +3829,6 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                ng-keypress=\"keypress($event)\"\n" +
     "                ng-pattern=\"regexexp\"\n" +
     "                ng-disabled=\"isDisabled\"\n" +
-    "                maxlength=\"{{maxLength}}\"\n" +
     "            >\n" +
     "            <textarea ng-show=\"textArea\"\n" +
     "                class=\"form-control\"\n" +
