@@ -6,20 +6,32 @@
  * # niceButton
  */
 angular.module('niceElements')
-  .directive('niceButton', function () {
+  .directive('niceButton', function ($q) {
     return {
       templateUrl: 'views/nice-button.html',
       restrict: 'E',
       scope: {
-        loading: "=?",
-        disabled: '@',
+        //loading: "=?",
+        //disabled: '@',
         title: "@",
         noMargin: "=",
         fieldWidth: '@',
-        labelWidth: '@'
+        labelWidth: '@',
+        niceClick: '&'
       },
       link: function postLink(scope, element, attrs) {
+        scope.loading = false;
 
+        scope.click = function(){
+
+          if (scope.loading===false){
+            scope.loading = true;
+
+            $q.when(scope.niceClick()).finally(function(){
+              scope.loading = false;
+            });
+          }
+        }
       }
     };
   });

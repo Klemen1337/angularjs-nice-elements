@@ -36,9 +36,20 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     $scope.percentage = 0.22000000;
 
-    $scope.niceButtonLoading = false;
-    $scope.toggleNiceButton = function(){
-      $scope.niceButtonLoading = !$scope.niceButtonLoading;
+    $scope.doSomethingLong = function(){
+        console.log('doing sth');
+        var deferred = $q.defer();
+
+        setTimeout(function() {
+            var r = Math.random()*100;
+            if (r>50) {
+                deferred.resolve();
+            } else {
+                deferred.reject();
+            }
+        }, Math.random()*5000);
+
+        return deferred.promise;
     };
 
     // Notification tests
