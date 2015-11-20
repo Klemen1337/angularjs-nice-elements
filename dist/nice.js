@@ -39,20 +39,33 @@ angular.module('niceElements')
  * # niceButton
  */
 angular.module('niceElements')
-  .directive('niceButton', function () {
+  .directive('niceButton', function ($q) {
     return {
       templateUrl: 'views/nice-button.html',
       restrict: 'E',
+      transclude: true,
       scope: {
-        loading: "=?",
-        disabled: '@',
+        //loading: "=?",
+        //disabled: '@',
         title: "@",
         noMargin: "=",
         fieldWidth: '@',
-        labelWidth: '@'
+        labelWidth: '@',
+        niceClick: '&'
       },
       link: function postLink(scope, element, attrs) {
+        scope.loading = false;
 
+        scope.click = function(){
+
+          if (scope.loading===false){
+            scope.loading = true;
+
+            $q.when(scope.niceClick()).finally(function(){
+              scope.loading = false;
+            });
+          }
+        }
       }
     };
   });
@@ -3400,15 +3413,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('views/nice-button.html',
     "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"labelWidth\"></div>\n" +
     "\n" +
-    "        <div ng-class=\"(labelWidth && fieldWidth) ? fieldWidth : ''\">\n" +
-    "            <div type=\"button\" class=\"btn btn-block btn-primary\">\n" +
-    "                <div ng-if=\"!loading\">{{ title }}</div>\n" +
-    "                <div ng-if=\"loading\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "    <div type=\"button\" class=\"btn btn-primary\" ng-click=\"click()\">\n" +
+    "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
+    "        <div ng-class=\"{opacity0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
     "    </div>\n" +
     "\n" +
     "</div>\n"

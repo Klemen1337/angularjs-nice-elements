@@ -10,6 +10,7 @@ angular.module('niceElements')
     return {
       templateUrl: 'views/nice-button.html',
       restrict: 'E',
+      transclude: true,
       scope: {
         //loading: "=?",
         //disabled: '@',
