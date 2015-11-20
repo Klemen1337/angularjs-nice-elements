@@ -51,7 +51,8 @@ angular.module('niceElements')
         noMargin: "=",
         fieldWidth: '@',
         labelWidth: '@',
-        niceClick: '&'
+        niceClick: '&',
+        addClass: '@'
       },
       link: function postLink(scope, element, attrs) {
         scope.loading = false;
@@ -3414,7 +3415,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   $templateCache.put('views/nice-button.html',
     "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "\n" +
-    "    <div type=\"button\" class=\"btn btn-primary\" ng-click=\"click()\">\n" +
+    "    <div type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\">\n" +
     "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
     "        <div ng-class=\"{opacity0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
     "    </div>\n" +
