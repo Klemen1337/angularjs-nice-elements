@@ -58,7 +58,7 @@ angular.module('niceElements')
 
         scope.click = function(){
 
-          if (scope.loading===false){
+          if (scope.loading===false && scope.niceDisabled!==true){
             scope.loading = true;
 
             $q.when(scope.niceClick()).finally(function(){
