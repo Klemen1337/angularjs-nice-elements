@@ -12,8 +12,7 @@ angular.module('niceElements')
       restrict: 'E',
       transclude: true,
       scope: {
-        //loading: "=?",
-        //disabled: '@',
+        niceDisabled: '=',
         title: "@",
         noMargin: "=",
         fieldWidth: '@',

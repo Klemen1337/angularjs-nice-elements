@@ -36,12 +36,14 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     $scope.percentage = 0.22000000;
 
+    $scope.disbled = false;
     $scope.doSomethingLong = function(){
         console.log('doing sth');
         var deferred = $q.defer();
 
         setTimeout(function() {
             var r = Math.random()*100;
+            $scope.disbled = true;
             if (r>50) {
                 deferred.resolve();
             } else {
