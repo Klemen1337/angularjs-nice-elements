@@ -18,7 +18,8 @@ angular.module('niceElements')
         noMargin: "=",
         fieldWidth: '@',
         labelWidth: '@',
-        niceClick: '&'
+        niceClick: '&',
+        addClass: '@'
       },
       link: function postLink(scope, element, attrs) {
         scope.loading = false;
