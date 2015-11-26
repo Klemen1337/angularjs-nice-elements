@@ -544,17 +544,20 @@ angular.module('niceElements')
         };
 
 
-        var initCurrentDate = function () {
-          if (typeof($scope.model) === 'undefined' || $scope.model === null) {
-            $scope.currentDate = moment();
+        var initCurrentDate = function (modelValue) {
+
+          $scope.modelUpdatedInternally = true;
+          var tmpCurrentDate = null;
+          if (typeof(modelValue) === 'undefined' || modelValue === null) {
+            tmpCurrentDate = moment();
           } else {
             if (!params.date && params.time) {
               // if only time
               var _time = moment();
               var i_hour = params.modelFormat.indexOf('HH:mm');
               var i_min = params.modelFormat.indexOf('mm');
-              var hours = $scope.model.substring(i_hour, i_hour + 2);
-              var minutes = $scope.model.substring(i_min, i_min + 2);
+              var hours = modelValue.substring(i_hour, i_hour + 2);
+              var minutes = modelValue.substring(i_min, i_min + 2);
 
               if (i_hour > -1 && i_min > -1) {
                 _time.hours(hours);
@@ -564,24 +567,28 @@ angular.module('niceElements')
                     'modelFilter setting in directive.. Falling back to current time instead.');
               }
 
-              $scope.currentDate = _time;
+              tmpCurrentDate = _time;
 
 
             } else {
               // all other combinations
-              if (typeof($scope.model) === 'string') {
+              if (typeof(modelValue) === 'string') {
                 if (params.modelFormat.indexOf('Z')>=0)
-                  $scope.currentDate = moment($scope.model, params.modelFormat).locale(params.lang);
+                  tmpCurrentDate = moment(modelValue, params.modelFormat).locale(params.lang);
                 else
-                  $scope.currentDate = moment.utc($scope.model, params.modelFormat).local().locale(params.lang);
+                  tmpCurrentDate = moment.utc(modelValue, params.modelFormat).local().locale(params.lang);
               }
               else {
                 if (params.modelFormat.indexOf('Z')>=0)
-                  $scope.currentDate = moment($scope.model).locale(params.lang);
+                  tmpCurrentDate = moment(modelValue).locale(params.lang);
                 else
-                  $scope.currentDate = moment.utc($scope.model).local().locale(params.lang);
+                  tmpCurrentDate = moment.utc(modelValue).local().locale(params.lang);
               }
             }
+          }
+
+          if ($scope.currentDate != tmpCurrentDate){
+            $scope.currentDate = tmpCurrentDate;
           }
         };
 
@@ -614,8 +621,9 @@ angular.module('niceElements')
 
         // copy attributes back to scope - for template usage
         $scope = angular.extend($scope, params);
+        $scope.modelUpdatedInternally = false;
 
-        initCurrentDate();
+        initCurrentDate($scope.model);
 
         $scope.opened = false;
 
@@ -625,29 +633,39 @@ angular.module('niceElements')
         };
 
         $scope.closeDtp = function(response) {
+          console.log(response);
           $scope.$broadcast('dtp-close-click');
           $scope.opened = false;
         };
 
         $scope.$on('dateSelected', function () {
           $scope.formDatetimePicker.$setDirty();
+          //$scope.closeDtp();
           //console.log('date selected');
         });
 
         $scope.$watch('currentDate', function (newDate) {
           $scope.value = moment(newDate).locale(params.lang).format(params.format);
-          if (!params.date && params.time){
+          if ((!params.date && params.time) || (params.date && !params.time)){
             var _date = moment(newDate, params.modelFormat).locale(params.lang).format(params.modelFormat);
           }else{
             var _date = moment(newDate, params.modelFormat).utc().locale(params.lang).format(params.modelFormat);
           }
           //$scope.model = moment(newDate).locale(params.lang).format(params.modelFormat);
+          //$scope.modelUpdatedInternally = true;
           $scope.model = _date;
 
         });
 
-        $scope.$watch('model', function(){
-          initCurrentDate();
+        $scope.$watch('model', function(newModel, oldModel){
+          if (newModel && newModel != oldModel && $scope.modelUpdatedInternally===false) {
+            initCurrentDate(newModel);
+          }else{
+
+          }
+          if ($scope.modelUpdatedInternally){
+            $scope.modelUpdatedInternally = false;
+          }
         });
 
       }

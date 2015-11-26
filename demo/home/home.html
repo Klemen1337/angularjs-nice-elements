@@ -116,13 +116,15 @@
                     </nice-datetime-picker>
 
                     <nice-datetime-picker
-                            model="dt"
+                            model="dt2"
                             title="Datetimepicker"
                             field-width="col-sm-4"
                             date="true"
-                            time="false">
+                            time="false"
+                            format="DD.MM.YYYY"
+                            model-format="YYYY-MM-DD"
+                    >
                             </nice-datetime-picker>
-
                     <nice-datetimerange-picker
                         model-start="dtStart"
                         model-end="dtEnd"
@@ -642,7 +644,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <nice-datetime-picker
-                            model="dateTimePicker"
+                            model="dateTimePicker4"
                             title="Datetime picker"
                             date="true"
                             time="true"
