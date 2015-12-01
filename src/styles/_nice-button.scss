@@ -16,15 +16,15 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      margin-left: -5px;
-      margin-top: -5px;
+      margin-left: -10px;
+      margin-top: -10px;
 
       .nice-button-loader{
-        padding: 0;
+        padding: 0 !important;
 
         svg{
-          width: 10px;
-          height: 10px;
+          width: 20px !important;
+          height: 20px !important;
         }
 
         svg path,

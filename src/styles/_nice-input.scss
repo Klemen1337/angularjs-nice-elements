@@ -60,6 +60,7 @@
   }
 
   .form-control{
+    min-width: 50px;
     background: $nice-input-bg;
     border: 1px solid $nice-input-border;
 
