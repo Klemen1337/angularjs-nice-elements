@@ -90,6 +90,7 @@
                     <li><a ng-click="scrollTo('nice-yes-no')" href>Yes no</a></li>
                     <li><a ng-click="scrollTo('nice-percent')" href>Percent</a></li>
                     <li><a ng-click="scrollTo('nice-notification')" href>Notifications</a></li>
+                    <li><a ng-click="scrollTo('nice-number')" href>Number</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -931,6 +932,23 @@ time="true">&lt;/nice-date-range></pre>
             <button class="btn btn-danger" ng-click="errorHtml()">Error Notification</button>
             <button class="btn btn-success" ng-click="successHtml()">Success Notification</button>
 
+        </div>
+
+
+        <!-------------------------------- NICE NUMBER -------------------------------->
+        <div class="white-wrapper" id="nice-number">
+            <h2>Nice number</h2>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-number title="Number" model="niceNumber"></nice-number>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <code>{{ niceNumber }}</code>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
