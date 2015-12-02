@@ -2705,7 +2705,7 @@ angular.module('niceElements')
         };
 
         // Close the dropdown if clicked outside
-        $document.bind('click', function(event){
+        var onClick = function(event){
           var isClickedElementChildOfPopup = element.find(event.target).length > 0;
 
           if (isClickedElementChildOfPopup) return;
@@ -2713,10 +2713,12 @@ angular.module('niceElements')
           scope.results = [];
           scope.noResults = false;
           scope.$apply();
-        });
+        };
+
+        angular.element($document).on('click', onClick);
 
         // Keyboard up/down on search results
-        element.bind('keydown', function(event) {
+        var onKeyDown = function(event) {
           if(event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27 && scope.showDropdown){
             event.preventDefault();
 
@@ -2741,6 +2743,13 @@ angular.module('niceElements')
 
             scope.$apply();
           }
+        };
+
+        angular.element($document).on('keydown', onKeyDown);
+
+        scope.$on('$destroy', function () {
+          angular.element($document).off('click', onClick);
+          angular.element($document).off('keydown', onKeyDown);
         });
 
       },
