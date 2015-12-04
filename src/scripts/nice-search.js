@@ -164,18 +164,21 @@ angular.module('niceElements')
 
         $scope.loading = false;
         $scope.noResults = false;
+        $scope.requests = 0;
 
         $scope.results = [];
-        var updateList = function(results){
-          if(results){
-            $scope.noResults = results.length == 0;
-            $scope.results = results;
+        var updateList = function(results, requestNumber){
 
-            if(!$scope.noResults){
-              $scope.selectedIndex = 0;
+          if(results){
+            if ($scope.requests == requestNumber){
+              $scope.noResults = results.length == 0;
+              $scope.results = results;
+
+              if(!$scope.noResults){
+                $scope.selectedIndex = 0;
+              }
             }
           }
-
           $scope.loading = false;
         };
 
@@ -187,10 +190,13 @@ angular.module('niceElements')
             $timeout.cancel($scope.timer_promise);
 
           $scope.timer_promise = $timeout(function(){
-            $scope.refreshFunction($scope.modelString).then(updateList);
+            $scope.requests = $scope.requests + 1;
+            var requestNumber = angular.copy($scope.requests);
+            $scope.refreshFunction($scope.modelString).then(function(response){
+              updateList(response, requestNumber);
+            });
             $scope.model = $scope.modelString;
           }, 200);
-
 
         };
 
