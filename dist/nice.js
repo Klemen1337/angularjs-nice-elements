@@ -2601,7 +2601,7 @@ angular.module('niceElements')
  * # niceSearch
  */
 angular.module('niceElements')
-  .directive('niceSearch', function ($document) {
+  .directive('niceSearch', function () {
     return {
       transclude: true,
       templateUrl: 'views/nice-search.html',
@@ -2715,7 +2715,7 @@ angular.module('niceElements')
           scope.$apply();
         };
 
-        angular.element($document).on('click', onClick);
+        angular.element(element).on('click', onClick);
 
         // Keyboard up/down on search results
         var onKeyDown = function(event) {
@@ -2745,11 +2745,11 @@ angular.module('niceElements')
           }
         };
 
-        angular.element($document).on('keydown', onKeyDown);
+        angular.element(element).on('keydown', onKeyDown);
 
         scope.$on('$destroy', function () {
-          angular.element($document).off('click', onClick);
-          angular.element($document).off('keydown', onKeyDown);
+          angular.element(element).off('click', onClick);
+          angular.element(element).off('keydown', onKeyDown);
         });
 
       },
