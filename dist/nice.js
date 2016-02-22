@@ -633,7 +633,7 @@ angular.module('niceElements')
         };
 
         $scope.closeDtp = function(response) {
-          console.log(response);
+          //console.log(response);
           $scope.$broadcast('dtp-close-click');
           $scope.opened = false;
         };
@@ -2353,6 +2353,9 @@ angular.module('niceElements')
 
         $timeout(function() {
           templateElement.addClass('killed');
+          templateElement.remove();
+          messageElements.splice(messageElements.indexOf(templateElement), 1);
+          reposite();
         }, args.delay);
 
         angular.element(document.getElementsByTagName('body')).append(templateElement);

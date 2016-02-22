@@ -11,10 +11,16 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
         {id:19, value:"Ghana"}, {id:20, value:"Greece"}, {id:21, value:"Haiti"},
         {id:22, value:"Hong kong"}, {id:23, value:"Ireland"}, {id:24, value:"Japan"}
     ];
+
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
     $scope.dt = '2015-12-12T16:00:00.000';
     $scope.dtTime = '02:00:00';
+
+    $scope.choiceDemo2 ={
+      "id": 2,
+      "value": "Belgija"
+    };
 
     //$scope.choiceDemo2 = 2;
     //$scope.choiceDemo2 = {id:3, value:"Orange"};

@@ -139,7 +139,7 @@ angular.module('niceElements')
         };
 
         $scope.closeDtp = function(response) {
-          console.log(response);
+          //console.log(response);
           $scope.$broadcast('dtp-close-click');
           $scope.opened = false;
         };

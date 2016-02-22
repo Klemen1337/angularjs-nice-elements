@@ -12,6 +12,7 @@ lib-cov
 pids
 logs
 results
+.tmp/
 
 .gitold
 .sass-cache

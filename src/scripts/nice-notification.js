@@ -80,6 +80,9 @@ angular.module('niceElements')
 
         $timeout(function() {
           templateElement.addClass('killed');
+          templateElement.remove();
+          messageElements.splice(messageElements.indexOf(templateElement), 1);
+          reposite();
         }, args.delay);
 
         angular.element(document.getElementsByTagName('body')).append(templateElement);

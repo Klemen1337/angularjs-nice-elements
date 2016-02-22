@@ -56,6 +56,10 @@
       color: white;
       position: absolute;
       line-height: 28px;
+
+      &:hover{
+        background-color: darken($nice-yesno-slider-bg, 5%);
+      }
     }
 
     .yesno-button-no{
