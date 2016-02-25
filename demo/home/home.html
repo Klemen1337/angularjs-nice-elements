@@ -105,8 +105,12 @@
             <div class="row">
                 <div class="col-sm-6">
 
-                    <nice-calendar title="Calendar" time="true" model="testRange"></nice-calendar>
-                    <pre>{{ testRange | json }}</pre>
+                    <nice-calendar title="Calendar" time="true" end-date="endDate" start-date="startDate" model="testRange"></nice-calendar>
+                    <pre>
+                        {{ testRange | json }}
+                        {{ startDate }}
+                        {{ endDate }}
+                    </pre>
 
                     <div class="btn btn-primary" ng-click="changeTestRange()">Change date</div>
 

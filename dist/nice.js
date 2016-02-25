@@ -93,7 +93,9 @@ angular.module('niceElements')
         max: '@',
         time: '@',
         noMargin: '@',
-        color: '@'
+        color: '@',
+        endDate: '=',
+        startDate: '='
       },
       link: function(scope) {
 
@@ -127,8 +129,11 @@ angular.module('niceElements')
         // ------------------ Bootstrap calendar ------------------
         function bootstrap(){
           scope.selectStart = true;
-          scope.model.startDate = scope.model.startDate.second(0).millisecond(0);
-          scope.model.endDate = scope.model.endDate.second(0).millisecond(0);
+          scope.model.startDate = moment(scope.model.startDate.second(0).millisecond(0));
+          scope.model.endDate = moment(scope.model.endDate.second(0).millisecond(0));
+
+          scope.startDate = scope.model.startDate;
+          scope.endDate = scope.model.endDate;
 
           scope.month = scope.model.startDate.clone();
           var start = scope.model.startDate.clone();
@@ -150,6 +155,7 @@ angular.module('niceElements')
           if(scope.selectStart){
             // Set start date
             scope.model.startDate = day.date;
+            scope.startDate = scope.model.startDate;
             scope.selectStart = false;
 
             // If start date is after end date
@@ -159,6 +165,7 @@ angular.module('niceElements')
           } else {
             // Set end date
             scope.model.endDate = day.date;
+            scope.endDate = scope.model.endDate;
             scope.selectStart = true;
 
             // If end date is before start date
