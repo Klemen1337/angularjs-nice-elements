@@ -63,16 +63,16 @@
       background: white;
       cursor: pointer;
       position: relative;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .time-picket-icon{
       border-right: 1px solid $nice-border-color;
       width: 20%;
       float: left;
-      font-size: 12px;
+      font-size: 14px;
       text-align: center;
-      line-height: 27px;
+      line-height: 30px;
       color: $nice-font-color;
       border-bottom: 1px solid $nice-border-color;
     }
@@ -149,7 +149,7 @@
         height: $day-height;
         line-height: $day-height;
         border-left: solid 1px $nice-border-color;
-        font-size: 0.75em;
+        font-size: 12px;
         text-align: center;
         background: white;
         cursor: pointer;
@@ -176,19 +176,18 @@
         }
 
         &.selected {
-          background: darken($nice-base-color, 3%);
-          color: white;
+          background: lighten($nice-base-color, 30%);
         }
 
         &.start-selected {
-          background: darken($nice-base-color, 10%);
+          background: $nice-base-color;
           color: white;
           border-bottom-left-radius: 10px;
           border-top-left-radius: 10px;
         }
 
         &.end-selected {
-          background: darken($nice-base-color, 10%);
+          background: $nice-base-color;
           color: white;
           border-bottom-right-radius: 10px;
           border-top-right-radius: 10px;
@@ -196,7 +195,7 @@
 
         &.selecting-start {
           &:hover {
-            background: lighten($nice-base-color, 10%);
+            background: lighten($nice-base-color, 3%);
             color: white;
             border-bottom-left-radius: 10px;
             border-top-left-radius: 10px;

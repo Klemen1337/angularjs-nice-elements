@@ -127,8 +127,8 @@ angular.module('niceElements')
         // ------------------ Bootstrap calendar ------------------
         function bootstrap(){
           scope.selectStart = true;
-          scope.model.startDate = scope.model.startDate.utc().second(0).millisecond(0);
-          scope.model.endDate = scope.model.endDate.utc().second(0).millisecond(0);
+          scope.model.startDate = scope.model.startDate.second(0).millisecond(0);
+          scope.model.endDate = scope.model.endDate.second(0).millisecond(0);
 
           scope.month = scope.model.startDate.clone();
           var start = scope.model.startDate.clone();
