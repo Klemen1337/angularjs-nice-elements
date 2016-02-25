@@ -1,0 +1,224 @@
+.nice-calendar {
+  margin-bottom: 10px;
+  display: block;
+
+  .nice-selected-dates {
+    padding: 5px 10px;
+
+    .nice-start-date, .nice-end-date{
+      width: 50%;
+      float: left;
+      color: $nice-font-color;
+
+      label{
+        font-size: 9px;
+        font-weight: normal;
+      }
+    }
+
+    .nice-start-date{
+      padding-right: 10px;
+    }
+
+    .nice-end-date{
+      padding-left: 10px;
+      text-align: right;
+    }
+  }
+
+
+  .nice-calendar-time{
+    border-left: 1px solid $nice-border-color;
+    position: relative;
+
+    .time-picker{
+      position: relative;
+      width: 20%;
+      float: left;
+
+      &:after{
+        content: " ";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 4px 0 4px;
+        margin-top: -4px;
+        border-color: $nice-border-color transparent transparent transparent;
+      }
+    }
+
+    .time-picker-hour, .time-picker-minute{
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      outline: 0;
+      border-radius: 0px;
+      border: 1px solid $nice-border-color;
+      border-top: 0;
+      border-left: 0;
+      padding: 5px 10px;
+      background: white;
+      cursor: pointer;
+      position: relative;
+      font-size: 12px;
+    }
+
+    .time-picket-icon{
+      border-right: 1px solid $nice-border-color;
+      width: 20%;
+      float: left;
+      font-size: 12px;
+      text-align: center;
+      line-height: 27px;
+      color: $nice-font-color;
+      border-bottom: 1px solid $nice-border-color;
+    }
+  }
+
+
+  .nice-calendar-wrapper {
+    border-radius: $nice-border-radius;
+    overflow: hidden;
+    display: block;
+    background: white;
+    width: 100%;
+    border: solid 1px $nice-border-color;
+
+    $day-width: 14.28571%;
+    $day-height: 25px;
+    $spacing: 10px;
+    $icon-width: 40px;
+    $header-height: 40px;
+
+    .header {
+      float: left;
+      width: 100%;
+      background: $nice-base-color;
+      height: $header-height;
+      line-height: $header-height;
+      color: white;
+
+      i {
+        float: left;
+        width: $icon-width;
+        font-size: 1.125em;
+        font-weight: bold;
+        position: relative;
+        line-height: 40px;
+        padding: 0 $spacing;
+        cursor: pointer;
+
+        &.fa-angle-left {
+          text-align: left;
+        }
+
+        &.fa-angle-right {
+          text-align: right;
+          margin-left: $icon-width*-1;
+        }
+      }
+
+      span {
+        float: left;
+        width: 100%;
+        text-transform: uppercase;
+        padding-left: $icon-width+$spacing;
+        margin-left: $icon-width*-1;
+        text-align: center;
+        padding-right: $icon-width;
+        color: inherit;
+      }
+    }
+
+    .week {
+      float: left;
+      width: 100%;
+      border-bottom: solid 1px $nice-border-color;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      .day {
+        position: relative;
+        float: left;
+        width: $day-width;
+        height: $day-height;
+        line-height: $day-height;
+        border-left: solid 1px $nice-border-color;
+        font-size: 0.75em;
+        text-align: center;
+        background: white;
+        cursor: pointer;
+        color: $nice-font-color;
+
+        &:first-child {
+          border-left: none;
+        }
+
+        &.today:before {
+          content: " ";
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 10px;
+          width: 10px;
+          border-style: solid;
+          border-width: 0 10px 10px 0;
+          border-color: transparent $nice-base-color transparent transparent;
+        }
+
+        &.different-month {
+          color: #C0C0C0;
+        }
+
+        &.selected {
+          background: darken($nice-base-color, 3%);
+          color: white;
+        }
+
+        &.start-selected {
+          background: darken($nice-base-color, 10%);
+          color: white;
+          border-bottom-left-radius: 10px;
+          border-top-left-radius: 10px;
+        }
+
+        &.end-selected {
+          background: darken($nice-base-color, 10%);
+          color: white;
+          border-bottom-right-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+
+        &.selecting-start {
+          &:hover {
+            background: lighten($nice-base-color, 10%);
+            color: white;
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+          }
+        }
+
+        &.selecting-end {
+          &:hover {
+            background: darken($nice-base-color, 10%);
+            color: white;
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+          }
+        }
+      }
+
+      &.names > span {
+        color: darken($nice-base-color, 10%);
+        line-height: 20px;
+        height: 20px;
+        cursor: default;
+      }
+    }
+  }
+}

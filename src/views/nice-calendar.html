@@ -1,0 +1,107 @@
+<ng-form class="nice-calendar" name="forma" ng-class="{ 'margin-bottom-0': noMargin }">
+    <div class="row">
+        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="nice-calendar-wrapper">
+                <div class="header">
+                    <i class="fa fa-angle-left" ng-click="previous()"></i>
+                    <span>{{ month.format("MMMM, YYYY" )}}</span>
+                    <i class="fa fa-angle-right" ng-click="next()"></i>
+                </div>
+
+                <div class="week names">
+                    <span class="day" translate>Mon</span>
+                    <span class="day" translate>Tue</span>
+                    <span class="day" translate>Wed</span>
+                    <span class="day" translate>Thu</span>
+                    <span class="day" translate>Fri</span>
+                    <span class="day" translate>Sat</span>
+                    <span class="day" translate>Sun</span>
+                </div>
+
+                <div class="week" ng-repeat="week in weeks">
+                    <span
+                        class="day"
+                        ng-class="{
+                            today: day.isToday,
+                            'different-month': !day.isCurrentMonth,
+                            'start-selected': isSameDay(day.date, model.startDate),
+                            'end-selected': isSameDay(day.date, model.endDate),
+                            'selected': isBetweenRange(day.date),
+                            'selecting-start': selectStart,
+                            'selecting-end': !selectStart,
+                        }"
+                        ng-style="
+                            (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||
+                            (color && isSameDay(day.date, model.startDate)) && {'background-color': color } ||
+                            (color && isSameDay(day.date, model.endDate)) && {'background-color': color }
+                        "
+                        ng-click="select(day)"
+                        ng-repeat="day in week.days"
+                        >{{ day.number }}
+                    </span>
+                </div>
+                <div class="clearfix"></div>
+
+
+            <div class="nice-calendar-time" ng-if="time">
+                <div class="time-picker">
+                    <select
+                      class="time-picker-hour"
+                      ng-model="startDateHour"
+                      ng-change="startHourChange(startDateHour)"
+                      ng-options="hour for hour in hours">
+                    </select>
+                </div>
+
+                <div class="time-picker">
+                    <select
+                      class="time-picker-minute"
+                      ng-model="startDateMinute"
+                      ng-change="startMinuteChange(startDateMinute)"
+                      ng-options="minute for minute in minutes">
+                    </select>
+                </div>
+
+                <div class="time-picket-icon">
+                    <i class="fa fa-clock-o"></i>
+                </div>
+
+                <div class="time-picker">
+                     <select
+                      class="time-picker-hour"
+                      ng-model="endDateHour"
+                      ng-change="endHourChange(endDateHour)"
+                      ng-options="hour for hour in hours">
+                    </select>
+                </div>
+
+                <div class="time-picker">
+                    <select
+                      class="time-picker-minute"
+                      ng-model="endDateMinute"
+                      ng-change="endMinuteChange(endDateMinute)"
+                      ng-options="minute for minute in minutes">
+                    </select>
+                </div>
+            </div>
+
+            <div class="nice-selected-dates">
+                <div class="nice-start-date">
+                    <label translate>Start</label>
+                    <div>{{ model.startDate.format() | date:'d.M.yyyy - HH:mm' }}</div>
+                </div>
+                <div class="nice-end-date">
+                    <label translate>End</label>
+                    <div>{{ model.endDate.format() | date:'d.M.yyyy - HH:mm' }}</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+            </div>
+    </div>
+</ng-form>

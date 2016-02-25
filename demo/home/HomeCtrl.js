@@ -14,6 +14,18 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
+    $scope.testRange = {
+      startDate: moment().minutes(0),
+      endDate: moment().add(1, 'months').minutes(0)
+    };
+
+    $scope.changeTestRange = function(){
+      $scope.testRange = {
+        startDate: $scope.testRange.startDate.add(1, 'day'),
+        endDate: $scope.testRange.endDate.add(1, 'day')
+      };
+    };
+
     $scope.dt = '2015-12-12T16:00:00.000';
     $scope.dtTime = '02:00:00';
 
