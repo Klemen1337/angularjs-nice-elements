@@ -175,6 +175,10 @@
           color: #C0C0C0;
         }
 
+        &.weekend{
+          background: #fafafa;
+        }
+
         &.selected {
           background: lighten($nice-base-color, 30%);
         }

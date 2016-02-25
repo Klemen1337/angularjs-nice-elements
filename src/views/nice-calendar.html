@@ -18,8 +18,8 @@
                     <span class="day" translate>Wed</span>
                     <span class="day" translate>Thu</span>
                     <span class="day" translate>Fri</span>
-                    <span class="day" translate>Sat</span>
-                    <span class="day" translate>Sun</span>
+                    <span class="day weekend" translate>Sat</span>
+                    <span class="day weekend" translate>Sun</span>
                 </div>
 
                 <div class="week" ng-repeat="week in weeks">
@@ -28,16 +28,17 @@
                         ng-class="{
                             today: day.isToday,
                             'different-month': !day.isCurrentMonth,
-                            'start-selected': isSameDay(day.date, model.startDate),
-                            'end-selected': isSameDay(day.date, model.endDate),
+                            'start-selected': isSameDay(day.date, startDate),
+                            'end-selected': isSameDay(day.date, endDate),
                             'selected': isBetweenRange(day.date),
                             'selecting-start': selectStart,
                             'selecting-end': !selectStart,
+                            'weekend': day.isWeekday
                         }"
                         ng-style="
                             (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||
-                            (color && isSameDay(day.date, model.startDate)) && {'background-color': color } ||
-                            (color && isSameDay(day.date, model.endDate)) && {'background-color': color }
+                            (color && isSameDay(day.date, startDate)) && {'background-color': color } ||
+                            (color && isSameDay(day.date, endDate)) && {'background-color': color }
                         "
                         ng-click="select(day)"
                         ng-repeat="day in week.days"
@@ -92,11 +93,11 @@
             <div class="nice-selected-dates">
                 <div class="nice-start-date">
                     <label translate>Start</label>
-                    <div>{{ model.startDate.format() | date:'d.M.yyyy - HH:mm' }}</div>
+                    <div>{{ startDate.format() | date:'d.M.yyyy - HH:mm' }}</div>
                 </div>
                 <div class="nice-end-date">
                     <label translate>End</label>
-                    <div>{{ model.endDate.format() | date:'d.M.yyyy - HH:mm' }}</div>
+                    <div>{{ endDate.format() | date:'d.M.yyyy - HH:mm' }}</div>
                 </div>
                 <div class="clearfix"></div>
             </div>

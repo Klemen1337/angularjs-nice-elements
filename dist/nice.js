@@ -84,7 +84,6 @@ angular.module('niceElements')
       restrict: "E",
       templateUrl: "views/nice-calendar.html",
       scope: {
-        model: '=',
         title: '@',
         fieldWidth: '@',
         labelWidth: '@',
@@ -100,6 +99,8 @@ angular.module('niceElements')
       link: function(scope) {
 
         // ------------------ Init default values ------------------
+        scope.selectStart = true;
+
         scope.hours = [
           0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
         ];
@@ -112,40 +113,35 @@ angular.module('niceElements')
         // ------------------ Check if attributes are set ------------------
         if(!scope.time) scope.time = true;
         if(!scope.format) scope.format = "d.M.yyyy";
-        if(!scope.model){
-          scope.model = {
-            startDate: moment().minutes(0).utc(),
-            endDate: moment().minutes(0).utc()
-          };
-        }
+        if(!scope.startDate) scope.startDate = moment().minutes(0).second(0).millisecond(0);
+        if(!scope.endDate) scope.endDate = moment().minutes(0).second(0).millisecond(0);
 
 
         // ------------------ Look for model changes ------------------
-        scope.$watch("model", function(value, valueOld){
+        scope.$watch("startDate", function(value, valueOld){
+          bootstrap();
+        });
+
+        scope.$watch("endDate", function(value, valueOld){
           bootstrap();
         });
 
 
         // ------------------ Bootstrap calendar ------------------
         function bootstrap(){
-          scope.selectStart = true;
-          scope.model.startDate = moment(scope.model.startDate.second(0).millisecond(0));
-          scope.model.endDate = moment(scope.model.endDate.second(0).millisecond(0));
+          //scope.startDate = moment(scope.startDate.second(0).millisecond(0));
+          //scope.endDate = moment(scope.endDate.second(0).millisecond(0));
 
-          scope.startDate = scope.model.startDate;
-          scope.endDate = scope.model.endDate;
-
-          scope.month = scope.model.startDate.clone();
-          var start = scope.model.startDate.clone();
-          start.date(1);
-
-          scope.startDateHour = scope.model.startDate.hours();
-          scope.startDateMinute = scope.model.startDate.minutes();
-          scope.endDateHour = scope.model.endDate.hours();
-          scope.endDateMinute = scope.model.endDate.minutes();
-
-          _buildMonth(scope, start, scope.month);
+          scope.startDateHour = scope.startDate.hours();
+          scope.startDateMinute = scope.startDate.minutes();
+          scope.endDateHour = scope.endDate.hours();
+          scope.endDateMinute = scope.endDate.minutes();
         }
+
+        scope.month = angular.copy(moment(scope.startDate));
+        var start = angular.copy(moment(scope.startDate));
+        _removeTimeWithDate(start.date(0));
+        _buildMonth(scope, start, scope.month);
 
         bootstrap();
 
@@ -154,23 +150,21 @@ angular.module('niceElements')
         scope.select = function(day) {
           if(scope.selectStart){
             // Set start date
-            scope.model.startDate = day.date;
-            scope.startDate = scope.model.startDate;
+            scope.startDate = day.date;
             scope.selectStart = false;
 
             // If start date is after end date
-            if(scope.model.startDate.isAfter(scope.model.endDate)){
-              scope.model.endDate = angular.copy(scope.model.startDate);
+            if(scope.startDate.isAfter(scope.endDate)){
+              scope.endDate = angular.copy(scope.startDate);
             }
           } else {
             // Set end date
-            scope.model.endDate = day.date;
-            scope.endDate = scope.model.endDate;
+            scope.endDate = day.date;
             scope.selectStart = true;
 
             // If end date is before start date
-            if(scope.model.endDate.isBefore(scope.model.startDate)){
-              scope.model.startDate = angular.copy(scope.model.endDate);
+            if(scope.endDate.isBefore(scope.startDate)){
+              scope.startDate = angular.copy(scope.endDate);
             }
           }
         };
@@ -179,32 +173,32 @@ angular.module('niceElements')
         // ------------------ Time changes ------------------
         scope.startHourChange = function(value){
           scope.startDateHour = value;
-          scope.model.startDate.hours(scope.startDateHour);
+          scope.startDate.hours(scope.startDateHour);
         };
 
 
         scope.startMinuteChange = function(value) {
           scope.startDateMinute = value;
-          scope.model.startDate.minutes(scope.startDateMinute);
+          scope.startDate.minutes(scope.startDateMinute);
         };
 
 
         scope.endHourChange = function(value){
           scope.endDateHour = value;
-          scope.model.endDate.hours(scope.endDateHour);
+          scope.endDate.hours(scope.endDateHour);
         };
 
 
         scope.endMinuteChange = function(value) {
           scope.endDateMinute = value;
-          scope.model.endDate.minutes(scope.endDateMinute);
+          scope.endDate.minutes(scope.endDateMinute);
         };
 
 
         // ------------------ Go to next month ------------------
         scope.next = function() {
-          var next = scope.month.clone();
-          _removeTime(next.month(next.month()+1)).date(1);
+          var next = angular.copy(scope.month);
+          _removeTimeWithDate(next.month(next.month()+1).date(0));
           scope.month.month(scope.month.month()+1);
           _buildMonth(scope, next, scope.month);
         };
@@ -212,8 +206,8 @@ angular.module('niceElements')
 
         // ------------------ Go to previous month ------------------
         scope.previous = function() {
-          var previous = scope.month.clone();
-          _removeTime(previous.month(previous.month()-1).date(1));
+          var previous = angular.copy(scope.month);
+          _removeTimeWithDate(previous.month(previous.month()-1).date(0));
           scope.month.month(scope.month.month()-1);
           _buildMonth(scope, previous, scope.month);
         };
@@ -229,7 +223,7 @@ angular.module('niceElements')
 
         // ------------------ Check if date is between start and end date ------------------
         scope.isBetweenRange = function(date){
-          return (date.isBefore(scope.model.endDate) && date.isAfter(scope.model.startDate));
+          return (date.isBefore(moment(scope.endDate)) && date.isAfter(moment(scope.startDate)));
         };
 
 
@@ -263,14 +257,20 @@ angular.module('niceElements')
 
         // ------------------ Remove time from date ------------------
         function _removeTime(date) {
-          return date.hour(0).minute(0).second(0).millisecond(0);
+          return moment(date).hour(0).minute(0).second(0).millisecond(0);
         }
+
+        function _removeTimeWithDate(date) {
+          return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+        }
+
 
 
         // ------------------ Build month ------------------
         function _buildMonth(scope, start, month) {
           scope.weeks = [];
-          var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+          var done = false, date = start.clone().startOf('week').isoWeekday(1), monthIndex = date.month(), count = 0;
+          date.add(1, "w");
           while (!done) {
             scope.weeks.push({ days: _buildWeek(date.clone(), month) });
             date.add(1, "w");
@@ -279,21 +279,24 @@ angular.module('niceElements')
           }
         }
 
+
         // ------------------ Build week ------------------
         function _buildWeek(date, month) {
           var days = [];
           for (var i = 0; i < 7; i++) {
             days.push({
-              name: date.format("dd").substring(0, 1),
+              name: date.format("dd"),
               number: date.date(),
               isCurrentMonth: date.month() === month.month(),
               isToday: date.isSame(new Date(), "day"),
+              isWeekday: date.weekday() == 0 || date.weekday() == 6,
               date: date
             });
 
             date = date.clone();
             date.add(1, "d");
           }
+
           return days;
         }
       }
@@ -3710,8 +3713,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    <span class=\"day\" translate>Wed</span>\n" +
     "                    <span class=\"day\" translate>Thu</span>\n" +
     "                    <span class=\"day\" translate>Fri</span>\n" +
-    "                    <span class=\"day\" translate>Sat</span>\n" +
-    "                    <span class=\"day\" translate>Sun</span>\n" +
+    "                    <span class=\"day weekend\" translate>Sat</span>\n" +
+    "                    <span class=\"day weekend\" translate>Sun</span>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"week\" ng-repeat=\"week in weeks\">\n" +
@@ -3720,16 +3723,17 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        ng-class=\"{\n" +
     "                            today: day.isToday,\n" +
     "                            'different-month': !day.isCurrentMonth,\n" +
-    "                            'start-selected': isSameDay(day.date, model.startDate),\n" +
-    "                            'end-selected': isSameDay(day.date, model.endDate),\n" +
+    "                            'start-selected': isSameDay(day.date, startDate),\n" +
+    "                            'end-selected': isSameDay(day.date, endDate),\n" +
     "                            'selected': isBetweenRange(day.date),\n" +
     "                            'selecting-start': selectStart,\n" +
     "                            'selecting-end': !selectStart,\n" +
+    "                            'weekend': day.isWeekday\n" +
     "                        }\"\n" +
     "                        ng-style=\"\n" +
     "                            (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||\n" +
-    "                            (color && isSameDay(day.date, model.startDate)) && {'background-color': color } ||\n" +
-    "                            (color && isSameDay(day.date, model.endDate)) && {'background-color': color }\n" +
+    "                            (color && isSameDay(day.date, startDate)) && {'background-color': color } ||\n" +
+    "                            (color && isSameDay(day.date, endDate)) && {'background-color': color }\n" +
     "                        \"\n" +
     "                        ng-click=\"select(day)\"\n" +
     "                        ng-repeat=\"day in week.days\"\n" +
@@ -3784,11 +3788,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <div class=\"nice-selected-dates\">\n" +
     "                <div class=\"nice-start-date\">\n" +
     "                    <label translate>Start</label>\n" +
-    "                    <div>{{ model.startDate.format() | date:'d.M.yyyy - HH:mm' }}</div>\n" +
+    "                    <div>{{ startDate.format() | date:'d.M.yyyy - HH:mm' }}</div>\n" +
     "                </div>\n" +
     "                <div class=\"nice-end-date\">\n" +
     "                    <label translate>End</label>\n" +
-    "                    <div>{{ model.endDate.format() | date:'d.M.yyyy - HH:mm' }}</div>\n" +
+    "                    <div>{{ endDate.format() | date:'d.M.yyyy - HH:mm' }}</div>\n" +
     "                </div>\n" +
     "                <div class=\"clearfix\"></div>\n" +
     "            </div>\n" +
