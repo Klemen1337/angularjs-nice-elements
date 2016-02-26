@@ -52,7 +52,7 @@ angular.module('niceElements')
 
 
         // ------------------ Bootstrap calendar ------------------
-        function bootstrap(){
+        function bootstrap() {
           //scope.startDate = moment(scope.startDate.second(0).millisecond(0));
           //scope.endDate = moment(scope.endDate.second(0).millisecond(0));
 
@@ -60,12 +60,12 @@ angular.module('niceElements')
           scope.startDateMinute = moment(scope.startDate).minutes();
           scope.endDateHour = moment(scope.endDate).hours();
           scope.endDateMinute = moment(scope.endDate).minutes();
-        }
 
-        scope.month = angular.copy(moment(scope.startDate));
-        var start = angular.copy(moment(scope.startDate));
-        _removeTimeWithDate(start.date(0));
-        _buildMonth(scope, start, scope.month);
+          scope.month = angular.copy(moment(scope.startDate));
+          var start = angular.copy(moment(scope.startDate));
+          _removeTimeWithDate(start.date(0));
+          _buildMonth(scope, start, scope.month);
+        }
 
         bootstrap();
 
