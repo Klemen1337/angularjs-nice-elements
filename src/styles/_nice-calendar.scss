@@ -181,7 +181,8 @@
         }
 
         &.disabled{
-          opacity: 0.5;
+          opacity: 0.3;
+          color: $nice-danger-color;
           cursor: not-allowed;
         }
 

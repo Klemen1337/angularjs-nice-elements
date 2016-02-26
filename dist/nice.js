@@ -88,6 +88,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         minDate: '=',
+        maxDate: '=',
         time: '@',
         noMargin: '@',
         color: '@',
@@ -119,6 +120,14 @@ angular.module('niceElements')
         });
 
         scope.$watch("endDate", function(value, valueOld){
+          bootstrap();
+        });
+
+        scope.$watch("minDate", function(value, valueOld){
+          bootstrap();
+        });
+
+        scope.$watch("maxDate", function(value, valueOld){
           bootstrap();
         });
 
@@ -299,7 +308,8 @@ angular.module('niceElements')
             };
 
             if(scope.minDate) day.isDisabled = date.isBefore(moment(scope.minDate));
-            else day.isDisabled = false;
+            if(scope.maxDate) day.isDisabled = date.isAfter(moment(scope.maxDate));
+            if(scope.minDate && scope.maxDate) day.isDisabled = !date.isBetween(moment(scope.minDate), moment(scope.maxDate));
 
             days.push(day);
             date = date.clone();
