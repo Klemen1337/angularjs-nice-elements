@@ -87,9 +87,7 @@ angular.module('niceElements')
         title: '@',
         fieldWidth: '@',
         labelWidth: '@',
-        format: '@',
-        min: '@',
-        max: '@',
+        minDate: '=',
         time: '@',
         noMargin: '@',
         color: '@',
@@ -111,8 +109,6 @@ angular.module('niceElements')
 
 
         // ------------------ Check if attributes are set ------------------
-        if(!scope.time) scope.time = true;
-        if(!scope.format) scope.format = "d.M.yyyy";
         if(!scope.startDate) scope.startDate = moment().minutes(0).second(0).millisecond(0);
         if(!scope.endDate) scope.endDate = moment().minutes(0).second(0).millisecond(0);
 
@@ -132,10 +128,10 @@ angular.module('niceElements')
           //scope.startDate = moment(scope.startDate.second(0).millisecond(0));
           //scope.endDate = moment(scope.endDate.second(0).millisecond(0));
 
-          scope.startDateHour = scope.startDate.hours();
-          scope.startDateMinute = scope.startDate.minutes();
-          scope.endDateHour = scope.endDate.hours();
-          scope.endDateMinute = scope.endDate.minutes();
+          scope.startDateHour = moment(scope.startDate).hours();
+          scope.startDateMinute = moment(scope.startDate).minutes();
+          scope.endDateHour = moment(scope.endDate).hours();
+          scope.endDateMinute = moment(scope.endDate).minutes();
         }
 
         scope.month = angular.copy(moment(scope.startDate));
@@ -148,23 +144,25 @@ angular.module('niceElements')
 
         // ------------------ Day was selected ------------------
         scope.select = function(day) {
-          if(scope.selectStart){
-            // Set start date
-            scope.startDate = day.date;
-            scope.selectStart = false;
+          if(!day.isDisabled){
+            if(scope.selectStart){
+              // Set start date
+              scope.startDate = day.date;
+              scope.selectStart = false;
 
-            // If start date is after end date
-            if(scope.startDate.isAfter(scope.endDate)){
-              scope.endDate = angular.copy(scope.startDate);
-            }
-          } else {
-            // Set end date
-            scope.endDate = day.date;
-            scope.selectStart = true;
+              // If start date is after end date
+              if(scope.startDate.isAfter(scope.endDate)){
+                scope.endDate = angular.copy(scope.startDate);
+              }
+            } else {
+              // Set end date
+              scope.endDate = day.date;
+              scope.selectStart = true;
 
-            // If end date is before start date
-            if(scope.endDate.isBefore(scope.startDate)){
-              scope.startDate = angular.copy(scope.endDate);
+              // If end date is before start date
+              if(scope.endDate.isBefore(scope.startDate)){
+                scope.startDate = angular.copy(scope.endDate);
+              }
             }
           }
         };
@@ -173,25 +171,25 @@ angular.module('niceElements')
         // ------------------ Time changes ------------------
         scope.startHourChange = function(value){
           scope.startDateHour = value;
-          scope.startDate.hours(scope.startDateHour);
+          scope.startDate = moment(scope.startDate).hours(scope.startDateHour);
         };
 
 
         scope.startMinuteChange = function(value) {
           scope.startDateMinute = value;
-          scope.startDate.minutes(scope.startDateMinute);
+          scope.startDate = moment(scope.startDate).minutes(scope.startDateMinute);
         };
 
 
         scope.endHourChange = function(value){
           scope.endDateHour = value;
-          scope.endDate.hours(scope.endDateHour);
+          scope.endDate = moment(scope.endDate).hours(scope.endDateHour);
         };
 
 
         scope.endMinuteChange = function(value) {
           scope.endDateMinute = value;
-          scope.endDate.minutes(scope.endDateMinute);
+          scope.endDate = moment(scope.endDate).minutes(scope.endDateMinute);
         };
 
 
@@ -224,6 +222,13 @@ angular.module('niceElements')
         // ------------------ Check if date is between start and end date ------------------
         scope.isBetweenRange = function(date){
           return (date.isBefore(moment(scope.endDate)) && date.isAfter(moment(scope.startDate)));
+        };
+
+
+        // ------------------ Format date ------------------
+        scope.formatDate = function(date){
+          if(scope.time) return moment(date).format('D.M.YYYY - HH:mm');
+          else return moment(date).format('D.M.YYYY');
         };
 
 
@@ -284,15 +289,19 @@ angular.module('niceElements')
         function _buildWeek(date, month) {
           var days = [];
           for (var i = 0; i < 7; i++) {
-            days.push({
+            var day = {
               name: date.format("dd"),
               number: date.date(),
               isCurrentMonth: date.month() === month.month(),
               isToday: date.isSame(new Date(), "day"),
               isWeekday: date.weekday() == 0 || date.weekday() == 6,
               date: date
-            });
+            };
 
+            if(scope.minDate) day.isDisabled = date.isBefore(moment(scope.minDate));
+            else day.isDisabled = false;
+
+            days.push(day);
             date = date.clone();
             date.add(1, "d");
           }
@@ -3728,7 +3737,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                            'selected': isBetweenRange(day.date),\n" +
     "                            'selecting-start': selectStart,\n" +
     "                            'selecting-end': !selectStart,\n" +
-    "                            'weekend': day.isWeekday\n" +
+    "                            'weekend': day.isWeekday,\n" +
+    "                            'disabled': day.isDisabled\n" +
     "                        }\"\n" +
     "                        ng-style=\"\n" +
     "                            (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||\n" +
@@ -3788,11 +3798,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <div class=\"nice-selected-dates\">\n" +
     "                <div class=\"nice-start-date\">\n" +
     "                    <label translate>Start</label>\n" +
-    "                    <div>{{ startDate.format() | date:'d.M.yyyy - HH:mm' }}</div>\n" +
+    "                    <div>{{ formatDate(startDate) }}</div>\n" +
     "                </div>\n" +
     "                <div class=\"nice-end-date\">\n" +
     "                    <label translate>End</label>\n" +
-    "                    <div>{{ endDate.format() | date:'d.M.yyyy - HH:mm' }}</div>\n" +
+    "                    <div>{{ formatDate(endDate) }}</div>\n" +
     "                </div>\n" +
     "                <div class=\"clearfix\"></div>\n" +
     "            </div>\n" +

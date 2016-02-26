@@ -15,9 +15,11 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
     $scope.testRange = {
-      startDate: moment().minutes(0),
-      endDate: moment().add(1, 'months').minutes(0)
+      startDate: moment("2015-12-25T22:00:00Z"),
+      endDate: "2016-01-31T05:00:00Z"
     };
+
+    $scope.minRange = moment();
 
     $scope.changeTestRange = function(){
       $scope.testRange = {

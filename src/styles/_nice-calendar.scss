@@ -179,6 +179,11 @@
           background: #fafafa;
         }
 
+        &.disabled{
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
         &.selected {
           background: lighten($nice-base-color, 30%);
         }
