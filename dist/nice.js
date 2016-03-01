@@ -3953,7 +3953,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    </select>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"time-picker\">\n" +
+    "                <div class=\"time-picker no-border-right\">\n" +
     "                    <select\n" +
     "                      class=\"time-picker-minute\"\n" +
     "                      ng-model=\"endDateMinute\"\n" +
