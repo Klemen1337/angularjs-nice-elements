@@ -2,7 +2,30 @@
   margin-bottom: 10px;
   display: block;
 
+  .form-group{
+    &:after{
+      content: " ";
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 4px 0 4px;
+      margin-top: -4px;
+      border-color: $nice-border-color transparent transparent transparent;
+    }
+  }
+
   select{
     width: 100% !important;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: 0;
+    border-radius: $nice-border-radius;
+    border: 1px solid $nice-border-color;
+    position: relative;
+    z-index: 2;
+    background: transparent;
   }
 }

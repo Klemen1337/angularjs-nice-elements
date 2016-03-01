@@ -89,7 +89,7 @@ angular.module('niceElements')
               selectedDate.minutes(scope.startDateMinute);
 
               // Set start date
-              scope.startDate = day.date;
+              scope.startDate = selectedDate;
               scope.selectStart = false;
 
               // If start date is after end date
@@ -101,7 +101,7 @@ angular.module('niceElements')
               selectedDate.minutes(scope.endDateMinute);
 
               // Set end date
-              scope.endDate = day.date;
+              scope.endDate = selectedDate;
               scope.selectStart = true;
               scope.forma.$setDirty();
 

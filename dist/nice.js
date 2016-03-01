@@ -161,7 +161,7 @@ angular.module('niceElements')
               selectedDate.minutes(scope.startDateMinute);
 
               // Set start date
-              scope.startDate = day.date;
+              scope.startDate = selectedDate;
               scope.selectStart = false;
 
               // If start date is after end date
@@ -173,7 +173,7 @@ angular.module('niceElements')
               selectedDate.minutes(scope.endDateMinute);
 
               // Set end date
-              scope.endDate = day.date;
+              scope.endDate = selectedDate;
               scope.selectStart = true;
               scope.forma.$setDirty();
 
@@ -1346,63 +1346,6 @@ angular.module('niceElements')
     }
   };
 });
-
-//.directive('niceDropdownDate', function (){
-//  return {
-//    restrict: 'E',
-//    templateUrl: "views/nice-dropdown-date.html",
-//    scope: {
-//      model: '=',
-//      title: '@',
-//      fieldWidth: '@',
-//      labelWidth: '@',
-//      noMargin: '@',
-//      disabled: '@'
-//    },
-//    link: function(scope, element, attrs){
-//
-//      // set the years drop down from attributes or defaults
-//      var currentYear = moment().year();
-//      var numYears = 100;
-//      var oldestYear = currentYear - numYears;
-//      var newestYear = currentYear - 17;
-//
-//      if(!scope.model){
-//        var startDate = moment().year(oldestYear+1).month(1).day(1).hours(0).minutes(0).seconds(0).milliseconds(0);
-//        scope.model = startDate;
-//
-//        scope.dateFields = {
-//          day: scope.model.day(),
-//          month: scope.model.month(),
-//          year: scope.model.year()
-//        };
-//      }
-//
-//
-//      scope.years = [];
-//      for(var i = currentYear; i >= oldestYear; i-- ){
-//        if (i <= newestYear){
-//          scope.years.push(i);
-//        }
-//      }
-//
-//      scope.months = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
-//
-//
-//      scope.checkDate = function(){
-//        scope.model = moment().year(scope.dateFields.year).month(scope.dateFields.month).day(scope.dateFields.day);
-//      };
-//
-//
-//      scope.$watch('model', function ( newDate ) {
-//        scope.days = [];
-//        for(var i = 0; i < scope.model.daysInMonth(); i++ ){
-//          scope.days.push(i+1);
-//        }
-//      });
-//    }
-//  };
-//});
 'use strict';
 
 /**
@@ -4273,51 +4216,51 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('views/nice-dropdown-date.html',
     "<ng-form class=\"nice-dropdown-date\" name=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "        </div>\n" +
     "\n" +
-    "    <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <div class=\"form-inline row\">\n" +
-    "            <div class=\"form-group col-xs-3\">\n" +
-    "                <select\n" +
-    "                    name=\"dateFields.day\"\n" +
-    "                    data-ng-model=\"dateFields.day\"\n" +
-    "                    class=\"form-control\"\n" +
-    "                    ng-options=\"day for day in days\"\n" +
-    "                    ng-change=\"checkDate()\"\n" +
-    "                    ng-disabled=\"disabled\"\n" +
-    "                    required=\"true\"\n" +
-    "                ></select>\n" +
-    "            </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "            <div class=\"form-inline row\">\n" +
+    "                <div class=\"form-group col-xs-3\">\n" +
+    "                    <select\n" +
+    "                        name=\"dateFields.day\"\n" +
+    "                        data-ng-model=\"dateFields.day\"\n" +
+    "                        class=\"form-control\"\n" +
+    "                        ng-options=\"day for day in days\"\n" +
+    "                        ng-change=\"checkDate()\"\n" +
+    "                        ng-disabled=\"disabled\"\n" +
+    "                        required=\"true\"\n" +
+    "                    ></select>\n" +
+    "                </div>\n" +
     "\n" +
-    "            <div class=\"form-group col-xs-4\">\n" +
-    "                <select\n" +
-    "                    name=\"dateFields.month\"\n" +
-    "                    data-ng-model=\"dateFields.month\"\n" +
-    "                    class=\"form-control\"\n" +
-    "                    ng-options=\"month.value as month.name for month in months\"\n" +
-    "                    ng-change=\"checkDate()\"\n" +
-    "                    ng-disabled=\"disabled\"\n" +
-    "                    required=\"true\"\n" +
-    "                ></select>\n" +
-    "            </div>\n" +
+    "                <div class=\"form-group col-xs-4\">\n" +
+    "                    <select\n" +
+    "                        name=\"dateFields.month\"\n" +
+    "                        data-ng-model=\"dateFields.month\"\n" +
+    "                        class=\"form-control\"\n" +
+    "                        ng-options=\"month.value as month.name for month in months\"\n" +
+    "                        ng-change=\"checkDate()\"\n" +
+    "                        ng-disabled=\"disabled\"\n" +
+    "                        required=\"true\"\n" +
+    "                    ></select>\n" +
+    "                </div>\n" +
     "\n" +
-    "            <div class=\"form-group col-xs-5\">\n" +
-    "                <select\n" +
-    "                    name=\"dateFields.year\"\n" +
-    "                    data-ng-model=\"dateFields.year\"\n" +
-    "                    class=\"form-control\"\n" +
-    "                    ng-options=\"year for year in years\"\n" +
-    "                    ng-change=\"checkDate()\"\n" +
-    "                    ng-disabled=\"disabled\"\n" +
-    "                    required=\"true\"\n" +
-    "                ></select>\n" +
+    "                <div class=\"form-group col-xs-5\">\n" +
+    "                    <select\n" +
+    "                        name=\"dateFields.year\"\n" +
+    "                        data-ng-model=\"dateFields.year\"\n" +
+    "                        class=\"form-control\"\n" +
+    "                        ng-options=\"year for year in years\"\n" +
+    "                        ng-change=\"checkDate()\"\n" +
+    "                        ng-disabled=\"disabled\"\n" +
+    "                        required=\"true\"\n" +
+    "                    ></select>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "  </div>\n" +
     "</ng-form>\n" +
     "\n"
   );
