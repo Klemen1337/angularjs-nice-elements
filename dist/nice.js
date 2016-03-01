@@ -154,7 +154,12 @@ angular.module('niceElements')
         // ------------------ Day was selected ------------------
         scope.select = function(day) {
           if(!day.isDisabled){
+            var selectedDate = angular.copy(day.date);
+
             if(scope.selectStart){
+              selectedDate.hours(scope.startDateHour);
+              selectedDate.minutes(scope.startDateMinute);
+
               // Set start date
               scope.startDate = day.date;
               scope.selectStart = false;
@@ -164,9 +169,13 @@ angular.module('niceElements')
                 scope.endDate = angular.copy(scope.startDate);
               }
             } else {
+              selectedDate.hours(scope.endDateHour);
+              selectedDate.minutes(scope.endDateMinute);
+
               // Set end date
               scope.endDate = day.date;
               scope.selectStart = true;
+              scope.forma.$setDirty();
 
               // If end date is before start date
               if(scope.endDate.isBefore(scope.startDate)){
@@ -1188,6 +1197,212 @@ angular.module('niceElements')
 
 }]);
 
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceDropdownDate
+ * @description
+ * # niceDropdownDate
+ */
+angular.module('niceElements')
+.factory('rsmdateutils', function () {
+  // validate if entered values are a real date
+  function validateDate(date){
+    // store as a UTC date as we do not want changes with timezones
+    var d = new Date(Date.UTC(date.year, date.month, date.day));
+    return d && (d.getMonth() === date.month && d.getDate() === Number(date.day));
+  }
+
+  // reduce the day count if not a valid date (e.g. 30 february)
+  function changeDate(date){
+    date.day--;
+    if(date.day <= 0) {
+      date.day = 31;
+      date.month--;
+    }
+    return date;
+  }
+
+  function dateToString(dateObject){
+    //var d = new Date(dateObject);
+    var d = dateObject;
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+    if (day < 10) {
+      day = "0" + day;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    var _date = year + "-" + month + "-" + day;
+    return _date;
+  }
+
+  var self = this;
+  this.days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+  this.months = [
+    { value: 0, name: 'Jan' },
+    { value: 1, name: 'Feb' },
+    { value: 2, name: 'Mar' },
+    { value: 3, name: 'Apr' },
+    { value: 4, name: 'May' },
+    { value: 5, name: 'Jun' },
+    { value: 6, name: 'Jul' },
+    { value: 7, name: 'Aug' },
+    { value: 8, name: 'Sep' },
+    { value: 9, name: 'Oct' },
+    { value: 10, name: 'Nov' },
+    { value: 11, name: 'Dec' }
+  ];
+
+  return {
+    checkDate: function(date) {
+      if(!date.day || (!date.month && date.month!=0) || !date.year){
+        return false;
+      }
+      if(validateDate(date)) {
+        // update the model when the date is correct
+        return date;
+      }
+      else {
+        // change the date on the scope and try again if invalid
+        return this.checkDate(changeDate(date));
+      }
+    },
+    get: function(name) {
+      return self[name];
+    },
+    dateToString: dateToString
+  };
+})
+
+
+.directive('niceDropdownDate', function (rsmdateutils){
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: "views/nice-dropdown-date.html",
+    scope: {
+      model: '=',
+      title: '@',
+      fieldWidth: '@',
+      labelWidth: '@',
+      noMargin: '@',
+      disabled: '@'
+    },
+    link: function(scope, element, attrs, ngModel){
+      if(attrs.yearText) {
+        scope.yearText = true;
+      }
+
+      // set the years drop down from attributes or defaults
+      var currentYear = parseInt(attrs.startingYear,10) || new Date().getFullYear();
+      var numYears = parseInt(attrs.numYears,10) || 100;
+      var oldestYear = currentYear - numYears;
+      var newestYear = currentYear - 17;
+
+      scope.years = [];
+      for(var i = currentYear; i >= oldestYear; i-- ){
+        if (i <= newestYear){
+          scope.years.push(i);
+        }
+      }
+
+      // pass down the ng-disabled property
+      scope.$parent.$watch(attrs.ngDisabled, function(newVal){
+        scope.disableFields = newVal;
+      });
+
+      scope.$watch('model', function ( newDate ) {
+        if (Object.keys(scope.dateFields).length === 0 || newDate != scope.model){
+          scope.dateFields.day = new Date(newDate).getUTCDate();
+          scope.dateFields.month = new Date(newDate).getUTCMonth();
+          scope.dateFields.year = new Date(newDate).getUTCFullYear();
+        }else{
+          //console.log('model changed, but internally');
+        }
+      });
+    },
+    controller: function ($scope, rsmdateutils) {
+      // set up arrays of values
+      $scope.days = rsmdateutils.get('days');
+      $scope.months = rsmdateutils.get('months');
+
+      // split the current date into sections
+      $scope.dateFields = {};
+
+
+      // validate that the date selected is accurate
+      $scope.checkDate = function(){
+        // update the date or return false if not all date fields entered.
+        var date = rsmdateutils.checkDate($scope.dateFields);
+        if(date){
+          $scope.dateFields = date;
+          $scope.model = rsmdateutils.dateToString(new Date($scope.dateFields.year, $scope.dateFields.month, $scope.dateFields.day))
+        }
+      };
+    }
+  };
+});
+
+//.directive('niceDropdownDate', function (){
+//  return {
+//    restrict: 'E',
+//    templateUrl: "views/nice-dropdown-date.html",
+//    scope: {
+//      model: '=',
+//      title: '@',
+//      fieldWidth: '@',
+//      labelWidth: '@',
+//      noMargin: '@',
+//      disabled: '@'
+//    },
+//    link: function(scope, element, attrs){
+//
+//      // set the years drop down from attributes or defaults
+//      var currentYear = moment().year();
+//      var numYears = 100;
+//      var oldestYear = currentYear - numYears;
+//      var newestYear = currentYear - 17;
+//
+//      if(!scope.model){
+//        var startDate = moment().year(oldestYear+1).month(1).day(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+//        scope.model = startDate;
+//
+//        scope.dateFields = {
+//          day: scope.model.day(),
+//          month: scope.model.month(),
+//          year: scope.model.year()
+//        };
+//      }
+//
+//
+//      scope.years = [];
+//      for(var i = currentYear; i >= oldestYear; i-- ){
+//        if (i <= newestYear){
+//          scope.years.push(i);
+//        }
+//      }
+//
+//      scope.months = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
+//
+//
+//      scope.checkDate = function(){
+//        scope.model = moment().year(scope.dateFields.year).month(scope.dateFields.month).day(scope.dateFields.day);
+//      };
+//
+//
+//      scope.$watch('model', function ( newDate ) {
+//        scope.days = [];
+//        for(var i = 0; i < scope.model.daysInMonth(); i++ ){
+//          scope.days.push(i+1);
+//        }
+//      });
+//    }
+//  };
+//});
 'use strict';
 
 /**
@@ -4053,6 +4268,58 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "    </div>\n" +
     "</div>"
+  );
+
+
+  $templateCache.put('views/nice-dropdown-date.html',
+    "<ng-form class=\"nice-dropdown-date\" name=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "  <div class=\"row\">\n" +
+    "    <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div class=\"form-inline row\">\n" +
+    "            <div class=\"form-group col-xs-3\">\n" +
+    "                <select\n" +
+    "                    name=\"dateFields.day\"\n" +
+    "                    data-ng-model=\"dateFields.day\"\n" +
+    "                    class=\"form-control\"\n" +
+    "                    ng-options=\"day for day in days\"\n" +
+    "                    ng-change=\"checkDate()\"\n" +
+    "                    ng-disabled=\"disabled\"\n" +
+    "                    required=\"true\"\n" +
+    "                ></select>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"form-group col-xs-4\">\n" +
+    "                <select\n" +
+    "                    name=\"dateFields.month\"\n" +
+    "                    data-ng-model=\"dateFields.month\"\n" +
+    "                    class=\"form-control\"\n" +
+    "                    ng-options=\"month.value as month.name for month in months\"\n" +
+    "                    ng-change=\"checkDate()\"\n" +
+    "                    ng-disabled=\"disabled\"\n" +
+    "                    required=\"true\"\n" +
+    "                ></select>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"form-group col-xs-5\">\n" +
+    "                <select\n" +
+    "                    name=\"dateFields.year\"\n" +
+    "                    data-ng-model=\"dateFields.year\"\n" +
+    "                    class=\"form-control\"\n" +
+    "                    ng-options=\"year for year in years\"\n" +
+    "                    ng-change=\"checkDate()\"\n" +
+    "                    ng-disabled=\"disabled\"\n" +
+    "                    required=\"true\"\n" +
+    "                ></select>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "</ng-form>\n" +
+    "\n"
   );
 
 

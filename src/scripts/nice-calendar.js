@@ -82,7 +82,12 @@ angular.module('niceElements')
         // ------------------ Day was selected ------------------
         scope.select = function(day) {
           if(!day.isDisabled){
+            var selectedDate = angular.copy(day.date);
+
             if(scope.selectStart){
+              selectedDate.hours(scope.startDateHour);
+              selectedDate.minutes(scope.startDateMinute);
+
               // Set start date
               scope.startDate = day.date;
               scope.selectStart = false;
@@ -92,9 +97,13 @@ angular.module('niceElements')
                 scope.endDate = angular.copy(scope.startDate);
               }
             } else {
+              selectedDate.hours(scope.endDateHour);
+              selectedDate.minutes(scope.endDateMinute);
+
               // Set end date
               scope.endDate = day.date;
               scope.selectStart = true;
+              scope.forma.$setDirty();
 
               // If end date is before start date
               if(scope.endDate.isBefore(scope.startDate)){

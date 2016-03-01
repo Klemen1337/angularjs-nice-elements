@@ -105,6 +105,12 @@
             <div class="row">
                 <div class="col-sm-6">
 
+                    <nice-dropdown-date title="Birthday" model="test"></nice-dropdown-date>
+
+                    <pre>
+                        {{ test | json }}
+                    </pre>
+
                     <nice-calendar title="Calendar" time="true" min-date="minRange" color="#9776E6" max-date="maxRange" end-date="testRange.endDate" start-date="testRange.startDate"></nice-calendar>
                     <pre>
                         {{ testRange | json }}

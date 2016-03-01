@@ -1,0 +1,48 @@
+<ng-form class="nice-dropdown-date" name="forma" ng-class="{ 'margin-bottom-0': noMargin }">
+    <div class="row">
+        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="form-inline row">
+                <div class="form-group col-xs-3">
+                    <select
+                        name="dateFields.day"
+                        data-ng-model="dateFields.day"
+                        class="form-control"
+                        ng-options="day for day in days"
+                        ng-change="checkDate()"
+                        ng-disabled="disabled"
+                        required="true"
+                    ></select>
+                </div>
+
+                <div class="form-group col-xs-4">
+                    <select
+                        name="dateFields.month"
+                        data-ng-model="dateFields.month"
+                        class="form-control"
+                        ng-options="month.value as month.name for month in months"
+                        ng-change="checkDate()"
+                        ng-disabled="disabled"
+                        required="true"
+                    ></select>
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <select
+                        name="dateFields.year"
+                        data-ng-model="dateFields.year"
+                        class="form-control"
+                        ng-options="year for year in years"
+                        ng-change="checkDate()"
+                        ng-disabled="disabled"
+                        required="true"
+                    ></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-form>
+
