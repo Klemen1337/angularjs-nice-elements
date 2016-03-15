@@ -3132,7 +3132,7 @@ angular.module('niceElements')
 
         // Keyboard up/down on search results
         var onKeyDown = function(event) {
-          if(event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27 && scope.showDropdown){
+          if((event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27) && scope.showDropdown && scope.results.length>0){
             event.preventDefault();
 
             if(event.keyCode == 27){ // Escape

@@ -532,6 +532,36 @@
             </div>
         </div>
 
+        <div class="white-wrapper" id="nice-search">
+            <h2>Nice search - TODO</h2>
+            <pre class="prettyprint">&lt;nice-search >&lt;/nice-search></pre>
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-search
+                            refresh-function="getAddresses"
+                            model="searchItem"
+                            field-width="col-xs-12"
+                            placeholder="Search item"
+                            key-for-input-label="formatted_address"
+                            show-dropdown="true">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-if="results.length" class="nice-dropdown">
+                                    <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
+                                        <span class="text-bold">{{ result.formatted_address }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nice-search>
+                </div>
+                <div class="col-sm-6">
+                    <pre>{{ searchItem | json }}</pre>
+                </div>
+            </div>
+        </div>
+
+
         <!-------------------------------- NICE DATE TIME -------------------------------->
         <div class="white-wrapper" id="nice-date-time">
             <h2>Nice date time picker</h2>
