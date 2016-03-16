@@ -20,6 +20,7 @@
   select{
     width: 100% !important;
     -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     outline: 0;
     border-radius: $nice-border-radius;

@@ -38,8 +38,11 @@ angular.module('niceElements')
 
 
         // ------------------ Check if attributes are set ------------------
-        if(!scope.startDate) scope.startDate = moment().minutes(0).second(0).millisecond(0);
-        if(!scope.endDate) scope.endDate = moment().minutes(0).second(0).millisecond(0);
+        if(!scope.startDate) scope.startDate = moment().minutes(0).second(0).millisecond(0).utc();
+        else scope.startDate = moment(scope.startDate).utc();
+
+        if(!scope.endDate) scope.endDate = moment().minutes(0).second(0).millisecond(0).utc();
+        else scope.endDate = moment(scope.endDate).utc();
 
 
         // ------------------ Look for model changes ------------------
