@@ -13,9 +13,10 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         model: '=',
+        title: '@?',
         placeholder: '@',
         noTextLabel: '@',
-        noMarginBottom: '@',
+        noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
         help: '@',
@@ -25,7 +26,6 @@ angular.module('niceElements')
         if (scope.model==null) { scope.model =  ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
-        if (!attrs.noMarginBottom) { angular.isDefined(attrs.noMarginBottom); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.help) { attrs.help = ''; }
@@ -38,6 +38,19 @@ angular.module('niceElements')
           $timeout(function(){
             textareas[0].focus();
           });
+        };
+
+        textareas[0].addEventListener('keydown', autosize);
+        autosize();
+
+        function autosize() {
+          var el = this;
+          setTimeout(function () {
+            el.style.cssText = 'height:auto; padding:0';
+            // for box-sizing other than "content-box" use:
+            // el.style.cssText = '-moz-box-sizing:content-box';
+            el.style.cssText = 'height:' + (el.scrollHeight + 14) + 'px';
+          }, 0);
         };
       },
       controller: function($scope){

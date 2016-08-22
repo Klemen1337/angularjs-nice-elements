@@ -26,6 +26,8 @@ angular.module('niceElements')
         name: '@',
         noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
+        tabIndex: '@',
+        isFocused: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -47,6 +49,13 @@ angular.module('niceElements')
         if (!attrs.name) { attrs.name = ''; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
+
+        if(!scope.textArea) scope.elementType = "input";
+        else scope.elementType = "textarea";
+
+        if(scope.isFocused) {
+          $(element).find(scope.elementType).focus();
+        }
 
         // Set internal type
         scope.internalType = attrs.type;

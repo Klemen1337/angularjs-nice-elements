@@ -547,9 +547,10 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         model: '=',
+        title: '@?',
         placeholder: '@',
         noTextLabel: '@',
-        noMarginBottom: '@',
+        noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
         help: '@',
@@ -559,7 +560,6 @@ angular.module('niceElements')
         if (scope.model==null) { scope.model =  ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
-        if (!attrs.noMarginBottom) { angular.isDefined(attrs.noMarginBottom); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.help) { attrs.help = ''; }
@@ -572,6 +572,19 @@ angular.module('niceElements')
           $timeout(function(){
             textareas[0].focus();
           });
+        };
+
+        textareas[0].addEventListener('keydown', autosize);
+        autosize();
+
+        function autosize() {
+          var el = this;
+          setTimeout(function () {
+            el.style.cssText = 'height:auto; padding:0';
+            // for box-sizing other than "content-box" use:
+            // el.style.cssText = '-moz-box-sizing:content-box';
+            el.style.cssText = 'height:' + (el.scrollHeight + 14) + 'px';
+          }, 0);
         };
       },
       controller: function($scope){
@@ -2529,6 +2542,8 @@ angular.module('niceElements')
         name: '@',
         noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
+        tabIndex: '@',
+        isFocused: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -2550,6 +2565,13 @@ angular.module('niceElements')
         if (!attrs.name) { attrs.name = ''; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
+
+        if(!scope.textArea) scope.elementType = "input";
+        else scope.elementType = "textarea";
+
+        if(scope.isFocused) {
+          $(element).find(scope.elementType).focus();
+        }
 
         // Set internal type
         scope.internalType = attrs.type;
@@ -3921,62 +3943,62 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                <div class=\"clearfix\"></div>\n" +
     "\n" +
     "\n" +
-    "            <div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
-    "                <div class=\"time-picker\">\n" +
-    "                    <select\n" +
-    "                      class=\"time-picker-hour\"\n" +
-    "                      ng-model=\"startDateHour\"\n" +
-    "                      ng-change=\"startHourChange(startDateHour)\"\n" +
-    "                      ng-options=\"hour for hour in hours\">\n" +
-    "                    </select>\n" +
+    "                <div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
+    "                    <div class=\"time-picker\">\n" +
+    "                        <select\n" +
+    "                          class=\"time-picker-hour\"\n" +
+    "                          ng-model=\"startDateHour\"\n" +
+    "                          ng-change=\"startHourChange(startDateHour)\"\n" +
+    "                          ng-options=\"hour for hour in hours\">\n" +
+    "                        </select>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"time-picker\">\n" +
+    "                        <select\n" +
+    "                          class=\"time-picker-minute\"\n" +
+    "                          ng-model=\"startDateMinute\"\n" +
+    "                          ng-change=\"startMinuteChange(startDateMinute)\"\n" +
+    "                          ng-options=\"minute for minute in minutes\">\n" +
+    "                        </select>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"time-picket-icon\">\n" +
+    "                        <i class=\"fa fa-clock-o\"></i>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"time-picker\">\n" +
+    "                         <select\n" +
+    "                          class=\"time-picker-hour\"\n" +
+    "                          ng-model=\"endDateHour\"\n" +
+    "                          ng-change=\"endHourChange(endDateHour)\"\n" +
+    "                          ng-options=\"hour for hour in hours\">\n" +
+    "                        </select>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"time-picker no-border-right\">\n" +
+    "                        <select\n" +
+    "                          class=\"time-picker-minute\"\n" +
+    "                          ng-model=\"endDateMinute\"\n" +
+    "                          ng-change=\"endMinuteChange(endDateMinute)\"\n" +
+    "                          ng-options=\"minute for minute in minutes\">\n" +
+    "                        </select>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"time-picker\">\n" +
-    "                    <select\n" +
-    "                      class=\"time-picker-minute\"\n" +
-    "                      ng-model=\"startDateMinute\"\n" +
-    "                      ng-change=\"startMinuteChange(startDateMinute)\"\n" +
-    "                      ng-options=\"minute for minute in minutes\">\n" +
-    "                    </select>\n" +
+    "                <div class=\"nice-selected-dates\">\n" +
+    "                    <div class=\"nice-start-date\">\n" +
+    "                        <label translate>Start</label>\n" +
+    "                        <div>{{ formatDate(startDate) }}</div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"nice-end-date\">\n" +
+    "                        <label translate>End</label>\n" +
+    "                        <div>{{ formatDate(endDate) }}</div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"clearfix\"></div>\n" +
     "                </div>\n" +
-    "\n" +
-    "                <div class=\"time-picket-icon\">\n" +
-    "                    <i class=\"fa fa-clock-o\"></i>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"time-picker\">\n" +
-    "                     <select\n" +
-    "                      class=\"time-picker-hour\"\n" +
-    "                      ng-model=\"endDateHour\"\n" +
-    "                      ng-change=\"endHourChange(endDateHour)\"\n" +
-    "                      ng-options=\"hour for hour in hours\">\n" +
-    "                    </select>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"time-picker no-border-right\">\n" +
-    "                    <select\n" +
-    "                      class=\"time-picker-minute\"\n" +
-    "                      ng-model=\"endDateMinute\"\n" +
-    "                      ng-change=\"endMinuteChange(endDateMinute)\"\n" +
-    "                      ng-options=\"minute for minute in minutes\">\n" +
-    "                    </select>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"nice-selected-dates\">\n" +
-    "                <div class=\"nice-start-date\">\n" +
-    "                    <label translate>Start</label>\n" +
-    "                    <div>{{ formatDate(startDate) }}</div>\n" +
-    "                </div>\n" +
-    "                <div class=\"nice-end-date\">\n" +
-    "                    <label translate>End</label>\n" +
-    "                    <div>{{ formatDate(endDate) }}</div>\n" +
-    "                </div>\n" +
-    "                <div class=\"clearfix\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "            </div>\n" +
     "    </div>\n" +
     "</ng-form>"
   );
@@ -4007,25 +4029,21 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('views/nice-comment.html',
     "<div class=\"nice-comment\">\n" +
-    "    <div class=\"row\" ng-class=\"noMarginBottom ? '':'margin-bottom-20'\">\n" +
-    "        <div ng-show=\"!editing\" ng-class=\"labelWidth ? labelWidth : 'col-sm-6'\">\n" +
-    "            <span ng-if=\"model=='' && !editing\"><a ng-click=\"edit()\">{{noTextLabel}} <i class=\"fa fa-pencil\"></i></a></span>\n" +
-    "            <span ng-if=\"model!='' && !editing\"><a ng-click=\"edit()\">{{model}} <i class=\"fa fa-pencil\"></i></a></span>\n" +
+    "    <div class=\"row\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
-    "        <div ng-show=\"editing\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-6'\">\n" +
-    "            <div class=\"relative\">\n" +
-    "                <textarea\n" +
-    "                    class=\"form-control\"\n" +
-    "                    ng-model=\"model\"\n" +
-    "                    title=\"{{ help }}\"\n" +
-    "                    placeholder=\"{{placeholder}}\"\n" +
-    "                    rows=\"{{rows}}\"\n" +
-    "                    ng-blur=\"save()\"\n" +
-    "                ></textarea>\n" +
-    "                <!--<nice-input  placeholder=\"{{placeholder}}\" model=\"model\" name=\"{{'This text is placed at the end of the document.'|translate}}\" field-width=\"col-sm-12\" text-area></nice-input>-->\n" +
-    "                <!--<div class=\"btn btn-sm btn-success btn-comment-save\" ng-click=\"save()\"><i class=\"fa fa-check\"></i></div>-->\n" +
-    "                <!--<div class=\"btn btn-sm btn-danger btn-comment-cancel\" ng-click=\"cancel()\"><i class=\"fa fa-times\"></i></div>-->\n" +
-    "            </div>\n" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\" ng-click=\"edit()\">\n" +
+    "            <textarea\n" +
+    "                ng-class=\"{'editing': editing}\"\n" +
+    "                class=\"form-control\"\n" +
+    "                ng-model=\"model\"\n" +
+    "                title=\"{{ help }}\"\n" +
+    "                placeholder=\"{{placeholder}}\"\n" +
+    "                rows=\"{{rows}}\"\n" +
+    "                ng-blur=\"save()\"\n" +
+    "            ></textarea>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n"
@@ -4441,6 +4459,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                title=\"{{ help }}\"\n" +
     "                name=\"{{ name }}\"\n" +
     "                id=\"{{ id }}\"\n" +
+    "                tabindex=\"{{ tabIndex }}\"\n" +
     "                placeholder=\"{{ placeholder }}\"\n" +
     "                ng-minlength=\"minlength\"\n" +
     "                ng-maxlength=\"maxlength\"\n" +
@@ -4454,6 +4473,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                ng-model=\"model\"\n" +
     "                title=\"{{ help }}\"\n" +
     "                id=\"{{ id }}\"\n" +
+    "                tabindex=\"{{ tabIndex }}\"\n" +
     "                placeholder=\"{{ placeholder }}\"\n" +
     "                rows=\"{{textAreaLines}}\"\n" +
     "                ng-minlength=\"minlength\"\n" +
