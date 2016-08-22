@@ -4028,8 +4028,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-comment.html',
-    "<div class=\"nice-comment\">\n" +
-    "    <div class=\"row\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "<div class=\"nice-comment\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "    <div class=\"row\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +

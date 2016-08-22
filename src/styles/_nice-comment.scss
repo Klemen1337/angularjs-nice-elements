@@ -14,17 +14,17 @@
   }
 
   textarea{
-    height: 34px;
+    min-height: 34px !important;
 
     &:focus{
       box-shadow: 0 0 0;
     }
 
     border-radius: $nice-border-radius;
-    border-color: transparent;
+    border-color: transparent !important;
     color: $nice-base-color;
     -webkit-user-select: none;
-    padding: 6px 0px;
+    padding: 6px 0px !important;
 
     &.editing{
       padding: 6px 12px;
