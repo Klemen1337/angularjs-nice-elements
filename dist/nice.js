@@ -3059,7 +3059,9 @@ angular.module('niceElements')
         keyForInputLabel: '@?',
         disableRow: '@?',
         noMargin: '@',
-        setText: '@'
+        setText: '@',
+        tabIndex: '@',
+        isFocused: '@'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 
@@ -3081,6 +3083,11 @@ angular.module('niceElements')
           var el = element.find('.nice-search');
           el.append(clone);
         });
+
+        // Is focused
+        if(scope.isFocused) {
+          $(element).find("input").focus();
+        }
 
         // Set default text
         scope.$watch("setText", function(){
@@ -4633,6 +4640,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    ng-disabled=\"isDisabled\"\n" +
     "                    ng-change=\"updateSearch()\"\n" +
     "                    ng-required=\"required\"\n" +
+    "                    tabindex=\"{{ tabIndex }}\"\n" +
     "                >\n" +
     "\n" +
     "                <span class=\"input-group-addon clickable\" ng-click=\"search()\">\n" +

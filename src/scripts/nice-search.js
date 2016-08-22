@@ -30,7 +30,9 @@ angular.module('niceElements')
         keyForInputLabel: '@?',
         disableRow: '@?',
         noMargin: '@',
-        setText: '@'
+        setText: '@',
+        tabIndex: '@',
+        isFocused: '@'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 
@@ -52,6 +54,11 @@ angular.module('niceElements')
           var el = element.find('.nice-search');
           el.append(clone);
         });
+
+        // Is focused
+        if(scope.isFocused) {
+          $(element).find("input").focus();
+        }
 
         // Set default text
         scope.$watch("setText", function(){
