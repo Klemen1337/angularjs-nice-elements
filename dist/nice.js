@@ -578,7 +578,7 @@ angular.module('niceElements')
         autosize();
 
         function autosize() {
-          var el = this;
+          var el = textareas[0];
           setTimeout(function () {
             el.style.cssText = 'height:auto; padding:0';
             // for box-sizing other than "content-box" use:
