@@ -49,61 +49,61 @@
                 <div class="clearfix"></div>
 
 
-            <div class="nice-calendar-time" ng-if="time">
-                <div class="time-picker">
-                    <select
-                      class="time-picker-hour"
-                      ng-model="startDateHour"
-                      ng-change="startHourChange(startDateHour)"
-                      ng-options="hour for hour in hours">
-                    </select>
+                <div class="nice-calendar-time" ng-if="time">
+                    <div class="time-picker">
+                        <select
+                          class="time-picker-hour"
+                          ng-model="startDateHour"
+                          ng-change="startHourChange(startDateHour)"
+                          ng-options="hour for hour in hours">
+                        </select>
+                    </div>
+
+                    <div class="time-picker">
+                        <select
+                          class="time-picker-minute"
+                          ng-model="startDateMinute"
+                          ng-change="startMinuteChange(startDateMinute)"
+                          ng-options="minute for minute in minutes">
+                        </select>
+                    </div>
+
+                    <div class="time-picket-icon">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+
+                    <div class="time-picker">
+                         <select
+                          class="time-picker-hour"
+                          ng-model="endDateHour"
+                          ng-change="endHourChange(endDateHour)"
+                          ng-options="hour for hour in hours">
+                        </select>
+                    </div>
+
+                    <div class="time-picker no-border-right">
+                        <select
+                          class="time-picker-minute"
+                          ng-model="endDateMinute"
+                          ng-change="endMinuteChange(endDateMinute)"
+                          ng-options="minute for minute in minutes">
+                        </select>
+                    </div>
                 </div>
 
-                <div class="time-picker">
-                    <select
-                      class="time-picker-minute"
-                      ng-model="startDateMinute"
-                      ng-change="startMinuteChange(startDateMinute)"
-                      ng-options="minute for minute in minutes">
-                    </select>
+                <div class="nice-selected-dates">
+                    <div class="nice-start-date">
+                        <label translate>Start</label>
+                        <div>{{ formatDate(startDate) }}</div>
+                    </div>
+                    <div class="nice-end-date">
+                        <label translate>End</label>
+                        <div>{{ formatDate(endDate) }}</div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-
-                <div class="time-picket-icon">
-                    <i class="fa fa-clock-o"></i>
-                </div>
-
-                <div class="time-picker">
-                     <select
-                      class="time-picker-hour"
-                      ng-model="endDateHour"
-                      ng-change="endHourChange(endDateHour)"
-                      ng-options="hour for hour in hours">
-                    </select>
-                </div>
-
-                <div class="time-picker no-border-right">
-                    <select
-                      class="time-picker-minute"
-                      ng-model="endDateMinute"
-                      ng-change="endMinuteChange(endDateMinute)"
-                      ng-options="minute for minute in minutes">
-                    </select>
-                </div>
-            </div>
-
-            <div class="nice-selected-dates">
-                <div class="nice-start-date">
-                    <label translate>Start</label>
-                    <div>{{ formatDate(startDate) }}</div>
-                </div>
-                <div class="nice-end-date">
-                    <label translate>End</label>
-                    <div>{{ formatDate(endDate) }}</div>
-                </div>
-                <div class="clearfix"></div>
             </div>
         </div>
 
-            </div>
     </div>
 </ng-form>
