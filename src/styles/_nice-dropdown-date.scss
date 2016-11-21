@@ -2,18 +2,44 @@
   margin-bottom: 10px;
   display: block;
 
-  .form-group{
+  .nice-dropdown-date-day,
+  .nice-dropdown-date-month,
+  .nice-dropdown-date-year {
+    float: left;
+    position: relative;
+
     &:after{
       content: " ";
       position: absolute;
       top: 50%;
-      right: 25px;
+      right: 20px;
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 6px 4px 0 4px;
-      margin-top: -3px;
-      border-color: #404040 transparent transparent transparent;
+      border-width: 4px 4px 0 4px;
+      margin-top: -2px;
+      border-color: $nice-border transparent transparent transparent;
+    }
+  }
+
+  .nice-dropdown-date-day,
+  .nice-dropdown-date-month {
+    padding-right: 10px;
+  }
+
+  .nice-dropdown-date-day{
+    width: 30%;
+  }
+
+  .nice-dropdown-date-month{
+    width: 40%;
+  }
+
+  .nice-dropdown-date-year{
+    width: 30%;
+
+    &:after{
+      right: 10px;
     }
   }
 

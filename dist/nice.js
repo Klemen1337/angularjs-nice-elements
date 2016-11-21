@@ -1330,9 +1330,10 @@ angular.module('niceElements')
 
       scope.$watch('model', function ( newDate ) {
         if (Object.keys(scope.dateFields).length === 0 || newDate != scope.model){
-          scope.dateFields.day = new Date(newDate).getUTCDate();
-          scope.dateFields.month = new Date(newDate).getUTCMonth();
-          scope.dateFields.year = new Date(newDate).getUTCFullYear();
+          var date = moment(newDate);
+          scope.dateFields.day = date.get('date');
+          scope.dateFields.month = date.get('month');
+          scope.dateFields.year = date.get('year');
         }else{
           //console.log('model changed, but internally');
         }
@@ -4076,33 +4077,35 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-date.html',
-    "<ng-form class=\"nice-date\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "    </div>\n" +
+    "<div class=\"nice-date\" ng-form=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "        </div>\n" +
     "\n" +
-    "    <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <div class=\"input-group\">\n" +
-    "          <input\n" +
-    "              type=\"text\"\n" +
-    "              class=\"form-control\"\n" +
-    "              datepicker-popup=\"{{ format }}\"\n" +
-    "              ng-model=\"model\"\n" +
-    "              is-open=\"opened\"\n" +
-    "              min-date=\"{{ min }}\"\n" +
-    "              max-date=\"max\"\n" +
-    "              datepicker-options=\"dateOptions\"\n" +
-    "              ng-required=\"true\"\n" +
-    "              close-text=\"Close\"\n" +
-    "              ng-click=\"open($event)\" />\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "            <div class=\"input-group\">\n" +
+    "                <input\n" +
+    "                    type=\"text\"\n" +
+    "                    class=\"form-control\"\n" +
+    "                    datepicker-popup=\"{{ format }}\"\n" +
+    "                    ng-model=\"model\"\n" +
+    "                    is-open=\"opened\"\n" +
+    "                    min-date=\"{{ min }}\"\n" +
+    "                    max-date=\"max\"\n" +
+    "                    datepicker-options=\"dateOptions\"\n" +
+    "                    ng-required=\"true\"\n" +
+    "                    close-text=\"Close\"\n" +
+    "                    ng-click=\"open($event)\"\n" +
+    "                />\n" +
     "\n" +
-    "          <span class=\"input-group-btn\">\n" +
-    "            <button type=\"button\" class=\"btn btn-default\" ng-click=\"open($event)\"><i class=\"fa fa-calendar\"></i></button>\n" +
-    "          </span>\n" +
+    "                <span class=\"input-group-btn\">\n" +
+    "                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"open($event)\"><i class=\"fa fa-calendar\"></i></button>\n" +
+    "                </span>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</ng-form>"
+    "</div>"
   );
 
 
@@ -4247,8 +4250,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"form-inline row\">\n" +
-    "                <div class=\"form-group col-xs-3\">\n" +
+    "            <div class=\"form-inline\">\n" +
+    "                <div class=\"form-group nice-dropdown-date-day\">\n" +
     "                    <select\n" +
     "                        name=\"dateFields.day\"\n" +
     "                        data-ng-model=\"dateFields.day\"\n" +
@@ -4260,7 +4263,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    ></select>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"form-group col-xs-4\">\n" +
+    "                <div class=\"form-group nice-dropdown-date-month\">\n" +
     "                    <select\n" +
     "                        name=\"dateFields.month\"\n" +
     "                        data-ng-model=\"dateFields.month\"\n" +
@@ -4272,7 +4275,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    ></select>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"form-group col-xs-5\">\n" +
+    "                <div class=\"form-group nice-dropdown-date-year\">\n" +
     "                    <select\n" +
     "                        name=\"dateFields.year\"\n" +
     "                        data-ng-model=\"dateFields.year\"\n" +

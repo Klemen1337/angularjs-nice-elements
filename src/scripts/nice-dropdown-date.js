@@ -118,9 +118,10 @@ angular.module('niceElements')
 
       scope.$watch('model', function ( newDate ) {
         if (Object.keys(scope.dateFields).length === 0 || newDate != scope.model){
-          scope.dateFields.day = new Date(newDate).getUTCDate();
-          scope.dateFields.month = new Date(newDate).getUTCMonth();
-          scope.dateFields.year = new Date(newDate).getUTCFullYear();
+          var date = moment(newDate);
+          scope.dateFields.day = date.get('date');
+          scope.dateFields.month = date.get('month');
+          scope.dateFields.year = date.get('year');
         }else{
           //console.log('model changed, but internally');
         }

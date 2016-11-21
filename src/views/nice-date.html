@@ -1,27 +1,29 @@
-<ng-form class="nice-date" name="form" ng-class="{ 'margin-bottom-0': noMargin }">
-  <div class="row">
-    <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-        <label class="nice">{{ title }}<span ng-if="required">*</span></label>
-    </div>
+<div class="nice-date" ng-form="form" ng-class="{ 'margin-bottom-0': noMargin }">
+    <div class="row">
+        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
 
-    <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-        <div class="input-group">
-          <input
-              type="text"
-              class="form-control"
-              datepicker-popup="{{ format }}"
-              ng-model="model"
-              is-open="opened"
-              min-date="{{ min }}"
-              max-date="max"
-              datepicker-options="dateOptions"
-              ng-required="true"
-              close-text="Close"
-              ng-click="open($event)" />
+        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="input-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    datepicker-popup="{{ format }}"
+                    ng-model="model"
+                    is-open="opened"
+                    min-date="{{ min }}"
+                    max-date="max"
+                    datepicker-options="dateOptions"
+                    ng-required="true"
+                    close-text="Close"
+                    ng-click="open($event)"
+                />
 
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
-          </span>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
         </div>
     </div>
-</ng-form>
+</div>
