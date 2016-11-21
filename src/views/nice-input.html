@@ -1,4 +1,4 @@
-<ng-form class="nice-input" ng-class="{'margin-bottom-0' : noMargin}" name="form">
+<ng-form class="nice-input" ng-class="{'margin-bottom-0' : noMargin}" name="forma">
   <div class="row">
     <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
         <label class="nice">{{ title }}<span ng-if="required">*</span></label>
@@ -8,8 +8,8 @@
         <div class="form-group"
              ng-class="{
                 'has-feedback': showValid && !hideValid,
-                'has-warning': !isDisabled && form.$invalid && form.$dirty && !hideValid,
-                'has-success': !isDisabled && form.$valid && form.$dirty && showValid,
+                'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
+                'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
                 'symbol': symbol,
                 'disabled': isDisabled
         }">
@@ -49,12 +49,12 @@
             <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
         </div>
 
-        <div ng-messages="form.$error" ng-if="form.$dirty">
-            <div class="error-message" ng-message="email" ng-if="form.$dirty" translate>Email is not valid.</div>
-            <div class="error-message" ng-message="pattern" ng-if="form.$dirty" translate>This field requires a specific pattern.</div>
+        <div ng-messages="forma.$error" ng-if="forma.$dirty">
+            <div class="error-message" ng-message="email" ng-if="forma.$dirty" translate>Email is not valid.</div>
+            <div class="error-message" ng-message="pattern" ng-if="forma.$dirty" translate>This field requires a specific pattern.</div>
             <div class="error-message" ng-message="minlength"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>
             <div class="error-message" ng-message="maxlength" translate>Your input is too long</div>
-            <div class="error-message" ng-message="required" ng-if="form.$dirty" translate>This field is required.</div>
+            <div class="error-message" ng-message="required" ng-if="forma.$dirty" translate>This field is required.</div>
             <div class="error-message" ng-message="unique" translate>This field must be unique.</div>
         </div>
     </div>

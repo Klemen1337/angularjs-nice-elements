@@ -14,7 +14,7 @@ angular.module('niceElements')
         placeholder: '@',
         minlength: '@?',
         maxlength: '@?',
-        required: '@',
+        required: '=',
         fieldWidth: '@',
         labelWidth: '@',
         hideValid: '@',
@@ -37,7 +37,8 @@ angular.module('niceElements')
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.minlength) { attrs.minlength = 1; }
         if (!attrs.maxlength) { attrs.maxlength = 100; }
-        attrs.required = angular.isDefined(attrs.required);
+        attrs.required = attrs.required === 'true';
+        //attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         attrs.hideValid = angular.isDefined(attrs.hideValid);

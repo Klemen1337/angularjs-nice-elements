@@ -115,17 +115,6 @@ angular.module('niceElements')
       scope.$parent.$watch(attrs.ngDisabled, function(newVal){
         scope.disableFields = newVal;
       });
-
-      scope.$watch('model', function ( newDate ) {
-        if (Object.keys(scope.dateFields).length === 0 || newDate != scope.model){
-          var date = moment(newDate);
-          scope.dateFields.day = date.get('date');
-          scope.dateFields.month = date.get('month');
-          scope.dateFields.year = date.get('year');
-        }else{
-          //console.log('model changed, but internally');
-        }
-      });
     },
     controller: function ($scope, rsmdateutils) {
       // set up arrays of values
@@ -135,6 +124,18 @@ angular.module('niceElements')
       // split the current date into sections
       $scope.dateFields = {};
 
+
+      $scope.$watch('model', function ( newDate, oldDate ) {
+        if (Object.keys($scope.dateFields).length === 0 || newDate != oldDate){
+          var date = moment(newDate);
+          $scope.dateFields.day = date.get('date');
+          $scope.dateFields.month = date.get('month');
+          $scope.dateFields.year = date.get('year');
+          $scope.checkDate();
+        }else{
+          //console.log('model changed, but internally');
+        }
+      });
 
       // validate that the date selected is accurate
       $scope.checkDate = function(){

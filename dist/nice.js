@@ -1327,17 +1327,6 @@ angular.module('niceElements')
       scope.$parent.$watch(attrs.ngDisabled, function(newVal){
         scope.disableFields = newVal;
       });
-
-      scope.$watch('model', function ( newDate ) {
-        if (Object.keys(scope.dateFields).length === 0 || newDate != scope.model){
-          var date = moment(newDate);
-          scope.dateFields.day = date.get('date');
-          scope.dateFields.month = date.get('month');
-          scope.dateFields.year = date.get('year');
-        }else{
-          //console.log('model changed, but internally');
-        }
-      });
     },
     controller: function ($scope, rsmdateutils) {
       // set up arrays of values
@@ -1347,6 +1336,18 @@ angular.module('niceElements')
       // split the current date into sections
       $scope.dateFields = {};
 
+
+      $scope.$watch('model', function ( newDate, oldDate ) {
+        if (Object.keys($scope.dateFields).length === 0 || newDate != oldDate){
+          var date = moment(newDate);
+          $scope.dateFields.day = date.get('date');
+          $scope.dateFields.month = date.get('month');
+          $scope.dateFields.year = date.get('year');
+          $scope.checkDate();
+        }else{
+          //console.log('model changed, but internally');
+        }
+      });
 
       // validate that the date selected is accurate
       $scope.checkDate = function(){
@@ -2531,7 +2532,7 @@ angular.module('niceElements')
         placeholder: '@',
         minlength: '@?',
         maxlength: '@?',
-        required: '@',
+        required: '=',
         fieldWidth: '@',
         labelWidth: '@',
         hideValid: '@',
@@ -2554,7 +2555,8 @@ angular.module('niceElements')
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.minlength) { attrs.minlength = 1; }
         if (!attrs.maxlength) { attrs.maxlength = 100; }
-        attrs.required = angular.isDefined(attrs.required);
+        attrs.required = attrs.required === 'true';
+        //attrs.required = angular.isDefined(attrs.required);
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         attrs.hideValid = angular.isDefined(attrs.hideValid);
@@ -4447,7 +4449,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-input.html',
-    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"forma\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
@@ -4457,8 +4459,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <div class=\"form-group\"\n" +
     "             ng-class=\"{\n" +
     "                'has-feedback': showValid && !hideValid,\n" +
-    "                'has-warning': !isDisabled && form.$invalid && form.$dirty && !hideValid,\n" +
-    "                'has-success': !isDisabled && form.$valid && form.$dirty && showValid,\n" +
+    "                'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
+    "                'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
     "                'symbol': symbol,\n" +
     "                'disabled': isDisabled\n" +
     "        }\">\n" +
@@ -4498,12 +4500,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <!--<span ng-if=\"!disabled && !hideValid && form.$invalid && form.$dirty\" class=\"glyphicon glyphicon-remove form-control-feedback feedback-invalid\" aria-hidden=\"true\"></span>-->\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-messages=\"form.$error\" ng-if=\"form.$dirty\">\n" +
-    "            <div class=\"error-message\" ng-message=\"email\" ng-if=\"form.$dirty\" translate>Email is not valid.</div>\n" +
-    "            <div class=\"error-message\" ng-message=\"pattern\" ng-if=\"form.$dirty\" translate>This field requires a specific pattern.</div>\n" +
+    "        <div ng-messages=\"forma.$error\" ng-if=\"forma.$dirty\">\n" +
+    "            <div class=\"error-message\" ng-message=\"email\" ng-if=\"forma.$dirty\" translate>Email is not valid.</div>\n" +
+    "            <div class=\"error-message\" ng-message=\"pattern\" ng-if=\"forma.$dirty\" translate>This field requires a specific pattern.</div>\n" +
     "            <div class=\"error-message\" ng-message=\"minlength\"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>\n" +
     "            <div class=\"error-message\" ng-message=\"maxlength\" translate>Your input is too long</div>\n" +
-    "            <div class=\"error-message\" ng-message=\"required\" ng-if=\"form.$dirty\" translate>This field is required.</div>\n" +
+    "            <div class=\"error-message\" ng-message=\"required\" ng-if=\"forma.$dirty\" translate>This field is required.</div>\n" +
     "            <div class=\"error-message\" ng-message=\"unique\" translate>This field must be unique.</div>\n" +
     "        </div>\n" +
     "    </div>\n" +
