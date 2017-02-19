@@ -3894,7 +3894,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
     "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
-    "        <div ng-class=\"{opacity0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
+    "        <div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
     "    </div>\n" +
     "\n" +
     "</div>\n"
