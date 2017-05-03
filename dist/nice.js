@@ -583,7 +583,11 @@ angular.module('niceElements')
             el.style.cssText = 'height:auto; padding:0';
             // for box-sizing other than "content-box" use:
             // el.style.cssText = '-moz-box-sizing:content-box';
-            el.style.cssText = 'height:' + (el.scrollHeight + 14) + 'px';
+            if(el.scrollHeight + 14 < 50){
+              el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
+            } else {
+              el.style.cssText = 'height:' + (el.scrollHeight + 14) + 'px';
+            }
           }, 0);
         };
       },
