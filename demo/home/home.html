@@ -91,6 +91,7 @@
                     <li><a ng-click="scrollTo('nice-percent')" href>Percent</a></li>
                     <li><a ng-click="scrollTo('nice-notification')" href>Notifications</a></li>
                     <li><a ng-click="scrollTo('nice-number')" href>Number</a></li>
+                    <li><a ng-click="scrollTo('nice-button')" href>Button</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -996,6 +997,57 @@ time="true">&lt;/nice-date-range></pre>
                 <div class="col-sm-6">
                     <div class="col-sm-6">
                         <code>{{ niceNumber }}</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-------------------------------- NICE BUTTON -------------------------------->
+        <div class="white-wrapper" id="nice-button">
+            <h2>Nice button</h2>
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>nice-click</td>
+                        <td>Set promisified function</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>add-class</td>
+                        <td>Add class to inner button</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>nice-disable</td>
+                        <td>Disable / Enable button</td>
+                        <td>null</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <pre class="prettyprint">&lt;nice-button nice-click="doSomethingLong()" add-class="btn-block"&gt;&lt;/nice-button></pre>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-button nice-click="doSomethingLong()" add-class="btn-block">This is a test button</nice-button>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <code>{{ niceButton }}</code>
                     </div>
                 </div>
             </div>
