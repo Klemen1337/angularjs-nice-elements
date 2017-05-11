@@ -33,15 +33,18 @@ angular.module('niceElements')
         multiple: '@',            // Can select multiple items
         help: '@',
         listenKeydown: '@',
+        noOptionsText: "@"
       },
 
       compile: function(element, attrs){
         if (!attrs.title) { attrs.title = ''; }
-        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
-        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        // if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        // if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.objValue) { attrs.objValue = 'value'; }
         if (!attrs.objKey) { attrs.objKey = 'id'; }
         if (!attrs.help) { attrs.help = ''; }
+        if (!attrs.list) { attr.list = []; }
+        if (!attrs.noOptionsText) { attrs.noOptionsText = "No options"; }
 
         attrs.valid = attrs.formDropdown;
 
@@ -204,7 +207,7 @@ angular.module('niceElements')
             $scope.emptyList = true;
             var sel = {};
             sel[$scope.objKey] = null;
-            sel[$scope.objValue] = "No options";
+            sel[$scope.objValue] = $scope.noOptionsText;
             $scope.internalList = [sel];
 
             if($scope.formDropdown && $scope.required){

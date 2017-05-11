@@ -40,11 +40,12 @@
             <div class="nice-dropdown" ng-if="results.length">
                 <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
                     <span class="text-bold">{{ result[keyForInputLabel] }}</span>
+                    <!--<div ng-transclude></div>-->
                 </div>
             </div>
         </div>
     </div>
 
-  <!--Here is injected dropdown html if passed and results present and open.-->
-  <!--<div ng-transclude></div>-->
+    <!--Here is injected dropdown html if passed and results present and open.-->
+    <!--<div ng-transclude></div>-->
 </ng-form>

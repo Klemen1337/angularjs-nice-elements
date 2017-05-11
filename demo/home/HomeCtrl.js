@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceNotification, $timeout) {
+    //$scope.emptyList = null;
     $scope.listObjs = [
         {id:0, value:"Afganistan"}, {id:1, value:"Azerbajdzan"}, {id:2, value:"Belgija"},
         {id:3, value:"Belorusija"}, {id:4, value:"Bolgarija"}, {id:5, value:"Burundi"},

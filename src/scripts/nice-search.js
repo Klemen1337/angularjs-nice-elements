@@ -14,7 +14,7 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         model: '=',
-//        modelString: '=',
+//      modelString: '=',
         isDisabled: '=',
         title: '@?',
         placeholder: '@',
@@ -132,7 +132,7 @@ angular.module('niceElements')
 
         // Keyboard up/down on search results
         var onKeyDown = function(event) {
-          if((event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27) && scope.showDropdown && scope.results.length>0){
+          if((event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27) && scope.results && scope.results.length>0){
             event.preventDefault();
 
             if(event.keyCode == 27){ // Escape
@@ -144,11 +144,11 @@ angular.module('niceElements')
               scope.selectRow(scope.results[scope.selectedIndex]);
             }
 
-            if(event.keyCode == 40 && scope.selectedIndex+1 < scope.results.length){ // Down
+            if(event.keyCode == 40 && scope.results && scope.selectedIndex+1 < scope.results.length){ // Down
               scope.selectedIndex += 1;
             }
 
-            if(event.keyCode == 38 && scope.selectedIndex-1 >= 0){ // Up
+            if(event.keyCode == 38 && scope.results && scope.selectedIndex-1 >= 0){ // Up
               scope.selectedIndex -= 1;
             }
 

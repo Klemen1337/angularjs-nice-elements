@@ -151,7 +151,7 @@ angular.module('niceElements')
 
         $scope.$watchCollection('internalSelected', function (value_new, value_old) {
           // Update $scope.selected based on settings
-          if (!angular.equals(value_new, value_old) || $scope.checkIfFirstTime()){
+          if (value_new && (!angular.equals(value_new, value_old) || $scope.checkIfFirstTime())){
             if ($scope.selectedIsObj){
               $scope.model = value_new;
             } else {

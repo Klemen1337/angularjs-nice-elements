@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('niceElements', [
-    'ngMessages',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'daterangepicker'
@@ -484,7 +483,7 @@ angular.module('niceElements')
 
         $scope.$watchCollection('internalSelected', function (value_new, value_old) {
           // Update $scope.selected based on settings
-          if (!angular.equals(value_new, value_old) || $scope.checkIfFirstTime()){
+          if (value_new && (!angular.equals(value_new, value_old) || $scope.checkIfFirstTime())){
             if ($scope.selectedIsObj){
               $scope.model = value_new;
             } else {
@@ -1400,15 +1399,18 @@ angular.module('niceElements')
         multiple: '@',            // Can select multiple items
         help: '@',
         listenKeydown: '@',
+        noOptionsText: "@"
       },
 
       compile: function(element, attrs){
         if (!attrs.title) { attrs.title = ''; }
-        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
-        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        // if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        // if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.objValue) { attrs.objValue = 'value'; }
         if (!attrs.objKey) { attrs.objKey = 'id'; }
         if (!attrs.help) { attrs.help = ''; }
+        if (!attrs.list) { attr.list = []; }
+        if (!attrs.noOptionsText) { attrs.noOptionsText = "No options"; }
 
         attrs.valid = attrs.formDropdown;
 
@@ -1571,7 +1573,7 @@ angular.module('niceElements')
             $scope.emptyList = true;
             var sel = {};
             sel[$scope.objKey] = null;
-            sel[$scope.objValue] = "No options";
+            sel[$scope.objValue] = $scope.noOptionsText;
             $scope.internalList = [sel];
 
             if($scope.formDropdown && $scope.required){
@@ -3050,7 +3052,7 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         model: '=',
-//        modelString: '=',
+//      modelString: '=',
         isDisabled: '=',
         title: '@?',
         placeholder: '@',
@@ -3168,7 +3170,7 @@ angular.module('niceElements')
 
         // Keyboard up/down on search results
         var onKeyDown = function(event) {
-          if((event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27) && scope.showDropdown && scope.results.length>0){
+          if((event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13 || event.keyCode == 27) && scope.results && scope.results.length>0){
             event.preventDefault();
 
             if(event.keyCode == 27){ // Escape
@@ -3180,11 +3182,11 @@ angular.module('niceElements')
               scope.selectRow(scope.results[scope.selectedIndex]);
             }
 
-            if(event.keyCode == 40 && scope.selectedIndex+1 < scope.results.length){ // Down
+            if(event.keyCode == 40 && scope.results && scope.selectedIndex+1 < scope.results.length){ // Down
               scope.selectedIndex += 1;
             }
 
-            if(event.keyCode == 38 && scope.selectedIndex-1 >= 0){ // Up
+            if(event.keyCode == 38 && scope.results && scope.selectedIndex-1 >= 0){ // Up
               scope.selectedIndex -= 1;
             }
 
@@ -4670,13 +4672,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <div class=\"nice-dropdown\" ng-if=\"results.length\">\n" +
     "                <div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectRow(result)\">\n" +
     "                    <span class=\"text-bold\">{{ result[keyForInputLabel] }}</span>\n" +
+    "                    <!--<div ng-transclude></div>-->\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "  <!--Here is injected dropdown html if passed and results present and open.-->\n" +
-    "  <!--<div ng-transclude></div>-->\n" +
+    "    <!--Here is injected dropdown html if passed and results present and open.-->\n" +
+    "    <!--<div ng-transclude></div>-->\n" +
     "</ng-form>"
   );
 
