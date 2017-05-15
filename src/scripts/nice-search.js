@@ -14,7 +14,6 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         model: '=',
-//      modelString: '=',
         isDisabled: '=',
         title: '@?',
         placeholder: '@',
@@ -201,8 +200,11 @@ angular.module('niceElements')
             var requestNumber = angular.copy($scope.requests);
             $scope.refreshFunction($scope.modelString).then(function(response){
               updateList(response, requestNumber);
+            }, function(error){
+              $scope.loading = false;
             });
-            $scope.model = $scope.modelString;
+            // Why was this here?
+            // $scope.model = $scope.modelString;
           }, 200);
 
         };
@@ -216,6 +218,12 @@ angular.module('niceElements')
             $("#"+$scope.id).focus();
           }
         };
+
+        // Clear model
+        $scope.remove = function(){
+          $scope.model = null;
+          $scope.modelString = null;
+        }
       }
     }
   });

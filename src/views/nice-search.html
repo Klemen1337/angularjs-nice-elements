@@ -22,9 +22,13 @@
                     tabindex="{{ tabIndex }}"
                 >
 
-                <span class="input-group-addon clickable" ng-click="search()">
+                <span class="input-group-addon clickable" ng-click="search()" ng-if="!model">
                     <i ng-show="!loading" class="fa fa-search" ></i>
                     <i ng-show="loading" class="fa fa-refresh fa-spin"></i>
+                </span>
+
+                <span class="input-group-addon clickable" ng-click="remove()" ng-if="model">
+                    <i ng-show="!loading" class="fa fa-remove" ></i>
                 </span>
             </div>
         </div>
