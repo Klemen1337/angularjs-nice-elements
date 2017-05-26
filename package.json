@@ -1,6 +1,6 @@
 {
   "name": "nice-elements",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Nice elements used in olaii angular 1.x webapps.",
   "license": "MIT",
   "devDependencies": {

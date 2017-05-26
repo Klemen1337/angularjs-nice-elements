@@ -32,7 +32,7 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
     };
 
     $scope.dt = '2015-12-12T16:00:00.000';
-    $scope.dtTime = '02:00:00';
+    $scope.dtTime = moment();
 
     $scope.choiceDemo2 ={
       "id": 2,
@@ -48,7 +48,7 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
     };
 
     $scope.change_hour = function(){
-        $scope.dtTime = '22:00:00';
+        $scope.dtTime = moment().add(2, "hours");
     };
     //$timeout(function(){
     //    $scope.choiceDemo2 = 2;

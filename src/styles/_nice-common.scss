@@ -188,8 +188,8 @@ p.nice{
   }
 
   .input-group-addon{
-    background: $nice-input-invalid;
-    border: $nice-input-invalid;
+    background: $nice-input-invalid !important;
+    border: $nice-input-invalid !important;
     color: white;
   }
 }

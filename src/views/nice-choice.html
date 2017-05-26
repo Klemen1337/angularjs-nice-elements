@@ -1,4 +1,4 @@
-<div class="nice-choice" ng-class="{'margin-bottom-0' : noMargin}">
+<div class="nice-choice" ng-class="{'margin-bottom-0' : noMargin}" ng-form="formChoice">
     <div class="row">
         <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
@@ -13,7 +13,4 @@
             </ul>
         </div>
     </div>
-
-    <!--Needed for intercepting form changes ($dirty)!-->
-    <div ng-form="formChoice"></div>
 </div>

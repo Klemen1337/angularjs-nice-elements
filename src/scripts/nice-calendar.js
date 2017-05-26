@@ -91,6 +91,7 @@ angular.module('niceElements')
               // Set start date
               scope.startDate = selectedDate;
               scope.selectStart = false;
+              scope.formCalendar.$setDirty();
 
               // If start date is after end date
               if(scope.startDate.isAfter(scope.endDate)){
@@ -103,7 +104,7 @@ angular.module('niceElements')
               // Set end date
               scope.endDate = selectedDate;
               scope.selectStart = true;
-              scope.forma.$setDirty();
+              scope.formCalendar.$setDirty();
 
               // If end date is before start date
               if(scope.endDate.isBefore(scope.startDate)){
@@ -118,24 +119,28 @@ angular.module('niceElements')
         scope.startHourChange = function(value){
           scope.startDateHour = value;
           scope.startDate = moment(scope.startDate).hours(scope.startDateHour);
+          scope.formCalendar.$setDirty();
         };
 
 
         scope.startMinuteChange = function(value) {
           scope.startDateMinute = value;
           scope.startDate = moment(scope.startDate).minutes(scope.startDateMinute);
+          scope.formCalendar.$setDirty();
         };
 
 
         scope.endHourChange = function(value){
           scope.endDateHour = value;
           scope.endDate = moment(scope.endDate).hours(scope.endDateHour);
+          scope.formCalendar.$setDirty();
         };
 
 
         scope.endMinuteChange = function(value) {
           scope.endDateMinute = value;
           scope.endDate = moment(scope.endDate).minutes(scope.endDateMinute);
+          scope.formCalendar.$setDirty();
         };
 
 

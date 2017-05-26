@@ -104,7 +104,7 @@
 
         <div class="white-wrapper">
             <div class="row">
-                <div class="col-sm-6">
+                <div ng-form="forme" class="col-sm-6">
 
                     <nice-dropdown title="Dropdown" model="emptyListModel" list="emptyList" no-options-text="Brez opcij" selected-is-obj="true"></nice-dropdown>
 
@@ -140,15 +140,15 @@
                     </nice-datetime-picker>
 
                     <nice-datetime-picker
-                            model="dt2"
-                            title="Datetimepicker"
-                            field-width="col-sm-4"
-                            date="true"
-                            time="false"
-                            format="DD.MM.YYYY"
-                            model-format="YYYY-MM-DD"
-                    >
-                            </nice-datetime-picker>
+                        model="dt2"
+                        title="Datetimepicker"
+                        field-width="col-sm-4"
+                        date="true"
+                        time="false"
+                        format="DD.MM.YYYY"
+                        model-format="YYYY-MM-DD">
+                    </nice-datetime-picker>
+
                     <nice-datetimerange-picker
                         model-start="dtStart"
                         model-end="dtEnd"
@@ -177,6 +177,8 @@
 
                     <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">nice-button</i></nice-button>
                 </div>
+
+                <pre>{{ forme | json }}</pre>
 
                 <div class="col-sm-6">
                     <pre>$scope.listObjs: {{listObjs}}</pre>
@@ -759,17 +761,17 @@ time="true">&lt;/nice-date-range></pre>
         <!------------------------------ NICE TIME PICKER ------------------------------>
         <div class="white-wrapper" id="nice-time-picker">
             <h2>Nice time picker</h2>
-            <pre class="prettyprint">&lt;nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"
-                    format="HH:mm" model-format="HH:mm:ss">&lt;/nice-time-picker></pre>
-            <div class="row">
+            <pre class="prettyprint">&lt;nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"&lt;/nice-time-picker></pre>
+            <div class="row" ng-form="forma">
                 <div class="col-sm-6">
-                    <nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"
-                                      format="HH:mm" model-format="HH:mm:ss"></nice-time-picker>
+                    <nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"></nice-time-picker>
                 </div>
                 <div class="col-sm-6">
                     <pre>{{ dtTime | json }}</pre>
                     <button ng-click="change_hour()">Change hour</button>
                 </div>
+
+                <pre>{{ forma | json }}</pre>
             </div>
         </div>
 
