@@ -15,7 +15,7 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
-  $scope.test = moment().subtract(10, "years").format();
+  $scope.test = moment().subtract(10, "years");
 
     $scope.testRange = {
       startDate: moment("2016-02-28T05:00:00Z"),
@@ -30,6 +30,7 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 //        startDate: $scope.testRange.startDate.add(1, 'day'),
 //        endDate: $scope.testRange.endDate.add(1, 'day')
 //      };
+      $scope.test = moment($scope.test).subtract(1, "years");
       $scope.minRange = moment($scope.minRange).add(1, 'day');
     };
 
