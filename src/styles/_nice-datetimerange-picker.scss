@@ -30,14 +30,14 @@
   .dtp-range-wrapper{
     border-radius: $nice-border-radius;
     position: absolute;
-    left: 0;
+    left: 15px;
     top: 40px;
     width: 625px;
     height: 325px;
     padding: 10px;
     background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px #ddd;
+    border: 1px solid $nice-border;
+    box-shadow: 0 0 0;
     z-index: 900;
 
     .dtp-layer {
@@ -79,9 +79,8 @@
 
 
     .dtp-content{
-      position: relative;
-      box-shadow: 0 0 0;
-      top: 0;
+      border-radius: $nice-border-radius;
+      box-shadow: 0 0 0 !important;
 
       .dtp-date-view{
         min-height: 300px;

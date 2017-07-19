@@ -23,13 +23,13 @@ angular.module('niceElements')
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (scope.model==null) { scope.model =  ''; }
+        if (scope.model == null) { scope.model =  ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.help) { attrs.help = ''; }
-        if (!attrs.rows) { attrs.rows = 3; }
+        if (!attrs.rows) { attrs.rows = 1; }
 
         var textareas = element.find('textarea');
 
@@ -45,17 +45,16 @@ angular.module('niceElements')
 
         function autosize() {
           var el = textareas[0];
-          setTimeout(function () {
+          $timeout(function () {
             el.style.cssText = 'height:auto; padding:0';
+
             // for box-sizing other than "content-box" use:
-            // el.style.cssText = '-moz-box-sizing:content-box';
-            if(el.scrollHeight + 14 < 50){
-              el.style.cssText = 'height:' + (el.scrollHeight) + 'px';
-            } else {
-              el.style.cssText = 'height:' + (el.scrollHeight + 14) + 'px';
-            }
-          }, 0);
-        };
+            el.style.cssText = '-moz-box-sizing:content-box';
+
+            // Fix height
+            el.style.cssText = 'height:' + (el.scrollHeight + 2) + 'px';
+          });
+        }
       },
       controller: function($scope){
         $scope.editing = false;
