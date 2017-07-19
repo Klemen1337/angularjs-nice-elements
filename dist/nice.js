@@ -1328,6 +1328,12 @@ angular.module('niceElements')
         $scope.dateFields.year = date.get('year');
         if($scope.mature) $scope.dateFields.year -= 18;
         $scope.checkDate();
+      } else {
+        var date = moment($scope.model);
+        $scope.dateFields.day = date.get('date');
+        $scope.dateFields.month = date.get('month');
+        $scope.dateFields.year = date.get('year');
+        $scope.checkDate();
       }
     }
   };

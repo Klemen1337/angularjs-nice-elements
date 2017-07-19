@@ -15,6 +15,8 @@ angular.module('myApp').controller('HomeCtrl', function($scope, $http, $q, NiceN
 
     //$scope.listStrings = ["String 1", "String 2", "String 3"];
 
+  $scope.test = moment().subtract(10, "years").format();
+
     $scope.testRange = {
       startDate: moment("2016-02-28T05:00:00Z"),
       endDate: "2016-02-28T05:00:00Z"
