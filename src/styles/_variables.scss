@@ -52,6 +52,9 @@ $nice-border: #cbd4d9 !default;
 $nice-hover-color: #EDEDED !default;
 
 
+// ---------- Checkbox colors override ----------
+$checkbox-border-color: $nice-border-color !default;
+
 // ---------- Input colors override ----------
 $input-border-focus: $nice-base-color !default;
 $input-border: $nice-border !default;

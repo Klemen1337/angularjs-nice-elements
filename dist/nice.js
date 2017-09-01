@@ -339,6 +339,34 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceCheckbox
+ * @description
+ * # niceCheckbox
+ */
+angular.module('niceElements')
+  .directive('niceCheckbox', function() {
+    return {
+      templateUrl: 'views/nice-checkbox.html',
+      restrict: 'E',
+      scope: {
+        model: '=',
+        title: '@',
+        noMargin: '@'
+      },
+      controller: function($rootScope, $scope) {
+        if($scope.model === undefined) $scope.model = false;
+
+        $scope.toggle = function(){
+          $scope.model = !$scope.model;
+        };
+      }
+    };
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceChoice
  * @description
  * # niceChoice
@@ -3575,6 +3603,18 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('views/nice-checkbox.html',
+    "<div class=\"nice-checkbox\" ng-class=\"{'checked': model, 'margin-bottom-0' : noMargin}\" ng-click=\"toggle()\">\n" +
+    "    <div class=\"checkbox\">\n" +
+    "        <svg class=\"check\" viewBox=\"-281 373 48 48\">\n" +
+    "            <path class=\"check-stroke\" d=\"M-273.2,398.2l10,9.9 l22.4-22.3\"></path>\n" +
+    "        </svg>\n" +
+    "    </div>\n" +
+    "    <div ng-if=\"title\" class=\"message\">{{ title }}</div>\n" +
     "</div>"
   );
 

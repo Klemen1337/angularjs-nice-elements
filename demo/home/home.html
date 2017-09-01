@@ -91,6 +91,7 @@
                     <li><a ng-click="scrollTo('nice-percent')" href>Percent</a></li>
                     <li><a ng-click="scrollTo('nice-notification')" href>Notifications</a></li>
                     <li><a ng-click="scrollTo('nice-number')" href>Number</a></li>
+                    <li><a ng-click="scrollTo('nice-checkbox')" href>Checkbox</a></li>
                     <li><a ng-click="scrollTo('nice-button')" href>Button</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -1015,6 +1016,24 @@ time="true">&lt;/nice-date-range></pre>
                 <div class="col-sm-6">
                     <div class="col-sm-6">
                         <code>{{ niceNumber }}</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-------------------------------- NICE CHECKBOX -------------------------------->
+        <div class="white-wrapper" id="nice-checkbox">
+            <h2>Nice checkbox</h2>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-checkbox title="I like milk" model="niceCheckbox"></nice-checkbox>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <code>{{ niceCheckbox }}</code>
                     </div>
                 </div>
             </div>
