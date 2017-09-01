@@ -9,10 +9,10 @@ nice-checkbox{
   cursor: pointer;
 
   .checkbox {
-    height: 30px;
-    width: 30px;
-    border: 1px solid $checkbox-border-color;
-    border-radius: 2px;
+    height: 34px;
+    width: 34px;
+    border: 1px solid $nice-input-border;
+    border-radius: $nice-border-radius-small;
     margin: 0;
     padding: 4px;
 
@@ -36,7 +36,7 @@ nice-checkbox{
 
   &:hover {
     .checkbox {
-      border-color: darken($checkbox-border-color, 15%);
+      border-color: darken($nice-input-border, 15%);
     }
 
     .message {
@@ -46,7 +46,7 @@ nice-checkbox{
 
   &.checked {
     .checkbox {
-      border-color: $checkbox-border-color;
+      border-color: $nice-input-border;
       background: white;
 
       .check{
@@ -60,7 +60,7 @@ nice-checkbox{
 
     &:hover{
       .checkbox {
-        border-color: darken($checkbox-border-color, 15%);
+        border-color: darken($nice-input-border, 15%);
       }
     }
   }
