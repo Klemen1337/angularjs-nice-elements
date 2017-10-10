@@ -30,10 +30,10 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   $scope.maxRange = moment().add(1, 'months');
 
   $scope.changeTestRange = function () {
-//      $scope.testRange = {
-//        startDate: $scope.testRange.startDate.add(1, 'day'),
-//        endDate: $scope.testRange.endDate.add(1, 'day')
-//      };
+    // $scope.testRange = {
+    //   startDate: $scope.testRange.startDate.add(1, 'day'),
+    //   endDate: $scope.testRange.endDate.add(1, 'day')
+    // };
     $scope.test = moment($scope.test).subtract(1, "years");
     $scope.minRange = moment($scope.minRange).add(1, 'day');
   };
@@ -46,8 +46,8 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     "value": "Belgija"
   };
 
-  //$scope.choiceDemo2 = 2;
-  //$scope.choiceDemo2 = {id:3, value:"Orange"};
+  // $scope.choiceDemo2 = 2;
+  // $scope.choiceDemo2 = {id:3, value:"Orange"};
   $scope.dropdownMulti = [];
 
   $scope.change_options = function () {
@@ -57,12 +57,12 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   $scope.change_hour = function () {
     $scope.dtTime = moment().add(2, "hours");
   };
-  //$timeout(function(){
+  // $timeout(function(){
   //    $scope.choiceDemo2 = 2;
   //    console.log('setting dropdown value')
-  //}, 6000);
-  //$scope.dtStart = '2015-12-10T16:00:00.000';
-  //$scope.dtEnd = '2015-12-14T20:00:00.000';
+  // }, 6000);
+  // $scope.dtStart = '2015-12-10T16:00:00.000';
+  // $scope.dtEnd = '2015-12-14T20:00:00.000';
 
   $scope.percentage = 0.22000000;
 

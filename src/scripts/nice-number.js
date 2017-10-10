@@ -59,12 +59,14 @@ angular.module('niceElements')
 
         // Fix min
         if(!$scope.min) $scope.min = 0;
+        else $scope.min = parseFloat($scope.min);
 
+        // Fix max
+        if($scope.max) $scope.max = parseFloat($scope.max);
 
         // Fix decimals
         if(!$scope.decimals) $scope.decimals = 0;
         else $scope.decimals = parseInt($scope.decimals);
-
 
         // Fix step
         if(!$scope.step) $scope.step = 1;
