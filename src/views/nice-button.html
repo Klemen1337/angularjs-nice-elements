@@ -1,8 +1,6 @@
 <div class="nice-button" ng-class="{'margin-bottom-0' : noMargin}">
-
-    <div type="button" class="btn btn-primary" ng-class="addClass" ng-click="click()" ng-disabled="niceDisabled===true">
+    <button type="button" class="btn btn-primary" ng-class="addClass" ng-click="click()" ng-disabled="niceDisabled===true">
         <div ng-class="{opacity0: loading==true, opacity1: loading==false}"><ng-transclude></ng-transclude></div>
         <div ng-class="{display0: loading==false, opacity1: loading==true}" class="nice-button-loader-wrapper"><nice-loader add-class="nice-button-loader"></nice-loader></div>
-    </div>
-
+    </button>
 </div>

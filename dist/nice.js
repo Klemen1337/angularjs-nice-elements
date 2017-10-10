@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('niceElements', [
+    'ngMessages',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'daterangepicker'
@@ -2865,80 +2866,103 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         showError: '@',
-        noMargin: '@'
+        noMargin: '@',
+        step: '@',
+        decimals: '@'
       },
 
       link: function (scope, element, attrs) {
-        if (!attrs.title) { attrs.title = ''; }
-        //if (!attrs.min) { attrs.min = 0; }
-        //if (!attrs.max) { attrs.max = 0; }
+        // Set default value
         if (!attrs.defaultValue) {
           attrs.defaultValue = 0;
-        }else{
+        } else {
           attrs.defaultValue = parseInt(attrs.defaultValue);
         }
-        attrs.required = angular.isDefined(attrs.required);
-        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
-        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attrs.showError = angular.isDefined(attrs.showError);
-        attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         // Link form object with valid object
-        if(angular.isDefined(attrs.valid)) { scope.valid = scope.form; }
-
-        if(!attrs.min) { attrs.min = 0; }
-
-        var setDefault = function(){
-          scope.model = attrs.defaultValue;
-        };
+        if(angular.isDefined(attrs.valid)) {
+          scope.valid = scope.form;
+        }
 
         // Check if number is defined
         if (!angular.isDefined(attrs.model)){
-          setDefault();
+          scope.model = attrs.defaultValue;
         } else {
           if(parseFloat(scope.model)){
             scope.model = parseFloat(scope.model);
           } else {
-            setDefault();
+            scope.model = attrs.defaultValue;
           }
         }
-
-        scope.check();
       },
 
       controller: function($rootScope, $scope) {
         $scope.canAdd = true;
         $scope.canSubstract = true;
 
-        // Check canAdd or canSubstract
-        $scope.check = function(){
-          if($scope.min && parseFloat($scope.model) <= $scope.min) $scope.canSubstract = false;
-          else $scope.canSubstract = true;
+        // Fix min
+        if(!$scope.min) $scope.min = 0;
 
-          if($scope.max && parseFloat($scope.model) >= $scope.max) $scope.canAdd = false;
-          else $scope.canAdd = true;
+
+        // Fix decimals
+        if(!$scope.decimals) $scope.decimals = 0;
+        else $scope.decimals = parseInt($scope.decimals);
+
+
+        // Fix step
+        if(!$scope.step) $scope.step = 1;
+        else $scope.step = parseFloat($scope.step);
+
+        // Check canAdd or canSubtract
+        $scope.check = function(){
+          if($scope.min && parseFloat($scope.model) <= $scope.min) {
+            $scope.canSubstract = false;
+            $scope.model = $scope.min;
+          } else {
+            $scope.canSubstract = true;
+          }
+
+          if($scope.max && parseFloat($scope.model) >= $scope.max) {
+            $scope.canAdd = false;
+            $scope.model = $scope.max;
+          } else {
+            $scope.canAdd = true;
+          }
+        };
+
+
+        // Check when load
+        $scope.check();
+
+
+        // On input change
+        $scope.onChange = function(){
+          $scope.check();
         };
 
 
         // Add to the value
         $scope.add = function(){
           if($scope.max){
-            if(parseInt($scope.model) < $scope.max) {
-              $scope.model = parseInt($scope.model) + 1;
+            if(parseFloat($scope.model) < parseFloat($scope.max)) {
+              // $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step)).toFixed($scope.decimals);
+              $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step));
               $scope.form.$setDirty();
             }
           } else {
-            $scope.model = parseInt($scope.model) + 1;
+            // $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step)).toFixed($scope.decimals);
+            $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step));
             $scope.form.$setDirty();
           }
           $scope.check();
         };
 
 
-        // Substract to the value
+        // Subtract to the value
         $scope.subtract = function(){
-          if(parseInt($scope.model) > $scope.min){
-            $scope.model = parseInt($scope.model) - 1;
+          if(parseFloat($scope.model) > parseFloat($scope.min)){
+            // $scope.model = parseFloat(parseFloat($scope.model) - parseFloat($scope.step)).toFixed($scope.decimals);
+            $scope.model = parseFloat(parseFloat($scope.model) - parseFloat($scope.step));
             $scope.form.$setDirty();
           }
           $scope.check();
@@ -3484,12 +3508,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('views/nice-button.html',
     "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "\n" +
-    "    <div type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
+    "    <button type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
     "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
     "        <div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
-    "    </div>\n" +
-    "\n" +
+    "    </button>\n" +
     "</div>\n"
   );
 
@@ -4166,7 +4188,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    <button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\">-</button>\n" +
     "                </span>\n" +
     "\n" +
-    "                <input type=\"number\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\">\n" +
+    "                <input type=\"number\" step=\"{{ step }}\" ng-change=\"onChange()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\" />\n" +
     "\n" +
     "                <span class=\"input-group-btn\">\n" +
     "                    <button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
@@ -4215,11 +4237,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <div ng-messages=\"form.$error\">\n" +
-    "            <div class=\"error-message\" ng-message=\"email\" ng-if=\"form.$dirty\">Email is not valid.</div>\n" +
     "            <div class=\"error-message\" ng-message=\"pattern\" ng-if=\"form.$dirty\">This field requires a specific pattern.</div>\n" +
     "            <div class=\"error-message\" ng-message=\"required\" ng-if=\"form.$dirty\">This field is required.</div>\n" +
-    "            <div class=\"error-message\" ng-message=\"minlength\">Your field is too short. It must contain at least {{ minlength }} characters.</div>\n" +
-    "            <div class=\"error-message\" ng-message=\"maxlength\">Your field is too long</div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "  </div>\n" +

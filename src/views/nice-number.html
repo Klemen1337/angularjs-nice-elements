@@ -11,7 +11,7 @@
                     <button class="btn btn-default" type="button" ng-disabled="!canSubstract" ng-click="subtract()">-</button>
                 </span>
 
-                <input type="number" class="form-control" max="{{ max }}" min="{{ min }}" ng-model="model">
+                <input type="number" step="{{ step }}" ng-change="onChange()" class="form-control" max="{{ max }}" min="{{ min }}" ng-model="model" />
 
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-disabled="!canAdd" ng-click="add()">+</button>

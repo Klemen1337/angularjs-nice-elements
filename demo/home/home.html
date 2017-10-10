@@ -584,6 +584,22 @@
                     <pre>{{ searchItem | json }}</pre>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <nice-search
+                            refresh-function="resolve"
+                            model="searchText"
+                            field-width="col-xs-12"
+                            placeholder="Search item">
+                    </nice-search>
+                </div>
+
+                <div class="col-sm-6">
+                    <pre>{{ searchText | json }}</pre>
+                </div>
+            </div>
         </div>
 
 
@@ -1012,11 +1028,12 @@ time="true">&lt;/nice-date-range></pre>
             <div class="row">
                 <div class="col-sm-6">
                     <nice-number title="Number" model="niceNumber"></nice-number>
+                    <nice-number title="Step 0.1" model="niceNumber" step="0.1" decimals="1"></nice-number>
+                    <nice-number title="Step 0.01" model="niceNumber" step="0.01" decimals="2"></nice-number>
+                    <nice-number title="Step 0.01" model="niceNumber2" decimals="5"></nice-number>
                 </div>
                 <div class="col-sm-6">
-                    <div class="col-sm-6">
-                        <code>{{ niceNumber }}</code>
-                    </div>
+                    <pre>{{ niceNumber }}</pre>
                 </div>
             </div>
         </div>

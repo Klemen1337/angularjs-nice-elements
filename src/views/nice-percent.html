@@ -29,11 +29,8 @@
         </div>
 
         <div ng-messages="form.$error">
-            <div class="error-message" ng-message="email" ng-if="form.$dirty">Email is not valid.</div>
             <div class="error-message" ng-message="pattern" ng-if="form.$dirty">This field requires a specific pattern.</div>
             <div class="error-message" ng-message="required" ng-if="form.$dirty">This field is required.</div>
-            <div class="error-message" ng-message="minlength">Your field is too short. It must contain at least {{ minlength }} characters.</div>
-            <div class="error-message" ng-message="maxlength">Your field is too long</div>
         </div>
     </div>
   </div>
