@@ -5,7 +5,7 @@ var fs =require('fs');		//for image upload file handling
 var express = require('express');
 var app = express();
 
-var port =3030;
+var port = 3030;
 var host ='localhost';
 var serverPath ='/demo/';
 var staticPath ='/';

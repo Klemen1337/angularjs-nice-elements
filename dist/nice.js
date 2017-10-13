@@ -1041,7 +1041,7 @@ angular.module('niceElements')
             enableOkButtons: false
           };
 
-          if($scope.formatOutput === undefined) $scope.formatOutput = false
+          if($scope.formatOutput === undefined) $scope.formatOutput = false;
 
           var setLabelValue = function(){
             var _from = moment($scope.internalStart).format(params.format);
@@ -1167,9 +1167,9 @@ angular.module('niceElements')
             $scope.showDtpRange = false;
             //$scope.internalStart = angular.copy($scope.modelStart);
             //$scope.internalEnd = angular.copy($scope.modelEnd);
-            var _start = moment.utc($scope.modelStart, params.modelFormat);
+            var _start = moment($scope.modelStart);
             if($scope.formatOutput) _start = _start.format(params.modelFormat);
-            var _end = moment.utc($scope.modelEnd, params.modelFormat);
+            var _end = moment($scope.modelEnd);
             if($scope.formatOutput) _end = _end.format(params.modelFormat);
 
             $scope.internalStart = _start;
