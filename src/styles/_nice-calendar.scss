@@ -9,6 +9,7 @@
       width: 50%;
       float: left;
       color: $nice-font-color;
+      transition: all 0.3s ease;
 
       label{
         font-size: 9px;
@@ -41,6 +42,7 @@
       position: relative;
       width: 20%;
       float: left;
+      height: 30px;
 
       &:after{
         content: " ";
@@ -72,6 +74,7 @@
       cursor: pointer;
       position: relative;
       font-size: 14px;
+      height: 30px;
     }
 
     .time-picket-icon{
@@ -83,13 +86,13 @@
       line-height: 30px;
       color: $nice-font-color;
       border-bottom: 1px solid $nice-border;
+      height: 30px;
     }
   }
 
 
   .nice-calendar-wrapper {
     border-radius: $nice-border-radius;
-    overflow: hidden;
     display: block;
     background: white;
     width: 100%;
@@ -228,6 +231,28 @@
             border-top-right-radius: 10px;
           }
         }
+
+        .popup{
+          position: relative;
+          bottom: 45px;
+          left: 0;
+          background: #8f8f8f;
+          color: white;
+          z-index: 1000;
+          line-height: 12px;
+          font-size: 10px;
+          text-align: left;
+          padding: 2px 8px;
+          display: none;
+          white-space: nowrap;
+          width: fit-content;
+        }
+
+        &:hover{
+          .popup {
+            display: block;
+          }
+        }
       }
 
       &.names > span {
@@ -237,5 +262,9 @@
         cursor: default;
       }
     }
+  }
+
+  .change {
+    color: $nice-base-color;
   }
 }

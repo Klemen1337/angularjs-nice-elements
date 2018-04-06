@@ -1,37 +1,185 @@
 .nice-date{
-  .dropdown-menu {
-    box-shadow: 0px 0px 0px;
-    padding: 10px;
-    border: 0px none;
+  $spacing: 10px;
+  $icon-width: 40px;
 
-    li{
-      :focus {
-        outline: -webkit-focus-ring-color auto 0px;
-      }
-    }
+  .date {
+    border-radius: $nice-border-radius;
+    background: white;
+    border: solid 1px $nice-border;
 
-    .input-group-addon {
-      background: $nice-addon-bg !important;
-    }
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 100%;
 
-    .btn{
-      border:0px none;
-    }
-
-    .btn-info{
+    .header {
       background: $nice-base-color;
+      line-height: 40px;
+      color: white;
 
-      .text-muted{
-        color: white;
+      i {
+        float: left;
+        width: 40px;
+        font-size: 1.125em;
+        font-weight: bold;
+        position: relative;
+        line-height: 40px;
+        padding: 0 $spacing;
+        cursor: pointer;
+
+        &.fa-angle-left {
+          text-align: left;
+        }
+
+        &.fa-angle-right {
+          text-align: right;
+          margin-left: $icon-width*-1;
+        }
       }
 
-      .text-info{
-        color:white;
+      span {
+        float: left;
+        width: 100%;
+        text-transform: uppercase;
+        padding-left: $icon-width+$spacing;
+        margin-left: $icon-width*-1;
+        text-align: center;
+        padding-right: $icon-width;
+        color: inherit;
       }
     }
 
-    .text-info{
-      color:$nice-base-color;
+    .week {
+      width: 100%;
+      border-top: solid 1px $nice-border-color;
+      display: flex;
+      flex-grow: 1;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      .day {
+        position: relative;
+        min-height: 20px;
+        //line-height: $day-height;
+        width: 14.2857%;
+        border-left: solid 1px $nice-border-color;
+        font-size: 12px;
+        text-align: center;
+        background: white;
+        cursor: pointer;
+        color: $nice-font-color;
+        padding: 0;
+        margin: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:first-child {
+          border-left: none;
+        }
+
+        &.today:before {
+          content: " ";
+          position: absolute;
+          top: 0;
+          right: 0;
+          height: 10px;
+          width: 10px;
+          border-style: solid;
+          border-width: 0 10px 10px 0;
+          border-color: transparent $nice-base-color transparent transparent;
+        }
+
+        &.different-month {
+          color: #C0C0C0;
+        }
+
+        &.weekend {
+          background: #fafafa;
+        }
+
+        &.disabled {
+          opacity: 0.3;
+          color: $nice-danger-color;
+          cursor: not-allowed;
+        }
+
+        &.selected {
+          background: $nice-base-color;
+          color: white;
+        }
+
+        &:hover {
+          background: lighten($nice-base-color, 30%);
+
+          &.selected {
+            background: darken($nice-base-color, 10%);
+          }
+        }
+      }
+
+      &.names {
+        flex-grow: 0;
+        height: 21px;
+        flex-shrink: 0;
+
+        & > span {
+          color: darken($nice-base-color, 10%);
+          min-height: 20px;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+
+  .time {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+
+    .time-picker{
+      position: relative;
+      flex-grow: 1;
+      height: 30px;
+
+      select{
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: 0;
+        border-radius: $nice-border-radius;
+        border: 1px solid $nice-border;
+        padding: 5px 25px 5px 10px;
+        z-index: 2;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+        font-size: 14px;
+        height: 30px;
+      }
+
+      &:after{
+        content: " ";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px 4px 0 4px;
+        margin-top: -3px;
+        border-color: #404040 transparent transparent transparent;
+      }
+
+      &.time-picker-hour{
+        margin-right: 10px;
+      }
     }
   }
 }

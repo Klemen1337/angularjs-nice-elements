@@ -104,6 +104,31 @@
 		<h1 class="headline">Nice elements</h1>
 
         <div class="white-wrapper">
+            <nice-datetimerange-picker2
+                start-date="dtp2.startDate"
+                end-date="dtp2.endDate"
+                title="Datetime range picker 2"
+                field-width="col-sm-4"
+                time="true"
+            ></nice-datetimerange-picker2>
+
+            <pre>{{ dtp2 | json }}</pre>
+        </div>
+
+
+        <div class="white-wrapper">
+            <nice-datetimerange-picker2
+                start-date="dtp3.startDate"
+                end-date="dtp3.endDate"
+                title="Datetime range picker 3"
+                field-width="col-sm-4"
+            ></nice-datetimerange-picker2>
+
+            <pre>{{ dtp3 | json }}</pre>
+        </div>
+
+
+        <div class="white-wrapper">
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
 
@@ -115,7 +140,7 @@
                         {{ test | json }}
                     </pre>
 
-                    <nice-calendar title="Calendar" time="true" min-date="minRange" color="#9776E6" max-date="maxRange" end-date="testRange.endDate" start-date="testRange.startDate"></nice-calendar>
+                    <nice-calendar title="Calendar" time="true" min-date="minRange" max-date="maxRange" end-date="testRange.endDate" start-date="testRange.startDate"></nice-calendar>
                     <pre>
                         {{ testRange | json }}
                     </pre>

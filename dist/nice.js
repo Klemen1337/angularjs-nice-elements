@@ -79,7 +79,7 @@ angular.module('niceElements')
  * # niceCalendar
  */
 angular.module('niceElements')
-  .directive("niceCalendar", function() {
+  .directive("niceCalendar", function($timeout) {
     return {
       restrict: "E",
       templateUrl: "views/nice-calendar.html",
@@ -93,19 +93,41 @@ angular.module('niceElements')
         noMargin: '@',
         color: '@',
         endDate: '=',
-        startDate: '='
+        startDate: '=',
+        translations: '@'
       },
       link: function(scope) {
+        scope.translations = {
+          selectStartDate: "Select start date",
+          selectStartTime: "Select start time",
+          selectEndDate: "Select end date",
+          selectEndTime: "Select end time",
+          nextMonth: "Next month",
+          prevMonth: "Previous month",
+          start: "Start",
+          end: "End",
+          mon: "Mon",
+          tue: "Tue",
+          wed: "Wed",
+          thu: "Thu",
+          fri: "Fri",
+          sat: "Sat",
+          sun: "Sun",
+          january: "January",
+          february: "February",
+
+        };
 
         // ------------------ Init default values ------------------
         scope.selectStart = true;
+        scope.popupText = scope.translations.selectStartDate;
 
         scope.hours = [
           0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
         ];
 
         scope.minutes = [
-          0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55
+          0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59
         ];
 
 
@@ -163,7 +185,9 @@ angular.module('niceElements')
               // Set start date
               scope.startDate = selectedDate;
               scope.selectStart = false;
+              scope.popupText = scope.translations.selectEndDate;
               scope.formCalendar.$setDirty();
+              scope.displayStartChange();
 
               // If start date is after end date
               if(scope.startDate.isAfter(scope.endDate)){
@@ -176,7 +200,9 @@ angular.module('niceElements')
               // Set end date
               scope.endDate = selectedDate;
               scope.selectStart = true;
+              scope.popupText = scope.translations.selectStartDate;
               scope.formCalendar.$setDirty();
+              scope.displayEndChange();
 
               // If end date is before start date
               if(scope.endDate.isBefore(scope.startDate)){
@@ -187,11 +213,28 @@ angular.module('niceElements')
         };
 
 
+        // ------------------ Display date changes ------------------
+        scope.displayStartChange = function(){
+          scope.startTimeClass = "change";
+          $timeout(function(){
+            scope.startTimeClass = "";
+          }, 1000);
+        };
+
+        scope.displayEndChange = function(){
+          scope.endTimeClass = "change";
+          $timeout(function(){
+            scope.endTimeClass = "";
+          }, 1000);
+        };
+
+
         // ------------------ Time changes ------------------
         scope.startHourChange = function(value){
           scope.startDateHour = value;
           scope.startDate = moment(scope.startDate).hours(scope.startDateHour);
           scope.formCalendar.$setDirty();
+          scope.displayStartChange();
         };
 
 
@@ -199,6 +242,7 @@ angular.module('niceElements')
           scope.startDateMinute = value;
           scope.startDate = moment(scope.startDate).minutes(scope.startDateMinute);
           scope.formCalendar.$setDirty();
+          scope.displayStartChange();
         };
 
 
@@ -206,6 +250,7 @@ angular.module('niceElements')
           scope.endDateHour = value;
           scope.endDate = moment(scope.endDate).hours(scope.endDateHour);
           scope.formCalendar.$setDirty();
+          scope.displayEndChange();
         };
 
 
@@ -213,6 +258,7 @@ angular.module('niceElements')
           scope.endDateMinute = value;
           scope.endDate = moment(scope.endDate).minutes(scope.endDateMinute);
           scope.formCalendar.$setDirty();
+          scope.displayEndChange();
         };
 
 
@@ -683,7 +729,6 @@ angular.module('niceElements')
       },
 
       controller: function($scope, $filter) { //gettextCatalog
-
         $scope.opts = {
           //format: 'DD.MM.YYYY',
           locale: {
@@ -757,48 +802,182 @@ angular.module('niceElements')
       templateUrl: 'views/nice-date.html',
       scope: {
         model: '=',
-        title: '@',
-        fieldWidth: '@',
-        labelWidth: '@',
-        format: '@',
-        min: '@',
-        max: '@',
-        noMargin: '@',
-        startDate: '=',
-        endDate: '='
+        time: '=',
+        maxDate: '=',
+        minDate: '='
       },
-
-      link: function(scope, iElement, attrs, ctrl){
-        if (!attrs.title) { attrs.title = ''; }
-        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
-        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
-        attrs.noMargin = angular.isDefined(attrs.noMargin);
-
-        if(scope.model) scope.model = new Date();
-
-        scope.dateOptions = {
-          formatYear: 'yy',
-          startingDay: 1
-        };
-      },
-
       controller: function($scope) {
-        if(!angular.isDefined($scope.model)) $scope.model = moment().format();
-
-        $scope.today = function() {
-          $scope.model = new Date();
+        $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+        $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
+        $scope.translations = {
+          nextMonth: "Next month",
+          prevMonth: "Previous month",
+          mon: "Mon",
+          tue: "Tue",
+          wed: "Wed",
+          thu: "Thu",
+          fri: "Fri",
+          sat: "Sat",
+          sun: "Sun"
         };
 
-        $scope.open = function($event) {
-          $event.preventDefault();
-          $event.stopPropagation();
+        if(!$scope.model) $scope.model = moment();
 
-          $scope.opened = true;
+        if(!$scope.time) $scope.time = false;
+        else $scope.time = $scope.time == "true";
+
+
+        // ------------------ Time changes ------------------
+        $scope.timeChange = function(newHour, newMinute){
+          if(newHour != null) $scope.dateHour = newHour;
+          if(newMinute != null) $scope.dateMinute = newMinute;
+
+          var selectedDate = angular.copy($scope.model);
+          selectedDate = $scope._removeTime(selectedDate);
+          selectedDate.hours($scope.dateHour);
+          selectedDate.minutes($scope.dateMinute);
+
+          $scope.model = selectedDate;
+          $scope.forma.$setDirty();
         };
+
+
+        // ------------------ Day was selected ------------------
+        $scope.select = function(day) {
+          if(!day.isDisabled){
+            var selectedDate = angular.copy(day.date);
+            selectedDate.hours($scope.dateHour);
+            selectedDate.minutes($scope.dateMinute);
+
+            $scope.model = selectedDate;
+            $scope.forma.$setDirty();
+          }
+        };
+
+
+        // ------------------ Go to next month ------------------
+        $scope.next = function() {
+          var next = angular.copy($scope.month);
+          next = $scope._removeTimeWithDate(next.month(next.month()+1).date(0));
+          $scope.month.month($scope.month.month()+1);
+          $scope._buildMonth(next, $scope.month);
+        };
+
+
+        // ------------------ Go to previous month ------------------
+        $scope.previous = function() {
+          var previous = angular.copy($scope.month);
+          previous = $scope._removeTimeWithDate(previous.month(previous.month()-1).date(0));
+          $scope.month.month($scope.month.month()-1);
+          $scope._buildMonth(previous, $scope.month);
+        };
+
+
+        // ------------------ Check if dates are equal without time ------------------
+        $scope.isSameDay = function(date1, date2){
+          return (
+            date1.date() == date2.date() &&
+            date1.month() == date2.month() &&
+            date1.year() == date2.year()
+          )
+        };
+
+        $scope.isSameMonth = function(date1, date2){
+          return (
+            date1.month() == date2.month() &&
+            date1.year() == date2.year()
+          )
+        };
+
+
+        // ------------------ Format date ------------------
+        $scope.formatDate = function(date){
+          if($scope.time) return date.format('D.M.YYYY - HH:mm');
+          else return date.format('D.M.YYYY');
+        };
+
+
+        // ------------------ Remove time from date ------------------
+        $scope._removeTime = function(date) {
+          return date.hour(0).minute(0).second(0).millisecond(0);
+        };
+
+        $scope._removeTimeWithDate = function(date) {
+          return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+        };
+
+
+        // ------------------ Build month ------------------
+        $scope._buildMonth = function(start, month) {
+          var done = false;
+          var date = start.clone().startOf('week').isoWeekday(1);
+          var monthIndex = date.month();
+          var count = 0;
+
+          date.add(1, "w");
+
+          $scope.weeks = [];
+          while (!done) {
+            $scope.weeks.push({ days: $scope._buildWeek(date.clone(), month) });
+            date.add(1, "w");
+            done = count++ > 2 && monthIndex !== date.month();
+            monthIndex = date.month();
+          }
+        };
+
+
+        // ------------------ Build week ------------------
+        $scope._buildWeek = function(date, month) {
+          var days = [];
+          for (var i = 0; i < 7; i++) {
+            var day = {
+              name: date.format("dd"),
+              number: date.date(),
+              isCurrentMonth: $scope.isSameMonth(date, month),
+              isToday: date.isSame(new Date(), "day"),
+              isWeekday: date.weekday() == 0 || date.weekday() == 6,
+              date: date
+            };
+
+            if($scope.minDate) day.isDisabled = date.isBefore(moment($scope.minDate));
+            if($scope.maxDate) day.isDisabled = date.isAfter(moment($scope.maxDate));
+            if($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween(moment($scope.minDate), moment($scope.maxDate));
+
+            days.push(day);
+            date = date.clone();
+            date.add(1, "d");
+          }
+
+          return days;
+        };
+
+
+        // ------------------ Watch for model change ------------------
+        $scope.$watch("model", function(){
+          $scope.boostrap();
+        });
+
+
+        // ------------------ Bootstrap ------------------
+        $scope.boostrap = function(){
+          $scope.month = angular.copy($scope.model);
+          if($scope.time) {
+            $scope.dateHour = $scope.model.hours();
+            $scope.dateMinute = $scope.model.minutes();
+          } else {
+            $scope.dateHour = 0;
+            $scope.dateMinute = 0;
+            $scope.model = $scope._removeTime($scope.model);
+          }
+
+          var start = angular.copy($scope.model);
+          start = $scope._removeTimeWithDate(start.date(0));
+          $scope._buildMonth(start, $scope.month);
+        };
+
+        $scope.boostrap();
 
       }
-
     };
   });
 
@@ -984,6 +1163,121 @@ angular.module('niceElements')
 
 });
 
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceDatetimerangePicker2
+ * @description
+ * # niceDatetimerangePicker2
+ */
+angular.module('niceElements')
+  .directive('niceDatetimerangePicker2', function() {
+    return {
+      scope: {
+        startDate: '=', // binding model
+        endDate: '=', // binding model
+        formatString: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        modelFormat: '@',
+        time: '@', // default: false, is time picker enabled?
+        minDate: '@', // default: undefined
+        maxDate: '@', // default: undefined
+        title: '@', // default: ''
+        noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
+        fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
+        labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
+      },
+      templateUrl: 'views/nice-datetimerange-picker-2.html',
+      controller: function ($rootScope, $scope) {
+        $scope.isOpen = false;
+
+
+        // Set defaults
+        if(!$scope.time) $scope.time = false;
+        else $scope.time = $scope.time == "true";
+
+
+        // Set format string
+        if(!$scope.formatString) {
+          if($scope.time) $scope.formatString = 'DD.MM.YYYY HH:mm';
+          else $scope.formatString = 'DD.MM.YYYY';
+        }
+
+        // Set start date
+        if(!$scope.startDate) {
+          $scope.startDate = moment();
+        } else {
+          $scope.innerStartDate = angular.copy($scope.startDate);
+        }
+
+        // Set end date
+        if(!$scope.endDate) {
+          $scope.endDate = moment();
+        } else {
+          $scope.innerEndDate = angular.copy($scope.endDate);
+        }
+
+
+        $scope.format = function(){
+          $scope.modelFormat = $scope.innerStartDate.format($scope.formatString) + " - " + $scope.innerEndDate.format($scope.formatString);
+        };
+
+
+        $scope.open = function() {
+          $scope.isOpen = true;
+        };
+
+
+        $scope.close = function() {
+          $scope.isOpen = false;
+        };
+
+
+        $scope.confirm = function() {
+          $scope.startDate = angular.copy($scope.innerStartDate);
+          $scope.endDate = angular.copy($scope.innerEndDate);
+          $scope.close();
+        };
+
+
+        $scope.selectLastNDays = function(days){
+          $scope.startDate = moment().subtract(days, 'days');
+          $scope.endDate = moment();
+          $scope.innerStartDate = angular.copy($scope.startDate);
+          $scope.innerEndDate = angular.copy($scope.endDate);
+        };
+
+
+        $scope.selectLastMonth = function(){
+          $scope.startDate = moment().subtract(1, 'months');
+          $scope.endDate = moment();
+          $scope.innerStartDate = angular.copy($scope.startDate);
+          $scope.innerEndDate = angular.copy($scope.endDate);
+        };
+
+
+        $scope.selectThisMonth = function(){
+          $scope.startDate = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+          $scope.endDate = moment().endOf('month');
+          $scope.innerStartDate = angular.copy($scope.startDate);
+          $scope.innerEndDate = angular.copy($scope.endDate);
+        };
+
+
+        $scope.$watchGroup(["innerStartDate", "innerEndDate"], function(newValues){
+          if(newValues[0] && newValues[1]){
+            $scope.format();
+          }
+        });
+
+
+        $scope.$watchGroup(["startDate", "endDate"], function(){
+          $scope.innerStartDate = angular.copy($scope.startDate);
+          $scope.innerEndDate = angular.copy($scope.endDate);
+        });
+      }
+    }
+  });
 'use strict';
 
 /**
@@ -3504,24 +3798,25 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div class=\"nice-calendar-wrapper\">\n" +
     "                <div class=\"header\">\n" +
-    "                    <i class=\"fa fa-angle-left\" ng-click=\"previous()\"></i>\n" +
-    "                    <span>{{ month.format(\"MMMM, YYYY\" )}}</span>\n" +
-    "                    <i class=\"fa fa-angle-right\" ng-click=\"next()\"></i>\n" +
+    "                    <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
+    "                    <span title=\"{{ month.format('MM.YYYY' )}}\">{{ month.format(\"MMMM, YYYY\" )}}</span>\n" +
+    "                    <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"week names\">\n" +
-    "                    <span class=\"day\" translate>Mon</span>\n" +
-    "                    <span class=\"day\" translate>Tue</span>\n" +
-    "                    <span class=\"day\" translate>Wed</span>\n" +
-    "                    <span class=\"day\" translate>Thu</span>\n" +
-    "                    <span class=\"day\" translate>Fri</span>\n" +
-    "                    <span class=\"day weekend\" translate>Sat</span>\n" +
-    "                    <span class=\"day weekend\" translate>Sun</span>\n" +
+    "                    <span class=\"day\" translate>{{ translations.mon }}</span>\n" +
+    "                    <span class=\"day\" translate>{{ translations.tue }}</span>\n" +
+    "                    <span class=\"day\" translate>{{ translations.wed }}</span>\n" +
+    "                    <span class=\"day\" translate>{{ translations.thu }}</span>\n" +
+    "                    <span class=\"day\" translate>{{ translations.fri }}</span>\n" +
+    "                    <span class=\"day weekend\" translate>{{ translations.sat }}</span>\n" +
+    "                    <span class=\"day weekend\" translate>{{ translations.sun }}</span>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"week\" ng-repeat=\"week in weeks\">\n" +
     "                    <span\n" +
     "                        class=\"day\"\n" +
+    "                        title=\"{{ day.date.format('DD.MM.YYYY') }}\"\n" +
     "                        ng-class=\"{\n" +
     "                            today: day.isToday,\n" +
     "                            'different-month': !day.isCurrentMonth,\n" +
@@ -3540,7 +3835,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        \"\n" +
     "                        ng-click=\"select(day)\"\n" +
     "                        ng-repeat=\"day in week.days\"\n" +
-    "                        >{{ day.number }}\n" +
+    "                        >\n" +
+    "                        {{ day.number }}\n" +
+    "                        <p class=\"popup\">{{ popupText }}</p>\n" +
     "                    </span>\n" +
     "                </div>\n" +
     "                <div class=\"clearfix\"></div>\n" +
@@ -3549,6 +3846,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                <div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
     "                    <div class=\"time-picker\">\n" +
     "                        <select\n" +
+    "                          title=\"{{ translations.selectStartTime }}\"\n" +
     "                          class=\"time-picker-hour\"\n" +
     "                          ng-model=\"startDateHour\"\n" +
     "                          ng-change=\"startHourChange(startDateHour)\"\n" +
@@ -3558,6 +3856,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    <div class=\"time-picker\">\n" +
     "                        <select\n" +
+    "                          title=\"{{ translations.selectStartTime }}\"\n" +
     "                          class=\"time-picker-minute\"\n" +
     "                          ng-model=\"startDateMinute\"\n" +
     "                          ng-change=\"startMinuteChange(startDateMinute)\"\n" +
@@ -3571,6 +3870,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    <div class=\"time-picker\">\n" +
     "                         <select\n" +
+    "                          title=\"{{ translations.selectEndTime }}\"\n" +
     "                          class=\"time-picker-hour\"\n" +
     "                          ng-model=\"endDateHour\"\n" +
     "                          ng-change=\"endHourChange(endDateHour)\"\n" +
@@ -3580,6 +3880,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    <div class=\"time-picker no-border-right\">\n" +
     "                        <select\n" +
+    "                          title=\"{{ translations.selectEndTime }}\"\n" +
     "                          class=\"time-picker-minute\"\n" +
     "                          ng-model=\"endDateMinute\"\n" +
     "                          ng-change=\"endMinuteChange(endDateMinute)\"\n" +
@@ -3590,12 +3891,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <div class=\"nice-selected-dates\">\n" +
     "                    <div class=\"nice-start-date\">\n" +
-    "                        <label translate>Start</label>\n" +
-    "                        <div>{{ formatDate(startDate) }}</div>\n" +
+    "                        <label>{{ translations.start }}</label>\n" +
+    "                        <div ng-class=\"startTimeClass\">{{ formatDate(startDate) }}</div>\n" +
     "                    </div>\n" +
     "                    <div class=\"nice-end-date\">\n" +
-    "                        <label translate>End</label>\n" +
-    "                        <div>{{ formatDate(endDate) }}</div>\n" +
+    "                        <label>{{ translations.end }}</label>\n" +
+    "                        <div ng-class=\"endTimeClass\">{{ formatDate(endDate) }}</div>\n" +
     "                    </div>\n" +
     "                    <div class=\"clearfix\"></div>\n" +
     "                </div>\n" +
@@ -3681,32 +3982,57 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('views/nice-date.html',
-    "<div class=\"nice-date\" ng-form=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "<div class=\"nice-date\" ng-form=\"forma\">\n" +
+    "    <div class=\"date\">\n" +
+    "        <div class=\"header\">\n" +
+    "            <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
+    "            <span title=\"{{ month.format('MM.YYYY' ) }}\">{{ month.format('MMMM, YYYY' ) }}</span>\n" +
+    "            <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\">\n" +
-    "                <input\n" +
-    "                    type=\"text\"\n" +
-    "                    class=\"form-control\"\n" +
-    "                    datepicker-popup=\"{{ format }}\"\n" +
-    "                    ng-model=\"model\"\n" +
-    "                    is-open=\"opened\"\n" +
-    "                    min-date=\"{{ min }}\"\n" +
-    "                    max-date=\"max\"\n" +
-    "                    datepicker-options=\"dateOptions\"\n" +
-    "                    ng-required=\"true\"\n" +
-    "                    close-text=\"Close\"\n" +
-    "                    ng-click=\"open($event)\"\n" +
-    "                />\n" +
+    "        <div class=\"week names\">\n" +
+    "            <span class=\"day\" translate>{{ translations.mon }}</span>\n" +
+    "            <span class=\"day\" translate>{{ translations.tue }}</span>\n" +
+    "            <span class=\"day\" translate>{{ translations.wed }}</span>\n" +
+    "            <span class=\"day\" translate>{{ translations.thu }}</span>\n" +
+    "            <span class=\"day\" translate>{{ translations.fri }}</span>\n" +
+    "            <span class=\"day weekend\" translate>{{ translations.sat }}</span>\n" +
+    "            <span class=\"day weekend\" translate>{{ translations.sun }}</span>\n" +
+    "        </div>\n" +
     "\n" +
-    "                <span class=\"input-group-btn\">\n" +
-    "                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"open($event)\"><i class=\"fa fa-calendar\"></i></button>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
+    "        <div class=\"week\" ng-repeat=\"week in weeks\">\n" +
+    "            <span\n" +
+    "                class=\"day\"\n" +
+    "                title=\"{{ day.date.format('DD.MM.YYYY') }}\"\n" +
+    "                ng-class=\"{\n" +
+    "                    'today': day.isToday,\n" +
+    "                    'different-month': !day.isCurrentMonth,\n" +
+    "                    'selected': isSameDay(model, day.date),\n" +
+    "                    'weekend': day.isWeekday,\n" +
+    "                    'disabled': day.isDisabled\n" +
+    "                }\"\n" +
+    "                ng-click=\"select(day)\"\n" +
+    "                ng-repeat=\"day in week.days\"\n" +
+    "            >{{ day.number }}</span>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "    <div class=\"time\" ng-if=\"time\">\n" +
+    "        <div class=\"time-picker time-picker-hour\">\n" +
+    "            <select\n" +
+    "                ng-model=\"dateHour\"\n" +
+    "                ng-change=\"timeChange(dateHour, null)\"\n" +
+    "                ng-options=\"hour for hour in hours\">\n" +
+    "            </select>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"time-picker time-picker-minute\">\n" +
+    "            <select\n" +
+    "                ng-model=\"dateMinute\"\n" +
+    "                ng-change=\"timeChange(null, dateMinute)\"\n" +
+    "                ng-options=\"minute for minute in minutes\">\n" +
+    "            </select>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>"
@@ -3757,6 +4083,52 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "</div>\n" +
     "\n"
+  );
+
+
+  $templateCache.put('views/nice-datetimerange-picker-2.html',
+    "<div class=\"nice-datetimerange-picker-2\" ng-form=\"formDateRangePicker\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"close()\" ng-if=\"isOpen\"></div>\n" +
+    "\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "            <div class=\"input-group\" ng-click=\"open()\">\n" +
+    "                <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\">\n" +
+    "                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"dtp-wrapper\" ng-show=\"isOpen\">\n" +
+    "                <div class=\"dtp-buttons-left\">\n" +
+    "                    <div class=\"dtp-buttons-top\">\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(1)\">Last 24 hours</a>\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"dtp-buttons-bottom\">\n" +
+    "                        <a class=\"btn btn-danger btn-block\" ng-click=\"close()\">Cancel</a>\n" +
+    "                        <a class=\"btn btn-success btn-block\" ng-click=\"confirm()\">OK</a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "                <div class=\"dtp-left\">\n" +
+    "                    <nice-date model=\"innerStartDate\" time=\"time\"></nice-date>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"dtp-right\">\n" +
+    "                    <nice-date model=\"innerEndDate\" time=\"time\"></nice-date>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>"
   );
 
 

@@ -7,24 +7,25 @@
         <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <div class="nice-calendar-wrapper">
                 <div class="header">
-                    <i class="fa fa-angle-left" ng-click="previous()"></i>
-                    <span>{{ month.format("MMMM, YYYY" )}}</span>
-                    <i class="fa fa-angle-right" ng-click="next()"></i>
+                    <i class="fa fa-angle-left" ng-click="previous()" title="{{ translations.prevMonth }}"></i>
+                    <span title="{{ month.format('MM.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
+                    <i class="fa fa-angle-right" ng-click="next()" title="{{ translations.nextMonth }}"></i>
                 </div>
 
                 <div class="week names">
-                    <span class="day" translate>Mon</span>
-                    <span class="day" translate>Tue</span>
-                    <span class="day" translate>Wed</span>
-                    <span class="day" translate>Thu</span>
-                    <span class="day" translate>Fri</span>
-                    <span class="day weekend" translate>Sat</span>
-                    <span class="day weekend" translate>Sun</span>
+                    <span class="day" translate>{{ translations.mon }}</span>
+                    <span class="day" translate>{{ translations.tue }}</span>
+                    <span class="day" translate>{{ translations.wed }}</span>
+                    <span class="day" translate>{{ translations.thu }}</span>
+                    <span class="day" translate>{{ translations.fri }}</span>
+                    <span class="day weekend" translate>{{ translations.sat }}</span>
+                    <span class="day weekend" translate>{{ translations.sun }}</span>
                 </div>
 
                 <div class="week" ng-repeat="week in weeks">
                     <span
                         class="day"
+                        title="{{ day.date.format('DD.MM.YYYY') }}"
                         ng-class="{
                             today: day.isToday,
                             'different-month': !day.isCurrentMonth,
@@ -43,7 +44,9 @@
                         "
                         ng-click="select(day)"
                         ng-repeat="day in week.days"
-                        >{{ day.number }}
+                        >
+                        {{ day.number }}
+                        <p class="popup">{{ popupText }}</p>
                     </span>
                 </div>
                 <div class="clearfix"></div>
@@ -52,6 +55,7 @@
                 <div class="nice-calendar-time" ng-if="time">
                     <div class="time-picker">
                         <select
+                          title="{{ translations.selectStartTime }}"
                           class="time-picker-hour"
                           ng-model="startDateHour"
                           ng-change="startHourChange(startDateHour)"
@@ -61,6 +65,7 @@
 
                     <div class="time-picker">
                         <select
+                          title="{{ translations.selectStartTime }}"
                           class="time-picker-minute"
                           ng-model="startDateMinute"
                           ng-change="startMinuteChange(startDateMinute)"
@@ -74,6 +79,7 @@
 
                     <div class="time-picker">
                          <select
+                          title="{{ translations.selectEndTime }}"
                           class="time-picker-hour"
                           ng-model="endDateHour"
                           ng-change="endHourChange(endDateHour)"
@@ -83,6 +89,7 @@
 
                     <div class="time-picker no-border-right">
                         <select
+                          title="{{ translations.selectEndTime }}"
                           class="time-picker-minute"
                           ng-model="endDateMinute"
                           ng-change="endMinuteChange(endDateMinute)"
@@ -93,12 +100,12 @@
 
                 <div class="nice-selected-dates">
                     <div class="nice-start-date">
-                        <label translate>Start</label>
-                        <div>{{ formatDate(startDate) }}</div>
+                        <label>{{ translations.start }}</label>
+                        <div ng-class="startTimeClass">{{ formatDate(startDate) }}</div>
                     </div>
                     <div class="nice-end-date">
-                        <label translate>End</label>
-                        <div>{{ formatDate(endDate) }}</div>
+                        <label>{{ translations.end }}</label>
+                        <div ng-class="endTimeClass">{{ formatDate(endDate) }}</div>
                     </div>
                     <div class="clearfix"></div>
                 </div>

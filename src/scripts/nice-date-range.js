@@ -48,7 +48,6 @@ angular.module('niceElements')
       },
 
       controller: function($scope, $filter) { //gettextCatalog
-
         $scope.opts = {
           //format: 'DD.MM.YYYY',
           locale: {

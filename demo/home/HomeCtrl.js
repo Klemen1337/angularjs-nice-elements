@@ -22,8 +22,14 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   $scope.test = moment().subtract(10, "years");
 
   $scope.testRange = {
-    startDate: moment("2016-02-28T05:00:00Z"),
-    endDate: "2016-02-28T05:00:00Z"
+    startDate: moment(),
+    endDate: moment().add(1, 'days')
+  };
+
+
+  $scope.dtp2 = {
+    startDate: moment(),
+    endDate: moment().add(1, 'days')
   };
 
   $scope.minRange = moment();

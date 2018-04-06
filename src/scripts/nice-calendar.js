@@ -7,7 +7,7 @@
  * # niceCalendar
  */
 angular.module('niceElements')
-  .directive("niceCalendar", function() {
+  .directive("niceCalendar", function($timeout) {
     return {
       restrict: "E",
       templateUrl: "views/nice-calendar.html",
@@ -21,19 +21,41 @@ angular.module('niceElements')
         noMargin: '@',
         color: '@',
         endDate: '=',
-        startDate: '='
+        startDate: '=',
+        translations: '@'
       },
       link: function(scope) {
+        scope.translations = {
+          selectStartDate: "Select start date",
+          selectStartTime: "Select start time",
+          selectEndDate: "Select end date",
+          selectEndTime: "Select end time",
+          nextMonth: "Next month",
+          prevMonth: "Previous month",
+          start: "Start",
+          end: "End",
+          mon: "Mon",
+          tue: "Tue",
+          wed: "Wed",
+          thu: "Thu",
+          fri: "Fri",
+          sat: "Sat",
+          sun: "Sun",
+          january: "January",
+          february: "February",
+
+        };
 
         // ------------------ Init default values ------------------
         scope.selectStart = true;
+        scope.popupText = scope.translations.selectStartDate;
 
         scope.hours = [
           0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
         ];
 
         scope.minutes = [
-          0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55
+          0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59
         ];
 
 
@@ -91,7 +113,9 @@ angular.module('niceElements')
               // Set start date
               scope.startDate = selectedDate;
               scope.selectStart = false;
+              scope.popupText = scope.translations.selectEndDate;
               scope.formCalendar.$setDirty();
+              scope.displayStartChange();
 
               // If start date is after end date
               if(scope.startDate.isAfter(scope.endDate)){
@@ -104,7 +128,9 @@ angular.module('niceElements')
               // Set end date
               scope.endDate = selectedDate;
               scope.selectStart = true;
+              scope.popupText = scope.translations.selectStartDate;
               scope.formCalendar.$setDirty();
+              scope.displayEndChange();
 
               // If end date is before start date
               if(scope.endDate.isBefore(scope.startDate)){
@@ -115,11 +141,28 @@ angular.module('niceElements')
         };
 
 
+        // ------------------ Display date changes ------------------
+        scope.displayStartChange = function(){
+          scope.startTimeClass = "change";
+          $timeout(function(){
+            scope.startTimeClass = "";
+          }, 1000);
+        };
+
+        scope.displayEndChange = function(){
+          scope.endTimeClass = "change";
+          $timeout(function(){
+            scope.endTimeClass = "";
+          }, 1000);
+        };
+
+
         // ------------------ Time changes ------------------
         scope.startHourChange = function(value){
           scope.startDateHour = value;
           scope.startDate = moment(scope.startDate).hours(scope.startDateHour);
           scope.formCalendar.$setDirty();
+          scope.displayStartChange();
         };
 
 
@@ -127,6 +170,7 @@ angular.module('niceElements')
           scope.startDateMinute = value;
           scope.startDate = moment(scope.startDate).minutes(scope.startDateMinute);
           scope.formCalendar.$setDirty();
+          scope.displayStartChange();
         };
 
 
@@ -134,6 +178,7 @@ angular.module('niceElements')
           scope.endDateHour = value;
           scope.endDate = moment(scope.endDate).hours(scope.endDateHour);
           scope.formCalendar.$setDirty();
+          scope.displayEndChange();
         };
 
 
@@ -141,6 +186,7 @@ angular.module('niceElements')
           scope.endDateMinute = value;
           scope.endDate = moment(scope.endDate).minutes(scope.endDateMinute);
           scope.formCalendar.$setDirty();
+          scope.displayEndChange();
         };
 
 

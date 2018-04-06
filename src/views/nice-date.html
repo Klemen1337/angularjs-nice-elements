@@ -1,29 +1,54 @@
-<div class="nice-date" ng-form="form" ng-class="{ 'margin-bottom-0': noMargin }">
-    <div class="row">
-        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+<div class="nice-date" ng-form="forma">
+    <div class="date">
+        <div class="header">
+            <i class="fa fa-angle-left" ng-click="previous()" title="{{ translations.prevMonth }}"></i>
+            <span title="{{ month.format('MM.YYYY' ) }}">{{ month.format('MMMM, YYYY' ) }}</span>
+            <i class="fa fa-angle-right" ng-click="next()" title="{{ translations.nextMonth }}"></i>
         </div>
 
-        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-            <div class="input-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    datepicker-popup="{{ format }}"
-                    ng-model="model"
-                    is-open="opened"
-                    min-date="{{ min }}"
-                    max-date="max"
-                    datepicker-options="dateOptions"
-                    ng-required="true"
-                    close-text="Close"
-                    ng-click="open($event)"
-                />
+        <div class="week names">
+            <span class="day" translate>{{ translations.mon }}</span>
+            <span class="day" translate>{{ translations.tue }}</span>
+            <span class="day" translate>{{ translations.wed }}</span>
+            <span class="day" translate>{{ translations.thu }}</span>
+            <span class="day" translate>{{ translations.fri }}</span>
+            <span class="day weekend" translate>{{ translations.sat }}</span>
+            <span class="day weekend" translate>{{ translations.sun }}</span>
+        </div>
 
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
+        <div class="week" ng-repeat="week in weeks">
+            <span
+                class="day"
+                title="{{ day.date.format('DD.MM.YYYY') }}"
+                ng-class="{
+                    'today': day.isToday,
+                    'different-month': !day.isCurrentMonth,
+                    'selected': isSameDay(model, day.date),
+                    'weekend': day.isWeekday,
+                    'disabled': day.isDisabled
+                }"
+                ng-click="select(day)"
+                ng-repeat="day in week.days"
+            >{{ day.number }}</span>
+        </div>
+    </div>
+
+
+    <div class="time" ng-if="time">
+        <div class="time-picker time-picker-hour">
+            <select
+                ng-model="dateHour"
+                ng-change="timeChange(dateHour, null)"
+                ng-options="hour for hour in hours">
+            </select>
+        </div>
+
+        <div class="time-picker time-picker-minute">
+            <select
+                ng-model="dateMinute"
+                ng-change="timeChange(null, dateMinute)"
+                ng-options="minute for minute in minutes">
+            </select>
         </div>
     </div>
 </div>
