@@ -4146,7 +4146,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div class=\"input-group\" ng-click=\"open()\">\n" +
-    "                <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\">\n" +
+    "                <!-- <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\"> -->\n" +
+    "                <div class=\"form-control\">{{ modelFormat }}</div>\n" +
     "                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
     "            </div>\n" +
     "\n" +

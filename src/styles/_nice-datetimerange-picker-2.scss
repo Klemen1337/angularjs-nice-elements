@@ -2,7 +2,21 @@
   margin-bottom: 10px;
   display: block;
 
+  .input-group{
+    .input-group-addon {
+      cursor: pointer;
+      background: $nice-addon-bg;
+
+      &:hover {
+        // Set icon color and background
+        background-color: $nice-base-color;
+        color: white;
+      }
+    }
+  }
+
   .form-control{
+    cursor: pointer;
     min-width: 50px;
     background: $nice-input-bg;
     border: 1px solid $nice-input-border;
