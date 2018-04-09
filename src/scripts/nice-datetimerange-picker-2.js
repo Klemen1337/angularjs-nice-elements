@@ -124,6 +124,21 @@ angular.module('niceElements')
         });
 
 
+
+        $scope.inputChanged = function(){
+          // console.log($scope.modelFormat);
+          // var dates = $scope.modelFormat.split(" - ");
+          
+          // var start = moment(dates[0], "DD.MM.YYYY HH:mm");
+          // var end = moment(dates[2], "DD.MM.YYYY HH:mm");
+          // console.log(dates);
+          // console.log(start.format());
+          // console.log(end.format());
+          // $scope.startDate = start;
+          // $scope.endDate = end;
+        }
+
+
         $scope.$watchGroup(["startDate", "endDate"], function(){
           $scope.innerStartDate = angular.copy($scope.startDate);
           $scope.innerEndDate = angular.copy($scope.endDate);

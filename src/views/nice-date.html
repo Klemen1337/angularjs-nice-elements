@@ -1,24 +1,24 @@
 <div class="nice-date" ng-form="forma">
-    <div class="date">
-        <div class="header">
+    <div class="nice-date-date">
+        <div class="nice-date-header">
             <i class="fa fa-angle-left" ng-click="previous()" title="{{ translations.prevMonth }}"></i>
             <span title="{{ month.format('MM.YYYY' ) }}">{{ month.format('MMMM, YYYY' ) }}</span>
             <i class="fa fa-angle-right" ng-click="next()" title="{{ translations.nextMonth }}"></i>
         </div>
 
-        <div class="week names">
-            <span class="day" translate>{{ translations.mon }}</span>
-            <span class="day" translate>{{ translations.tue }}</span>
-            <span class="day" translate>{{ translations.wed }}</span>
-            <span class="day" translate>{{ translations.thu }}</span>
-            <span class="day" translate>{{ translations.fri }}</span>
-            <span class="day weekend" translate>{{ translations.sat }}</span>
-            <span class="day weekend" translate>{{ translations.sun }}</span>
+        <div class="nice-date-week names">
+            <span class="nice-date-day" translate>{{ translations.mon }}</span>
+            <span class="nice-date-day" translate>{{ translations.tue }}</span>
+            <span class="nice-date-day" translate>{{ translations.wed }}</span>
+            <span class="nice-date-day" translate>{{ translations.thu }}</span>
+            <span class="nice-date-day" translate>{{ translations.fri }}</span>
+            <span class="nice-date-day weekend" translate>{{ translations.sat }}</span>
+            <span class="nice-date-day weekend" translate>{{ translations.sun }}</span>
         </div>
 
-        <div class="week" ng-repeat="week in weeks">
+        <div class="nice-date-week" ng-repeat="week in weeks">
             <span
-                class="day"
+                class="nice-date-day"
                 title="{{ day.date.format('DD.MM.YYYY') }}"
                 ng-class="{
                     'today': day.isToday,
@@ -35,7 +35,7 @@
     </div>
 
 
-    <div class="time" ng-if="time">
+    <div class="nice-date-time" ng-if="time">
         <div class="time-picker time-picker-hour">
             <select
                 ng-model="dateHour"

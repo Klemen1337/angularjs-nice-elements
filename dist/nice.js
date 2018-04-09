@@ -1302,6 +1302,21 @@ angular.module('niceElements')
         });
 
 
+
+        $scope.inputChanged = function(){
+          // console.log($scope.modelFormat);
+          // var dates = $scope.modelFormat.split(" - ");
+          
+          // var start = moment(dates[0], "DD.MM.YYYY HH:mm");
+          // var end = moment(dates[2], "DD.MM.YYYY HH:mm");
+          // console.log(dates);
+          // console.log(start.format());
+          // console.log(end.format());
+          // $scope.startDate = start;
+          // $scope.endDate = end;
+        }
+
+
         $scope.$watchGroup(["startDate", "endDate"], function(){
           $scope.innerStartDate = angular.copy($scope.startDate);
           $scope.innerEndDate = angular.copy($scope.endDate);
@@ -4015,26 +4030,26 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('views/nice-date.html',
     "<div class=\"nice-date\" ng-form=\"forma\">\n" +
-    "    <div class=\"date\">\n" +
-    "        <div class=\"header\">\n" +
+    "    <div class=\"nice-date-date\">\n" +
+    "        <div class=\"nice-date-header\">\n" +
     "            <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
     "            <span title=\"{{ month.format('MM.YYYY' ) }}\">{{ month.format('MMMM, YYYY' ) }}</span>\n" +
     "            <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"week names\">\n" +
-    "            <span class=\"day\" translate>{{ translations.mon }}</span>\n" +
-    "            <span class=\"day\" translate>{{ translations.tue }}</span>\n" +
-    "            <span class=\"day\" translate>{{ translations.wed }}</span>\n" +
-    "            <span class=\"day\" translate>{{ translations.thu }}</span>\n" +
-    "            <span class=\"day\" translate>{{ translations.fri }}</span>\n" +
-    "            <span class=\"day weekend\" translate>{{ translations.sat }}</span>\n" +
-    "            <span class=\"day weekend\" translate>{{ translations.sun }}</span>\n" +
+    "        <div class=\"nice-date-week names\">\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.mon }}</span>\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.tue }}</span>\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.wed }}</span>\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.thu }}</span>\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.fri }}</span>\n" +
+    "            <span class=\"nice-date-day weekend\" translate>{{ translations.sat }}</span>\n" +
+    "            <span class=\"nice-date-day weekend\" translate>{{ translations.sun }}</span>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"week\" ng-repeat=\"week in weeks\">\n" +
+    "        <div class=\"nice-date-week\" ng-repeat=\"week in weeks\">\n" +
     "            <span\n" +
-    "                class=\"day\"\n" +
+    "                class=\"nice-date-day\"\n" +
     "                title=\"{{ day.date.format('DD.MM.YYYY') }}\"\n" +
     "                ng-class=\"{\n" +
     "                    'today': day.isToday,\n" +
@@ -4051,7 +4066,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "\n" +
     "\n" +
-    "    <div class=\"time\" ng-if=\"time\">\n" +
+    "    <div class=\"nice-date-time\" ng-if=\"time\">\n" +
     "        <div class=\"time-picker time-picker-hour\">\n" +
     "            <select\n" +
     "                ng-model=\"dateHour\"\n" +
@@ -4131,7 +4146,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div class=\"input-group\" ng-click=\"open()\">\n" +
-    "                <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\">\n" +
+    "                <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\">\n" +
     "                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
     "            </div>\n" +
     "\n" +

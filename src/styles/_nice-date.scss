@@ -2,7 +2,7 @@
   $spacing: 10px;
   $icon-width: 40px;
 
-  .date {
+  .nice-date-date {
     border-radius: $nice-border-radius;
     background: white;
     border: solid 1px $nice-border;
@@ -13,7 +13,7 @@
     height: 250px;
     width: 100%;
 
-    .header {
+    .nice-date-header {
       background: $nice-base-color;
       line-height: 40px;
       color: white;
@@ -39,6 +39,7 @@
       }
 
       span {
+        user-select: none;
         float: left;
         width: 100%;
         text-transform: uppercase;
@@ -50,7 +51,7 @@
       }
     }
 
-    .week {
+    .nice-date-week {
       width: 100%;
       border-top: solid 1px $nice-border-color;
       display: flex;
@@ -60,7 +61,8 @@
         border-top: none;
       }
 
-      .day {
+      .nice-date-day {
+        user-select: none;
         position: relative;
         min-height: 20px;
         //line-height: $day-height;
@@ -141,7 +143,7 @@
   }
 
 
-  .time {
+  .nice-date-time {
     display: flex;
     width: 100%;
     margin-top: 10px;
