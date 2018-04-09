@@ -2893,7 +2893,7 @@ angular.module('niceElements')
         if (!attrs.help) { attrs.help = ''; }
         if (!attrs.name) { attrs.name = ''; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
-        if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 2; }
+        if (!attrs.minDecimalsCutZeros) { attrs.minDecimalsCutZeros = 0; }
 
         if(!scope.textArea) scope.elementType = "input";
         else scope.elementType = "textarea";
@@ -2909,9 +2909,9 @@ angular.module('niceElements')
           attrs.symbol = '%';
         }
         else if(attrs.type == "number"){
-          scope.internalType = "text";
+          scope.internalType = "number";
           if(scope.model){
-            scope.model = parseFloat(scope.model);
+            scope.model = Number(scope.model);
           } else {
             scope.model = 0;
           }
@@ -2929,9 +2929,9 @@ angular.module('niceElements')
         }
 
         if (angular.isDefined(attrs.minDecimalsCutZeros) && attrs.type=='number'){
-          scope.model = parseFloat(scope.model);
+          scope.model = Number(scope.model);
           if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros))
-            scope.model = (parseFloat(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros));
+            scope.model = (Number(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros));
         }
 
         if (angular.isDefined(scope.regex) && scope.regex!=''){
