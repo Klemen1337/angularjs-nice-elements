@@ -64,6 +64,8 @@ angular.module('niceElements')
 
 
         $scope.close = function() {
+          $scope.innerStartDate = angular.copy($scope.startDate);
+          $scope.innerEndDate = angular.copy($scope.endDate);
           $scope.isOpen = false;
         };
 
@@ -75,27 +77,27 @@ angular.module('niceElements')
         };
 
 
+        $scope.selectToday = function(){
+          $scope.innerStartDate = moment().startOf('day');
+          $scope.innerEndDate = moment().endOf('day');
+        };
+
+
         $scope.selectLastNDays = function(days){
-          $scope.startDate = moment().subtract(days, 'days').startOf('day');
-          $scope.endDate = moment().endOf('day');
-          $scope.innerStartDate = angular.copy($scope.startDate);
-          $scope.innerEndDate = angular.copy($scope.endDate);
+          $scope.innerStartDate = moment().subtract(days, 'days').startOf('day');
+          $scope.innerEndDate = moment().endOf('day');
         };
 
 
         $scope.selectLastMonth = function(){
-          $scope.startDate = moment().subtract(1, 'months').startOf('month').startOf('date');
-          $scope.endDate = moment().subtract(1, 'months').endOf('month').endOf('date');
-          $scope.innerStartDate = angular.copy($scope.startDate);
-          $scope.innerEndDate = angular.copy($scope.endDate);
+          $scope.innerStartDate = moment().subtract(1, 'months').startOf('month').startOf('date');
+          $scope.innerEndDate = moment().subtract(1, 'months').endOf('month').endOf('date');
         };
 
 
         $scope.selectThisMonth = function(){
-          $scope.startDate = moment().startOf('month').startOf('date');
-          $scope.endDate = moment().endOf('month').endOf('date');
-          $scope.innerStartDate = angular.copy($scope.startDate);
-          $scope.innerEndDate = angular.copy($scope.endDate);
+          $scope.innerStartDate = moment().startOf('month').startOf('date');
+          $scope.innerEndDate = moment().endOf('month').endOf('date');
         };
 
 
@@ -122,21 +124,6 @@ angular.module('niceElements')
             }
           }
         });
-
-
-
-        $scope.inputChanged = function(){
-          // console.log($scope.modelFormat);
-          // var dates = $scope.modelFormat.split(" - ");
-          
-          // var start = moment(dates[0], "DD.MM.YYYY HH:mm");
-          // var end = moment(dates[2], "DD.MM.YYYY HH:mm");
-          // console.log(dates);
-          // console.log(start.format());
-          // console.log(end.format());
-          // $scope.startDate = start;
-          // $scope.endDate = end;
-        }
 
 
         $scope.$watchGroup(["startDate", "endDate"], function(){
