@@ -804,7 +804,8 @@ angular.module('niceElements')
         model: '=',
         time: '=',
         maxDate: '=',
-        minDate: '='
+        minDate: '=',
+        nextDate: '='
       },
       controller: function($scope) {
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
@@ -889,6 +890,18 @@ angular.module('niceElements')
           )
         };
 
+        $scope.isBetween = function(date1, date2, date3){
+          if(!$scope.nextDate){
+            return false;
+          } else if($scope.isSameDay(date1, date2) || $scope.isSameDay(date1, date3)){
+            return true;
+          } else if(date2.isBefore(date3)){
+            return $scope._removeTime(date1).isBetween(date2, date3);
+          } else {
+            return $scope._removeTime(date1).isBetween(date3, date2);
+          }
+        }
+
 
         // ------------------ Format date ------------------
         $scope.formatDate = function(date){
@@ -953,7 +966,7 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watch("model", function(){
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(){
           $scope.boostrap();
         });
 
@@ -1219,7 +1232,7 @@ angular.module('niceElements')
 
 
         $scope.format = function(){
-          $scope.modelFormat = $scope.innerStartDate.format($scope.formatString) + " - " + $scope.innerEndDate.format($scope.formatString);
+          $scope.modelFormat = $scope.startDate.format($scope.formatString) + " - " + $scope.endDate.format($scope.formatString);
         };
 
 
@@ -1241,32 +1254,50 @@ angular.module('niceElements')
 
 
         $scope.selectLastNDays = function(days){
-          $scope.startDate = moment().subtract(days, 'days');
-          $scope.endDate = moment();
+          $scope.startDate = moment().subtract(days, 'days').startOf('day');
+          $scope.endDate = moment().endOf('day');
           $scope.innerStartDate = angular.copy($scope.startDate);
           $scope.innerEndDate = angular.copy($scope.endDate);
         };
 
 
         $scope.selectLastMonth = function(){
-          $scope.startDate = moment().subtract(1, 'months');
-          $scope.endDate = moment();
+          $scope.startDate = moment().subtract(1, 'months').startOf('month').startOf('date');
+          $scope.endDate = moment().subtract(1, 'months').endOf('month').endOf('date');
           $scope.innerStartDate = angular.copy($scope.startDate);
           $scope.innerEndDate = angular.copy($scope.endDate);
         };
 
 
         $scope.selectThisMonth = function(){
-          $scope.startDate = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
-          $scope.endDate = moment().endOf('month');
+          $scope.startDate = moment().startOf('month').startOf('date');
+          $scope.endDate = moment().endOf('month').endOf('date');
           $scope.innerStartDate = angular.copy($scope.startDate);
           $scope.innerEndDate = angular.copy($scope.endDate);
         };
 
 
+        // ------------------ Remove time from date ------------------
+        $scope._removeTime = function(date) {
+          return date.hour(0).minute(0).second(0).millisecond(0);
+        };
+
+
         $scope.$watchGroup(["innerStartDate", "innerEndDate"], function(newValues){
           if(newValues[0] && newValues[1]){
-            $scope.format();
+            // Check if start date is after end date
+            if($scope.innerStartDate.isAfter($scope.innerEndDate)){
+              var temp = angular.copy($scope.innerStartDate);
+              $scope.innerStartDate = angular.copy($scope.innerEndDate); 
+              $scope.innerEndDate = temp; 
+            }
+
+            // Check if end date is before start date
+            if($scope.innerEndDate.isBefore($scope.innerStartDate)){
+              var temp = angular.copy($scope.innerStartDate);
+              $scope.innerStartDate = angular.copy($scope.innerEndDate); 
+              $scope.innerEndDate = temp; 
+            }
           }
         });
 
@@ -1274,6 +1305,7 @@ angular.module('niceElements')
         $scope.$watchGroup(["startDate", "endDate"], function(){
           $scope.innerStartDate = angular.copy($scope.startDate);
           $scope.innerEndDate = angular.copy($scope.endDate);
+          $scope.format();
         });
       }
     }
@@ -4009,7 +4041,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    'different-month': !day.isCurrentMonth,\n" +
     "                    'selected': isSameDay(model, day.date),\n" +
     "                    'weekend': day.isWeekday,\n" +
-    "                    'disabled': day.isDisabled\n" +
+    "                    'disabled': day.isDisabled,\n" +
+    "                    'between': isBetween(day.date, model, nextDate)\n" +
     "                }\"\n" +
     "                ng-click=\"select(day)\"\n" +
     "                ng-repeat=\"day in week.days\"\n" +
@@ -4119,11 +4152,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "                <div class=\"dtp-left\">\n" +
-    "                    <nice-date model=\"innerStartDate\" time=\"time\"></nice-date>\n" +
+    "                    <nice-date model=\"innerStartDate\" next-date=\"innerEndDate\" time=\"time\"></nice-date>\n" +
     "                </div>\n" +
     "\n" +
     "                <div class=\"dtp-right\">\n" +
-    "                    <nice-date model=\"innerEndDate\" time=\"time\"></nice-date>\n" +
+    "                    <nice-date model=\"innerEndDate\" next-date=\"innerStartDate\" time=\"time\"></nice-date>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +

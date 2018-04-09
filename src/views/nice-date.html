@@ -25,7 +25,8 @@
                     'different-month': !day.isCurrentMonth,
                     'selected': isSameDay(model, day.date),
                     'weekend': day.isWeekday,
-                    'disabled': day.isDisabled
+                    'disabled': day.isDisabled,
+                    'between': isBetween(day.date, model, nextDate)
                 }"
                 ng-click="select(day)"
                 ng-repeat="day in week.days"

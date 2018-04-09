@@ -6681,52 +6681,79 @@ p.nice {
     .nice-datetimerange-picker .dtp-range-wrapper .dtp-content .dtp-date-view {
       min-height: 300px; }
 
-.nice-datetimerange-picker-2 .form-control {
-  min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9; }
-  .nice-datetimerange-picker-2 .form-control:active, .nice-datetimerange-picker-2 .form-control:focus {
-    border-color: #4abeb4;
-    -webkit-box-shadow: inset 0 0 0;
-    box-shadow: inset 0 0 0; }
-    .input-group-addon .nice-datetimerange-picker-2 .form-control:active, .input-group-addon .nice-datetimerange-picker-2 .form-control:focus {
-      border-color: #4abeb4; }
-  .nice-datetimerange-picker-2 .form-control:disabled {
+.nice-datetimerange-picker-2 {
+  margin-bottom: 10px;
+  display: block; }
+  .nice-datetimerange-picker-2 .form-control {
+    min-width: 50px;
     background: white;
-    border-color: #EDEFF2;
-    opacity: 0.65; }
-.nice-datetimerange-picker-2 .dtp-wrapper {
-  border-radius: 3px;
-  position: absolute;
-  left: 15px;
-  top: 40px;
-  width: 650px;
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #cbd4d9;
-  z-index: 900;
-  display: flex; }
-  .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left {
-    min-width: 100px;
-    display: flex;
-    flex-direction: column; }
-    .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left .dtp-buttons-top {
-      flex-grow: 1; }
-    .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left .dtp-buttons-bottom {
-      margin-top: 5px; }
-  .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
-    flex-grow: 1;
-    margin: 10px;
-    padding-left: 10px;
+    border: 1px solid #cbd4d9; }
+    .nice-datetimerange-picker-2 .form-control:active, .nice-datetimerange-picker-2 .form-control:focus {
+      border-color: #4abeb4;
+      -webkit-box-shadow: inset 0 0 0;
+      box-shadow: inset 0 0 0; }
+      .input-group-addon .nice-datetimerange-picker-2 .form-control:active, .input-group-addon .nice-datetimerange-picker-2 .form-control:focus {
+        border-color: #4abeb4; }
+    .nice-datetimerange-picker-2 .form-control:disabled {
+      background: white;
+      border-color: #EDEFF2;
+      opacity: 0.65; }
+  .nice-datetimerange-picker-2 .dtp-wrapper {
+    border-radius: 3px;
+    position: absolute;
+    left: 15px;
+    top: 40px;
+    width: 650px;
+    padding: 15px;
+    background-color: white;
     border: 1px solid #cbd4d9;
-    border-radius: 3px; }
-.nice-datetimerange-picker-2 .nice-dtp-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 800;
-  height: 100%; }
+    z-index: 900;
+    display: flex; }
+    .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left {
+      min-width: 110px;
+      display: flex;
+      flex-direction: column; }
+      .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left .dtp-buttons-top {
+        flex-grow: 1; }
+      .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left .dtp-buttons-bottom {
+        margin-top: 5px; }
+    .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-left: 15px;
+      width: 50%; }
+  .nice-datetimerange-picker-2 .nice-dtp-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 800;
+    height: 100%; }
+  .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .daterangepicker .ranges ul li, .daterangepicker .ranges ul .nice-datetimerange-picker-2 li {
+    background: #4abeb4;
+    border-color: #3fafa6; }
+    .nice-datetimerange-picker-2 .btn-primary:hover, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .daterangepicker .ranges ul li:hover, .daterangepicker .ranges ul .nice-datetimerange-picker-2 li:hover {
+      background: #3fafa6;
+      border-color: #3fafa6; }
+    .nice-datetimerange-picker-2 .btn-primary:active, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:active, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .daterangepicker .ranges ul li:active, .daterangepicker .ranges ul .nice-datetimerange-picker-2 li:active {
+      background: #389d94;
+      border-color: #389d94; }
+  @media (max-width: 767px) {
+    .nice-datetimerange-picker-2 .dtp-wrapper {
+      width: auto;
+      flex-direction: column; }
+      .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left {
+        margin-bottom: 15px;
+        margin-top: 15px; }
+      .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
+        margin-left: 0;
+        width: 100%; }
+    .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .daterangepicker .ranges ul li, .daterangepicker .ranges ul .nice-datetimerange-picker-2 li {
+      padding: 5px;
+      line-height: 1;
+      font-size: 12px;
+      min-width: 300px; } }
 
 .nice-button-toggle {
   margin-bottom: 10px; }
@@ -7061,24 +7088,137 @@ input::-webkit-outer-spin-button {
 .daterangepicker th.month {
   width: auto; }
 
-.nice-date .dropdown-menu {
-  box-shadow: 0px 0px 0px;
-  padding: 10px;
-  border: 0px none; }
-  .nice-date .dropdown-menu li :focus {
-    outline: -webkit-focus-ring-color auto 0px; }
-  .nice-date .dropdown-menu .input-group-addon {
-    background: #dcdcdc !important; }
-  .nice-date .dropdown-menu .btn, .nice-date .dropdown-menu .daterangepicker .ranges ul li, .daterangepicker .ranges ul .nice-date .dropdown-menu li {
-    border: 0px none; }
-  .nice-date .dropdown-menu .btn-info {
-    background: #4abeb4; }
-    .nice-date .dropdown-menu .btn-info .text-muted {
-      color: white; }
-    .nice-date .dropdown-menu .btn-info .text-info {
-      color: white; }
-  .nice-date .dropdown-menu .text-info {
-    color: #4abeb4; }
+.nice-date .date {
+  border-radius: 3px;
+  background: white;
+  border: solid 1px #cbd4d9;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  width: 100%; }
+  .nice-date .date .header {
+    background: #4abeb4;
+    line-height: 40px;
+    color: white; }
+    .nice-date .date .header i {
+      float: left;
+      width: 40px;
+      font-size: 1.125em;
+      font-weight: bold;
+      position: relative;
+      line-height: 40px;
+      padding: 0 10px;
+      cursor: pointer; }
+      .nice-date .date .header i.fa-angle-left {
+        text-align: left; }
+      .nice-date .date .header i.fa-angle-right {
+        text-align: right;
+        margin-left: -40px; }
+    .nice-date .date .header span {
+      float: left;
+      width: 100%;
+      text-transform: uppercase;
+      padding-left: 50px;
+      margin-left: -40px;
+      text-align: center;
+      padding-right: 40px;
+      color: inherit; }
+  .nice-date .date .week {
+    width: 100%;
+    border-top: solid 1px #eee;
+    display: flex;
+    flex-grow: 1; }
+    .nice-date .date .week:first-child {
+      border-top: none; }
+    .nice-date .date .week .day {
+      position: relative;
+      min-height: 20px;
+      width: 14.2857%;
+      border-left: solid 1px #eee;
+      font-size: 12px;
+      text-align: center;
+      background: white;
+      cursor: pointer;
+      color: #404040;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .nice-date .date .week .day:first-child {
+        border-left: none; }
+      .nice-date .date .week .day.today:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 10px;
+        width: 10px;
+        border-style: solid;
+        border-width: 0 10px 10px 0;
+        border-color: transparent #4abeb4 transparent transparent; }
+      .nice-date .date .week .day.different-month {
+        color: #C0C0C0; }
+      .nice-date .date .week .day.weekend {
+        background: #fafafa; }
+      .nice-date .date .week .day.disabled {
+        opacity: 0.3;
+        color: #d9534f;
+        cursor: not-allowed; }
+      .nice-date .date .week .day.selected {
+        background: #4abeb4;
+        color: white; }
+      .nice-date .date .week .day.between {
+        background: #cdedea; }
+      .nice-date .date .week .day:hover {
+        background: #bbe6e3; }
+        .nice-date .date .week .day:hover.selected {
+          background: #389d94; }
+    .nice-date .date .week.names {
+      flex-grow: 0;
+      height: 21px;
+      flex-shrink: 0; }
+      .nice-date .date .week.names > span {
+        color: #389d94;
+        min-height: 20px;
+        cursor: default; }
+.nice-date .time {
+  display: flex;
+  width: 100%;
+  margin-top: 10px; }
+  .nice-date .time .time-picker {
+    position: relative;
+    flex-grow: 1;
+    height: 30px; }
+    .nice-date .time .time-picker select {
+      width: 100%;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: 0;
+      border-radius: 3px;
+      border: 1px solid #cbd4d9;
+      padding: 5px 25px 5px 10px;
+      z-index: 2;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      font-size: 14px;
+      height: 30px; }
+    .nice-date .time .time-picker:after {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 4px 0 4px;
+      margin-top: -3px;
+      border-color: #404040 transparent transparent transparent; }
+    .nice-date .time .time-picker.time-picker-hour {
+      margin-right: 10px; }
 
 .nice-comment {
   margin-bottom: 10px; }

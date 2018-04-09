@@ -109,15 +109,19 @@
         }
 
         &.selected {
-          background: $nice-base-color;
+          background: $nice-base-color !important;
           color: white;
+        }
+
+        &.between{
+          background: lighten($nice-base-color, 40%);
         }
 
         &:hover {
           background: lighten($nice-base-color, 30%);
 
           &.selected {
-            background: darken($nice-base-color, 10%);
+            background: darken($nice-base-color, 10%) !important;
           }
         }
       }

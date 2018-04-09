@@ -18,7 +18,8 @@ angular.module('niceElements')
         model: '=',
         time: '=',
         maxDate: '=',
-        minDate: '='
+        minDate: '=',
+        nextDate: '='
       },
       controller: function($scope) {
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
@@ -103,6 +104,18 @@ angular.module('niceElements')
           )
         };
 
+        $scope.isBetween = function(date1, date2, date3){
+          if(!$scope.nextDate){
+            return false;
+          } else if($scope.isSameDay(date1, date2) || $scope.isSameDay(date1, date3)){
+            return true;
+          } else if(date2.isBefore(date3)){
+            return $scope._removeTime(date1).isBetween(date2, date3);
+          } else {
+            return $scope._removeTime(date1).isBetween(date3, date2);
+          }
+        }
+
 
         // ------------------ Format date ------------------
         $scope.formatDate = function(date){
@@ -167,7 +180,7 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watch("model", function(){
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(){
           $scope.boostrap();
         });
 
