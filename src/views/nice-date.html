@@ -38,17 +38,17 @@
     <div class="nice-date-time" ng-if="time">
         <div class="time-picker time-picker-hour">
             <select
-                ng-model="dateHour"
-                ng-change="timeChange(dateHour, null)"
-                ng-options="hour for hour in hours">
+                ng-model="timeData.dateHour"
+                ng-change="timeChange(timeData.dateHour, null)"
+                ng-options="hour as hour for hour in hours track by hour">
             </select>
         </div>
 
         <div class="time-picker time-picker-minute">
             <select
-                ng-model="dateMinute"
-                ng-change="timeChange(null, dateMinute)"
-                ng-options="minute for minute in minutes">
+                ng-model="timeData.dateMinute"
+                ng-change="timeChange(null, timeData.dateMinute)"
+                ng-options="minute as minute for minute in minutes track by minute">
             </select>
         </div>
     </div>

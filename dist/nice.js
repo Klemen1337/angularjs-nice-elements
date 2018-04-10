@@ -821,6 +821,10 @@ angular.module('niceElements')
           sat: "Sat",
           sun: "Sun"
         };
+        $scope.timeData = {
+          dateMinute: 0,
+          dateHours: 0
+        };
 
         if(!$scope.model) $scope.model = moment();
 
@@ -830,13 +834,13 @@ angular.module('niceElements')
 
         // ------------------ Time changes ------------------
         $scope.timeChange = function(newHour, newMinute){
-          if(newHour != null) $scope.dateHour = newHour;
-          if(newMinute != null) $scope.dateMinute = newMinute;
+          if(newHour != null) $scope.timeData.dateHour = newHour;
+          if(newMinute != null) $scope.timeData.dateMinute = newMinute;
 
           var selectedDate = angular.copy($scope.model);
           selectedDate = $scope._removeTime(selectedDate);
-          selectedDate.hours($scope.dateHour);
-          selectedDate.minutes($scope.dateMinute);
+          selectedDate.hours($scope.timeData.dateHour);
+          selectedDate.minutes($scope.timeData.dateMinute);
 
           $scope.model = selectedDate;
           $scope.forma.$setDirty();
@@ -847,8 +851,8 @@ angular.module('niceElements')
         $scope.select = function(day) {
           if(!day.isDisabled){
             var selectedDate = angular.copy(day.date);
-            selectedDate.hours($scope.dateHour);
-            selectedDate.minutes($scope.dateMinute);
+            selectedDate.hours($scope.timeData.dateHour);
+            selectedDate.minutes($scope.timeData.dateMinute);
 
             $scope.model = selectedDate;
             $scope.forma.$setDirty();
@@ -890,6 +894,7 @@ angular.module('niceElements')
           )
         };
 
+
         $scope.isBetween = function(date1, date2, date3){
           if(!$scope.nextDate){
             return false;
@@ -900,7 +905,7 @@ angular.module('niceElements')
           } else {
             return $scope._removeTime(date1).isBetween(date3, date2);
           }
-        }
+        };
 
 
         // ------------------ Format date ------------------
@@ -952,9 +957,9 @@ angular.module('niceElements')
               date: date
             };
 
-            if($scope.minDate) day.isDisabled = date.isBefore(moment($scope.minDate));
-            if($scope.maxDate) day.isDisabled = date.isAfter(moment($scope.maxDate));
-            if($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween(moment($scope.minDate), moment($scope.maxDate));
+            if($scope.minDate) day.isDisabled = date.isBefore($scope.minDate);
+            if($scope.maxDate) day.isDisabled = date.isAfter($scope.maxDate);
+            if($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween($scope.minDate, $scope.maxDate);
 
             days.push(day);
             date = date.clone();
@@ -972,14 +977,22 @@ angular.module('niceElements')
 
 
         // ------------------ Bootstrap ------------------
+        $scope.getTime = function(){
+          if ($scope.time) {
+            $scope.timeData.dateHour = $scope.model.hours();
+            $scope.timeData.dateMinute = $scope.model.minutes();
+          } else {
+            $scope.timeData.dateHour = 0;
+            $scope.timeData.dateMinute = 0;
+          }
+        };
+
+
+        // ------------------ Bootstrap ------------------
         $scope.boostrap = function(){
           $scope.month = angular.copy($scope.model);
-          if($scope.time) {
-            $scope.dateHour = $scope.model.hours();
-            $scope.dateMinute = $scope.model.minutes();
-          } else {
-            $scope.dateHour = 0;
-            $scope.dateMinute = 0;
+          $scope.getTime();
+          if(!$scope.time) {
             $scope.model = $scope._removeTime($scope.model);
           }
 
@@ -4056,17 +4069,17 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    <div class=\"nice-date-time\" ng-if=\"time\">\n" +
     "        <div class=\"time-picker time-picker-hour\">\n" +
     "            <select\n" +
-    "                ng-model=\"dateHour\"\n" +
-    "                ng-change=\"timeChange(dateHour, null)\"\n" +
-    "                ng-options=\"hour for hour in hours\">\n" +
+    "                ng-model=\"timeData.dateHour\"\n" +
+    "                ng-change=\"timeChange(timeData.dateHour, null)\"\n" +
+    "                ng-options=\"hour as hour for hour in hours track by hour\">\n" +
     "            </select>\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"time-picker time-picker-minute\">\n" +
     "            <select\n" +
-    "                ng-model=\"dateMinute\"\n" +
-    "                ng-change=\"timeChange(null, dateMinute)\"\n" +
-    "                ng-options=\"minute for minute in minutes\">\n" +
+    "                ng-model=\"timeData.dateMinute\"\n" +
+    "                ng-change=\"timeChange(null, timeData.dateMinute)\"\n" +
+    "                ng-options=\"minute as minute for minute in minutes track by minute\">\n" +
     "            </select>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -4132,7 +4145,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\" ng-click=\"open()\">\n" +
+    "            <div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
     "                <!-- <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\"> -->\n" +
     "                <div class=\"form-control\">{{ modelFormat }}</div>\n" +
     "                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +

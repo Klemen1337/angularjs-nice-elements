@@ -13,6 +13,12 @@
         color: white;
       }
     }
+
+    &.open {
+      .form-control, .input-group-addon{
+        border-color: $nice-base-color;
+      }
+    }
   }
 
   .form-control{
@@ -81,6 +87,10 @@
     width: 100%;
     z-index: 800;
     height: 100%;
+  }
+
+  .btn{
+    border-radius: $nice-border-radius;
   }
 
   .btn-primary{
