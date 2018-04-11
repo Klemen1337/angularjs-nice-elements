@@ -4,14 +4,14 @@
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
         </div>
 
-        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'" click-outside="close()" is-open="{{ isOpen }}">
             <div ng-class="addButtonEnable && !isDisabled ? 'input-group': ''">
-                <div class="btn-group" dropdown is-open="status.isopen" ng-class="{ 'disabled': isDisabled || emptyList }">
+                <div class="btn-group" ng-class="{ 'open': isOpen, 'disabled': isDisabled || emptyList }">
                     <button
                         type="button"
                         class="btn btn-block btn-dropdown dropdown-toggle"
                         title="{{ getLabel(internalSelected) }}"
-                        dropdown-toggle
+                        ng-click="toggle()"
                         ng-disabled="isDisabled || emptyList">
 
                         <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
@@ -28,7 +28,7 @@
                         <span class="caret"></span>
                     </button>
 
-                    <ul id="{{id}}" class="dropdown-menu" role="menu">
+                    <ul id="{{id}}" class="dropdown-menu">
                         <li id="{{id}}-{{$index}}" ng-repeat="item in internalList" ng-click="clicked(item)">
                             <a href>
                                 <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>

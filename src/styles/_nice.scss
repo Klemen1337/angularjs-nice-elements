@@ -1,5 +1,6 @@
 @import "variables";
-@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
 
 //body{
 //  font-family: $font-family-base;
@@ -26,6 +27,10 @@
 
 .margin-bottom-0{
   margin-bottom: 0 !important;
+}
+
+.mb-10{
+  margin-bottom: 10px;
 }
 
 @import "nice-common";

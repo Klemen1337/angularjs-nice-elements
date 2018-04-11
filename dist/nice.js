@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('niceElements', [
-    'ngMessages',
-    'ui.bootstrap',
-    'ui.bootstrap.datetimepicker',
-    'daterangepicker'
+    'ngMessages'
 ]);
 
 
@@ -615,6 +612,112 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:clickOutside
+ * @description
+ * # clickOutside
+ */
+angular.module('niceElements')
+  .directive('clickOutside', function($document, $parse, $timeout){
+    return {
+      restrict: 'A',
+      link: function ($scope, elem, attr) {
+        $scope.isOpen = false;
+
+        // watch for is open
+        attr.$observe('isOpen', function(value){
+          $scope.isOpen = value == 'true';
+        });
+
+        $timeout(function () {
+          // postpone linking to next digest to allow for unique id generation
+          var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [];
+          var fn;
+
+          function eventHandler(e) {
+            if ($scope.isOpen) {
+              var i, element, r, id, classNames, l;
+
+              // if there is no click target, no point going on
+              if (!e || !e.target) {
+                return;
+              }
+
+              // loop through the available elements, looking for classes in the class list that might match and so will eat
+              for (element = e.target; element; element = element.parentNode) {
+                // check if the element is the same element the directive is attached to and exit if so (props @CosticaPuntaru)
+                if (element === elem[0]) {
+                  return;
+                }
+
+                // now we have done the initial checks, start gathering id's and classes
+                id = element.id;
+                classNames = element.className;
+                l = classList.length;
+
+                // Unwrap SVGAnimatedString classes
+                if (classNames && classNames.baseVal !== undefined) {
+                  classNames = classNames.baseVal;
+                }
+
+                // if there are no class names on the element clicked, skip the check
+                if (classNames || id) {
+
+                  // loop through the elements id's and classnames looking for exceptions
+                  for (i = 0; i < l; i++) {
+                    //prepare regex for class word matching
+                    r = new RegExp('\\b' + classList[i] + '\\b');
+
+                    // check for exact matches on id's or classes, but only if they exist in the first place
+                    if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
+                      // now let's exit out as it is an element that has been defined as being ignored for clicking outside
+                      return;
+                    }
+                  }
+                }
+              }
+
+              // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
+              $timeout(function () {
+                fn = $parse(attr['clickOutside']);
+                fn($scope, {event: e});
+              });
+            }
+          }
+
+
+          // if the devices has a touchscreen, listen for this event
+          if (_hasTouch()) {
+            $document.on('touchstart', eventHandler);
+          }
+
+          // still listen for the click event even if there is touch to cater for touchscreen laptops
+          $document.on('click', eventHandler);
+
+          // when the scope is destroyed, clean up the documents event handlers as we don't want it hanging around
+          $scope.$on('$destroy', function () {
+            if (_hasTouch()) {
+              $document.off('touchstart', eventHandler);
+            }
+
+            $document.off('click', eventHandler);
+          });
+
+          /**
+           * @description Private function to attempt to figure out if we are on a touch device
+           * @private
+           **/
+          function _hasTouch() {
+            // works on most browsers, IE10/11 and Surface
+            return 'ontouchstart' in window || navigator.maxTouchPoints;
+          }
+        });
+      }
+    };
+});
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceComment
  * @description
  * # niceComment
@@ -1140,17 +1243,16 @@ angular.module('niceElements')
 
         initCurrentDate($scope.model);
 
-        $scope.opened = false;
+        $scope.isOpen = false;
 
         $scope.openDtp = function () {
+          $scope.isOpen = true;
           $scope.$broadcast('dtp-open-click');
-          $scope.opened = true;
         };
 
         $scope.closeDtp = function(response) {
-          //console.log(response);
+          $scope.isOpen = false;
           $scope.$broadcast('dtp-close-click');
-          $scope.opened = false;
         };
 
         $scope.$on('dateSelected', function () {
@@ -1709,8 +1811,6 @@ angular.module('niceElements')
         addButtonFunction: '&',
         objValue: '@',            // Optional - default is 'value'
         objKey: '@?',             // Optional - default is 'id'. Used only when returnOnlyKey=true
-        // deprecated: listIsObj - list must always contain objects
-        //listIsObj: '@',           // True - list has objects, False - list has strings
         selectedIsObj: '@',       // Optional parameter.
         nullable: '@',            // No selection is possible
         required: '@',            // Model cannot be NULL
@@ -1721,23 +1821,16 @@ angular.module('niceElements')
         listenKeydown: '@',
         noOptionsText: "@"
       },
+      controller: function($rootScope, $scope, $document, $element) {
+        if (!$scope.objValue) { $scope.objValue = 'value'; }
+        if (!$scope.objKey) { $scope.objKey = 'id'; }
+        if (!$scope.list) { $scope.list = []; }
+        if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
+        if(!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
+        if(!$scope.listenKeydown) { $scope.listenKeydown = false; }
+        $scope.valid = $scope.formDropdown;
 
-      compile: function(element, attrs){
-        if (!attrs.title) { attrs.title = ''; }
-        // if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
-        // if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        if (!attrs.objValue) { attrs.objValue = 'value'; }
-        if (!attrs.objKey) { attrs.objKey = 'id'; }
-        if (!attrs.help) { attrs.help = ''; }
-        if (!attrs.list) { attr.list = []; }
-        if (!attrs.noOptionsText) { attrs.noOptionsText = "No options"; }
 
-        attrs.valid = attrs.formDropdown;
-
-        if(!attrs.addButtonFunction) { attrs.addButtonFunction = null; }
-      },
-
-      controller: function($rootScope, $scope, $document) {
         $scope.selectedIsObj = $scope.selectedIsObj === 'true' || $scope.selectedIsObj === true;
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;
@@ -1748,6 +1841,13 @@ angular.module('niceElements')
         $scope.internalSelected = null;
         $scope.id = Math.random().toString(36).substring(7);
 
+        $scope.isOpen = false;
+        $scope.toggle = function(){ $scope.isOpen = !$scope.isOpen; };
+        $scope.close = function(){ $scope.isOpen = false; };
+        $scope.open = function(){ $scope.isOpen = true; };
+
+
+        // ----------------------------------- Get filter -----------------------------------
         var getFilter = function(item){
           // Create filter for finding object by objValue with _.where()
           var filter = {};
@@ -1759,21 +1859,13 @@ angular.module('niceElements')
         };
 
 
-        $scope.isItemSelected = function(item){
-          if (!$scope.internalSelected)
-            return false;
-          // Which item is selected
-          if ($scope.multiple) {
-              return _.where($scope.internalSelected, {'id':item.id}).length > 0;
-          }else{
-              return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
-          }
-        };
-
+        // ----------------------------------- Set internal list -----------------------------------
         var _set_internal_list = function(){
           $scope.internalList = angular.copy($scope.list);
         };
 
+
+        // ----------------------------------- Add null object to internal list -----------------------------------
         var _add_null_object_to_internal = function(){
           if ($scope.nullable && !$scope.multiple) {
             var nullObj = {};
@@ -1783,30 +1875,35 @@ angular.module('niceElements')
           }
         };
 
-        var _get_selected_object = function(selected){
-          if (!selected)
-            return null;
 
-          if ($scope.selectedIsObj)
+        // ----------------------------------- Get selected object -----------------------------------
+        var _get_selected_object = function(selected){
+          if (!selected) return null;
+          if ($scope.selectedIsObj) {
             return selected;
-          else
+          } else {
             return _.find($scope.internalList, getFilter(selected));
+          }
         };
 
+
+        // ----------------------------------- Init -----------------------------------
         var _set_internal_selected_one = function(selected){
           var obj = {};
 
           var selectedObj = _get_selected_object(selected);
           // console.log('_set_internal_selected_one', selected, selectedObj);
           if(selectedObj && _.find($scope.internalList, getFilter(selected))){
-              obj = selectedObj;
-          }else{
-              obj = $scope.internalList[0];
+            obj = selectedObj;
+          } else {
+            obj = $scope.internalList[0];
           }
           $scope.internalSelected = obj;
           _set_model(obj);
         };
 
+
+        // ----------------------------------- Get selected objects -----------------------------------
         var _get_selected_objects = function(selected){
           if (!selected)
             return null;
@@ -1821,19 +1918,21 @@ angular.module('niceElements')
           }
         };
 
+
+        // ----------------------------------- Set internal selected multiple -----------------------------------
         var _set_internal_selected_multiple = function(item){
-
           var _selected_objects = _get_selected_objects(item);
-
           if (_selected_objects){
             $scope.internalSelected = _selected_objects;
             _set_model($scope.internalSelected);
-          }else{
+          } else {
             $scope.internalSelected = [];
             _set_model($scope.internalSelected);
           }
         };
 
+
+        // ----------------------------------- Set model -----------------------------------
         var _set_model = function(value){
           var _new = angular.copy($scope.model);
 
@@ -1858,32 +1957,37 @@ angular.module('niceElements')
           }
 
           // update model only if it is changed
-          if (!_.isEqual(_new, $scope.model))
+          if (!_.isEqual(_new, $scope.model)){
             $scope.model = _new;
+          }
         };
 
+
+        // ----------------------------------- Init -----------------------------------
         var init = function() {
           _set_internal_list();
           _add_null_object_to_internal();
 
           if($scope.multiple && $scope.model){
-            if ($scope.internalSelected)
+            if ($scope.internalSelected) {
               // remove already selected but not in list - this happens when list changes from outside
-              _set_internal_selected_multiple(_.filter($scope.internalSelected, function(obj) {
+              _set_internal_selected_multiple(_.filter($scope.internalSelected, function (obj) {
                 return _.find($scope.internalList, getFilter(obj));
               }));
-            else
+            } else {
               $scope.internalSelected = [];
+            }
           }
 
           // Set internalSelected
           if($scope.internalList && $scope.internalList.length>0){
             $scope.emptyList = false;
 
-            if ($scope.multiple)
+            if ($scope.multiple) {
               _set_internal_selected_multiple($scope.model);
-            else
+            } else {
               _set_internal_selected_one($scope.model);
+            }
 
             if($scope.formDropdown && $scope.required){
               $scope.formDropdown.$setValidity('required', true);
@@ -1900,16 +2004,31 @@ angular.module('niceElements')
               $scope.formDropdown.$setValidity('required', false); // Form is not valid because dropdown is empty and required
             }
 
-            if ($scope.multiple)
+            if ($scope.multiple) {
               _set_internal_selected_multiple(sel);
-            else
+            } else {
               _set_internal_selected_one([sel]);
+            }
           }
         };
 
+
+        // ----------------------------------- Is Item selected -----------------------------------
+        $scope.isItemSelected = function(item){
+          if (!$scope.internalSelected) return false;
+
+          // Which item is selected
+          if ($scope.multiple) {
+            return _.where($scope.internalSelected, {'id':item.id}).length > 0;
+          } else {
+            return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
+          }
+        };
+
+
+        // ----------------------------------- Item clicked -----------------------------------
         $scope.clicked = function(item){
           $scope.formDropdown.$setDirty();
-
           if($scope.multiple){
             // This actually toggles selection
             var _current = angular.copy($scope.internalSelected);
@@ -1921,58 +2040,75 @@ angular.module('niceElements')
             _set_internal_selected_multiple(_current);
           } else {
             _set_internal_selected_one(item);
+            $scope.close();
           }
 
         };
 
+
+        // ----------------------------------- Get label -----------------------------------
         $scope.getLabel = function(item){
-          if (item)
+          if (item) {
             return item[$scope.objValue];
-          else
+          } else {
             return '-';
+          }
         };
 
+
+        // ----------------------------------- Watch for list change -----------------------------------
         $scope.$watch('list', function (value_new, value_old) {
           init();
-        }, true);
+        });
 
+
+        // ----------------------------------- Watch for model change -----------------------------------
         $scope.$watch('model', function (value_new, value_old) {
-
-          if ($scope.multiple)
+          if ($scope.multiple) {
             var _new_model_object = _get_selected_object(value_new);
-          else
+          } else {
             var _new_model_object = _get_selected_objects(value_new);
-
+          }
 
           if (!_.isEqual(_new_model_object, $scope.internalSelected)){
             init();
           }
         });
 
-        if ($scope.listenKeydown) {
-          $document.bind('keypress', function (e) {
 
-            // bind to keypress events if dropdown list is opened
-            if ($scope.status['isopen']) {
-              var char = String.fromCharCode(e.which).toLowerCase();
+        // ----------------------------------- Listen keydown -----------------------------------
+        $scope.bindKeypress = function(){
+          if ($scope.listenKeydown) {
+            $element.bind('keyup', function (e) {
+              console.log(e);
+              // bind to keypress events if dropdown list is opened
+              if ($scope.isOpen) {
+                var char = String.fromCharCode(e.which).toLowerCase();
 
-              // find first element with value starting on selected char
-              var index = _.findIndex($scope.internalList, function (item) {
-                var _name = item[$scope.objValue].toLowerCase();
-                return _name.indexOf(char) === 0;
-              });
+                // find first element with value starting on selected char
+                var index = _.findIndex($scope.internalList, function (item) {
+                  var _name = item[$scope.objValue].toLowerCase();
+                  return _name.indexOf(char) === 0;
+                });
 
-              if (index >= 0) {
-                // scroll within dropdown list to selected index
-                var _id_name = '#' + $scope.id + '-' + index;
-                var _id_first = '#' + $scope.id + '-0';
-                var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
-                if (_relative_top >= 0)
-                  $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
+                if (index >= 0) {
+                  // scroll within dropdown list to selected index
+                  var _id_name = '#' + $scope.id + '-' + index;
+                  var _id_first = '#' + $scope.id + '-0';
+                  var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
+                  if (_relative_top >= 0){
+                    $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
+                  }
+                }
               }
-            }
-          });
+            });
+          }
+        };
+
+        $scope.unbindKeypress = function(){
+          $element.off('keyup', function (e) {});
         }
+
       }
     };
   });
@@ -4090,7 +4226,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   $templateCache.put('views/nice-datetime-picker.html',
     "<div class=\"nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "\n" +
-    "    <div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"opened\"></div>\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"isOpen\"></div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4101,17 +4237,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <!--Needed for intercepting form changes ($dirty)!-->\n" +
     "            <div ng-form=\"formDatetimePicker\"></div>\n" +
     "\n" +
-    "            <div class=\"dropdown\">\n" +
-    "                <a class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtp()\" href=\"javascript:void(0);\">\n" +
-    "                    <div class=\"input-group\">\n" +
-    "                        <input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtp()\">\n" +
-    "                        <span class=\"input-group-addon\"><i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i></span>\n" +
-    "                    </div>\n" +
-    "                </a>\n" +
+    "            <div class=\"input-group\" id=\"dropdown{{randNum}}\">\n" +
+    "                <input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtp()\">\n" +
+    "                <span class=\"input-group-addon\" ng-click=\"openDtp()\">\n" +
+    "                    <i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i>\n" +
+    "                </span>\n" +
     "            </div>\n" +
     "\n" +
     "            <!-- inject nice-dtp here -->\n" +
-    "            <nice-dtp\n" +
+    "            <div ng-show=\"isOpen\">\n" +
+    "                <nice-dtp\n" +
     "                    model=\"currentDate\"\n" +
     "                    format=\"{{format}}\"\n" +
     "                    model-format=\"{{modelFormat}}\"\n" +
@@ -4126,7 +4261,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    ok-text=\"{{okText}}\"\n" +
     "                    cancel-text=\"{{cancelText}}\"\n" +
     "                    closed=\"closeDtp\"\n" +
-    "            ></nice-dtp>\n" +
+    "                ></nice-dtp>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -4328,14 +4464,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
     "            <div ng-class=\"addButtonEnable && !isDisabled ? 'input-group': ''\">\n" +
-    "                <div class=\"btn-group\" dropdown is-open=\"status.isopen\" ng-class=\"{ 'disabled': isDisabled || emptyList }\">\n" +
+    "                <div class=\"btn-group\" ng-class=\"{ 'open': isOpen, 'disabled': isDisabled || emptyList }\">\n" +
     "                    <button\n" +
     "                        type=\"button\"\n" +
     "                        class=\"btn btn-block btn-dropdown dropdown-toggle\"\n" +
     "                        title=\"{{ getLabel(internalSelected) }}\"\n" +
-    "                        dropdown-toggle\n" +
+    "                        ng-click=\"toggle()\"\n" +
     "                        ng-disabled=\"isDisabled || emptyList\">\n" +
     "\n" +
     "                        <span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>\n" +
@@ -4352,7 +4488,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        <span class=\"caret\"></span>\n" +
     "                    </button>\n" +
     "\n" +
-    "                    <ul id=\"{{id}}\" class=\"dropdown-menu\" role=\"menu\">\n" +
+    "                    <ul id=\"{{id}}\" class=\"dropdown-menu\">\n" +
     "                        <li id=\"{{id}}-{{$index}}\" ng-repeat=\"item in internalList\" ng-click=\"clicked(item)\">\n" +
     "                            <a href>\n" +
     "                                <span class=\"choice-checkbox\" ng-if=\"multiple\" ng-class=\"{ 'selected' : isItemSelected(item) }\"><i class=\"fa fa-check\"></i></span>\n" +

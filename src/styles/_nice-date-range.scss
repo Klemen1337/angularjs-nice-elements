@@ -35,7 +35,6 @@
     ul{
       margin-bottom: 15px;
       li{
-        @extend .btn, .btn-block, .btn-sm, .btn-primary;
         border-color: $nice-base-color;
         background: $nice-base-color;
         -webkit-border-radius: $nice-border-radius;

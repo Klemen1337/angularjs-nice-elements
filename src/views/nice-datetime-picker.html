@@ -1,6 +1,6 @@
 <div class="nice-datetime-picker" name="form" ng-class="{ 'margin-bottom-0': noMargin }">
 
-    <div class="nice-dtp-background" ng-click="closeDtp(true)" ng-if="opened"></div>
+    <div class="nice-dtp-background" ng-click="closeDtp(true)" ng-if="isOpen"></div>
 
     <div class="row">
         <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
@@ -11,17 +11,16 @@
             <!--Needed for intercepting form changes ($dirty)!-->
             <div ng-form="formDatetimePicker"></div>
 
-            <div class="dropdown">
-                <a class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="openDtp()" href="javascript:void(0);">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="{{value}}" ng-click="openDtp()">
-                        <span class="input-group-addon"><i class="fa" ng-class="{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}"></i></span>
-                    </div>
-                </a>
+            <div class="input-group" id="dropdown{{randNum}}">
+                <input type="text" class="form-control" value="{{value}}" ng-click="openDtp()">
+                <span class="input-group-addon" ng-click="openDtp()">
+                    <i class="fa" ng-class="{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}"></i>
+                </span>
             </div>
 
             <!-- inject nice-dtp here -->
-            <nice-dtp
+            <div ng-show="isOpen">
+                <nice-dtp
                     model="currentDate"
                     format="{{format}}"
                     model-format="{{modelFormat}}"
@@ -36,7 +35,8 @@
                     ok-text="{{okText}}"
                     cancel-text="{{cancelText}}"
                     closed="closeDtp"
-            ></nice-dtp>
+                ></nice-dtp>
+            </div>
         </div>
     </div>
 </div>

@@ -106,29 +106,32 @@
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
 
-                    <nice-dropdown title="Dropdown" model="emptyListModel" list="emptyList" no-options-text="Brez opcij" selected-is-obj="true"></nice-dropdown>
+                    <nice-dropdown title="Dropdown" model="data.dropdown" list="listObjs" no-options-text="Brez opcij" selected-is-obj="true"></nice-dropdown>
 
-                    <nice-dropdown-date title="Birthday" model="test"></nice-dropdown-date>
+                    <nice-dropdown-date title="Birthday" model="data.birthday"></nice-dropdown-date>
 
-                    <pre>
-                        {{ test | json }}
-                    </pre>
+                    <nice-calendar title="Calendar" time="true" min-date="minRange" max-date="maxRange" end-date="data.calendarEndDate" start-date="data.calendarStartDate"></nice-calendar>
 
-                    <nice-calendar title="Calendar" time="true" min-date="minRange" max-date="maxRange" end-date="testRange.endDate" start-date="testRange.startDate"></nice-calendar>
-                    <pre>
-                        {{ testRange | json }}
-                    </pre>
-
-                    <div class="btn btn-primary" ng-click="changeTestRange()">Change date</div>
-
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-8 mb-10">
+                            <button class="btn btn-primary" ng-click="changeTestRange()">Change date</button>
+                        </div>
+                    </div>
 
                     <nice-comment title="Comment" model="data.comment" placeholder="Add a comment"></nice-comment>
 
                     <nice-search title="Search" is-focused="true"></nice-search>
 
                     <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl" tab-index="1"></nice-input>
+
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" disabled="disabl" tab-index="2"></nice-input>
-                    <button ng-click="toggleRequired = !toggleRequired">Toggle required</button>
+
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-8 mb-10">
+                            <button class="btn btn-primary" ng-click="toggleRequired = !toggleRequired">Toggle required</button>
+                        </div>
+                    </div>
+
                     <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number" tab-index="3"></nice-input>
 
                     <nice-datetime-picker
@@ -158,6 +161,13 @@
                         time="true">
                     </nice-datetimerange-picker>
 
+                    <nice-datetimerange-picker2
+                        start-date="dtStart"
+                        end-date="dtEnd"
+                        title="Range picker v2"
+                        time="true">
+                    </nice-datetimerange-picker2>
+
                     <!--<nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetimerange-picker>-->
 
                     <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
@@ -175,18 +185,20 @@
                         selected-is-obj="true">
                     </nice-choice>
 
-                    <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">nice-button</i></nice-button>
-                </div>
 
-                <pre>{{ forme | json }}</pre>
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-8 mb-10">
+                            <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">nice-button</i></nice-button>
+                            <button class="btn btn-danger" ng-click="error()">Error Notification</button>
+                            <nice-loader></nice-loader>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-sm-6">
-                    <pre>$scope.listObjs: {{listObjs}}</pre>
                     <pre>{{ data | json }}</pre>
-                    <button class="btn btn-danger" ng-click="error()">Error Notification</button>
-                    <nice-loader></nice-loader>
+                    <!--<pre>{{ forme | json }}</pre>-->
                 </div>
-
             </div>
         </div>
 
@@ -478,7 +490,7 @@
 &lt;/nice-dropdown></pre>
             <div class="row">
                 <div class="col-sm-6">
-                    <nice-dropdown listen-keydown="true" title="Dropdown" model="dropdown2" list="listObjs" selected-is-obj="true"></nice-dropdown>
+                    <nice-dropdown title="Dropdown" model="dropdown2" list="listObjs" selected-is-obj="true"></nice-dropdown>
                 </div>
                 <div class="col-sm-6">
                     <pre>{{ dropdown2 | json }}</pre>
