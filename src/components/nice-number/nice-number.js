@@ -25,7 +25,8 @@ angular.module('niceElements')
         showError: '@',
         noMargin: '@',
         step: '@',
-        decimals: '@'
+        decimals: '@',
+        allowNegative: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -53,13 +54,16 @@ angular.module('niceElements')
         }
       },
 
-      controller: function($rootScope, $scope) {
+      controller: function($scope) {
         $scope.canAdd = true;
         $scope.canSubstract = true;
 
         // Fix min
         if(!$scope.min) $scope.min = 0;
         else $scope.min = parseFloat($scope.min);
+
+        // Allow negative
+        if ($scope.allowNegative) $scope.min = -Infinity;
 
         // Fix max
         if($scope.max) $scope.max = parseFloat($scope.max);
@@ -102,15 +106,14 @@ angular.module('niceElements')
 
         // Add to the value
         $scope.add = function(){
+          let result = new Decimal($scope.model).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
           if($scope.max){
-            if(parseFloat($scope.model) < parseFloat($scope.max)) {
-              // $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step)).toFixed($scope.decimals);
-              $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step));
+            if(result <= parseFloat($scope.max)) {
+              $scope.model = angular.copy(result);
               $scope.form.$setDirty();
             }
           } else {
-            // $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step)).toFixed($scope.decimals);
-            $scope.model = parseFloat(parseFloat($scope.model) + parseFloat($scope.step));
+            $scope.model = angular.copy(result);
             $scope.form.$setDirty();
           }
           $scope.check();
@@ -119,9 +122,9 @@ angular.module('niceElements')
 
         // Subtract to the value
         $scope.subtract = function(){
-          if(parseFloat($scope.model) > parseFloat($scope.min)){
-            // $scope.model = parseFloat(parseFloat($scope.model) - parseFloat($scope.step)).toFixed($scope.decimals);
-            $scope.model = parseFloat(parseFloat($scope.model) - parseFloat($scope.step));
+          var result = new Decimal($scope.model).minus($scope.step).toNumber(); //.toFixed($scope.decimals);
+          if(result >= Number($scope.min)){
+            $scope.model = angular.copy(result);
             $scope.form.$setDirty();
           }
           $scope.check();
