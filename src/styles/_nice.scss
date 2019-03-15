@@ -2,16 +2,6 @@
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
 
-//body{
-//  font-family: $font-family-base;
-//  color: $font-color;
-//  font-weight: lighter;
-//
-//  p, h1, h2, h3{
-//    color: $font-color;
-//  }
-//}
-
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -34,24 +24,24 @@
 }
 
 @import "nice-common";
-@import "nice-dropdown";
-@import "nice-input";
-@import "nice-search";
-@import "nice-yesno";
-@import "nice-steps";
-@import "nice-choice";
-@import "nice-datetime-picker";
-@import "nice-datetimerange-picker";
-@import "nice-datetimerange-picker-2";
-@import "nice-button-toggle";
-@import "nice-number";
-@import "nice-date-range";
-@import "nice-date";
-@import "nice-comment";
-@import "nice-loader";
-@import "nice-notification";
-@import "nice-button";
-@import "nice-calendar";
-@import "nice-dropdown-date";
-@import "nice-time-picker";
-@import "nice-checkbox";
+@import "../components/nice-dropdown/nice-dropdown";
+@import "../components/nice-input/nice-input";
+@import "../components/nice-search/nice-search";
+@import "../components/nice-yesno/nice-yesno";
+@import "../components/nice-steps/nice-steps";
+@import "../components/nice-choice/nice-choice";
+@import "../components/nice-datetime-picker/nice-datetime-picker";
+@import "../components/nice-datetimerange-picker/nice-datetimerange-picker";
+@import "../components/nice-datetimerange-picker-2/nice-datetimerange-picker-2";
+@import "../components/nice-button-toggle/nice-button-toggle";
+@import "../components/nice-number/nice-number";
+@import "../components/nice-date-range/nice-date-range";
+@import "../components/nice-date/nice-date";
+@import "../components/nice-comment/nice-comment";
+@import "../components/nice-loader/nice-loader";
+@import "../components/nice-notification/nice-notification";
+@import "../components/nice-button/nice-button";
+@import "../components/nice-calendar/nice-calendar";
+@import "../components/nice-dropdown-date/nice-dropdown-date";
+@import "../components/nice-time-picker/nice-time-picker";
+@import "../components/nice-checkbox/nice-checkbox";
