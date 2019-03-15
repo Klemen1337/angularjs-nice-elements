@@ -2,6 +2,7 @@
 
 angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, NiceNotification, $timeout) {
   $scope.emptyList = [];
+  $scope.inputNumber = null;
 
   $scope.listObjs = [
     {id: 0, value: "Afganistan"},

@@ -5,14 +5,15 @@
     </div>
 
     <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-        <div class="form-group"
-             ng-class="{
-                'has-feedback': showValid && !hideValid,
-                'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
-                'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
-                'symbol': symbol,
-                'disabled': isDisabled
-        }">
+        <div 
+            class="form-group"
+            ng-class="{
+            'has-feedback': showValid && !hideValid,
+            'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
+            'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
+            'symbol': symbol,
+            'disabled': isDisabled}"
+        >
             <input ng-show="!textArea"
                 class="form-control"
                 type="{{ internalType }}"
@@ -28,7 +29,7 @@
                 ng-keypress="keypress($event)"
                 ng-pattern="regexexp"
                 ng-disabled="isDisabled"
-            >
+            />
             <textarea ng-show="textArea"
                 class="form-control"
                 ng-model="model"
@@ -49,14 +50,16 @@
             <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
         </div>
 
-        <div ng-messages="forma.$error" ng-if="forma.$dirty">
-            <div class="error-message" ng-message="email" ng-if="forma.$dirty" translate>Email is not valid.</div>
-            <div class="error-message" ng-message="pattern" ng-if="forma.$dirty" translate>This field requires a specific pattern.</div>
-            <div class="error-message" ng-message="minlength"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>
-            <div class="error-message" ng-message="maxlength" translate>Your input is too long</div>
-            <div class="error-message" ng-message="required" ng-if="forma.$dirty" translate>This field is required.</div>
-            <div class="error-message" ng-message="unique" translate>This field must be unique.</div>
+        <div ng-if="forma.$error && forma.$dirty">
+            <div class="error-message" ng-if="forma.$dirty && forma.$error.email" translate>Email is not valid.</div>
+            <div class="error-message" ng-if="forma.$dirty && forma.$error.pattern" translate>This field requires a specific pattern.</div>
+            <div class="error-message" ng-if="forma.$error.minlength"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>
+            <div class="error-message" ng-if="forma.$error.maxlength" translate>Your input is too long</div>
+            <div class="error-message" ng-if="forma.$error.required" ng-if="forma.$dirty" translate>This field is required.</div>
+            <div class="error-message" ng-if="forma.$error.unique" translate>This field must be unique.</div>
         </div>
+
+        <!-- <pre>{{ forma | json }}</pre> -->
     </div>
   </div>
 </ng-form>
