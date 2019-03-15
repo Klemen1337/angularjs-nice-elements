@@ -49,15 +49,10 @@ angular.module('niceElements')
         if (!attrs.setText) { attrs.setText = ''; }
 
         // This is used for connecting directive's scope to transcluded html.
-        transcludeFn(scope, function(clone, scope) {
-          var el = element.find('.nice-search');
-          el.append(clone);
-        });
-
-        // Is focused
-        if(scope.isFocused) {
-          $(element).find("input").focus();
-        }
+        // transcludeFn(scope, function(clone, scope) {
+        //   var el = element.find('.nice-search');
+        //   el.append(clone);
+        // });
 
         // Set default text
         scope.$watch("setText", function(){
@@ -165,12 +160,23 @@ angular.module('niceElements')
         });
 
       },
-      controller: function($scope, $timeout) {
+      controller: function($scope, $timeout, $element) {
         $scope.id = Math.random().toString(36).substring(7);
-
         $scope.loading = false;
         $scope.noResults = false;
         $scope.requests = 0;
+
+        $scope.focus = function() {
+          var input = $element[0].getElementsByTagName('input')[0];
+          if (input) {
+            input.focus();
+          }
+        };
+
+        // Is focused
+        if ($scope.isFocused) {
+          $scope.focus();
+        }
 
         $scope.results = [];
         var updateList = function(results, requestNumber){
@@ -215,7 +221,7 @@ angular.module('niceElements')
             if($scope.showDropdown) {
               $scope.updateSearch();
             }
-            $("#"+$scope.id).focus();
+            $scope.focus();
           }
         };
 

@@ -2,7 +2,22 @@
   "name": "nice-elements",
   "version": "1.0.9",
   "description": "Nice elements used in olaii angular 1.x webapps.",
+  "main": "dist/nice.js",
   "license": "MIT",
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-animate": "1.5.8",
+    "angular-messages": "1.5.8",
+    "angular-route": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "angular-touch": "1.5.8",
+    "angular-truncate": "latest",
+    "bootstrap": "3.3.7",
+    "decimal.js": "4.0.3",
+    "font-awesome": "4.3.0",
+    "lodash": "3.9.3",
+    "moment": "2.24.0"
+  },
   "devDependencies": {
     "express": "3.4.8",
     "grunt": "0.4.5",

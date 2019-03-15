@@ -7,24 +7,7 @@
  * # niceYesno
  */
 angular.module('niceElements')
-  .directive('niceYesno', function ($compile) {
-
-    var setButtonLabel = function(scope, state){
-      if (state)
-          scope.state = scope.yes;
-        else
-          scope.state = scope.no;
-    };
-
-    var setWidth = function(width, el){
-       el.style.width = width;
-    };
-
-     var setWidthBootstrap = function(bootstrapClass, el){
-       $(el).addClass(bootstrapClass);
-    };
-
-
+  .directive('niceYesno', function () {
     return {
       templateUrl: '/src/components/nice-yesno/nice-yesno.html',
       restrict: 'E',
@@ -41,62 +24,62 @@ angular.module('niceElements')
         defaultFalse: '@',
         noMargin: '@'
       },
+      controller: function($scope, $attrs) {
+        if (!$attrs.yes) { $attrs.yes = 'Yes'; }
+        if (!$attrs.no) { $attrs.no = 'No'; }
+        if (!$attrs.title) { $attrs.title = ''; }
+        if (!$attrs.fieldWidth) { $attrs.fieldWidth = 'col-sm-8'; }
+        if (!$attrs.labelWidth) { $attrs.labelWidth = 'col-sm-4'; }
+        if(!angular.isDefined($scope.model) && !angular.isDefined($scope.options)) $scope.model = !angular.isDefined($scope.defaultFalse);
+        if(!angular.isDefined($scope.modelValue) && angular.isDefined($scope.options)) $scope.modelValue = $scope.options[0];
 
-      link: function postLink(scope, element, attrs) {
-        if (!attrs.yes) { attrs.yes = 'Yes'; }
-        if (!attrs.no) { attrs.no = 'No'; }
-        if (!attrs.title) { attrs.title = ''; }
-        attrs.isDisabled = angular.isDefined(attrs.isDisabled);
-        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
-        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        attrs.defaultFalse = angular.isDefined(attrs.defaultFalse);
-        attrs.noMargin = angular.isDefined(attrs.noMargin);
+        $attrs.defaultFalse = angular.isDefined($attrs.defaultFalse);
+        $attrs.noMargin = angular.isDefined($attrs.noMargin);
+        $attrs.isDisabled = angular.isDefined($attrs.isDisabled);
 
-        if(!angular.isDefined(scope.model) && !angular.isDefined(scope.options)){
-          scope.model = !angular.isDefined(scope.defaultFalse);
-        }
+        $scope.buttonClass = "";
+        
 
-        if(!angular.isDefined(scope.modelValue) && angular.isDefined(scope.options)){
-          scope.modelValue = scope.options[0];
-        }
-
-        // Set label based on state passed in scope.model
-        setButtonLabel(scope, scope.model);
-
-        // Set overlay button position based on passed state in scope.model
-        var setButtonPosition = function(state) {
-          var el = element[0].querySelector('.yesno-button');
+        // ------------------------- Set overlay button position based on passed state in $scope.model -------------------------
+        $scope.setButtonPosition = function(state) {
           if(state) {
-            $(el).removeClass('yesno-button-no');
-            $(el).addClass('yesno-button-yes');
+            $scope.buttonClass = "yesno-button-yes";
           } else {
-            $(el).addClass('yesno-button-no');
-            $(el).removeClass('yesno-button-yes');
+            $scope.buttonClass = "yesno-button-no";
           }
         };
 
-        // Save reference to function on scope
-        scope.setButtonPosition = setButtonPosition;
-
-        // Call it first time
-        setButtonPosition(scope.model);
-
-        // Watch for changes from outside
-        scope.$watch('model', function(value_new, value_old){
-          if(angular.isDefined(scope.model)){
-            setButtonLabel(scope, scope.model);
-            scope.setButtonPosition(scope.model);
+        // ------------------------- Watch for changes from outside -------------------------
+        $scope.$watch('model', function(value_new, value_old){
+          if(angular.isDefined($scope.model)){
+            $scope.setButtonLabel($scope.model);
+            $scope.setButtonPosition($scope.model);
           }
         });
 
-        scope.$watch('modelValue', function(value_new, value_old){
-          if(scope.options){
-            scope.model = scope.modelValue == scope.options[0];
+        // ------------------------- Watch for model value -------------------------
+        $scope.$watch('modelValue', function(value_new, value_old){
+          if($scope.options){
+            $scope.model = $scope.modelValue == $scope.options[0];
           }
         });
-      },
 
-      controller: function($rootScope, $scope) {
+        // ------------------------- Set button label -------------------------
+        $scope.setButtonLabel = function(state){
+          if (state) {
+            $scope.state = $scope.yes;
+          } else {
+            $scope.state = $scope.no;
+          }
+        };
+        
+        // ------------------------- Set width -------------------------
+        $scope.setWidth = function(width, el){
+          el.style.width = width;
+        };
+  
+
+        // ------------------------- Switch -------------------------
         $scope.switch = function(){
           if(!$scope.isDisabled){
             $scope.model = !$scope.model;
@@ -112,6 +95,12 @@ angular.module('niceElements')
             $scope.formYesno.$setDirty();
           }
         };
+
+        // Call it first time
+        $scope.setButtonPosition($scope.model);
+
+        // Set label based on state passed in $scope.model
+        $scope.setButtonLabel($scope.model);
       }
     };
   });

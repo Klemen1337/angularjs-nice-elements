@@ -15,21 +15,6 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "angular": "1.5.8",
-    "angular-animate": "1.5.8",
-    "angular-messages": "1.5.8",
-    "angular-sanitize": "1.5.8",
-    "angular-touch": "1.5.8",
-    "angular-route": "1.5.8",
-    "font-awesome": "4.3.0",
-    "lodash": "3.9.3",
-    "moment": "2.10.6",
-    "decimal.js": "4.0.3",
-    "angular-truncate": "latest",
-    "bootstrap-sass-official": "3.3.7",
-    "bootstrap": "3.3.7"
-  },
   "resolutions": {
     "angular": "1.5.8"
   }

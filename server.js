@@ -25,7 +25,7 @@ app.configure(function(){
 });
 
 app.use(express.static('demo'));
-app.use('/bower_components', express.static('bower_components'));
+app.use('/node_modules', express.static('node_modules'));
 app.use('/dist', express.static('dist'));
 app.use('/src', express.static('src'));
 app.use('/views', express.static('src/views'));

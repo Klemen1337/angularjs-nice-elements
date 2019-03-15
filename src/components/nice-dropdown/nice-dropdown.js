@@ -292,7 +292,6 @@ angular.module('niceElements')
         $scope.bindKeypress = function(){
           if ($scope.listenKeydown) {
             $element.bind('keyup', function (e) {
-              console.log(e);
               // bind to keypress events if dropdown list is opened
               if ($scope.isOpen) {
                 var char = String.fromCharCode(e.which).toLowerCase();
@@ -305,12 +304,12 @@ angular.module('niceElements')
 
                 if (index >= 0) {
                   // scroll within dropdown list to selected index
-                  var _id_name = '#' + $scope.id + '-' + index;
-                  var _id_first = '#' + $scope.id + '-0';
-                  var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
-                  if (_relative_top >= 0){
-                    $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
-                  }
+                  // var _id_name = '#' + $scope.id + '-' + index;
+                  // var _id_first = '#' + $scope.id + '-0';
+                  // var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
+                  // if (_relative_top >= 0){
+                  //   $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
+                  // }
                 }
               }
             });
@@ -319,7 +318,7 @@ angular.module('niceElements')
 
         $scope.unbindKeypress = function(){
           $element.off('keyup', function (e) {});
-        }
+        };
 
       }
     };

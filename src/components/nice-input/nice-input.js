@@ -58,7 +58,10 @@ angular.module('niceElements')
         }
 
         if (scope.isFocused) {
-          $(element).find(scope.elementType).focus();
+          var input = element[0].getElementsByTagName(scope.elementType)[0];
+          if (input) {
+            input.focus();
+          }
         }
 
         // Set internal type

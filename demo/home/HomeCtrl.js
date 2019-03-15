@@ -159,8 +159,11 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
 
 
   $scope.scrollTo = function (destination) {
-    $('html, body').animate({
-      scrollTop: $("#" + destination).offset().top - 50
-    }, 300);
+    let dest = document.getElementById(destination)
+    window.scrollTo({
+      top: dest.offsetTop,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
 });
