@@ -13,7 +13,7 @@ angular.module('niceElements')
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: '/src/components/nice-date/nice-date.html',
+      templateUrl: 'components/nice-date/nice-date.html',
       scope: {
         model: '=',
         time: '=',

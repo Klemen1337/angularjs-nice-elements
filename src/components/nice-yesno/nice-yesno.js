@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceYesno', function () {
     return {
-      templateUrl: '/src/components/nice-yesno/nice-yesno.html',
+      templateUrl: 'components/nice-yesno/nice-yesno.html',
       restrict: 'E',
       scope: {
         model: '=',

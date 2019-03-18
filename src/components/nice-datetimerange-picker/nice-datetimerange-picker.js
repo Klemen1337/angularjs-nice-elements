@@ -31,7 +31,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
         formatOutput: "@" // Format output or moment
       },
-      templateUrl: '/src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
+      templateUrl: 'components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
         pre: function($scope, $element, $attrs) {
           // Default parameters

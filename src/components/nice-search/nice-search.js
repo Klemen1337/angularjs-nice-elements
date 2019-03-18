@@ -10,7 +10,7 @@ angular.module('niceElements')
   .directive('niceSearch', function () {
     return {
       transclude: true,
-      templateUrl: '/src/components/nice-search/nice-search.html',
+      templateUrl: 'components/nice-search/nice-search.html',
       restrict: 'E',
       scope: {
         model: '=',

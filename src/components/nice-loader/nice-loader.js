@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceLoader', function () {
     return {
-      templateUrl: '/src/components/nice-loader/nice-loader.html',
+      templateUrl: 'components/nice-loader/nice-loader.html',
       restrict: 'E',
       scope: {
           visibleWhen: '=',

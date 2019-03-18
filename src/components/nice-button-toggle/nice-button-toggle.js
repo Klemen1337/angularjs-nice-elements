@@ -8,7 +8,7 @@
 angular.module('niceElements')
   .directive('niceButtonToggle', function () {
     return {
-      templateUrl: '/src/components/nice-button-toggle/nice-button-toggle.html',
+      templateUrl: 'components/nice-button-toggle/nice-button-toggle.html',
       restrict: 'E',
       scope: {
         model: "=?",

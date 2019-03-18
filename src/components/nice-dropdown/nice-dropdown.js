@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceDropdown', function () {
     return {
-      templateUrl: '/src/components/nice-dropdown/nice-dropdown.html',
+      templateUrl: 'components/nice-dropdown/nice-dropdown.html',
       restrict: 'E',
       transclude: true,
       scope: {

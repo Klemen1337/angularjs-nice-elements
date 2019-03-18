@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('nicePercent', function () {
     return {
-      templateUrl: '/src/components/nice-percent/nice-percent.html',
+      templateUrl: 'components/nice-percent/nice-percent.html',
       restrict: 'E',
       transclude: true,
       scope: {

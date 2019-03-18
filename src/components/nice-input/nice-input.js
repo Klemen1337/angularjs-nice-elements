@@ -1,7 +1,7 @@
 angular.module('niceElements')
   .directive('niceInput', function () {
     return {
-      templateUrl: '/src/components/nice-input/nice-input.html',
+      templateUrl: 'components/nice-input/nice-input.html',
       restrict: 'E',
       transclude: true,
       scope: {

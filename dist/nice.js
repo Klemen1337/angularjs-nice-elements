@@ -11,7 +11,7 @@ angular.module('niceElements', []);
 angular.module('niceElements')
   .directive('niceButtonToggle', function () {
     return {
-      templateUrl: '/src/components/nice-button-toggle/nice-button-toggle.html',
+      templateUrl: 'components/nice-button-toggle/nice-button-toggle.html',
       restrict: 'E',
       scope: {
         model: "=?",
@@ -35,7 +35,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceButton', function ($q) {
     return {
-      templateUrl: '/src/components/nice-button/nice-button.html',
+      templateUrl: 'components/nice-button/nice-button.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -76,7 +76,7 @@ angular.module('niceElements')
   .directive("niceCalendar", function($timeout) {
     return {
       restrict: "E",
-      templateUrl: "/src/components/nice-calendar/nice-calendar.html",
+      templateUrl: "components/nice-calendar/nice-calendar.html",
       scope: {
         title: '@',
         fieldWidth: '@',
@@ -387,7 +387,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceCheckbox', function() {
     return {
-      templateUrl: '/src/components/nice-checkbox/nice-checkbox.html',
+      templateUrl: 'components/nice-checkbox/nice-checkbox.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -415,7 +415,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceChoice', function () {
     return {
-      templateUrl: '/src/components/nice-choice/nice-choice.html',
+      templateUrl: 'components/nice-choice/nice-choice.html',
       restrict: 'E',
       scope: {
         title: '@',
@@ -722,7 +722,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceComment', function ($timeout) {
     return {
-      templateUrl: '/src/components/nice-comment/nice-comment.html',
+      templateUrl: 'components/nice-comment/nice-comment.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -793,7 +793,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       transclude: true,
-      templateUrl: '/src/components/nice-date-range/nice-date-range.html',
+      templateUrl: 'components/nice-date-range/nice-date-range.html',
       scope: {
         model: '=',
         title: '@',
@@ -899,7 +899,7 @@ angular.module('niceElements')
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: '/src/components/nice-date/nice-date.html',
+      templateUrl: 'components/nice-date/nice-date.html',
       scope: {
         model: '=',
         time: '=',
@@ -1140,7 +1140,7 @@ angular.module('niceElements')
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
     },
-    templateUrl: '/src/components/nice-datetime-picker/nice-datetime-picker.html',
+    templateUrl: 'components/nice-datetime-picker/nice-datetime-picker.html',
     link: {
       pre: function($scope, $element, $attrs) {
 
@@ -1312,7 +1312,7 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
       },
-      templateUrl: '/src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
+      templateUrl: 'components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
         $scope.isOpen = false;
 
@@ -1457,7 +1457,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
         formatOutput: "@" // Format output or moment
       },
-      templateUrl: '/src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
+      templateUrl: 'components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
         pre: function($scope, $element, $attrs) {
           // Default parameters
@@ -1675,7 +1675,7 @@ angular.module('niceElements')
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: "/src/components/nice-dropdown-date/nice-dropdown-date.html",
+    templateUrl: "components/nice-dropdown-date/nice-dropdown-date.html",
     scope: {
       model: '=',
       title: '@',
@@ -1794,7 +1794,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceDropdown', function () {
     return {
-      templateUrl: '/src/components/nice-dropdown/nice-dropdown.html',
+      templateUrl: 'components/nice-dropdown/nice-dropdown.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -2145,7 +2145,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         closed: '='
       },
-      templateUrl: '/src/components/nice-dtp/nice-dtp.html',
+      templateUrl: 'components/nice-dtp/nice-dtp.html',
       link: function ($scope, $element, $attrs) {
 
         // default parameters
@@ -2941,7 +2941,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceInput', function () {
     return {
-      templateUrl: '/src/components/nice-input/nice-input.html',
+      templateUrl: 'components/nice-input/nice-input.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -3095,7 +3095,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceLabel', function () {
     return {
-      templateUrl: '/src/components/nice-label/nice-label.html',
+      templateUrl: 'components/nice-label/nice-label.html',
       restrict: 'E',
       scope: {
         fieldWidth: '@',
@@ -3123,7 +3123,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceLoader', function () {
     return {
-      templateUrl: '/src/components/nice-loader/nice-loader.html',
+      templateUrl: 'components/nice-loader/nice-loader.html',
       restrict: 'E',
       scope: {
           visibleWhen: '=',
@@ -3157,7 +3157,7 @@ angular.module('niceElements')
         args = {message:args};
       }
 
-      args.template = args.template ? args.template : '/src/components/nice-notification/nice-notification.html';
+      args.template = args.template ? args.template : 'components/nice-notification/nice-notification.html';
       args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
       args.type = t ? t : '';
 
@@ -3268,7 +3268,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceNumber', function () {
     return {
-      templateUrl: '/src/components/nice-number/nice-number.html',
+      templateUrl: 'components/nice-number/nice-number.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -3403,7 +3403,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('nicePercent', function () {
     return {
-      templateUrl: '/src/components/nice-percent/nice-percent.html',
+      templateUrl: 'components/nice-percent/nice-percent.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -3495,7 +3495,7 @@ angular.module('niceElements')
   .directive('niceSearch', function () {
     return {
       transclude: true,
-      templateUrl: '/src/components/nice-search/nice-search.html',
+      templateUrl: 'components/nice-search/nice-search.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -3739,7 +3739,7 @@ angular.module('niceElements')
         labelWidth: '@'
       },
       restrict: 'E',
-      templateUrl: '/src/components/nice-time-picker/nice-time-picker.html',
+      templateUrl: 'components/nice-time-picker/nice-time-picker.html',
       link: function($scope, $element, $attrs) {
         if(!$scope.model) $scope.model = moment();
         $scope.open = false;
@@ -3810,7 +3810,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceYesno', function () {
     return {
-      templateUrl: '/src/components/nice-yesno/nice-yesno.html',
+      templateUrl: 'components/nice-yesno/nice-yesno.html',
       restrict: 'E',
       scope: {
         model: '=',

@@ -18,7 +18,7 @@ angular.module('niceElements')
         labelWidth: '@'
       },
       restrict: 'E',
-      templateUrl: '/src/components/nice-time-picker/nice-time-picker.html',
+      templateUrl: 'components/nice-time-picker/nice-time-picker.html',
       link: function($scope, $element, $attrs) {
         if(!$scope.model) $scope.model = moment();
         $scope.open = false;
