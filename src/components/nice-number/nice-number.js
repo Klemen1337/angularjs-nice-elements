@@ -106,14 +106,14 @@ angular.module('niceElements')
 
         // Add to the value
         $scope.add = function(){
-          let result = new Decimal($scope.model).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
+          var result = new Decimal($scope.model).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
           if($scope.max){
             if(result <= parseFloat($scope.max)) {
-              $scope.model = angular.copy(result);
+              $scope.model = result;
               $scope.form.$setDirty();
             }
           } else {
-            $scope.model = angular.copy(result);
+            $scope.model = result;
             $scope.form.$setDirty();
           }
           $scope.check();
@@ -124,7 +124,7 @@ angular.module('niceElements')
         $scope.subtract = function(){
           var result = new Decimal($scope.model).minus($scope.step).toNumber(); //.toFixed($scope.decimals);
           if(result >= Number($scope.min)){
-            $scope.model = angular.copy(result);
+            $scope.model = result;
             $scope.form.$setDirty();
           }
           $scope.check();

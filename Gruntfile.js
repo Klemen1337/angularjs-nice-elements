@@ -49,14 +49,14 @@ module.exports = function (grunt) {
       ngtemplates: {
         niceElements: {
           cwd: 'src/',
-          src: 'components/**.html',
+          src: 'components/**/*.html',
           dest: '.tmp/nice.templates.js'
         }
       },
 
       concat: {
         build: {
-          src: ['src/nice.js', 'src/components/*.js', '.tmp/nice.templates.js'],
+          src: ['src/nice.js', 'src/components/**/*.js', '.tmp/nice.templates.js'],
           dest: '<%= yeoman.dist %>/nice.js'
         }
       },
@@ -154,14 +154,6 @@ module.exports = function (grunt) {
           dest: 'dist/nice.min.css'
         }
       }
-
-      /*karma: {
-      	unit: {
-      		configFile: publicPathRelativeRoot+'config/karma.conf.js',
-      		singleRun: true,
-      		browsers: ['PhantomJS']
-      	}
-      }*/
     });
 
 
