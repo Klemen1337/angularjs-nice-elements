@@ -1,0 +1,43 @@
+.nice-quantity{
+  $nice-quantity-height: 35px;
+  width: 100%;
+  margin-bottom: 10px;
+
+  .btn {
+    height: $nice-quantity-height;
+    width: $nice-quantity-height;
+    line-height: $nice-quantity-height - 2;
+    padding: 0;
+    border: 1px solid $nice-border;
+  }
+
+  .btn-left{
+    border-bottom-left-radius: $nice-border-radius;
+    border-top-left-radius: $nice-border-radius;
+    width: 45px;
+  }
+
+  .btn-right{
+    border-bottom-right-radius: $nice-border-radius;
+    border-top-right-radius: $nice-border-radius;
+    width: 45px;
+  }
+
+  input {
+    &:focus {
+      outline: 0 none;
+    }
+  }
+
+  .value{
+    line-height: $nice-quantity-height - 2;
+    padding: 0px 10px;
+    text-align: center;
+    width: 100%;
+    display: table;
+    // background: #f1f1f1;
+    border: 0 none;
+    border-top: 1px solid $nice-border;
+    border-bottom: 1px solid $nice-border;
+  }
+}

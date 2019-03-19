@@ -1,0 +1,16 @@
+<div class="nice-progress-bar" ng-class="{'margin-bottom-0' : noMargin}">
+    <div class="row">
+        <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="progress">
+                <div class="progress-value">{{ value }} / {{ max }}</div>
+                <div class="progress-bar" ng-style="{'width': percentage+'%', 'background': color}">
+                    <div class="progress-value" ng-style="{'width': width+'px'}">{{ value }} / {{ max }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

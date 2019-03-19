@@ -1,0 +1,22 @@
+<div class="nice-quantity" ng-class="{'margin-bottom-0' : noMargin}">
+    <div class="row">
+        <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+        </div>
+
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-left" ng-click="sub()" type="button">-</button>
+                </span>
+        
+                <input class="value" ng-model="model" type="number" ng-change="handleChange()" />
+        
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-right" ng-click="add()" type="button">+</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+

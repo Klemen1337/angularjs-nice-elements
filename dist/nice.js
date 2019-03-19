@@ -2938,6 +2938,31 @@ angular.module('niceElements')
     };
 
   });
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceHelp
+ * @description
+ * # niceHelp
+ */
+angular.module('niceElements')
+  .directive('niceHelp', function () {
+    return {
+      templateUrl: 'components/nice-help/nice-help.html',
+      restrict: 'E',
+      scope: {
+        text: '@'
+      },
+      link: function postLink(scope, element, attrs) {
+
+      },
+      controller: function($rootScope, $scope) {
+
+      }
+    };
+  });
+
 angular.module('niceElements')
   .directive('niceInput', function () {
     return {
@@ -3487,6 +3512,114 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceProgressBar
+ * @description
+ * # niceProgressBar
+ */
+angular.module('niceElements')
+  .directive('niceProgressBar', function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'components/nice-progress-bar/nice-progress-bar.html',
+      scope: {
+        title: '@',
+        noMargin: "@",
+        value: '=',
+        max: '=',
+        color: '='
+      },
+
+      controller: function($scope, $element, $timeout) {
+        $scope.width = 0;
+        $scope.resize = function(){
+          $timeout(function() {
+            $scope.width = $element[0].getElementsByClassName("progress")[0].offsetWidth;
+          },100);
+        };
+        window.onresize = function() {
+          $scope.resize();
+        };
+        $scope.resize();
+
+        
+
+        $scope.$watch("value", function(valueNew, valueOld){
+          $scope.calculate();
+        });
+
+        $scope.$watch("max", function(valueNew, valueOld){
+          $scope.calculate();
+        });
+
+        $scope.calculate = function(){
+          $scope.percentage = ($scope.value / $scope.max) * 100;
+        };
+
+        $scope.calculate();
+      }
+    };
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceQuantity
+ * @description
+ * # niceQuantity
+ */
+angular.module('niceElements')
+  .directive('niceQuantity', function () {
+    return {
+      templateUrl: 'components/nice-quantity/nice-quantity.html',
+      restrict: 'E',
+      scope: {
+        title: '@',
+        model: '=',
+        max: '=',
+        onChange: "&",
+        noMargin: "@",
+        fieldWidth: '@',
+        labelWidth: '@'
+      },
+      controller: function ($scope) {
+        if (!$scope.model) {
+          $scope.model = 0;
+        }
+
+        $scope.add = function () {
+          if ($scope.max) {
+            if ($scope.max >= $scope.model + 1) {
+              $scope.model += 1;
+              $scope.onChange($scope.model);
+            }
+          } else {
+            $scope.model += 1;
+            $scope.onChange($scope.model);
+          }
+        };
+
+        $scope.sub = function () {
+          if ($scope.model - 1 >= 0) {
+            $scope.model -= 1;
+            $scope.onChange($scope.model);
+          }
+        };
+
+        $scope.handleChange = function () {
+          if ($scope.model) {
+            $scope.model = Number($scope.model);
+          }
+        }
+      }
+    };
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceSearch
  * @description
  * # niceSearch
@@ -3799,6 +3932,128 @@ angular.module('niceElements')
       }
     };
   });
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceUpload
+ * @description
+ * # niceUpload
+ */
+ angular.module('niceElements')
+   .directive('niceUpload', function ($timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      templateUrl: 'components/nice-upload/nice-upload.html',
+      scope: {
+        model: '=',
+        title: '@',
+        text: '@',
+        fieldWidth: '@',
+        labelWidth: '@',
+        noMargin: '@',
+        accept: '@',
+        uploadFunction: '=',
+        callbackFunction: '=',
+        callbackFile: '=',
+        callbackUrl: '='
+      },
+
+      link: function(scope, element, attrs, ctrl){
+        if (!attrs.title) { attrs.title = ''; }
+        if (!attrs.text) { attrs.text = 'Click to upload file'; }
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        attrs.noMargin = angular.isDefined(attrs.noMargin);
+        var maxImageSize = 1000000; // 1MB
+
+        element.bind("change", function (changeEvent) {
+
+          if (scope.callbackUrl != undefined) {
+            scope.callbackUrl(URL.createObjectURL(changeEvent.target.files[0]));
+          }
+
+          $timeout(function () {
+            var inputObj = changeEvent.target;
+
+            scope.loading = true;
+            scope.error = null;
+            var reader = new FileReader();
+
+            if (inputObj.files) {
+              try {
+                var fileSize = inputObj.files[0].size; // in bytes
+
+                reader.onload = function (event) {
+                  $timeout(function(){
+                    // file size must be smaller than 1MB.
+                    if (fileSize <= maxImageSize) {
+                      if (scope.callbackFunction != undefined) {
+                        scope.loading = false;
+                        scope.imageSource = null;
+                        scope.callbackFunction(event.target.result);
+                        scope.text = inputObj.files[0].name;
+                        scope.form.$setDirty();
+                      }
+
+                      if(scope.callbackFile != undefined){
+                        scope.loading = false;
+                        scope.text = inputObj.files[0].name;
+                        scope.callbackFile(inputObj.files[0]);
+                        scope.form.$setDirty();
+                      }
+
+                      if (scope.uploadFunction != undefined) {
+                        scope.uploadFunction(inputObj.files[0]).then(function (response) {
+                          scope.loading = false;
+                          scope.imageSource = event.target.result;
+                          scope.model = response.data.url;
+                          scope.form.$setDirty();
+                        }, function (error) {
+                          // Handle upload function error
+                          scope.error = error;
+                          scope.loading = false;
+                          scope.imageSource = null;
+                        });
+                      } else {
+                        // console.error("No upload function set!");
+                      }
+                    } else {
+                      // Handle file too big error
+                      scope.error = "File must be smaller than 1MB";
+                      scope.loading = false;
+                      scope.imageSource = null;
+                    }
+                  });
+                };
+
+              } catch (err) {
+                // Handle try catch
+                scope.error = "Something went wrong";
+                scope.loading = false;
+                scope.imageSource = null;
+              }
+
+              // when the file is read it triggers the onload event above.
+              reader.readAsDataURL(inputObj.files[0]);
+
+            }
+          });
+
+        });
+      },
+
+      controller: function($scope) {
+        $scope.$watch("model", function(value){
+          $scope.imageSource = angular.copy($scope.model);
+        });
+      }
+
+    };
+  });
+
 'use strict';
 
 /**
@@ -4570,6 +4825,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('components/nice-help/nice-help.html',
+    "<div class=\"nice-help\">\n" +
+    "    <i class=\"fa fa-question-circle\"></i>\n" +
+    "    <div class=\"help-window\">{{ text }}</div>\n" +
+    "</div>\n"
+  );
+
+
   $templateCache.put('components/nice-input/nice-input.html',
     "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"forma\">\n" +
     "  <div class=\"row\">\n" +
@@ -4745,6 +5008,52 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('components/nice-progress-bar/nice-progress-bar.html',
+    "<div class=\"nice-progress-bar\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "            <div class=\"progress\">\n" +
+    "                <div class=\"progress-value\">{{ value }} / {{ max }}</div>\n" +
+    "                <div class=\"progress-bar\" ng-style=\"{'width': percentage+'%', 'background': color}\">\n" +
+    "                    <div class=\"progress-value\" ng-style=\"{'width': width+'px'}\">{{ value }} / {{ max }}</div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('components/nice-quantity/nice-quantity.html',
+    "<div class=\"nice-quantity\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "            <div class=\"input-group\">\n" +
+    "                <span class=\"input-group-btn\">\n" +
+    "                    <button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\">-</button>\n" +
+    "                </span>\n" +
+    "        \n" +
+    "                <input class=\"value\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" />\n" +
+    "        \n" +
+    "                <span class=\"input-group-btn\">\n" +
+    "                    <button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\">+</button>\n" +
+    "                </span>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n"
+  );
+
+
   $templateCache.put('components/nice-search/nice-search.html',
     "<ng-form class=\"nice-input nice-search\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "    <div class=\"row\">\n" +
@@ -4849,6 +5158,31 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"nice-background\" ng-click=\"close()\" ng-if=\"open\"></div>\n" +
     "</div>"
+  );
+
+
+  $templateCache.put('components/nice-upload/nice-upload.html',
+    "<ng-form class=\"nice-upload\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "  <div class=\"row\">\n" +
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" />\n" +
+    "        <div class=\"input-area\">\n" +
+    "            <div class=\"middle-text\" ng-if=\"!imageSource && !loading\">\n" +
+    "                {{ text }}\n" +
+    "                <div class=\"error\" ng-if=\"error\">{{ error }}</div>\n" +
+    "            </div>\n" +
+    "            <img ng-if=\"imageSource\" data-ng-src=\"{{ imageSource }}\" />\n" +
+    "        </div>\n" +
+    "        <div class=\"loading\" ng-if=\"loading\">\n" +
+    "            <nice-loader></nice-loader>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "</ng-form>\n"
   );
 
 

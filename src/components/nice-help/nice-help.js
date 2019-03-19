@@ -1,0 +1,24 @@
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name niceElements.directive:niceHelp
+ * @description
+ * # niceHelp
+ */
+angular.module('niceElements')
+  .directive('niceHelp', function () {
+    return {
+      templateUrl: 'components/nice-help/nice-help.html',
+      restrict: 'E',
+      scope: {
+        text: '@'
+      },
+      link: function postLink(scope, element, attrs) {
+
+      },
+      controller: function($rootScope, $scope) {
+
+      }
+    };
+  });

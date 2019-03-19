@@ -1,0 +1,21 @@
+<ng-form class="nice-upload" ng-class="{'margin-bottom-0' : noMargin}" name="form">
+  <div class="row">
+    <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+        <label class="nice">{{ title }}<span ng-if="required">*</span></label>
+    </div>
+
+    <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+        <input class="input-file" type="file" accept="{{ accept }}" ng-model="file" />
+        <div class="input-area">
+            <div class="middle-text" ng-if="!imageSource && !loading">
+                {{ text }}
+                <div class="error" ng-if="error">{{ error }}</div>
+            </div>
+            <img ng-if="imageSource" data-ng-src="{{ imageSource }}" />
+        </div>
+        <div class="loading" ng-if="loading">
+            <nice-loader></nice-loader>
+        </div>
+    </div>
+  </div>
+</ng-form>
