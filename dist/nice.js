@@ -5041,7 +5041,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    <button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\">-</button>\n" +
     "                </span>\n" +
     "        \n" +
-    "                <input class=\"value\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" />\n" +
+    "                <input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" />\n" +
     "        \n" +
     "                <span class=\"input-group-btn\">\n" +
     "                    <button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\">+</button>\n" +
