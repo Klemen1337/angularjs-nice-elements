@@ -4168,7 +4168,7 @@ angular.module('niceElements')
 angular.module('niceElements').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('components/nice-button-toggle/nice-button-toggle.html',
+  $templateCache.put('src/components/nice-button-toggle/nice-button-toggle.html',
     "<div class=\"nice-button-toggle row\">\n" +
     "    <div class=\"col-xs-offset-4 col-xs-8\">\n" +
     "            <button type=\"button\" class=\"btn btn-block btn-primary\" ng-click=\"model = !model\">\n" +
@@ -4181,7 +4181,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-button/nice-button.html',
+  $templateCache.put('src/components/nice-button/nice-button.html',
     "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <button type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
     "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
@@ -4191,7 +4191,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-calendar/nice-calendar.html',
+  $templateCache.put('src/components/nice-calendar/nice-calendar.html',
     "<div class=\"nice-calendar\" ng-form=\"formCalendar\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4311,7 +4311,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-checkbox/nice-checkbox.html',
+  $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
     "<div class=\"nice-checkbox\" ng-class=\"{'checked': model, 'margin-bottom-0' : noMargin}\" ng-click=\"toggle()\">\n" +
     "    <div class=\"checkbox\">\n" +
     "        <svg class=\"check\" viewBox=\"-281 373 48 48\">\n" +
@@ -4323,7 +4323,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-choice/nice-choice.html',
+  $templateCache.put('src/components/nice-choice/nice-choice.html',
     "<div class=\"nice-choice\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formChoice\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4343,7 +4343,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-comment/nice-comment.html',
+  $templateCache.put('src/components/nice-comment/nice-comment.html',
     "<div class=\"nice-comment\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div class=\"row\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4366,7 +4366,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-date-range/nice-date-range.html',
+  $templateCache.put('src/components/nice-date-range/nice-date-range.html',
     "<ng-form class=\"nice-date-range\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4384,7 +4384,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-date/nice-date.html',
+  $templateCache.put('src/components/nice-date/nice-date.html',
     "<div class=\"nice-date\" ng-form=\"forma\">\n" +
     "    <div class=\"nice-date-date\">\n" +
     "        <div class=\"nice-date-header\">\n" +
@@ -4443,7 +4443,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-datetime-picker/nice-datetime-picker.html',
+  $templateCache.put('src/components/nice-datetime-picker/nice-datetime-picker.html',
     "<div class=\"nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "\n" +
     "    <div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"isOpen\"></div>\n" +
@@ -4490,7 +4490,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
+  $templateCache.put('src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
     "<div class=\"nice-datetimerange-picker-2\" ng-form=\"formDateRangePicker\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "\n" +
     "    <div class=\"nice-dtp-background\" ng-click=\"close()\" ng-if=\"isOpen\"></div>\n" +
@@ -4537,7 +4537,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-datetimerange-picker/nice-datetimerange-picker.html',
+  $templateCache.put('src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
     "<div class=\"nice-datetime-picker nice-datetimerange-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "\n" +
     "    <div class=\"nice-dtp-background\" ng-click=\"cancelClick()\" ng-if=\"showDtpRange\"></div>\n" +
@@ -4623,7 +4623,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-dropdown-date/nice-dropdown-date.html',
+  $templateCache.put('src/components/nice-dropdown-date/nice-dropdown-date.html',
     "<div class=\"nice-dropdown-date\" ng-form=\"dropdownDateForm\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4677,7 +4677,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-dropdown/nice-dropdown.html',
+  $templateCache.put('src/components/nice-dropdown/nice-dropdown.html',
     "<div class=\"nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "    <div class=\"row\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4739,7 +4739,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-dtp/nice-dtp.html',
+  $templateCache.put('src/components/nice-dtp/nice-dtp.html',
     "<div class=\"dtp-wrapper\">\n" +
     "    <div class=\"dtp\" id=\"this.name\" ng-class=\"{'hidden': !showDtp}\">\n" +
     "        <div class=\"dtp-content\" ng-style=\"dtp_content_style\">\n" +
@@ -4835,7 +4835,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-help/nice-help.html',
+  $templateCache.put('src/components/nice-help/nice-help.html',
     "<div class=\"nice-help\">\n" +
     "    <i class=\"fa fa-question-circle\"></i>\n" +
     "    <div class=\"help-window\">{{ text }}</div>\n" +
@@ -4843,7 +4843,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-input/nice-input.html',
+  $templateCache.put('src/components/nice-input/nice-input.html',
     "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"forma\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4912,7 +4912,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-label/nice-label.html',
+  $templateCache.put('src/components/nice-label/nice-label.html',
     "<div class=\"nice-label\">\n" +
     "\n" +
     "<div class=\"row\">\n" +
@@ -4929,7 +4929,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-loader/nice-loader.html',
+  $templateCache.put('src/components/nice-loader/nice-loader.html',
     "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">\n" +
     "  <svg version=\"1.1\" id=\"loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
     "    <path fill=\"#000\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\n" +
@@ -4938,7 +4938,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-notification/nice-notification.html',
+  $templateCache.put('src/components/nice-notification/nice-notification.html',
     "<div class=\"notification\">\n" +
     "    <h3 ng-show=\"title\" ng-bind-html=\"title\"></h3>\n" +
     "    <div class=\"message\" ng-bind-html=\"message\"></div>\n" +
@@ -4946,7 +4946,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-number/nice-number.html',
+  $templateCache.put('src/components/nice-number/nice-number.html',
     "<div ng-form=\"form\" class=\"nice-number\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div ng-class=\"{'row' : !disableRow}\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4977,7 +4977,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-percent/nice-percent.html',
+  $templateCache.put('src/components/nice-percent/nice-percent.html',
     "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5018,7 +5018,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-progress-bar/nice-progress-bar.html',
+  $templateCache.put('src/components/nice-progress-bar/nice-progress-bar.html',
     "<div class=\"nice-progress-bar\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div class=\"row\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5038,7 +5038,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-quantity/nice-quantity.html',
+  $templateCache.put('src/components/nice-quantity/nice-quantity.html',
     "<div class=\"nice-quantity\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
     "    <div class=\"row\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5064,7 +5064,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-search/nice-search.html',
+  $templateCache.put('src/components/nice-search/nice-search.html',
     "<ng-form class=\"nice-input nice-search\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "    <div class=\"row\">\n" +
     "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5123,7 +5123,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-time-picker/nice-time-picker.html',
+  $templateCache.put('src/components/nice-time-picker/nice-time-picker.html',
     "<div class=\"nice-time-picker\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5171,7 +5171,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-upload/nice-upload.html',
+  $templateCache.put('src/components/nice-upload/nice-upload.html',
     "<ng-form class=\"nice-upload\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
     "  <div class=\"row\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5196,7 +5196,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('components/nice-yesno/nice-yesno.html',
+  $templateCache.put('src/components/nice-yesno/nice-yesno.html',
     "<div class=\"row nice-yesno\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formYesno\">\n" +
     "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "        <label class=\"nice\">{{ title }}</label>\n" +

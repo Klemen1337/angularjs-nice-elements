@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    src: 'src',
     dist: 'dist'
   };
 
@@ -48,8 +48,7 @@ module.exports = function (grunt) {
 
       ngtemplates: {
         niceElements: {
-          cwd: 'src/',
-          src: 'components/**/*.html',
+          src: '<%= yeoman.src %>/components/**/*.html',
           dest: '.tmp/nice.templates.js'
         }
       },
