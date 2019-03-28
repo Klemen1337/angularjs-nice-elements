@@ -12,29 +12,35 @@
                         class="btn btn-block btn-dropdown dropdown-toggle"
                         title="{{ getLabel(internalSelected) }}"
                         ng-click="toggle()"
-                        ng-disabled="isDisabled || emptyList">
+                        ng-disabled="isDisabled || emptyList"
+                    >
+                        <nice-loader visible-when="!loading"></nice-loader>
 
-                        <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
-                        <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>
+                        <div ng-transclude="button">
+                            <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
+                            <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>
 
-                        <span ng-if="multiple">
-                            <!--<span ng-repeat="item in internalSelected"><span ng-if="$index > 0">, </span>{{ getLabel(item) }}</span>-->
-                            <span ng-if="internalSelected.length  > 1">{{ internalSelected.length }} <translate>selected</translate></span>
-                            <span ng-if="internalSelected.length  == 1">{{ getLabel(internalSelected[0]) }}</span>
-                            <span ng-if="internalSelected.length == 0" translate>None</span>
-                        </span>
+                            <span ng-if="multiple">
+                                <!--<span ng-repeat="item in internalSelected"><span ng-if="$index > 0">, </span>{{ getLabel(item) }}</span>-->
+                                <span ng-if="internalSelected.length  > 1">{{ internalSelected.length }} <translate>selected</translate></span>
+                                <span ng-if="internalSelected.length  == 1">{{ getLabel(internalSelected[0]) }}</span>
+                                <span ng-if="internalSelected.length == 0" translate>None</span>
+                            </span>
+                        </div>
 
                         <!--<span ng-if="showTax && internalSelected.value">{{ internalSelected.value * 100 }}%</span>-->
-                        <span class="caret"></span>
+                        <span class="caret" ng-if="!loading"></span>
                     </button>
 
                     <ul id="{{id}}" class="dropdown-menu">
                         <li id="{{id}}-{{$index}}" ng-repeat="item in internalList" ng-click="clicked(item)">
                             <a href>
                                 <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>
-                                <span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>
-                                <span ng-class="{'multiple-item': multiple}">{{ getLabel(item) }}</span>
-                                <!--<span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>-->
+                                <span ng-transclude="option">
+                                    <span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>
+                                    <span ng-class="{'multiple-item': multiple}">{{ getLabel(item) }}</span>
+                                    <!--<span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>-->
+                                </span>
                             </a>
                         </li>
                     </ul>

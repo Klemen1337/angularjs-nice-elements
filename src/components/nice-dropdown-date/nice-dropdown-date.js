@@ -11,7 +11,7 @@ angular.module('niceElements')
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: "components/nice-dropdown-date/nice-dropdown-date.html",
+    templateUrl: "src/components/nice-dropdown-date/nice-dropdown-date.html",
     scope: {
       model: '=',
       title: '@',

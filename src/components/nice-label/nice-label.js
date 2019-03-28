@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceLabel', function () {
     return {
-      templateUrl: 'components/nice-label/nice-label.html',
+      templateUrl: 'src/components/nice-label/nice-label.html',
       restrict: 'E',
       scope: {
         fieldWidth: '@',

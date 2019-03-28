@@ -8,7 +8,7 @@
 angular.module('niceElements')
   .directive('niceButton', function ($q) {
     return {
-      templateUrl: 'components/nice-button/nice-button.html',
+      templateUrl: 'src/components/nice-button/nice-button.html',
       restrict: 'E',
       transclude: true,
       scope: {

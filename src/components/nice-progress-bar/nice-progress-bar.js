@@ -11,7 +11,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'components/nice-progress-bar/nice-progress-bar.html',
+      templateUrl: 'src/components/nice-progress-bar/nice-progress-bar.html',
       scope: {
         title: '@',
         noMargin: "@",

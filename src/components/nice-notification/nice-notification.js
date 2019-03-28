@@ -24,7 +24,7 @@ angular.module('niceElements')
         args = {message:args};
       }
 
-      args.template = args.template ? args.template : 'components/nice-notification/nice-notification.html';
+      args.template = args.template ? args.template : 'src/components/nice-notification/nice-notification.html';
       args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
       args.type = t ? t : '';
 

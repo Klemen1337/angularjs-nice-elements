@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceNumber', function () {
     return {
-      templateUrl: 'components/nice-number/nice-number.html',
+      templateUrl: 'src/components/nice-number/nice-number.html',
       restrict: 'E',
       scope: {
         model: '=',

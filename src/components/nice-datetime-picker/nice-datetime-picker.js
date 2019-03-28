@@ -31,7 +31,7 @@ angular.module('niceElements')
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
     },
-    templateUrl: 'components/nice-datetime-picker/nice-datetime-picker.html',
+    templateUrl: 'src/components/nice-datetime-picker/nice-datetime-picker.html',
     link: {
       pre: function($scope, $element, $attrs) {
 

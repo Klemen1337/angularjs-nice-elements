@@ -12,7 +12,7 @@
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: 'components/nice-upload/nice-upload.html',
+      templateUrl: 'src/components/nice-upload/nice-upload.html',
       scope: {
         model: '=',
         title: '@',

@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceCheckbox', function() {
     return {
-      templateUrl: 'components/nice-checkbox/nice-checkbox.html',
+      templateUrl: 'src/components/nice-checkbox/nice-checkbox.html',
       restrict: 'E',
       scope: {
         model: '=',

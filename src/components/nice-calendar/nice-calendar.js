@@ -10,7 +10,7 @@ angular.module('niceElements')
   .directive("niceCalendar", function($timeout) {
     return {
       restrict: "E",
-      templateUrl: "components/nice-calendar/nice-calendar.html",
+      templateUrl: "src/components/nice-calendar/nice-calendar.html",
       scope: {
         title: '@',
         fieldWidth: '@',

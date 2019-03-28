@@ -12,7 +12,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       transclude: true,
-      templateUrl: 'components/nice-date-range/nice-date-range.html',
+      templateUrl: 'src/components/nice-date-range/nice-date-range.html',
       scope: {
         model: '=',
         title: '@',

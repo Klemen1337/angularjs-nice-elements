@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceQuantity', function () {
     return {
-      templateUrl: 'components/nice-quantity/nice-quantity.html',
+      templateUrl: 'src/components/nice-quantity/nice-quantity.html',
       restrict: 'E',
       scope: {
         title: '@',

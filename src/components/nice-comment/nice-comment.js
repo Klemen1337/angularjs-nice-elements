@@ -9,7 +9,7 @@
 angular.module('niceElements')
   .directive('niceComment', function ($timeout) {
     return {
-      templateUrl: 'components/nice-comment/nice-comment.html',
+      templateUrl: 'src/components/nice-comment/nice-comment.html',
       restrict: 'E',
       scope: {
         model: '=',

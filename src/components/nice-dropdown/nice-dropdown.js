@@ -9,9 +9,12 @@
 angular.module('niceElements')
   .directive('niceDropdown', function () {
     return {
-      templateUrl: 'components/nice-dropdown/nice-dropdown.html',
+      templateUrl: 'src/components/nice-dropdown/nice-dropdown.html',
       restrict: 'E',
-      transclude: true,
+      transclude: {
+        'button': '?niceDropdownButton',
+        'option': '?niceDropdownOption'
+      },
       scope: {
         title: '@',               // Title of the field
         model: '=',               // Aka model
@@ -19,6 +22,7 @@ angular.module('niceElements')
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
+        loading: '=',
         addButtonEnable: '=',
         addButtonFunction: '&',
         objValue: '@',            // Optional - default is 'value'
@@ -33,7 +37,7 @@ angular.module('niceElements')
         listenKeydown: '@',
         noOptionsText: "@"
       },
-      controller: function($rootScope, $scope, $document, $element) {
+      controller: function($scope, $element) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
         if (!$scope.list) { $scope.list = []; }

@@ -22,7 +22,7 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
       },
-      templateUrl: 'components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
+      templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
         $scope.isOpen = false;
 

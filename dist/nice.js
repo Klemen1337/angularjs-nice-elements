@@ -11,7 +11,7 @@ angular.module('niceElements', []);
 angular.module('niceElements')
   .directive('niceButtonToggle', function () {
     return {
-      templateUrl: 'components/nice-button-toggle/nice-button-toggle.html',
+      templateUrl: 'src/components/nice-button-toggle/nice-button-toggle.html',
       restrict: 'E',
       scope: {
         model: "=?",
@@ -35,7 +35,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceButton', function ($q) {
     return {
-      templateUrl: 'components/nice-button/nice-button.html',
+      templateUrl: 'src/components/nice-button/nice-button.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -76,7 +76,7 @@ angular.module('niceElements')
   .directive("niceCalendar", function($timeout) {
     return {
       restrict: "E",
-      templateUrl: "components/nice-calendar/nice-calendar.html",
+      templateUrl: "src/components/nice-calendar/nice-calendar.html",
       scope: {
         title: '@',
         fieldWidth: '@',
@@ -387,7 +387,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceCheckbox', function() {
     return {
-      templateUrl: 'components/nice-checkbox/nice-checkbox.html',
+      templateUrl: 'src/components/nice-checkbox/nice-checkbox.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -415,7 +415,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceChoice', function () {
     return {
-      templateUrl: 'components/nice-choice/nice-choice.html',
+      templateUrl: 'src/components/nice-choice/nice-choice.html',
       restrict: 'E',
       scope: {
         title: '@',
@@ -722,7 +722,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceComment', function ($timeout) {
     return {
-      templateUrl: 'components/nice-comment/nice-comment.html',
+      templateUrl: 'src/components/nice-comment/nice-comment.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -793,7 +793,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       transclude: true,
-      templateUrl: 'components/nice-date-range/nice-date-range.html',
+      templateUrl: 'src/components/nice-date-range/nice-date-range.html',
       scope: {
         model: '=',
         title: '@',
@@ -899,7 +899,7 @@ angular.module('niceElements')
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: 'components/nice-date/nice-date.html',
+      templateUrl: 'src/components/nice-date/nice-date.html',
       scope: {
         model: '=',
         time: '=',
@@ -1140,7 +1140,7 @@ angular.module('niceElements')
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
     },
-    templateUrl: 'components/nice-datetime-picker/nice-datetime-picker.html',
+    templateUrl: 'src/components/nice-datetime-picker/nice-datetime-picker.html',
     link: {
       pre: function($scope, $element, $attrs) {
 
@@ -1312,7 +1312,7 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
       },
-      templateUrl: 'components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
+      templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
         $scope.isOpen = false;
 
@@ -1457,7 +1457,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
         formatOutput: "@" // Format output or moment
       },
-      templateUrl: 'components/nice-datetimerange-picker/nice-datetimerange-picker.html',
+      templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
         pre: function($scope, $element, $attrs) {
           // Default parameters
@@ -1675,7 +1675,7 @@ angular.module('niceElements')
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: "components/nice-dropdown-date/nice-dropdown-date.html",
+    templateUrl: "src/components/nice-dropdown-date/nice-dropdown-date.html",
     scope: {
       model: '=',
       title: '@',
@@ -1794,9 +1794,12 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceDropdown', function () {
     return {
-      templateUrl: 'components/nice-dropdown/nice-dropdown.html',
+      templateUrl: 'src/components/nice-dropdown/nice-dropdown.html',
       restrict: 'E',
-      transclude: true,
+      transclude: {
+        'button': '?niceDropdownButton',
+        'option': '?niceDropdownOption'
+      },
       scope: {
         title: '@',               // Title of the field
         model: '=',               // Aka model
@@ -1804,6 +1807,7 @@ angular.module('niceElements')
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
+        loading: '=',
         addButtonEnable: '=',
         addButtonFunction: '&',
         objValue: '@',            // Optional - default is 'value'
@@ -1818,7 +1822,7 @@ angular.module('niceElements')
         listenKeydown: '@',
         noOptionsText: "@"
       },
-      controller: function($rootScope, $scope, $document, $element) {
+      controller: function($scope, $element) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
         if (!$scope.list) { $scope.list = []; }
@@ -2145,7 +2149,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         closed: '='
       },
-      templateUrl: 'components/nice-dtp/nice-dtp.html',
+      templateUrl: 'src/components/nice-dtp/nice-dtp.html',
       link: function ($scope, $element, $attrs) {
 
         // default parameters
@@ -2949,7 +2953,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceHelp', function () {
     return {
-      templateUrl: 'components/nice-help/nice-help.html',
+      templateUrl: 'src/components/nice-help/nice-help.html',
       restrict: 'E',
       scope: {
         text: '@'
@@ -2966,7 +2970,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceInput', function () {
     return {
-      templateUrl: 'components/nice-input/nice-input.html',
+      templateUrl: 'src/components/nice-input/nice-input.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -3120,7 +3124,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceLabel', function () {
     return {
-      templateUrl: 'components/nice-label/nice-label.html',
+      templateUrl: 'src/components/nice-label/nice-label.html',
       restrict: 'E',
       scope: {
         fieldWidth: '@',
@@ -3148,7 +3152,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceLoader', function () {
     return {
-      templateUrl: 'components/nice-loader/nice-loader.html',
+      templateUrl: 'src/components/nice-loader/nice-loader.html',
       restrict: 'E',
       scope: {
           visibleWhen: '=',
@@ -3182,7 +3186,7 @@ angular.module('niceElements')
         args = {message:args};
       }
 
-      args.template = args.template ? args.template : 'components/nice-notification/nice-notification.html';
+      args.template = args.template ? args.template : 'src/components/nice-notification/nice-notification.html';
       args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
       args.type = t ? t : '';
 
@@ -3293,7 +3297,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceNumber', function () {
     return {
-      templateUrl: 'components/nice-number/nice-number.html',
+      templateUrl: 'src/components/nice-number/nice-number.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -3428,7 +3432,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('nicePercent', function () {
     return {
-      templateUrl: 'components/nice-percent/nice-percent.html',
+      templateUrl: 'src/components/nice-percent/nice-percent.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -3521,7 +3525,7 @@ angular.module('niceElements')
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'components/nice-progress-bar/nice-progress-bar.html',
+      templateUrl: 'src/components/nice-progress-bar/nice-progress-bar.html',
       scope: {
         title: '@',
         noMargin: "@",
@@ -3572,7 +3576,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceQuantity', function () {
     return {
-      templateUrl: 'components/nice-quantity/nice-quantity.html',
+      templateUrl: 'src/components/nice-quantity/nice-quantity.html',
       restrict: 'E',
       scope: {
         title: '@',
@@ -3628,7 +3632,7 @@ angular.module('niceElements')
   .directive('niceSearch', function () {
     return {
       transclude: true,
-      templateUrl: 'components/nice-search/nice-search.html',
+      templateUrl: 'src/components/nice-search/nice-search.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -3872,7 +3876,7 @@ angular.module('niceElements')
         labelWidth: '@'
       },
       restrict: 'E',
-      templateUrl: 'components/nice-time-picker/nice-time-picker.html',
+      templateUrl: 'src/components/nice-time-picker/nice-time-picker.html',
       link: function($scope, $element, $attrs) {
         if(!$scope.model) $scope.model = moment();
         $scope.open = false;
@@ -3946,7 +3950,7 @@ angular.module('niceElements')
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: 'components/nice-upload/nice-upload.html',
+      templateUrl: 'src/components/nice-upload/nice-upload.html',
       scope: {
         model: '=',
         title: '@',
@@ -4065,7 +4069,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceYesno', function () {
     return {
-      templateUrl: 'components/nice-yesno/nice-yesno.html',
+      templateUrl: 'src/components/nice-yesno/nice-yesno.html',
       restrict: 'E',
       scope: {
         model: '=',
@@ -4688,29 +4692,35 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                        class=\"btn btn-block btn-dropdown dropdown-toggle\"\n" +
     "                        title=\"{{ getLabel(internalSelected) }}\"\n" +
     "                        ng-click=\"toggle()\"\n" +
-    "                        ng-disabled=\"isDisabled || emptyList\">\n" +
+    "                        ng-disabled=\"isDisabled || emptyList\"\n" +
+    "                    >\n" +
+    "                        <nice-loader visible-when=\"!loading\"></nice-loader>\n" +
     "\n" +
-    "                        <span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>\n" +
-    "                        <span ng-if=\"!multiple\">{{ getLabel(internalSelected) }}</span>\n" +
+    "                        <div ng-transclude=\"button\">\n" +
+    "                            <span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>\n" +
+    "                            <span ng-if=\"!multiple\">{{ getLabel(internalSelected) }}</span>\n" +
     "\n" +
-    "                        <span ng-if=\"multiple\">\n" +
-    "                            <!--<span ng-repeat=\"item in internalSelected\"><span ng-if=\"$index > 0\">, </span>{{ getLabel(item) }}</span>-->\n" +
-    "                            <span ng-if=\"internalSelected.length  > 1\">{{ internalSelected.length }} <translate>selected</translate></span>\n" +
-    "                            <span ng-if=\"internalSelected.length  == 1\">{{ getLabel(internalSelected[0]) }}</span>\n" +
-    "                            <span ng-if=\"internalSelected.length == 0\" translate>None</span>\n" +
-    "                        </span>\n" +
+    "                            <span ng-if=\"multiple\">\n" +
+    "                                <!--<span ng-repeat=\"item in internalSelected\"><span ng-if=\"$index > 0\">, </span>{{ getLabel(item) }}</span>-->\n" +
+    "                                <span ng-if=\"internalSelected.length  > 1\">{{ internalSelected.length }} <translate>selected</translate></span>\n" +
+    "                                <span ng-if=\"internalSelected.length  == 1\">{{ getLabel(internalSelected[0]) }}</span>\n" +
+    "                                <span ng-if=\"internalSelected.length == 0\" translate>None</span>\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
     "\n" +
     "                        <!--<span ng-if=\"showTax && internalSelected.value\">{{ internalSelected.value * 100 }}%</span>-->\n" +
-    "                        <span class=\"caret\"></span>\n" +
+    "                        <span class=\"caret\" ng-if=\"!loading\"></span>\n" +
     "                    </button>\n" +
     "\n" +
     "                    <ul id=\"{{id}}\" class=\"dropdown-menu\">\n" +
     "                        <li id=\"{{id}}-{{$index}}\" ng-repeat=\"item in internalList\" ng-click=\"clicked(item)\">\n" +
     "                            <a href>\n" +
     "                                <span class=\"choice-checkbox\" ng-if=\"multiple\" ng-class=\"{ 'selected' : isItemSelected(item) }\"><i class=\"fa fa-check\"></i></span>\n" +
-    "                                <span ng-if=\"item.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': item.color_hex_code}\"></span>\n" +
-    "                                <span ng-class=\"{'multiple-item': multiple}\">{{ getLabel(item) }}</span>\n" +
-    "                                <!--<span ng-if=\"showTax && item.value\">{{ item.value * 100 }}%</span>-->\n" +
+    "                                <span ng-transclude=\"option\">\n" +
+    "                                    <span ng-if=\"item.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': item.color_hex_code}\"></span>\n" +
+    "                                    <span ng-class=\"{'multiple-item': multiple}\">{{ getLabel(item) }}</span>\n" +
+    "                                    <!--<span ng-if=\"showTax && item.value\">{{ item.value * 100 }}%</span>-->\n" +
+    "                                </span>\n" +
     "                            </a>\n" +
     "                        </li>\n" +
     "                    </ul>\n" +

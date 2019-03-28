@@ -34,7 +34,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         closed: '='
       },
-      templateUrl: 'components/nice-dtp/nice-dtp.html',
+      templateUrl: 'src/components/nice-dtp/nice-dtp.html',
       link: function ($scope, $element, $attrs) {
 
         // default parameters

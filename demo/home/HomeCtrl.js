@@ -3,19 +3,21 @@
 angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, NiceNotification, $timeout) {
   $scope.emptyList = [];
   $scope.inputNumber = null;
+  $scope.dropdownLoading = true;
 
   $scope.listObjs = [
-    {id: 0, value: "Afganistan"},
-    {id: 1, value: "Azerbajdzan"},
-    {id: 2, value: "Belgija"},
-    {id: 3, value: "Belorusija"},
-    {id: 4, value: "Bolgarija"},
-    {id: 5, value: "Burundi"}
+    {id: 0, iso: "SI",value: "Slovenia"},
+    {id: 1, iso: "ZA",value: "South Africa"},
+    {id: 2, iso: "BR",value: "Brazil"},
+    {id: 3, iso: "AF", value: "Afganistan"},
+    {id: 4, iso: "CA",value: "Canada"},
+    {id: 5, iso: "US",value: "United States"}
   ];
 
   //$scope.listStrings = ["String 1", "String 2", "String 3"];
   $timeout(function () {
     $scope.niceNumber2 = 1.99887;
+    $scope.dropdownLoading = false;
   }, 5000);
 
   $scope.niceNumber2 = 0.1;

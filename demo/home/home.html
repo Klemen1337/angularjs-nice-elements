@@ -111,7 +111,17 @@
 
                     <nice-upload title="Nice upload" model="data.upload"></nice-upload>
 
-                    <nice-dropdown title="Dropdown" model="data.dropdown" list="listObjs" no-options-text="Brez opcij" selected-is-obj="true"></nice-dropdown>
+                    <nice-dropdown 
+                        title="Country" 
+                        model="data.dropdown" 
+                        list="listObjs" 
+                        no-options-text="Brez opcij" 
+                        selected-is-obj="true"
+                        loading="dropdownLoading"
+                    >
+                        <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.internalSelected.iso }}/flat/16.png"> <span>{{ $parent.internalSelected.value }}</span></nice-dropdown-button>
+                        <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.value }}</nice-dropdown-option>
+                    </nice-dropdown>
 
                     <nice-dropdown-date title="Birthday" model="data.birthday"></nice-dropdown-date>
 
