@@ -64,7 +64,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Get filter -----------------------------------
-        var getFilter = function(item){
+        $scope.getFilter = function(item){
           // Create filter for finding object by objValue with _.where()
           var filter = {};
           if (item.hasOwnProperty($scope.objKey))
@@ -76,13 +76,13 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Set internal list -----------------------------------
-        var _set_internal_list = function(){
+        $scope._set_internal_list = function(){
           $scope.internalList = angular.copy($scope.list);
         };
 
 
         // ----------------------------------- Add null object to internal list -----------------------------------
-        var _add_null_object_to_internal = function(){
+        $scope._add_null_object_to_internal = function(){
           if ($scope.nullable && !$scope.multiple) {
             var nullObj = {};
             nullObj[$scope.objKey] = null;
@@ -93,34 +93,34 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Get selected object -----------------------------------
-        var _get_selected_object = function(selected){
+        $scope._get_selected_object = function(selected){
           if (!selected) return null;
           if ($scope.selectedIsObj) {
             return selected;
           } else {
-            return _.find($scope.internalList, getFilter(selected));
+            return _.find($scope.internalList, $scope.getFilter(selected));
           }
         };
 
 
         // ----------------------------------- Init -----------------------------------
-        var _set_internal_selected_one = function(selected){
+        $scope._set_internal_selected_one = function(selected){
           var obj = {};
 
-          var selectedObj = _get_selected_object(selected);
+          var selectedObj = $scope._get_selected_object(selected);
           // console.log('_set_internal_selected_one', selected, selectedObj);
-          if(selectedObj && _.find($scope.internalList, getFilter(selected))){
+          if(selectedObj && _.find($scope.internalList, $scope.getFilter(selected))){
             obj = selectedObj;
           } else {
             obj = $scope.internalList[0];
           }
           $scope.internalSelected = obj;
-          _set_model(obj);
+          $scope._set_model(obj);
         };
 
 
         // ----------------------------------- Get selected objects -----------------------------------
-        var _get_selected_objects = function(selected){
+        $scope._get_selected_objects = function(selected){
           if (!selected)
             return null;
 
@@ -129,27 +129,27 @@ angular.module('niceElements')
           else {
             // from [1,2,3] get list of objects [{}, {}, {}]
             return _.map(selected, function (val) {
-              return _.find($scope.internalList, getFilter(val));
+              return _.find($scope.internalList, $scope.getFilter(val));
             });
           }
         };
 
 
         // ----------------------------------- Set internal selected multiple -----------------------------------
-        var _set_internal_selected_multiple = function(item){
-          var _selected_objects = _get_selected_objects(item);
+        $scope._set_internal_selected_multiple = function(item){
+          var _selected_objects = $scope._get_selected_objects(item);
           if (_selected_objects){
             $scope.internalSelected = _selected_objects;
-            _set_model($scope.internalSelected);
+            $scope._set_model($scope.internalSelected);
           } else {
             $scope.internalSelected = [];
-            _set_model($scope.internalSelected);
+            $scope._set_model($scope.internalSelected);
           }
         };
 
 
         // ----------------------------------- Set model -----------------------------------
-        var _set_model = function(value){
+        $scope._set_model = function(value){
           var _new = angular.copy($scope.model);
 
           if(!$scope.multiple){
@@ -180,15 +180,15 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Init -----------------------------------
-        var init = function() {
-          _set_internal_list();
-          _add_null_object_to_internal();
+        $scope.init = function() {
+          $scope._set_internal_list();
+          $scope._add_null_object_to_internal();
 
           if($scope.multiple && $scope.model){
             if ($scope.internalSelected) {
               // remove already selected but not in list - this happens when list changes from outside
-              _set_internal_selected_multiple(_.filter($scope.internalSelected, function (obj) {
-                return _.find($scope.internalList, getFilter(obj));
+              $scope._set_internal_selected_multiple(_.filter($scope.internalSelected, function (obj) {
+                return _.find($scope.internalList, $scope.getFilter(obj));
               }));
             } else {
               $scope.internalSelected = [];
@@ -200,9 +200,9 @@ angular.module('niceElements')
             $scope.emptyList = false;
 
             if ($scope.multiple) {
-              _set_internal_selected_multiple($scope.model);
+              $scope._set_internal_selected_multiple($scope.model);
             } else {
-              _set_internal_selected_one($scope.model);
+              $scope._set_internal_selected_one($scope.model);
             }
 
             if($scope.formDropdown && $scope.required){
@@ -221,9 +221,9 @@ angular.module('niceElements')
             }
 
             if ($scope.multiple) {
-              _set_internal_selected_multiple(sel);
+              $scope._set_internal_selected_multiple(sel);
             } else {
-              _set_internal_selected_one([sel]);
+              $scope._set_internal_selected_one([sel]);
             }
           }
         };
@@ -248,14 +248,14 @@ angular.module('niceElements')
           if($scope.multiple){
             // This actually toggles selection
             var _current = angular.copy($scope.internalSelected);
-            if(!_.find(_current, getFilter(item))){
+            if(!_.find(_current, $scope.getFilter(item))){
               _current.push(item);
             } else {
-              _current = _.reject(_current, getFilter(item[$scope.objKey]));
+              _current = _.reject(_current, $scope.getFilter(item[$scope.objKey]));
             }
-            _set_internal_selected_multiple(_current);
+            $scope._set_internal_selected_multiple(_current);
           } else {
-            _set_internal_selected_one(item);
+            $scope._set_internal_selected_one(item);
             $scope.close();
           }
 
@@ -274,20 +274,20 @@ angular.module('niceElements')
 
         // ----------------------------------- Watch for list change -----------------------------------
         $scope.$watch('list', function (value_new, value_old) {
-          init();
+          $scope.init();
         });
 
 
         // ----------------------------------- Watch for model change -----------------------------------
         $scope.$watch('model', function (value_new, value_old) {
           if ($scope.multiple) {
-            var _new_model_object = _get_selected_object(value_new);
+            var _new_model_object = $scope._get_selected_object(value_new);
           } else {
-            var _new_model_object = _get_selected_objects(value_new);
+            var _new_model_object = $scope._get_selected_objects(value_new);
           }
 
           if (!_.isEqual(_new_model_object, $scope.internalSelected)){
-            init();
+            $scope.init();
           }
         });
 

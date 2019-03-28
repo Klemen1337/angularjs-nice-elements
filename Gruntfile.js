@@ -25,6 +25,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-postcss');
 
   // Configurable paths for the application
   var appConfig = {
@@ -110,15 +111,52 @@ module.exports = function (grunt) {
         }
       },
 
+
+      postcss: {
+        options: {
+          map: true,
+          syntax: require('postcss-scss'), // work with SCSS directly
+          processors: [
+            require('autoprefixer')({
+              browsers: ['last 8 versions']
+            })
+          ]
+        },
+        server: {
+          options: {
+            map: true,
+            syntax: require('postcss-scss'), // work with SCSS directly,
+            processors: [
+              require('autoprefixer')({
+                browsers: ['last 8 versions']
+              })
+            ]
+          },
+          files: [{
+            expand: true,
+            cwd: '.tmp/styles/',
+            src: '{,*/}*.css',
+            dest: '.tmp/styles/'
+          }]
+        },
+        dist: {
+          expand: true,
+          cwd: '.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: '.tmp/styles/'
+        }
+      },
+
+
       // Compiles Sass to CSS and generates necessary files if requested
       compass: {
         options: {
-          sassDir: 'src/styles/',
-          cssDir: 'dist',
-          generatedImagesDir: 'dist/images/generated',
-          imagesDir: 'dist/images',
-          javascriptsDir: 'dist/scripts',
-          fontsDir: 'dist/fonts',
+          sassDir: '<%= yeoman.src %>/styles/',
+          cssDir: '<%= yeoman.dist %>',
+          generatedImagesDir: '<%= yeoman.dist %>/images/generated',
+          imagesDir: '<%= yeoman.dist %>/images',
+          javascriptsDir: '<%= yeoman.dist %>/scripts',
+          fontsDir: '<%= yeoman.dist %>/fonts',
           importPath: './bower_components',
           httpImagesPath: '/images',
           httpGeneratedImagesPath: '/images/generated',
@@ -140,7 +178,7 @@ module.exports = function (grunt) {
           files: [{
             dot: true,
             src: [
-              'dist/',
+              '<%= yeoman.dist %>/',
               '.tmp/'
             ]
           }]
@@ -149,8 +187,8 @@ module.exports = function (grunt) {
       },
       cssmin: {
         dev: {
-          src: ['dist/nice.css'],
-          dest: 'dist/nice.min.css'
+          src: ['dist/style.css'],
+          dest: 'dist/style.min.css'
         }
       }
     });
@@ -162,6 +200,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
       'clean:dist',
       'ngtemplates',
+      'postcss',
       'concat:build',
       'jshint:beforeconcatQ',
       'compass:dist',
