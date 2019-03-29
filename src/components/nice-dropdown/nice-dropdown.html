@@ -1,52 +1,55 @@
 <div class="nice-dropdown" ng-class="{ 'margin-bottom-0': noMargin }">
     <div class="row">
+        <!------------------------- Label ------------------------->
         <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
         </div>
 
+        <!------------------------- Field ------------------------->
         <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'" click-outside="close()" is-open="{{ isOpen }}">
-            <div ng-class="addButtonEnable && !isDisabled ? 'input-group': ''">
+            <div ng-class="addButtonFunction && !isDisabled ? 'input-group': ''">
                 <div class="btn-group" ng-class="{ 'open': isOpen, 'disabled': isDisabled || emptyList }">
-                    <button
-                        type="button"
-                        class="btn btn-block btn-dropdown dropdown-toggle"
-                        title="{{ getLabel(internalSelected) }}"
-                        ng-click="toggle()"
-                        ng-disabled="isDisabled || emptyList"
-                    >
-                        <nice-loader visible-when="!loading"></nice-loader>
-
-                        <div ng-transclude="button">
-                            <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
-                            <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>
-
+                    <!------------------------- Button ------------------------->
+                    <button type="button" class="btn btn-block btn-dropdown dropdown-toggle" ng-click="toggle()" ng-disabled="isDisabled || emptyList">
+                        <div ng-transclude="button" ng-if="selected">
+                            <span ng-if="!multiple">{{ selected[objValue] }}</span>
                             <span ng-if="multiple">
-                                <!--<span ng-repeat="item in internalSelected"><span ng-if="$index > 0">, </span>{{ getLabel(item) }}</span>-->
-                                <span ng-if="internalSelected.length  > 1">{{ internalSelected.length }} <translate>selected</translate></span>
-                                <span ng-if="internalSelected.length  == 1">{{ getLabel(internalSelected[0]) }}</span>
-                                <span ng-if="internalSelected.length == 0" translate>None</span>
+                                <span ng-if="selected.length > 1">{{ selected.length }} <translate>selected</translate></span>
+                                <span ng-if="selected.length == 1">{{ selected[0][objValue] }}</span>
+                                <span ng-if="selected.length == 0">None</span>
                             </span>
                         </div>
-
-                        <!--<span ng-if="showTax && internalSelected.value">{{ internalSelected.value * 100 }}%</span>-->
-                        <span class="caret" ng-if="!loading"></span>
+                        <div class="not-selected" ng-if="!selected">
+                            {{ selectText }}
+                        </div>
+                        
+                        <span class="caret" ng-show="!loading"></span>
+                        <nice-loader visible-when="!loading"></nice-loader>
                     </button>
 
-                    <ul id="{{id}}" class="dropdown-menu">
-                        <li id="{{id}}-{{$index}}" ng-repeat="item in internalList" ng-click="clicked(item)">
-                            <a href>
-                                <span class="choice-checkbox" ng-if="multiple" ng-class="{ 'selected' : isItemSelected(item) }"><i class="fa fa-check"></i></span>
+                    <!------------------------- Dropdown menu ------------------------->
+                    <div class="dropdown-menu">
+                        <div class="search-bar" ng-if="searchFunction">
+                            <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
+                            <span class="icon"><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
+                        <ul>
+                            <li ng-if="nullable" ng-click="handleSelected(null, -1)">
+                                {{ nullableText }}
+                            </li>
+                            <li ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }">
+                                <span class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></span>
                                 <span ng-transclude="option">
-                                    <span ng-if="item.color_hex_code" class="dropdown-color" ng-style="{'background': item.color_hex_code}"></span>
-                                    <span ng-class="{'multiple-item': multiple}">{{ getLabel(item) }}</span>
-                                    <!--<span ng-if="showTax && item.value">{{ item.value * 100 }}%</span>-->
+                                    <span ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</span>
                                 </span>
-                            </a>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <span class="input-group-btn" ng-if="addButtonEnable && !isDisabled">
+                <!------------------------- Add button ------------------------->
+                <span class="input-group-btn" ng-if="addButtonFunction && !isDisabled">
                     <button class="btn btn-primary" ng-click="addButtonFunction()" type="button">+</button>
                 </span>
             </div>
@@ -55,4 +58,3 @@
     <!--Needed for intercepting form changes ($dirty)!-->
     <div ng-form="formDropdown"></div>
 </div>
-

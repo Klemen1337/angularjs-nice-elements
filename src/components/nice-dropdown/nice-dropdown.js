@@ -16,314 +16,192 @@ angular.module('niceElements')
         'option': '?niceDropdownOption'
       },
       scope: {
-        title: '@',               // Title of the field
-        model: '=',               // Aka model
-        list: '=',                // List of options
+        title: '@', // Title of the field
+        model: '=', // Aka model
+        list: '=', // List of options
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
-        loading: '=',
-        addButtonEnable: '=',
-        addButtonFunction: '&',
-        objValue: '@',            // Optional - default is 'value'
-        objKey: '@?',             // Optional - default is 'id'. Used only when returnOnlyKey=true
-        selectedIsObj: '@',       // Optional parameter.
-        nullable: '@',            // No selection is possible
-        required: '@',            // Model cannot be NULL
-        showTax: '@',             // Shows tax rate
-        noMargin: '@',            // margin-bottom: 0px
-        multiple: '@',            // Can select multiple items
+        loading: '=?',
+        addButtonFunction: '=?',
+        objValue: '@', // Optional - default is 'value'
+        objKey: '@?', // Optional - default is 'id'. Used only when returnOnlyKey=true.
+        nullable: '@', // No selection is possible
+        required: '@', // Model cannot be NULL
+        noMargin: '@', // margin-bottom: 0px
+        multiple: '@', // Can select multiple items
         help: '@',
-        listenKeydown: '@',
-        noOptionsText: "@"
+        noOptionsText: "@",
+        noDataText: "@",
+        selectText: "@",
+        searchText: "@",
+        nullableText: "@",
+        searchFunction: "=?"
       },
-      controller: function($scope, $element) {
+      controller: function ($scope, $element, $timeout) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
-        if (!$scope.list) { $scope.list = []; }
         if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
-        if(!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
-        if(!$scope.listenKeydown) { $scope.listenKeydown = false; }
-        $scope.valid = $scope.formDropdown;
-
-
-        $scope.selectedIsObj = $scope.selectedIsObj === 'true' || $scope.selectedIsObj === true;
+        if (!$scope.noDataText) { $scope.noDataText = "No options"; }
+        if (!$scope.searchText) { $scope.searchText = "Search..."; }
+        if (!$scope.nullableText) { $scope.nullableText = "None"; }
+        if (!$scope.selectText) { $scope.selectText = "Select option"; }
+        if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;
-        $scope.showTax = $scope.showTax === 'true' || $scope.showTax === true;
         $scope.noMargin = $scope.noMargin === 'true' || $scope.noMargin === true;
         $scope.multiple = $scope.multiple === 'true' || $scope.multiple === true;
-
-        $scope.internalSelected = null;
-        $scope.id = Math.random().toString(36).substring(7);
-
+        $scope.valid = $scope.formDropdown;
         $scope.isOpen = false;
-        $scope.toggle = function(){ $scope.isOpen = !$scope.isOpen; };
-        $scope.close = function(){ $scope.isOpen = false; };
-        $scope.open = function(){ $scope.isOpen = true; };
-
-
-        // ----------------------------------- Get filter -----------------------------------
-        $scope.getFilter = function(item){
-          // Create filter for finding object by objValue with _.where()
-          var filter = {};
-          if (item.hasOwnProperty($scope.objKey))
-            filter[$scope.objKey] = item[$scope.objKey];
-          else
-            filter[$scope.objKey] = item;
-          return filter;
+        $scope.selected = null;
+        $scope.selectedIndex = null;
+        $scope.internal = {
+          search: ""
         };
 
-
-        // ----------------------------------- Set internal list -----------------------------------
-        $scope._set_internal_list = function(){
-          $scope.internalList = angular.copy($scope.list);
-        };
-
-
-        // ----------------------------------- Add null object to internal list -----------------------------------
-        $scope._add_null_object_to_internal = function(){
-          if ($scope.nullable && !$scope.multiple) {
-            var nullObj = {};
-            nullObj[$scope.objKey] = null;
-            nullObj[$scope.objValue] = '-';
-            $scope.internalList = [nullObj].concat($scope.internalList);
-          }
-        };
-
-
-        // ----------------------------------- Get selected object -----------------------------------
-        $scope._get_selected_object = function(selected){
-          if (!selected) return null;
-          if ($scope.selectedIsObj) {
-            return selected;
+        // -----------------------------------Open -----------------------------------
+        $scope.toggle = function () {
+          if ($scope.isOpen) {
+            $scope.close();
           } else {
-            return _.find($scope.internalList, $scope.getFilter(selected));
+            $scope.open();
           }
         };
 
+        $scope.close = function () {
+          $scope.isOpen = false;
+        };
 
-        // ----------------------------------- Init -----------------------------------
-        $scope._set_internal_selected_one = function(selected){
-          var obj = {};
-
-          var selectedObj = $scope._get_selected_object(selected);
-          // console.log('_set_internal_selected_one', selected, selectedObj);
-          if(selectedObj && _.find($scope.internalList, $scope.getFilter(selected))){
-            obj = selectedObj;
-          } else {
-            obj = $scope.internalList[0];
-          }
-          $scope.internalSelected = obj;
-          $scope._set_model(obj);
+        $scope.open = function () {
+          $scope.focusInput();
+          $scope.isOpen = true;
         };
 
 
-        // ----------------------------------- Get selected objects -----------------------------------
-        $scope._get_selected_objects = function(selected){
-          if (!selected)
-            return null;
-
-          if ($scope.selectedIsObj)
-            return selected;
-          else {
-            // from [1,2,3] get list of objects [{}, {}, {}]
-            return _.map(selected, function (val) {
-              return _.find($scope.internalList, $scope.getFilter(val));
+        // ----------------------------------- Focus input -----------------------------------
+        $scope.focusInput = function () {
+          var input = $element[0].getElementsByTagName('input')[0];
+          if (input) {
+            $timeout(function () {
+              input.focus();
             });
           }
         };
 
 
-        // ----------------------------------- Set internal selected multiple -----------------------------------
-        $scope._set_internal_selected_multiple = function(item){
-          var _selected_objects = $scope._get_selected_objects(item);
-          if (_selected_objects){
-            $scope.internalSelected = _selected_objects;
-            $scope._set_model($scope.internalSelected);
-          } else {
-            $scope.internalSelected = [];
-            $scope._set_model($scope.internalSelected);
-          }
+        // ----------------------------------- Search -----------------------------------
+        $scope.handleSearch = function () {
+          $scope.loading = true;
+          $scope.searchFunction($scope.internal.search).then(function (response) {
+            $scope.internalList = response;
+            $scope.loading = false;
+            $scope.handleDefault();
+          }, function (error) {
+            $scope.internalList = null;
+            $scope.loading = false;
+          });
         };
 
+        // Init search
+        if ($scope.searchFunction) {
+          $scope.handleSearch();
+        }
 
-        // ----------------------------------- Set model -----------------------------------
-        $scope._set_model = function(value){
-          var _new = angular.copy($scope.model);
-
-          if(!$scope.multiple){
-            if (value[$scope.objKey]==null){
-              _new = null;
-            } else {
-              if ($scope.selectedIsObj){
-                _new = value;
-              } else {
-                _new = value[$scope.objKey];
-              }
-            }
-          } else {
-            if ($scope.selectedIsObj){
-              _new = value;
-            } else {
-              _new = _.map(value, function (val) {
-                return val[$scope.objKey];
-              });
-            }
-          }
-
-          // update model only if it is changed
-          if (!_.isEqual(_new, $scope.model)){
-            $scope.model = _new;
-          }
-        };
-
-
-        // ----------------------------------- Init -----------------------------------
-        $scope.init = function() {
-          $scope._set_internal_list();
-          $scope._add_null_object_to_internal();
-
-          if($scope.multiple && $scope.model){
-            if ($scope.internalSelected) {
-              // remove already selected but not in list - this happens when list changes from outside
-              $scope._set_internal_selected_multiple(_.filter($scope.internalSelected, function (obj) {
-                return _.find($scope.internalList, $scope.getFilter(obj));
-              }));
-            } else {
-              $scope.internalSelected = [];
-            }
-          }
-
-          // Set internalSelected
-          if($scope.internalList && $scope.internalList.length>0){
-            $scope.emptyList = false;
-
-            if ($scope.multiple) {
-              $scope._set_internal_selected_multiple($scope.model);
-            } else {
-              $scope._set_internal_selected_one($scope.model);
-            }
-
-            if($scope.formDropdown && $scope.required){
-              $scope.formDropdown.$setValidity('required', true);
-            }
-          } else {
-            // Disable dropdown button if list of items is empty
-            $scope.emptyList = true;
-            var sel = {};
-            sel[$scope.objKey] = null;
-            sel[$scope.objValue] = $scope.noOptionsText;
-            $scope.internalList = [sel];
-
-            if($scope.formDropdown && $scope.required){
-              $scope.formDropdown.$setValidity('required', false); // Form is not valid because dropdown is empty and required
-            }
-
-            if ($scope.multiple) {
-              $scope._set_internal_selected_multiple(sel);
-            } else {
-              $scope._set_internal_selected_one([sel]);
-            }
-          }
-        };
-
-
-        // ----------------------------------- Is Item selected -----------------------------------
-        $scope.isItemSelected = function(item){
-          if (!$scope.internalSelected) return false;
-
-          // Which item is selected
-          if ($scope.multiple) {
-            return _.where($scope.internalSelected, {'id':item.id}).length > 0;
-          } else {
-            return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
-          }
-        };
 
 
         // ----------------------------------- Item clicked -----------------------------------
-        $scope.clicked = function(item){
+        $scope.handleSelected = function (item, index) {
           $scope.formDropdown.$setDirty();
-          if($scope.multiple){
-            // This actually toggles selection
-            var _current = angular.copy($scope.internalSelected);
-            if(!_.find(_current, $scope.getFilter(item))){
-              _current.push(item);
-            } else {
-              _current = _.reject(_current, $scope.getFilter(item[$scope.objKey]));
-            }
-            $scope._set_internal_selected_multiple(_current);
-          } else {
-            $scope._set_internal_selected_one(item);
-            $scope.close();
-          }
 
-        };
-
-
-        // ----------------------------------- Get label -----------------------------------
-        $scope.getLabel = function(item){
           if (item) {
-            return item[$scope.objValue];
+            if ($scope.multiple) {
+              $scope.handleMultipleSelect(item, index);
+            } else {
+              $scope.handleSingleSelect(item, index);
+            }
           } else {
-            return '-';
+            $scope.handleSingleSelect(undefined, -1);
           }
         };
 
+
+        // ----------------------------------- Handle multiple select -----------------------------------
+        $scope.handleMultipleSelect = function(item, index) {
+          if (!$scope.selected) $scope.selected = [];
+          if(item._selected) {
+            $scope.selected = $scope.selected.filter(function(s) {
+              return s[$scope.objKey] != item[$scope.objKey] 
+            });
+          } else {
+            $scope.selected.push(item);
+          }
+
+          $scope.handleSetModel();
+        };
+
+
+        // ----------------------------------- Handle single slect -----------------------------------
+        $scope.handleSingleSelect = function(item, index) {
+          $scope.selected = item;
+          $scope.close();
+          $scope.handleSetModel();
+        };
+
+
+        // ----------------------------------- Handle set model -----------------------------------
+        $scope.handleSetModel = function() {
+          var obj = angular.copy($scope.selected);
+
+          if ($scope.selected) {
+            if ($scope.multiple) {
+              angular.forEach(obj, function(o) {
+                o._selected = undefined;
+              })
+            } else {
+              obj._selected = undefined;
+            }
+          }
+          
+          $scope.model = obj;
+        };
+
+
+        // ----------------------------------- Handle default -----------------------------------
+        $scope.handleDefault = function() {
+          if (!$scope.selected && $scope.internalList && $scope.internalList.length > 0) {
+            $scope.handleSelected($scope.internalList[0], 0);
+          }
+        };
 
         // ----------------------------------- Watch for list change -----------------------------------
         $scope.$watch('list', function (value_new, value_old) {
-          $scope.init();
+          $scope.internalList = angular.copy($scope.list);
+          $scope.handleDefault();
         });
 
 
         // ----------------------------------- Watch for model change -----------------------------------
         $scope.$watch('model', function (value_new, value_old) {
-          if ($scope.multiple) {
-            var _new_model_object = $scope._get_selected_object(value_new);
-          } else {
-            var _new_model_object = $scope._get_selected_objects(value_new);
-          }
+          $scope.selected = angular.copy($scope.model);
+          angular.forEach($scope.internalList, function(i) {
+            i._selected = false;
 
-          if (!_.isEqual(_new_model_object, $scope.internalSelected)){
-            $scope.init();
-          }
+            if ($scope.multiple) {
+              angular.forEach($scope.selected, function(s) {
+                if (i[$scope.objKey] == s[$scope.objKey]) {
+                  i._selected = true;
+                }
+              });
+            } else {
+              if ($scope.selected && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
+                i._selected = true;
+              }
+            }
+          });
         });
 
 
-        // ----------------------------------- Listen keydown -----------------------------------
-        $scope.bindKeypress = function(){
-          if ($scope.listenKeydown) {
-            $element.bind('keyup', function (e) {
-              // bind to keypress events if dropdown list is opened
-              if ($scope.isOpen) {
-                var char = String.fromCharCode(e.which).toLowerCase();
-
-                // find first element with value starting on selected char
-                var index = _.findIndex($scope.internalList, function (item) {
-                  var _name = item[$scope.objValue].toLowerCase();
-                  return _name.indexOf(char) === 0;
-                });
-
-                if (index >= 0) {
-                  // scroll within dropdown list to selected index
-                  // var _id_name = '#' + $scope.id + '-' + index;
-                  // var _id_first = '#' + $scope.id + '-0';
-                  // var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
-                  // if (_relative_top >= 0){
-                  //   $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
-                  // }
-                }
-              }
-            });
-          }
-        };
-
-        $scope.unbindKeypress = function(){
-          $element.off('keyup', function (e) {});
-        };
-
+        $scope.handleDefault();
       }
     };
   });

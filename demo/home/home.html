@@ -113,14 +113,29 @@
 
                     <nice-dropdown 
                         title="Country" 
-                        model="data.dropdown" 
-                        list="listObjs" 
+                        model="data.dropdownCountry" 
+                        list="countries" 
                         no-options-text="Brez opcij" 
                         selected-is-obj="true"
+                        obj-key="iso"
                         loading="dropdownLoading"
+                        nullable="true"
                     >
-                        <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.internalSelected.iso }}/flat/16.png"> <span>{{ $parent.internalSelected.value }}</span></nice-dropdown-button>
-                        <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.value }}</nice-dropdown-option>
+                        <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
+                        <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
+                    </nice-dropdown>
+
+
+                    <nice-dropdown 
+                        title="Search" 
+                        model="data.dropdownPerson"
+                        selected-is-obj="true"
+                        search-function="searchFunction"
+                    >
+                        <nice-dropdown-button>
+                            <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
+                        </nice-dropdown-button>
+                        <nice-dropdown-option><img ng-src="{{ $parent.item.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.item.name }}</nice-dropdown-option>
                     </nice-dropdown>
 
                     <nice-dropdown-date title="Birthday" model="data.birthday"></nice-dropdown-date>

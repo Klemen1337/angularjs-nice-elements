@@ -1,85 +1,134 @@
-.nice-dropdown{
+.nice-dropdown {
   margin-bottom: 10px;
 
-  .disabled{
+  .disabled {
     cursor: not-allowed !important;
   }
 
-  .open{
-    .btn-dropdown{
+  .open {
+    .btn-dropdown {
       background: $nice-focus-bg !important;
       border-color: $nice-focus-border !important;
       color: $nice-focus-color !important;
     }
+
+    .dropdown-menu {
+      display: flex;
+    }
   }
 
-  .btn-group{
+  .btn-group {
     width: 100%;
   }
 
-  .input-group-btn{
+  .input-group-btn {
     padding-left: 10px;
-    .btn{
+
+    .btn {
       border-bottom-left-radius: $nice-border-radius;
       border-top-left-radius: $nice-border-radius;
     }
   }
 
-  .dropdown-menu{
+  .not-selected {
+    opacity: 0.5;
+  }
+
+  .dropdown-menu {
     min-width: 200px;
     width: 100%;
     padding: 0;
     max-height: 300px;
-    overflow: auto;
     border: 1px solid $nice-border-color;
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
+    flex-direction: column;
+    border-radius: $nice-border-radius;
+    overflow: hidden;
 
-    li{
-      .choice-checkbox{
-        -webkit-transition: all 0.2s;
-        -moz-transition: all 0.2s;
-        -ms-transition: all 0.2s;
-        -o-transition: all 0.2s;
-        transition: all 0.2s;
+    .search-bar {
+      flex-shrink: 0;
+      border-bottom: 1px solid $nice-border-color;
+      position: relative;
+      border-top-left-radius: $nice-border-radius;
+      border-top-right-radius: $nice-border-radius;
 
-        background: $nice-choice-bg;
-        color: $nice-choice-bg;
-        line-height: 22px;
-        width: 25px;
-        height: 25px;
-        border: 2px solid $nice-border;
+      input {
+        width: 100%;
+        padding: 6px 30px 6px 10px;
+        border: 0 none;
+        flex-grow: 1;
+
+        &:focus {
+          outline: 0;
+        }
+      }
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
-        border-radius: 2px;
-        text-align: center;
+        top: 50%;
+        right: 10px;
+        transform: translate(0, -50%);
+      }
+    }
 
-        &.selected{
-          border-color: $nice-choice-selected-bg;
-          background: $nice-choice-selected-bg;
-          color: $nice-choice-selected-color;
+    .no-data {
+      padding: 10px;
+      text-align: center;
+      color: #ccc;
+    }
+
+    ul {
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex-grow: 1;
+      list-style: 0;
+      padding: 0;
+      margin: 0;
+
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+
+        .choice-checkbox {
+          transition: all 0.2s;
+          background: $nice-choice-bg;
+          color: $nice-choice-bg;
+          line-height: 22px;
+          width: 25px;
+          height: 25px;
+          border: 2px solid $nice-border;
+          position: absolute;
+          border-radius: 2px;
+          text-align: center;
         }
-      }
 
-      .multiple-item{
-        margin-left: 35px;
-        line-height: 26px;
-      }
+        .multiple-item {
+          margin-left: 35px;
+          line-height: 26px;
+        }
 
-      a{
-        padding:10px;
-      }
-
-      &:hover{
-        a{
+        &:hover {
           background: $nice-hover-color;
-          //color: white;
         }
 
+        &.selected {
+          background: $nice-hover-color;
+
+          .choice-checkbox {
+            border-color: $nice-choice-selected-bg;
+            background: $nice-choice-selected-bg;
+            color: $nice-choice-selected-color;
+          }
+        }
       }
     }
   }
 
-  .btn-dropdown{
+  .btn-dropdown {
     @extend .btn-primary;
     background: $nice-dropdown-bg;
     border-color: $nice-dropdown-border;
@@ -90,7 +139,7 @@
     text-align: left;
     padding-right: 25px;
 
-    .caret{
+    .caret {
       position: absolute;
       color: $nice-border;
       top: 50%;
@@ -114,26 +163,27 @@
       }
     }
 
-    &:disabled{
+    &:disabled {
       cursor: not-allowed;
       background: $nice-dropdown-disabled-bg !important;
       border-color: $nice-dropdown-disabled-border !important;
     }
 
-    &:hover{
+    &:hover {
       background: $nice-dropdown-hover-bg;
       border-color: $nice-dropdown-hover-border;
       color: $nice-dropdown-hover-color;
     }
 
-    &:active, &:focus{
+    &:active,
+    &:focus {
       background: $nice-focus-bg !important;
       border-color: $nice-focus-border !important;
       color: $nice-focus-color !important;
     }
   }
 
-  .dropdown-color{
+  .dropdown-color {
     width: 12px;
     height: 12px;
     margin-right: 7px;
@@ -141,4 +191,3 @@
     display: inline-block;
   }
 }
-
