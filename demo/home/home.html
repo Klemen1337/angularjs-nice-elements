@@ -116,7 +116,6 @@
                         model="data.dropdownCountry" 
                         list="countries" 
                         no-options-text="Brez opcij" 
-                        selected-is-obj="true"
                         obj-key="iso"
                         loading="dropdownLoading"
                         nullable="true"
@@ -129,8 +128,8 @@
                     <nice-dropdown 
                         title="Search" 
                         model="data.dropdownPerson"
-                        selected-is-obj="true"
                         search-function="searchFunction"
+                        nullable="true"
                     >
                         <nice-dropdown-button>
                             <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
