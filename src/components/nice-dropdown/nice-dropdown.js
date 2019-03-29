@@ -168,7 +168,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Handle default -----------------------------------
         $scope.handleDefault = function() {
-          if (!$scope.selected && $scope.internalList && $scope.internalList.length > 0) {
+          if (!$scope.nullable && !$scope.selected && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
           }
         };
