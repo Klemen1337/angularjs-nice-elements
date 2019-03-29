@@ -20,10 +20,22 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
       }, 500);
     });
   };
+
+  $scope.testFunction = function(test) {
+    console.log("test", test);
+  }
+
+  $scope.data = {
+    dropdownCountryKey: "US"
+  };
   
 
+  $scope.setSlovenia = function() {
+    $scope.data.dropdownCountryKey = "SI";
+  }
+
   $scope.listObjs = [
-    {id: 0, iso: "SI",value: "Slovenia"},
+    {id: 0, iso: "SI",value: "Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia"},
     {id: 1, iso: "ZA",value: "South Africa"},
     {id: 2, iso: "BR",value: "Brazil"},
     {id: 3, iso: "AF", value: "Afganistan"},

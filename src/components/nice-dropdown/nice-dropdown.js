@@ -19,6 +19,7 @@ angular.module('niceElements')
         title: '@', // Title of the field
         model: '=', // Aka model
         list: '=', // List of options
+        onChange: '=?',
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -26,6 +27,7 @@ angular.module('niceElements')
         addButtonFunction: '=?',
         objValue: '@', // Optional - default is 'value'
         objKey: '@?', // Optional - default is 'id'. Used only when returnOnlyKey=true.
+        selectedIsKey: '@?',
         nullable: '@', // No selection is possible
         required: '@', // Model cannot be NULL
         noMargin: '@', // margin-bottom: 0px
@@ -55,6 +57,7 @@ angular.module('niceElements')
         $scope.isOpen = false;
         $scope.selected = null;
         $scope.selectedIndex = null;
+
         $scope.internal = {
           search: ""
         };
@@ -102,18 +105,18 @@ angular.module('niceElements')
           });
         };
 
-        // Init search
+
+        // ----------------------------------- Init search -----------------------------------
         if ($scope.searchFunction) {
           $scope.handleSearch();
         }
-
 
 
         // ----------------------------------- Item clicked -----------------------------------
         $scope.handleSelected = function (item, index) {
           $scope.formDropdown.$setDirty();
 
-          if (item) {
+          if (item != null) {
             if ($scope.multiple) {
               $scope.handleMultipleSelect(item, index);
             } else {
@@ -130,7 +133,7 @@ angular.module('niceElements')
           if (!$scope.selected) $scope.selected = [];
           if(item._selected) {
             $scope.selected = $scope.selected.filter(function(s) {
-              return s[$scope.objKey] != item[$scope.objKey] 
+              return s[$scope.objKey] != item[$scope.objKey];
             });
           } else {
             $scope.selected.push(item);
@@ -152,14 +155,31 @@ angular.module('niceElements')
         $scope.handleSetModel = function() {
           var obj = angular.copy($scope.selected);
 
-          if ($scope.selected) {
+          if ($scope.selected != null) {
+            // Remove selected flag
             if ($scope.multiple) {
               angular.forEach(obj, function(o) {
                 o._selected = undefined;
-              })
+              });
             } else {
               obj._selected = undefined;
             }
+
+            // Selected is object
+            if ($scope.selectedIsKey) {
+              if ($scope.multiple) {
+                angular.forEach(obj, function(o) {
+                  o = o[$scope.objKey];
+                });
+              } else {
+                obj = obj[$scope.objKey];
+              }
+            }
+          }
+          
+          // Trigger on change
+          if ($scope.onChange) {
+            $scope.onChange(obj);
           }
           
           $scope.model = obj;
@@ -168,7 +188,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Handle default -----------------------------------
         $scope.handleDefault = function() {
-          if (!$scope.nullable && !$scope.selected && $scope.internalList && $scope.internalList.length > 0) {
+          if (!$scope.nullable && !$scope.model && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
           }
         };
@@ -186,20 +206,43 @@ angular.module('niceElements')
           angular.forEach($scope.internalList, function(i) {
             i._selected = false;
 
-            if ($scope.multiple) {
-              angular.forEach($scope.selected, function(s) {
-                if (i[$scope.objKey] == s[$scope.objKey]) {
+            if ($scope.selectedIsKey) {
+              // Not object
+              if ($scope.multiple) {
+                // Multiple
+                angular.forEach($scope.selected, function(s) {
+                  if (i[$scope.objKey] == s) {
+                    i._selected = true;
+                    $scope.selected.push(i);
+                  }
+                });
+              } else {
+                // Single
+                if ($scope.selected != null && i[$scope.objKey] == $scope.selected) {
                   i._selected = true;
+                  $scope.selected = i;
                 }
-              });
+              }
             } else {
-              if ($scope.selected && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
-                i._selected = true;
+              // Is object
+              if ($scope.multiple) {
+                // Multiple
+                angular.forEach($scope.selected, function(s) {
+                  if (i[$scope.objKey] == s[$scope.objKey]) {
+                    i._selected = true;
+                    $scope.selected.push(i);
+                  }
+                });
+              } else {
+                // Single
+                if ($scope.selected != null && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
+                  i._selected = true;
+                  $scope.selected = i;
+                }
               }
             }
           });
         });
-
 
         $scope.handleDefault();
       }

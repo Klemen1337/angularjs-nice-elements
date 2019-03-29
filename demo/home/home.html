@@ -60,8 +60,6 @@
 
 </style>
 
-
-
 <div ng-controller='HomeCtrl'>
 
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -112,13 +110,31 @@
                     <nice-upload title="Nice upload" model="data.upload"></nice-upload>
 
                     <nice-dropdown 
-                        title="Country" 
+                        title="Country (value)" 
+                        model="data.dropdownCountryKey" 
+                        list="countries" 
+                        no-options-text="Brez opcij" 
+                        obj-key="iso"
+                        loading="dropdownLoading"
+                        add-button-function="setSlovenia"
+                        nullable="true"
+                        on-change="testFunction"
+                        selected-is-key="true"
+                    >
+                        <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
+                        <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
+                    </nice-dropdown>
+
+                    <nice-dropdown 
+                        title="Country (object)" 
                         model="data.dropdownCountry" 
                         list="countries" 
                         no-options-text="Brez opcij" 
                         obj-key="iso"
                         loading="dropdownLoading"
                         nullable="true"
+                        add-button-function="testFunction"
+                        on-change="testFunction"
                     >
                         <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
@@ -135,6 +151,14 @@
                             <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
                         </nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="{{ $parent.item.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.item.name }}</nice-dropdown-option>
+                    </nice-dropdown>
+
+                    <nice-dropdown 
+                        title="Country" 
+                        model="data.dropdownListObj"
+                        list="listObjs"
+                        selected-is-key="true"
+                        nullable="true">
                     </nice-dropdown>
 
                     <nice-dropdown-date title="Birthday" model="data.birthday"></nice-dropdown-date>

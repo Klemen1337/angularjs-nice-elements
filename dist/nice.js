@@ -1804,6 +1804,7 @@ angular.module('niceElements')
         title: '@', // Title of the field
         model: '=', // Aka model
         list: '=', // List of options
+        onChange: '=?',
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -1811,6 +1812,7 @@ angular.module('niceElements')
         addButtonFunction: '=?',
         objValue: '@', // Optional - default is 'value'
         objKey: '@?', // Optional - default is 'id'. Used only when returnOnlyKey=true.
+        selectedIsKey: '@?',
         nullable: '@', // No selection is possible
         required: '@', // Model cannot be NULL
         noMargin: '@', // margin-bottom: 0px
@@ -1840,6 +1842,7 @@ angular.module('niceElements')
         $scope.isOpen = false;
         $scope.selected = null;
         $scope.selectedIndex = null;
+
         $scope.internal = {
           search: ""
         };
@@ -1887,18 +1890,18 @@ angular.module('niceElements')
           });
         };
 
-        // Init search
+
+        // ----------------------------------- Init search -----------------------------------
         if ($scope.searchFunction) {
           $scope.handleSearch();
         }
-
 
 
         // ----------------------------------- Item clicked -----------------------------------
         $scope.handleSelected = function (item, index) {
           $scope.formDropdown.$setDirty();
 
-          if (item) {
+          if (item != null) {
             if ($scope.multiple) {
               $scope.handleMultipleSelect(item, index);
             } else {
@@ -1915,7 +1918,7 @@ angular.module('niceElements')
           if (!$scope.selected) $scope.selected = [];
           if(item._selected) {
             $scope.selected = $scope.selected.filter(function(s) {
-              return s[$scope.objKey] != item[$scope.objKey] 
+              return s[$scope.objKey] != item[$scope.objKey];
             });
           } else {
             $scope.selected.push(item);
@@ -1937,14 +1940,31 @@ angular.module('niceElements')
         $scope.handleSetModel = function() {
           var obj = angular.copy($scope.selected);
 
-          if ($scope.selected) {
+          if ($scope.selected != null) {
+            // Remove selected flag
             if ($scope.multiple) {
               angular.forEach(obj, function(o) {
                 o._selected = undefined;
-              })
+              });
             } else {
               obj._selected = undefined;
             }
+
+            // Selected is object
+            if ($scope.selectedIsKey) {
+              if ($scope.multiple) {
+                angular.forEach(obj, function(o) {
+                  o = o[$scope.objKey];
+                });
+              } else {
+                obj = obj[$scope.objKey];
+              }
+            }
+          }
+          
+          // Trigger on change
+          if ($scope.onChange) {
+            $scope.onChange(obj);
           }
           
           $scope.model = obj;
@@ -1953,7 +1973,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Handle default -----------------------------------
         $scope.handleDefault = function() {
-          if (!$scope.nullable && !$scope.selected && $scope.internalList && $scope.internalList.length > 0) {
+          if (!$scope.nullable && !$scope.model && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
           }
         };
@@ -1971,20 +1991,43 @@ angular.module('niceElements')
           angular.forEach($scope.internalList, function(i) {
             i._selected = false;
 
-            if ($scope.multiple) {
-              angular.forEach($scope.selected, function(s) {
-                if (i[$scope.objKey] == s[$scope.objKey]) {
+            if ($scope.selectedIsKey) {
+              // Not object
+              if ($scope.multiple) {
+                // Multiple
+                angular.forEach($scope.selected, function(s) {
+                  if (i[$scope.objKey] == s) {
+                    i._selected = true;
+                    $scope.selected.push(i);
+                  }
+                });
+              } else {
+                // Single
+                if ($scope.selected != null && i[$scope.objKey] == $scope.selected) {
                   i._selected = true;
+                  $scope.selected = i;
                 }
-              });
+              }
             } else {
-              if ($scope.selected && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
-                i._selected = true;
+              // Is object
+              if ($scope.multiple) {
+                // Multiple
+                angular.forEach($scope.selected, function(s) {
+                  if (i[$scope.objKey] == s[$scope.objKey]) {
+                    i._selected = true;
+                    $scope.selected.push(i);
+                  }
+                });
+              } else {
+                // Single
+                if ($scope.selected != null && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
+                  i._selected = true;
+                  $scope.selected = i;
+                }
               }
             }
           });
         });
-
 
         $scope.handleDefault();
       }
@@ -4563,56 +4606,53 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <!------------------------- Field ------------------------->\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
-    "            <div ng-class=\"addButtonFunction && !isDisabled ? 'input-group': ''\">\n" +
-    "                <div class=\"btn-group\" ng-class=\"{ 'open': isOpen, 'disabled': isDisabled || emptyList }\">\n" +
-    "                    <!------------------------- Button ------------------------->\n" +
-    "                    <button type=\"button\" class=\"btn btn-block btn-dropdown dropdown-toggle\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
-    "                        <div ng-transclude=\"button\" ng-if=\"selected\">\n" +
-    "                            <span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\n" +
-    "                            <span ng-if=\"multiple\">\n" +
-    "                                <span ng-if=\"selected.length > 1\">{{ selected.length }} <translate>selected</translate></span>\n" +
-    "                                <span ng-if=\"selected.length == 1\">{{ selected[0][objValue] }}</span>\n" +
-    "                                <span ng-if=\"selected.length == 0\">None</span>\n" +
-    "                            </span>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"not-selected\" ng-if=\"!selected\">\n" +
-    "                            {{ selectText }}\n" +
-    "                        </div>\n" +
-    "                        \n" +
-    "                        <span class=\"caret\" ng-show=\"!loading\"></span>\n" +
-    "                        <nice-loader visible-when=\"!loading\"></nice-loader>\n" +
-    "                    </button>\n" +
-    "\n" +
-    "                    <!------------------------- Dropdown menu ------------------------->\n" +
-    "                    <div class=\"dropdown-menu\">\n" +
-    "                        <div class=\"search-bar\" ng-if=\"searchFunction\">\n" +
-    "                            <input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\" />\n" +
-    "                            <span class=\"icon\"><i class=\"fa fa-search\"></i></span>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
-    "                        <ul>\n" +
-    "                            <li ng-if=\"nullable\" ng-click=\"handleSelected(null, -1)\">\n" +
-    "                                {{ nullableText }}\n" +
-    "                            </li>\n" +
-    "                            <li ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected }\">\n" +
-    "                                <span class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></span>\n" +
-    "                                <span ng-transclude=\"option\">\n" +
-    "                                    <span ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</span>\n" +
-    "                                </span>\n" +
-    "                            </li>\n" +
-    "                        </ul>\n" +
+    "        <div ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
+    "            <div class=\"nice-field-wrapper\">\n" +
+    "                <!------------------------- Button ------------------------->\n" +
+    "                <button type=\"button\" class=\"btn btn-dropdown\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
+    "                    <div class=\"btn-dropdown-inside\" ng-transclude=\"button\" ng-if=\"selected != null\">\n" +
+    "                        <span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\n" +
+    "                        <span ng-if=\"multiple\">\n" +
+    "                            <span ng-if=\"selected.length > 1\">{{ selected.length }} <translate>selected</translate></span>\n" +
+    "                            <span ng-if=\"selected.length == 1\">{{ selected[0][objValue] }}</span>\n" +
+    "                            <span ng-if=\"selected.length == 0\">None</span>\n" +
+    "                        </span>\n" +
     "                    </div>\n" +
+    "                    <div class=\"not-selected\" ng-if=\"selected == null\">\n" +
+    "                        {{ selectText }}\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <span class=\"caret\" ng-show=\"!loading\"></span>\n" +
+    "                    <nice-loader visible-when=\"!loading\"></nice-loader>\n" +
+    "                </button>\n" +
+    "\n" +
+    "\n" +
+    "                <!------------------------- Dropdown menu ------------------------->\n" +
+    "                <div class=\"dropdown-menu\">\n" +
+    "                    <div class=\"search-bar\" ng-if=\"searchFunction\">\n" +
+    "                        <input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\" />\n" +
+    "                        <span class=\"icon\"><i class=\"fa fa-search\"></i></span>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
+    "                    <ul>\n" +
+    "                        <li ng-if=\"nullable\" ng-click=\"handleSelected(null, -1)\">\n" +
+    "                            {{ nullableText }}\n" +
+    "                        </li>\n" +
+    "                        <li ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected }\">\n" +
+    "                            <span class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></span>\n" +
+    "                            <span ng-transclude=\"option\">\n" +
+    "                                <span ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</span>\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                    </ul>\n" +
     "                </div>\n" +
     "\n" +
+    "\n" +
     "                <!------------------------- Add button ------------------------->\n" +
-    "                <span class=\"input-group-btn\" ng-if=\"addButtonFunction && !isDisabled\">\n" +
-    "                    <button class=\"btn btn-primary\" ng-click=\"addButtonFunction()\" type=\"button\">+</button>\n" +
-    "                </span>\n" +
+    "                <button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction\" ng-click=\"addButtonFunction()\">+</button>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <!--Needed for intercepting form changes ($dirty)!-->\n" +
     "    <div ng-form=\"formDropdown\"></div>\n" +
     "</div>"
   );
