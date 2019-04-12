@@ -1787,6 +1787,332 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceDropdownOld
+ * @description
+ * # niceDropdownOld
+ */
+angular.module('niceElements')
+  .directive('niceDropdownOld', function () {
+    return {
+      templateUrl: 'src/components/nice-dropdown-old/nice-dropdown-old.html',
+      restrict: 'E',
+      transclude: true,
+      scope: {
+        title: '@',               // Title of the field
+        model: '=',               // Aka model
+        list: '=',                // List of options
+        isDisabled: '=',
+        fieldWidth: '@',
+        labelWidth: '@',
+        addButtonEnable: '=',
+        addButtonFunction: '&',
+        objValue: '@',            // Optional - default is 'value'
+        objKey: '@?',             // Optional - default is 'id'. Used only when returnOnlyKey=true
+        selectedIsObj: '@',       // Optional parameter.
+        nullable: '@',            // No selection is possible
+        required: '@',            // Model cannot be NULL
+        showTax: '@',             // Shows tax rate
+        noMargin: '@',            // margin-bottom: 0px
+        multiple: '@',            // Can select multiple items
+        help: '@',
+        listenKeydown: '@',
+        noOptionsText: "@"
+      },
+      controller: function($rootScope, $scope, $document, $element) {
+        if (!$scope.objValue) { $scope.objValue = 'value'; }
+        if (!$scope.objKey) { $scope.objKey = 'id'; }
+        if (!$scope.list) { $scope.list = []; }
+        if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
+        if(!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
+        if(!$scope.listenKeydown) { $scope.listenKeydown = false; }
+        $scope.valid = $scope.formDropdown;
+
+
+        $scope.selectedIsObj = $scope.selectedIsObj === 'true' || $scope.selectedIsObj === true;
+        $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
+        $scope.required = $scope.required === 'true' || $scope.required === true;
+        $scope.showTax = $scope.showTax === 'true' || $scope.showTax === true;
+        $scope.noMargin = $scope.noMargin === 'true' || $scope.noMargin === true;
+        $scope.multiple = $scope.multiple === 'true' || $scope.multiple === true;
+
+        $scope.internalSelected = null;
+        $scope.id = Math.random().toString(36).substring(7);
+
+        $scope.isOpen = false;
+        $scope.toggle = function(){ $scope.isOpen = !$scope.isOpen; };
+        $scope.close = function(){ $scope.isOpen = false; };
+        $scope.open = function(){ $scope.isOpen = true; };
+
+
+        // ----------------------------------- Get filter -----------------------------------
+        var getFilter = function(item){
+          // Create filter for finding object by objValue with _.where()
+          var filter = {};
+          if (item.hasOwnProperty($scope.objKey))
+            filter[$scope.objKey] = item[$scope.objKey];
+          else
+            filter[$scope.objKey] = item;
+          return filter;
+        };
+
+
+        // ----------------------------------- Set internal list -----------------------------------
+        var _set_internal_list = function(){
+          $scope.internalList = angular.copy($scope.list);
+        };
+
+
+        // ----------------------------------- Add null object to internal list -----------------------------------
+        var _add_null_object_to_internal = function(){
+          if ($scope.nullable && !$scope.multiple) {
+            var nullObj = {};
+            nullObj[$scope.objKey] = null;
+            nullObj[$scope.objValue] = '-';
+            $scope.internalList = [nullObj].concat($scope.internalList);
+          }
+        };
+
+
+        // ----------------------------------- Get selected object -----------------------------------
+        var _get_selected_object = function(selected){
+          if (!selected) return null;
+          if ($scope.selectedIsObj) {
+            return selected;
+          } else {
+            return _.find($scope.internalList, getFilter(selected));
+          }
+        };
+
+
+        // ----------------------------------- Init -----------------------------------
+        var _set_internal_selected_one = function(selected){
+          var obj = {};
+
+          var selectedObj = _get_selected_object(selected);
+          // console.log('_set_internal_selected_one', selected, selectedObj);
+          if(selectedObj && _.find($scope.internalList, getFilter(selected))){
+            obj = selectedObj;
+          } else {
+            obj = $scope.internalList[0];
+          }
+          $scope.internalSelected = obj;
+          _set_model(obj);
+        };
+
+
+        // ----------------------------------- Get selected objects -----------------------------------
+        var _get_selected_objects = function(selected){
+          if (!selected)
+            return null;
+
+          if ($scope.selectedIsObj)
+            return selected;
+          else {
+            // from [1,2,3] get list of objects [{}, {}, {}]
+            return _.map(selected, function (val) {
+              return _.find($scope.internalList, getFilter(val));
+            });
+          }
+        };
+
+
+        // ----------------------------------- Set internal selected multiple -----------------------------------
+        var _set_internal_selected_multiple = function(item){
+          var _selected_objects = _get_selected_objects(item);
+          if (_selected_objects){
+            $scope.internalSelected = _selected_objects;
+            _set_model($scope.internalSelected);
+          } else {
+            $scope.internalSelected = [];
+            _set_model($scope.internalSelected);
+          }
+        };
+
+
+        // ----------------------------------- Set model -----------------------------------
+        var _set_model = function(value){
+          var _new = angular.copy($scope.model);
+
+          if(!$scope.multiple){
+            if (value[$scope.objKey]==null){
+              _new = null;
+            } else {
+              if ($scope.selectedIsObj){
+                _new = value;
+              } else {
+                _new = value[$scope.objKey];
+              }
+            }
+          } else {
+            if ($scope.selectedIsObj){
+              _new = value;
+            } else {
+              _new = _.map(value, function (val) {
+                return val[$scope.objKey];
+              });
+            }
+          }
+
+          // update model only if it is changed
+          if (!_.isEqual(_new, $scope.model)){
+            $scope.model = _new;
+          }
+        };
+
+
+        // ----------------------------------- Init -----------------------------------
+        var init = function() {
+          _set_internal_list();
+          _add_null_object_to_internal();
+
+          if($scope.multiple && $scope.model){
+            if ($scope.internalSelected) {
+              // remove already selected but not in list - this happens when list changes from outside
+              _set_internal_selected_multiple(_.filter($scope.internalSelected, function (obj) {
+                return _.find($scope.internalList, getFilter(obj));
+              }));
+            } else {
+              $scope.internalSelected = [];
+            }
+          }
+
+          // Set internalSelected
+          if($scope.internalList && $scope.internalList.length>0){
+            $scope.emptyList = false;
+
+            if ($scope.multiple) {
+              _set_internal_selected_multiple($scope.model);
+            } else {
+              _set_internal_selected_one($scope.model);
+            }
+
+            if($scope.formDropdown && $scope.required){
+              $scope.formDropdown.$setValidity('required', true);
+            }
+          } else {
+            // Disable dropdown button if list of items is empty
+            $scope.emptyList = true;
+            var sel = {};
+            sel[$scope.objKey] = null;
+            sel[$scope.objValue] = $scope.noOptionsText;
+            $scope.internalList = [sel];
+
+            if($scope.formDropdown && $scope.required){
+              $scope.formDropdown.$setValidity('required', false); // Form is not valid because dropdown is empty and required
+            }
+
+            if ($scope.multiple) {
+              _set_internal_selected_multiple(sel);
+            } else {
+              _set_internal_selected_one([sel]);
+            }
+          }
+        };
+
+
+        // ----------------------------------- Is Item selected -----------------------------------
+        $scope.isItemSelected = function(item){
+          if (!$scope.internalSelected) return false;
+
+          // Which item is selected
+          if ($scope.multiple) {
+            return _.where($scope.internalSelected, {'id':item.id}).length > 0;
+          } else {
+            return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
+          }
+        };
+
+
+        // ----------------------------------- Item clicked -----------------------------------
+        $scope.clicked = function(item){
+          $scope.formDropdown.$setDirty();
+          if($scope.multiple){
+            // This actually toggles selection
+            var _current = angular.copy($scope.internalSelected);
+            if(!_.find(_current, getFilter(item))){
+              _current.push(item);
+            } else {
+              _current = _.reject(_current, getFilter(item[$scope.objKey]));
+            }
+            _set_internal_selected_multiple(_current);
+          } else {
+            _set_internal_selected_one(item);
+            $scope.close();
+          }
+
+        };
+
+
+        // ----------------------------------- Get label -----------------------------------
+        $scope.getLabel = function(item){
+          if (item) {
+            return item[$scope.objValue];
+          } else {
+            return '-';
+          }
+        };
+
+
+        // ----------------------------------- Watch for list change -----------------------------------
+        $scope.$watch('list', function (value_new, value_old) {
+          init();
+        });
+
+
+        // ----------------------------------- Watch for model change -----------------------------------
+        $scope.$watch('model', function (value_new, value_old) {
+          if ($scope.multiple) {
+            var _new_model_object = _get_selected_object(value_new);
+          } else {
+            var _new_model_object = _get_selected_objects(value_new);
+          }
+
+          if (!_.isEqual(_new_model_object, $scope.internalSelected)){
+            init();
+          }
+        });
+
+
+        // ----------------------------------- Listen keydown -----------------------------------
+        $scope.bindKeypress = function(){
+          if ($scope.listenKeydown) {
+            $element.bind('keyup', function (e) {
+              // bind to keypress events if dropdown list is opened
+              if ($scope.isOpen) {
+                var char = String.fromCharCode(e.which).toLowerCase();
+
+                // find first element with value starting on selected char
+                var index = _.findIndex($scope.internalList, function (item) {
+                  var _name = item[$scope.objValue].toLowerCase();
+                  return _name.indexOf(char) === 0;
+                });
+
+                if (index >= 0) {
+                  // scroll within dropdown list to selected index
+                  // var _id_name = '#' + $scope.id + '-' + index;
+                  // var _id_first = '#' + $scope.id + '-0';
+                  // var _relative_top = Math.abs($(_id_first).offset().top - $(_id_name).offset().top);
+                  // if (_relative_top >= 0){
+                  //   $("#" + $scope.id).animate({scrollTop: _relative_top}, 100);
+                  // }
+                }
+              }
+            });
+          }
+        };
+
+        $scope.unbindKeypress = function(){
+          $element.off('keyup', function (e) {});
+        };
+
+      }
+    };
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:nice-dropdown
  * @description
  * # nice-dropdown
@@ -4089,1044 +4415,2069 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('src/components/nice-button-toggle/nice-button-toggle.html',
-    "<div class=\"nice-button-toggle row\">\n" +
-    "    <div class=\"col-xs-offset-4 col-xs-8\">\n" +
-    "            <button type=\"button\" class=\"btn btn-block btn-primary\" ng-click=\"model = !model\">\n" +
-    "                {{ label }}\n" +
-    "                <span ng-show=\"!model\" class=\"glyphicon glyphicon-menu-down\"></span>\n" +
-    "                <span ng-show=\"model\" class=\"glyphicon glyphicon-menu-up\"></span>\n" +
-    "            </button>\n" +
-    "    </div>\n" +
-    "</div>\n"
+    "<div class=\"nice-button-toggle row\">\r" +
+    "\n" +
+    "    <div class=\"col-xs-offset-4 col-xs-8\">\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-block btn-primary\" ng-click=\"model = !model\">\r" +
+    "\n" +
+    "                {{ label }}\r" +
+    "\n" +
+    "                <span ng-show=\"!model\" class=\"glyphicon glyphicon-menu-down\"></span>\r" +
+    "\n" +
+    "                <span ng-show=\"model\" class=\"glyphicon glyphicon-menu-up\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-button/nice-button.html',
-    "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "    <button type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
-    "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
-    "        <div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
-    "    </button>\n" +
-    "</div>\n"
+    "<div class=\"nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\r" +
+    "\n" +
+    "    <button type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\r" +
+    "\n" +
+    "        <div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\r" +
+    "\n" +
+    "        <div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\r" +
+    "\n" +
+    "    </button>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-calendar/nice-calendar.html',
-    "<div class=\"nice-calendar\" ng-form=\"formCalendar\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-calendar\" ng-form=\"formCalendar\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"nice-calendar-wrapper\">\n" +
-    "                <div class=\"header\">\n" +
-    "                    <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
-    "                    <span title=\"{{ month.format('MM.YYYY' )}}\">{{ month.format(\"MMMM, YYYY\" )}}</span>\n" +
-    "                    <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\n" +
-    "                </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "                <div class=\"week names\">\n" +
-    "                    <span class=\"day\" translate>{{ translations.mon }}</span>\n" +
-    "                    <span class=\"day\" translate>{{ translations.tue }}</span>\n" +
-    "                    <span class=\"day\" translate>{{ translations.wed }}</span>\n" +
-    "                    <span class=\"day\" translate>{{ translations.thu }}</span>\n" +
-    "                    <span class=\"day\" translate>{{ translations.fri }}</span>\n" +
-    "                    <span class=\"day weekend\" translate>{{ translations.sat }}</span>\n" +
-    "                    <span class=\"day weekend\" translate>{{ translations.sun }}</span>\n" +
-    "                </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <div class=\"week\" ng-repeat=\"week in weeks\">\n" +
-    "                    <span\n" +
-    "                        class=\"day\"\n" +
-    "                        title=\"{{ day.date.format('DD.MM.YYYY') }}\"\n" +
-    "                        ng-class=\"{\n" +
-    "                            today: day.isToday,\n" +
-    "                            'different-month': !day.isCurrentMonth,\n" +
-    "                            'start-selected': isSameDay(day.date, startDate),\n" +
-    "                            'end-selected': isSameDay(day.date, endDate),\n" +
-    "                            'selected': isBetweenRange(day.date),\n" +
-    "                            'selecting-start': selectStart,\n" +
-    "                            'selecting-end': !selectStart,\n" +
-    "                            'weekend': day.isWeekday,\n" +
-    "                            'disabled': day.isDisabled\n" +
-    "                        }\"\n" +
-    "                        ng-style=\"\n" +
-    "                            (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||\n" +
-    "                            (color && isSameDay(day.date, startDate)) && {'background-color': color } ||\n" +
-    "                            (color && isSameDay(day.date, endDate)) && {'background-color': color }\n" +
-    "                        \"\n" +
-    "                        ng-click=\"select(day)\"\n" +
-    "                        ng-repeat=\"day in week.days\"\n" +
-    "                        >\n" +
-    "                        {{ day.number }}\n" +
-    "                        <p class=\"popup\">{{ popupText }}</p>\n" +
-    "                    </span>\n" +
-    "                </div>\n" +
-    "                <div class=\"clearfix\"></div>\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
+    "        </div>\r" +
     "\n" +
-    "                <div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
-    "                    <div class=\"time-picker\">\n" +
-    "                        <select\n" +
-    "                          title=\"{{ translations.selectStartTime }}\"\n" +
-    "                          class=\"time-picker-hour\"\n" +
-    "                          ng-model=\"startDateHour\"\n" +
-    "                          ng-change=\"startHourChange(startDateHour)\"\n" +
-    "                          ng-options=\"hour for hour in hours\">\n" +
-    "                        </select>\n" +
-    "                    </div>\n" +
+    "\r" +
     "\n" +
-    "                    <div class=\"time-picker\">\n" +
-    "                        <select\n" +
-    "                          title=\"{{ translations.selectStartTime }}\"\n" +
-    "                          class=\"time-picker-minute\"\n" +
-    "                          ng-model=\"startDateMinute\"\n" +
-    "                          ng-change=\"startMinuteChange(startDateMinute)\"\n" +
-    "                          ng-options=\"minute for minute in minutes\">\n" +
-    "                        </select>\n" +
-    "                    </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
     "\n" +
-    "                    <div class=\"time-picket-icon\">\n" +
-    "                        <i class=\"fa fa-clock-o\"></i>\n" +
-    "                    </div>\n" +
+    "            <div class=\"nice-calendar-wrapper\">\r" +
     "\n" +
-    "                    <div class=\"time-picker\">\n" +
-    "                         <select\n" +
-    "                          title=\"{{ translations.selectEndTime }}\"\n" +
-    "                          class=\"time-picker-hour\"\n" +
-    "                          ng-model=\"endDateHour\"\n" +
-    "                          ng-change=\"endHourChange(endDateHour)\"\n" +
-    "                          ng-options=\"hour for hour in hours\">\n" +
-    "                        </select>\n" +
-    "                    </div>\n" +
+    "                <div class=\"header\">\r" +
     "\n" +
-    "                    <div class=\"time-picker no-border-right\">\n" +
-    "                        <select\n" +
-    "                          title=\"{{ translations.selectEndTime }}\"\n" +
-    "                          class=\"time-picker-minute\"\n" +
-    "                          ng-model=\"endDateMinute\"\n" +
-    "                          ng-change=\"endMinuteChange(endDateMinute)\"\n" +
-    "                          ng-options=\"minute for minute in minutes\">\n" +
-    "                        </select>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
+    "                    <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\r" +
     "\n" +
-    "                <div class=\"nice-selected-dates\">\n" +
-    "                    <div class=\"nice-start-date\">\n" +
-    "                        <label>{{ translations.start }}</label>\n" +
-    "                        <div ng-class=\"startTimeClass\">{{ formatDate(startDate) }}</div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"nice-end-date\">\n" +
-    "                        <label>{{ translations.end }}</label>\n" +
-    "                        <div ng-class=\"endTimeClass\">{{ formatDate(endDate) }}</div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"clearfix\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "                    <span title=\"{{ month.format('MM.YYYY' )}}\">{{ month.format(\"MMMM, YYYY\" )}}</span>\r" +
     "\n" +
-    "    </div>\n" +
+    "                    <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"week names\">\r" +
+    "\n" +
+    "                    <span class=\"day\" translate>{{ translations.mon }}</span>\r" +
+    "\n" +
+    "                    <span class=\"day\" translate>{{ translations.tue }}</span>\r" +
+    "\n" +
+    "                    <span class=\"day\" translate>{{ translations.wed }}</span>\r" +
+    "\n" +
+    "                    <span class=\"day\" translate>{{ translations.thu }}</span>\r" +
+    "\n" +
+    "                    <span class=\"day\" translate>{{ translations.fri }}</span>\r" +
+    "\n" +
+    "                    <span class=\"day weekend\" translate>{{ translations.sat }}</span>\r" +
+    "\n" +
+    "                    <span class=\"day weekend\" translate>{{ translations.sun }}</span>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"week\" ng-repeat=\"week in weeks\">\r" +
+    "\n" +
+    "                    <span\r" +
+    "\n" +
+    "                        class=\"day\"\r" +
+    "\n" +
+    "                        title=\"{{ day.date.format('DD.MM.YYYY') }}\"\r" +
+    "\n" +
+    "                        ng-class=\"{\r" +
+    "\n" +
+    "                            today: day.isToday,\r" +
+    "\n" +
+    "                            'different-month': !day.isCurrentMonth,\r" +
+    "\n" +
+    "                            'start-selected': isSameDay(day.date, startDate),\r" +
+    "\n" +
+    "                            'end-selected': isSameDay(day.date, endDate),\r" +
+    "\n" +
+    "                            'selected': isBetweenRange(day.date),\r" +
+    "\n" +
+    "                            'selecting-start': selectStart,\r" +
+    "\n" +
+    "                            'selecting-end': !selectStart,\r" +
+    "\n" +
+    "                            'weekend': day.isWeekday,\r" +
+    "\n" +
+    "                            'disabled': day.isDisabled\r" +
+    "\n" +
+    "                        }\"\r" +
+    "\n" +
+    "                        ng-style=\"\r" +
+    "\n" +
+    "                            (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||\r" +
+    "\n" +
+    "                            (color && isSameDay(day.date, startDate)) && {'background-color': color } ||\r" +
+    "\n" +
+    "                            (color && isSameDay(day.date, endDate)) && {'background-color': color }\r" +
+    "\n" +
+    "                        \"\r" +
+    "\n" +
+    "                        ng-click=\"select(day)\"\r" +
+    "\n" +
+    "                        ng-repeat=\"day in week.days\"\r" +
+    "\n" +
+    "                        >\r" +
+    "\n" +
+    "                        {{ day.number }}\r" +
+    "\n" +
+    "                        <p class=\"popup\">{{ popupText }}</p>\r" +
+    "\n" +
+    "                    </span>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"clearfix\"></div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"nice-calendar-time\" ng-if=\"time\">\r" +
+    "\n" +
+    "                    <div class=\"time-picker\">\r" +
+    "\n" +
+    "                        <select\r" +
+    "\n" +
+    "                          title=\"{{ translations.selectStartTime }}\"\r" +
+    "\n" +
+    "                          class=\"time-picker-hour\"\r" +
+    "\n" +
+    "                          ng-model=\"startDateHour\"\r" +
+    "\n" +
+    "                          ng-change=\"startHourChange(startDateHour)\"\r" +
+    "\n" +
+    "                          ng-options=\"hour for hour in hours\">\r" +
+    "\n" +
+    "                        </select>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"time-picker\">\r" +
+    "\n" +
+    "                        <select\r" +
+    "\n" +
+    "                          title=\"{{ translations.selectStartTime }}\"\r" +
+    "\n" +
+    "                          class=\"time-picker-minute\"\r" +
+    "\n" +
+    "                          ng-model=\"startDateMinute\"\r" +
+    "\n" +
+    "                          ng-change=\"startMinuteChange(startDateMinute)\"\r" +
+    "\n" +
+    "                          ng-options=\"minute for minute in minutes\">\r" +
+    "\n" +
+    "                        </select>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"time-picket-icon\">\r" +
+    "\n" +
+    "                        <i class=\"fa fa-clock-o\"></i>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"time-picker\">\r" +
+    "\n" +
+    "                         <select\r" +
+    "\n" +
+    "                          title=\"{{ translations.selectEndTime }}\"\r" +
+    "\n" +
+    "                          class=\"time-picker-hour\"\r" +
+    "\n" +
+    "                          ng-model=\"endDateHour\"\r" +
+    "\n" +
+    "                          ng-change=\"endHourChange(endDateHour)\"\r" +
+    "\n" +
+    "                          ng-options=\"hour for hour in hours\">\r" +
+    "\n" +
+    "                        </select>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"time-picker no-border-right\">\r" +
+    "\n" +
+    "                        <select\r" +
+    "\n" +
+    "                          title=\"{{ translations.selectEndTime }}\"\r" +
+    "\n" +
+    "                          class=\"time-picker-minute\"\r" +
+    "\n" +
+    "                          ng-model=\"endDateMinute\"\r" +
+    "\n" +
+    "                          ng-change=\"endMinuteChange(endDateMinute)\"\r" +
+    "\n" +
+    "                          ng-options=\"minute for minute in minutes\">\r" +
+    "\n" +
+    "                        </select>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"nice-selected-dates\">\r" +
+    "\n" +
+    "                    <div class=\"nice-start-date\">\r" +
+    "\n" +
+    "                        <label>{{ translations.start }}</label>\r" +
+    "\n" +
+    "                        <div ng-class=\"startTimeClass\">{{ formatDate(startDate) }}</div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"nice-end-date\">\r" +
+    "\n" +
+    "                        <label>{{ translations.end }}</label>\r" +
+    "\n" +
+    "                        <div ng-class=\"endTimeClass\">{{ formatDate(endDate) }}</div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"clearfix\"></div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
-    "<div class=\"nice-checkbox\" ng-class=\"{'checked': model, 'margin-bottom-0' : noMargin}\" ng-click=\"toggle()\">\n" +
-    "    <div class=\"checkbox\">\n" +
-    "        <svg class=\"check\" viewBox=\"-281 373 48 48\">\n" +
-    "            <path class=\"check-stroke\" d=\"M-273.2,398.2l10,9.9 l22.4-22.3\"></path>\n" +
-    "        </svg>\n" +
-    "    </div>\n" +
-    "    <div ng-if=\"title\" class=\"message\">{{ title }}</div>\n" +
+    "<div class=\"nice-checkbox\" ng-class=\"{'checked': model, 'margin-bottom-0' : noMargin}\" ng-click=\"toggle()\">\r" +
+    "\n" +
+    "    <div class=\"checkbox\">\r" +
+    "\n" +
+    "        <svg class=\"check\" viewBox=\"-281 373 48 48\">\r" +
+    "\n" +
+    "            <path class=\"check-stroke\" d=\"M-273.2,398.2l10,9.9 l22.4-22.3\"></path>\r" +
+    "\n" +
+    "        </svg>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div ng-if=\"title\" class=\"message\">{{ title }}</div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-choice/nice-choice.html',
-    "<div class=\"nice-choice\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formChoice\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-choice\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formChoice\">\r" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <ul class=\"list-unstyled\" ng-class=\"{'disabled': isDisabled}\">\n" +
-    "                <li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
-    "                    <div class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></div>\n" +
-    "                    <div class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
-    "                </li>\n" +
-    "            </ul>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <ul class=\"list-unstyled\" ng-class=\"{'disabled': isDisabled}\">\r" +
+    "\n" +
+    "                <li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\r" +
+    "\n" +
+    "                    <div class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></div>\r" +
+    "\n" +
+    "                    <div class=\"choice-label\">{{ getLabel(item) }}</div>\r" +
+    "\n" +
+    "                </li>\r" +
+    "\n" +
+    "            </ul>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-comment/nice-comment.html',
-    "<div class=\"nice-comment\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-comment\" ng-class=\"{'margin-bottom-0' : noMargin}\">\r" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\" ng-click=\"edit()\">\n" +
-    "            <textarea\n" +
-    "                ng-class=\"{'editing': editing}\"\n" +
-    "                class=\"form-control\"\n" +
-    "                ng-model=\"model\"\n" +
-    "                title=\"{{ help }}\"\n" +
-    "                placeholder=\"{{placeholder}}\"\n" +
-    "                rows=\"{{rows}}\"\n" +
-    "                ng-blur=\"save()\"\n" +
-    "            ></textarea>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n"
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\" ng-click=\"edit()\">\r" +
+    "\n" +
+    "            <textarea\r" +
+    "\n" +
+    "                ng-class=\"{'editing': editing}\"\r" +
+    "\n" +
+    "                class=\"form-control\"\r" +
+    "\n" +
+    "                ng-model=\"model\"\r" +
+    "\n" +
+    "                title=\"{{ help }}\"\r" +
+    "\n" +
+    "                placeholder=\"{{placeholder}}\"\r" +
+    "\n" +
+    "                rows=\"{{rows}}\"\r" +
+    "\n" +
+    "                ng-blur=\"save()\"\r" +
+    "\n" +
+    "            ></textarea>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-date-range/nice-date-range.html',
-    "<ng-form class=\"nice-date-range\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "    </div>\n" +
+    "<ng-form class=\"nice-date-range\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\r" +
     "\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <div class=\"input-group\">\n" +
-    "            <input date-range-picker class=\"form-control date-picker\" type=\"text\" options=\"opts\" ng-model=\"model\" />\n" +
-    "            <span date-range-picker options=\"opts\" ng-model=\"model\" class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
-    "</ng-form>\n"
+    "  <div class=\"row\">\r" +
+    "\n" +
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "        <div class=\"input-group\">\r" +
+    "\n" +
+    "            <input date-range-picker class=\"form-control date-picker\" type=\"text\" options=\"opts\" ng-model=\"model\" />\r" +
+    "\n" +
+    "            <span date-range-picker options=\"opts\" ng-model=\"model\" class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "  </div>\r" +
+    "\n" +
+    "</ng-form>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-date/nice-date.html',
-    "<div class=\"nice-date\" ng-form=\"forma\">\n" +
-    "    <div class=\"nice-date-date\">\n" +
-    "        <div class=\"nice-date-header\">\n" +
-    "            <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
-    "            <span title=\"{{ month.format('MM.YYYY' ) }}\">{{ month.format('MMMM, YYYY' ) }}</span>\n" +
-    "            <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-date\" ng-form=\"forma\">\r" +
     "\n" +
-    "        <div class=\"nice-date-week names\">\n" +
-    "            <span class=\"nice-date-day\" translate>{{ translations.mon }}</span>\n" +
-    "            <span class=\"nice-date-day\" translate>{{ translations.tue }}</span>\n" +
-    "            <span class=\"nice-date-day\" translate>{{ translations.wed }}</span>\n" +
-    "            <span class=\"nice-date-day\" translate>{{ translations.thu }}</span>\n" +
-    "            <span class=\"nice-date-day\" translate>{{ translations.fri }}</span>\n" +
-    "            <span class=\"nice-date-day weekend\" translate>{{ translations.sat }}</span>\n" +
-    "            <span class=\"nice-date-day weekend\" translate>{{ translations.sun }}</span>\n" +
-    "        </div>\n" +
+    "    <div class=\"nice-date-date\">\r" +
     "\n" +
-    "        <div class=\"nice-date-week\" ng-repeat=\"week in weeks\">\n" +
-    "            <span\n" +
-    "                class=\"nice-date-day\"\n" +
-    "                title=\"{{ day.date.format('DD.MM.YYYY') }}\"\n" +
-    "                ng-class=\"{\n" +
-    "                    'today': day.isToday,\n" +
-    "                    'different-month': !day.isCurrentMonth,\n" +
-    "                    'selected': isSameDay(model, day.date),\n" +
-    "                    'weekend': day.isWeekday,\n" +
-    "                    'disabled': day.isDisabled,\n" +
-    "                    'between': isBetween(day.date, model, nextDate)\n" +
-    "                }\"\n" +
-    "                ng-click=\"select(day)\"\n" +
-    "                ng-repeat=\"day in week.days\"\n" +
-    "            >{{ day.number }}</span>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "        <div class=\"nice-date-header\">\r" +
     "\n" +
+    "            <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\r" +
     "\n" +
-    "    <div class=\"nice-date-time\" ng-if=\"time\">\n" +
-    "        <div class=\"time-picker time-picker-hour\">\n" +
-    "            <select\n" +
-    "                ng-model=\"timeData.dateHour\"\n" +
-    "                ng-change=\"timeChange(timeData.dateHour, null)\"\n" +
-    "                ng-options=\"hour as hour for hour in hours track by hour\">\n" +
-    "            </select>\n" +
-    "        </div>\n" +
+    "            <span title=\"{{ month.format('MM.YYYY' ) }}\">{{ month.format('MMMM, YYYY' ) }}</span>\r" +
     "\n" +
-    "        <div class=\"time-picker time-picker-minute\">\n" +
-    "            <select\n" +
-    "                ng-model=\"timeData.dateMinute\"\n" +
-    "                ng-change=\"timeChange(null, timeData.dateMinute)\"\n" +
-    "                ng-options=\"minute as minute for minute in minutes track by minute\">\n" +
-    "            </select>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "            <i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"nice-date-week names\">\r" +
+    "\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.mon }}</span>\r" +
+    "\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.tue }}</span>\r" +
+    "\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.wed }}</span>\r" +
+    "\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.thu }}</span>\r" +
+    "\n" +
+    "            <span class=\"nice-date-day\" translate>{{ translations.fri }}</span>\r" +
+    "\n" +
+    "            <span class=\"nice-date-day weekend\" translate>{{ translations.sat }}</span>\r" +
+    "\n" +
+    "            <span class=\"nice-date-day weekend\" translate>{{ translations.sun }}</span>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"nice-date-week\" ng-repeat=\"week in weeks\">\r" +
+    "\n" +
+    "            <span\r" +
+    "\n" +
+    "                class=\"nice-date-day\"\r" +
+    "\n" +
+    "                title=\"{{ day.date.format('DD.MM.YYYY') }}\"\r" +
+    "\n" +
+    "                ng-class=\"{\r" +
+    "\n" +
+    "                    'today': day.isToday,\r" +
+    "\n" +
+    "                    'different-month': !day.isCurrentMonth,\r" +
+    "\n" +
+    "                    'selected': isSameDay(model, day.date),\r" +
+    "\n" +
+    "                    'weekend': day.isWeekday,\r" +
+    "\n" +
+    "                    'disabled': day.isDisabled,\r" +
+    "\n" +
+    "                    'between': isBetween(day.date, model, nextDate)\r" +
+    "\n" +
+    "                }\"\r" +
+    "\n" +
+    "                ng-click=\"select(day)\"\r" +
+    "\n" +
+    "                ng-repeat=\"day in week.days\"\r" +
+    "\n" +
+    "            >{{ day.number }}</span>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"nice-date-time\" ng-if=\"time\">\r" +
+    "\n" +
+    "        <div class=\"time-picker time-picker-hour\">\r" +
+    "\n" +
+    "            <select\r" +
+    "\n" +
+    "                ng-model=\"timeData.dateHour\"\r" +
+    "\n" +
+    "                ng-change=\"timeChange(timeData.dateHour, null)\"\r" +
+    "\n" +
+    "                ng-options=\"hour as hour for hour in hours track by hour\">\r" +
+    "\n" +
+    "            </select>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"time-picker time-picker-minute\">\r" +
+    "\n" +
+    "            <select\r" +
+    "\n" +
+    "                ng-model=\"timeData.dateMinute\"\r" +
+    "\n" +
+    "                ng-change=\"timeChange(null, timeData.dateMinute)\"\r" +
+    "\n" +
+    "                ng-options=\"minute as minute for minute in minutes track by minute\">\r" +
+    "\n" +
+    "            </select>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-datetime-picker/nice-datetime-picker.html',
-    "<div class=\"nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "    <div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"isOpen\"></div>\n" +
+    "\r" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"isOpen\"></div>\r" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <!--Needed for intercepting form changes ($dirty)!-->\n" +
-    "            <div ng-form=\"formDatetimePicker\"></div>\n" +
+    "\r" +
     "\n" +
-    "            <div class=\"input-group\" id=\"dropdown{{randNum}}\">\n" +
-    "                <input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtp()\">\n" +
-    "                <span class=\"input-group-addon\" ng-click=\"openDtp()\">\n" +
-    "                    <i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "            <!-- inject nice-dtp here -->\n" +
-    "            <div ng-show=\"isOpen\">\n" +
-    "                <nice-dtp\n" +
-    "                    model=\"currentDate\"\n" +
-    "                    format=\"{{format}}\"\n" +
-    "                    model-format=\"{{modelFormat}}\"\n" +
-    "                    date=\"{{date}}\"\n" +
-    "                    time=\"{{time}}\"\n" +
-    "                    width=\"{{width}}\"\n" +
-    "                    enable-ok-buttons=\"{{enableOkButtons}}\"\n" +
-    "                    lang=\"{{lang}}\"\n" +
-    "                    min-date=\"{{minDate}}\"\n" +
-    "                    max-date=\"{{maxDate}}\"\n" +
-    "                    week-start=\"{{weekStart}}\"\n" +
-    "                    ok-text=\"{{okText}}\"\n" +
-    "                    cancel-text=\"{{cancelText}}\"\n" +
-    "                    closed=\"closeDtp\"\n" +
-    "                ></nice-dtp>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <!--Needed for intercepting form changes ($dirty)!-->\r" +
+    "\n" +
+    "            <div ng-form=\"formDatetimePicker\"></div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"input-group\" id=\"dropdown{{randNum}}\">\r" +
+    "\n" +
+    "                <input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtp()\">\r" +
+    "\n" +
+    "                <span class=\"input-group-addon\" ng-click=\"openDtp()\">\r" +
+    "\n" +
+    "                    <i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <!-- inject nice-dtp here -->\r" +
+    "\n" +
+    "            <div ng-show=\"isOpen\">\r" +
+    "\n" +
+    "                <nice-dtp\r" +
+    "\n" +
+    "                    model=\"currentDate\"\r" +
+    "\n" +
+    "                    format=\"{{format}}\"\r" +
+    "\n" +
+    "                    model-format=\"{{modelFormat}}\"\r" +
+    "\n" +
+    "                    date=\"{{date}}\"\r" +
+    "\n" +
+    "                    time=\"{{time}}\"\r" +
+    "\n" +
+    "                    width=\"{{width}}\"\r" +
+    "\n" +
+    "                    enable-ok-buttons=\"{{enableOkButtons}}\"\r" +
+    "\n" +
+    "                    lang=\"{{lang}}\"\r" +
+    "\n" +
+    "                    min-date=\"{{minDate}}\"\r" +
+    "\n" +
+    "                    max-date=\"{{maxDate}}\"\r" +
+    "\n" +
+    "                    week-start=\"{{weekStart}}\"\r" +
+    "\n" +
+    "                    ok-text=\"{{okText}}\"\r" +
+    "\n" +
+    "                    cancel-text=\"{{cancelText}}\"\r" +
+    "\n" +
+    "                    closed=\"closeDtp\"\r" +
+    "\n" +
+    "                ></nice-dtp>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
     "\n"
   );
 
 
   $templateCache.put('src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
-    "<div class=\"nice-datetimerange-picker-2\" ng-form=\"formDateRangePicker\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-datetimerange-picker-2\" ng-form=\"formDateRangePicker\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "    <div class=\"nice-dtp-background\" ng-click=\"close()\" ng-if=\"isOpen\"></div>\n" +
+    "\r" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"close()\" ng-if=\"isOpen\"></div>\r" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
-    "                <!-- <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\"> -->\n" +
-    "                <div class=\"form-control\" title=\"{{ modelFormat }}\">{{ modelFormat }}</div>\n" +
-    "                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
-    "            </div>\n" +
+    "\r" +
     "\n" +
-    "            <div class=\"dtp-wrapper\" ng-show=\"isOpen\">\n" +
-    "                <div class=\"dtp-buttons-left\">\n" +
-    "                    <div class=\"dtp-buttons-top\">\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectToday()\">Last 24 hours</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\n" +
-    "                    </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "                    <div class=\"dtp-buttons-bottom\">\n" +
-    "                        <a class=\"btn btn-danger btn-block\" ng-click=\"close()\">Cancel</a>\n" +
-    "                        <a class=\"btn btn-success btn-block\" ng-click=\"confirm()\">OK</a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
-    "                <div class=\"dtp-left\">\n" +
-    "                    <nice-date model=\"innerStartDate\" next-date=\"innerEndDate\" time=\"time\"></nice-date>\n" +
-    "                </div>\n" +
+    "        </div>\r" +
     "\n" +
-    "                <div class=\"dtp-right\">\n" +
-    "                    <nice-date model=\"innerEndDate\" next-date=\"innerStartDate\" time=\"time\"></nice-date>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\r" +
+    "\n" +
+    "                <!-- <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\"> -->\r" +
+    "\n" +
+    "                <div class=\"form-control\" title=\"{{ modelFormat }}\">{{ modelFormat }}</div>\r" +
+    "\n" +
+    "                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"dtp-wrapper\" ng-show=\"isOpen\">\r" +
+    "\n" +
+    "                <div class=\"dtp-buttons-left\">\r" +
+    "\n" +
+    "                    <div class=\"dtp-buttons-top\">\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectToday()\">Last 24 hours</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"dtp-buttons-bottom\">\r" +
+    "\n" +
+    "                        <a class=\"btn btn-danger btn-block\" ng-click=\"close()\">Cancel</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-success btn-block\" ng-click=\"confirm()\">OK</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"dtp-left\">\r" +
+    "\n" +
+    "                    <nice-date model=\"innerStartDate\" next-date=\"innerEndDate\" time=\"time\"></nice-date>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"dtp-right\">\r" +
+    "\n" +
+    "                    <nice-date model=\"innerEndDate\" next-date=\"innerStartDate\" time=\"time\"></nice-date>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
-    "<div class=\"nice-datetime-picker nice-datetimerange-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-datetime-picker nice-datetimerange-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "    <div class=\"nice-dtp-background\" ng-click=\"cancelClick()\" ng-if=\"showDtpRange\"></div>\n" +
+    "\r" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "    <div class=\"nice-dtp-background\" ng-click=\"cancelClick()\" ng-if=\"showDtpRange\"></div>\r" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <!--Needed for intercepting form changes ($dirty)!-->\n" +
-    "            <div ng-form=\"formDatetimeRangePicker\"></div>\n" +
+    "\r" +
     "\n" +
-    "            <div class=\"dropdown\">\n" +
-    "                <a class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtpRange()\" href=\"javascript:void(0);\">\n" +
-    "                    <div class=\"input-group\">\n" +
-    "                        <input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtpRange()\">\n" +
-    "                        <span class=\"input-group-addon\"><i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i></span>\n" +
-    "                    </div>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "            <div class=\"dtp-range-wrapper\" ng-show=\"showDtpRange\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <div class=\"dtp-layer\">\n" +
-    "                    <div class=\"dtp-buttons-left\">\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(1)\">Last 24 hours</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\n" +
-    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\n" +
-    "                    </div>\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
+    "        </div>\r" +
     "\n" +
-    "                    <div class=\"dtp-left\">\n" +
-    "                        <!-- inject nice-dtp here -->\n" +
-    "                        <nice-dtp\n" +
-    "                            model=\"dateStart\"\n" +
-    "                            format=\"{{format}}\"\n" +
-    "                            model-format=\"{{modelFormat}}\"\n" +
-    "                            date=\"{{date}}\"\n" +
-    "                            time=\"{{time}}\"\n" +
-    "                            width=\"{{width}}\"\n" +
-    "                            enable-ok-buttons=\"{{enableOkButtons}}\"\n" +
-    "                            lang=\"{{lang}}\"\n" +
-    "                            min-date=\"{{minDate}}\"\n" +
-    "                            max-date=\"{{maxDate}}\"\n" +
-    "                            week-start=\"{{weekStart}}\"\n" +
-    "                            ok-text=\"{{okText}}\"\n" +
-    "                            cancel-text=\"{{cancelText}}\"\n" +
-    "                            inline=\"true\"\n" +
-    "                        ></nice-dtp>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"dtp-right\">\n" +
-    "                        <!-- inject nice-dtp here -->\n" +
-    "                        <nice-dtp\n" +
-    "                                model=\"dateEnd\"\n" +
-    "                                format=\"{{format}}\"\n" +
-    "                                model-format=\"{{modelFormat}}\"\n" +
-    "                                date=\"{{date}}\"\n" +
-    "                                time=\"{{time}}\"\n" +
-    "                                width=\"{{width}}\"\n" +
-    "                                enable-ok-buttons=\"{{enableOkButtons}}\"\n" +
-    "                                lang=\"{{lang}}\"\n" +
-    "                                min-date=\"{{minDate}}\"\n" +
-    "                                max-date=\"{{maxDate}}\"\n" +
-    "                                week-start=\"{{weekStart}}\"\n" +
-    "                                ok-text=\"{{okText}}\"\n" +
-    "                                cancel-text=\"{{cancelText}}\"\n" +
-    "                                inline=\"true\"\n" +
-    "                         > </nice-dtp>\n" +
-    "                    </div>\n" +
+    "\r" +
     "\n" +
-    "                    <div class=\"dtp-buttons-bottom\">\n" +
-    "                        <a class=\"btn btn-danger btn-block margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
-    "                        <a class=\"btn btn-success btn-block\" ng-click=\"okClick()\">OK</a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
     "\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "            <!--Needed for intercepting form changes ($dirty)!-->\r" +
+    "\n" +
+    "            <div ng-form=\"formDatetimeRangePicker\"></div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"dropdown\">\r" +
+    "\n" +
+    "                <a class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtpRange()\" href=\"javascript:void(0);\">\r" +
+    "\n" +
+    "                    <div class=\"input-group\">\r" +
+    "\n" +
+    "                        <input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtpRange()\">\r" +
+    "\n" +
+    "                        <span class=\"input-group-addon\"><i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i></span>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"dtp-range-wrapper\" ng-show=\"showDtpRange\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"dtp-layer\">\r" +
+    "\n" +
+    "                    <div class=\"dtp-buttons-left\">\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(1)\">Last 24 hours</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"dtp-left\">\r" +
+    "\n" +
+    "                        <!-- inject nice-dtp here -->\r" +
+    "\n" +
+    "                        <nice-dtp\r" +
+    "\n" +
+    "                            model=\"dateStart\"\r" +
+    "\n" +
+    "                            format=\"{{format}}\"\r" +
+    "\n" +
+    "                            model-format=\"{{modelFormat}}\"\r" +
+    "\n" +
+    "                            date=\"{{date}}\"\r" +
+    "\n" +
+    "                            time=\"{{time}}\"\r" +
+    "\n" +
+    "                            width=\"{{width}}\"\r" +
+    "\n" +
+    "                            enable-ok-buttons=\"{{enableOkButtons}}\"\r" +
+    "\n" +
+    "                            lang=\"{{lang}}\"\r" +
+    "\n" +
+    "                            min-date=\"{{minDate}}\"\r" +
+    "\n" +
+    "                            max-date=\"{{maxDate}}\"\r" +
+    "\n" +
+    "                            week-start=\"{{weekStart}}\"\r" +
+    "\n" +
+    "                            ok-text=\"{{okText}}\"\r" +
+    "\n" +
+    "                            cancel-text=\"{{cancelText}}\"\r" +
+    "\n" +
+    "                            inline=\"true\"\r" +
+    "\n" +
+    "                        ></nice-dtp>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"dtp-right\">\r" +
+    "\n" +
+    "                        <!-- inject nice-dtp here -->\r" +
+    "\n" +
+    "                        <nice-dtp\r" +
+    "\n" +
+    "                                model=\"dateEnd\"\r" +
+    "\n" +
+    "                                format=\"{{format}}\"\r" +
+    "\n" +
+    "                                model-format=\"{{modelFormat}}\"\r" +
+    "\n" +
+    "                                date=\"{{date}}\"\r" +
+    "\n" +
+    "                                time=\"{{time}}\"\r" +
+    "\n" +
+    "                                width=\"{{width}}\"\r" +
+    "\n" +
+    "                                enable-ok-buttons=\"{{enableOkButtons}}\"\r" +
+    "\n" +
+    "                                lang=\"{{lang}}\"\r" +
+    "\n" +
+    "                                min-date=\"{{minDate}}\"\r" +
+    "\n" +
+    "                                max-date=\"{{maxDate}}\"\r" +
+    "\n" +
+    "                                week-start=\"{{weekStart}}\"\r" +
+    "\n" +
+    "                                ok-text=\"{{okText}}\"\r" +
+    "\n" +
+    "                                cancel-text=\"{{cancelText}}\"\r" +
+    "\n" +
+    "                                inline=\"true\"\r" +
+    "\n" +
+    "                         > </nice-dtp>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"dtp-buttons-bottom\">\r" +
+    "\n" +
+    "                        <a class=\"btn btn-danger btn-block margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\r" +
+    "\n" +
+    "                        <a class=\"btn btn-success btn-block\" ng-click=\"okClick()\">OK</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-dropdown-date/nice-dropdown-date.html',
-    "<div class=\"nice-dropdown-date\" ng-form=\"dropdownDateForm\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-dropdown-date\" ng-form=\"dropdownDateForm\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "        <div class=\"col-sm-8\"\n" +
-    "             ng-class=\"{\n" +
-    "                fieldWidth: fieldWidth,\n" +
-    "                'has-warning': !isDisabled && dropdownDateForm.$invalid && dropdownDateForm.$dirty,\n" +
-    "                'disabled': isDisabled\n" +
-    "            }\">\n" +
-    "            <div class=\"form-inline\">\n" +
-    "                <div class=\"form-group nice-dropdown-date-day\">\n" +
-    "                    <select\n" +
-    "                        ng-model=\"dateFields.day\"\n" +
-    "                        class=\"form-control\"\n" +
-    "                        ng-options=\"day for day in days\"\n" +
-    "                        ng-change=\"checkDate()\"\n" +
-    "                        ng-disabled=\"isDisabled\"\n" +
-    "                        required=\"true\"\n" +
-    "                    ></select>\n" +
-    "                </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "                <div class=\"form-group nice-dropdown-date-month\">\n" +
-    "                    <select\n" +
-    "                        ng-model=\"dateFields.month\"\n" +
-    "                        class=\"form-control\"\n" +
-    "                        ng-options=\"month.value as month.name for month in months\"\n" +
-    "                        ng-change=\"checkDate()\"\n" +
-    "                        ng-disabled=\"isDisabled\"\n" +
-    "                        required=\"true\"\n" +
-    "                    ></select>\n" +
-    "                </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <div class=\"form-group nice-dropdown-date-year\">\n" +
-    "                    <select\n" +
-    "                        ng-model=\"dateFields.year\"\n" +
-    "                        class=\"form-control\"\n" +
-    "                        ng-options=\"year for year in years\"\n" +
-    "                        ng-change=\"checkDate()\"\n" +
-    "                        ng-disabled=\"isDisabled\"\n" +
-    "                        required=\"true\"\n" +
-    "                    ></select>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"col-sm-8\"\r" +
+    "\n" +
+    "             ng-class=\"{\r" +
+    "\n" +
+    "                fieldWidth: fieldWidth,\r" +
+    "\n" +
+    "                'has-warning': !isDisabled && dropdownDateForm.$invalid && dropdownDateForm.$dirty,\r" +
+    "\n" +
+    "                'disabled': isDisabled\r" +
+    "\n" +
+    "            }\">\r" +
+    "\n" +
+    "            <div class=\"form-inline\">\r" +
+    "\n" +
+    "                <div class=\"form-group nice-dropdown-date-day\">\r" +
+    "\n" +
+    "                    <select\r" +
+    "\n" +
+    "                        ng-model=\"dateFields.day\"\r" +
+    "\n" +
+    "                        class=\"form-control\"\r" +
+    "\n" +
+    "                        ng-options=\"day for day in days\"\r" +
+    "\n" +
+    "                        ng-change=\"checkDate()\"\r" +
+    "\n" +
+    "                        ng-disabled=\"isDisabled\"\r" +
+    "\n" +
+    "                        required=\"true\"\r" +
+    "\n" +
+    "                    ></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"form-group nice-dropdown-date-month\">\r" +
+    "\n" +
+    "                    <select\r" +
+    "\n" +
+    "                        ng-model=\"dateFields.month\"\r" +
+    "\n" +
+    "                        class=\"form-control\"\r" +
+    "\n" +
+    "                        ng-options=\"month.value as month.name for month in months\"\r" +
+    "\n" +
+    "                        ng-change=\"checkDate()\"\r" +
+    "\n" +
+    "                        ng-disabled=\"isDisabled\"\r" +
+    "\n" +
+    "                        required=\"true\"\r" +
+    "\n" +
+    "                    ></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"form-group nice-dropdown-date-year\">\r" +
+    "\n" +
+    "                    <select\r" +
+    "\n" +
+    "                        ng-model=\"dateFields.year\"\r" +
+    "\n" +
+    "                        class=\"form-control\"\r" +
+    "\n" +
+    "                        ng-options=\"year for year in years\"\r" +
+    "\n" +
+    "                        ng-change=\"checkDate()\"\r" +
+    "\n" +
+    "                        ng-disabled=\"isDisabled\"\r" +
+    "\n" +
+    "                        required=\"true\"\r" +
+    "\n" +
+    "                    ></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
     "\n"
   );
 
 
+  $templateCache.put('src/components/nice-dropdown-old/nice-dropdown-old.html',
+    "<div class=\"nice-dropdown-old\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
+    "\n" +
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div ng-class=\"addButtonEnable && !isDisabled ? 'input-group': ''\">\r" +
+    "\n" +
+    "                <div class=\"btn-group\" dropdown is-open=\"status.isopen\" ng-class=\"{ 'disabled': isDisabled || emptyList }\">\r" +
+    "\n" +
+    "                    <button\r" +
+    "\n" +
+    "                        type=\"button\"\r" +
+    "\n" +
+    "                        class=\"btn btn-block btn-dropdown dropdown-toggle\"\r" +
+    "\n" +
+    "                        title=\"{{ getLabel(internalSelected) }}\"\r" +
+    "\n" +
+    "                        dropdown-toggle\r" +
+    "\n" +
+    "                        ng-disabled=\"isDisabled || emptyList\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>\r" +
+    "\n" +
+    "                        <span ng-if=\"!multiple\">{{ getLabel(internalSelected) }}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <span ng-if=\"multiple\">\r" +
+    "\n" +
+    "                            <!--<span ng-repeat=\"item in internalSelected\"><span ng-if=\"$index > 0\">, </span>{{ getLabel(item) }}</span>-->\r" +
+    "\n" +
+    "                            <span ng-if=\"internalSelected.length  > 1\">{{ internalSelected.length }} <translate>selected</translate></span>\r" +
+    "\n" +
+    "                            <span ng-if=\"internalSelected.length  == 1\">{{ getLabel(internalSelected[0]) }}</span>\r" +
+    "\n" +
+    "                            <span ng-if=\"internalSelected.length == 0\" translate>None</span>\r" +
+    "\n" +
+    "                        </span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <!--<span ng-if=\"showTax && internalSelected.value\">{{ internalSelected.value * 100 }}%</span>-->\r" +
+    "\n" +
+    "                        <span class=\"caret\"></span>\r" +
+    "\n" +
+    "                    </button>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <ul id=\"{{id}}\" class=\"dropdown-menu\" role=\"menu\">\r" +
+    "\n" +
+    "                        <li id=\"{{id}}-{{$index}}\" ng-repeat=\"item in internalList\" ng-click=\"clicked(item)\">\r" +
+    "\n" +
+    "                            <a href>\r" +
+    "\n" +
+    "                                <span class=\"choice-checkbox\" ng-if=\"multiple\" ng-class=\"{ 'selected' : isItemSelected(item) }\"><i class=\"fa fa-check\"></i></span>\r" +
+    "\n" +
+    "                                <span ng-if=\"item.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': item.color_hex_code}\"></span>\r" +
+    "\n" +
+    "                                <span ng-class=\"{'multiple-item': multiple}\">{{ getLabel(item) }}</span>\r" +
+    "\n" +
+    "                                <!--<span ng-if=\"showTax && item.value\">{{ item.value * 100 }}%</span>-->\r" +
+    "\n" +
+    "                            </a>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <span class=\"input-group-btn\" ng-if=\"addButtonEnable && !isDisabled\">\r" +
+    "\n" +
+    "                    <button class=\"btn btn-primary\" ng-click=\"addButtonFunction()\" type=\"button\">+</button>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <!--Needed for intercepting form changes ($dirty)!-->\r" +
+    "\n" +
+    "    <div ng-form=\"formDropdown\"></div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('src/components/nice-dropdown/nice-dropdown.html',
-    "<div class=\"nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <!------------------------- Label ------------------------->\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "        <!------------------------- Field ------------------------->\n" +
-    "        <div ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
-    "            <div class=\"nice-field-wrapper\">\n" +
-    "                <!------------------------- Button ------------------------->\n" +
-    "                <button type=\"button\" class=\"btn btn-dropdown\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
-    "                    <div class=\"btn-dropdown-inside\" ng-transclude=\"button\" ng-if=\"selected != null\">\n" +
-    "                        <span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\n" +
-    "                        <span ng-if=\"multiple\">\n" +
-    "                            <span ng-if=\"selected.length > 1\">{{ selected.length }} <translate>selected</translate></span>\n" +
-    "                            <span ng-if=\"selected.length == 1\">{{ selected[0][objValue] }}</span>\n" +
-    "                            <span ng-if=\"selected.length == 0\">None</span>\n" +
-    "                        </span>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"not-selected\" ng-if=\"selected == null\">\n" +
-    "                        {{ selectText }}\n" +
-    "                    </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "                    <span class=\"caret\" ng-show=\"!loading\"></span>\n" +
-    "                    <nice-loader visible-when=\"!loading\"></nice-loader>\n" +
-    "                </button>\n" +
+    "        <!------------------------- Label ------------------------->\r" +
     "\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <!------------------------- Dropdown menu ------------------------->\n" +
-    "                <div class=\"dropdown-menu\">\n" +
-    "                    <div class=\"search-bar\" ng-if=\"searchFunction\">\n" +
-    "                        <input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\" />\n" +
-    "                        <span class=\"icon\"><i class=\"fa fa-search\"></i></span>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
-    "                    <ul>\n" +
-    "                        <li ng-if=\"nullable\" ng-click=\"handleSelected(null, -1)\">\n" +
-    "                            {{ nullableText }}\n" +
-    "                        </li>\n" +
-    "                        <li ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected }\">\n" +
-    "                            <span class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></span>\n" +
-    "                            <span ng-transclude=\"option\">\n" +
-    "                                <span ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</span>\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </div>\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
+    "        </div>\r" +
     "\n" +
-    "                <!------------------------- Add button ------------------------->\n" +
-    "                <button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction\" ng-click=\"addButtonFunction()\">+</button>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <div ng-form=\"formDropdown\"></div>\n" +
+    "\r" +
+    "\n" +
+    "        <!------------------------- Field ------------------------->\r" +
+    "\n" +
+    "        <div ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\r" +
+    "\n" +
+    "            <div class=\"nice-field-wrapper\">\r" +
+    "\n" +
+    "                <!------------------------- Button ------------------------->\r" +
+    "\n" +
+    "                <button type=\"button\" class=\"btn btn-dropdown\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\r" +
+    "\n" +
+    "                    <div class=\"btn-dropdown-inside\" ng-transclude=\"button\" ng-if=\"selected != null\">\r" +
+    "\n" +
+    "                        <span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\r" +
+    "\n" +
+    "                        <span ng-if=\"multiple\">\r" +
+    "\n" +
+    "                            <span ng-if=\"selected.length > 1\">{{ selected.length }} <translate>selected</translate></span>\r" +
+    "\n" +
+    "                            <span ng-if=\"selected.length == 1\">{{ selected[0][objValue] }}</span>\r" +
+    "\n" +
+    "                            <span ng-if=\"selected.length == 0\">None</span>\r" +
+    "\n" +
+    "                        </span>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"not-selected\" ng-if=\"selected == null\">\r" +
+    "\n" +
+    "                        {{ selectText }}\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <span class=\"caret\" ng-show=\"!loading\"></span>\r" +
+    "\n" +
+    "                    <nice-loader visible-when=\"!loading\"></nice-loader>\r" +
+    "\n" +
+    "                </button>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <!------------------------- Dropdown menu ------------------------->\r" +
+    "\n" +
+    "                <div class=\"dropdown-menu\">\r" +
+    "\n" +
+    "                    <div class=\"search-bar\" ng-if=\"searchFunction\">\r" +
+    "\n" +
+    "                        <input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\" />\r" +
+    "\n" +
+    "                        <span class=\"icon\"><i class=\"fa fa-search\"></i></span>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\r" +
+    "\n" +
+    "                    <ul>\r" +
+    "\n" +
+    "                        <li ng-if=\"nullable\" ng-click=\"handleSelected(null, -1)\">\r" +
+    "\n" +
+    "                            {{ nullableText }}\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected }\">\r" +
+    "\n" +
+    "                            <span class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></span>\r" +
+    "\n" +
+    "                            <span ng-transclude=\"option\">\r" +
+    "\n" +
+    "                                <span ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</span>\r" +
+    "\n" +
+    "                            </span>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <!------------------------- Add button ------------------------->\r" +
+    "\n" +
+    "                <button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction\" ng-click=\"addButtonFunction()\">+</button>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div ng-form=\"formDropdown\"></div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-dtp/nice-dtp.html',
-    "<div class=\"dtp-wrapper\">\n" +
-    "    <div class=\"dtp\" id=\"this.name\" ng-class=\"{'hidden': !showDtp}\">\n" +
-    "        <div class=\"dtp-content\" ng-style=\"dtp_content_style\">\n" +
-    "            <div class=\"dtp-date-view\">\n" +
-    "                <div class=\"dtp-header\" ng-if=\"!inline\">\n" +
-    "                    <div class=\"dtp-actual-day\">{{actualDay}}</div>\n" +
-    "                    <div class=\"dtp-close\" ng-if=\"!inline\"><a href=\"javascript:void(0);\" ng-click=\"onCloseClick()\"><i class=\"fa fa-close\"></i></div>\n" +
-    "                </div>\n" +
-    "                <div class=\"dtp-date\" ng-if=\"!inline\" ng-class=\"{'hidden': !showDateHeader}\">\n" +
-    "                    <div>\n" +
-    "                        <div class=\"left center p10\">\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"dtp-actual-month p80\" ng-click=\"initDate()\">{{actualMonth}}</div>\n" +
-    "                        <div class=\"right center p10\">\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"clearfix\"></div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"dtp-actual-num\" ng-click=\"initDate()\">{{actualNum}}</div>\n" +
-    "                    <div>\n" +
-    "                        <div class=\"left center p10\">\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-year-before\" ng-click=\"onYearBeforeClick()\" ng-class=\"{'disabled': !btnYearBeforeEnabled}\"\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"dtp-actual-year p80\" ng-click=\"initDate()\">{{actualYear}}</div>\n" +
-    "                        <div class=\"right center p10\">\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-year-after\" ng-click=\"onYearAfterClick()\" ng-class=\"{'disabled': !btnYearAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"clearfix\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"dtp-time\" ng-show=\"!showTimeHeader\">\n" +
-    "                    <div class=\"dtp-actual-maxtime\">\n" +
-    "                        <a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==1}\" ng-click=\"initHours()\" href=\"javascript:void(0);\">{{actualTime.hours}}</a>:<a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==2}\" ng-click=\"initMinutes()\" href=\"javascript:void(0);\">{{actualTime.minutes}}</a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div class=\"dtp-picker\">\n" +
-    "                    <div class=\"dtp-picker-calendar\" ng-class=\"{'hidden': !showCalendar}\">\n" +
-    "                        <div>\n" +
-    "                            <div ng-if=\"inline\" class=\"left center p10\">\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"dtp-picker-month\" ng-class=\"{'p80': inline}\">{{monthAndYear}}</div>\n" +
-    "                            <div class=\"right center p10\" ng-if=\"inline\">\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
+    "<div class=\"dtp-wrapper\">\r" +
     "\n" +
-    "                        <table class=\"table dtp-picker-days\">\n" +
-    "                            <thead>\n" +
-    "                            <th ng-repeat=\"weekDay in weekDays track by $index\">{{weekDay}}</th>\n" +
-    "                            </thead>\n" +
-    "                            <tbody>\n" +
-    "                            <tr ng-repeat=\"week in weeks\">\n" +
-    "                                <td ng-repeat=\"day in week\">\n" +
-    "                                    <span ng-if=\"day.disabled\" class=\"dtp-select-day\">{{day.label}}</span>\n" +
-    "                                    <a ng-if=\"!day.disabled\" ng-click=\"onSelectDate(day)\" href=\"javascript:void(0);\" class=\"dtp-select-day\" ng-class=\"{'selected': day.selected}\">{{day.label}}</a>\n" +
-    "                                </td>\n" +
-    "                            </tr>\n" +
-    "                            </tbody>\n" +
-    "                        </table>\n" +
+    "    <div class=\"dtp\" id=\"this.name\" ng-class=\"{'hidden': !showDtp}\">\r" +
     "\n" +
-    "                    </div>\n" +
-    "                    <div class=\"dtp-picker-datetime\" ng-class=\"{'hidden': !showTime}\">\n" +
-    "                        <div class=\"dtp-actual-meridien\">\n" +
-    "                            <div class=\"dtp-actual-time p60\" ng-show=\"showTimeHeader\">\n" +
-    "                                <a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==1}\" ng-click=\"initHours()\" href=\"javascript:void(0);\">{{actualTime.hours}}</a>:<a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==2}\" ng-click=\"initMinutes()\" href=\"javascript:void(0);\">{{actualTime.minutes}}</a>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"clearfix\"></div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"dtp-picker-clock\">\n" +
-    "                            <div class=\"dtp-hand dtp-hour-hand\" ng-show=\"currentView==1\"></div>\n" +
-    "                            <div class=\"dtp-hand dtp-minute-hand\" ng-show=\"currentView==2\"></div>\n" +
-    "                            <div class=\"dtp-clock-center\"></div>\n" +
-    "                            <div ng-repeat=\"hour in hours\" class=\"dtp-picker-time\" ng-style=\"hour.style\">\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-hour\" ng-class=\"{'selected': hour.selected, 'disabled': hour.disabled}\" ng-click=\"onSelectHour(hour)\">{{hour.h}}</a>\n" +
-    "                            </div>\n" +
-    "                            <div ng-repeat=\"minute in minutes\" class=\"dtp-picker-time\" ng-style=\"minute.style\">\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-minute\" ng-class=\"{'selected': minute.selected, 'disabled': minute.disabled}\" ng-click=\"onSelectMinute(minute)\">{{minute.m}}</a>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <!--<div class=\"dtp-buttons\" ng-if=\"enableOkButtons\">-->\n" +
-    "                <!--<button class=\"dtp-btn-cancel btn btn-flat\" ng-click=\"onCancelClick()\">{{cancelText}}</button>-->\n" +
-    "                <!--<button class=\"dtp-btn-ok btn btn-flat\" ng-click=\"onOKClick()\"> {{okText}} </button>-->\n" +
-    "                <!--<div class=\"clearfix\"></div>-->\n" +
-    "            <!--</div>-->\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n"
+    "        <div class=\"dtp-content\" ng-style=\"dtp_content_style\">\r" +
+    "\n" +
+    "            <div class=\"dtp-date-view\">\r" +
+    "\n" +
+    "                <div class=\"dtp-header\" ng-if=\"!inline\">\r" +
+    "\n" +
+    "                    <div class=\"dtp-actual-day\">{{actualDay}}</div>\r" +
+    "\n" +
+    "                    <div class=\"dtp-close\" ng-if=\"!inline\"><a href=\"javascript:void(0);\" ng-click=\"onCloseClick()\"><i class=\"fa fa-close\"></i></div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"dtp-date\" ng-if=\"!inline\" ng-class=\"{'hidden': !showDateHeader}\">\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "                        <div class=\"left center p10\">\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"dtp-actual-month p80\" ng-click=\"initDate()\">{{actualMonth}}</div>\r" +
+    "\n" +
+    "                        <div class=\"right center p10\">\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"clearfix\"></div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"dtp-actual-num\" ng-click=\"initDate()\">{{actualNum}}</div>\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "                        <div class=\"left center p10\">\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-year-before\" ng-click=\"onYearBeforeClick()\" ng-class=\"{'disabled': !btnYearBeforeEnabled}\"\"><i class=\"fa fa-chevron-left\"></i></a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"dtp-actual-year p80\" ng-click=\"initDate()\">{{actualYear}}</div>\r" +
+    "\n" +
+    "                        <div class=\"right center p10\">\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"dtp-select-year-after\" ng-click=\"onYearAfterClick()\" ng-class=\"{'disabled': !btnYearAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"clearfix\"></div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"dtp-time\" ng-show=\"!showTimeHeader\">\r" +
+    "\n" +
+    "                    <div class=\"dtp-actual-maxtime\">\r" +
+    "\n" +
+    "                        <a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==1}\" ng-click=\"initHours()\" href=\"javascript:void(0);\">{{actualTime.hours}}</a>:<a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==2}\" ng-click=\"initMinutes()\" href=\"javascript:void(0);\">{{actualTime.minutes}}</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"dtp-picker\">\r" +
+    "\n" +
+    "                    <div class=\"dtp-picker-calendar\" ng-class=\"{'hidden': !showCalendar}\">\r" +
+    "\n" +
+    "                        <div>\r" +
+    "\n" +
+    "                            <div ng-if=\"inline\" class=\"left center p10\">\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-month-before\" ng-click=\"onMonthBeforeClick()\" ng-class=\"{'disabled': !btnMonthBeforeEnabled}\"><i class=\"fa fa-chevron-left\"></i></a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div class=\"dtp-picker-month\" ng-class=\"{'p80': inline}\">{{monthAndYear}}</div>\r" +
+    "\n" +
+    "                            <div class=\"right center p10\" ng-if=\"inline\">\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-month-after\" ng-click=\"onMonthAfterClick()\" ng-class=\"{'disabled': !btnMonthAfterEnabled}\"><i class=\"fa fa-chevron-right\"></i></a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <table class=\"table dtp-picker-days\">\r" +
+    "\n" +
+    "                            <thead>\r" +
+    "\n" +
+    "                            <th ng-repeat=\"weekDay in weekDays track by $index\">{{weekDay}}</th>\r" +
+    "\n" +
+    "                            </thead>\r" +
+    "\n" +
+    "                            <tbody>\r" +
+    "\n" +
+    "                            <tr ng-repeat=\"week in weeks\">\r" +
+    "\n" +
+    "                                <td ng-repeat=\"day in week\">\r" +
+    "\n" +
+    "                                    <span ng-if=\"day.disabled\" class=\"dtp-select-day\">{{day.label}}</span>\r" +
+    "\n" +
+    "                                    <a ng-if=\"!day.disabled\" ng-click=\"onSelectDate(day)\" href=\"javascript:void(0);\" class=\"dtp-select-day\" ng-class=\"{'selected': day.selected}\">{{day.label}}</a>\r" +
+    "\n" +
+    "                                </td>\r" +
+    "\n" +
+    "                            </tr>\r" +
+    "\n" +
+    "                            </tbody>\r" +
+    "\n" +
+    "                        </table>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"dtp-picker-datetime\" ng-class=\"{'hidden': !showTime}\">\r" +
+    "\n" +
+    "                        <div class=\"dtp-actual-meridien\">\r" +
+    "\n" +
+    "                            <div class=\"dtp-actual-time p60\" ng-show=\"showTimeHeader\">\r" +
+    "\n" +
+    "                                <a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==1}\" ng-click=\"initHours()\" href=\"javascript:void(0);\">{{actualTime.hours}}</a>:<a class=\"dtp-hours-minutes-btn\" ng-class=\"{'selected': currentView==2}\" ng-click=\"initMinutes()\" href=\"javascript:void(0);\">{{actualTime.minutes}}</a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div class=\"clearfix\"></div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"dtp-picker-clock\">\r" +
+    "\n" +
+    "                            <div class=\"dtp-hand dtp-hour-hand\" ng-show=\"currentView==1\"></div>\r" +
+    "\n" +
+    "                            <div class=\"dtp-hand dtp-minute-hand\" ng-show=\"currentView==2\"></div>\r" +
+    "\n" +
+    "                            <div class=\"dtp-clock-center\"></div>\r" +
+    "\n" +
+    "                            <div ng-repeat=\"hour in hours\" class=\"dtp-picker-time\" ng-style=\"hour.style\">\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-hour\" ng-class=\"{'selected': hour.selected, 'disabled': hour.disabled}\" ng-click=\"onSelectHour(hour)\">{{hour.h}}</a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-repeat=\"minute in minutes\" class=\"dtp-picker-time\" ng-style=\"minute.style\">\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"dtp-select-minute\" ng-class=\"{'selected': minute.selected, 'disabled': minute.disabled}\" ng-click=\"onSelectMinute(minute)\">{{minute.m}}</a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <!--<div class=\"dtp-buttons\" ng-if=\"enableOkButtons\">-->\r" +
+    "\n" +
+    "                <!--<button class=\"dtp-btn-cancel btn btn-flat\" ng-click=\"onCancelClick()\">{{cancelText}}</button>-->\r" +
+    "\n" +
+    "                <!--<button class=\"dtp-btn-ok btn btn-flat\" ng-click=\"onOKClick()\"> {{okText}} </button>-->\r" +
+    "\n" +
+    "                <!--<div class=\"clearfix\"></div>-->\r" +
+    "\n" +
+    "            <!--</div>-->\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-help/nice-help.html',
-    "<div class=\"nice-help\">\n" +
-    "    <i class=\"fa fa-question-circle\"></i>\n" +
-    "    <div class=\"help-window\">{{ text }}</div>\n" +
-    "</div>\n"
+    "<div class=\"nice-help\">\r" +
+    "\n" +
+    "    <i class=\"fa fa-question-circle\"></i>\r" +
+    "\n" +
+    "    <div class=\"help-window\">{{ text }}</div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-input/nice-input.html',
-    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"forma\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "    </div>\n" +
+    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"forma\">\r" +
     "\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <div \n" +
-    "            class=\"form-group\"\n" +
-    "            ng-class=\"{\n" +
-    "            'has-feedback': showValid && !hideValid,\n" +
-    "            'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
-    "            'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
-    "            'symbol': symbol,\n" +
-    "            'disabled': isDisabled}\"\n" +
-    "        >\n" +
-    "            <input ng-show=\"!textArea\"\n" +
-    "                class=\"form-control\"\n" +
-    "                type=\"{{ internalType }}\"\n" +
-    "                ng-model=\"model\"\n" +
-    "                title=\"{{ help }}\"\n" +
-    "                name=\"{{ name }}\"\n" +
-    "                id=\"{{ id }}\"\n" +
-    "                tabindex=\"{{ tabIndex }}\"\n" +
-    "                placeholder=\"{{ placeholder }}\"\n" +
-    "                ng-minlength=\"minlength\"\n" +
-    "                ng-maxlength=\"maxlength\"\n" +
-    "                ng-required=\"required\"\n" +
-    "                ng-keypress=\"keypress($event)\"\n" +
-    "                ng-pattern=\"regexexp\"\n" +
-    "                ng-disabled=\"isDisabled\"\n" +
-    "            />\n" +
-    "            <textarea ng-show=\"textArea\"\n" +
-    "                class=\"form-control\"\n" +
-    "                ng-model=\"model\"\n" +
-    "                title=\"{{ help }}\"\n" +
-    "                id=\"{{ id }}\"\n" +
-    "                tabindex=\"{{ tabIndex }}\"\n" +
-    "                placeholder=\"{{ placeholder }}\"\n" +
-    "                rows=\"{{textAreaLines}}\"\n" +
-    "                ng-minlength=\"minlength\"\n" +
-    "                ng-maxlength=\"maxlength\"\n" +
-    "                ng-required=\"required\"\n" +
-    "                ng-pattern=\"regexexp\"\n" +
-    "                ng-disabled=\"isDisabled\"\n" +
-    "            ></textarea>\n" +
+    "  <div class=\"row\">\r" +
     "\n" +
-    "            <span class=\"input-group-addon\" ng-if=\"symbol\">{{ symbol }}</span>\n" +
-    "            <!--<span ng-if=\"!disabled && showValid && form.$valid && form.$dirty\" class=\"glyphicon glyphicon-ok form-control-feedback feedback-valid\" aria-hidden=\"true\"></span>-->\n" +
-    "            <!--<span ng-if=\"!disabled && !hideValid && form.$invalid && form.$dirty\" class=\"glyphicon glyphicon-remove form-control-feedback feedback-invalid\" aria-hidden=\"true\"></span>-->\n" +
-    "        </div>\n" +
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "        <div ng-if=\"forma.$error && forma.$dirty\">\n" +
-    "            <div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate>Email is not valid.</div>\n" +
-    "            <div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\" translate>This field requires a specific pattern.</div>\n" +
-    "            <div class=\"error-message\" ng-if=\"forma.$error.minlength\"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>\n" +
-    "            <div class=\"error-message\" ng-if=\"forma.$error.maxlength\" translate>Your input is too long</div>\n" +
-    "            <div class=\"error-message\" ng-if=\"forma.$error.required\" ng-if=\"forma.$dirty\" translate>This field is required.</div>\n" +
-    "            <div class=\"error-message\" ng-if=\"forma.$error.unique\" translate>This field must be unique.</div>\n" +
-    "        </div>\n" +
+    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
-    "        <!-- <pre>{{ forma | json }}</pre> -->\n" +
-    "    </div>\n" +
-    "  </div>\n" +
-    "</ng-form>\n"
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "        <div \r" +
+    "\n" +
+    "            class=\"form-group\"\r" +
+    "\n" +
+    "            ng-class=\"{\r" +
+    "\n" +
+    "            'has-feedback': showValid && !hideValid,\r" +
+    "\n" +
+    "            'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\r" +
+    "\n" +
+    "            'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\r" +
+    "\n" +
+    "            'symbol': symbol,\r" +
+    "\n" +
+    "            'disabled': isDisabled}\"\r" +
+    "\n" +
+    "        >\r" +
+    "\n" +
+    "            <input ng-show=\"!textArea\"\r" +
+    "\n" +
+    "                class=\"form-control\"\r" +
+    "\n" +
+    "                type=\"{{ internalType }}\"\r" +
+    "\n" +
+    "                ng-model=\"model\"\r" +
+    "\n" +
+    "                title=\"{{ help }}\"\r" +
+    "\n" +
+    "                name=\"{{ name }}\"\r" +
+    "\n" +
+    "                id=\"{{ id }}\"\r" +
+    "\n" +
+    "                tabindex=\"{{ tabIndex }}\"\r" +
+    "\n" +
+    "                placeholder=\"{{ placeholder }}\"\r" +
+    "\n" +
+    "                ng-minlength=\"minlength\"\r" +
+    "\n" +
+    "                ng-maxlength=\"maxlength\"\r" +
+    "\n" +
+    "                ng-required=\"required\"\r" +
+    "\n" +
+    "                ng-keypress=\"keypress($event)\"\r" +
+    "\n" +
+    "                ng-pattern=\"regexexp\"\r" +
+    "\n" +
+    "                ng-disabled=\"isDisabled\"\r" +
+    "\n" +
+    "            />\r" +
+    "\n" +
+    "            <textarea ng-show=\"textArea\"\r" +
+    "\n" +
+    "                class=\"form-control\"\r" +
+    "\n" +
+    "                ng-model=\"model\"\r" +
+    "\n" +
+    "                title=\"{{ help }}\"\r" +
+    "\n" +
+    "                id=\"{{ id }}\"\r" +
+    "\n" +
+    "                tabindex=\"{{ tabIndex }}\"\r" +
+    "\n" +
+    "                placeholder=\"{{ placeholder }}\"\r" +
+    "\n" +
+    "                rows=\"{{textAreaLines}}\"\r" +
+    "\n" +
+    "                ng-minlength=\"minlength\"\r" +
+    "\n" +
+    "                ng-maxlength=\"maxlength\"\r" +
+    "\n" +
+    "                ng-required=\"required\"\r" +
+    "\n" +
+    "                ng-pattern=\"regexexp\"\r" +
+    "\n" +
+    "                ng-disabled=\"isDisabled\"\r" +
+    "\n" +
+    "            ></textarea>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <span class=\"input-group-addon\" ng-if=\"symbol\">{{ symbol }}</span>\r" +
+    "\n" +
+    "            <!--<span ng-if=\"!disabled && showValid && form.$valid && form.$dirty\" class=\"glyphicon glyphicon-ok form-control-feedback feedback-valid\" aria-hidden=\"true\"></span>-->\r" +
+    "\n" +
+    "            <!--<span ng-if=\"!disabled && !hideValid && form.$invalid && form.$dirty\" class=\"glyphicon glyphicon-remove form-control-feedback feedback-invalid\" aria-hidden=\"true\"></span>-->\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-if=\"forma.$error && forma.$dirty\">\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate>Email is not valid.</div>\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\" translate>This field requires a specific pattern.</div>\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-if=\"forma.$error.minlength\"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-if=\"forma.$error.maxlength\" translate>Your input is too long</div>\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-if=\"forma.$error.required\" ng-if=\"forma.$dirty\" translate>This field is required.</div>\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-if=\"forma.$error.unique\" translate>This field must be unique.</div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <!-- <pre>{{ forma | json }}</pre> -->\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "  </div>\r" +
+    "\n" +
+    "</ng-form>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-label/nice-label.html',
-    "<div class=\"nice-label\">\n" +
+    "<div class=\"nice-label\">\r" +
     "\n" +
-    "<div class=\"row\">\n" +
-    "    <div ng-class=\"labelWidth ? labelWidth : 'col-xs-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}</label>\n" +
-    "    </div>\n" +
+    "\r" +
     "\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-xs-8'\">\n" +
-    "        <p class=\"value\">{{ value }}</p>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "<div class=\"row\">\r" +
     "\n" +
-    "</div>\n"
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-xs-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "        <label class=\"nice\">{{ title }}</label>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-xs-8'\">\r" +
+    "\n" +
+    "        <p class=\"value\">{{ value }}</p>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-loader/nice-loader.html',
-    "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">\n" +
-    "  <svg version=\"1.1\" id=\"loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
-    "    <path fill=\"#000\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\n" +
-    "  </svg>\n" +
+    "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">\r" +
+    "\n" +
+    "  <svg version=\"1.1\" id=\"loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\r" +
+    "\n" +
+    "    <path fill=\"#000\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\r" +
+    "\n" +
+    "  </svg>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-notification/nice-notification.html',
-    "<div class=\"notification\">\n" +
-    "    <h3 ng-show=\"title\" ng-bind-html=\"title\"></h3>\n" +
-    "    <div class=\"message\" ng-bind-html=\"message\"></div>\n" +
+    "<div class=\"notification\">\r" +
+    "\n" +
+    "    <h3 ng-show=\"title\" ng-bind-html=\"title\"></h3>\r" +
+    "\n" +
+    "    <div class=\"message\" ng-bind-html=\"message\"></div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-number/nice-number.html',
-    "<div ng-form=\"form\" class=\"nice-number\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "    <div ng-class=\"{'row' : !disableRow}\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}</label>\n" +
-    "        </div>\n" +
+    "<div ng-form=\"form\" class=\"nice-number\" ng-class=\"{'margin-bottom-0' : noMargin}\">\r" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\"\n" +
-    "                ng-class=\"{'has-warning': !disabled && form.$invalid && form.$dirty}\">\n" +
-    "                <span class=\"input-group-btn\">\n" +
-    "                    <button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\">-</button>\n" +
-    "                </span>\n" +
+    "    <div ng-class=\"{'row' : !disableRow}\">\r" +
     "\n" +
-    "                <input type=\"number\" step=\"{{ step }}\" ng-change=\"onChange()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\" />\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <span class=\"input-group-btn\">\n" +
-    "                    <button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
-    "            <div ng-messages=\"form.$error\" ng-if=\"showError\">\n" +
-    "                <div class=\"error-message\" ng-message=\"number\" ng-if=\"form.$dirty\" translate>This field requires a number</div>\n" +
-    "                <div class=\"error-message\" ng-message=\"min\"><translate>Min value is</translate> {{ min }}</div>\n" +
-    "                <div class=\"error-message\" ng-message=\"max\"><translate>Max value is</translate> {{ max }}</div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "            <label class=\"nice\">{{ title }}</label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"input-group\"\r" +
+    "\n" +
+    "                ng-class=\"{'has-warning': !disabled && form.$invalid && form.$dirty}\">\r" +
+    "\n" +
+    "                <span class=\"input-group-btn\">\r" +
+    "\n" +
+    "                    <button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\">-</button>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <input type=\"number\" step=\"{{ step }}\" ng-change=\"onChange()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <span class=\"input-group-btn\">\r" +
+    "\n" +
+    "                    <button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div ng-messages=\"form.$error\" ng-if=\"showError\">\r" +
+    "\n" +
+    "                <div class=\"error-message\" ng-message=\"number\" ng-if=\"form.$dirty\" translate>This field requires a number</div>\r" +
+    "\n" +
+    "                <div class=\"error-message\" ng-message=\"min\"><translate>Min value is</translate> {{ min }}</div>\r" +
+    "\n" +
+    "                <div class=\"error-message\" ng-message=\"max\"><translate>Max value is</translate> {{ max }}</div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-percent/nice-percent.html',
-    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "    </div>\n" +
+    "<ng-form class=\"nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\r" +
     "\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <div class=\"form-group has-feedback symbol\"\n" +
-    "             ng-class=\"{\n" +
-    "                'has-warning': !isDisabled && form.$invalid && form.$dirty && !hideValid,\n" +
-    "                'has-success': !isDisabled && form.$valid && form.$dirty && showValid,\n" +
-    "                'disabled': isDisabled\n" +
-    "        }\">\n" +
-    "            <input\n" +
-    "                class=\"form-control\"\n" +
-    "                type=\"text\"\n" +
-    "                max=\"100\"\n" +
-    "                min=\"0\"\n" +
-    "                ng-model=\"internalModel\"\n" +
-    "                placeholder=\"{{ placeholder }}\"\n" +
-    "                ng-required=\"required\"\n" +
-    "                ng-keypress=\"keypress($event)\"\n" +
-    "                ng-change=\"change()\"\n" +
-    "                ng-disabled=\"isDisabled\">\n" +
+    "  <div class=\"row\">\r" +
     "\n" +
-    "            <span class=\"input-group-addon\">%</span>\n" +
-    "            <!--<span ng-if=\"!disabled && showValid && form.$valid && form.$dirty\" class=\"glyphicon glyphicon-ok form-control-feedback feedback-valid\" aria-hidden=\"true\"></span>-->\n" +
-    "            <!--<span ng-if=\"!disabled && !hideValid && form.$invalid && form.$dirty\" class=\"glyphicon glyphicon-remove form-control-feedback feedback-invalid\" aria-hidden=\"true\"></span>-->\n" +
-    "        </div>\n" +
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "        <div ng-messages=\"form.$error\">\n" +
-    "            <div class=\"error-message\" ng-message=\"pattern\" ng-if=\"form.$dirty\">This field requires a specific pattern.</div>\n" +
-    "            <div class=\"error-message\" ng-message=\"required\" ng-if=\"form.$dirty\">This field is required.</div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
+    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "        <div class=\"form-group has-feedback symbol\"\r" +
+    "\n" +
+    "             ng-class=\"{\r" +
+    "\n" +
+    "                'has-warning': !isDisabled && form.$invalid && form.$dirty && !hideValid,\r" +
+    "\n" +
+    "                'has-success': !isDisabled && form.$valid && form.$dirty && showValid,\r" +
+    "\n" +
+    "                'disabled': isDisabled\r" +
+    "\n" +
+    "        }\">\r" +
+    "\n" +
+    "            <input\r" +
+    "\n" +
+    "                class=\"form-control\"\r" +
+    "\n" +
+    "                type=\"text\"\r" +
+    "\n" +
+    "                max=\"100\"\r" +
+    "\n" +
+    "                min=\"0\"\r" +
+    "\n" +
+    "                ng-model=\"internalModel\"\r" +
+    "\n" +
+    "                placeholder=\"{{ placeholder }}\"\r" +
+    "\n" +
+    "                ng-required=\"required\"\r" +
+    "\n" +
+    "                ng-keypress=\"keypress($event)\"\r" +
+    "\n" +
+    "                ng-change=\"change()\"\r" +
+    "\n" +
+    "                ng-disabled=\"isDisabled\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <span class=\"input-group-addon\">%</span>\r" +
+    "\n" +
+    "            <!--<span ng-if=\"!disabled && showValid && form.$valid && form.$dirty\" class=\"glyphicon glyphicon-ok form-control-feedback feedback-valid\" aria-hidden=\"true\"></span>-->\r" +
+    "\n" +
+    "            <!--<span ng-if=\"!disabled && !hideValid && form.$invalid && form.$dirty\" class=\"glyphicon glyphicon-remove form-control-feedback feedback-invalid\" aria-hidden=\"true\"></span>-->\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-messages=\"form.$error\">\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-message=\"pattern\" ng-if=\"form.$dirty\">This field requires a specific pattern.</div>\r" +
+    "\n" +
+    "            <div class=\"error-message\" ng-message=\"required\" ng-if=\"form.$dirty\">This field is required.</div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "  </div>\r" +
+    "\n" +
     "</ng-form>"
   );
 
 
   $templateCache.put('src/components/nice-progress-bar/nice-progress-bar.html',
-    "<div class=\"nice-progress-bar\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-progress-bar\" ng-class=\"{'margin-bottom-0' : noMargin}\">\r" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"progress\">\n" +
-    "                <div class=\"progress-value\">{{ value }} / {{ max }}</div>\n" +
-    "                <div class=\"progress-bar\" ng-style=\"{'width': percentage+'%', 'background': color}\">\n" +
-    "                    <div class=\"progress-value\" ng-style=\"{'width': width+'px'}\">{{ value }} / {{ max }}</div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"progress\">\r" +
+    "\n" +
+    "                <div class=\"progress-value\">{{ value }} / {{ max }}</div>\r" +
+    "\n" +
+    "                <div class=\"progress-bar\" ng-style=\"{'width': percentage+'%', 'background': color}\">\r" +
+    "\n" +
+    "                    <div class=\"progress-value\" ng-style=\"{'width': width+'px'}\">{{ value }} / {{ max }}</div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-quantity/nice-quantity.html',
-    "<div class=\"nice-quantity\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-quantity\" ng-class=\"{'margin-bottom-0' : noMargin}\">\r" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\">\n" +
-    "                <span class=\"input-group-btn\">\n" +
-    "                    <button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\">-</button>\n" +
-    "                </span>\n" +
-    "        \n" +
-    "                <input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" />\n" +
-    "        \n" +
-    "                <span class=\"input-group-btn\">\n" +
-    "                    <button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\">+</button>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"input-group\">\r" +
+    "\n" +
+    "                <span class=\"input-group-btn\">\r" +
+    "\n" +
+    "                    <button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\">-</button>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "                <input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" />\r" +
+    "\n" +
+    "        \r" +
+    "\n" +
+    "                <span class=\"input-group-btn\">\r" +
+    "\n" +
+    "                    <button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\">+</button>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
     "\n"
   );
 
 
   $templateCache.put('src/components/nice-search/nice-search.html',
-    "<ng-form class=\"nice-input nice-search\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<ng-form class=\"nice-input nice-search\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\r" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\" ng-class=\"{\n" +
-    "                'disabled': isDisabled,\n" +
-    "                'has-warning': !isDisabled && form.$invalid && form.$dirty,\n" +
-    "                'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
-    "                <input\n" +
-    "                    class=\"form-control\"\n" +
-    "                    type=\"text\"\n" +
-    "                    id=\"{{ id }}\"\n" +
-    "                    ng-model=\"modelString\"\n" +
-    "                    ng-keypress=\"keypress($event)\"\n" +
-    "                    placeholder=\"{{ placeholder }}\"\n" +
-    "                    ng-disabled=\"isDisabled\"\n" +
-    "                    ng-change=\"updateSearch()\"\n" +
-    "                    ng-required=\"required\"\n" +
-    "                    tabindex=\"{{ tabIndex }}\"\n" +
-    "                >\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "                <span class=\"input-group-addon clickable\" ng-click=\"search()\" ng-if=\"!model\">\n" +
-    "                    <i ng-show=\"!loading\" class=\"fa fa-search\" ></i>\n" +
-    "                    <i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\n" +
-    "                </span>\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <span class=\"input-group-addon clickable\" ng-click=\"remove()\" ng-if=\"model\">\n" +
-    "                    <i ng-show=\"!loading\" class=\"fa fa-remove\" ></i>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
-    "    <div class=\"row\">\n" +
-    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\"></div>\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"nice-dropdown-empty\" ng-if=\"noResults\">\n" +
-    "                <div class=\"nice-search-row\">No results found.</div>\n" +
-    "            </div>\n" +
+    "        </div>\r" +
     "\n" +
-    "            <div class=\"nice-dropdown\" ng-if=\"results.length\">\n" +
-    "                <div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectRow(result)\">\n" +
-    "                    <span class=\"text-bold\">{{ result[keyForInputLabel] }}</span>\n" +
-    "                    <!--<div ng-transclude></div>-->\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "\r" +
     "\n" +
-    "    <!--Here is injected dropdown html if passed and results present and open.-->\n" +
-    "    <!--<div ng-transclude></div>-->\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"input-group\" ng-class=\"{\r" +
+    "\n" +
+    "                'disabled': isDisabled,\r" +
+    "\n" +
+    "                'has-warning': !isDisabled && form.$invalid && form.$dirty,\r" +
+    "\n" +
+    "                'has-success': !isDisabled && form.$valid && form.$dirty}\">\r" +
+    "\n" +
+    "                <input\r" +
+    "\n" +
+    "                    class=\"form-control\"\r" +
+    "\n" +
+    "                    type=\"text\"\r" +
+    "\n" +
+    "                    id=\"{{ id }}\"\r" +
+    "\n" +
+    "                    ng-model=\"modelString\"\r" +
+    "\n" +
+    "                    ng-keypress=\"keypress($event)\"\r" +
+    "\n" +
+    "                    placeholder=\"{{ placeholder }}\"\r" +
+    "\n" +
+    "                    ng-disabled=\"isDisabled\"\r" +
+    "\n" +
+    "                    ng-change=\"updateSearch()\"\r" +
+    "\n" +
+    "                    ng-required=\"required\"\r" +
+    "\n" +
+    "                    tabindex=\"{{ tabIndex }}\"\r" +
+    "\n" +
+    "                >\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <span class=\"input-group-addon clickable\" ng-click=\"search()\" ng-if=\"!model\">\r" +
+    "\n" +
+    "                    <i ng-show=\"!loading\" class=\"fa fa-search\" ></i>\r" +
+    "\n" +
+    "                    <i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <span class=\"input-group-addon clickable\" ng-click=\"remove()\" ng-if=\"model\">\r" +
+    "\n" +
+    "                    <i ng-show=\"!loading\" class=\"fa fa-remove\" ></i>\r" +
+    "\n" +
+    "                </span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"row\">\r" +
+    "\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\"></div>\r" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"nice-dropdown-empty\" ng-if=\"noResults\">\r" +
+    "\n" +
+    "                <div class=\"nice-search-row\">No results found.</div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"nice-dropdown\" ng-if=\"results.length\">\r" +
+    "\n" +
+    "                <div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectRow(result)\">\r" +
+    "\n" +
+    "                    <span class=\"text-bold\">{{ result[keyForInputLabel] }}</span>\r" +
+    "\n" +
+    "                    <!--<div ng-transclude></div>-->\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <!--Here is injected dropdown html if passed and results present and open.-->\r" +
+    "\n" +
+    "    <!--<div ng-transclude></div>-->\r" +
+    "\n" +
     "</ng-form>"
   );
 
 
   $templateCache.put('src/components/nice-time-picker/nice-time-picker.html',
-    "<div class=\"nice-time-picker\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "        </div>\n" +
+    "<div class=\"nice-time-picker\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\r" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <div class=\"input-group\" ng-class=\"{\n" +
-    "                'has-warning': !isDisabled && forma.$invalid && forma.$dirty,\n" +
-    "                'disabled': isDisabled }\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"modelString\" ng-keyup=\"$event.keyCode == 13 && validateDate()\" ng-blur=\"validateDate()\">\n" +
-    "                <span class=\"input-group-addon\" ng-click=\"open = !open\"><i class=\"fa fa-clock-o\"></i></span>\n" +
-    "            </div>\n" +
+    "    <div class=\"row\">\r" +
     "\n" +
-    "            <div class=\"nice-time-picker-dropdown\" ng-if=\"open\">\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-6\">\n" +
-    "                        <button ng-click=\"changeHour(true)\"><i class=\"fa fa-chevron-up\"></i></button>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-xs-6\">\n" +
-    "                        <button ng-click=\"changeMinutes(true)\"><i class=\"fa fa-chevron-up\"></i></button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
     "\n" +
-    "                <div class=\"row numbers\">\n" +
-    "                    <div class=\"col-xs-6\">{{ hours }}</div>\n" +
-    "                    <div class=\"col-xs-6\">{{ minutes }}</div>\n" +
-    "                </div>\n" +
+    "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
     "\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-6\">\n" +
-    "                        <button ng-click=\"changeHour(false)\"><i class=\"fa fa-chevron-down\"></i></button>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-xs-6\">\n" +
-    "                        <button ng-click=\"changeMinutes(false)\"><i class=\"fa fa-chevron-down\"></i></button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
+    "        </div>\r" +
     "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "\r" +
     "\n" +
-    "    <div class=\"nice-background\" ng-click=\"close()\" ng-if=\"open\"></div>\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "            <div class=\"input-group\" ng-class=\"{\r" +
+    "\n" +
+    "                'has-warning': !isDisabled && forma.$invalid && forma.$dirty,\r" +
+    "\n" +
+    "                'disabled': isDisabled }\">\r" +
+    "\n" +
+    "                <input type=\"text\" class=\"form-control\" ng-model=\"modelString\" ng-keyup=\"$event.keyCode == 13 && validateDate()\" ng-blur=\"validateDate()\">\r" +
+    "\n" +
+    "                <span class=\"input-group-addon\" ng-click=\"open = !open\"><i class=\"fa fa-clock-o\"></i></span>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"nice-time-picker-dropdown\" ng-if=\"open\">\r" +
+    "\n" +
+    "                <div class=\"row\">\r" +
+    "\n" +
+    "                    <div class=\"col-xs-6\">\r" +
+    "\n" +
+    "                        <button ng-click=\"changeHour(true)\"><i class=\"fa fa-chevron-up\"></i></button>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"col-xs-6\">\r" +
+    "\n" +
+    "                        <button ng-click=\"changeMinutes(true)\"><i class=\"fa fa-chevron-up\"></i></button>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"row numbers\">\r" +
+    "\n" +
+    "                    <div class=\"col-xs-6\">{{ hours }}</div>\r" +
+    "\n" +
+    "                    <div class=\"col-xs-6\">{{ minutes }}</div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"row\">\r" +
+    "\n" +
+    "                    <div class=\"col-xs-6\">\r" +
+    "\n" +
+    "                        <button ng-click=\"changeHour(false)\"><i class=\"fa fa-chevron-down\"></i></button>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"col-xs-6\">\r" +
+    "\n" +
+    "                        <button ng-click=\"changeMinutes(false)\"><i class=\"fa fa-chevron-down\"></i></button>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"nice-background\" ng-click=\"close()\" ng-if=\"open\"></div>\r" +
+    "\n" +
     "</div>"
   );
 
 
   $templateCache.put('src/components/nice-upload/nice-upload.html',
-    "<ng-form class=\"nice-upload\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
-    "    </div>\n" +
+    "<ng-form class=\"nice-upload\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\r" +
     "\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" />\n" +
-    "        <div class=\"input-area\">\n" +
-    "            <div class=\"middle-text\" ng-if=\"!imageSource && !loading\">\n" +
-    "                {{ text }}\n" +
-    "                <div class=\"error\" ng-if=\"error\">{{ error }}</div>\n" +
-    "            </div>\n" +
-    "            <img ng-if=\"imageSource\" data-ng-src=\"{{ imageSource }}\" />\n" +
-    "        </div>\n" +
-    "        <div class=\"loading\" ng-if=\"loading\">\n" +
-    "            <nice-loader></nice-loader>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
-    "</ng-form>\n"
+    "  <div class=\"row\">\r" +
+    "\n" +
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "        <input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" />\r" +
+    "\n" +
+    "        <div class=\"input-area\">\r" +
+    "\n" +
+    "            <div class=\"middle-text\" ng-if=\"!imageSource && !loading\">\r" +
+    "\n" +
+    "                {{ text }}\r" +
+    "\n" +
+    "                <div class=\"error\" ng-if=\"error\">{{ error }}</div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <img ng-if=\"imageSource\" data-ng-src=\"{{ imageSource }}\" />\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"loading\" ng-if=\"loading\">\r" +
+    "\n" +
+    "            <nice-loader></nice-loader>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "  </div>\r" +
+    "\n" +
+    "</ng-form>\r" +
+    "\n"
   );
 
 
   $templateCache.put('src/components/nice-yesno/nice-yesno.html',
-    "<div class=\"row nice-yesno\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formYesno\">\n" +
-    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "        <label class=\"nice\">{{ title }}</label>\n" +
-    "    </div>\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <div class=\"yesno-wrapper noselect\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
-    "            <div class=\"yesno-yes-bg\" ng-click=\"switch()\">{{ yes }}</div>\n" +
-    "            <div class=\"yesno-no-bg\" ng-click=\"switch()\">{{ no }}</div>\n" +
-    "            <div class=\"yesno-button\" ng-class=\"buttonClass\" ng-click=\"switch()\">{{ state }}</div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "<div class=\"row nice-yesno\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formYesno\">\r" +
+    "\n" +
+    "    <div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\r" +
+    "\n" +
+    "        <label class=\"nice\">{{ title }}</label>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\r" +
+    "\n" +
+    "        <div class=\"yesno-wrapper noselect\" ng-class=\"{ 'disabled': isDisabled }\">\r" +
+    "\n" +
+    "            <div class=\"yesno-yes-bg\" ng-click=\"switch()\">{{ yes }}</div>\r" +
+    "\n" +
+    "            <div class=\"yesno-no-bg\" ng-click=\"switch()\">{{ no }}</div>\r" +
+    "\n" +
+    "            <div class=\"yesno-button\" ng-class=\"buttonClass\" ng-click=\"switch()\">{{ state }}</div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
