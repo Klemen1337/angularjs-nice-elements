@@ -1,7 +1,5 @@
 'use strict';
 
-var fs =require('fs');		//for image upload file handling
-
 var express = require('express');
 var app = express();
 
