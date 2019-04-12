@@ -161,6 +161,17 @@
                         nullable="true">
                     </nice-dropdown>
 
+                    <nice-dropdown 
+                        title="Empty list" 
+                        model="data.dropdownemptyList"
+                        list="emptyList"
+                        selected-is-key="true"
+                        add-button-function="addToList"
+                        nullable="true">
+                    </nice-dropdown>
+
+                    <pre>{{ emptyList | json }}</pre>
+
                     <nice-dropdown-old 
                         title="Old dropdown" 
                         model="data.dropdownOld"

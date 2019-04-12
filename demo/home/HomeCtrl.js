@@ -34,6 +34,12 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     $scope.data.dropdownCountryKey = "SI";
   }
 
+  $scope.emptyList = [];
+
+  $scope.addToList = function() {
+    $scope.emptyList.push({id: 0, iso: "SI",value: "Slovenia"});
+  }
+
   $scope.listObjs = [
     {id: 0, iso: "SI",value: "Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia"},
     {id: 1, iso: "ZA",value: "South Africa"},

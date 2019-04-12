@@ -2305,7 +2305,7 @@ angular.module('niceElements')
         };
 
         // ----------------------------------- Watch for list change -----------------------------------
-        $scope.$watch('list', function (value_new, value_old) {
+        $scope.$watchCollection('list', function (value_new, value_old) {
           $scope.internalList = angular.copy($scope.list);
           $scope.handleDefault();
         });
@@ -5558,7 +5558,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    <ul>\r" +
     "\n" +
-    "                        <li ng-if=\"nullable\" ng-click=\"handleSelected(null, -1)\">\r" +
+    "                        <li ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\">\r" +
     "\n" +
     "                            {{ nullableText }}\r" +
     "\n" +

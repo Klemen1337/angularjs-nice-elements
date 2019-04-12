@@ -194,7 +194,7 @@ angular.module('niceElements')
         };
 
         // ----------------------------------- Watch for list change -----------------------------------
-        $scope.$watch('list', function (value_new, value_old) {
+        $scope.$watchCollection('list', function (value_new, value_old) {
           $scope.internalList = angular.copy($scope.list);
           $scope.handleDefault();
         });
