@@ -8,7 +8,7 @@
  */
 angular.module('niceElements')
 
-.directive('niceDatetimePicker', function($window, $compile) {
+.directive('niceDatetimePickerOld', function($window, $compile) {
 
   return {
     scope: {

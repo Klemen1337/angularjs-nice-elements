@@ -1,0 +1,37 @@
+.nice-datetime-picker{
+  margin-bottom: 10px;
+
+  .input-group{
+    .input-group-addon {
+      background: $nice-addon-bg;
+
+      &:hover {
+        // Set icon color and background
+        background-color: $nice-base-color;
+        color: white;
+      }
+    }
+  }
+
+  .form-control{
+    background: $nice-background;
+  }
+
+  .nice-datetime {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 16px 24px;
+    width: 364px;
+    height: 308px;
+    background: white;
+    border-radius: $nice-border-radius;
+    box-shadow: 0 0 20px #ccc;
+    z-index: 100;
+
+
+    .footer {
+      background: #F8F8FA;
+    }
+  }
+}

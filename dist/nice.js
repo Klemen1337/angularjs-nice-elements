@@ -1115,7 +1115,7 @@ angular.module('niceElements')
  * @description
  * # niceDatetimePicker
  */
-angular.module('niceElements').directive('niceDatetimePicker', function () {
+angular.module('niceElements').directive('niceDatetimePickerNew', function () {
   return {
     restrict: 'E',
     transclude: false,
@@ -1187,7 +1187,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
  */
 angular.module('niceElements')
 
-.directive('niceDatetimePicker', function($window, $compile) {
+.directive('niceDatetimePickerOld', function($window, $compile) {
 
   return {
     scope: {
