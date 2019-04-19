@@ -94,6 +94,9 @@ angular.module('niceElements')
 
         };
 
+        $scope.date = $attrs.date === 'true' || $attrs.date === true;
+        $scope.time = $attrs.time === 'true' || $attrs.time === true;
+
         // functions are defined in a variable 'var that', not in $scope
         var that = {
           init: function () {

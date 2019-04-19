@@ -205,17 +205,29 @@
                     <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number" tab-index="3"></nice-input>
 
                     <nice-datetime-picker
-                        model="dt"
-                        title="Datetimepicker"
-                        field-width="col-sm-4"
+                        model="data.dt1"
+                        title="Datetimepicker all"
                         date="true"
                         time="true">
                     </nice-datetime-picker>
 
                     <nice-datetime-picker
-                        model="dt2"
-                        title="Datetimepicker"
-                        field-width="col-sm-4"
+                        model="data.dt2"
+                        title="Datetimepicker time"
+                        date="false"
+                        time="true">
+                    </nice-datetime-picker>
+
+                    <nice-datetime-picker
+                        model="data.dt3"
+                        title="Datetimepicker date"
+                        date="true"
+                        time="false">
+                    </nice-datetime-picker>
+
+                    <nice-datetime-picker
+                        model="data.dt4"
+                        title="Datetimepicker custom"
                         date="true"
                         time="false"
                         format="DD.MM.YYYY"

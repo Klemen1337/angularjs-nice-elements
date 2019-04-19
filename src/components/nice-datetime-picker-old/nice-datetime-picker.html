@@ -12,28 +12,28 @@
             <div ng-form="formDatetimePicker"></div>
 
             <div class="input-group" id="dropdown{{randNum}}">
-                <input type="text" class="form-control" value="{{ value }}" ng-click="openDtp()">
+                <input type="text" class="form-control" value="{{value}}" ng-click="openDtp()">
                 <span class="input-group-addon" ng-click="openDtp()">
-                    <i class="fa" ng-class="date == 'true' ? 'fa-calendar' : 'fa-clock-o'"></i>
+                    <i class="fa" ng-class="{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}"></i>
                 </span>
             </div>
 
             <!-- inject nice-dtp here -->
             <div ng-show="isOpen">
                 <nice-dtp
-                    model="internalDate"
-                    format="{{ format }}"
-                    model-format="{{ modelFormat }}"
-                    date="{{ date == 'true' }}"
-                    time="{{ time == 'true' }}"
-                    width="{{ width }}"
-                    enable-ok-buttons="{{ enableOkButtons }}"
-                    lang="{{ lang }}"
-                    min-date="{{ minDate }}"
-                    max-date="{{ maxDate }}"
-                    week-start="{{ weekStart }}"
-                    ok-text="{{ okText }}"
-                    cancel-text="{{ cancelText }}"
+                    model="currentDate"
+                    format="{{format}}"
+                    model-format="{{modelFormat}}"
+                    date="{{date}}"
+                    time="{{time}}"
+                    width="{{width}}"
+                    enable-ok-buttons="{{enableOkButtons}}"
+                    lang="{{lang}}"
+                    min-date="{{minDate}}"
+                    max-date="{{maxDate}}"
+                    week-start="{{weekStart}}"
+                    ok-text="{{okText}}"
+                    cancel-text="{{cancelText}}"
                     closed="closeDtp"
                 ></nice-dtp>
             </div>

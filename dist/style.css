@@ -1013,7 +1013,7 @@ p.nice {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2000;
+  z-index: 200;
   position: absolute;
 }
 /* line 98, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1214,8 +1214,8 @@ p.nice {
 .nice-datetime-picker .dtp-wrapper .dtp > .dtp-content {
   background: #fff;
   max-width: 300px;
-  border: 1px solid #ddd;
-  box-shadow: 0 0 10px #ddd;
+  border: 1px solid #cbd4d9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   max-height: 500px;
   position: absolute;
   left: 0;
@@ -1303,7 +1303,7 @@ p.nice {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 800;
+  z-index: 199;
   height: 100%;
 }
 
