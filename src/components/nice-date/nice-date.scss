@@ -1,6 +1,28 @@
-.nice-date{
+.nice-date {
+  margin-bottom: 10px;
   $spacing: 10px;
   $icon-width: 40px;
+
+  .dropdown {
+    position: absolute;
+    top: 40px;
+    z-index: 1000;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .nice-date-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    height: 100%;
+  }
+
+  .input-group {
+    cursor: pointer;
+  }
 
   .nice-date-date {
     border-radius: $nice-border-radius;
@@ -14,42 +36,51 @@
     height: 250px;
     width: 100%;
 
+    &.with-time {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     .nice-date-header {
       background: $nice-base-color;
       line-height: 40px;
       color: white;
+      display: flex;
+      padding: 0 0 0 $spacing;
 
       i {
-        float: left;
-        width: 40px;
+        width: 30px;
         font-size: 1.125em;
         font-weight: bold;
-        position: relative;
         line-height: 40px;
-        padding: 0 $spacing;
         cursor: pointer;
+        text-align: center;
 
-        &.fa-angle-left {
-          text-align: left;
+        &:hover {
+          background: darken($nice-base-color, 5%);
         }
 
-        &.fa-angle-right {
-          text-align: right;
-          margin-left: $icon-width*-1;
+        &.fa-circle {
+          font-size: 8px;
         }
       }
 
       span {
-        user-select: none;
-        float: left;
-        width: 100%;
-        text-transform: uppercase;
-        padding-left: $icon-width+$spacing;
-        margin-left: $icon-width*-1;
-        text-align: center;
-        padding-right: $icon-width;
-        color: inherit;
+        flex-grow: 1;
+
+        select {
+          background: transparent;
+          border: 0px;
+          -webkit-appearance: none;
+          cursor: pointer;
+  
+          &:focus, &:focus {
+            outline: 0 none;
+          }
+        }
       }
+
+      
     }
 
     .nice-date-week {
@@ -66,8 +97,8 @@
         user-select: none;
         position: relative;
         min-height: 20px;
-        //line-height: $day-height;
         width: 14.2857%;
+        border-radius: $nice-border-radius;
         border-left: solid 1px $nice-border-color;
         font-size: 12px;
         text-align: center;
@@ -143,18 +174,34 @@
     }
   }
 
-
   .nice-date-time {
     display: flex;
     width: 100%;
-    margin-top: 10px;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #cad4d9;
+    border-top: 0;
 
-    .time-picker{
+    border-bottom-left-radius: $nice-border-radius;
+    border-bottom-right-radius: $nice-border-radius;
+
+    .divider {
+      line-height: 30px;
+      margin: 0 10px;
+    }
+
+    i {
+      line-height: 30px;
+      margin-right: 10px;
+      color: $nice-border;
+    }
+
+    .time-picker {
       position: relative;
-      flex-grow: 1;
+      // flex-grow: 1;
       height: 30px;
 
-      select{
+      select {
         width: 100%;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -162,31 +209,33 @@
         outline: 0;
         border-radius: $nice-border-radius;
         border: 1px solid $nice-border;
-        padding: 5px 25px 5px 10px;
+        padding: 0 10px;
         z-index: 2;
-        background: transparent;
+        background: white;
         cursor: pointer;
         position: relative;
         font-size: 14px;
         height: 30px;
       }
 
-      &:after{
-        content: " ";
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 6px 4px 0 4px;
-        margin-top: -3px;
-        border-color: #404040 transparent transparent transparent;
-      }
+      // &:after {
+      //   content: " ";
+      //   position: absolute;
+      //   top: 50%;
+      //   right: 10px;
+      //   width: 0;
+      //   height: 0;
+      //   border-style: solid;
+      //   border-width: 6px 4px 0 4px;
+      //   margin-top: -3px;
+      //   border-color: #404040 transparent transparent transparent;
+      // }
 
-      &.time-picker-hour{
-        margin-right: 10px;
-      }
+      // &.time-picker-hour{
+      //   select {
+      //     padding: 5px 10px 5px 15px;
+      //   }
+      // }
     }
   }
 }

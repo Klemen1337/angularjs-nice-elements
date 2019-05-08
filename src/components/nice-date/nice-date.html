@@ -1,55 +1,89 @@
-<div class="nice-date" ng-form="forma">
-    <div class="nice-date-date">
-        <div class="nice-date-header">
-            <i class="fa fa-angle-left" ng-click="previous()" title="{{ translations.prevMonth }}"></i>
-            <span title="{{ month.format('MM.YYYY' ) }}">{{ month.format('MMMM, YYYY' ) }}</span>
-            <i class="fa fa-angle-right" ng-click="next()" title="{{ translations.nextMonth }}"></i>
+<div class="nice-date" ng-form="forma" ng-class="{ 'margin-bottom-0': noMargin }">
+    <div class="nice-date-background" ng-click="toggleOpen()" ng-if="isOpen && !inline"></div>
+
+    <div class="row">
+        <div class="col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <label class="nice">{{ title }}<span ng-if="required">*</span></label>
         </div>
 
-        <div class="nice-date-week names">
-            <span class="nice-date-day" translate>{{ translations.mon }}</span>
-            <span class="nice-date-day" translate>{{ translations.tue }}</span>
-            <span class="nice-date-day" translate>{{ translations.wed }}</span>
-            <span class="nice-date-day" translate>{{ translations.thu }}</span>
-            <span class="nice-date-day" translate>{{ translations.fri }}</span>
-            <span class="nice-date-day weekend" translate>{{ translations.sat }}</span>
-            <span class="nice-date-day weekend" translate>{{ translations.sun }}</span>
-        </div>
+        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <!------------------------------ Input ------------------------------>
+            <div class="input-group" ng-if="!inline">
+                <span class="form-control" ng-click="toggleOpen()">{{ innerDate.value }}</span>
+                <span class="input-group-addon" ng-click="toggleOpen()">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
 
-        <div class="nice-date-week" ng-repeat="week in weeks">
-            <span
-                class="nice-date-day"
-                title="{{ day.date.format('DD.MM.YYYY') }}"
-                ng-class="{
-                    'today': day.isToday,
-                    'different-month': !day.isCurrentMonth,
-                    'selected': isSameDay(model, day.date),
-                    'weekend': day.isWeekday,
-                    'disabled': day.isDisabled,
-                    'between': isBetween(day.date, model, nextDate)
-                }"
-                ng-click="select(day)"
-                ng-repeat="day in week.days"
-            >{{ day.number }}</span>
-        </div>
-    </div>
+            <!-------- Dropdown -------->
+            <div ng-class="{ 'dropdown': !inline }" ng-if="inline || isOpen">
+                <!------------------------------ Date picker ------------------------------>
+                <div class="nice-date-date" ng-class="{ 'with-time': time }">
+                    <div class="nice-date-header">
+                        <span>
+                            <select 
+                                class="year-picker"
+                                ng-model="innerDate.year"
+                                ng-change="handleDateChange()"
+                                ng-options="year for year in years">
+                            </select>, 
+                            <select
+                                class="month-picker"
+                                ng-model="innerDate.month"
+                                ng-change="handleDateChange()"
+                                ng-options="month.value as month.name for month in months">
+                            </select>
+                        </span>
+                        <i class="fa fa-angle-left" ng-click="previous()"></i>
+                        <i class="fa fa-circle" ng-click="today()"></i>
+                        <i class="fa fa-angle-right" ng-click="next()"></i>
+                    </div>
 
+                    <div class="nice-date-week names">
+                        <span class="nice-date-day" ng-class="{ 'weekend': $index == 6 || $index == 5 }" ng-repeat="day in weekdays">{{ day }}</span>
+                    </div>
 
-    <div class="nice-date-time" ng-if="time">
-        <div class="time-picker time-picker-hour">
-            <select
-                ng-model="timeData.dateHour"
-                ng-change="timeChange(timeData.dateHour, null)"
-                ng-options="hour as hour for hour in hours track by hour">
-            </select>
-        </div>
+                    <div class="nice-date-week" ng-repeat="week in weeks">
+                        <span
+                            class="nice-date-day"
+                            title="{{ day.value }}"
+                            ng-class="{
+                                'today': day.isToday,
+                                'different-month': !day.isCurrentMonth,
+                                'selected': isSameDay(model, day.date),
+                                'weekend': day.isWeekday,
+                                'disabled': day.isDisabled,
+                                'between': isBetween(day.date, model, nextDate)
+                            }"
+                            ng-click="select(day)"
+                            ng-repeat="day in week.days"
+                        >{{ day.number }}</span>
+                    </div>
+                </div>
 
-        <div class="time-picker time-picker-minute">
-            <select
-                ng-model="timeData.dateMinute"
-                ng-change="timeChange(null, timeData.dateMinute)"
-                ng-options="minute as minute for minute in minutes track by minute">
-            </select>
+                <!------------------------------ Time picker ------------------------------>
+                <div class="nice-date-time" ng-if="time">
+                    <i class="fa fa-clock-o"></i>
+
+                    <div class="time-picker time-picker-hour">
+                        <select
+                            ng-model="innerDate.hour"
+                            ng-change="timeChange()"
+                            ng-options="hour as hour for hour in hours track by hour">
+                        </select>
+                    </div>
+
+                    <div class="divider">:</div>
+
+                    <div class="time-picker time-picker-minute">
+                        <select
+                            ng-model="innerDate.minute"
+                            ng-change="timeChange()"
+                            ng-options="minute as minute for minute in minutes track by minute">
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

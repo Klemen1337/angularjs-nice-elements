@@ -15,30 +15,47 @@ angular.module('niceElements')
       transclude: true,
       templateUrl: 'src/components/nice-date/nice-date.html',
       scope: {
+        title: '@', // default: ''
+        noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
+        fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
+        labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         model: '=',
-        time: '=',
+        time: '@',
+        inline: '@',
         maxDate: '=',
         minDate: '=',
         nextDate: '='
       },
       controller: function($scope) {
+        $scope.isOpen = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
         $scope.translations = {
           nextMonth: "Next month",
           prevMonth: "Previous month",
-          mon: "Mon",
-          tue: "Tue",
-          wed: "Wed",
-          thu: "Thu",
-          fri: "Fri",
-          sat: "Sat",
-          sun: "Sun"
         };
-        $scope.timeData = {
-          dateMinute: 0,
-          dateHours: 0
+        $scope.innerDate = {
+          month: 0,
+          year: 0,
+          minute: 0,
+          hour: 0,
+          date: moment(),
+          value: ""
         };
+        $scope.days = [];
+
+        $scope.weekdays = moment.weekdaysShort(false);
+
+        $scope.years = [];
+        var year = moment().year()-100;
+        for(var i=0; i<200; i++) {
+          $scope.years.push(year + i);
+        }
+
+        $scope.months = [];
+        angular.forEach(moment.months(), function(month, index) {
+          $scope.months.push({ value: index, name: month });
+        });
 
         if(!$scope.model) $scope.model = moment();
 
@@ -46,16 +63,15 @@ angular.module('niceElements')
         else $scope.time = $scope.time == "true";
 
 
-        // ------------------ Time changes ------------------
-        $scope.timeChange = function(newHour, newMinute){
-          if(newHour != null) $scope.timeData.dateHour = newHour;
-          if(newMinute != null) $scope.timeData.dateMinute = newMinute;
 
+        // ------------------ Time changes ------------------
+        $scope.timeChange = function() {
           var selectedDate = angular.copy($scope.model);
           selectedDate = $scope._removeTime(selectedDate);
-          selectedDate.hours($scope.timeData.dateHour);
-          selectedDate.minutes($scope.timeData.dateMinute);
-
+          selectedDate.hours($scope.innerDate.hour);
+          selectedDate.minutes($scope.innerDate.minute);
+          $scope.innerDate.value = $scope.formatDate(selectedDate);
+          
           $scope.model = selectedDate;
           $scope.forma.$setDirty();
         };
@@ -65,8 +81,8 @@ angular.module('niceElements')
         $scope.select = function(day) {
           if(!day.isDisabled){
             var selectedDate = angular.copy(day.date);
-            selectedDate.hours($scope.timeData.dateHour);
-            selectedDate.minutes($scope.timeData.dateMinute);
+            selectedDate.hours($scope.innerDate.hour);
+            selectedDate.minutes($scope.innerDate.minute);
 
             $scope.model = selectedDate;
             $scope.forma.$setDirty();
@@ -74,21 +90,42 @@ angular.module('niceElements')
         };
 
 
+        // ------------------ Handle date change ------------------
+        $scope.handleDateChange = function () {
+          $scope.innerDate.date.year($scope.innerDate.year);
+          $scope.innerDate.date.month($scope.innerDate.month);
+          $scope._buildMonth();
+        };
+
+
+        // ------------------ Set inner date ------------------
+        $scope.setInnerDate = function(date) {
+          $scope.innerDate.year = date.year();
+          $scope.innerDate.month = date.month();
+          $scope.innerDate.date = date;
+        };
+
+
+        // ------------------ Today ------------------
+        $scope.today = function() {
+          $scope.setInnerDate(moment());
+          $scope._buildMonth();
+        };
+
+
         // ------------------ Go to next month ------------------
         $scope.next = function() {
-          var next = angular.copy($scope.month);
-          next = $scope._removeTimeWithDate(next.month(next.month()+1).date(0));
-          $scope.month.month($scope.month.month()+1);
-          $scope._buildMonth(next, $scope.month);
+          $scope.innerDate.date.add(1, "month");
+          $scope.setInnerDate($scope.innerDate.date);
+          $scope._buildMonth();
         };
 
 
         // ------------------ Go to previous month ------------------
         $scope.previous = function() {
-          var previous = angular.copy($scope.month);
-          previous = $scope._removeTimeWithDate(previous.month(previous.month()-1).date(0));
-          $scope.month.month($scope.month.month()-1);
-          $scope._buildMonth(previous, $scope.month);
+          $scope.innerDate.date.subtract(1, "month");
+          $scope.setInnerDate($scope.innerDate.date);
+          $scope._buildMonth();
         };
 
 
@@ -98,14 +135,15 @@ angular.module('niceElements')
             date1.date() == date2.date() &&
             date1.month() == date2.month() &&
             date1.year() == date2.year()
-          )
+          );
         };
 
+        // ------------------ Check month ------------------
         $scope.isSameMonth = function(date1, date2){
           return (
             date1.month() == date2.month() &&
             date1.year() == date2.year()
-          )
+          );
         };
 
 
@@ -135,14 +173,14 @@ angular.module('niceElements')
         };
 
         $scope._removeTimeWithDate = function(date) {
-          return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+          return date.date(0).hour(0).minute(0).second(0).millisecond(0);
         };
 
 
         // ------------------ Build month ------------------
-        $scope._buildMonth = function(start, month) {
+        $scope._buildMonth = function() {
           var done = false;
-          var date = start.clone().startOf('week').isoWeekday(1);
+          var date = angular.copy($scope.innerDate.date).date(0).startOf('week').isoWeekday(1);
           var monthIndex = date.month();
           var count = 0;
 
@@ -150,7 +188,7 @@ angular.module('niceElements')
 
           $scope.weeks = [];
           while (!done) {
-            $scope.weeks.push({ days: $scope._buildWeek(date.clone(), month) });
+            $scope.weeks.push({ days: $scope._buildWeek(date.clone()) });
             date.add(1, "w");
             done = count++ > 2 && monthIndex !== date.month();
             monthIndex = date.month();
@@ -159,15 +197,16 @@ angular.module('niceElements')
 
 
         // ------------------ Build week ------------------
-        $scope._buildWeek = function(date, month) {
+        $scope._buildWeek = function(date) {
           var days = [];
           for (var i = 0; i < 7; i++) {
             var day = {
               name: date.format("dd"),
               number: date.date(),
-              isCurrentMonth: $scope.isSameMonth(date, month),
+              isCurrentMonth: $scope.isSameMonth(date, $scope.innerDate.date),
               isToday: date.isSame(new Date(), "day"),
-              isWeekday: date.weekday() == 0 || date.weekday() == 6,
+              isWeekday: date.weekday() == 6 || date.weekday() == 0,
+              value: date.format('D.M.YYYY'),
               date: date
             };
 
@@ -185,38 +224,45 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(){
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value){
           $scope.boostrap();
         });
 
 
-        // ------------------ Bootstrap ------------------
-        $scope.getTime = function(){
+        // ------------------ Get time ------------------
+        $scope.getTime = function() {
           if ($scope.time) {
-            $scope.timeData.dateHour = $scope.model.hours();
-            $scope.timeData.dateMinute = $scope.model.minutes();
+            $scope.innerDate.hour = $scope.model.hours();
+            $scope.innerDate.minute = $scope.model.minutes();
           } else {
-            $scope.timeData.dateHour = 0;
-            $scope.timeData.dateMinute = 0;
+            $scope.innerDate.hour = 0;
+            $scope.innerDate.minute = 0;
           }
+
+          $scope.innerDate.value = $scope.formatDate($scope.innerDate.date);
         };
 
 
         // ------------------ Bootstrap ------------------
         $scope.boostrap = function(){
-          $scope.month = angular.copy($scope.model);
+          $scope.setInnerDate(moment($scope.model));
           $scope.getTime();
+          
           if(!$scope.time) {
             $scope.model = $scope._removeTime($scope.model);
           }
-
-          var start = angular.copy($scope.model);
-          start = $scope._removeTimeWithDate(start.date(0));
-          $scope._buildMonth(start, $scope.month);
+          
+          $scope.innerDate.value = $scope.formatDate($scope.model);
+          $scope._buildMonth();
         };
 
         $scope.boostrap();
 
+
+        // ------------------ Toggle open ------------------
+        $scope.toggleOpen = function() {
+          $scope.isOpen = !$scope.isOpen;
+        }
       }
     };
   });
