@@ -134,6 +134,8 @@ angular.module('niceElements')
 
         // ------------------ Check if dates are equal without time ------------------
         $scope.isSameDay = function(date1, date2){
+          date1 = moment(date1);
+          date2 = moment(date2);
           return (
             date1.date() == date2.date() &&
             date1.month() == date2.month() &&
@@ -143,6 +145,8 @@ angular.module('niceElements')
 
         // ------------------ Check month ------------------
         $scope.isSameMonth = function(date1, date2){
+          date1 = moment(date1);
+          date2 = moment(date2);
           return (
             date1.month() == date2.month() &&
             date1.year() == date2.year()
@@ -235,8 +239,8 @@ angular.module('niceElements')
         // ------------------ Get time ------------------
         $scope.getTime = function() {
           if ($scope.time) {
-            $scope.innerDate.hour = $scope.model.hours();
-            $scope.innerDate.minute = $scope.model.minutes();
+            $scope.innerDate.hour = moment($scope.model).hours();
+            $scope.innerDate.minute = moment($scope.model).minutes();
           } else {
             $scope.innerDate.hour = 0;
             $scope.innerDate.minute = 0;
@@ -255,7 +259,7 @@ angular.module('niceElements')
             $scope.model = $scope._removeTime($scope.model);
           }
           
-          $scope.innerDate.value = $scope.formatDate($scope.model);
+          $scope.innerDate.value = $scope.formatDate(moment($scope.model));
           $scope._buildMonth();
         };
 

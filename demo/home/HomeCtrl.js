@@ -67,6 +67,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     endDate: moment().add(1, 'days')
   };
 
+  $scope.eeeey = "2019-05-01T13:00:00.000Z";
 
   $scope.dtp2 = {
     startDate: moment(),
