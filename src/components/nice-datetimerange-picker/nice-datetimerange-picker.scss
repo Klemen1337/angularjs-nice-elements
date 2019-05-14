@@ -29,6 +29,7 @@
 
   .dtp-range-wrapper{
     border-radius: $nice-border-radius;
+    box-shadow: $nice-box-shadow;
     position: absolute;
     left: 15px;
     top: 40px;
@@ -37,7 +38,6 @@
     padding: 10px;
     background-color: white;
     border: 1px solid $nice-border;
-    box-shadow: 0 0 0;
     z-index: 900;
 
     .dtp-layer {

@@ -104,7 +104,7 @@
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
                     <nice-date title="Nice date" time="true" model="data.niceDate"></nice-date>
-                    <nice-date title="Nice date no time" model="data.niceDate2"></nice-date>
+                    <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2"></nice-date>
 
                     <nice-date title="Nice date" time="true" inline="true" model="data.niceDate"></nice-date>
                     <nice-date title="Nice date no time" inline="true" model="data.niceDate2"></nice-date>
@@ -138,7 +138,6 @@
                         no-options-text="Brez opcij" 
                         obj-key="iso"
                         loading="dropdownLoading"
-                        nullable="true"
                         add-button-function="testFunction"
                         on-change="testFunction"
                     >
@@ -157,6 +156,15 @@
                             <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
                         </nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="{{ $parent.item.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.item.name }}</nice-dropdown-option>
+                    </nice-dropdown>
+
+                    <nice-dropdown 
+                        title="Country multiple" 
+                        model="data.dropdownListObj2"
+                        list="countries"
+                        obj-value="name"
+                        obj-key="iso"
+                        multiple="true">
                     </nice-dropdown>
 
                     <nice-dropdown 

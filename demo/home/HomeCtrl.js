@@ -26,7 +26,11 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   }
 
   $scope.data = {
-    dropdownCountryKey: "US"
+    dropdownCountryKey: "US",
+    dropdownListObj2: [
+      {'iso' : 'AF', 'name' : 'Afghanistan'},
+      {'iso' : 'AL', 'name' : 'Albania'}
+    ]
   };
   
 
@@ -68,6 +72,8 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     startDate: moment(),
     endDate: moment().add(1, 'days')
   };
+
+  $scope.minDate = moment().subtract(1, 'days');
 
   $scope.minRange = moment();
   $scope.maxRange = moment().add(1, 'months');

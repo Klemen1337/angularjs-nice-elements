@@ -63,6 +63,9 @@ angular.module('niceElements')
         else $scope.time = $scope.time == "true";
 
 
+        if ($scope.maxDate) $scope.maxDate = moment($scope.maxDate);
+        if ($scope.minDate) $scope.minDate = moment($scope.minDate);
+
 
         // ------------------ Time changes ------------------
         $scope.timeChange = function() {

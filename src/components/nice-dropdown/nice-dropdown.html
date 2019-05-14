@@ -35,7 +35,7 @@
                     </div>
                     <div class="no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
                     <ul>
-                        <li ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
+                        <li class="null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
                             {{ nullableText }}
                         </li>
                         <li ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }">

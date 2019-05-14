@@ -47,7 +47,7 @@ angular.module('niceElements')
         if (!$scope.noDataText) { $scope.noDataText = "No options"; }
         if (!$scope.searchText) { $scope.searchText = "Search..."; }
         if (!$scope.nullableText) { $scope.nullableText = "None"; }
-        if (!$scope.selectText) { $scope.selectText = "Select option"; }
+        if (!$scope.selectText) { $scope.selectText = "None"; }
         if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;
@@ -131,6 +131,7 @@ angular.module('niceElements')
         // ----------------------------------- Handle multiple select -----------------------------------
         $scope.handleMultipleSelect = function(item, index) {
           if (!$scope.selected) $scope.selected = [];
+
           if(item._selected) {
             $scope.selected = $scope.selected.filter(function(s) {
               return s[$scope.objKey] != item[$scope.objKey];
@@ -213,7 +214,7 @@ angular.module('niceElements')
                 angular.forEach($scope.selected, function(s) {
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
-                    $scope.selected.push(i);
+                    // $scope.selected.push(i);
                   }
                 });
               } else {
@@ -230,7 +231,7 @@ angular.module('niceElements')
                 angular.forEach($scope.selected, function(s) {
                   if (i[$scope.objKey] == s[$scope.objKey]) {
                     i._selected = true;
-                    $scope.selected.push(i);
+                    // $scope.selected.push(i);
                   }
                 });
               } else {
