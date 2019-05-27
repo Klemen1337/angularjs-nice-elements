@@ -2101,7 +2101,8 @@ angular.module('niceElements')
         selectText: "@",
         searchText: "@",
         nullableText: "@",
-        searchFunction: "=?"
+        searchFunction: "=?",
+        clearOnSelect: "@"
       },
       controller: function ($scope, $element, $timeout) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -2116,6 +2117,7 @@ angular.module('niceElements')
         $scope.required = $scope.required === 'true' || $scope.required === true;
         $scope.noMargin = $scope.noMargin === 'true' || $scope.noMargin === true;
         $scope.multiple = $scope.multiple === 'true' || $scope.multiple === true;
+        $scope.clearOnSelect = $scope.clearOnSelect === 'true' || $scope.clearOnSelect === true;
         $scope.valid = $scope.formDropdown;
         $scope.isOpen = false;
         $scope.selected = null;
@@ -2141,6 +2143,9 @@ angular.module('niceElements')
         $scope.open = function () {
           $scope.focusInput();
           $scope.isOpen = true;
+          $timeout(function() {
+            $scope.scrollToHover(true);
+          }, 100);
         };
 
 
@@ -2150,6 +2155,22 @@ angular.module('niceElements')
           if (input) {
             $timeout(function () {
               input.focus();
+            });
+          }
+        };
+
+
+        // ----------------------------------- Scroll to hover -----------------------------------
+        $scope.scrollToHover = function(notSmooth) {
+          var dropdownMenu = $element[0].getElementsByClassName("dropdown-menu")[0];
+          var dorpdownList = dropdownMenu.getElementsByTagName("ul")[0];
+          var hoverItem = dorpdownList.getElementsByClassName("hover")[0];
+          if (hoverItem) {
+            var topPos = hoverItem.offsetTop;
+            dorpdownList.scroll({
+              top: topPos - 120,
+              left: 0,
+              behavior: notSmooth ? 'auto' : 'smooth'
             });
           }
         };
@@ -2167,12 +2188,6 @@ angular.module('niceElements')
             $scope.loading = false;
           });
         };
-
-
-        // ----------------------------------- Init search -----------------------------------
-        if ($scope.searchFunction) {
-          $scope.handleSearch();
-        }
 
 
         // ----------------------------------- Item clicked -----------------------------------
@@ -2245,8 +2260,14 @@ angular.module('niceElements')
           if ($scope.onChange) {
             $scope.onChange(obj);
           }
-          
-          $scope.model = obj;
+
+          if ($scope.clearOnSelect) {
+            // Clear on select
+            $scope.model = null;
+          } else {
+            // Set model
+            $scope.model = obj;
+          }
         };
 
 
@@ -2267,7 +2288,7 @@ angular.module('niceElements')
         // ----------------------------------- Watch for model change -----------------------------------
         $scope.$watch('model', function (value_new, value_old) {
           $scope.selected = angular.copy($scope.model);
-          angular.forEach($scope.internalList, function(i) {
+          angular.forEach($scope.internalList, function(i, index) {
             i._selected = false;
 
             if ($scope.selectedIsKey) {
@@ -2278,6 +2299,8 @@ angular.module('niceElements')
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
                     // $scope.selected.push(i);
+                    $scope.selectedIndex = index;
+                    $scope.scrollToHover();
                   }
                 });
               } else {
@@ -2285,6 +2308,8 @@ angular.module('niceElements')
                 if ($scope.selected != null && i[$scope.objKey] == $scope.selected) {
                   i._selected = true;
                   $scope.selected = i;
+                  $scope.selectedIndex = index;
+                  $scope.scrollToHover();
                 }
               }
             } else {
@@ -2295,6 +2320,8 @@ angular.module('niceElements')
                   if (i[$scope.objKey] == s[$scope.objKey]) {
                     i._selected = true;
                     // $scope.selected.push(i);
+                    $scope.selectedIndex = index;
+                    $scope.scrollToHover();
                   }
                 });
               } else {
@@ -2302,26 +2329,14 @@ angular.module('niceElements')
                 if ($scope.selected != null && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
                   i._selected = true;
                   $scope.selected = i;
+                  $scope.selectedIndex = index;
+                  $scope.scrollToHover();
                 }
               }
             }
           });
         });
 
-        $scope.handleDefault();
-
-        // ----------------------------------- Scroll to hover -----------------------------------
-        $scope.scrollToHover = function() {
-          var dropdownMenu = $element[0].getElementsByClassName("dropdown-menu")[0];
-          var dorpdownList = dropdownMenu.getElementsByTagName("ul")[0];
-          var hoverItem = dorpdownList.getElementsByClassName("hover")[0];
-          var topPos = hoverItem.offsetTop;
-          dorpdownList.scroll({
-            top: topPos - 120,
-            left: 0,
-            behavior: 'smooth'
-          });
-        };
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------
         $element.bind("keydown keypress", function (event) {
@@ -2331,7 +2346,9 @@ angular.module('niceElements')
             $timeout(function() {
               if ( $scope.selectedIndex > 0) {
                 $scope.selectedIndex -= 1;
-                $scope.scrollToHover();
+                $timeout(function() {
+                  $scope.scrollToHover();
+                });
               }
             });
           }
@@ -2342,7 +2359,9 @@ angular.module('niceElements')
             $timeout(function() {
               if ( $scope.selectedIndex < $scope.internalList.length - 1) {
                 $scope.selectedIndex += 1;
-                $scope.scrollToHover();
+                $timeout(function() {
+                  $scope.scrollToHover();
+                });
               }
             });
           }
@@ -2362,6 +2381,13 @@ angular.module('niceElements')
             });
           }
         });
+
+        $scope.handleDefault();
+
+        // ----------------------------------- Init search -----------------------------------
+        if ($scope.searchFunction) {
+          $scope.handleSearch();
+        }
       }
     };
   });

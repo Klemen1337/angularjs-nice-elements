@@ -126,6 +126,7 @@
                         nullable="true"
                         on-change="testFunction"
                         selected-is-key="true"
+                        clear-on-select="true"
                     >
                         <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>

@@ -277,13 +277,14 @@ p.nice {
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-top: 0.5rem;
+  margin-bottom: 2rem;
   z-index: 1000;
 }
-/* line 47, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 48, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .null-item, .nice-search .nice-dropdown-empty .dropdown-menu .null-item {
   color: #ccc;
 }
-/* line 51, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 52, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar {
   flex-shrink: 0;
   border-bottom: 1px solid #eee;
@@ -291,22 +292,22 @@ p.nice {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
-/* line 58, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 59, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar input, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input {
   width: 100%;
   padding: 8px 30px 8px 10px;
   border: 0 none;
   flex-grow: 1;
 }
-/* line 64, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 65, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar input:focus, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input:focus {
   outline: 0;
 }
-/* line 68, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 69, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar input::placeholder, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input::placeholder {
   color: #ccc;
 }
-/* line 73, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 74, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar .icon, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar .icon {
   display: flex;
   justify-content: center;
@@ -316,13 +317,13 @@ p.nice {
   right: 10px;
   transform: translate(0, -50%);
 }
-/* line 84, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 85, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .no-data, .nice-search .nice-dropdown-empty .dropdown-menu .no-data {
   padding: 10px;
   text-align: center;
   color: #ccc;
 }
-/* line 90, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 91, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul, .nice-search .nice-dropdown-empty .dropdown-menu ul {
   overflow-y: auto;
   overflow-x: hidden;
@@ -331,13 +332,13 @@ p.nice {
   padding: 0;
   margin: 0;
 }
-/* line 99, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 100, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li, .nice-search .nice-dropdown-empty .dropdown-menu ul li {
   padding: 10px;
   position: relative;
   cursor: pointer;
 }
-/* line 104, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 105, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li .choice-checkbox, .nice-search .nice-dropdown-empty .dropdown-menu ul li .choice-checkbox {
   transition: all 0.2s;
   background: white;
@@ -350,27 +351,27 @@ p.nice {
   border-radius: 2px;
   text-align: center;
 }
-/* line 117, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 118, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li .multiple-item, .nice-search .nice-dropdown-empty .dropdown-menu ul li .multiple-item {
   margin-left: 35px;
   line-height: 26px;
 }
-/* line 122, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 123, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li:hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li:hover, .nice-dropdown .dropdown-menu ul li.hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li.hover {
   background: #EDEDED;
 }
-/* line 126, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 127, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li.selected, .nice-search .nice-dropdown-empty .dropdown-menu ul li.selected {
   background: #4abeb4;
   color: white;
 }
-/* line 130, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 131, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li.selected .choice-checkbox, .nice-search .nice-dropdown-empty .dropdown-menu ul li.selected .choice-checkbox {
   border-color: #4abeb4;
   background: #4abeb4;
   color: white;
 }
-/* line 140, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 141, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown, .nice-search .nice-dropdown-empty .btn-dropdown {
   background: white;
   border-color: #cbd4d9;
@@ -383,11 +384,11 @@ p.nice {
   text-align: left;
   padding-right: 25px;
 }
-/* line 154, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 155, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown .btn-dropdown-inside, .nice-search .nice-dropdown-empty .btn-dropdown .btn-dropdown-inside {
   overflow: hidden;
 }
-/* line 158, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 159, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown .caret, .nice-search .nice-dropdown-empty .btn-dropdown .caret {
   position: absolute;
   color: #cbd4d9;
@@ -395,7 +396,7 @@ p.nice {
   right: 10px;
   transform: translate(0, -50%);
 }
-/* line 166, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 167, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown .nice-loader, .nice-search .nice-dropdown-empty .btn-dropdown .nice-loader {
   padding: 0;
   text-align: left;
@@ -406,24 +407,24 @@ p.nice {
   width: 20px;
   transform: translate(0, -50%);
 }
-/* line 176, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 177, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown .nice-loader svg, .nice-search .nice-dropdown-empty .btn-dropdown .nice-loader svg {
   width: 20px;
   height: 20px;
 }
-/* line 182, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 183, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown:disabled, .nice-search .nice-dropdown-empty .btn-dropdown:disabled {
   cursor: not-allowed;
   background: white !important;
   border-color: #EDEFF2 !important;
 }
-/* line 188, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 189, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown:hover, .nice-search .nice-dropdown-empty .btn-dropdown:hover {
   background: white;
   border-color: #cbd4d9;
   color: #474F52;
 }
-/* line 194, ../src/components/nice-dropdown/nice-dropdown.scss */
+/* line 195, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus {
   background: white !important;
   border-color: #4abeb4 !important;
@@ -2221,6 +2222,7 @@ input::-webkit-outer-spin-button {
   position: relative;
   font-size: 14px;
   height: 30px;
+  line-height: auto;
 }
 
 /* line 1, ../src/components/nice-comment/nice-comment.scss */
