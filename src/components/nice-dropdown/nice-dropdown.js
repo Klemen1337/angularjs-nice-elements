@@ -294,7 +294,7 @@ angular.module('niceElements')
           if (event.keyCode == 40) {
             event.preventDefault();
             $timeout(function() {
-              if ( $scope.selectedIndex < $scope.internalList.length - 1) {
+              if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
                 $scope.selectedIndex += 1;
                 $timeout(function() {
                   $scope.scrollToHover();
