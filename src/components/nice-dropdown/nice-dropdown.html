@@ -38,7 +38,7 @@
                         <li class="null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
                             {{ nullableText }}
                         </li>
-                        <li ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }">
+                        <li ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected, 'hover': $index == selectedIndex }">
                             <span class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></span>
                             <span ng-transclude="option">
                                 <span ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</span>

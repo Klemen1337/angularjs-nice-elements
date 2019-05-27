@@ -56,7 +56,7 @@ angular.module('niceElements')
         $scope.valid = $scope.formDropdown;
         $scope.isOpen = false;
         $scope.selected = null;
-        $scope.selectedIndex = null;
+        $scope.selectedIndex = 0;
 
         $scope.internal = {
           search: ""
@@ -246,6 +246,59 @@ angular.module('niceElements')
         });
 
         $scope.handleDefault();
+
+        // ----------------------------------- Scroll to hover -----------------------------------
+        $scope.scrollToHover = function() {
+          var dropdownMenu = $element[0].getElementsByClassName("dropdown-menu")[0];
+          var dorpdownList = dropdownMenu.getElementsByTagName("ul")[0];
+          var hoverItem = dorpdownList.getElementsByClassName("hover")[0];
+          var topPos = hoverItem.offsetTop;
+          dorpdownList.scroll({
+            top: topPos - 120,
+            left: 0,
+            behavior: 'smooth'
+          });
+        };
+
+        // ----------------------------------- Watch for keydown and keypress -----------------------------------
+        $element.bind("keydown keypress", function (event) {
+          // Arrow Up
+          if (event.keyCode == 38) {
+            event.preventDefault();
+            $timeout(function() {
+              if ( $scope.selectedIndex > 0) {
+                $scope.selectedIndex -= 1;
+                $scope.scrollToHover();
+              }
+            });
+          }
+
+          // Arrow Down
+          if (event.keyCode == 40) {
+            event.preventDefault();
+            $timeout(function() {
+              if ( $scope.selectedIndex < $scope.internalList.length - 1) {
+                $scope.selectedIndex += 1;
+                $scope.scrollToHover();
+              }
+            });
+          }
+
+          // Enter
+          if (event.keyCode == 13) {
+            event.preventDefault();
+            $timeout(function() {
+              $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
+            });
+          }
+
+          // Escape
+          if (event.keyCode == 27) {
+            $timeout(function() {
+              $scope.close();
+            });
+          }
+        });
       }
     };
   });

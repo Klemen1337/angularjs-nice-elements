@@ -272,12 +272,12 @@ p.nice {
   padding: 0;
   max-height: 300px;
   border: 1px solid #eee;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
   flex-direction: column;
   border-radius: 3px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-top: 0.5rem;
+  z-index: 1000;
 }
 /* line 47, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .null-item, .nice-search .nice-dropdown-empty .dropdown-menu .null-item {
@@ -356,7 +356,7 @@ p.nice {
   line-height: 26px;
 }
 /* line 122, ../src/components/nice-dropdown/nice-dropdown.scss */
-.nice-dropdown .dropdown-menu ul li:hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li:hover {
+.nice-dropdown .dropdown-menu ul li:hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li:hover, .nice-dropdown .dropdown-menu ul li.hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li.hover {
   background: #EDEDED;
 }
 /* line 126, ../src/components/nice-dropdown/nice-dropdown.scss */
@@ -1349,7 +1349,7 @@ p.nice {
 /* line 30, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper {
   border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: absolute;
   left: 15px;
   top: 40px;
@@ -1464,7 +1464,7 @@ p.nice {
 /* line 61, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper {
   border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: absolute;
   left: 15px;
   top: 40px;
@@ -2017,7 +2017,7 @@ input::-webkit-outer-spin-button {
   top: 40px;
   z-index: 1000;
   width: 300px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 /* line 14, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-background {
