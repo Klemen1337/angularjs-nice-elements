@@ -44,7 +44,8 @@ angular.module('niceElements')
         };
         $scope.days = [];
 
-        $scope.weekdays = moment.weekdaysShort(false);
+        // $scope.weekdays = moment.weekdaysShort(false);
+        $scope.weekdays = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"];
 
         $scope.years = [];
         var year = moment().year()-100;
