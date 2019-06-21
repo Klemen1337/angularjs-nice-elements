@@ -3,12 +3,13 @@
   $spacing: 10px;
   $icon-width: 40px;
 
-  .dropdown {
+  .nice-date-dropdown {
     position: absolute;
     top: 40px;
     z-index: 1000;
     width: 300px;
     box-shadow: $nice-box-shadow;
+    line-height: normal;
   }
 
   .nice-date-background {

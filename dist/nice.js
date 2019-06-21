@@ -930,7 +930,8 @@ angular.module('niceElements')
         };
         $scope.days = [];
 
-        $scope.weekdays = moment.weekdaysShort(false);
+        // $scope.weekdays = moment.weekdaysShort(false);
+        $scope.weekdays = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"];
 
         $scope.years = [];
         var year = moment().year()-100;
@@ -4684,7 +4685,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            </div>\n" +
     "\n" +
     "            <!-------- Dropdown -------->\n" +
-    "            <div ng-class=\"{ 'dropdown': !inline }\" ng-if=\"inline || isOpen\">\n" +
+    "            <div ng-class=\"{ 'nice-date-dropdown': !inline }\" ng-if=\"inline || isOpen\">\n" +
     "                <!------------------------------ Date picker ------------------------------>\n" +
     "                <div class=\"nice-date-date\" ng-class=\"{ 'with-time': time }\">\n" +
     "                    <div class=\"nice-date-header\">\n" +

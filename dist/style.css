@@ -2013,14 +2013,15 @@ input::-webkit-outer-spin-button {
   margin-bottom: 10px;
 }
 /* line 6, ../src/components/nice-date/nice-date.scss */
-.nice-date .dropdown {
+.nice-date .nice-date-dropdown {
   position: absolute;
   top: 40px;
   z-index: 1000;
   width: 300px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  line-height: normal;
 }
-/* line 14, ../src/components/nice-date/nice-date.scss */
+/* line 15, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-background {
   position: fixed;
   top: 0;
@@ -2029,11 +2030,11 @@ input::-webkit-outer-spin-button {
   z-index: 999;
   height: 100%;
 }
-/* line 23, ../src/components/nice-date/nice-date.scss */
+/* line 24, ../src/components/nice-date/nice-date.scss */
 .nice-date .input-group, .nice-date .nice-input .symbol, .nice-input .nice-date .symbol {
   cursor: pointer;
 }
-/* line 27, ../src/components/nice-date/nice-date.scss */
+/* line 28, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date {
   border-radius: 3px;
   background: white;
@@ -2045,12 +2046,12 @@ input::-webkit-outer-spin-button {
   height: 250px;
   width: 100%;
 }
-/* line 39, ../src/components/nice-date/nice-date.scss */
+/* line 40, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date.with-time {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-/* line 44, ../src/components/nice-date/nice-date.scss */
+/* line 45, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header {
   background: #4abeb4;
   line-height: 40px;
@@ -2058,7 +2059,7 @@ input::-webkit-outer-spin-button {
   display: flex;
   padding: 0 0 0 10px;
 }
-/* line 51, ../src/components/nice-date/nice-date.scss */
+/* line 52, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i {
   width: 30px;
   font-size: 1.125em;
@@ -2067,41 +2068,41 @@ input::-webkit-outer-spin-button {
   cursor: pointer;
   text-align: center;
 }
-/* line 59, ../src/components/nice-date/nice-date.scss */
+/* line 60, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i:hover {
   background: #3fafa6;
 }
-/* line 63, ../src/components/nice-date/nice-date.scss */
+/* line 64, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i.fa-circle {
   font-size: 8px;
 }
-/* line 68, ../src/components/nice-date/nice-date.scss */
+/* line 69, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header span {
   flex-grow: 1;
 }
-/* line 71, ../src/components/nice-date/nice-date.scss */
+/* line 72, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header span select {
   background: transparent;
   border: 0px;
   -webkit-appearance: none;
   cursor: pointer;
 }
-/* line 77, ../src/components/nice-date/nice-date.scss */
+/* line 78, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header span select:focus, .nice-date .nice-date-date .nice-date-header span select:focus {
   outline: 0 none;
 }
-/* line 86, ../src/components/nice-date/nice-date.scss */
+/* line 87, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week {
   width: 100%;
   border-top: solid 1px #eee;
   display: flex;
   flex-grow: 1;
 }
-/* line 92, ../src/components/nice-date/nice-date.scss */
+/* line 93, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week:first-child {
   border-top: none;
 }
-/* line 96, ../src/components/nice-date/nice-date.scss */
+/* line 97, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day {
   user-select: none;
   position: relative;
@@ -2120,11 +2121,11 @@ input::-webkit-outer-spin-button {
   justify-content: center;
   align-items: center;
 }
-/* line 115, ../src/components/nice-date/nice-date.scss */
+/* line 116, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:first-child {
   border-left: none;
 }
-/* line 119, ../src/components/nice-date/nice-date.scss */
+/* line 120, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.today:before {
   content: " ";
   position: absolute;
@@ -2136,50 +2137,50 @@ input::-webkit-outer-spin-button {
   border-width: 0 10px 10px 0;
   border-color: transparent #4abeb4 transparent transparent;
 }
-/* line 131, ../src/components/nice-date/nice-date.scss */
+/* line 132, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.different-month {
   color: #C0C0C0;
 }
-/* line 135, ../src/components/nice-date/nice-date.scss */
+/* line 136, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.weekend {
   background: #fafafa;
 }
-/* line 139, ../src/components/nice-date/nice-date.scss */
+/* line 140, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.disabled {
   opacity: 0.3;
   color: #d9534f;
   cursor: not-allowed;
 }
-/* line 145, ../src/components/nice-date/nice-date.scss */
+/* line 146, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.selected {
   background: #4abeb4 !important;
   color: white;
 }
-/* line 150, ../src/components/nice-date/nice-date.scss */
+/* line 151, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.between {
   background: #e0f4f2;
 }
-/* line 154, ../src/components/nice-date/nice-date.scss */
+/* line 155, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover {
   background: #bbe6e3;
 }
-/* line 157, ../src/components/nice-date/nice-date.scss */
+/* line 158, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover.selected {
   background: #389d94 !important;
 }
-/* line 163, ../src/components/nice-date/nice-date.scss */
+/* line 164, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week.names {
   flex-grow: 0;
   height: 21px;
   flex-shrink: 0;
 }
-/* line 168, ../src/components/nice-date/nice-date.scss */
+/* line 169, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week.names > span {
   color: #389d94;
   min-height: 20px;
   cursor: default;
 }
-/* line 177, ../src/components/nice-date/nice-date.scss */
+/* line 178, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time {
   display: flex;
   width: 100%;
@@ -2190,23 +2191,23 @@ input::-webkit-outer-spin-button {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-/* line 188, ../src/components/nice-date/nice-date.scss */
+/* line 189, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .divider {
   line-height: 30px;
   margin: 0 10px;
 }
-/* line 193, ../src/components/nice-date/nice-date.scss */
+/* line 194, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time i {
   line-height: 30px;
   margin-right: 10px;
   color: #cbd4d9;
 }
-/* line 199, ../src/components/nice-date/nice-date.scss */
+/* line 200, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .time-picker {
   position: relative;
   height: 30px;
 }
-/* line 204, ../src/components/nice-date/nice-date.scss */
+/* line 205, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .time-picker select {
   width: 100%;
   -webkit-appearance: none;
