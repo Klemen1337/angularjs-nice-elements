@@ -103,18 +103,21 @@
         <div class="white-wrapper">
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
-                    <nice-date title="Nice date" time="true" model="data.niceDate"></nice-date>
-                    <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2"></nice-date>
+                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled"></nice-date>
+                    <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled"></nice-date>
 
-                    <nice-date title="Nice date" time="true" inline="true" model="eeeey"></nice-date>
-                    <nice-date title="Nice date no time" inline="true" model="data.niceDate2"></nice-date>
+                    <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled"></nice-date>
+                    <nice-date title="Nice date no time" inline="true" model="data.niceDate2" is-disabled="data.disabled"></nice-date>
 
                     <nice-progress-bar title="Progress bar" value="1" max="2"></nice-progress-bar>
 
-                    <nice-quantity title="Quantity" model="data.quantity"></nice-quantity>
+                    <nice-quantity title="Quantity" model="data.quantity" is-disabled="data.disabled"></nice-quantity>
 
-                    <nice-upload title="Nice upload" model="data.upload"></nice-upload>
+                    <nice-upload title="Nice upload" model="data.upload" is-disabled="data.disabled"></nice-upload>
 
+                    <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4"></nice-yesno>
+
+                
                     <nice-dropdown 
                         title="Country (value)" 
                         model="data.dropdownCountryKey" 
@@ -127,6 +130,7 @@
                         on-change="testFunction"
                         selected-is-key="true"
                         clear-on-select="true"
+                        is-disabled="data.disabled"
                     >
                         <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
@@ -141,6 +145,7 @@
                         loading="dropdownLoading"
                         add-button-function="testFunction"
                         on-change="testFunction"
+                        is-disabled="data.disabled"
                     >
                         <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
@@ -152,6 +157,7 @@
                         model="data.dropdownPerson"
                         search-function="searchFunction"
                         nullable="true"
+                        is-disabled="data.disabled"
                     >
                         <nice-dropdown-button>
                             <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
@@ -165,6 +171,7 @@
                         list="countries"
                         obj-value="name"
                         obj-key="iso"
+                        is-disabled="data.disabled"
                         multiple="true">
                     </nice-dropdown>
 
@@ -173,8 +180,27 @@
                         model="data.dropdownListObj"
                         list="listObjs"
                         selected-is-key="true"
+                        is-disabled="data.disabled"
                         nullable="true">
                     </nice-dropdown>
+
+                    <nice-dropdown 
+                        title="Vzdrževanje" 
+                        model="simpleListData"
+                        list="simpleList"
+                        obj-value="text"
+                        obj-key="text"
+                        is-disabled="data.disabled"
+                        selected-is-key="true">
+                        <!-- <nice-dropdown-button>{{ $parent.selected.text }}</nice-dropdown-button>
+                        <nice-dropdown-option>{{ $parent.item.text }}</nice-dropdown-option> -->
+                    </nice-dropdown>
+
+                    <nice-slot title="Simple list">
+                        <pre>{{ simpleListData }}</pre>
+                        <pre>{{ simpleList }}</pre>
+                    </nice-slot>
+                    
 
                     <nice-dropdown 
                         title="Empty list" 
@@ -182,20 +208,34 @@
                         list="emptyList"
                         selected-is-key="true"
                         add-button-function="addToList"
+                        is-disabled="data.disabled"
                         nullable="true">
                     </nice-dropdown>
 
-                    <pre>{{ emptyList | json }}</pre>
+                    
+                    <nice-slot title="Empty list">
+                        <pre>{{ emptyList | json }}</pre>
+                    </nice-slot>
+                    
 
                     <nice-dropdown-old 
                         title="Old dropdown" 
                         model="data.dropdownOld"
+                        is-disabled="data.disabled"
                         list="listObjs">
                     </nice-dropdown-old>
 
-                    <nice-dropdown-date title="Birthday" model="data.birthday"></nice-dropdown-date>
+                    <nice-dropdown-date title="Birthday" model="data.birthday" is-disabled="data.disabled"></nice-dropdown-date>
 
-                    <nice-calendar title="Calendar" time="true" min-date="minRange" max-date="maxRange" end-date="data.calendarEndDate" start-date="data.calendarStartDate"></nice-calendar>
+                    <nice-calendar 
+                        title="Calendar" 
+                        time="true" 
+                        min-date="minRange" 
+                        max-date="maxRange" 
+                        end-date="data.calendarEndDate" 
+                        start-date="data.calendarStartDate"
+                        is-disabled="data.disabled"
+                    ></nice-calendar>
 
                     <div class="row">
                         <div class="col-sm-offset-4 col-sm-8 mb-10">
@@ -203,13 +243,13 @@
                         </div>
                     </div>
 
-                    <nice-comment title="Comment" model="data.comment" placeholder="Add a comment"></nice-comment>
+                    <nice-comment title="Comment" model="data.comment" placeholder="Add a comment" is-disabled="data.disabled"></nice-comment>
 
-                    <nice-search title="Search" is-focused="true"></nice-search>
+                    <nice-search title="Search" is-focused="true" is-disabled="data.disabled"></nice-search>
 
-                    <nice-input title="First name" model="data.first" placeholder="Janez" disabled="disabl" tab-index="1" is-focused="true"></nice-input>
+                    <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" tab-index="1" is-focused="true"></nice-input>
 
-                    <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" disabled="disabl" tab-index="2"></nice-input>
+                    <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" is-disabled="data.disabled" tab-index="2"></nice-input>
 
                     <div class="row">
                         <div class="col-sm-offset-4 col-sm-8 mb-10">
@@ -217,9 +257,10 @@
                         </div>
                     </div>
 
-                    <nice-input title="Random number" model="data.number" placeholder="1234" disabled="disabl" type="number" tab-index="3"></nice-input>
+                    <nice-input title="Random number" model="data.number" placeholder="1234" is-disabled="data.disabled" type="number" tab-index="3"></nice-input>
 
                     <nice-datetime-picker
+                        is-disabled="data.disabled"
                         model="data.dt1"
                         title="Datetimepicker all"
                         date="true"
@@ -227,6 +268,7 @@
                     </nice-datetime-picker>
 
                     <nice-datetime-picker
+                        is-disabled="data.disabled"
                         model="data.dt2"
                         title="Datetimepicker time"
                         date="false"
@@ -234,6 +276,7 @@
                     </nice-datetime-picker>
 
                     <nice-datetime-picker
+                        is-disabled="data.disabled"
                         model="data.dt3"
                         title="Datetimepicker date"
                         date="true"
@@ -241,6 +284,7 @@
                     </nice-datetime-picker>
 
                     <nice-datetime-picker
+                        is-disabled="data.disabled"
                         model="data.dt4"
                         title="Datetimepicker custom"
                         date="true"
@@ -250,6 +294,7 @@
                     </nice-datetime-picker>
 
                     <nice-datetimerange-picker
+                        is-disabled="data.disabled"
                         model-start="dtStart"
                         model-end="dtEnd"
                         title="Range picker"
@@ -259,6 +304,7 @@
                     </nice-datetimerange-picker>
 
                     <nice-datetimerange-picker2
+                        is-disabled="data.disabled"
                         start-date="dtStart"
                         end-date="dtEnd"
                         title="Range picker v2"
@@ -267,15 +313,15 @@
 
                     <!--<nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetimerange-picker>-->
 
-                    <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true disabled="disabl"></nice-input>
-                    <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" disabled="disabl"></nice-yesno>
+                    <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true is-disabled="data.disabled"></nice-input>
+                    <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." field-width="col-sm-4" is-disabled="data.disabled"></nice-yesno>
 
                     <nice-choice
                         title="I like"
                         model="data.likes"
                         list="listObjs"
                         multiple="true"
-                        disabled="disabl"
+                        is-disabled="data.disabled"
                         list-is-obj="true"
                         list="listObjs"
                         obj-value="value"

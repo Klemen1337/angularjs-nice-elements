@@ -24,7 +24,8 @@
         uploadFunction: '=',
         callbackFunction: '=',
         callbackFile: '=',
-        callbackUrl: '='
+        callbackUrl: '=',
+        isDisabled: '='
       },
 
       link: function(scope, element, attrs, ctrl){

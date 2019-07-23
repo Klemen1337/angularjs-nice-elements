@@ -20,7 +20,8 @@ angular.module('niceElements')
         title: '@', // default: ''
         noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
-        labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
+        labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
+        isDisabled: '='
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
@@ -59,7 +60,9 @@ angular.module('niceElements')
 
 
         $scope.open = function() {
-          $scope.isOpen = true;
+          if (!$scope.isDisabled) {
+            $scope.isOpen = true;
+          }
         };
 
 
@@ -108,16 +111,16 @@ angular.module('niceElements')
 
 
         $scope.$watchGroup(["innerStartDate", "innerEndDate"], function(newValues){
-          if(newValues[0] && newValues[1]){
+          if (newValues[0] && newValues[1]) {
             // Check if start date is after end date
-            if($scope.innerStartDate.isAfter($scope.innerEndDate)){
+            if ($scope.innerStartDate.isAfter($scope.innerEndDate)) {
               var temp = angular.copy($scope.innerStartDate);
               $scope.innerStartDate = angular.copy($scope.innerEndDate); 
               $scope.innerEndDate = temp; 
             }
 
             // Check if end date is before start date
-            if($scope.innerEndDate.isBefore($scope.innerStartDate)){
+            if ($scope.innerEndDate.isBefore($scope.innerStartDate)) {
               var temp = angular.copy($scope.innerStartDate);
               $scope.innerStartDate = angular.copy($scope.innerEndDate); 
               $scope.innerEndDate = temp; 

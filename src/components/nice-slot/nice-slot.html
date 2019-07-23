@@ -1,0 +1,11 @@
+<div class="nice-slot">
+    <div class="row">
+        <div ng-class="labelWidth ? labelWidth : 'col-xs-4'" ng-if="title">
+            <label class="nice">{{ title }}</label>
+        </div>
+
+        <div ng-class="fieldWidth ? fieldWidth : 'col-xs-8'">
+            <ng-transclude></ng-transclude>
+        </div>
+    </div>
+</div>

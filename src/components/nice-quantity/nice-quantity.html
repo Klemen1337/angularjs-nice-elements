@@ -4,16 +4,16 @@
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
         </div>
 
-        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+        <div ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
             <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary btn-left" ng-click="sub()" type="button">-</button>
+                    <button class="btn btn-primary btn-left" ng-click="sub()" type="button" ng-disabled="isDisabled">-</button>
                 </span>
         
-                <input class="value form-control" ng-model="model" type="number" ng-change="handleChange()" />
+                <input class="value form-control" ng-model="model" type="number" ng-change="handleChange()" ng-disabled="isDisabled" />
         
                 <span class="input-group-btn">
-                    <button class="btn btn-primary btn-right" ng-click="add()" type="button">+</button>
+                    <button class="btn btn-primary btn-right" ng-click="add()" type="button" ng-disabled="isDisabled">+</button>
                 </span>
             </div>
         </div>

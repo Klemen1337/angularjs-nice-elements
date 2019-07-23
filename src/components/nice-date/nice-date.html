@@ -6,7 +6,9 @@
             <label class="nice">{{ title }}<span ng-if="required">*</span></label>
         </div>
 
-        <div class="col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+        <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
+            <div class="disabled-shield" ng-if="isDisabled"></div>
+
             <!------------------------------ Input ------------------------------>
             <div class="input-group" ng-if="!inline">
                 <span class="form-control" ng-click="toggleOpen()">{{ innerDate.value }}</span>
@@ -67,6 +69,7 @@
 
                     <div class="time-picker time-picker-hour">
                         <select
+                            ng-disabled="isDisabled"
                             ng-model="innerDate.hour"
                             ng-change="timeChange()"
                             ng-options="hour as hour for hour in hours track by hour">
@@ -77,6 +80,7 @@
 
                     <div class="time-picker time-picker-minute">
                         <select
+                            ng-disabled="isDisabled"
                             ng-model="innerDate.minute"
                             ng-change="timeChange()"
                             ng-options="minute as minute for minute in minutes track by minute">

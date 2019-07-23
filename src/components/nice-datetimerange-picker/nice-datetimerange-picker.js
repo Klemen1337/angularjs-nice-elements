@@ -29,7 +29,8 @@ angular.module('niceElements')
         noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
-        formatOutput: "@" // Format output or moment
+        formatOutput: "@", // Format output or moment
+        isDisabled: "="
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
@@ -121,8 +122,8 @@ angular.module('niceElements')
               }
             }
 
-            // fix dateEnd if it's before dateStart
-            if ($scope.dateStart > $scope.dateEnd){
+            // Fix dateEnd if it's before dateStart
+            if ($scope.dateStart > $scope.dateEnd) {
               $scope.dateEnd = moment($scope.dateStart);
             }
           };
@@ -158,8 +159,10 @@ angular.module('niceElements')
           $scope = angular.extend($scope, params);
 
           $scope.openDtpRange = function () {
-            initCurrentDates();
-            $scope.showDtpRange = true;
+            if (!$scope.isDisabled) {
+              initCurrentDates();
+              $scope.showDtpRange = true;
+            }
           };
 
           $scope.okClick = function(){

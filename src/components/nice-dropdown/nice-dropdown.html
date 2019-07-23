@@ -6,7 +6,7 @@
         </div>
 
         <!------------------------- Field ------------------------->
-        <div ng-class="[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'disabled': isDisabled || emptyList } ]" click-outside="close()" is-open="{{ isOpen }}">
+        <div ng-class="[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]" click-outside="close()" is-open="{{ isOpen }}">
             <div class="nice-field-wrapper">
                 <!------------------------- Button ------------------------->
                 <button type="button" class="btn btn-dropdown" ng-click="toggle()" ng-disabled="isDisabled || emptyList">
@@ -49,7 +49,7 @@
 
 
                 <!------------------------- Add button ------------------------->
-                <button class="btn btn-primary add-btn" type="button" ng-if="addButtonFunction" ng-click="addButtonFunction()">+</button>
+                <button class="btn btn-primary add-btn" type="button" ng-if="addButtonFunction && !isDisabled" ng-click="addButtonFunction()">+</button>
             </div>
         </div>
     </div>

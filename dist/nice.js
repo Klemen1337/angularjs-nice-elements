@@ -88,6 +88,7 @@ angular.module('niceElements')
         color: '@',
         endDate: '=',
         startDate: '=',
+        isDisabled: '=',
         translations: '@'
       },
       link: function(scope) {
@@ -910,7 +911,8 @@ angular.module('niceElements')
         inline: '@',
         maxDate: '=',
         minDate: '=',
-        nextDate: '='
+        nextDate: '=',
+        isDisabled: '='
       },
       controller: function($scope) {
         $scope.isOpen = false;
@@ -1155,8 +1157,10 @@ angular.module('niceElements')
 
         // ------------------ Toggle open ------------------
         $scope.toggleOpen = function() {
-          $scope.isOpen = !$scope.isOpen;
-        }
+          if (!$scope.isDisabled) {
+            $scope.isOpen = !$scope.isOpen;
+          }
+        };
       }
     };
   });
@@ -1192,6 +1196,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
+      isDisabled: '='
     },
     controller: function ($scope) {
         $scope.date = $scope.date == 'true' || $scope.date == true;
@@ -1217,8 +1222,10 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
         }
 
         $scope.openDtp = function () {
-          $scope.isOpen = true;
-          $scope.$broadcast('dtp-open-click');
+          if (!$scope.isDisabled) {
+            $scope.isOpen = true;
+            $scope.$broadcast('dtp-open-click');
+          }
         };
 
         $scope.closeDtp = function (response) {
@@ -1263,7 +1270,8 @@ angular.module('niceElements')
         title: '@', // default: ''
         noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
-        labelWidth: '@' // default: 'col-sm-4', bootstrap classes that defines width of label
+        labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
+        isDisabled: '='
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
@@ -1302,7 +1310,9 @@ angular.module('niceElements')
 
 
         $scope.open = function() {
-          $scope.isOpen = true;
+          if (!$scope.isDisabled) {
+            $scope.isOpen = true;
+          }
         };
 
 
@@ -1351,16 +1361,16 @@ angular.module('niceElements')
 
 
         $scope.$watchGroup(["innerStartDate", "innerEndDate"], function(newValues){
-          if(newValues[0] && newValues[1]){
+          if (newValues[0] && newValues[1]) {
             // Check if start date is after end date
-            if($scope.innerStartDate.isAfter($scope.innerEndDate)){
+            if ($scope.innerStartDate.isAfter($scope.innerEndDate)) {
               var temp = angular.copy($scope.innerStartDate);
               $scope.innerStartDate = angular.copy($scope.innerEndDate); 
               $scope.innerEndDate = temp; 
             }
 
             // Check if end date is before start date
-            if($scope.innerEndDate.isBefore($scope.innerStartDate)){
+            if ($scope.innerEndDate.isBefore($scope.innerStartDate)) {
               var temp = angular.copy($scope.innerStartDate);
               $scope.innerStartDate = angular.copy($scope.innerEndDate); 
               $scope.innerEndDate = temp; 
@@ -1408,7 +1418,8 @@ angular.module('niceElements')
         noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
-        formatOutput: "@" // Format output or moment
+        formatOutput: "@", // Format output or moment
+        isDisabled: "="
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
@@ -1500,8 +1511,8 @@ angular.module('niceElements')
               }
             }
 
-            // fix dateEnd if it's before dateStart
-            if ($scope.dateStart > $scope.dateEnd){
+            // Fix dateEnd if it's before dateStart
+            if ($scope.dateStart > $scope.dateEnd) {
               $scope.dateEnd = moment($scope.dateStart);
             }
           };
@@ -1537,8 +1548,10 @@ angular.module('niceElements')
           $scope = angular.extend($scope, params);
 
           $scope.openDtpRange = function () {
-            initCurrentDates();
-            $scope.showDtpRange = true;
+            if (!$scope.isDisabled) {
+              initCurrentDates();
+              $scope.showDtpRange = true;
+            }
           };
 
           $scope.okClick = function(){
@@ -1635,7 +1648,7 @@ angular.module('niceElements')
       fieldWidth: '@',
       labelWidth: '@',
       noMargin: '@',
-      isDisabled: '@',
+      isDisabled: '=',
       numYears: '@',
       startingYear: '@',
       mature: '@'
@@ -3867,7 +3880,8 @@ angular.module('niceElements')
         onChange: "&",
         noMargin: "@",
         fieldWidth: '@',
-        labelWidth: '@'
+        labelWidth: '@',
+        isDisabled: '='
       },
       controller: function ($scope) {
         if (!$scope.model) {
@@ -4142,6 +4156,33 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceSlot
+ * @description
+ * # niceSlot
+ */
+angular.module('niceElements')
+  .directive('niceSlot', function () {
+    return {
+      templateUrl: 'src/components/nice-slot/nice-slot.html',
+      restrict: 'E',
+      transclude: true,
+      scope: {
+        fieldWidth: '@',
+        labelWidth: '@',
+        title: '@'
+      },
+      link: function postLink(scope, element, attrs) {
+        if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
+        if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.title) { attrs.labelWidth = ''; }
+      }
+    };
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceTimePicker
  * @description
  * # niceTimePicker
@@ -4244,7 +4285,8 @@ angular.module('niceElements')
         uploadFunction: '=',
         callbackFunction: '=',
         callbackFile: '=',
-        callbackUrl: '='
+        callbackUrl: '=',
+        isDisabled: '='
       },
 
       link: function(scope, element, attrs, ctrl){
@@ -4480,7 +4522,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
+    "            <div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
+    "\n" +
     "            <div class=\"nice-calendar-wrapper\">\n" +
     "                <div class=\"header\">\n" +
     "                    <i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
@@ -4613,7 +4657,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "            <ul class=\"list-unstyled\" ng-class=\"{'disabled': isDisabled}\">\n" +
+    "            <ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "                <li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
     "                    <div class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></div>\n" +
     "                    <div class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
@@ -4675,7 +4719,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
+    "            <div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
+    "\n" +
     "            <!------------------------------ Input ------------------------------>\n" +
     "            <div class=\"input-group\" ng-if=\"!inline\">\n" +
     "                <span class=\"form-control\" ng-click=\"toggleOpen()\">{{ innerDate.value }}</span>\n" +
@@ -4736,6 +4782,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    <div class=\"time-picker time-picker-hour\">\n" +
     "                        <select\n" +
+    "                            ng-disabled=\"isDisabled\"\n" +
     "                            ng-model=\"innerDate.hour\"\n" +
     "                            ng-change=\"timeChange()\"\n" +
     "                            ng-options=\"hour as hour for hour in hours track by hour\">\n" +
@@ -4746,6 +4793,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    <div class=\"time-picker time-picker-minute\">\n" +
     "                        <select\n" +
+    "                            ng-disabled=\"isDisabled\"\n" +
     "                            ng-model=\"innerDate.minute\"\n" +
     "                            ng-change=\"timeChange()\"\n" +
     "                            ng-options=\"minute as minute for minute in minutes track by minute\">\n" +
@@ -4769,12 +4817,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "            <!--Needed for intercepting form changes ($dirty)!-->\n" +
     "            <div ng-form=\"formDatetimePicker\"></div>\n" +
     "\n" +
     "            <div class=\"input-group\" id=\"dropdown{{randNum}}\">\n" +
-    "                <input type=\"text\" class=\"form-control\" value=\"{{ value }}\" ng-click=\"openDtp()\">\n" +
+    "                <input type=\"text\" class=\"form-control\" value=\"{{ value }}\" ng-click=\"openDtp()\" ng-disabled=\"isDisabled\">\n" +
     "                <span class=\"input-group-addon\" ng-click=\"openDtp()\">\n" +
     "                    <i class=\"fa\" ng-class=\"date == 'true' ? 'fa-calendar' : 'fa-clock-o'\"></i>\n" +
     "                </span>\n" +
@@ -4816,7 +4864,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "            <div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
     "                <!-- <input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" ng-keyup=\"inputChanged()\"> -->\n" +
     "                <div class=\"form-control\" title=\"{{ modelFormat }}\">{{ modelFormat }}</div>\n" +
@@ -4863,7 +4911,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div class=\"col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "            <!--Needed for intercepting form changes ($dirty)!-->\n" +
     "            <div ng-form=\"formDatetimeRangePicker\"></div>\n" +
     "\n" +
@@ -4950,7 +4998,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "             ng-class=\"{\n" +
     "                fieldWidth: fieldWidth,\n" +
     "                'has-warning': !isDisabled && dropdownDateForm.$invalid && dropdownDateForm.$dirty,\n" +
-    "                'disabled': isDisabled\n" +
+    "                'nice-disabled': isDisabled\n" +
     "            }\">\n" +
     "            <div class=\"form-inline\">\n" +
     "                <div class=\"form-group nice-dropdown-date-day\">\n" +
@@ -5057,7 +5105,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "\n" +
     "        <!------------------------- Field ------------------------->\n" +
-    "        <div ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
+    "        <div ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
     "            <div class=\"nice-field-wrapper\">\n" +
     "                <!------------------------- Button ------------------------->\n" +
     "                <button type=\"button\" class=\"btn btn-dropdown\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
@@ -5100,7 +5148,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "\n" +
     "                <!------------------------- Add button ------------------------->\n" +
-    "                <button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction\" ng-click=\"addButtonFunction()\">+</button>\n" +
+    "                <button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction && !isDisabled\" ng-click=\"addButtonFunction()\">+</button>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -5228,7 +5276,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
     "            'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
     "            'symbol': symbol,\n" +
-    "            'disabled': isDisabled}\"\n" +
+    "            'nice-disabled': isDisabled}\"\n" +
     "        >\n" +
     "            <input ng-show=\"!textArea\"\n" +
     "                class=\"form-control\"\n" +
@@ -5415,16 +5463,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "            <div class=\"input-group\">\n" +
     "                <span class=\"input-group-btn\">\n" +
-    "                    <button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\">-</button>\n" +
+    "                    <button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\">-</button>\n" +
     "                </span>\n" +
     "        \n" +
-    "                <input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" />\n" +
+    "                <input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" ng-disabled=\"isDisabled\" />\n" +
     "        \n" +
     "                <span class=\"input-group-btn\">\n" +
-    "                    <button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\">+</button>\n" +
+    "                    <button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\">+</button>\n" +
     "                </span>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -5441,7 +5489,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "            <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "        <div ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "            <div class=\"input-group\" ng-class=\"{\n" +
     "                'disabled': isDisabled,\n" +
     "                'has-warning': !isDisabled && form.$invalid && form.$dirty,\n" +
@@ -5490,6 +5538,21 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "    <!--Here is injected dropdown html if passed and results present and open.-->\n" +
     "    <!--<div ng-transclude></div>-->\n" +
     "</ng-form>"
+  );
+
+
+  $templateCache.put('src/components/nice-slot/nice-slot.html',
+    "<div class=\"nice-slot\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div ng-class=\"labelWidth ? labelWidth : 'col-xs-4'\" ng-if=\"title\">\n" +
+    "            <label class=\"nice\">{{ title }}</label>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-xs-8'\">\n" +
+    "            <ng-transclude></ng-transclude>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n"
   );
 
 
@@ -5548,11 +5611,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <label class=\"nice\">{{ title }}<span ng-if=\"required\">*</span></label>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "        <input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" />\n" +
+    "    <div ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
+    "        <input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" ng-disabled=\"isDisabled\" />\n" +
     "        <div class=\"input-area\">\n" +
     "            <div class=\"middle-text\" ng-if=\"!imageSource && !loading\">\n" +
-    "                {{ text }}\n" +
+    "                <div class=\"text\">{{ text }}</div>\n" +
     "                <div class=\"error\" ng-if=\"error\">{{ error }}</div>\n" +
     "            </div>\n" +
     "            <img ng-if=\"imageSource\" data-ng-src=\"{{ imageSource }}\" />\n" +

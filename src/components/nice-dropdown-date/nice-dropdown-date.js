@@ -18,7 +18,7 @@ angular.module('niceElements')
       fieldWidth: '@',
       labelWidth: '@',
       noMargin: '@',
-      isDisabled: '@',
+      isDisabled: '=',
       numYears: '@',
       startingYear: '@',
       mature: '@'

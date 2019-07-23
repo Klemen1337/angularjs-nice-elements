@@ -22,6 +22,7 @@ angular.module('niceElements')
         color: '@',
         endDate: '=',
         startDate: '=',
+        isDisabled: '=',
         translations: '@'
       },
       link: function(scope) {

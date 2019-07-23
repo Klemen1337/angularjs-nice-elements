@@ -24,6 +24,12 @@ p.nice{
   margin: 0;
 }
 
+.nice-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  user-select: none;
+}
+
 .nice-table{
   hr{
     margin: 0px;

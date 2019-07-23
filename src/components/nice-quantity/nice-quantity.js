@@ -18,7 +18,8 @@ angular.module('niceElements')
         onChange: "&",
         noMargin: "@",
         fieldWidth: '@',
-        labelWidth: '@'
+        labelWidth: '@',
+        isDisabled: '='
       },
       controller: function ($scope) {
         if (!$scope.model) {

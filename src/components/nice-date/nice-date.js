@@ -24,7 +24,8 @@ angular.module('niceElements')
         inline: '@',
         maxDate: '=',
         minDate: '=',
-        nextDate: '='
+        nextDate: '=',
+        isDisabled: '='
       },
       controller: function($scope) {
         $scope.isOpen = false;
@@ -269,8 +270,10 @@ angular.module('niceElements')
 
         // ------------------ Toggle open ------------------
         $scope.toggleOpen = function() {
-          $scope.isOpen = !$scope.isOpen;
-        }
+          if (!$scope.isDisabled) {
+            $scope.isOpen = !$scope.isOpen;
+          }
+        };
       }
     };
   });

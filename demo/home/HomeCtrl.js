@@ -26,6 +26,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   }
 
   $scope.data = {
+    disabled: false,
     dropdownCountryKey: "US",
     dropdownListObj2: [
       {'iso' : 'AF', 'name' : 'Afghanistan'},
@@ -52,6 +53,25 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     {id: 4, iso: "CA",value: "Canada"},
     {id: 5, iso: "US",value: "United States"}
   ];
+
+  $scope.simpleListData = "ODPIS";
+  $scope.simpleList = [
+    {
+      "text": "SERVIS"
+    }, {
+      "text": "NOV APARAT"
+    }, {
+      "text": "ODPIS"
+    }, {
+      "text": "PREGLED"
+    }, {
+      "text": "TLAČNI PREIZKUS G"
+    }, {
+      "text": "TLAČNI PREIZKUS H"
+    }, {
+      "text": "PREGLED HIDRANTA"
+    }
+  ]
 
   //$scope.listStrings = ["String 1", "String 2", "String 3"];
   $timeout(function () {

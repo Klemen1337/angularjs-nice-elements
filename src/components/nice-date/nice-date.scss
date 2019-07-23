@@ -212,6 +212,7 @@
         border: 1px solid $nice-border;
         padding: 0 10px;
         z-index: 2;
+        // color: $nice-font-color;
         background: white;
         cursor: pointer;
         position: relative;
@@ -239,5 +240,14 @@
       //   }
       // }
     }
+  }
+
+  .disabled-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
   }
 }
