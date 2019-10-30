@@ -15,7 +15,8 @@ angular.module('niceElements')
         isDisabled: '=',
         noMargin: '@',
         fieldWidth: '@',
-        labelWidth: '@'
+        labelWidth: '@',
+        help: '@'
       },
       restrict: 'E',
       templateUrl: 'src/components/nice-time-picker/nice-time-picker.html',

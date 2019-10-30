@@ -23,7 +23,8 @@ angular.module('niceElements')
         endDate: '=',
         startDate: '=',
         isDisabled: '=',
-        translations: '@'
+        translations: '@',
+        help: '@'
       },
       link: function(scope) {
         scope.translations = {

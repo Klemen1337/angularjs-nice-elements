@@ -31,7 +31,8 @@ angular.module('niceElements')
         noMargin: '@',
         setText: '@',
         tabIndex: '@',
-        isFocused: '@'
+        isFocused: '@',
+        help: '@'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 

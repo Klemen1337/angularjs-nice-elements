@@ -15,7 +15,8 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         value: '@',
-        title: '@'
+        title: '@',
+        help: '@'
       },
       link: function postLink(scope, element, attrs) {
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }

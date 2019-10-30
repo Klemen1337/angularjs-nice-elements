@@ -1,9 +1,9 @@
-<div class="nice-button-toggle row">
+<div class="nice-component nice-button-toggle row">
     <div class="col-xs-offset-4 col-xs-8">
-            <button type="button" class="btn btn-block btn-primary" ng-click="model = !model">
-                {{ label }}
-                <span ng-show="!model" class="glyphicon glyphicon-menu-down"></span>
-                <span ng-show="model" class="glyphicon glyphicon-menu-up"></span>
-            </button>
+        <button type="button" class="btn btn-block btn-primary" ng-click="model = !model">
+            <span>{{ label }}</span>
+            <span ng-show="!model" class="glyphicon glyphicon-menu-down"></span>
+            <span ng-show="model" class="glyphicon glyphicon-menu-up"></span>
+        </button>
     </div>
 </div>

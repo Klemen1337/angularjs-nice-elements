@@ -17,7 +17,8 @@ angular.module('niceElements')
         noMargin: "@",
         value: '=',
         max: '=',
-        color: '='
+        color: '=',
+        help: '@'
       },
 
       controller: function($scope, $element, $timeout) {

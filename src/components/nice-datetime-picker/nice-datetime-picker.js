@@ -29,7 +29,8 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
-      isDisabled: '='
+      isDisabled: '=',
+      help: '@'
     },
     controller: function ($scope) {
         $scope.date = $scope.date == 'true' || $scope.date == true;

@@ -26,7 +26,8 @@ angular.module('niceElements')
         noMargin: '@',
         step: '@',
         decimals: '@',
-        allowNegative: '@'
+        allowNegative: '@',
+        help: '@'
       },
 
       link: function (scope, element, attrs) {

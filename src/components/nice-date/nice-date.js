@@ -21,6 +21,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         model: '=',
         time: '@',
+        help: '@',
         inline: '@',
         maxDate: '=',
         minDate: '=',

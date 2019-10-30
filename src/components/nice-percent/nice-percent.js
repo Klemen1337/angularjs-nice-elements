@@ -21,7 +21,8 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         placeholder: '@',
-        noMargin: '@'
+        noMargin: '@',
+        help: '@'
       },
 
       link: function (scope, element, attrs) {

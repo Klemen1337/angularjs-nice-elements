@@ -22,7 +22,8 @@ angular.module('niceElements')
         labelWidth: '@',
         options: '=',
         defaultFalse: '@',
-        noMargin: '@'
+        noMargin: '@',
+        help: '@'
       },
       controller: function($scope, $attrs) {
         if (!$attrs.yes) { $attrs.yes = 'Yes'; }

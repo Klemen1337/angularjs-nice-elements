@@ -22,7 +22,8 @@ angular.module('niceElements')
         max: '@',
         noMargin: '@',
         labelWidth: '@',
-        startOfTheYear: '@'
+        startOfTheYear: '@',
+        help: '@'
       },
 
       link: function(scope, iElement, attrs, ctrl){

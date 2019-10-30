@@ -1,14 +1,17 @@
-<ng-form class="nice-date-range" ng-class="{'margin-bottom-0' : noMargin}" name="form">
-  <div class="row">
-    <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-        <label class="nice">{{ title }}<span ng-if="required">*</span></label>
-    </div>
+<ng-form class="nice-component nice-date-range" ng-class="{'margin-bottom-0' : noMargin}" name="form">
+    <div class="row">
+        <!------------------------- Label ------------------------->
+        <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <div class="nice-title-text">{{ title }}<span ng-if="required">*</span></div>
+            <nice-help class="nice-title-help" ng-if="help" text="{{ help }}"></nice-help>
+        </div>
 
-    <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-        <div class="input-group">
-            <input date-range-picker class="form-control date-picker" type="text" options="opts" ng-model="model" />
-            <span date-range-picker options="opts" ng-model="model" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <!------------------------- Field ------------------------->
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div class="input-group">
+                <input date-range-picker class="form-control date-picker" type="text" options="opts" ng-model="model" />
+                <span date-range-picker options="opts" ng-model="model" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
         </div>
     </div>
-  </div>
 </ng-form>

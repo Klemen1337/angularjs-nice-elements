@@ -11,6 +11,33 @@ label.nice{
   }
 }
 
+.nice-component {
+  .nice-title {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    line-height: 34px;
+
+    .nice-title-text {
+      text-align: right;
+      color: $input-label-color;
+    }
+    
+    .nice-title-help {
+      margin-left: 5px;
+      line-height: 1;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      justify-content: flex-start;
+
+      .nice-title-text {
+        text-align: left;
+      }
+    }
+  }
+}
+
 .margin-top-20 {
   margin-top: 20px;
 }

@@ -23,7 +23,8 @@ angular.module('niceElements')
         objValue: '@',
         objKey: '@',
         noMargin: '@',
-        multiple: '@'
+        multiple: '@',
+        help: '@'
       },
       link: function (scope, element, attr) {
         if (!attr.title) { attr.title = ''; }

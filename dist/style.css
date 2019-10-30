@@ -39,36 +39,64 @@ label.nice {
   }
 }
 
-/* line 14, ../src/styles/_nice-common.scss */
+/* line 15, ../src/styles/_nice-common.scss */
+.nice-component .nice-title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  line-height: 34px;
+}
+/* line 21, ../src/styles/_nice-common.scss */
+.nice-component .nice-title .nice-title-text {
+  text-align: right;
+  color: #474F52;
+}
+/* line 26, ../src/styles/_nice-common.scss */
+.nice-component .nice-title .nice-title-help {
+  margin-left: 5px;
+  line-height: 1;
+}
+@media (max-width: 767px) {
+  /* line 15, ../src/styles/_nice-common.scss */
+  .nice-component .nice-title {
+    justify-content: flex-start;
+  }
+  /* line 34, ../src/styles/_nice-common.scss */
+  .nice-component .nice-title .nice-title-text {
+    text-align: left;
+  }
+}
+
+/* line 41, ../src/styles/_nice-common.scss */
 .margin-top-20 {
   margin-top: 20px;
 }
 
-/* line 18, ../src/styles/_nice-common.scss */
+/* line 45, ../src/styles/_nice-common.scss */
 .margin-right-20 {
   margin-right: 20px;
 }
 
-/* line 22, ../src/styles/_nice-common.scss */
+/* line 49, ../src/styles/_nice-common.scss */
 p.nice {
   line-height: 34px;
   margin: 0;
 }
 
-/* line 27, ../src/styles/_nice-common.scss */
+/* line 54, ../src/styles/_nice-common.scss */
 .nice-disabled {
   opacity: 0.5;
   cursor: not-allowed;
   user-select: none;
 }
 
-/* line 34, ../src/styles/_nice-common.scss */
+/* line 61, ../src/styles/_nice-common.scss */
 .nice-table hr {
   margin: 0px;
   margin-bottom: 10px;
   border-color: #cbd4d9;
 }
-/* line 40, ../src/styles/_nice-common.scss */
+/* line 67, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-header {
   font-size: 12px;
   color: #4abeb4;
@@ -76,7 +104,7 @@ p.nice {
   padding-bottom: 5px;
   text-transform: uppercase;
 }
-/* line 48, ../src/styles/_nice-common.scss */
+/* line 75, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row {
   cursor: pointer;
   line-height: 25px;
@@ -84,24 +112,24 @@ p.nice {
   padding: 10px 0px;
   border-top: 1px solid #cbd4d9;
 }
-/* line 57, ../src/styles/_nice-common.scss */
+/* line 84, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .list-inline {
   margin-bottom: 0px;
 }
-/* line 61, ../src/styles/_nice-common.scss */
+/* line 88, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row:hover {
   background: #f5f5f5;
 }
-/* line 65, ../src/styles/_nice-common.scss */
+/* line 92, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .nice-table-btn {
   line-height: 11px;
   width: 100%;
 }
-/* line 71, ../src/styles/_nice-common.scss */
+/* line 98, ../src/styles/_nice-common.scss */
 .nice-table .no-border-top {
   border-top: none;
 }
-/* line 78, ../src/styles/_nice-common.scss */
+/* line 105, ../src/styles/_nice-common.scss */
 .nice-table .active:before, .nice-table.nice-table-settings .nice-table-row:hover:before {
   content: " ";
   background: #4abeb4;
@@ -111,12 +139,12 @@ p.nice {
   top: 0px;
   left: 0px;
 }
-/* line 90, ../src/styles/_nice-common.scss */
+/* line 117, ../src/styles/_nice-common.scss */
 .nice-table.nice-table-settings .nice-table-row:hover {
   background: none;
 }
 
-/* line 97, ../src/styles/_nice-common.scss */
+/* line 124, ../src/styles/_nice-common.scss */
 .nice-list-item {
   cursor: pointer;
   line-height: 25px;
@@ -124,32 +152,32 @@ p.nice {
   padding: 15px 25px;
   border-top: 1px solid #cbd4d9;
 }
-/* line 104, ../src/styles/_nice-common.scss */
+/* line 131, ../src/styles/_nice-common.scss */
 .nice-list-item:hover {
   background: #f5f5f5;
 }
-/* line 108, ../src/styles/_nice-common.scss */
+/* line 135, ../src/styles/_nice-common.scss */
 .nice-list-item.active, .nice-table.nice-table-settings .nice-list-item.nice-table-row:hover {
   background: #f5f5f5;
 }
 
-/* line 113, ../src/styles/_nice-common.scss */
+/* line 140, ../src/styles/_nice-common.scss */
 .nice-submenu {
   background-color: #e1e5e8;
   margin-top: 0;
   padding: 0;
   margin-bottom: 20px;
 }
-/* line 121, ../src/styles/_nice-common.scss */
+/* line 148, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-wrapper {
   padding: 25px;
 }
-/* line 125, ../src/styles/_nice-common.scss */
+/* line 152, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item {
   cursor: pointer;
   line-height: 50px;
 }
-/* line 129, ../src/styles/_nice-common.scss */
+/* line 156, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item:before {
   content: " ";
   background: #b0bec5;
@@ -160,47 +188,47 @@ p.nice {
   left: 2px;
   right: 2px;
 }
-/* line 141, ../src/styles/_nice-common.scss */
+/* line 168, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item.active:before, .nice-submenu .nice-table.nice-table-settings .nice-submenu-item.nice-table-row:hover:before, .nice-table.nice-table-settings .nice-submenu .nice-submenu-item.nice-table-row:hover:before, .nice-submenu .nice-submenu-item:hover:before {
   background: #4abeb4;
 }
-/* line 147, ../src/styles/_nice-common.scss */
+/* line 174, ../src/styles/_nice-common.scss */
 .nice-submenu .width-200 {
   width: 200px;
 }
-/* line 151, ../src/styles/_nice-common.scss */
+/* line 178, ../src/styles/_nice-common.scss */
 .nice-submenu .width-300 {
   width: 300px;
 }
-/* line 155, ../src/styles/_nice-common.scss */
+/* line 182, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-inline {
   margin-right: 10px;
   float: left;
   line-height: 34px;
 }
-/* line 161, ../src/styles/_nice-common.scss */
+/* line 188, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-inline-right {
   margin-left: 10px;
   float: right;
   line-height: 34px;
 }
 @media (max-width: 992px) {
-  /* line 161, ../src/styles/_nice-common.scss */
+  /* line 188, ../src/styles/_nice-common.scss */
   .nice-submenu .nice-inline-right {
     float: left;
   }
 }
 
-/* line 169, ../src/styles/_nice-common.scss */
+/* line 196, ../src/styles/_nice-common.scss */
 .nice-label {
   display: block;
 }
-/* line 171, ../src/styles/_nice-common.scss */
+/* line 198, ../src/styles/_nice-common.scss */
 .nice-label p.value {
   line-height: 34px;
 }
 
-/* line 176, ../src/styles/_nice-common.scss */
+/* line 203, ../src/styles/_nice-common.scss */
 .error-message {
   padding: 5px 0px 0px 0px;
   text-align: right;
@@ -208,32 +236,32 @@ p.nice {
   color: #d9534f;
 }
 
-/* line 183, ../src/styles/_nice-common.scss */
+/* line 210, ../src/styles/_nice-common.scss */
 .feedback-invalid {
   color: #d9534f !important;
 }
 
-/* line 187, ../src/styles/_nice-common.scss */
+/* line 214, ../src/styles/_nice-common.scss */
 .feedback-valid {
   color: #4abeb4;
 }
 
-/* line 192, ../src/styles/_nice-common.scss */
+/* line 219, ../src/styles/_nice-common.scss */
 .has-warning .form-control {
   border-color: #d9534f !important;
 }
-/* line 196, ../src/styles/_nice-common.scss */
+/* line 223, ../src/styles/_nice-common.scss */
 .has-warning .input-group-addon {
   background: #d9534f !important;
   border: #d9534f !important;
   color: white;
 }
 
-/* line 204, ../src/styles/_nice-common.scss */
+/* line 231, ../src/styles/_nice-common.scss */
 .has-success .form-control {
   border-color: #4abeb4;
 }
-/* line 208, ../src/styles/_nice-common.scss */
+/* line 235, ../src/styles/_nice-common.scss */
 .has-success .input-group-addon {
   background: #4abeb4;
   border: #4abeb4;
@@ -3043,15 +3071,16 @@ nice-checkbox {
   color: white;
   padding: 10px;
   max-width: 200px;
+  width: max-content;
   top: 30px;
   left: 50%;
   border-radius: 3px;
   font-size: 12px;
   z-index: 99999;
   transform: translate(-50%, 0);
-  white-space: pre;
+  line-height: 1.2;
 }
-/* line 31, ../src/components/nice-help/nice-help.scss */
+/* line 32, ../src/components/nice-help/nice-help.scss */
 .nice-help .help-window:before {
   content: "";
   width: 0;

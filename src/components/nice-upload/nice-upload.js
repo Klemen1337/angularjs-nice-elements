@@ -25,7 +25,8 @@
         callbackFunction: '=',
         callbackFile: '=',
         callbackUrl: '=',
-        isDisabled: '='
+        isDisabled: '=',
+        help: '@'
       },
 
       link: function(scope, element, attrs, ctrl){

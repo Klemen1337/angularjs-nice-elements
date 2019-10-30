@@ -19,7 +19,8 @@ angular.module('niceElements')
         noMargin: "@",
         fieldWidth: '@',
         labelWidth: '@',
-        isDisabled: '='
+        isDisabled: '=',
+        help: '@'
       },
       controller: function ($scope) {
         if (!$scope.model) {

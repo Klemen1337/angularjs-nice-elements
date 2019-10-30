@@ -1,9 +1,12 @@
-<div ng-form="form" class="nice-number" ng-class="{'margin-bottom-0' : noMargin}">
+<div class="nice-component nice-number" ng-form="form" ng-class="{'margin-bottom-0' : noMargin}">
     <div ng-class="{'row' : !disableRow}">
-        <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-            <label class="nice">{{ title }}</label>
+        <!------------------------- Label ------------------------->
+        <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <div class="nice-title-text">{{ title }}<span ng-if="required">*</span></div>
+            <nice-help class="nice-title-help" ng-if="help" text="{{ help }}"></nice-help>
         </div>
 
+        <!------------------------- Field ------------------------->
         <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <div class="input-group"
                 ng-class="{'has-warning': !disabled && form.$invalid && form.$dirty}">

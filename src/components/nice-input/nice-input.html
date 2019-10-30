@@ -1,65 +1,66 @@
-<ng-form class="nice-input" ng-class="{'margin-bottom-0' : noMargin}" name="forma">
-  <div class="row">
-    <div ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-        <label class="nice">{{ title }}<span ng-if="required">*</span></label>
-    </div>
-
-    <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-        <div 
-            class="form-group"
-            ng-class="{
-            'has-feedback': showValid && !hideValid,
-            'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
-            'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
-            'symbol': symbol,
-            'nice-disabled': isDisabled}"
-        >
-            <input ng-show="!textArea"
-                class="form-control"
-                type="{{ internalType }}"
-                ng-model="model"
-                title="{{ help }}"
-                name="{{ name }}"
-                id="{{ id }}"
-                tabindex="{{ tabIndex }}"
-                placeholder="{{ placeholder }}"
-                ng-minlength="minlength"
-                ng-maxlength="maxlength"
-                ng-required="required"
-                ng-keypress="keypress($event)"
-                ng-pattern="regexexp"
-                ng-disabled="isDisabled"
-            />
-            <textarea ng-show="textArea"
-                class="form-control"
-                ng-model="model"
-                title="{{ help }}"
-                id="{{ id }}"
-                tabindex="{{ tabIndex }}"
-                placeholder="{{ placeholder }}"
-                rows="{{textAreaLines}}"
-                ng-minlength="minlength"
-                ng-maxlength="maxlength"
-                ng-required="required"
-                ng-pattern="regexexp"
-                ng-disabled="isDisabled"
-            ></textarea>
-
-            <span class="input-group-addon" ng-if="symbol">{{ symbol }}</span>
-            <!--<span ng-if="!disabled && showValid && form.$valid && form.$dirty" class="glyphicon glyphicon-ok form-control-feedback feedback-valid" aria-hidden="true"></span>-->
-            <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
+<ng-form class="nice-component nice-input" ng-class="{'margin-bottom-0' : noMargin}" name="forma">
+    <div class="row">
+        <!------------------------- Label ------------------------->
+        <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
+            <div class="nice-title-text">{{ title }}<span ng-if="required">*</span></div>
+            <nice-help class="nice-title-help" ng-if="help" text="{{ help }}"></nice-help>
         </div>
 
-        <div ng-if="forma.$error && forma.$dirty">
-            <div class="error-message" ng-if="forma.$dirty && forma.$error.email" translate>Email is not valid.</div>
-            <div class="error-message" ng-if="forma.$dirty && forma.$error.pattern" translate>This field requires a specific pattern.</div>
-            <div class="error-message" ng-if="forma.$error.minlength"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>
-            <div class="error-message" ng-if="forma.$error.maxlength" translate>Your input is too long</div>
-            <div class="error-message" ng-if="forma.$error.required" ng-if="forma.$dirty" translate>This field is required.</div>
-            <div class="error-message" ng-if="forma.$error.unique" translate>This field must be unique.</div>
-        </div>
+        <!------------------------- Field ------------------------->
+        <div ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
+            <div 
+                class="form-group"
+                ng-class="{
+                'has-feedback': showValid && !hideValid,
+                'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
+                'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
+                'symbol': symbol,
+                'nice-disabled': isDisabled}"
+            >
+                <input ng-show="!textArea"
+                    class="form-control"
+                    type="{{ internalType }}"
+                    ng-model="model"
+                    name="{{ name }}"
+                    id="{{ id }}"
+                    tabindex="{{ tabIndex }}"
+                    placeholder="{{ placeholder }}"
+                    ng-minlength="minlength"
+                    ng-maxlength="maxlength"
+                    ng-required="required"
+                    ng-keypress="keypress($event)"
+                    ng-pattern="regexexp"
+                    ng-disabled="isDisabled"
+                />
+                <textarea ng-show="textArea"
+                    class="form-control"
+                    ng-model="model"
+                    id="{{ id }}"
+                    tabindex="{{ tabIndex }}"
+                    placeholder="{{ placeholder }}"
+                    rows="{{textAreaLines}}"
+                    ng-minlength="minlength"
+                    ng-maxlength="maxlength"
+                    ng-required="required"
+                    ng-pattern="regexexp"
+                    ng-disabled="isDisabled"
+                ></textarea>
 
-        <!-- <pre>{{ forma | json }}</pre> -->
+                <span class="input-group-addon" ng-if="symbol">{{ symbol }}</span>
+                <!--<span ng-if="!disabled && showValid && form.$valid && form.$dirty" class="glyphicon glyphicon-ok form-control-feedback feedback-valid" aria-hidden="true"></span>-->
+                <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
+            </div>
+
+            <div ng-if="forma.$error && forma.$dirty">
+                <div class="error-message" ng-if="forma.$dirty && forma.$error.email" translate>Email is not valid.</div>
+                <div class="error-message" ng-if="forma.$dirty && forma.$error.pattern" translate>This field requires a specific pattern.</div>
+                <div class="error-message" ng-if="forma.$error.minlength"><translate>Your input is too short. It must contain at least</translate> {{ minlength }} <translate>characters</translate>.</div>
+                <div class="error-message" ng-if="forma.$error.maxlength" translate>Your input is too long</div>
+                <div class="error-message" ng-if="forma.$error.required" ng-if="forma.$dirty" translate>This field is required.</div>
+                <div class="error-message" ng-if="forma.$error.unique" translate>This field must be unique.</div>
+            </div>
+
+            <!-- <pre>{{ forma | json }}</pre> -->
+        </div>
     </div>
-  </div>
 </ng-form>

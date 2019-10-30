@@ -30,7 +30,8 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
         formatOutput: "@", // Format output or moment
-        isDisabled: "="
+        isDisabled: "=",
+        help: "@"
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
