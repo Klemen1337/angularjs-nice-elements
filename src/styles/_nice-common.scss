@@ -16,8 +16,8 @@ label.nice{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    line-height: 34px;
-
+    min-height: 34px;
+    
     .nice-title-text {
       text-align: right;
       color: $input-label-color;
