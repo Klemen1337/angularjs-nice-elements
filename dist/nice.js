@@ -5302,7 +5302,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   $templateCache.put('src/components/nice-help/nice-help.html',
     "<div class=\"nice-help\">\n" +
     "    <i class=\"fa fa-question-circle\"></i>\n" +
-    "    <div class=\"help-window\">{{ text }}</div>\n" +
+    "    <div class=\"help-window\" ng-bind-html=\"text\">{{ text }}</div>\n" +
     "</div>\n"
   );
 

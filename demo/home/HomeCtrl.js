@@ -160,7 +160,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   };
 
   $scope.error = function () {
-    NiceNotification.error({message: 'Error notification', delay: 20000});
+    NiceNotification.error({ title: "Error", message: "This is a test error", delay: 20000});
   };
 
   $scope.success = function () {
