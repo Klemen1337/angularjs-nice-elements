@@ -21,16 +21,16 @@
       box-shadow: 0 0 0;
     }
 
-    border-radius: $nice-border-radius;
+    border-radius: var(--nice-border-color-radius);
     border-color: transparent;
-    color: $nice-base-color;
+    color: var(--nice-base-color);
     -webkit-user-select: none;
     padding: 6px 0px;
 
     &.editing{
       padding: 6px 12px;
-      border-color: $nice-base-color;
-      color: $nice-font-color;
+      border-color: var(--nice-base-color);
+      color: var(--nice-font-color);
       -webkit-user-select: initial;
     }
   }

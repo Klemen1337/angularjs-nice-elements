@@ -8,7 +8,7 @@
     .nice-start-date, .nice-end-date{
       width: 50%;
       float: left;
-      color: $nice-font-color;
+      color: var(--nice-font-color);
       transition: all 0.3s ease;
 
       label{
@@ -29,7 +29,7 @@
 
 
   .nice-calendar-time{
-    border-top: 1px solid $nice-border;
+    border-top: 1px solid var(--nice-border-color);
     position: relative;
 
     .no-border-right{
@@ -65,7 +65,7 @@
       appearance: none;
       outline: 0;
       border-radius: 0px;
-      border: 1px solid $nice-border;
+      border: 1px solid var(--nice-border-color);
       border-top: 0;
       border-left: 0;
       padding: 5px 10px;
@@ -78,25 +78,25 @@
     }
 
     .time-picket-icon{
-      border-right: 1px solid $nice-border;
+      border-right: 1px solid var(--nice-border-color);
       width: 20%;
       float: left;
       font-size: 14px;
       text-align: center;
       line-height: 30px;
-      color: $nice-font-color;
-      border-bottom: 1px solid $nice-border;
+      color: var(--nice-font-color);
+      border-bottom: 1px solid var(--nice-border-color);
       height: 30px;
     }
   }
 
 
   .nice-calendar-wrapper {
-    border-radius: $nice-border-radius;
+    border-radius: var(--nice-border-color-radius);
     display: block;
     background: white;
     width: 100%;
-    border: solid 1px $nice-border;
+    border: solid 1px var(--nice-border-color);
 
     $day-width: 14.28571%;
     $day-height: 25px;
@@ -107,7 +107,7 @@
     .header {
       float: left;
       width: 100%;
-      background: $nice-base-color;
+      background: var(--nice-base-color);
       height: $header-height;
       line-height: $header-height;
       color: white;
@@ -147,7 +147,7 @@
     .week {
       float: left;
       width: 100%;
-      border-top: solid 1px $nice-border-color;
+      border-top: solid 1px var(--nice-border-color);
 
       &:first-child {
         border-top: none;
@@ -159,12 +159,12 @@
         width: $day-width;
         height: $day-height;
         line-height: $day-height;
-        border-left: solid 1px $nice-border-color;
+        border-left: solid 1px var(--nice-border-color);
         font-size: 12px;
         text-align: center;
         background: white;
         cursor: pointer;
-        color: $nice-font-color;
+        color: var(--nice-font-color);
 
         &:first-child {
           border-left: none;
@@ -179,7 +179,7 @@
           width: 10px;
           border-style: solid;
           border-width: 0 10px 10px 0;
-          border-color: transparent $nice-base-color transparent transparent;
+          border-color: transparent var(--nice-base-color) transparent transparent;
         }
 
         &.different-month {
@@ -192,23 +192,23 @@
 
         &.disabled{
           opacity: 0.3;
-          color: $nice-danger-color;
+          color: var(--nice-danger-color);
           cursor: not-allowed;
         }
 
         &.selected {
-          background: lighten($nice-base-color, 30%);
+          background: var(--nice-base-color-lighter);
         }
 
         &.start-selected {
-          background: $nice-base-color;
+          background: var(--nice-base-color);
           color: white;
           border-bottom-left-radius: 10px;
           border-top-left-radius: 10px;
         }
 
         &.end-selected {
-          background: $nice-base-color;
+          background: var(--nice-base-color);
           color: white;
           border-bottom-right-radius: 10px;
           border-top-right-radius: 10px;
@@ -216,7 +216,7 @@
 
         &.selecting-start {
           &:hover {
-            background: lighten($nice-base-color, 3%);
+            background: var(--nice-base-color-lighter);
             color: white;
             border-bottom-left-radius: 10px;
             border-top-left-radius: 10px;
@@ -225,7 +225,7 @@
 
         &.selecting-end {
           &:hover {
-            background: darken($nice-base-color, 10%);
+            background: var(--nice-base-color-darken);
             color: white;
             border-bottom-right-radius: 10px;
             border-top-right-radius: 10px;
@@ -256,7 +256,7 @@
       }
 
       &.names > span {
-        color: darken($nice-base-color, 10%);
+        color: var(--nice-base-color-darken);
         line-height: 20px;
         height: 20px;
         cursor: default;
@@ -265,7 +265,7 @@
   }
 
   .change {
-    color: $nice-base-color;
+    color: var(--nice-base-color);
   }
 
   .disabled-shield {

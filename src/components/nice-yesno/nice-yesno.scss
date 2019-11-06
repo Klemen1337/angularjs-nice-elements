@@ -2,9 +2,9 @@
   margin-bottom: 10px;
 
   .disabled{
-    background-color: $nice-yesno-disabled-bg;
+    background-color: var(--nice-yesno-disabled-bg);
     opacity: 0.65;
-    border: $nice-yesno-disabled-border;
+    border: var(--nice-yesno-disabled-border);
 
     .yesno-yes-bg, .yesno-no-bg, .yesno-button{
       cursor: not-allowed !important;
@@ -12,10 +12,10 @@
   }
 
   .yesno-wrapper{
-    background: $nice-yesno-bg;
-    border: 1px solid $nice-border;
-    color: $nice-font-color;
-    border-radius: $nice-border-radius;
+    background: var(--nice-yesno-bg);
+    border: 1px solid var(--nice-border-color);
+    color: var(--nice-font-color);
+    border-radius: var(--nice-border-color-radius);
 
     height: 34px;
     position: relative;
@@ -27,7 +27,6 @@
     }
 
     .yesno-yes-bg, .yesno-no-bg {
-      color: $disabled-font-color;
       width: 50%;
       height: 100%;
       position: absolute;
@@ -35,44 +34,45 @@
       bottom: 0;
     }
 
-    .yesno-no-bg{
+    .yesno-no-bg {
       left: 50%;
       right: 0;
     }
-    .yesno-yes-bg{
+
+    .yesno-yes-bg {
       left: 0;
       right: 50%;
     }
 
-    .yesno-button{
+    .yesno-button {
       -webkit-transition: all 0.5s;
       -moz-transition: all 0.5s;
       -ms-transition: all 0.5s;
       -o-transition: all 0.5s;
       transition: all 0.5s;
-      width: 50%;
 
-      background-color: $nice-yesno-slider-bg;
-      border-radius: $nice-border-radius-small;
+      background-color: var(--nice-yesno-slider-bg);
+      border-radius: var(--nice-border-color-radius-small);
       color: white;
       position: absolute;
       line-height: 28px;
       top: 2px;
       left: 2px;
+      right: 50%;
 
       &:hover{
-        background-color: darken($nice-yesno-slider-bg, 5%);
+        background-color: var(--nice-yesno-slider-bg);
       }
     }
 
-    .yesno-button-no{
+    .yesno-button-no {
       left: 50%;
       top: 2px;
       bottom: 2px;
       right: 2px;
     }
 
-    .yesno-button-yes{
+    .yesno-button-yes {
       left: 2px;
       top: 2px;
       bottom: 2px;
@@ -82,6 +82,7 @@
     &.true{
       .yesno-button{
         right: 2px;
+        left: 50%;
       }
     }
   }

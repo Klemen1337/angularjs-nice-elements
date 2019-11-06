@@ -1,11 +1,11 @@
 .nice-steps{
   font-size: $font-size-small;
-  color: $nice-base-color;
+  color: var(--nice-base-color);
   margin-top: -30px;
   padding-bottom: 10px;
   padding-top: 45px;
   margin-bottom: 25px;
-  background-color: $nice-submenu-bg-color;
+  background-color: var(--nice-submenu-bg-color);
 
   ul{
     position: relative;
@@ -19,7 +19,7 @@
 
     label{
       //cursor: pointer;
-      color: $nice-submenu-gray-color;
+      color: var(--nice-submenu-gray-color);
     }
 
     .circle{
@@ -29,12 +29,12 @@
       margin-left: -9px;
       width: 18px;
       height: 18px;
-      background: $nice-submenu-gray-color;
+      background: var(--nice-submenu-gray-color);
       display: block;
       content: "";
       z-index: 2;
       border-radius: 100px;
-      border: 3px solid $nice-submenu-gray-color;
+      border: 3px solid var(--nice-submenu-gray-color);
     }
   }
 
@@ -46,7 +46,7 @@
     left: -50%;
     width: 100%;
     height: 3px;
-    background: $nice-submenu-gray-color;
+    background: var(--nice-submenu-gray-color);
     z-index: 1;
   }
 
@@ -58,21 +58,21 @@
   // Styling of active elements (circle, line and text)
   .active{
     .circle {
-      background: $nice-base-color;
-      border-color: $nice-base-color;
+      background: var(--nice-base-color);
+      border-color: var(--nice-base-color);
     }
     &.progress-step::before{
-      background: $nice-base-color;
+      background: var(--nice-base-color);
     }
     label{
-      color: $nice-base-color;
+      color: var(--nice-base-color);
     }
   }
 
   // Current element has white color inside the circle
   .current{
     .circle {
-      background-color: $nice-submenu-bg-color;
+      background-color: var(--nice-submenu-bg-color);
     }
   }
 

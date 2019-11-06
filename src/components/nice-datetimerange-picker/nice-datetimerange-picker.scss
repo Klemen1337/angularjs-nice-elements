@@ -2,34 +2,34 @@
   .btn{
     padding-left: 0;
     padding-right: 0;
-    border-radius: $nice-border-radius;
+    border-radius: var(--nice-border-color-radius);
   }
 
   .form-control{
     min-width: 50px;
-    background: $nice-input-bg;
-    border: 1px solid $nice-input-border;
+    background: var(--nice-input-bg);
+    border: 1px solid var(--nice-input-border);
 
     &:active, &:focus{
-      border-color: $nice-focus-border;
+      border-color: var(--nice-focus-border);
       -webkit-box-shadow: inset 0 0 0;
       box-shadow: inset 0 0 0;
 
       .input-group-addon &{
-        border-color: $nice-focus-border;
+        border-color: var(--nice-focus-border);
       }
     }
 
     &:disabled {
-      background: $nice-input-disabled-bg;
-      border-color: $nice-input-disabled-border;
+      background: var(--nice-input-disabled-bg);
+      border-color: var(--nice-input-disabled-border);
       opacity: 0.65;
     }
   }
 
   .dtp-range-wrapper{
-    border-radius: $nice-border-radius;
-    box-shadow: $nice-box-shadow;
+    border-radius: var(--nice-border-color-radius);
+    box-shadow: var(--nice-box-shadow);
     position: absolute;
     left: 15px;
     top: 40px;
@@ -37,7 +37,7 @@
     height: 325px;
     padding: 10px;
     background-color: white;
-    border: 1px solid $nice-border;
+    border: 1px solid var(--nice-border-color);
     z-index: 900;
 
     .dtp-layer {
@@ -79,7 +79,7 @@
 
 
     .dtp-content{
-      border-radius: $nice-border-radius;
+      border-radius: var(--nice-border-color-radius);
       box-shadow: 0 0 0 !important;
 
       .dtp-date-view{

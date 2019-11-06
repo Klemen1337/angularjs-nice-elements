@@ -2,11 +2,11 @@
   .input-group{
     .input-group-addon {
       cursor: pointer;
-      background: $nice-addon-bg;
+      background: var(--nice-addon-bg);
 
       &:hover {
         // Set icon color and background
-        background-color: $nice-base-color;
+        background-color: var(--nice-base-color);
         color: white;
       }
     }
@@ -14,7 +14,7 @@
 }
 
 .daterangepicker{
-  border-radius: $nice-border-radius;
+  border-radius: var(--nice-border-color-radius);
   padding: 15px;
   box-shadow: 0px 0px 0px;
 
@@ -35,11 +35,11 @@
     ul{
       margin-bottom: 15px;
       li{
-        border-color: $nice-base-color;
-        background: $nice-base-color;
-        -webkit-border-radius: $nice-border-radius;
-        -moz-border-radius: $nice-border-radius;
-        border-radius: $nice-border-radius;
+        border-color: var(--nice-base-color);
+        background: var(--nice-base-color);
+        -webkit-border-radius: var(--nice-border-color-radius);
+        -moz-border-radius: var(--nice-border-color-radius);
+        border-radius: var(--nice-border-color-radius);
         color: white;
 
         &.active{
@@ -49,8 +49,8 @@
         }
 
         &:hover, &:active, &:focus{
-          border-color: $nice-base-color;
-          background: $nice-base-color;
+          border-color: var(--nice-base-color);
+          background: var(--nice-base-color);
           color: white;
         }
       }
@@ -65,14 +65,14 @@
 
   .calendar{
     .in-range{
-      background: lighten($nice-base-color, 30%);
+      background: var(--nice-base-color-lighter);
     }
 
     .start-date, .end-date{
-      background: $nice-base-color;
+      background: var(--nice-base-color);
 
       &:hover{
-        background: $nice-base-color;
+        background: var(--nice-base-color);
       }
     }
   }
@@ -164,7 +164,7 @@
 
 .daterangepicker .ranges .input-mini {
   border: 1px solid #ccc;
-  border-radius: $nice-border-radius;
+  border-radius: var(--nice-border-color-radius);
   color: #555;
   display: block;
   font-size: 11px;
@@ -189,9 +189,9 @@
   color: #08c;
   padding: 3px 12px;
   margin-bottom: 8px;
-  -webkit-border-radius: $nice-border-radius;
-  -moz-border-radius: $nice-border-radius;
-  border-radius: $nice-border-radius;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
   cursor: pointer;
 }
 
@@ -204,7 +204,7 @@
 .daterangepicker .calendar-date {
   border: 1px solid #ddd;
   padding: 4px;
-  border-radius: $nice-border-radius;
+  border-radius: var(--nice-border-color-radius);
   background: #fff;
 }
 
@@ -221,9 +221,9 @@
   left: 20px;
   padding: 4px;
   margin-top: 1px;
-  -webkit-border-radius: $nice-border-radius;
-  -moz-border-radius: $nice-border-radius;
-  border-radius: $nice-border-radius;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
 }
 
 .daterangepicker.opensleft:before {
@@ -312,9 +312,9 @@
   text-align: center;
   width: 20px;
   height: 20px;
-  -webkit-border-radius: $nice-border-radius;
-  -moz-border-radius: $nice-border-radius;
-  border-radius: $nice-border-radius;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -351,9 +351,9 @@
 }
 
 .daterangepicker td.start-date.end-date {
-  -webkit-border-radius: $nice-border-radius;
-  -moz-border-radius: $nice-border-radius;
-  border-radius: $nice-border-radius;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
 }
 
 .daterangepicker td.active, .daterangepicker td.active:hover {

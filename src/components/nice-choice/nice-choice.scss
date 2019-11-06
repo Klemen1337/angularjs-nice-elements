@@ -3,9 +3,9 @@
 
   .selected{
     .choice-checkbox {
-      border-color: $nice-choice-selected-bg;
-      background: $nice-choice-selected-bg;
-      color: $nice-choice-selected-color;
+      border-color: var(--nice-choice-selected-bg);
+      background: var(--nice-choice-selected-bg);
+      color: var(--nice-choice-selected-color);
     }
   }
 
@@ -17,7 +17,7 @@
 
       &:hover{
         .choice-checkbox{
-          border-color:$nice-border !important;
+          border-color:var(--nice-border-color) !important;
         }
       }
     }
@@ -25,7 +25,7 @@
     .selected{
       &:hover{
         .choice-checkbox {
-          border-color:$nice-choice-selected-bg !important;
+          border-color:var(--nice-choice-selected-bg) !important;
         }
       }
     }
@@ -48,20 +48,20 @@
       -o-transition: all 0.2s;
       transition: all 0.2s;
 
-      background: $nice-choice-bg;
-      color: $nice-choice-bg;
+      background: var(--nice-choice-bg);
+      color: var(--nice-choice-bg);
       line-height: 22px;
       width: 25px;
       height: 25px;
-      border: 2px solid $nice-border;
+      border: 2px solid var(--nice-border-color);
       position: absolute;
-      border-radius: $nice-border-radius-small;
+      border-radius: var(--nice-border-color-radius-small);
       text-align: center;
     }
 
     &:hover{
       .choice-checkbox{
-        border-color: $nice-choice-hover-border;
+        border-color: var(--nice-choice-hover-border);
       }
     }
 

@@ -10,7 +10,7 @@
 
   svg path,
   svg rect{
-    fill: $nice-loader-color;
+    fill: var(--nice-loader-color);
   }
 
   #loader{

@@ -9,8 +9,8 @@
     font-weight: normal;
     min-width: 300px;
     padding: 10px 15px;
-    color: $nice-notification-color;
-    background: $nice-notification-bg;
+    color: var(--nice-notification-color);
+    background: var(--nice-notification-bg);
     transform: all 0.5s ease;
 
     &.killed {
@@ -30,7 +30,7 @@
     }
 
     & a {
-        color: $nice-notification-color;
+        color: var(--nice-notification-color);
         &:hover {
             text-decoration: underline;
         }
@@ -41,23 +41,23 @@
     }
 
     &.warning {
-        color: $nice-notification-warning-color;
-        background: $nice-notification-warning-bg;
+        color: var(--nice-notification-warning-color);
+        background: var(--nice-notification-warning-bg);
     }
 
     &.error {
-        color: $nice-notification-danger-color;
-        background: $nice-notification-danger-color-bg;
+        color: var(--nice-notification-danger-color);
+        background: var(--nice-notification-danger-bg);
     }
 
     &.success {
-        color: $nice-notification-success-color;
-        background: $nice-notification-success-bg;
+        color: var(--nice-notification-success-color);
+        background: var(--nice-notification-success-bg);
     }
 
     &.info {
-        color: $nice-notification-info-color;
-        background: $nice-notification-info-bg;
+        color: var(--nice-notification-info-color);
+        background: var(--nice-notification-info-bg);
     }
 
     &:hover {

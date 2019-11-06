@@ -1,4 +1,75 @@
+/* line 3, ../src/styles/_variables.scss */
+:root {
+  --nice-font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --nice-font-weight: normal;
+  --nice-danger-color: #d9534f;
+  --nice-success-color: #5cb85c;
+  --nice-info-color: #31b0d5;
+  --nice-warning-color: #ec971f;
+  --nice-base-color: #4abeb4;
+  --nice-base-color-darker: #3fafa6;
+  --nice-base-color-lighter: #5dc5bc;
+  --nice-border-color: #cbd4d9;
+  --nice-addon-bg: #dcdcdc;
+  --nice-font-color: #404040;
+  --nice-disabled-color: #EDEFF2;
+  --nice-disabled-border: #D2D9D9;
+  --nice-disabled-bg: white;
+  --nice-submenu-bg-color: #e1e5e8;
+  --nice-submenu-gray-color: #b0bec5;
+  --nice-table-bg-hover: #f5f5f5;
+  --nice-table-bg-active: #f5f5f5;
+  --nice-border-radius: 3px;
+  --nice-focus-bg: white;
+  --nice-focus-border: var(--nice-base-color);
+  --nice-focus-color: #474F52;
+  --nice-background: white;
+  --nice-hover-color: #EDEDED;
+  --nice-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --nice-input-label-color: #474F52;
+  --nice-input-placeholder-color: #999999;
+  --nice-input-bg: var(--nice-background);
+  --nice-input-border: var(--nice-border-color);
+  --nice-input-disabled-bg: white;
+  --nice-input-disabled-border: var(--nice-disabled-color);
+  --nice-input-valid: var(--nice-base-color);
+  --nice-input-invalid: var(--nice-danger-color);
+  --nice-dropdown-bg: var(--nice-background);
+  --nice-dropdown-border: var(--nice-border-color);
+  --nice-dropdown-color: var(--nice-font-color);
+  --nice-dropdown-hover-bg: white;
+  --nice-dropdown-hover-border: var(--nice-border-color);
+  --nice-dropdown-hover-color: #474F52;
+  --nice-dropdown-disabled-bg: var(--nice-disabled-bg);
+  --nice-dropdown-disabled-border: var(--nice-disabled-color);
+  --nice-yesno-bg: var(--nice-background);
+  --nice-yesno-slider-bg: var(--nice-base-color);
+  --nice-yesno-disabled-bg: var(--nice-disabled-bg);
+  --nice-yesno-disabled-border: var(--nice-disabled-border);
+  --nice-choice-bg: var(--nice-background);
+  --nice-choice-hover-border: var(--nice-base-color);
+  --nice-choice-selected-bg: var(--nice-base-color);
+  --nice-choice-selected-color: white;
+  --nice-loader-color: var(--nice-base-color);
+  --nice-notification-color: white;
+  --nice-notification-bg: var(--nice-base-color);
+  --nice-notification-warning-color: var(--nice-notification-color);
+  --nice-notification-warning-bg: var(--nice-warning-color);
+  --nice-notification-danger-color: var(--nice-notification-color);
+  --nice-notification-danger-bg: var(--nice-danger-color);
+  --nice-notification-success-color: var(--nice-notification-color);
+  --nice-notification-success-bg: var(--nice-success-color);
+  --nice-notification-info-color: var(--nice-notification-color);
+  --nice-notification-info-bg: var(--nice-info-color);
+}
+
 /* line 4, ../src/styles/_nice.scss */
+*, ::after, ::before {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* line 9, ../src/styles/_nice.scss */
 .noselect, .nice-choice li {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -8,24 +79,24 @@
   user-select: none;
 }
 
-/* line 13, ../src/styles/_nice.scss */
+/* line 18, ../src/styles/_nice.scss */
 .form-control {
   box-shadow: none;
 }
 
-/* line 17, ../src/styles/_nice.scss */
+/* line 22, ../src/styles/_nice.scss */
 .margin-bottom-0 {
   margin-bottom: 0 !important;
 }
 
-/* line 21, ../src/styles/_nice.scss */
+/* line 26, ../src/styles/_nice.scss */
 .mb-10 {
   margin-bottom: 10px;
 }
 
 /* line 1, ../src/styles/_nice-common.scss */
 label.nice {
-  color: #474F52;
+  color: var(--nice-input-label-color);
   text-align: right;
   display: block;
   line-height: 34px;
@@ -49,7 +120,7 @@ label.nice {
 /* line 21, ../src/styles/_nice-common.scss */
 .nice-component .nice-title .nice-title-text {
   text-align: right;
-  color: #474F52;
+  color: var(--nice-input-label-color);
 }
 /* line 26, ../src/styles/_nice-common.scss */
 .nice-component .nice-title .nice-title-help {
@@ -94,12 +165,12 @@ p.nice {
 .nice-table hr {
   margin: 0px;
   margin-bottom: 10px;
-  border-color: #cbd4d9;
+  border-color: var(--nice-border-color);
 }
 /* line 67, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-header {
   font-size: 12px;
-  color: #4abeb4;
+  color: var(--nice-base-color);
   padding-top: 10px;
   padding-bottom: 5px;
   text-transform: uppercase;
@@ -110,7 +181,7 @@ p.nice {
   line-height: 25px;
   font-size: 14px;
   padding: 10px 0px;
-  border-top: 1px solid #cbd4d9;
+  border-top: 1px solid var(--nice-border-color);
 }
 /* line 84, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .list-inline {
@@ -118,7 +189,7 @@ p.nice {
 }
 /* line 88, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row:hover {
-  background: #f5f5f5;
+  background: var(--nice-table-bg-hover);
 }
 /* line 92, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .nice-table-btn {
@@ -132,7 +203,7 @@ p.nice {
 /* line 105, ../src/styles/_nice-common.scss */
 .nice-table .active:before, .nice-table.nice-table-settings .nice-table-row:hover:before {
   content: " ";
-  background: #4abeb4;
+  background: var(--nice-base-color);
   width: 2px;
   height: 100%;
   position: absolute;
@@ -150,20 +221,20 @@ p.nice {
   line-height: 25px;
   font-size: 14px;
   padding: 15px 25px;
-  border-top: 1px solid #cbd4d9;
+  border-top: 1px solid var(--nice-border-color);
 }
 /* line 131, ../src/styles/_nice-common.scss */
 .nice-list-item:hover {
-  background: #f5f5f5;
+  background: var(--nice-table-bg-hover);
 }
 /* line 135, ../src/styles/_nice-common.scss */
 .nice-list-item.active, .nice-table.nice-table-settings .nice-list-item.nice-table-row:hover {
-  background: #f5f5f5;
+  background: var(--nice-table-bg-active);
 }
 
 /* line 140, ../src/styles/_nice-common.scss */
 .nice-submenu {
-  background-color: #e1e5e8;
+  background-color: var(--nice-submenu-bg-color);
   margin-top: 0;
   padding: 0;
   margin-bottom: 20px;
@@ -180,7 +251,7 @@ p.nice {
 /* line 156, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item:before {
   content: " ";
-  background: #b0bec5;
+  background: var(--nice-submenu-gray-color);
   height: 3px;
   position: absolute;
   top: 47px;
@@ -190,7 +261,7 @@ p.nice {
 }
 /* line 168, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item.active:before, .nice-submenu .nice-table.nice-table-settings .nice-submenu-item.nice-table-row:hover:before, .nice-table.nice-table-settings .nice-submenu .nice-submenu-item.nice-table-row:hover:before, .nice-submenu .nice-submenu-item:hover:before {
-  background: #4abeb4;
+  background: var(--nice-base-color);
 }
 /* line 174, ../src/styles/_nice-common.scss */
 .nice-submenu .width-200 {
@@ -233,38 +304,38 @@ p.nice {
   padding: 5px 0px 0px 0px;
   text-align: right;
   font-size: 12px;
-  color: #d9534f;
+  color: var(--nice-input-invalid);
 }
 
 /* line 210, ../src/styles/_nice-common.scss */
 .feedback-invalid {
-  color: #d9534f !important;
+  color: var(--nice-input-invalid) !important;
 }
 
 /* line 214, ../src/styles/_nice-common.scss */
 .feedback-valid {
-  color: #4abeb4;
+  color: var(--nice-input-valid);
 }
 
 /* line 219, ../src/styles/_nice-common.scss */
 .has-warning .form-control {
-  border-color: #d9534f !important;
+  border-color: var(--nice-input-invalid) !important;
 }
 /* line 223, ../src/styles/_nice-common.scss */
 .has-warning .input-group-addon {
-  background: #d9534f !important;
-  border: #d9534f !important;
+  background: var(--nice-input-invalid) !important;
+  border: var(--nice-input-invalid) !important;
   color: white;
 }
 
 /* line 231, ../src/styles/_nice-common.scss */
 .has-success .form-control {
-  border-color: #4abeb4;
+  border-color: var(--nice-input-valid);
 }
 /* line 235, ../src/styles/_nice-common.scss */
 .has-success .input-group-addon {
-  background: #4abeb4;
-  border: #4abeb4;
+  background: var(--nice-input-valid);
+  border: var(--nice-input-valid);
   color: white;
 }
 
@@ -278,9 +349,9 @@ p.nice {
 }
 /* line 9, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .open .btn-dropdown, .nice-search .nice-dropdown-empty .open .btn-dropdown {
-  background: white !important;
-  border-color: #4abeb4 !important;
-  color: #474F52 !important;
+  background: var(--nice-focus-bg) !important;
+  border-color: var(--nice-focus-border) !important;
+  color: var(--nice-focus-color) !important;
 }
 /* line 15, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .open .dropdown-menu, .nice-search .nice-dropdown-empty .open .dropdown-menu {
@@ -306,11 +377,11 @@ p.nice {
   width: 100%;
   padding: 0;
   max-height: 300px;
-  border: 1px solid #eee;
+  border: 1px solid var(--nice-border-color);
   flex-direction: column;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--nice-box-shadow);
   margin-top: 0.5rem;
   margin-bottom: 2rem;
   z-index: 1000;
@@ -322,10 +393,10 @@ p.nice {
 /* line 52, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar {
   flex-shrink: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--nice-border-color);
   position: relative;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: var(--nice-border-color-radius);
+  border-top-right-radius: var(--nice-border-color-radius);
 }
 /* line 59, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu .search-bar input, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input {
@@ -376,12 +447,12 @@ p.nice {
 /* line 105, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li .choice-checkbox, .nice-search .nice-dropdown-empty .dropdown-menu ul li .choice-checkbox {
   transition: all 0.2s;
-  background: white;
-  color: white;
+  background: var(--nice-choice-bg);
+  color: var(--nice-choice-bg);
   line-height: 22px;
   width: 25px;
   height: 25px;
-  border: 2px solid #cbd4d9;
+  border: 2px solid var(--nice-border-color);
   position: absolute;
   border-radius: 2px;
   text-align: center;
@@ -393,24 +464,24 @@ p.nice {
 }
 /* line 123, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li:hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li:hover, .nice-dropdown .dropdown-menu ul li.hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li.hover {
-  background: #EDEDED;
+  background: var(--nice-hover-color);
 }
 /* line 127, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li.selected, .nice-search .nice-dropdown-empty .dropdown-menu ul li.selected {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   color: white;
 }
 /* line 131, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .dropdown-menu ul li.selected .choice-checkbox, .nice-search .nice-dropdown-empty .dropdown-menu ul li.selected .choice-checkbox {
-  border-color: #4abeb4;
-  background: #4abeb4;
-  color: white;
+  border-color: var(--nice-choice-selected-bg);
+  background: var(--nice-choice-selected-bg);
+  color: var(--nice-choice-selected-color);
 }
 /* line 141, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown, .nice-search .nice-dropdown-empty .btn-dropdown {
-  background: white;
-  border-color: #cbd4d9;
-  color: #404040;
+  background: var(--nice-dropdown-bg);
+  border-color: var(--nice-dropdown-border);
+  color: var(--nice-dropdown-color);
   font-weight: inherit;
   min-height: 34px;
   position: relative;
@@ -426,7 +497,7 @@ p.nice {
 /* line 159, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown .caret, .nice-search .nice-dropdown-empty .btn-dropdown .caret {
   position: absolute;
-  color: #cbd4d9;
+  color: var(--nice-border-color);
   top: 50%;
   right: 10px;
   transform: translate(0, -50%);
@@ -450,20 +521,20 @@ p.nice {
 /* line 183, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown:disabled, .nice-search .nice-dropdown-empty .btn-dropdown:disabled {
   cursor: not-allowed;
-  background: white !important;
-  border-color: #EDEFF2 !important;
+  background: var(--nice-dropdown-disabled-bg) !important;
+  border-color: var(--nice-dropdown-disabled-border) !important;
 }
 /* line 189, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown:hover, .nice-search .nice-dropdown-empty .btn-dropdown:hover {
-  background: white;
-  border-color: #cbd4d9;
-  color: #474F52;
+  background: var(--nice-dropdown-hover-bg);
+  border-color: var(--nice-dropdown-hover-border);
+  color: var(--nice-dropdown-hover-color);
 }
 /* line 195, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus {
-  background: white !important;
-  border-color: #4abeb4 !important;
-  color: #474F52 !important;
+  background: var(--nice-focus-bg) !important;
+  border-color: var(--nice-focus-border) !important;
+  color: var(--nice-focus-color) !important;
   outline: 0 none;
 }
 
@@ -477,9 +548,9 @@ p.nice {
 }
 /* line 9, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .open .btn-dropdown {
-  background: white !important;
-  border-color: #4abeb4 !important;
-  color: #474F52 !important;
+  background: var(--nice-focus-bg) !important;
+  border-color: var(--nice-focus-border) !important;
+  color: var(--nice-focus-color) !important;
 }
 /* line 16, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .btn-group {
@@ -491,8 +562,8 @@ p.nice {
 }
 /* line 22, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .input-group-btn .btn {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
+  border-bottom-left-radius: var(--nice-border-color-radius);
+  border-top-left-radius: var(--nice-border-color-radius);
 }
 /* line 28, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .dropdown-menu {
@@ -501,7 +572,7 @@ p.nice {
   padding: 0;
   max-height: 300px;
   overflow: auto;
-  border: 1px solid #eee;
+  border: 1px solid var(--nice-border-color);
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
 }
@@ -512,21 +583,21 @@ p.nice {
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
-  background: white;
-  color: white;
+  background: var(--nice-choice-bg);
+  color: var(--nice-choice-bg);
   line-height: 22px;
   width: 25px;
   height: 25px;
-  border: 2px solid #cbd4d9;
+  border: 2px solid var(--nice-border-color);
   position: absolute;
   border-radius: 2px;
   text-align: center;
 }
 /* line 56, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .dropdown-menu li .choice-checkbox.selected {
-  border-color: #4abeb4;
-  background: #4abeb4;
-  color: white;
+  border-color: var(--nice-choice-selected-bg);
+  background: var(--nice-choice-selected-bg);
+  color: var(--nice-choice-selected-color);
 }
 /* line 63, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .dropdown-menu li .multiple-item {
@@ -539,14 +610,14 @@ p.nice {
 }
 /* line 73, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .dropdown-menu li:hover a {
-  background: #EDEDED;
+  background: var(--nice-hover-color);
 }
 /* line 82, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .btn-dropdown {
-  background: white;
-  border-color: #cbd4d9;
-  color: #404040;
-  font-weight: normal;
+  background: var(--nice-dropdown-bg);
+  border-color: var(--nice-dropdown-border);
+  color: var(--nice-dropdown-color);
+  font-weight: var(--nice-font-weight);
   min-height: 34px;
   text-align: left;
   padding-right: 25px;
@@ -556,25 +627,25 @@ p.nice {
   position: absolute;
   top: 15px;
   right: 10px;
-  color: #cbd4d9;
+  color: var(--nice-border-color);
 }
 /* line 100, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .btn-dropdown:disabled {
   cursor: not-allowed;
-  background: white !important;
-  border-color: #EDEFF2 !important;
+  background: var(--nice-dropdown-disabled-bg) !important;
+  border-color: var(--nice-dropdown-disabled-border) !important;
 }
 /* line 106, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .btn-dropdown:hover {
-  background: white;
-  border-color: #cbd4d9;
-  color: #474F52;
+  background: var(--nice-dropdown-hover-bg);
+  border-color: var(--nice-dropdown-hover-border);
+  color: var(--nice-dropdown-hover-color);
 }
 /* line 112, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus {
-  background: white !important;
-  border-color: #4abeb4 !important;
-  color: #474F52 !important;
+  background: var(--nice-focus-bg) !important;
+  border-color: var(--nice-focus-border) !important;
+  color: var(--nice-focus-color) !important;
 }
 /* line 119, ../src/components/nice-dropdown-old/nice-dropdown-old.scss */
 .nice-dropdown-old .dropdown-color {
@@ -594,78 +665,78 @@ p.nice {
 /* line 6, ../src/components/nice-input/nice-input.scss */
 .nice-input ::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: #999999;
+  color: var(--nice-input-placeholder-color);
 }
 /* line 11, ../src/components/nice-input/nice-input.scss */
 .nice-input :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: #999999;
+  color: var(--nice-input-placeholder-color);
 }
 /* line 16, ../src/components/nice-input/nice-input.scss */
 .nice-input ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: #999999;
+  color: var(--nice-input-placeholder-color);
 }
 /* line 21, ../src/components/nice-input/nice-input.scss */
 .nice-input :-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: #999999;
+  color: var(--nice-input-placeholder-color);
 }
 /* line 26, ../src/components/nice-input/nice-input.scss */
 .nice-input :disabled::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: white;
+  color: var(--nice-input-disabled-bg);
 }
 /* line 30, ../src/components/nice-input/nice-input.scss */
 .nice-input :disabled:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: white;
+  color: var(--nice-input-disabled-bg);
 }
 /* line 34, ../src/components/nice-input/nice-input.scss */
 .nice-input :disabled::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: white;
+  color: var(--nice-input-disabled-bg);
 }
 /* line 38, ../src/components/nice-input/nice-input.scss */
 .nice-input :disabled:-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: white;
+  color: var(--nice-input-disabled-bg);
 }
 /* line 44, ../src/components/nice-input/nice-input.scss */
 .nice-input .input-group-addon {
-  background: #dcdcdc;
-  border-top-right-radius: 3px !important;
-  border-bottom-right-radius: 3px !important;
-  color: #404040;
-  border: 1px solid #cbd4d9;
+  background: var(--nice-addon-bg);
+  border-top-right-radius: var(--nice-border-color-radius) !important;
+  border-bottom-right-radius: var(--nice-border-color-radius) !important;
+  color: var(--nice-font-color);
+  border: 1px solid var(--nice-input-border);
   border-left: 0px;
 }
 /* line 54, ../src/components/nice-input/nice-input.scss */
 .nice-input .disabled .input-group-addon {
-  background: white;
-  border-color: #EDEFF2;
+  background: var(--nice-dropdown-disabled-bg);
+  border-color: var(--nice-dropdown-disabled-border);
   opacity: 0.65;
 }
 /* line 61, ../src/components/nice-input/nice-input.scss */
 .nice-input .form-control {
   min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
+  background: var(--nice-input-bg);
+  border: 1px solid var(--nice-input-border);
 }
 /* line 66, ../src/components/nice-input/nice-input.scss */
 .nice-input .form-control:active, .nice-input .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
   -webkit-box-shadow: inset 0 0 0;
   box-shadow: inset 0 0 0;
 }
 /* line 71, ../src/components/nice-input/nice-input.scss */
 .input-group-addon .nice-input .form-control:active, .input-group-addon .nice-input .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
 }
 /* line 76, ../src/components/nice-input/nice-input.scss */
 .nice-input .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
+  background: var(--nice-input-disabled-bg);
+  border-color: var(--nice-input-disabled-border);
   opacity: 0.65;
 }
 /* line 83, ../src/components/nice-input/nice-input.scss */
@@ -698,11 +769,11 @@ p.nice {
 /* line 9, ../src/components/nice-search/nice-search.scss */
 .nice-search .input-group .input-group-addon, .nice-search .nice-input .symbol .input-group-addon, .nice-input .nice-search .symbol .input-group-addon {
   cursor: pointer;
-  background: #dcdcdc;
+  background: var(--nice-addon-bg);
 }
 /* line 13, ../src/components/nice-search/nice-search.scss */
 .nice-search .input-group .input-group-addon:hover, .nice-search .nice-input .symbol .input-group-addon:hover, .nice-input .nice-search .symbol .input-group-addon:hover {
-  background-color: #4abeb4;
+  background-color: var(--nice-base-color);
   color: white;
 }
 /* line 22, ../src/components/nice-search/nice-search.scss */
@@ -720,7 +791,7 @@ p.nice {
   left: 0;
   max-height: 300px;
   background-color: white;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   overflow-x: auto;
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
@@ -736,12 +807,12 @@ p.nice {
 }
 /* line 53, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown .nice-search-row:hover, .nice-search .nice-dropdown-empty .nice-search-row:hover {
-  background-color: #EDEDED;
+  background-color: var(--nice-hover-color);
   cursor: pointer;
 }
 /* line 60, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown .nice-search-row.active, .nice-search .nice-dropdown-empty .nice-search-row.active, .nice-search .nice-dropdown .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown .nice-search-row.nice-table-row:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-search-row.nice-table-row:hover {
-  background-color: #EDEDED;
+  background-color: var(--nice-hover-color);
   cursor: pointer;
 }
 /* line 70, ../src/components/nice-search/nice-search.scss */
@@ -767,9 +838,9 @@ p.nice {
 }
 /* line 4, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .disabled {
-  background-color: white;
+  background-color: var(--nice-yesno-disabled-bg);
   opacity: 0.65;
-  border: #D2D9D9;
+  border: var(--nice-yesno-disabled-border);
 }
 /* line 9, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .disabled .yesno-yes-bg, .nice-yesno .disabled .yesno-no-bg, .nice-yesno .disabled .yesno-button {
@@ -777,10 +848,10 @@ p.nice {
 }
 /* line 14, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .yesno-wrapper {
-  background: white;
-  border: 1px solid #cbd4d9;
-  color: #404040;
-  border-radius: 3px;
+  background: var(--nice-yesno-bg);
+  border: 1px solid var(--nice-border-color);
+  color: var(--nice-font-color);
+  border-radius: var(--nice-border-color-radius);
   height: 34px;
   position: relative;
 }
@@ -792,14 +863,13 @@ p.nice {
 }
 /* line 29, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .yesno-wrapper .yesno-yes-bg, .nice-yesno .yesno-wrapper .yesno-no-bg {
-  color: #999999;
   width: 50%;
   height: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
 }
-/* line 38, ../src/components/nice-yesno/nice-yesno.scss */
+/* line 37, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .yesno-wrapper .yesno-no-bg {
   left: 50%;
   right: 0;
@@ -816,18 +886,18 @@ p.nice {
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
-  width: 50%;
-  background-color: #4abeb4;
-  border-radius: 3px;
+  background-color: var(--nice-yesno-slider-bg);
+  border-radius: var(--nice-border-color-radius-small);
   color: white;
   position: absolute;
   line-height: 28px;
   top: 2px;
   left: 2px;
+  right: 50%;
 }
 /* line 63, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .yesno-wrapper .yesno-button:hover {
-  background-color: #3fafa6;
+  background-color: var(--nice-yesno-slider-bg);
 }
 /* line 68, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .yesno-wrapper .yesno-button-no {
@@ -846,9 +916,10 @@ p.nice {
 /* line 83, ../src/components/nice-yesno/nice-yesno.scss */
 .nice-yesno .yesno-wrapper.true .yesno-button {
   right: 2px;
+  left: 50%;
 }
 
-/* line 93, ../src/components/nice-yesno/nice-yesno.scss */
+/* line 94, ../src/components/nice-yesno/nice-yesno.scss */
 .no-margin-bottom .nice-yesno {
   margin-bottom: 0px;
 }
@@ -856,12 +927,12 @@ p.nice {
 /* line 1, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps {
   font-size: 12px;
-  color: #4abeb4;
+  color: var(--nice-base-color);
   margin-top: -30px;
   padding-bottom: 10px;
   padding-top: 45px;
   margin-bottom: 25px;
-  background-color: #e1e5e8;
+  background-color: var(--nice-submenu-bg-color);
 }
 /* line 10, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps ul {
@@ -875,7 +946,7 @@ p.nice {
 }
 /* line 20, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .progress-step label {
-  color: #b0bec5;
+  color: var(--nice-submenu-gray-color);
 }
 /* line 25, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .progress-step .circle {
@@ -885,12 +956,12 @@ p.nice {
   margin-left: -9px;
   width: 18px;
   height: 18px;
-  background: #b0bec5;
+  background: var(--nice-submenu-gray-color);
   display: block;
   content: "";
   z-index: 2;
   border-radius: 100px;
-  border: 3px solid #b0bec5;
+  border: 3px solid var(--nice-submenu-gray-color);
 }
 /* line 42, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .progress-step::before {
@@ -900,7 +971,7 @@ p.nice {
   left: -50%;
   width: 100%;
   height: 3px;
-  background: #b0bec5;
+  background: var(--nice-submenu-gray-color);
   z-index: 1;
 }
 /* line 54, ../src/components/nice-steps/nice-steps.scss */
@@ -909,20 +980,20 @@ p.nice {
 }
 /* line 60, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .active .circle, .nice-steps .nice-table.nice-table-settings .nice-table-row:hover .circle, .nice-table.nice-table-settings .nice-steps .nice-table-row:hover .circle {
-  background: #4abeb4;
-  border-color: #4abeb4;
+  background: var(--nice-base-color);
+  border-color: var(--nice-base-color);
 }
 /* line 64, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .active.progress-step::before, .nice-steps .nice-table.nice-table-settings .progress-step.nice-table-row:hover::before, .nice-table.nice-table-settings .nice-steps .progress-step.nice-table-row:hover::before {
-  background: #4abeb4;
+  background: var(--nice-base-color);
 }
 /* line 67, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .active label, .nice-steps .nice-table.nice-table-settings .nice-table-row:hover label, .nice-table.nice-table-settings .nice-steps .nice-table-row:hover label {
-  color: #4abeb4;
+  color: var(--nice-base-color);
 }
 /* line 74, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .current .circle {
-  background-color: #e1e5e8;
+  background-color: var(--nice-submenu-bg-color);
 }
 /* line 79, ../src/components/nice-steps/nice-steps.scss */
 .nice-steps .progress {
@@ -935,9 +1006,9 @@ p.nice {
 }
 /* line 5, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice .selected .choice-checkbox {
-  border-color: #4abeb4;
-  background: #4abeb4;
-  color: white;
+  border-color: var(--nice-choice-selected-bg);
+  background: var(--nice-choice-selected-bg);
+  color: var(--nice-choice-selected-color);
 }
 /* line 14, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice .disabled li {
@@ -946,11 +1017,11 @@ p.nice {
 }
 /* line 19, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice .disabled li:hover .choice-checkbox {
-  border-color: #cbd4d9 !important;
+  border-color: var(--nice-border-color) !important;
 }
 /* line 27, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice .disabled .selected:hover .choice-checkbox {
-  border-color: #4abeb4 !important;
+  border-color: var(--nice-choice-selected-bg) !important;
 }
 /* line 35, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice ul {
@@ -968,19 +1039,19 @@ p.nice {
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
-  background: white;
-  color: white;
+  background: var(--nice-choice-bg);
+  color: var(--nice-choice-bg);
   line-height: 22px;
   width: 25px;
   height: 25px;
-  border: 2px solid #cbd4d9;
+  border: 2px solid var(--nice-border-color);
   position: absolute;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius-small);
   text-align: center;
 }
 /* line 63, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice li:hover .choice-checkbox {
-  border-color: #4abeb4;
+  border-color: var(--nice-choice-hover-border);
 }
 /* line 68, ../src/components/nice-choice/nice-choice.scss */
 .nice-choice li .circle {
@@ -994,7 +1065,7 @@ p.nice {
 
 /* line 17, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-date, .nice-datetime-picker .dtp-wrapper .dtp div.dtp-time {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   text-align: center;
   color: #fff;
   padding: 10px;
@@ -1038,16 +1109,16 @@ p.nice {
 }
 /* line 69, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .input-group .input-group-addon, .nice-datetime-picker .nice-input .symbol .input-group-addon, .nice-input .nice-datetime-picker .symbol .input-group-addon {
-  background: #dcdcdc;
+  background: var(--nice-addon-bg);
 }
 /* line 72, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .input-group .input-group-addon:hover, .nice-datetime-picker .nice-input .symbol .input-group-addon:hover, .nice-input .nice-datetime-picker .symbol .input-group-addon:hover {
-  background-color: #4abeb4;
+  background-color: var(--nice-base-color);
   color: white;
 }
 /* line 80, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .form-control {
-  background: white;
+  background: var(--nice-background);
 }
 /* line 84, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper {
@@ -1127,18 +1198,18 @@ p.nice {
 }
 /* line 152, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-time .dtp-hours-minutes-btn.selected {
-  color: #4abeb4;
+  color: var(--nice-base-color);
   background-color: transparent;
 }
 /* line 158, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-maxtime {
-  color: #389d94;
+  color: var(--nice-base-color-darken);
 }
 /* line 160, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-maxtime .dtp-hours-minutes-btn {
   text-decoration: none;
   background-color: transparent;
-  color: #389d94;
+  color: var(--nice-base-color-darken);
 }
 /* line 164, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-maxtime .dtp-hours-minutes-btn.selected {
@@ -1178,7 +1249,7 @@ p.nice {
 }
 /* line 198, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a.dtp-select-hour.selected {
-  background: #389d94;
+  background: var(--nice-base-color-darken);
   color: #fff;
 }
 /* line 202, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1191,7 +1262,7 @@ p.nice {
 }
 /* line 210, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a.dtp-select-minute.selected {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   color: #fff;
 }
 /* line 217, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1201,7 +1272,7 @@ p.nice {
 }
 /* line 220, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .p10 > a {
-  color: #389d94;
+  color: var(--nice-base-color-darken);
   text-decoration: none;
 }
 /* line 225, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1221,7 +1292,7 @@ p.nice {
 }
 /* line 247, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-hand.on {
-  background: #4abeb4;
+  background: var(--nice-base-color);
 }
 /* line 254, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-minute-hand {
@@ -1261,7 +1332,7 @@ p.nice {
 .nice-datetime-picker .dtp-wrapper .dtp > .dtp-content {
   background: #fff;
   max-width: 300px;
-  border: 1px solid #cbd4d9;
+  border: 1px solid var(--nice-border-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   max-height: 500px;
   position: absolute;
@@ -1271,7 +1342,7 @@ p.nice {
 }
 /* line 292, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp > .dtp-content > .dtp-date-view > div.dtp-header {
-  background: #389d94;
+  background: var(--nice-base-color-darken);
   color: #fff;
   text-align: center;
   padding: 0.3rem;
@@ -1296,7 +1367,7 @@ p.nice {
 }
 /* line 316, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr > td > a.selected {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   color: #fff;
 }
 /* line 321, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1312,7 +1383,7 @@ p.nice {
 }
 /* line 335, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-actual-meridien a.selected {
-  background: #389d94;
+  background: var(--nice-base-color-darken);
   color: #fff;
 }
 /* line 340, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1326,17 +1397,17 @@ p.nice {
 }
 /* line 351, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .btn-primary, .nice-datetime-picker .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetime-picker .btn-dropdown {
-  background: #4abeb4;
-  border-color: #3fafa6;
+  background: var(--nice-base-color);
+  border-color: var(--nice-base-color-darken);
   color: white;
 }
 /* line 356, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .btn-primary:hover, .nice-datetime-picker .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetime-picker .btn-dropdown:hover {
-  background: #3fafa6;
+  background: var(--nice-base-color-darken);
 }
 /* line 362, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-select-day:hover, .nice-datetime-picker .dtp-picker-time:hover {
-  background: #70cbc4;
+  background: var(--nice-base-color-lighter);
   color: white !important;
 }
 /* line 365, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
@@ -1364,34 +1435,34 @@ p.nice {
 .nice-datetimerange-picker .btn {
   padding-left: 0;
   padding-right: 0;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
 }
 /* line 8, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .form-control {
   min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
+  background: var(--nice-input-bg);
+  border: 1px solid var(--nice-input-border);
 }
 /* line 13, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .form-control:active, .nice-datetimerange-picker .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
   -webkit-box-shadow: inset 0 0 0;
   box-shadow: inset 0 0 0;
 }
 /* line 18, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .input-group-addon .nice-datetimerange-picker .form-control:active, .input-group-addon .nice-datetimerange-picker .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
 }
 /* line 23, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
+  background: var(--nice-input-disabled-bg);
+  border-color: var(--nice-input-disabled-border);
   opacity: 0.65;
 }
 /* line 30, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper {
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: var(--nice-border-color-radius);
+  box-shadow: var(--nice-box-shadow);
   position: absolute;
   left: 15px;
   top: 40px;
@@ -1399,7 +1470,7 @@ p.nice {
   height: 325px;
   padding: 10px;
   background-color: white;
-  border: 1px solid #cbd4d9;
+  border: 1px solid var(--nice-border-color);
   z-index: 900;
 }
 /* line 43, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
@@ -1440,7 +1511,7 @@ p.nice {
 }
 /* line 81, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-content {
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   box-shadow: 0 0 0 !important;
 }
 /* line 85, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
@@ -1461,32 +1532,32 @@ p.nice {
 .nice-datetimerange-picker-2 .input-group .form-control, .nice-datetimerange-picker-2 .nice-input .symbol .form-control, .nice-input .nice-datetimerange-picker-2 .symbol .form-control {
   cursor: pointer;
   min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
+  background: var(--nice-input-bg);
+  border: 1px solid var(--nice-input-border);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 /* line 18, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .input-group .form-control:active, .nice-datetimerange-picker-2 .nice-input .symbol .form-control:active, .nice-input .nice-datetimerange-picker-2 .symbol .form-control:active, .nice-datetimerange-picker-2 .input-group .form-control:focus, .nice-datetimerange-picker-2 .nice-input .symbol .form-control:focus, .nice-input .nice-datetimerange-picker-2 .symbol .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
   -webkit-box-shadow: inset 0 0 0;
   box-shadow: inset 0 0 0;
 }
 /* line 23, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .input-group-addon .nice-datetimerange-picker-2 .input-group .form-control:active, .input-group-addon .nice-datetimerange-picker-2 .nice-input .symbol .form-control:active, .nice-input .input-group-addon .nice-datetimerange-picker-2 .symbol .form-control:active, .input-group-addon .nice-datetimerange-picker-2 .input-group .form-control:focus, .input-group-addon .nice-datetimerange-picker-2 .nice-input .symbol .form-control:focus, .nice-input .input-group-addon .nice-datetimerange-picker-2 .symbol .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
 }
 /* line 28, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .input-group .form-control:disabled, .nice-datetimerange-picker-2 .nice-input .symbol .form-control:disabled, .nice-input .nice-datetimerange-picker-2 .symbol .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
+  background: var(--nice-input-disabled-bg);
+  border-color: var(--nice-input-disabled-border);
   opacity: 0.65;
 }
 /* line 35, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .input-group .input-group-addon, .nice-datetimerange-picker-2 .nice-input .symbol .input-group-addon, .nice-input .nice-datetimerange-picker-2 .symbol .input-group-addon {
   cursor: pointer;
-  background: #dcdcdc;
+  background: var(--nice-addon-bg);
   width: 38px;
   padding: 0;
   flex-shrink: 0;
@@ -1496,24 +1567,24 @@ p.nice {
 }
 /* line 46, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .input-group .input-group-addon:hover, .nice-datetimerange-picker-2 .nice-input .symbol .input-group-addon:hover, .nice-input .nice-datetimerange-picker-2 .symbol .input-group-addon:hover {
-  background-color: #4abeb4;
+  background-color: var(--nice-base-color);
   color: white;
 }
 /* line 54, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .input-group.open .form-control, .nice-datetimerange-picker-2 .nice-input .open.symbol .form-control, .nice-input .nice-datetimerange-picker-2 .open.symbol .form-control, .nice-datetimerange-picker-2 .input-group.open .input-group-addon, .nice-datetimerange-picker-2 .nice-input .open.symbol .input-group-addon, .nice-input .nice-datetimerange-picker-2 .open.symbol .input-group-addon {
-  border-color: #4abeb4;
+  border-color: var(--nice-base-color);
 }
 /* line 61, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper {
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: var(--nice-border-color-radius);
+  box-shadow: var(--nice-box-shadow);
   position: absolute;
   left: 15px;
   top: 40px;
   width: 700px;
   padding: 15px;
   background-color: white;
-  border: 1px solid #cbd4d9;
+  border: 1px solid var(--nice-border-color);
   z-index: 900;
   display: flex;
 }
@@ -1550,22 +1621,22 @@ p.nice {
 }
 /* line 107, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn {
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
 }
 /* line 111, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
-  background: #4abeb4;
-  border-color: #3fafa6;
+  background: var(--nice-base-color);
+  border-color: var(--nice-base-color-darken);
 }
 /* line 115, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn-primary:hover, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:hover {
-  background: #3fafa6;
-  border-color: #3fafa6;
+  background: var(--nice-base-color-darken);
+  border-color: var(--nice-base-color-darken);
 }
 /* line 120, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn-primary:active, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:active, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:active {
-  background: #389d94;
-  border-color: #389d94;
+  background: var(--nice-base-color-darken);
+  border-color: var(--nice-base-color-darken);
 }
 @media (max-width: 767px) {
   /* line 128, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
@@ -1618,17 +1689,17 @@ input::-webkit-outer-spin-button {
 /* line 3, ../src/components/nice-date-range/nice-date-range.scss */
 .nice-date-range .input-group .input-group-addon, .nice-date-range .nice-input .symbol .input-group-addon, .nice-input .nice-date-range .symbol .input-group-addon {
   cursor: pointer;
-  background: #dcdcdc;
+  background: var(--nice-addon-bg);
 }
 /* line 7, ../src/components/nice-date-range/nice-date-range.scss */
 .nice-date-range .input-group .input-group-addon:hover, .nice-date-range .nice-input .symbol .input-group-addon:hover, .nice-input .nice-date-range .symbol .input-group-addon:hover {
-  background-color: #4abeb4;
+  background-color: var(--nice-base-color);
   color: white;
 }
 
 /* line 16, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker {
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   padding: 15px;
   box-shadow: 0px 0px 0px;
 }
@@ -1650,11 +1721,11 @@ input::-webkit-outer-spin-button {
 }
 /* line 37, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul li {
-  border-color: #4abeb4;
-  background: #4abeb4;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  border-color: var(--nice-base-color);
+  background: var(--nice-base-color);
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
   color: white;
 }
 /* line 45, ../src/components/nice-date-range/nice-date-range.scss */
@@ -1665,8 +1736,8 @@ input::-webkit-outer-spin-button {
 }
 /* line 51, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul li:hover, .daterangepicker .ranges ul li:active, .daterangepicker .ranges ul li:focus {
-  border-color: #4abeb4;
-  background: #4abeb4;
+  border-color: var(--nice-base-color);
+  background: var(--nice-base-color);
   color: white;
 }
 /* line 62, ../src/components/nice-date-range/nice-date-range.scss */
@@ -1675,15 +1746,15 @@ input::-webkit-outer-spin-button {
 }
 /* line 67, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar .in-range {
-  background: #bbe6e3;
+  background: var(--nice-base-color-lighter);
 }
 /* line 71, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar .start-date, .daterangepicker .calendar .end-date {
-  background: #4abeb4;
+  background: var(--nice-base-color);
 }
 /* line 74, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar .start-date:hover, .daterangepicker .calendar .end-date:hover {
-  background: #4abeb4;
+  background: var(--nice-base-color);
 }
 
 /*!
@@ -1781,7 +1852,7 @@ input::-webkit-outer-spin-button {
 /* line 165, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges .input-mini {
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   color: #555;
   display: block;
   font-size: 11px;
@@ -1808,9 +1879,9 @@ input::-webkit-outer-spin-button {
   color: #08c;
   padding: 3px 12px;
   margin-bottom: 8px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
   cursor: pointer;
 }
 
@@ -1825,7 +1896,7 @@ input::-webkit-outer-spin-button {
 .daterangepicker .calendar-date {
   border: 1px solid #ddd;
   padding: 4px;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   background: #fff;
 }
 
@@ -1844,9 +1915,9 @@ input::-webkit-outer-spin-button {
   left: 20px;
   padding: 4px;
   margin-top: 1px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
 }
 
 /* line 229, ../src/components/nice-date-range/nice-date-range.scss */
@@ -1943,9 +2014,9 @@ input::-webkit-outer-spin-button {
   text-align: center;
   width: 20px;
   height: 20px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -1989,9 +2060,9 @@ input::-webkit-outer-spin-button {
 
 /* line 353, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.start-date.end-date {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: var(--nice-border-color-radius);
+  -moz-border-radius: var(--nice-border-color-radius);
+  border-radius: var(--nice-border-color-radius);
 }
 
 /* line 359, ../src/components/nice-date-range/nice-date-range.scss */
@@ -2059,7 +2130,7 @@ input::-webkit-outer-spin-button {
   top: 40px;
   z-index: 1000;
   width: 300px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--nice-box-shadow);
   line-height: normal;
 }
 /* line 15, ../src/components/nice-date/nice-date.scss */
@@ -2077,10 +2148,10 @@ input::-webkit-outer-spin-button {
 }
 /* line 28, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date {
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   background: white;
   overflow: hidden;
-  border: solid 1px #cbd4d9;
+  border: solid 1px var(--nice-border-color);
   color: white;
   display: flex;
   flex-direction: column;
@@ -2094,7 +2165,7 @@ input::-webkit-outer-spin-button {
 }
 /* line 45, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   line-height: 40px;
   color: white;
   display: flex;
@@ -2111,7 +2182,7 @@ input::-webkit-outer-spin-button {
 }
 /* line 60, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i:hover {
-  background: #3fafa6;
+  background: var(--nice-base-color-darken);
 }
 /* line 64, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i.fa-circle {
@@ -2135,7 +2206,7 @@ input::-webkit-outer-spin-button {
 /* line 87, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week {
   width: 100%;
-  border-top: solid 1px #eee;
+  border-top: solid 1px var(--nice-border-color);
   display: flex;
   flex-grow: 1;
 }
@@ -2149,13 +2220,13 @@ input::-webkit-outer-spin-button {
   position: relative;
   min-height: 20px;
   width: 14.2857%;
-  border-radius: 3px;
-  border-left: solid 1px #eee;
+  border-radius: var(--nice-border-color-radius);
+  border-left: solid 1px var(--nice-border-color);
   font-size: 12px;
   text-align: center;
   background: white;
   cursor: pointer;
-  color: #404040;
+  color: var(--nice-font-color);
   padding: 0;
   margin: 0;
   display: flex;
@@ -2176,7 +2247,7 @@ input::-webkit-outer-spin-button {
   width: 10px;
   border-style: solid;
   border-width: 0 10px 10px 0;
-  border-color: transparent #4abeb4 transparent transparent;
+  border-color: transparent var(--nice-base-color) transparent transparent;
 }
 /* line 132, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.different-month {
@@ -2189,25 +2260,25 @@ input::-webkit-outer-spin-button {
 /* line 140, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.disabled {
   opacity: 0.3;
-  color: #d9534f;
+  color: var(--nice-danger-color);
   cursor: not-allowed;
 }
 /* line 146, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.selected {
-  background: #4abeb4 !important;
+  background: var(--nice-base-color) !important;
   color: white;
 }
 /* line 151, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.between {
-  background: #e0f4f2;
+  background: var(--nice-base-color-lighter);
 }
 /* line 155, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover {
-  background: #bbe6e3;
+  background: var(--nice-base-color-lighter);
 }
 /* line 158, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover.selected {
-  background: #389d94 !important;
+  background: var(--nice-base-color-darken);
 }
 /* line 164, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week.names {
@@ -2217,7 +2288,7 @@ input::-webkit-outer-spin-button {
 }
 /* line 169, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week.names > span {
-  color: #389d94;
+  color: var(--nice-base-color-darken);
   min-height: 20px;
   cursor: default;
 }
@@ -2229,8 +2300,8 @@ input::-webkit-outer-spin-button {
   background: #ffffff;
   border: 1px solid #cad4d9;
   border-top: 0;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: var(--nice-border-color-radius);
+  border-bottom-right-radius: var(--nice-border-color-radius);
 }
 /* line 189, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .divider {
@@ -2241,7 +2312,7 @@ input::-webkit-outer-spin-button {
 .nice-date .nice-date-time i {
   line-height: 30px;
   margin-right: 10px;
-  color: #cbd4d9;
+  color: var(--nice-border-color);
 }
 /* line 200, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .time-picker {
@@ -2255,8 +2326,8 @@ input::-webkit-outer-spin-button {
   -moz-appearance: none;
   appearance: none;
   outline: 0;
-  border-radius: 3px;
-  border: 1px solid #cbd4d9;
+  border-radius: var(--nice-border-color-radius);
+  border: 1px solid var(--nice-border-color);
   padding: 0 10px;
   z-index: 2;
   background: white;
@@ -2296,9 +2367,9 @@ input::-webkit-outer-spin-button {
 .nice-comment textarea {
   min-height: 34px !important;
   height: 34px;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   border-color: transparent;
-  color: #4abeb4;
+  color: var(--nice-base-color);
   -webkit-user-select: none;
   padding: 6px 0px;
 }
@@ -2309,8 +2380,8 @@ input::-webkit-outer-spin-button {
 /* line 30, ../src/components/nice-comment/nice-comment.scss */
 .nice-comment textarea.editing {
   padding: 6px 12px;
-  border-color: #4abeb4;
-  color: #404040;
+  border-color: var(--nice-base-color);
+  color: var(--nice-font-color);
   -webkit-user-select: initial;
 }
 
@@ -2328,7 +2399,7 @@ input::-webkit-outer-spin-button {
 /* line 11, ../src/components/nice-loader/nice-loader.scss */
 .nice-loader svg path,
 .nice-loader svg rect {
-  fill: #4abeb4;
+  fill: var(--nice-loader-color);
 }
 /* line 16, ../src/components/nice-loader/nice-loader.scss */
 .nice-loader #loader {
@@ -2371,8 +2442,8 @@ input::-webkit-outer-spin-button {
   font-weight: normal;
   min-width: 300px;
   padding: 10px 15px;
-  color: white;
-  background: #4abeb4;
+  color: var(--nice-notification-color);
+  background: var(--nice-notification-bg);
   transform: all 0.5s ease;
 }
 /* line 16, ../src/components/nice-notification/nice-notification.scss */
@@ -2393,7 +2464,7 @@ input::-webkit-outer-spin-button {
 }
 /* line 32, ../src/components/nice-notification/nice-notification.scss */
 .notification a {
-  color: white;
+  color: var(--nice-notification-color);
 }
 /* line 34, ../src/components/nice-notification/nice-notification.scss */
 .notification a:hover {
@@ -2405,23 +2476,23 @@ input::-webkit-outer-spin-button {
 }
 /* line 43, ../src/components/nice-notification/nice-notification.scss */
 .notification.warning {
-  color: white;
-  background: #ec971f;
+  color: var(--nice-notification-warning-color);
+  background: var(--nice-notification-warning-bg);
 }
 /* line 48, ../src/components/nice-notification/nice-notification.scss */
 .notification.error {
-  color: white;
-  background: #d9534f;
+  color: var(--nice-notification-danger-color);
+  background: var(--nice-notification-danger-bg);
 }
 /* line 53, ../src/components/nice-notification/nice-notification.scss */
 .notification.success {
-  color: white;
-  background: #5cb85c;
+  color: var(--nice-notification-success-color);
+  background: var(--nice-notification-success-bg);
 }
 /* line 58, ../src/components/nice-notification/nice-notification.scss */
 .notification.info {
-  color: white;
-  background: #31b0d5;
+  color: var(--nice-notification-info-color);
+  background: var(--nice-notification-info-bg);
 }
 /* line 63, ../src/components/nice-notification/nice-notification.scss */
 .notification:hover {
@@ -2484,7 +2555,7 @@ input::-webkit-outer-spin-button {
 .nice-calendar .nice-selected-dates .nice-start-date, .nice-calendar .nice-selected-dates .nice-end-date {
   width: 50%;
   float: left;
-  color: #404040;
+  color: var(--nice-font-color);
   transition: all 0.3s ease;
 }
 /* line 14, ../src/components/nice-calendar/nice-calendar.scss */
@@ -2503,7 +2574,7 @@ input::-webkit-outer-spin-button {
 }
 /* line 31, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-time {
-  border-top: 1px solid #cbd4d9;
+  border-top: 1px solid var(--nice-border-color);
   position: relative;
 }
 /* line 36, ../src/components/nice-calendar/nice-calendar.scss */
@@ -2538,7 +2609,7 @@ input::-webkit-outer-spin-button {
   appearance: none;
   outline: 0;
   border-radius: 0px;
-  border: 1px solid #cbd4d9;
+  border: 1px solid var(--nice-border-color);
   border-top: 0;
   border-left: 0;
   padding: 5px 10px;
@@ -2551,29 +2622,29 @@ input::-webkit-outer-spin-button {
 }
 /* line 80, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-time .time-picket-icon {
-  border-right: 1px solid #cbd4d9;
+  border-right: 1px solid var(--nice-border-color);
   width: 20%;
   float: left;
   font-size: 14px;
   text-align: center;
   line-height: 30px;
-  color: #404040;
-  border-bottom: 1px solid #cbd4d9;
+  color: var(--nice-font-color);
+  border-bottom: 1px solid var(--nice-border-color);
   height: 30px;
 }
 /* line 94, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper {
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   display: block;
   background: white;
   width: 100%;
-  border: solid 1px #cbd4d9;
+  border: solid 1px var(--nice-border-color);
 }
 /* line 107, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .header {
   float: left;
   width: 100%;
-  background: #4abeb4;
+  background: var(--nice-base-color);
   height: 40px;
   line-height: 40px;
   color: white;
@@ -2613,7 +2684,7 @@ input::-webkit-outer-spin-button {
 .nice-calendar .nice-calendar-wrapper .week {
   float: left;
   width: 100%;
-  border-top: solid 1px #eee;
+  border-top: solid 1px var(--nice-border-color);
 }
 /* line 152, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week:first-child {
@@ -2626,12 +2697,12 @@ input::-webkit-outer-spin-button {
   width: 14.28571%;
   height: 25px;
   line-height: 25px;
-  border-left: solid 1px #eee;
+  border-left: solid 1px var(--nice-border-color);
   font-size: 12px;
   text-align: center;
   background: white;
   cursor: pointer;
-  color: #404040;
+  color: var(--nice-font-color);
 }
 /* line 169, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day:first-child {
@@ -2647,7 +2718,7 @@ input::-webkit-outer-spin-button {
   width: 10px;
   border-style: solid;
   border-width: 0 10px 10px 0;
-  border-color: transparent #4abeb4 transparent transparent;
+  border-color: transparent var(--nice-base-color) transparent transparent;
 }
 /* line 185, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.different-month {
@@ -2660,37 +2731,37 @@ input::-webkit-outer-spin-button {
 /* line 193, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.disabled {
   opacity: 0.3;
-  color: #d9534f;
+  color: var(--nice-danger-color);
   cursor: not-allowed;
 }
 /* line 199, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.selected {
-  background: #bbe6e3;
+  background: var(--nice-base-color-lighter);
 }
 /* line 203, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.start-selected {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   color: white;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
 /* line 210, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.end-selected {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   color: white;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
 /* line 218, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.selecting-start:hover {
-  background: #55c2b9;
+  background: var(--nice-base-color-lighter);
   color: white;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
 /* line 227, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week .day.selecting-end:hover {
-  background: #389d94;
+  background: var(--nice-base-color-darken);
   color: white;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
@@ -2717,14 +2788,14 @@ input::-webkit-outer-spin-button {
 }
 /* line 258, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .nice-calendar-wrapper .week.names > span {
-  color: #389d94;
+  color: var(--nice-base-color-darken);
   line-height: 20px;
   height: 20px;
   cursor: default;
 }
 /* line 267, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .change {
-  color: #4abeb4;
+  color: var(--nice-base-color);
 }
 /* line 271, ../src/components/nice-calendar/nice-calendar.scss */
 .nice-calendar .disabled-shield {
@@ -2767,7 +2838,7 @@ input::-webkit-outer-spin-button {
   border-style: solid;
   border-width: 4px 4px 0 4px;
   margin-top: -2px;
-  border-color: #cbd4d9 transparent transparent transparent;
+  border-color: var(--nice-border-color) transparent transparent transparent;
 }
 /* line 25, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-day,
@@ -2797,8 +2868,8 @@ input::-webkit-outer-spin-button {
   -moz-appearance: none;
   appearance: none;
   outline: 0;
-  border-radius: 3px;
-  border: 1px solid #cbd4d9;
+  border-radius: var(--nice-border-color-radius);
+  border: 1px solid var(--nice-border-color);
   position: relative;
   z-index: 2;
   background: transparent;
@@ -2806,18 +2877,18 @@ input::-webkit-outer-spin-button {
 /* line 58, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select:disabled {
   cursor: not-allowed;
-  background: white !important;
-  border-color: #EDEFF2 !important;
+  background: var(--nice-dropdown-disabled-bg) !important;
+  border-color: var(--nice-dropdown-disabled-border) !important;
 }
 /* line 64, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select:hover {
-  border-color: #cbd4d9;
-  color: #474F52;
+  border-color: var(--nice-dropdown-hover-border);
+  color: var(--nice-dropdown-hover-color);
 }
 /* line 70, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select:active, .nice-dropdown-date select:focus {
-  border-color: #4abeb4 !important;
-  color: #474F52 !important;
+  border-color: var(--nice-focus-border) !important;
+  color: var(--nice-focus-color) !important;
   -webkit-box-shadow: 0 0 0;
   box-shadow: 0 0 0;
 }
@@ -2830,69 +2901,69 @@ input::-webkit-outer-spin-button {
 /* line 6, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .input-group .input-group-addon, .nice-time-picker .nice-input .symbol .input-group-addon, .nice-input .nice-time-picker .symbol .input-group-addon {
   cursor: pointer;
-  background: #dcdcdc;
-  border: 1px solid #cbd4d9;
+  background: var(--nice-addon-bg);
+  border: 1px solid var(--nice-input-border);
 }
 /* line 11, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .input-group .input-group-addon:hover, .nice-time-picker .nice-input .symbol .input-group-addon:hover, .nice-input .nice-time-picker .symbol .input-group-addon:hover {
-  background-color: #4abeb4;
+  background-color: var(--nice-base-color);
   color: white;
 }
 /* line 19, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .form-control {
   min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
+  background: var(--nice-input-bg);
+  border: 1px solid var(--nice-input-border);
 }
 /* line 24, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .form-control:active, .nice-time-picker .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
   -webkit-box-shadow: inset 0 0 0;
   box-shadow: inset 0 0 0;
 }
 /* line 29, ../src/components/nice-time-picker/nice-time-picker.scss */
 .input-group-addon .nice-time-picker .form-control:active, .input-group-addon .nice-time-picker .form-control:focus {
-  border-color: #4abeb4;
+  border-color: var(--nice-focus-border);
 }
 /* line 34, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
+  background: var(--nice-input-disabled-bg);
+  border-color: var(--nice-input-disabled-border);
   opacity: 0.65;
 }
 /* line 42, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown {
   z-index: 900;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   position: absolute;
   top: 40px;
   left: 15px;
   width: 100%;
   background: white;
-  border: 1px solid #cbd4d9;
-  box-shadow: 0px 0px 10px #cbd4d9;
+  border: 1px solid var(--nice-input-border);
+  box-shadow: 0px 0px 10px var(--nice-input-border);
   padding: 10px;
   text-align: center;
 }
 /* line 55, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown .numbers {
   font-size: 28px;
-  color: #404040;
+  color: var(--nice-font-color);
   line-height: 1.6;
 }
 /* line 61, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button {
   width: 100%;
   border: 0;
-  color: #404040;
+  color: var(--nice-font-color);
   line-height: 1;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   background: none;
 }
 /* line 70, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button:hover {
-  background: #4abeb4;
+  background: var(--nice-base-color);
   color: #ffffff;
 }
 /* line 75, ../src/components/nice-time-picker/nice-time-picker.scss */
@@ -2902,7 +2973,7 @@ input::-webkit-outer-spin-button {
 /* line 79, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button:active {
   outline: 0;
-  background: #389d94;
+  background: var(--nice-base-color-darken);
   color: #ffffff;
 }
 /* line 88, ../src/components/nice-time-picker/nice-time-picker.scss */
@@ -2931,8 +3002,8 @@ nice-checkbox {
 .nice-checkbox .checkbox {
   height: 34px;
   width: 34px;
-  border: 1px solid #cbd4d9;
-  border-radius: 3px;
+  border: 1px solid var(--nice-input-border);
+  border-radius: var(--nice-border-color-radius-small);
   margin: 0;
   padding: 4px;
 }
@@ -2942,7 +3013,7 @@ nice-checkbox {
 }
 /* line 23, ../src/components/nice-checkbox/nice-checkbox.scss */
 .nice-checkbox .checkbox .check-stroke {
-  stroke: #4abeb4;
+  stroke: var(--nice-base-color);
   fill: none;
   stroke-width: 4;
   stroke-linecap: round;
@@ -2951,19 +3022,19 @@ nice-checkbox {
 .nice-checkbox .message {
   margin-left: 15px;
   user-select: none;
-  color: #404040;
+  color: var(--nice-font-color);
 }
 /* line 38, ../src/components/nice-checkbox/nice-checkbox.scss */
 .nice-checkbox:hover .checkbox {
-  border-color: #9fafb9;
+  border-color: var(--nice-input-border);
 }
 /* line 42, ../src/components/nice-checkbox/nice-checkbox.scss */
 .nice-checkbox:hover .message {
-  color: #1a1a1a;
+  color: var(--nice-font-color);
 }
 /* line 48, ../src/components/nice-checkbox/nice-checkbox.scss */
 .nice-checkbox.checked .checkbox {
-  border-color: #cbd4d9;
+  border-color: var(--nice-input-border);
   background: white;
 }
 /* line 52, ../src/components/nice-checkbox/nice-checkbox.scss */
@@ -2972,11 +3043,11 @@ nice-checkbox {
 }
 /* line 56, ../src/components/nice-checkbox/nice-checkbox.scss */
 .nice-checkbox.checked .checkbox .message {
-  color: #404040;
+  color: var(--nice-font-color);
 }
 /* line 62, ../src/components/nice-checkbox/nice-checkbox.scss */
 .nice-checkbox.checked:hover .checkbox {
-  border-color: #9fafb9;
+  border-color: var(--nice-input-border);
 }
 
 /* line 1, ../src/components/nice-upload/nice-upload.scss */
@@ -3002,7 +3073,7 @@ nice-checkbox {
 }
 /* line 21, ../src/components/nice-upload/nice-upload.scss */
 .nice-upload .input-area {
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   width: 100%;
   height: 150px;
   border: 1px solid #cbd4d9;
@@ -3020,7 +3091,7 @@ nice-checkbox {
 }
 /* line 37, ../src/components/nice-upload/nice-upload.scss */
 .nice-upload .input-area .middle-text .error {
-  color: #d9534f;
+  color: var(--nice-danger-color);
   margin-top: 10px;
 }
 /* line 43, ../src/components/nice-upload/nice-upload.scss */
@@ -3067,31 +3138,36 @@ nice-checkbox {
 .nice-help .help-window {
   display: none;
   position: absolute;
-  background: #404040;
+  background: var(--nice-base-color);
   color: white;
   padding: 10px;
   max-width: 200px;
   width: max-content;
-  top: 30px;
+  bottom: 20px;
   left: 50%;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   font-size: 12px;
   z-index: 99999;
   transform: translate(-50%, 0);
   line-height: 1.2;
+  font-weight: normal;
+  text-align: center;
 }
-/* line 32, ../src/components/nice-help/nice-help.scss */
+/* line 34, ../src/components/nice-help/nice-help.scss */
 .nice-help .help-window:before {
   content: "";
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 0 10px 5px 10px;
-  border-color: transparent transparent #404040 transparent;
   position: absolute;
-  top: -5px;
+  bottom: -5px;
   left: 50%;
   margin-left: -10px;
+  border-bottom: 0px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 5px solid var(--nice-base-color);
 }
 
 /* line 1, ../src/components/nice-quantity/nice-quantity.scss */
@@ -3105,18 +3181,18 @@ nice-checkbox {
   width: 35px;
   line-height: 33px;
   padding: 0;
-  border: 1px solid #cbd4d9;
+  border: 1px solid var(--nice-border-color);
 }
 /* line 14, ../src/components/nice-quantity/nice-quantity.scss */
 .nice-quantity .btn-left {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
+  border-bottom-left-radius: var(--nice-border-color-radius);
+  border-top-left-radius: var(--nice-border-color-radius);
   width: 45px;
 }
 /* line 20, ../src/components/nice-quantity/nice-quantity.scss */
 .nice-quantity .btn-right {
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
+  border-bottom-right-radius: var(--nice-border-color-radius);
+  border-top-right-radius: var(--nice-border-color-radius);
   width: 45px;
 }
 /* line 26, ../src/components/nice-quantity/nice-quantity.scss */
@@ -3135,8 +3211,8 @@ nice-checkbox {
   width: 100%;
   display: table;
   border: 0 none;
-  border-top: 1px solid #cbd4d9;
-  border-bottom: 1px solid #cbd4d9;
+  border-top: 1px solid var(--nice-border-color);
+  border-bottom: 1px solid var(--nice-border-color);
 }
 
 /* line 1, ../src/components/nice-progress-bar/nice-progress-bar.scss */
@@ -3150,11 +3226,11 @@ nice-checkbox {
   height: 34px;
   line-height: 34px;
   box-shadow: 0 0 0;
-  border-radius: 3px;
+  border-radius: var(--nice-border-color-radius);
   overflow: hidden;
   background: #f5f5f5;
   margin-bottom: 0;
-  border: 1px solid #cbd4d9;
+  border: 1px solid var(--nice-border-color);
 }
 /* line 17, ../src/components/nice-progress-bar/nice-progress-bar.scss */
 .nice-progress-bar .progress .progress-value {
@@ -3173,12 +3249,12 @@ nice-checkbox {
   line-height: 34px;
   position: absolute;
   top: 0;
-  border-radius: 3px;
-  background-color: #4abeb4;
+  border-radius: var(--nice-border-color-radius);
+  background-color: var(--nice-base-color);
 }
 /* line 44, ../src/components/nice-progress-bar/nice-progress-bar.scss */
 .nice-progress-bar .progress .progress-bar-color0 {
-  background: #4abeb4;
+  background: var(--nice-base-color);
 }
 /* line 44, ../src/components/nice-progress-bar/nice-progress-bar.scss */
 .nice-progress-bar .progress .progress-bar-color1 {

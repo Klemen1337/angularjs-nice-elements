@@ -8,7 +8,7 @@
     top: 40px;
     z-index: 1000;
     width: 300px;
-    box-shadow: $nice-box-shadow;
+    box-shadow: var(--nice-box-shadow);
     line-height: normal;
   }
 
@@ -26,10 +26,10 @@
   }
 
   .nice-date-date {
-    border-radius: $nice-border-radius;
+    border-radius: var(--nice-border-color-radius);
     background: white;
     overflow: hidden;
-    border: solid 1px $nice-border;
+    border: solid 1px var(--nice-border-color);
 
     color: white;
     display: flex;
@@ -43,7 +43,7 @@
     }
 
     .nice-date-header {
-      background: $nice-base-color;
+      background: var(--nice-base-color);
       line-height: 40px;
       color: white;
       display: flex;
@@ -58,7 +58,7 @@
         text-align: center;
 
         &:hover {
-          background: darken($nice-base-color, 5%);
+          background: var(--nice-base-color-darken);
         }
 
         &.fa-circle {
@@ -86,7 +86,7 @@
 
     .nice-date-week {
       width: 100%;
-      border-top: solid 1px $nice-border-color;
+      border-top: solid 1px var(--nice-border-color);
       display: flex;
       flex-grow: 1;
 
@@ -99,13 +99,13 @@
         position: relative;
         min-height: 20px;
         width: 14.2857%;
-        border-radius: $nice-border-radius;
-        border-left: solid 1px $nice-border-color;
+        border-radius: var(--nice-border-color-radius);
+        border-left: solid 1px var(--nice-border-color);
         font-size: 12px;
         text-align: center;
         background: white;
         cursor: pointer;
-        color: $nice-font-color;
+        color: var(--nice-font-color);
         padding: 0;
         margin: 0;
 
@@ -126,7 +126,7 @@
           width: 10px;
           border-style: solid;
           border-width: 0 10px 10px 0;
-          border-color: transparent $nice-base-color transparent transparent;
+          border-color: transparent var(--nice-base-color) transparent transparent;
         }
 
         &.different-month {
@@ -139,24 +139,24 @@
 
         &.disabled {
           opacity: 0.3;
-          color: $nice-danger-color;
+          color: var(--nice-danger-color);
           cursor: not-allowed;
         }
 
         &.selected {
-          background: $nice-base-color !important;
+          background: var(--nice-base-color) !important;
           color: white;
         }
 
-        &.between{
-          background: lighten($nice-base-color, 40%);
+        &.between {
+          background: var(--nice-base-color-lighter);
         }
 
         &:hover {
-          background: lighten($nice-base-color, 30%);
+          background: var(--nice-base-color-lighter);
 
           &.selected {
-            background: darken($nice-base-color, 10%) !important;
+            background: var(--nice-base-color-darken);
           }
         }
       }
@@ -167,7 +167,7 @@
         flex-shrink: 0;
 
         & > span {
-          color: darken($nice-base-color, 10%);
+          color: var(--nice-base-color-darken);
           min-height: 20px;
           cursor: default;
         }
@@ -183,8 +183,8 @@
     border: 1px solid #cad4d9;
     border-top: 0;
 
-    border-bottom-left-radius: $nice-border-radius;
-    border-bottom-right-radius: $nice-border-radius;
+    border-bottom-left-radius: var(--nice-border-color-radius);
+    border-bottom-right-radius: var(--nice-border-color-radius);
 
     .divider {
       line-height: 30px;
@@ -194,7 +194,7 @@
     i {
       line-height: 30px;
       margin-right: 10px;
-      color: $nice-border;
+      color: var(--nice-border-color);
     }
 
     .time-picker {
@@ -208,11 +208,11 @@
         -moz-appearance: none;
         appearance: none;
         outline: 0;
-        border-radius: $nice-border-radius;
-        border: 1px solid $nice-border;
+        border-radius: var(--nice-border-color-radius);
+        border: 1px solid var(--nice-border-color);
         padding: 0 10px;
         z-index: 2;
-        // color: $nice-font-color;
+        // color: var(--nice-font-color);
         background: white;
         cursor: pointer;
         position: relative;

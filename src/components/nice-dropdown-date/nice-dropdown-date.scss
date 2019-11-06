@@ -18,7 +18,7 @@
       border-style: solid;
       border-width: 4px 4px 0 4px;
       margin-top: -2px;
-      border-color: $nice-border transparent transparent transparent;
+      border-color: var(--nice-border-color) transparent transparent transparent;
     }
   }
 
@@ -49,28 +49,28 @@
     -moz-appearance: none;
     appearance: none;
     outline: 0;
-    border-radius: $nice-border-radius;
-    border: 1px solid $nice-border;
+    border-radius: var(--nice-border-color-radius);
+    border: 1px solid var(--nice-border-color);
     position: relative;
     z-index: 2;
     background: transparent;
 
     &:disabled{
       cursor: not-allowed;
-      background: $nice-dropdown-disabled-bg !important;
-      border-color: $nice-dropdown-disabled-border !important;
+      background: var(--nice-dropdown-disabled-bg) !important;
+      border-color: var(--nice-dropdown-disabled-border) !important;
     }
 
     &:hover{
-      //background: $nice-dropdown-hover-bg;
-      border-color: $nice-dropdown-hover-border;
-      color: $nice-dropdown-hover-color;
+      //background: var(--nice-dropdown-hover-bg);
+      border-color: var(--nice-dropdown-hover-border);
+      color: var(--nice-dropdown-hover-color);
     }
 
     &:active, &:focus{
-      //background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
-      color: $nice-focus-color !important;
+      //background: var(--nice-focus-bg) !important;
+      border-color: var(--nice-focus-border) !important;
+      color: var(--nice-focus-color) !important;
       -webkit-box-shadow: 0 0 0;
       box-shadow: 0 0 0;
     }

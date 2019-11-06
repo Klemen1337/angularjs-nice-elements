@@ -8,18 +8,18 @@
     width: $nice-quantity-height;
     line-height: $nice-quantity-height - 2;
     padding: 0;
-    border: 1px solid $nice-border;
+    border: 1px solid var(--nice-border-color);
   }
 
   .btn-left{
-    border-bottom-left-radius: $nice-border-radius;
-    border-top-left-radius: $nice-border-radius;
+    border-bottom-left-radius: var(--nice-border-color-radius);
+    border-top-left-radius: var(--nice-border-color-radius);
     width: 45px;
   }
 
   .btn-right{
-    border-bottom-right-radius: $nice-border-radius;
-    border-top-right-radius: $nice-border-radius;
+    border-bottom-right-radius: var(--nice-border-color-radius);
+    border-top-right-radius: var(--nice-border-color-radius);
     width: 45px;
   }
 
@@ -38,7 +38,7 @@
     display: table;
     // background: #f1f1f1;
     border: 0 none;
-    border-top: 1px solid $nice-border;
-    border-bottom: 1px solid $nice-border;
+    border-top: 1px solid var(--nice-border-color);
+    border-bottom: 1px solid var(--nice-border-color);
   }
 }

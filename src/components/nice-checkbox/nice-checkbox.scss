@@ -11,8 +11,8 @@ nice-checkbox{
   .checkbox {
     height: 34px;
     width: 34px;
-    border: 1px solid $nice-input-border;
-    border-radius: $nice-border-radius-small;
+    border: 1px solid var(--nice-input-border);
+    border-radius: var(--nice-border-color-radius-small);
     margin: 0;
     padding: 4px;
 
@@ -21,7 +21,7 @@ nice-checkbox{
     }
 
     .check-stroke {
-      stroke: $nice-base-color;
+      stroke: var(--nice-base-color);
       fill: none;
       stroke-width: 4;
       stroke-linecap: round;
@@ -31,22 +31,22 @@ nice-checkbox{
   .message {
     margin-left: 15px;
     user-select: none;
-    color: $nice-font-color;
+    color: var(--nice-font-color);
   }
 
   &:hover {
     .checkbox {
-      border-color: darken($nice-input-border, 15%);
+      border-color: var(--nice-input-border);
     }
 
     .message {
-      color: darken($nice-font-color, 15%);
+      color: var(--nice-font-color);
     }
   }
 
   &.checked {
     .checkbox {
-      border-color: $nice-input-border;
+      border-color: var(--nice-input-border);
       background: white;
 
       .check{
@@ -54,13 +54,13 @@ nice-checkbox{
       }
 
       .message {
-        color: $nice-font-color;
+        color: var(--nice-font-color);
       }
     }
 
     &:hover{
       .checkbox {
-        border-color: darken($nice-input-border, 15%);
+        border-color: var(--nice-input-border);
       }
     }
   }

@@ -1,6 +1,11 @@
 @import "variables";
 @import "bootstrap-variables";
 
+*, ::after, ::before {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: auto;
+}
+
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

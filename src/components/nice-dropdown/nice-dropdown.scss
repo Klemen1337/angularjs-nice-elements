@@ -7,9 +7,9 @@
 
   .open {
     .btn-dropdown {
-      background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
-      color: $nice-focus-color !important;
+      background: var(--nice-focus-bg) !important;
+      border-color: var(--nice-focus-border) !important;
+      color: var(--nice-focus-color) !important;
     }
 
     .dropdown-menu {
@@ -36,11 +36,11 @@
     width: 100%;
     padding: 0;
     max-height: 300px;
-    border: 1px solid $nice-border-color;
+    border: 1px solid var(--nice-border-color);
     flex-direction: column;
-    border-radius: $nice-border-radius;
+    border-radius: var(--nice-border-color-radius);
     overflow: hidden;
-    box-shadow: $nice-box-shadow;
+    box-shadow: var(--nice-box-shadow);
     margin-top: 0.5rem;
     margin-bottom: 2rem;
     z-index: 1000;
@@ -51,10 +51,10 @@
 
     .search-bar {
       flex-shrink: 0;
-      border-bottom: 1px solid $nice-border-color;
+      border-bottom: 1px solid var(--nice-border-color);
       position: relative;
-      border-top-left-radius: $nice-border-radius;
-      border-top-right-radius: $nice-border-radius;
+      border-top-left-radius: var(--nice-border-color-radius);
+      border-top-right-radius: var(--nice-border-color-radius);
 
       input {
         width: 100%;
@@ -104,12 +104,12 @@
 
         .choice-checkbox {
           transition: all 0.2s;
-          background: $nice-choice-bg;
-          color: $nice-choice-bg;
+          background: var(--nice-choice-bg);
+          color: var(--nice-choice-bg);
           line-height: 22px;
           width: 25px;
           height: 25px;
-          border: 2px solid $nice-border;
+          border: 2px solid var(--nice-border-color);
           position: absolute;
           border-radius: 2px;
           text-align: center;
@@ -121,17 +121,17 @@
         }
 
         &:hover, &.hover {
-          background: $nice-hover-color;
+          background: var(--nice-hover-color);
         }
 
         &.selected {
-          background: $nice-base-color;
+          background: var(--nice-base-color);
           color: white;
 
           .choice-checkbox {
-            border-color: $nice-choice-selected-bg;
-            background: $nice-choice-selected-bg;
-            color: $nice-choice-selected-color;
+            border-color: var(--nice-choice-selected-bg);
+            background: var(--nice-choice-selected-bg);
+            color: var(--nice-choice-selected-color);
           }
         }
       }
@@ -140,9 +140,9 @@
 
   .btn-dropdown {
     @extend .btn-primary;
-    background: $nice-dropdown-bg;
-    border-color: $nice-dropdown-border;
-    color: $nice-dropdown-color;
+    background: var(--nice-dropdown-bg);
+    border-color: var(--nice-dropdown-border);
+    color: var(--nice-dropdown-color);
     font-weight: inherit;
     min-height: 34px;
     position: relative;
@@ -158,7 +158,7 @@
 
     .caret {
       position: absolute;
-      color: $nice-border;
+      color: var(--nice-border-color);
       top: 50%;
       right: 10px;
       transform: translate(0, -50%);
@@ -182,21 +182,21 @@
 
     &:disabled {
       cursor: not-allowed;
-      background: $nice-dropdown-disabled-bg !important;
-      border-color: $nice-dropdown-disabled-border !important;
+      background: var(--nice-dropdown-disabled-bg) !important;
+      border-color: var(--nice-dropdown-disabled-border) !important;
     }
 
     &:hover {
-      background: $nice-dropdown-hover-bg;
-      border-color: $nice-dropdown-hover-border;
-      color: $nice-dropdown-hover-color;
+      background: var(--nice-dropdown-hover-bg);
+      border-color: var(--nice-dropdown-hover-border);
+      color: var(--nice-dropdown-hover-color);
     }
 
     &:active,
     &:focus {
-      background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
-      color: $nice-focus-color !important;
+      background: var(--nice-focus-bg) !important;
+      border-color: var(--nice-focus-border) !important;
+      color: var(--nice-focus-color) !important;
       outline: 0 none;
     }
   }

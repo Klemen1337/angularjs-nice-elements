@@ -8,11 +8,11 @@
   .input-group{
     .input-group-addon {
       cursor: pointer;
-      background: $nice-addon-bg;
+      background: var(--nice-addon-bg);
 
       &:hover {
         // Set icon color and background
-        background-color: $nice-base-color;
+        background-color: var(--nice-base-color);
         color: white;
       }
     }
@@ -36,7 +36,7 @@
     //min-width: 340px;
     max-height: 300px;
     background-color: white;
-    border-radius: $nice-border-radius;
+    border-radius: var(--nice-border-color-radius);
     overflow-x: auto;
 
     -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
@@ -52,14 +52,14 @@
       width: 100%;
       &:hover {
         //color: white !important;
-        //background-color: $nice-base-color !important;
-        background-color: $nice-hover-color;
+        //background-color: var(--nice-base-color) !important;
+        background-color: var(--nice-hover-color);
         cursor: pointer;
       }
 
       &.active{
         // color: white;
-        background-color: $nice-hover-color;
+        background-color: var(--nice-hover-color);
         cursor: pointer;
 
         // p{color:white;}

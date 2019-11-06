@@ -7,9 +7,9 @@
 
   .open{
     .btn-dropdown{
-      background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
-      color: $nice-focus-color !important;
+      background: var(--nice-focus-bg) !important;
+      border-color: var(--nice-focus-border) !important;
+      color: var(--nice-focus-color) !important;
     }
   }
 
@@ -20,8 +20,8 @@
   .input-group-btn{
     padding-left: 10px;
     .btn{
-      border-bottom-left-radius: $nice-border-radius;
-      border-top-left-radius: $nice-border-radius;
+      border-bottom-left-radius: var(--nice-border-color-radius);
+      border-top-left-radius: var(--nice-border-color-radius);
     }
   }
 
@@ -31,7 +31,7 @@
     padding: 0;
     max-height: 300px;
     overflow: auto;
-    border: 1px solid $nice-border-color;
+    border: 1px solid var(--nice-border-color);
     -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.175);
 
@@ -43,20 +43,20 @@
         -o-transition: all 0.2s;
         transition: all 0.2s;
 
-        background: $nice-choice-bg;
-        color: $nice-choice-bg;
+        background: var(--nice-choice-bg);
+        color: var(--nice-choice-bg);
         line-height: 22px;
         width: 25px;
         height: 25px;
-        border: 2px solid $nice-border;
+        border: 2px solid var(--nice-border-color);
         position: absolute;
         border-radius: 2px;
         text-align: center;
 
         &.selected{
-          border-color: $nice-choice-selected-bg;
-          background: $nice-choice-selected-bg;
-          color: $nice-choice-selected-color;
+          border-color: var(--nice-choice-selected-bg);
+          background: var(--nice-choice-selected-bg);
+          color: var(--nice-choice-selected-color);
         }
       }
 
@@ -71,7 +71,7 @@
 
       &:hover{
         a{
-          background: $nice-hover-color;
+          background: var(--nice-hover-color);
           //color: white;
         }
 
@@ -81,10 +81,10 @@
 
   .btn-dropdown{
     @extend .btn-primary;
-    background: $nice-dropdown-bg;
-    border-color: $nice-dropdown-border;
-    color: $nice-dropdown-color;
-    font-weight: $nice-font-weight;
+    background: var(--nice-dropdown-bg);
+    border-color: var(--nice-dropdown-border);
+    color: var(--nice-dropdown-color);
+    font-weight: var(--nice-font-weight);
     min-height: 34px;
 
     text-align: left;
@@ -94,25 +94,25 @@
       position: absolute;
       top: 15px;
       right: 10px;
-      color: $nice-border;
+      color: var(--nice-border-color);
     }
 
     &:disabled{
       cursor: not-allowed;
-      background: $nice-dropdown-disabled-bg !important;
-      border-color: $nice-dropdown-disabled-border !important;
+      background: var(--nice-dropdown-disabled-bg) !important;
+      border-color: var(--nice-dropdown-disabled-border) !important;
     }
 
     &:hover{
-      background: $nice-dropdown-hover-bg;
-      border-color: $nice-dropdown-hover-border;
-      color: $nice-dropdown-hover-color;
+      background: var(--nice-dropdown-hover-bg);
+      border-color: var(--nice-dropdown-hover-border);
+      color: var(--nice-dropdown-hover-color);
     }
 
     &:active, &:focus{
-      background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
-      color: $nice-focus-color !important;
+      background: var(--nice-focus-bg) !important;
+      border-color: var(--nice-focus-border) !important;
+      color: var(--nice-focus-color) !important;
     }
   }
 

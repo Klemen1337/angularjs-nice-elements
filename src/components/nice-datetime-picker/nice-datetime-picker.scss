@@ -3,8 +3,8 @@ $black_40: rgba(0, 0, 0, 0.4);
 $white: #fff;
 $black_16: rgba(0, 0, 0, 0.16);
 $black_12: rgba(0, 0, 0, 0.12);
-$color_apple_approx: darken($nice-base-color, 10%);
-$color_sushi_approx: $nice-base-color;
+$color_apple_approx: var(--nice-base-color-darken);
+$color_sushi_approx: var(--nice-base-color);
 $color_beryl_green_approx: #dcedc8;
 $color_silver_approx: #bdbdbd;
 $color_log_cabin_approx: #212121;
@@ -67,18 +67,18 @@ $color_gallery_approx: #eee;
 
   .input-group{
     .input-group-addon {
-      background: $nice-addon-bg;
+      background: var(--nice-addon-bg);
 
       &:hover {
         // Set icon color and background
-        background-color: $nice-base-color;
+        background-color: var(--nice-base-color);
         color: white;
       }
     }
   }
 
   .form-control{
-    background: $nice-background;
+    background: var(--nice-background);
   }
 
   .dtp-wrapper {
@@ -282,7 +282,7 @@ $color_gallery_approx: #eee;
         max-width: 300px;
         //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
         //box-shadow: 0 2px 5px 0 $black_16, 0 2px 10px 0 $black_12;
-        border: 1px solid $nice-border;
+        border: 1px solid var(--nice-border-color);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         max-height: 500px;
         position: absolute;
@@ -349,18 +349,18 @@ $color_gallery_approx: #eee;
   }
 
   .btn-primary{
-    background: $nice-base-color;
-    border-color: darken($nice-base-color, 5%);
+    background: var(--nice-base-color);
+    border-color: var(--nice-base-color-darken);
     color: white;
 
     &:hover{
-      background: darken($nice-base-color, 5%);
+      background: var(--nice-base-color-darken);
     }
   }
 
   .dtp-select-day, .dtp-picker-time {
     &:hover{
-      background: lighten($nice-base-color, 10%);
+      background: var(--nice-base-color-lighter);
       color: white !important;
       a{ color: white !important; }
     }

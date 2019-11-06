@@ -1,5 +1,5 @@
 label.nice{
-  color: $input-label-color;
+  color: var(--nice-input-label-color);
   text-align: right;
   display: block;
   line-height: 34px;
@@ -20,7 +20,7 @@ label.nice{
     
     .nice-title-text {
       text-align: right;
-      color: $input-label-color;
+      color: var(--nice-input-label-color);
     }
     
     .nice-title-help {
@@ -61,12 +61,12 @@ p.nice{
   hr{
     margin: 0px;
     margin-bottom: 10px;
-    border-color: $nice-border;
+    border-color: var(--nice-border-color);
   }
 
   .nice-table-header{
     font-size: $font-size-small;
-    color: $nice-base-color;
+    color: var(--nice-base-color);
     padding-top: 10px;
     padding-bottom: 5px;
     text-transform: uppercase;
@@ -77,7 +77,7 @@ p.nice{
     line-height: 25px;
     font-size: 14px;
     padding: 10px 0px;
-    border-top: 1px solid $nice-border;
+    border-top: 1px solid var(--nice-border-color);
 
 
 
@@ -86,7 +86,7 @@ p.nice{
     }
 
     &:hover{
-      background: $nice-table-bg-hover;
+      background: var(--nice-table-bg-hover);
     }
 
     .nice-table-btn{
@@ -104,7 +104,7 @@ p.nice{
 
     &:before{
       content: " ";
-      background: $nice-base-color;
+      background: var(--nice-base-color);
       width: 2px;
       height: 100%;
       position: absolute;
@@ -126,19 +126,19 @@ p.nice{
   line-height: 25px;
   font-size: 14px;
   padding: 15px 25px;
-  border-top: 1px solid $nice-border;
+  border-top: 1px solid var(--nice-border-color);
 
   &:hover{
-    background: $nice-table-bg-hover;
+    background: var(--nice-table-bg-hover);
   }
 
   &.active{
-    background: $nice-table-bg-active;
+    background: var(--nice-table-bg-active);
   }
 }
 
 .nice-submenu{
-  background-color: $nice-submenu-bg-color;
+  background-color: var(--nice-submenu-bg-color);
   // height: 50px;
   margin-top: 0;
   padding: 0;
@@ -155,7 +155,7 @@ p.nice{
 
     &:before {
       content: " ";
-      background: $nice-submenu-gray-color;
+      background: var(--nice-submenu-gray-color);
       height: 3px;
       position: absolute;
       top: 47px;
@@ -166,7 +166,7 @@ p.nice{
 
     &.active, &:hover {
       &:before {
-        background: $nice-base-color;
+        background: var(--nice-base-color);
       }
     }
   }
@@ -204,37 +204,37 @@ p.nice{
   padding:5px 0px 0px 0px;
   text-align: right;
   font-size: $font-size-small;
-  color: $nice-input-invalid;
+  color: var(--nice-input-invalid);
 }
 
 .feedback-invalid{
-  color:$nice-input-invalid !important;
+  color:var(--nice-input-invalid) !important;
 }
 
 .feedback-valid{
-  color:$nice-input-valid;
+  color:var(--nice-input-valid);
 }
 
 .has-warning{
   .form-control{
-    border-color: $nice-input-invalid !important;
+    border-color: var(--nice-input-invalid) !important;
   }
 
   .input-group-addon{
-    background: $nice-input-invalid !important;
-    border: $nice-input-invalid !important;
+    background: var(--nice-input-invalid) !important;
+    border: var(--nice-input-invalid) !important;
     color: white;
   }
 }
 
 .has-success{
   .form-control{
-    border-color: $nice-input-valid;
+    border-color: var(--nice-input-valid);
   }
 
   .input-group-addon{
-    background: $nice-input-valid;
-    border: $nice-input-valid;
+    background: var(--nice-input-valid);
+    border: var(--nice-input-valid);
     color: white;
   }
 }
