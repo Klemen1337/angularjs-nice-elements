@@ -23,13 +23,17 @@
 
   .input-group {
     cursor: pointer;
+
+    .input-group-addon {
+      background: $nice-addon-bg;
+    }
   }
 
   .nice-date-date {
     border-radius: $nice-border-radius;
     background: white;
     overflow: hidden;
-    border: solid 1px $nice-border;
+    border: solid 1px $nice-border-color;
 
     color: white;
     display: flex;
@@ -194,7 +198,7 @@
     i {
       line-height: 30px;
       margin-right: 10px;
-      color: $nice-border;
+      color: $nice-border-color;
     }
 
     .time-picker {
@@ -209,7 +213,7 @@
         appearance: none;
         outline: 0;
         border-radius: $nice-border-radius;
-        border: 1px solid $nice-border;
+        border: 1px solid $nice-border-color;
         padding: 0 10px;
         z-index: 2;
         // color: $nice-font-color;

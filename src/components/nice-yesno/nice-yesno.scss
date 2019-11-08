@@ -13,7 +13,7 @@
 
   .yesno-wrapper{
     background: $nice-yesno-bg;
-    border: 1px solid $nice-border;
+    border: 1px solid $nice-border-color;
     color: $nice-font-color;
     border-radius: $nice-border-radius;
 
@@ -27,8 +27,7 @@
     }
 
     .yesno-yes-bg, .yesno-no-bg {
-      color: $disabled-font-color;
-      width: 50%;
+      opacity: 0.8;
       height: 100%;
       position: absolute;
       top: 0;

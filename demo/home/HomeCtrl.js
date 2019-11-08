@@ -203,11 +203,9 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     var deferred = $q.defer();
 
     var params = {address: address, sensor: false};
-    $http.get(
-      'http://maps.googleapis.com/maps/api/geocode/json',
-      {params: params}
-    ).then(function (response) {
+    $http.get('http://maps.googleapis.com/maps/api/geocode/json', {params: params}).then(function (response) {
       $scope.results = response.data.results;
+      console.log($scope.results);
       deferred.resolve(response.data.results);
     }, function (error) {
       deferred.reject(error);
@@ -230,6 +228,24 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
       behavior: 'smooth'
     });
   };
+
+  $scope.countrySelected = function(country) {
+    console.log(country);
+  }
+
+  $scope.searchCountry = function (search) {
+    if (!search) search = "";
+    return new Promise(function(resolve, reject) {
+      var countries = $scope.countries.filter(function(d) {
+        let lowercaseName = (d.name).toLowerCase();
+        let lowercaseSearch = search.toLowerCase();
+        return lowercaseName.includes(lowercaseSearch);
+      })
+      $timeout(function () {
+        resolve(countries);
+      }, 200);
+    });
+  }
 
   $scope.countries = [
     {'iso' : 'AF', 'name' : 'Afghanistan'},

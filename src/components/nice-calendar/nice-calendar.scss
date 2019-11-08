@@ -29,7 +29,7 @@
 
 
   .nice-calendar-time{
-    border-top: 1px solid $nice-border;
+    border-top: 1px solid $nice-border-color;
     position: relative;
 
     .no-border-right{
@@ -65,7 +65,7 @@
       appearance: none;
       outline: 0;
       border-radius: 0px;
-      border: 1px solid $nice-border;
+      border: 1px solid $nice-border-color;
       border-top: 0;
       border-left: 0;
       padding: 5px 10px;
@@ -78,14 +78,14 @@
     }
 
     .time-picket-icon{
-      border-right: 1px solid $nice-border;
+      border-right: 1px solid $nice-border-color;
       width: 20%;
       float: left;
       font-size: 14px;
       text-align: center;
       line-height: 30px;
       color: $nice-font-color;
-      border-bottom: 1px solid $nice-border;
+      border-bottom: 1px solid $nice-border-color;
       height: 30px;
     }
   }
@@ -96,7 +96,7 @@
     display: block;
     background: white;
     width: 100%;
-    border: solid 1px $nice-border;
+    border: solid 1px $nice-border-color;
 
     $day-width: 14.28571%;
     $day-height: 25px;

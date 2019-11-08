@@ -4170,6 +4170,203 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceSearch2
+ * @description
+ * # niceSearch2
+ */
+angular.module('niceElements')
+  .directive('niceSearch2', function () {
+    return {
+      transclude: {
+        'option': '?niceSearchOption'
+      },
+      templateUrl: 'src/components/nice-search2/nice-search2.html',
+      restrict: 'E',
+      scope: {
+        model: '=',
+        isDisabled: '=',
+        showDropdown: '=',
+        title: '@?',
+        placeholder: '@',
+        fieldWidth: '@',
+        labelWidth: '@',
+        refreshFunction: '=',
+        refreshSelectedCallback: '=',
+        onSelect: '=',
+        noMargin: '@',
+        tabIndex: '@',
+        help: '@'
+      },
+      controller: function($scope, $timeout, $element) {
+        $scope.loading = false;
+        $scope.isOpen = false;
+        $scope.debounce = null;
+        $scope.results = [];
+        $scope.noResults = false;
+        $scope.selectedIndex = 0;
+
+
+        
+        // ------------------- On focus -------------------
+        $scope.onFocus = function() {
+          if ($scope.showDropdown) {
+            $scope.getData($scope.model);
+            $scope.open();
+          }
+
+          var input = $element[0].getElementsByTagName('input')[0];
+          if (input) input.focus();
+        };
+
+
+        // ------------------- On focus -------------------
+        $scope.open = function() {
+          $scope.isOpen = true;
+        };
+
+
+        // ------------------- On blur -------------------
+        $scope.close = function() {
+          $scope.isOpen = false;
+
+          var input = $element[0].getElementsByTagName('input')[0];
+          if (input) input.blur();
+        };
+
+
+        // ------------------- Update search -------------------
+        $scope.updateSearch = function () {
+          if ($scope.debounce) {
+            $timeout.cancel($scope.debounce);
+          }
+
+          $scope.debounce = $timeout(function() {
+            $scope.getData($scope.model);
+          }, 200);
+        };
+
+
+        // ------------------- Get data -------------------
+        $scope.getData = function(keywords) {
+          if ($scope.refreshFunction != null) {
+            $scope.loading = true;
+            $scope.refreshFunction(keywords).then(function(results) {
+              $timeout(function() {
+                $scope.open();
+                $scope.loading = false;
+
+                $scope.noResults = results.length == 0;
+                $scope.results = results;
+
+                if (!$scope.noResults) {
+                  $scope.selectedIndex = 0;
+                }
+              });
+            }, function(error) {
+              $scope.loading = false;
+              $scope.close();
+            });
+          } else {
+            $scope.loading = false;
+            $scope.close();
+          }
+        };
+
+
+        // ------------------------ If search button is clicked set focus or make request ------------------------
+        $scope.search = function() {
+          if (!$scope.isDisabled) {
+            if ($scope.showDropdown) {
+              $scope.updateSearch();
+            }
+            $scope.focus();
+          }
+        };
+
+
+        // ------------------------ Clear search ------------------------
+        $scope.clear = function () {
+          $scope.model = "";
+          $scope.close();
+        };
+
+
+        // ------------------------ Select item ------------------------
+        $scope.selectItem = function (item) {
+          if ($scope.onSelect) {
+            $scope.onSelect(item);
+            $scope.clear();
+            $scope.close();
+          }
+        };
+
+
+        // ----------------------------------- Scroll to hover -----------------------------------
+        $scope.scrollToHover = function(notSmooth) {
+          var dropdownMenu = $element[0].getElementsByClassName("nice-dropdown")[0];
+          var hoverItem = dropdownMenu.getElementsByClassName("active")[0];
+          if (hoverItem) {
+            var topPos = hoverItem.offsetTop;
+            dropdownMenu.scroll({
+              top: topPos - 120,
+              left: 0,
+              behavior: notSmooth ? 'auto' : 'smooth'
+            });
+          }
+        };
+
+
+        // ----------------------------------- Watch for keydown and keypress -----------------------------------
+        $element.bind("keydown keypress", function (event) {
+          // Arrow Up
+          if (event.keyCode == 38) {
+            event.preventDefault();
+            $timeout(function() {
+              if ( $scope.selectedIndex > 0) {
+                $scope.selectedIndex -= 1;
+                $timeout(function() {
+                  $scope.scrollToHover();
+                });
+              }
+            });
+          }
+
+          // Arrow Down
+          if (event.keyCode == 40) {
+            event.preventDefault();
+            $timeout(function() {
+              if ($scope.results && $scope.selectedIndex < $scope.results.length - 1) {
+                $scope.selectedIndex += 1;
+                $timeout(function() {
+                  $scope.scrollToHover();
+                });
+              }
+            });
+          }
+
+          // Enter
+          if (event.keyCode == 13) {
+            event.preventDefault();
+            $timeout(function() {
+              $scope.selectItem($scope.results[$scope.selectedIndex], $scope.selectedIndex);
+            });
+          }
+
+          // Escape
+          if (event.keyCode == 27) {
+            $timeout(function() {
+              $scope.close();
+            });
+          }
+        });
+      }
+    }
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceSlot
  * @description
  * # niceSlot
@@ -5458,7 +5655,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "        <!------------------------- Field ------------------------->\n" +
     "        <div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "            <div \n" +
-    "                class=\"form-group has-feedback symbol\"\n" +
+    "                class=\"input-group has-feedback symbol\"\n" +
     "                ng-class=\"{\n" +
     "                    'has-warning': !isDisabled && form.$invalid && form.$dirty && !hideValid,\n" +
     "                    'has-success': !isDisabled && form.$valid && form.$dirty && showValid,\n" +
@@ -5602,6 +5799,53 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <!--Here is injected dropdown html if passed and results present and open.-->\n" +
     "    <!--<div ng-transclude></div>-->\n" +
+    "</ng-form>"
+  );
+
+
+  $templateCache.put('src/components/nice-search2/nice-search2.html',
+    "<ng-form class=\"nice-component nice-input nice-search2\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <!------------------------- Label ------------------------->\n" +
+    "        <div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "            <div class=\"nice-title-text\">{{ title }}</div>\n" +
+    "            <nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <!------------------------- Field ------------------------->\n" +
+    "        <div ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\" click-outside=\"close()\">\n" +
+    "            <div class=\"input-group\" ng-class=\"{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
+    "                <input\n" +
+    "                    class=\"form-control\"\n" +
+    "                    type=\"text\"\n" +
+    "                    id=\"{{ id }}\"\n" +
+    "                    ng-model=\"model\"\n" +
+    "                    placeholder=\"{{ placeholder }}\"\n" +
+    "                    ng-disabled=\"isDisabled\"\n" +
+    "                    ng-change=\"updateSearch()\"\n" +
+    "                    ng-focus=\"onFocus()\"\n" +
+    "                    tabindex=\"{{ tabIndex }}\"\n" +
+    "                >\n" +
+    "\n" +
+    "                <span class=\"input-group-addon\">\n" +
+    "                    <i ng-show=\"!loading\" class=\"fa fa-search\" ></i>\n" +
+    "                    <i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\n" +
+    "                </span>\n" +
+    "\n" +
+    "                <div class=\"nice-dropdown\" ng-if=\"showDropdown && isOpen\">\n" +
+    "                    <div class=\"nice-search-row nice-search-row-loading\" ng-if=\"loading && results.length == 0\">\n" +
+    "                      <nice-loader visible-when=\"!loading\"></nice-loader>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"nice-search-row nice-search-row-empty\" ng-if=\"!loading && results.length == 0\">No results found.</div>\n" +
+    "\n" +
+    "                    <div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectItem(result)\">\n" +
+    "                      <span ng-transclude=\"option\">{{ result[keyForInputLabel] }}</span>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "      </div>\n" +
     "</ng-form>"
   );
 

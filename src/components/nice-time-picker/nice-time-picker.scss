@@ -7,6 +7,7 @@
       cursor: pointer;
       background: $nice-addon-bg;
       border: 1px solid $nice-input-border;
+      border-left: 0;
 
       &:hover {
         // Set icon color and background

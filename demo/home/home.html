@@ -103,6 +103,29 @@
         <div class="white-wrapper">
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
+                    <nice-search2
+                      title="Search v2"
+                      model="searchCountryString"
+                      refresh-function="searchCountry"
+                      placeholder="Search item"
+                      show-dropdown="true"
+                      on-select="countrySelected"
+                    >
+                      <nice-search-option>
+                        <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> {{ $parent.result.name }}
+                      </nice-search-option>
+                    </nice-search2>
+
+                    <nice-search
+                      title="Search"
+                      model="searchCountryString"
+                      refresh-function="searchCountry"
+                      placeholder="Search item"
+                      show-dropdown="false"
+                      on-select="countrySelected"
+                      key-for-input-label="name"
+                    ></nice-search>
+
                     <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled"></nice-date>
                     <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test "></nice-date>
 
@@ -752,15 +775,16 @@
             <div class="row">
                 <div class="col-sm-6">
                     <nice-search
-                            refresh-function="getAddresses"
-                            model="searchItem"
-                            field-width="col-xs-12"
-                            placeholder="Search item"
-                            show-dropdown="true"
-                            key-for-input-label="formatted_address">
-                                <span class="text-bold">{{ result.formatted_address }}</span>
-                                <div>{{ result.geometry.location.lat }}</div>
-                                <div>{{ result.geometry.location.lng }}</div>
+                      model="searchItem"
+                      refresh-function="getAddresses"
+                      field-width="col-xs-12"
+                      placeholder="Search item"
+                      show-dropdown="true"
+                      key-for-input-label="formatted_address"
+                    >
+                      <span class="text-bold">{{ result.formatted_address }}</span>
+                      <div>{{ result.geometry.location.lat }}</div>
+                      <div>{{ result.geometry.location.lng }}</div>
                     </nice-search>
                 </div>
 

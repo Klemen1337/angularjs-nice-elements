@@ -1,88 +1,65 @@
 // ---------- Fonts ----------
-$nice-font-family-sans-serif:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-base: $nice-font-family-sans-serif !default;
+$nice-font-family:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$nice-font-weight: normal !default;
+$nice-font-color: #404040 !default;
 
 
 // ---------- Colors ----------
-$trout: #474F52 !default;
+$nice-base-color: #4abeb4 !default;
 $nice-danger-color: #d9534f !default;
 $nice-success-color: #5cb85c !default;
 $nice-info-color: #31b0d5 !default;
 $nice-warning-color: #ec971f !default;
 
 
-// ---------- Color override ----------
-$nice-base-color: #4abeb4 !default;
-$nice-border-color: #eee !default;
-$nice-addon-bg: #dcdcdc !default;
-$nice-font-color: #404040 !default;
+// ---------- Border ----------
+$nice-border-color: #cbd4d9 !default;
+$nice-border-radius: 3px !default;
+$nice-border-radius-small: $nice-border-radius !default;
+
+
+// ---------- Disabled ----------
 $nice-disabled-color: #EDEFF2 !default;
 $nice-disabled-border: #D2D9D9!default;
 $nice-disabled-bg: white !default;
-
-$nice-submenu-bg-color: #e1e5e8 !default;
-$nice-submenu-gray-color: #b0bec5 !default;
-
-$nice-font-weight: normal !default;
-
-
-// ---------- Table ----------
-$nice-table-bg-hover: #f5f5f5 !default;
-$nice-table-bg-active: #f5f5f5 !default;
-
-
-// ---------- Disabled colors ----------
-$disabled-font-color: #999999 !default;
-$disabled-bg-color: #eeeeee !default;
-
-
-// ---------- Border radius ----------
-$nice-border-radius: 3px !default;
-$nice-border-radius-small: $nice-border-radius !default;
 
 
 // ---------- Nice global settings ----------
 $nice-focus-bg: white !default;
 $nice-focus-border: $nice-base-color !default;
-$nice-focus-color: $trout !default;
+$nice-focus-color: #474F52 !default;
 
-$nice-color: #404040 !default;
 $nice-background: white !default;
-$nice-border: #cbd4d9 !default;
 $nice-hover-color: #EDEDED !default;
 $nice-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !default;
 
-// ---------- Input colors override ----------
-$input-border-focus: $nice-base-color !default;
-$input-border: $nice-border !default;
-$input-bg: $nice-background !default;
-$input-color: $nice-font-color !default;
-$input-label-color: $trout !default;
-$nice-input-placeholder-color: #999999 !default;
 
+// ---------- Input colors override ----------
+$nice-label-color: $nice-font-color !default;
+$nice-input-placeholder-color: #999999 !default;
 $nice-input-bg: $nice-background !default;
-$nice-input-border: $nice-border !default;
+$nice-input-border: $nice-border-color !default;
 $nice-input-disabled-bg: white !default;
 $nice-input-disabled-border: $nice-disabled-color !default;
-
 $nice-input-valid: $nice-base-color !default;
 $nice-input-invalid: $nice-danger-color !default;
+$nice-addon-bg: #f3f3f3 !default;
 
 
 // ---------- Dropdown colors override ----------
 $nice-dropdown-bg: $nice-background !default;
-$nice-dropdown-border: $nice-border !default;
+$nice-dropdown-border: $nice-border-color !default;
 $nice-dropdown-color: $nice-font-color !default;
 
 $nice-dropdown-hover-bg: white !default;
-$nice-dropdown-hover-border: $nice-border !default;
-$nice-dropdown-hover-color: $trout !default;
+$nice-dropdown-hover-border: $nice-border-color !default;
+$nice-dropdown-hover-color: #474F52 !default;
 
 $nice-dropdown-disabled-bg: $nice-disabled-bg !default;
 $nice-dropdown-disabled-border: $nice-disabled-color !default;
 
 
-// ---------- YesNo colors override ----------
+// ---------- Yes no colors override ----------
 $nice-yesno-bg: $nice-background !default;
 $nice-yesno-slider-bg: $nice-base-color !default;
 
@@ -98,15 +75,11 @@ $nice-choice-selected-bg: $nice-base-color !default;
 $nice-choice-selected-color: white !default;
 
 
-// ---------- Datetime colors override ----------
-$nice-datetime-bg: $nice-base-color !default;
-
-
 // ---------- Loader ----------
 $nice-loader-color: $nice-base-color !default;
 
 
-// Notification
+// ---------- Notifications ----------
 $nice-notification-color: white !default;
 $nice-notification-bg: $nice-base-color !default;
 
@@ -121,3 +94,13 @@ $nice-notification-success-bg: $nice-success-color !default;
 
 $nice-notification-info-color: $nice-notification-color !default;
 $nice-notification-info-bg: $nice-info-color !default;
+
+
+// ---------- Submenu ----------
+$nice-submenu-bg-color: #e1e5e8 !default;
+$nice-submenu-gray-color: #b0bec5 !default;
+
+
+// ---------- Table ----------
+$nice-table-bg-hover: #f5f5f5 !default;
+$nice-table-bg-active: #f5f5f5 !default;
