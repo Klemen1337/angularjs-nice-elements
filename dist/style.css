@@ -268,6 +268,11 @@ p.nice {
   color: white;
 }
 
+/* line 242, ../src/styles/_nice-common.scss */
+.nice-highligh {
+  background: yellow;
+}
+
 /* line 1, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown, .nice-search .nice-dropdown-empty {
   margin-bottom: 10px;

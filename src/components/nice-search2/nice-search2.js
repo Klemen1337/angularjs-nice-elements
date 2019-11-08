@@ -38,7 +38,7 @@ angular.module('niceElements')
         $scope.selectedIndex = 0;
         $scope.requestNumber = 0;
 
-
+        if (!$scope.model) $scope.model = "";
         
         // ------------------- On focus -------------------
         $scope.onFocus = function() {

@@ -50,13 +50,25 @@ module.exports = function (grunt) {
       ngtemplates: {
         niceElements: {
           src: '<%= yeoman.src %>/components/**/*.html',
-          dest: '.tmp/nice.templates.js'
+          dest: '.tmp/nice.templates.js',
+          options: {
+            htmlmin:  {
+              collapseWhitespace: true, 
+              preserveLineBreaks: true,
+              removeComments: true
+            }
+          }
         }
       },
 
       concat: {
         build: {
-          src: ['src/nice.js', 'src/components/**/*.js', '.tmp/nice.templates.js'],
+          src: [
+            'src/nice.js', 
+            'src/components/**/*.js', 
+            'src/filters/*.js',
+            '.tmp/nice.templates.js'
+          ],
           dest: '<%= yeoman.dist %>/nice.js'
         }
       },

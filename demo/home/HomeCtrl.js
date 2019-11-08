@@ -10,6 +10,13 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     $scope.mockData = response.data;
   });
 
+
+  $scope.searchPeople = function(search) {
+    return $http.get('http://5c9dcf843be4e30014a7d40a.mockapi.io/users?search=' + search).then(function(response) {
+      return response.data;
+    });
+  };
+
   $scope.searchFunction = function(search) {
     return $q(function(resolve, reject) {
       $timeout(function(){
