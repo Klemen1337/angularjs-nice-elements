@@ -13,9 +13,9 @@
             <div class="disabled-shield" ng-if="isDisabled"></div>
 
             <!------------------------------ Input ------------------------------>
-            <div class="input-group" ng-if="!inline">
+            <div class="input-group" ng-class="{ 'open': isOpen }" ng-if="!inline">
                 <span class="form-control" ng-click="toggleOpen()">{{ innerDate.value }}</span>
-                <span class="input-group-addon" ng-click="toggleOpen()">
+                <span class="input-group-addon clickable" ng-click="toggleOpen()">
                     <i class="fa fa-calendar"></i>
                 </span>
             </div>

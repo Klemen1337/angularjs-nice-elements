@@ -21,8 +21,8 @@
                     tabindex="{{ tabIndex }}"
                 >
 
-                <span class="input-group-addon">
-                    <i ng-show="!loading" class="fa fa-search" ></i>
+                <span class="input-group-addon clickable" ng-click="onFocus()">
+                    <i ng-show="!loading" class="fa fa-search"></i>
                     <i ng-show="loading" class="fa fa-refresh fa-spin"></i>
                 </span>
 
@@ -34,7 +34,7 @@
                     <div class="nice-search-row nice-search-row-empty" ng-if="!loading && results.length == 0">No results found.</div>
 
                     <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectItem(result)">
-                      <span ng-transclude="option">{{ result[keyForInputLabel] }}</span>
+                      <ng-transclude>{{ result[keyForInputLabel] }}</ng-transclude>
                     </div>
                 </div>
             </div>

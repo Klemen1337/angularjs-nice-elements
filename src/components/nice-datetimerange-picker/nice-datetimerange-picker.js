@@ -42,7 +42,7 @@ angular.module('niceElements')
             noMargin: false,
             fieldWidth: 'col-sm-8',
             labelWidth: 'col-sm-4',
-            format: 'DD.MM.YYYY HH:mm',
+            format: 'D.M.YYYY H:mm',
             modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
             minDate: null,
             maxDate: null,

@@ -1,16 +1,5 @@
 .nice-date-range{
-  .input-group{
-    .input-group-addon {
-      cursor: pointer;
-      background: $nice-addon-bg;
-
-      &:hover {
-        // Set icon color and background
-        background-color: $nice-base-color;
-        color: white;
-      }
-    }
-  }
+  
 }
 
 .daterangepicker{

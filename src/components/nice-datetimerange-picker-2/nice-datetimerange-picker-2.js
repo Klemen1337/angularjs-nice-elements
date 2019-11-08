@@ -36,8 +36,8 @@ angular.module('niceElements')
 
         // Set format string
         if(!$scope.formatString) {
-          if($scope.time) $scope.formatString = 'DD.MM.YYYY HH:mm';
-          else $scope.formatString = 'DD.MM.YYYY';
+          if($scope.time) $scope.formatString = 'D.M.YYYY H:mm';
+          else $scope.formatString = 'D.M.YYYY';
         }
 
         // Set start date

@@ -9,9 +9,7 @@
 angular.module('niceElements')
   .directive('niceSearch2', function () {
     return {
-      transclude: {
-        'option': '?niceSearchOption'
-      },
+      transclude: true,
       templateUrl: 'src/components/nice-search2/nice-search2.html',
       restrict: 'E',
       scope: {

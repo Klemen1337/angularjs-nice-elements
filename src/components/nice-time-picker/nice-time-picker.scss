@@ -2,55 +2,18 @@
   position: relative;
   margin-bottom: 10px;
 
-  .input-group{
-    .input-group-addon {
-      cursor: pointer;
-      background: $nice-addon-bg;
-      border: 1px solid $nice-border-color;
-      border-left: 0;
-
-      &:hover {
-        // Set icon color and background
-        background-color: $nice-base-color;
-        color: white;
-      }
-    }
-  }
-
-  .form-control{
-    min-width: 50px;
-    background: $nice-input-bg;
-    border: 1px solid $nice-border-color;
-
-    &:active, &:focus{
-      border-color: $nice-focus-border;
-      -webkit-box-shadow: inset 0 0 0;
-      box-shadow: inset 0 0 0;
-
-      .input-group-addon &{
-        border-color: $nice-focus-border;
-      }
-    }
-
-    &:disabled {
-      background: $nice-input-disabled-bg;
-      border-color: $nice-input-disabled-border;
-      opacity: 0.65;
-    }
-  }
-
-
   .nice-time-picker-dropdown{
     z-index: 900;
     border-radius: $nice-border-radius;
     position: absolute;
-    top: 40px;
+    top: 100%;
     left: 15px;
     width: 100%;
     background: white;
     border: 1px solid $nice-border-color;
-    box-shadow: 0px 0px 10px $nice-border-color;
+    box-shadow: $nice-box-shadow;
     padding: 10px;
+    margin-top: 0.5rem;
     text-align: center;
 
     .numbers{

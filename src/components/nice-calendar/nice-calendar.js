@@ -226,7 +226,7 @@ angular.module('niceElements')
 
         // ------------------ Format date ------------------
         scope.formatDate = function(date){
-          if(scope.time) return moment(date).format('D.M.YYYY - HH:mm');
+          if(scope.time) return moment(date).format('D.M.YYYY - H:mm');
           else return moment(date).format('D.M.YYYY');
         };
 

@@ -5,7 +5,8 @@
 
   .nice-date-dropdown {
     position: absolute;
-    top: 40px;
+    margin-top: 0.5rem;
+    top: 100%;
     z-index: 1000;
     width: 300px;
     box-shadow: $nice-box-shadow;
@@ -23,14 +24,16 @@
 
   .input-group {
     cursor: pointer;
+  
+    &.open {
+      .form-control, .input-group-addon{
+        border-color: $nice-base-color;
+      }
 
-    .form-control {
-      background: $nice-input-bg;
-      border: 1px solid $nice-border-color;
-    }
-
-    .input-group-addon {
-      background: $nice-addon-bg;
+      .input-group-addon{
+        background-color: $nice-base-color;
+        color: white;
+      }
     }
   }
 

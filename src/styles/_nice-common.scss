@@ -36,6 +36,52 @@ label.nice{
       }
     }
   }
+
+  .input-group, .form-group {
+    .form-control {
+      min-width: 50px;
+      // border-radius: $nice-border-radius;
+      // border-right: 0;
+      background: $nice-input-bg;
+      border: 1px solid $nice-border-color;
+      box-shadow: 0 0 0;
+  
+      &:active, &:focus {
+        border-color: $nice-focus-border;
+        box-shadow: 0 0 0;
+
+        & + .input-group-addon {
+          border-color: $nice-focus-border;
+          background-color: $nice-focus-border;
+          color: white;
+        }
+      }
+  
+      &:disabled {
+        background: $nice-input-disabled-bg;
+        border-color: $nice-input-disabled-border;
+        opacity: 0.65;
+      }
+    }
+
+    .input-group-addon{
+      background: $nice-addon-bg;
+      // border: 0 none;
+      border-top-right-radius: $nice-border-radius;
+      border-bottom-right-radius: $nice-border-radius;
+      color: $nice-font-color;
+      border: 1px solid $nice-border-color;
+      border-left: 0 none;
+
+      &.clickable {
+        &:hover {
+          cursor: pointer;
+          background-color: $nice-base-color;
+          color: white;
+        }
+      }
+    }
+  }
 }
 
 .margin-top-20 {
@@ -208,11 +254,11 @@ p.nice{
 }
 
 .feedback-invalid{
-  color:$nice-input-invalid !important;
+  color: $nice-input-invalid !important;
 }
 
 .feedback-valid{
-  color:$nice-input-valid;
+  color: $nice-input-valid;
 }
 
 .has-warning{
@@ -222,7 +268,7 @@ p.nice{
 
   .input-group-addon{
     background: $nice-input-invalid !important;
-    border: $nice-input-invalid !important;
+    border-color: $nice-input-invalid !important;
     color: white;
   }
 }
@@ -234,7 +280,7 @@ p.nice{
 
   .input-group-addon{
     background: $nice-input-valid;
-    border: $nice-input-valid;
+    border-color: $nice-input-valid;
     color: white;
   }
 }

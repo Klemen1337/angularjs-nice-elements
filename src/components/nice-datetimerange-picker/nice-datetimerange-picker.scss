@@ -5,28 +5,6 @@
     border-radius: $nice-border-radius;
   }
 
-  .form-control{
-    min-width: 50px;
-    background: $nice-input-bg;
-    border: 1px solid $nice-border-color;
-
-    &:active, &:focus{
-      border-color: $nice-focus-border;
-      -webkit-box-shadow: inset 0 0 0;
-      box-shadow: inset 0 0 0;
-
-      .input-group-addon &{
-        border-color: $nice-focus-border;
-      }
-    }
-
-    &:disabled {
-      background: $nice-input-disabled-bg;
-      border-color: $nice-input-disabled-border;
-      opacity: 0.65;
-    }
-  }
-
   .dtp-range-wrapper{
     border-radius: $nice-border-radius;
     box-shadow: $nice-box-shadow;

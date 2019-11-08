@@ -3,56 +3,18 @@
   display: block;
 
   .input-group{
-    display: flex;
-
     .form-control{
       cursor: pointer;
-      min-width: 50px;
-      background: $nice-input-bg;
-      border: 1px solid $nice-border-color;
-
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      &:active, &:focus{
-        border-color: $nice-focus-border;
-        -webkit-box-shadow: inset 0 0 0;
-        box-shadow: inset 0 0 0;
-
-        .input-group-addon &{
-          border-color: $nice-focus-border;
-        }
-      }
-
-      &:disabled {
-        background: $nice-input-disabled-bg;
-        border-color: $nice-input-disabled-border;
-        opacity: 0.65;
-      }
-    }
-
-    .input-group-addon {
-      cursor: pointer;
-      background: $nice-addon-bg;
-
-      width: 38px;
-      padding: 0;
-      flex-shrink: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:hover {
-        // Set icon color and background
-        background-color: $nice-base-color;
-        color: white;
-      }
     }
 
     &.open {
       .form-control, .input-group-addon{
         border-color: $nice-base-color;
+      }
+
+      .input-group-addon{
+        background-color: $nice-base-color;
+        color: white;
       }
     }
   }
@@ -62,8 +24,9 @@
     border-radius: $nice-border-radius;
     box-shadow: $nice-box-shadow;
     position: absolute;
+    margin-top: 0.5rem;
     left: 15px;
-    top: 40px;
+    top: 100%;
     width: 700px;
     padding: 15px;
     background-color: white;

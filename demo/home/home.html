@@ -7,6 +7,10 @@
     body { font-size: 14px; font-size: 1.4rem; } /* =14px */
     h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
 
+    .mb-10{
+      margin-bottom: 10px;
+    }
+
     .headline{
         text-align:center;
         font-size: 60px;
@@ -17,14 +21,11 @@
     }
 
     .white-wrapper{
-        /*border: 1px solid #ccc;*/
-        padding: 25px;
+        border: 1px solid #cbd4d9;
+        padding: 4rem;
         background: white;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
         border-radius: 3px;
-        margin-bottom:25px;
-        box-shadow: 0 0 5px #e2e2e2;
+        margin-bottom: 4rem;
     }
 
     .white-wrapper h2{
@@ -59,11 +60,10 @@
     }
 
     .person-row img {
-      height: 50px;
+      height: 30px;
       border-radius: 50%;
       margin-right: 1rem;
     }
-
 </style>
 
 <div ng-controller='HomeCtrl'>
@@ -117,9 +117,9 @@
                       show-dropdown="true"
                       on-select="countrySelected"
                     >
-                      <nice-search-option class="person-row">
+                      <div class="person-row">
                         <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
-                      </nice-search-option>
+                      </div>
                     </nice-search2>
 
                     <nice-search2
@@ -130,9 +130,7 @@
                       show-dropdown="true"
                       on-select="countrySelected"
                     >
-                      <nice-search-option>
-                        <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> {{ $parent.result.name }}
-                      </nice-search-option>
+                      <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> <span>{{ $parent.result.name }}</span>
                     </nice-search2>
 
                     <nice-search
@@ -306,6 +304,8 @@
                     <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" tab-index="1" is-focused="true" help="This is a test"></nice-input>
 
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" is-disabled="data.disabled" tab-index="2" help="This is a test"></nice-input>
+
+                    <nice-input title="Total" model="data.total" placeholder="10.23" required="toggleRequired" is-disabled="data.disabled" tab-index="3" symbol="EUR"></nice-input>
 
                     <div class="row">
                         <div class="col-sm-offset-4 col-sm-8 mb-10">

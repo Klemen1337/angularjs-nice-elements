@@ -9,18 +9,8 @@
 }
 
 /* line 13, ../src/styles/_nice.scss */
-.form-control {
-  box-shadow: none;
-}
-
-/* line 17, ../src/styles/_nice.scss */
 .margin-bottom-0 {
   margin-bottom: 0 !important;
-}
-
-/* line 21, ../src/styles/_nice.scss */
-.mb-10 {
-  margin-bottom: 10px;
 }
 
 /* line 1, ../src/styles/_nice-common.scss */
@@ -66,37 +56,76 @@ label.nice {
     text-align: left;
   }
 }
-
 /* line 41, ../src/styles/_nice-common.scss */
+.nice-component .input-group .form-control, .nice-component .form-group .form-control {
+  min-width: 50px;
+  background: white;
+  border: 1px solid #cbd4d9;
+  box-shadow: 0 0 0;
+}
+/* line 49, ../src/styles/_nice-common.scss */
+.nice-component .input-group .form-control:active, .nice-component .input-group .form-control:focus, .nice-component .form-group .form-control:active, .nice-component .form-group .form-control:focus {
+  border-color: #3189ff;
+  box-shadow: 0 0 0;
+}
+/* line 53, ../src/styles/_nice-common.scss */
+.nice-component .input-group .form-control:active + .input-group-addon, .nice-component .input-group .form-control:focus + .input-group-addon, .nice-component .form-group .form-control:active + .input-group-addon, .nice-component .form-group .form-control:focus + .input-group-addon {
+  border-color: #3189ff;
+  background-color: #3189ff;
+  color: white;
+}
+/* line 60, ../src/styles/_nice-common.scss */
+.nice-component .input-group .form-control:disabled, .nice-component .form-group .form-control:disabled {
+  background: white;
+  border-color: #EDEFF2;
+  opacity: 0.65;
+}
+/* line 67, ../src/styles/_nice-common.scss */
+.nice-component .input-group .input-group-addon, .nice-component .form-group .input-group-addon {
+  background: #f3f3f3;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #404040;
+  border: 1px solid #cbd4d9;
+  border-left: 0 none;
+}
+/* line 77, ../src/styles/_nice-common.scss */
+.nice-component .input-group .input-group-addon.clickable:hover, .nice-component .form-group .input-group-addon.clickable:hover {
+  cursor: pointer;
+  background-color: #3189ff;
+  color: white;
+}
+
+/* line 87, ../src/styles/_nice-common.scss */
 .margin-top-20 {
   margin-top: 20px;
 }
 
-/* line 45, ../src/styles/_nice-common.scss */
+/* line 91, ../src/styles/_nice-common.scss */
 .margin-right-20 {
   margin-right: 20px;
 }
 
-/* line 49, ../src/styles/_nice-common.scss */
+/* line 95, ../src/styles/_nice-common.scss */
 p.nice {
   line-height: 34px;
   margin: 0;
 }
 
-/* line 54, ../src/styles/_nice-common.scss */
+/* line 100, ../src/styles/_nice-common.scss */
 .nice-disabled {
   opacity: 0.5;
   cursor: not-allowed;
   user-select: none;
 }
 
-/* line 61, ../src/styles/_nice-common.scss */
+/* line 107, ../src/styles/_nice-common.scss */
 .nice-table hr {
   margin: 0px;
   margin-bottom: 10px;
   border-color: #cbd4d9;
 }
-/* line 67, ../src/styles/_nice-common.scss */
+/* line 113, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-header {
   font-size: 12px;
   color: #3189ff;
@@ -104,7 +133,7 @@ p.nice {
   padding-bottom: 5px;
   text-transform: uppercase;
 }
-/* line 75, ../src/styles/_nice-common.scss */
+/* line 121, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row {
   cursor: pointer;
   line-height: 25px;
@@ -112,24 +141,24 @@ p.nice {
   padding: 10px 0px;
   border-top: 1px solid #cbd4d9;
 }
-/* line 84, ../src/styles/_nice-common.scss */
+/* line 130, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .list-inline {
   margin-bottom: 0px;
 }
-/* line 88, ../src/styles/_nice-common.scss */
+/* line 134, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row:hover {
   background: #f5f5f5;
 }
-/* line 92, ../src/styles/_nice-common.scss */
+/* line 138, ../src/styles/_nice-common.scss */
 .nice-table .nice-table-row .nice-table-btn {
   line-height: 11px;
   width: 100%;
 }
-/* line 98, ../src/styles/_nice-common.scss */
+/* line 144, ../src/styles/_nice-common.scss */
 .nice-table .no-border-top {
   border-top: none;
 }
-/* line 105, ../src/styles/_nice-common.scss */
+/* line 151, ../src/styles/_nice-common.scss */
 .nice-table .active:before, .nice-table.nice-table-settings .nice-table-row:hover:before {
   content: " ";
   background: #3189ff;
@@ -139,12 +168,12 @@ p.nice {
   top: 0px;
   left: 0px;
 }
-/* line 117, ../src/styles/_nice-common.scss */
+/* line 163, ../src/styles/_nice-common.scss */
 .nice-table.nice-table-settings .nice-table-row:hover {
   background: none;
 }
 
-/* line 124, ../src/styles/_nice-common.scss */
+/* line 170, ../src/styles/_nice-common.scss */
 .nice-list-item {
   cursor: pointer;
   line-height: 25px;
@@ -152,32 +181,32 @@ p.nice {
   padding: 15px 25px;
   border-top: 1px solid #cbd4d9;
 }
-/* line 131, ../src/styles/_nice-common.scss */
+/* line 177, ../src/styles/_nice-common.scss */
 .nice-list-item:hover {
   background: #f5f5f5;
 }
-/* line 135, ../src/styles/_nice-common.scss */
+/* line 181, ../src/styles/_nice-common.scss */
 .nice-list-item.active, .nice-table.nice-table-settings .nice-list-item.nice-table-row:hover {
   background: #f5f5f5;
 }
 
-/* line 140, ../src/styles/_nice-common.scss */
+/* line 186, ../src/styles/_nice-common.scss */
 .nice-submenu {
   background-color: #e1e5e8;
   margin-top: 0;
   padding: 0;
   margin-bottom: 20px;
 }
-/* line 148, ../src/styles/_nice-common.scss */
+/* line 194, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-wrapper {
   padding: 25px;
 }
-/* line 152, ../src/styles/_nice-common.scss */
+/* line 198, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item {
   cursor: pointer;
   line-height: 50px;
 }
-/* line 156, ../src/styles/_nice-common.scss */
+/* line 202, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item:before {
   content: " ";
   background: #b0bec5;
@@ -188,47 +217,47 @@ p.nice {
   left: 2px;
   right: 2px;
 }
-/* line 168, ../src/styles/_nice-common.scss */
+/* line 214, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-submenu-item.active:before, .nice-submenu .nice-table.nice-table-settings .nice-submenu-item.nice-table-row:hover:before, .nice-table.nice-table-settings .nice-submenu .nice-submenu-item.nice-table-row:hover:before, .nice-submenu .nice-submenu-item:hover:before {
   background: #3189ff;
 }
-/* line 174, ../src/styles/_nice-common.scss */
+/* line 220, ../src/styles/_nice-common.scss */
 .nice-submenu .width-200 {
   width: 200px;
 }
-/* line 178, ../src/styles/_nice-common.scss */
+/* line 224, ../src/styles/_nice-common.scss */
 .nice-submenu .width-300 {
   width: 300px;
 }
-/* line 182, ../src/styles/_nice-common.scss */
+/* line 228, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-inline {
   margin-right: 10px;
   float: left;
   line-height: 34px;
 }
-/* line 188, ../src/styles/_nice-common.scss */
+/* line 234, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-inline-right {
   margin-left: 10px;
   float: right;
   line-height: 34px;
 }
 @media (max-width: 992px) {
-  /* line 188, ../src/styles/_nice-common.scss */
+  /* line 234, ../src/styles/_nice-common.scss */
   .nice-submenu .nice-inline-right {
     float: left;
   }
 }
 
-/* line 196, ../src/styles/_nice-common.scss */
+/* line 242, ../src/styles/_nice-common.scss */
 .nice-label {
   display: block;
 }
-/* line 198, ../src/styles/_nice-common.scss */
+/* line 244, ../src/styles/_nice-common.scss */
 .nice-label p.value {
   line-height: 34px;
 }
 
-/* line 203, ../src/styles/_nice-common.scss */
+/* line 249, ../src/styles/_nice-common.scss */
 .error-message {
   padding: 5px 0px 0px 0px;
   text-align: right;
@@ -236,39 +265,39 @@ p.nice {
   color: #f22e28;
 }
 
-/* line 210, ../src/styles/_nice-common.scss */
+/* line 256, ../src/styles/_nice-common.scss */
 .feedback-invalid {
   color: #f22e28 !important;
 }
 
-/* line 214, ../src/styles/_nice-common.scss */
+/* line 260, ../src/styles/_nice-common.scss */
 .feedback-valid {
   color: #3189ff;
 }
 
-/* line 219, ../src/styles/_nice-common.scss */
+/* line 265, ../src/styles/_nice-common.scss */
 .has-warning .form-control {
   border-color: #f22e28 !important;
 }
-/* line 223, ../src/styles/_nice-common.scss */
+/* line 269, ../src/styles/_nice-common.scss */
 .has-warning .input-group-addon {
   background: #f22e28 !important;
-  border: #f22e28 !important;
+  border-color: #f22e28 !important;
   color: white;
 }
 
-/* line 231, ../src/styles/_nice-common.scss */
+/* line 277, ../src/styles/_nice-common.scss */
 .has-success .form-control {
   border-color: #3189ff;
 }
-/* line 235, ../src/styles/_nice-common.scss */
+/* line 281, ../src/styles/_nice-common.scss */
 .has-success .input-group-addon {
   background: #3189ff;
-  border: #3189ff;
+  border-color: #3189ff;
   color: white;
 }
 
-/* line 242, ../src/styles/_nice-common.scss */
+/* line 288, ../src/styles/_nice-common.scss */
 .nice-highligh {
   background: yellow;
 }
@@ -641,59 +670,25 @@ p.nice {
   color: white;
 }
 /* line 44, ../src/components/nice-input/nice-input.scss */
-.nice-input .input-group-addon {
-  background: #f3f3f3;
-  border-top-right-radius: 3px !important;
-  border-bottom-right-radius: 3px !important;
-  color: #404040;
-  border: 1px solid #cbd4d9;
-  border-left: 0px;
-}
-/* line 54, ../src/components/nice-input/nice-input.scss */
-.nice-input .disabled .input-group-addon {
-  background: white;
-  border-color: #EDEFF2;
-  opacity: 0.65;
-}
-/* line 61, ../src/components/nice-input/nice-input.scss */
-.nice-input .form-control {
-  min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
-}
-/* line 66, ../src/components/nice-input/nice-input.scss */
-.nice-input .form-control:active, .nice-input .form-control:focus {
-  border-color: #3189ff;
-  -webkit-box-shadow: inset 0 0 0;
-  box-shadow: inset 0 0 0;
-}
-/* line 71, ../src/components/nice-input/nice-input.scss */
-.input-group-addon .nice-input .form-control:active, .input-group-addon .nice-input .form-control:focus {
-  border-color: #3189ff;
-}
-/* line 76, ../src/components/nice-input/nice-input.scss */
-.nice-input .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
-  opacity: 0.65;
-}
-/* line 83, ../src/components/nice-input/nice-input.scss */
 .nice-input .form-group {
   margin-bottom: 0px;
 }
-/* line 90, ../src/components/nice-input/nice-input.scss */
-.nice-input .symbol input {
-  text-align: right;
+/* line 48, ../src/components/nice-input/nice-input.scss */
+.nice-input .symbol {
+  position: relative;
+  display: table;
+  border-collapse: separate;
 }
-/* line 94, ../src/components/nice-input/nice-input.scss */
+/* line 53, ../src/components/nice-input/nice-input.scss */
 .nice-input .symbol .form-control-feedback {
   left: 0;
   right: auto;
 }
-/* line 99, ../src/components/nice-input/nice-input.scss */
+/* line 58, ../src/components/nice-input/nice-input.scss */
 .nice-input .symbol .form-control {
-  padding-right: 12px;
-  padding-left: 12px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  text-align: right;
 }
 
 /* line 1, ../src/components/nice-search/nice-search.scss */
@@ -705,24 +700,14 @@ p.nice {
   -webkit-animation: 0;
 }
 /* line 9, ../src/components/nice-search/nice-search.scss */
-.nice-search .input-group .input-group-addon, .nice-search .nice-input .symbol .input-group-addon, .nice-input .nice-search .symbol .input-group-addon {
-  cursor: pointer;
-  background: #f3f3f3;
-}
-/* line 13, ../src/components/nice-search/nice-search.scss */
-.nice-search .input-group .input-group-addon:hover, .nice-search .nice-input .symbol .input-group-addon:hover, .nice-input .nice-search .symbol .input-group-addon:hover {
-  background-color: #3189ff;
-  color: white;
-}
-/* line 22, ../src/components/nice-search/nice-search.scss */
 .nice-search .symbol input {
   text-align: left;
 }
-/* line 25, ../src/components/nice-search/nice-search.scss */
+/* line 12, ../src/components/nice-search/nice-search.scss */
 .nice-search .symbol .form-control {
   padding-left: 12px;
 }
-/* line 30, ../src/components/nice-search/nice-search.scss */
+/* line 17, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown, .nice-search .nice-dropdown-empty {
   position: absolute;
   z-index: 999;
@@ -738,32 +723,32 @@ p.nice {
   margin: 15px;
   right: 0;
 }
-/* line 50, ../src/components/nice-search/nice-search.scss */
+/* line 37, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown .nice-search-row, .nice-search .nice-dropdown-empty .nice-search-row {
   padding: 10px 15px;
   z-index: 1000;
   width: 100%;
 }
-/* line 54, ../src/components/nice-search/nice-search.scss */
+/* line 41, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown .nice-search-row:hover, .nice-search .nice-dropdown-empty .nice-search-row:hover {
   background-color: #EDEDED;
   cursor: pointer;
 }
-/* line 61, ../src/components/nice-search/nice-search.scss */
+/* line 48, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown .nice-search-row.active, .nice-search .nice-dropdown-empty .nice-search-row.active, .nice-search .nice-dropdown .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown .nice-search-row.nice-table-row:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-search-row.nice-table-row:hover {
   background-color: #EDEDED;
   cursor: pointer;
 }
-/* line 71, ../src/components/nice-search/nice-search.scss */
+/* line 58, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown:hover .active, .nice-search .nice-dropdown-empty:hover .active, .nice-search .nice-dropdown:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown:hover .nice-table-row:hover, .nice-search .nice-dropdown-empty:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty:hover .nice-table-row:hover {
   color: #333333;
   background-color: white;
 }
-/* line 74, ../src/components/nice-search/nice-search.scss */
+/* line 61, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown:hover .active p, .nice-search .nice-dropdown-empty:hover .active p, .nice-search .nice-dropdown:hover .nice-table.nice-table-settings .nice-table-row:hover p, .nice-table.nice-table-settings .nice-search .nice-dropdown:hover .nice-table-row:hover p, .nice-search .nice-dropdown-empty:hover .nice-table.nice-table-settings .nice-table-row:hover p, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty:hover .nice-table-row:hover p {
   color: #333333;
 }
-/* line 81, ../src/components/nice-search/nice-search.scss */
+/* line 68, ../src/components/nice-search/nice-search.scss */
 .nice-search .nice-dropdown-empty {
   top: -13px;
   margin: 15px;
@@ -780,18 +765,14 @@ p.nice {
   animation: none;
 }
 /* line 9, ../src/components/nice-search2/nice-search2.scss */
-.nice-search2 .input-group .input-group-addon, .nice-search2 .nice-input .symbol .input-group-addon, .nice-input .nice-search2 .symbol .input-group-addon {
-  background: #f3f3f3;
-}
-/* line 15, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .symbol input {
   text-align: left;
 }
-/* line 18, ../src/components/nice-search2/nice-search2.scss */
+/* line 12, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .symbol .form-control {
   padding-left: 12px;
 }
-/* line 23, ../src/components/nice-search2/nice-search2.scss */
+/* line 17, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown, .nice-search2 .nice-search .nice-dropdown-empty, .nice-search .nice-search2 .nice-dropdown-empty {
   position: absolute;
   z-index: 999;
@@ -807,46 +788,46 @@ p.nice {
   margin-top: .5rem;
   margin-bottom: 2rem;
 }
-/* line 39, ../src/components/nice-search2/nice-search2.scss */
+/* line 33, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row {
   padding: 10px 15px;
   z-index: 1000;
   width: 100%;
 }
-/* line 44, ../src/components/nice-search2/nice-search2.scss */
+/* line 38, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row:hover, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row:hover, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row:hover {
   background-color: #EDEDED;
   cursor: pointer;
 }
-/* line 51, ../src/components/nice-search2/nice-search2.scss */
+/* line 45, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row.active, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row.active, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row.active, .nice-search2 .nice-dropdown .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search2 .nice-dropdown .nice-search-row.nice-table-row:hover, .nice-search2 .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row.nice-table-row:hover, .nice-search .nice-search2 .nice-dropdown-empty .nice-table.nice-table-settings .nice-search-row.nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row.nice-table-row:hover {
   background-color: #EDEDED;
   cursor: pointer;
 }
-/* line 60, ../src/components/nice-search2/nice-search2.scss */
+/* line 54, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row-empty, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row-empty, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row-empty {
   opacity: 0.4;
 }
-/* line 64, ../src/components/nice-search2/nice-search2.scss */
+/* line 58, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row-loading, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row-loading, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row-loading {
   padding: 8px;
 }
-/* line 67, ../src/components/nice-search2/nice-search2.scss */
+/* line 61, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row-loading .nice-loader, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row-loading .nice-loader, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row-loading .nice-loader {
   padding: 0;
   height: 25px;
 }
-/* line 71, ../src/components/nice-search2/nice-search2.scss */
+/* line 65, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown .nice-search-row-loading .nice-loader svg, .nice-search2 .nice-search .nice-dropdown-empty .nice-search-row-loading .nice-loader svg, .nice-search .nice-search2 .nice-dropdown-empty .nice-search-row-loading .nice-loader svg {
   height: 25px;
   width: 25px;
 }
-/* line 79, ../src/components/nice-search2/nice-search2.scss */
+/* line 73, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown:hover .active, .nice-search2 .nice-search .nice-dropdown-empty:hover .active, .nice-search .nice-search2 .nice-dropdown-empty:hover .active, .nice-search2 .nice-dropdown:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search2 .nice-dropdown:hover .nice-table-row:hover, .nice-search2 .nice-search .nice-dropdown-empty:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search2 .nice-search .nice-dropdown-empty:hover .nice-table-row:hover, .nice-search .nice-search2 .nice-dropdown-empty:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-search2 .nice-dropdown-empty:hover .nice-table-row:hover {
   color: #333333;
   background-color: transparent;
 }
-/* line 83, ../src/components/nice-search2/nice-search2.scss */
+/* line 77, ../src/components/nice-search2/nice-search2.scss */
 .nice-search2 .nice-dropdown:hover .active:hover, .nice-search2 .nice-search .nice-dropdown-empty:hover .active:hover, .nice-search .nice-search2 .nice-dropdown-empty:hover .active:hover, .nice-search2 .nice-dropdown:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search2 .nice-dropdown:hover .nice-table-row:hover, .nice-search2 .nice-search .nice-dropdown-empty:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search2 .nice-search .nice-dropdown-empty:hover .nice-table-row:hover, .nice-search .nice-search2 .nice-dropdown-empty:hover .nice-table.nice-table-settings .nice-table-row:hover, .nice-table.nice-table-settings .nice-search .nice-search2 .nice-dropdown-empty:hover .nice-table-row:hover {
   background-color: #EDEDED;
   cursor: pointer;
@@ -1123,29 +1104,11 @@ p.nice {
 .nice-datetime-picker {
   margin-bottom: 10px;
 }
-/* line 69, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
-.nice-datetime-picker .input-group .form-control, .nice-datetime-picker .nice-input .symbol .form-control, .nice-input .nice-datetime-picker .symbol .form-control {
-  background: white;
-  border: 1px solid #cbd4d9;
-}
-/* line 74, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
-.nice-datetime-picker .input-group .input-group-addon, .nice-datetime-picker .nice-input .symbol .input-group-addon, .nice-input .nice-datetime-picker .symbol .input-group-addon {
-  background: #f3f3f3;
-}
-/* line 77, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
-.nice-datetime-picker .input-group .input-group-addon:hover, .nice-datetime-picker .nice-input .symbol .input-group-addon:hover, .nice-input .nice-datetime-picker .symbol .input-group-addon:hover {
-  background-color: #3189ff;
-  color: white;
-}
-/* line 85, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
-.nice-datetime-picker .form-control {
-  background: white;
-}
-/* line 89, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 68, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper {
   position: relative;
 }
-/* line 91, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 71, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp {
   position: absolute;
   top: 0;
@@ -1155,45 +1118,45 @@ p.nice {
   z-index: 200;
   position: absolute;
 }
-/* line 103, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 85, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-date > div {
   padding: 0;
   margin: 0;
 }
-/* line 111, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 95, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-month {
   font-size: 1.5em;
 }
-/* line 114, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 99, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-num {
   font-size: 3em;
   line-height: 0.9;
 }
-/* line 118, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 104, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-maxtime {
   font-size: 3em;
   line-height: 0.9;
 }
-/* line 122, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 109, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-year {
   font-size: 1.5em;
 }
-/* line 126, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 114, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-picker {
   padding: 1rem;
   text-align: center;
 }
-/* line 130, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 119, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-picker-month {
   font-weight: 500;
   text-align: center;
 }
-/* line 134, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 124, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-time {
   font-weight: 500;
   text-align: center;
 }
-/* line 138, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 129, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-picker-clock {
   width: 200px;
   height: 200px;
@@ -1202,31 +1165,31 @@ p.nice {
   border-radius: 50% !important;
   background: #eee;
 }
-/* line 147, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 139, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-month, .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-num, .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-year {
   cursor: pointer;
 }
-/* line 150, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 145, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-time {
   font-size: 3em;
   line-height: 0.9;
   color: #757575;
 }
-/* line 154, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 150, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-time .dtp-hours-minutes-btn {
   text-decoration: none;
   color: #757575;
 }
-/* line 157, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 154, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-time .dtp-hours-minutes-btn.selected {
   color: #3189ff;
   background-color: transparent;
 }
-/* line 163, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 161, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-maxtime {
   color: #006cfd;
 }
-/* line 165, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 164, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-actual-maxtime .dtp-hours-minutes-btn {
   text-decoration: none;
   background-color: transparent;
@@ -1237,21 +1200,21 @@ p.nice {
   color: white;
   background-color: transparent;
 }
-/* line 176, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 177, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-close {
   position: absolute;
   top: 0.2em;
   right: 1rem;
 }
-/* line 180, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 182, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-close > a {
   color: #fff;
 }
-/* line 182, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 185, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-close > a > i {
   font-size: 1em;
 }
-/* line 187, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 191, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time {
   position: absolute;
   width: 30px;
@@ -1262,123 +1225,125 @@ p.nice {
   font-weight: 500;
   text-align: center !important;
 }
-/* line 197, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 202, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a {
   display: block;
   line-height: 23px;
   padding: 0.3rem 0.3rem 0.3rem 0.3rem;
 }
-/* line 203, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 209, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a.dtp-select-hour.selected {
   background: #006cfd;
   color: #fff;
 }
-/* line 207, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 214, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a.dtp-select-hour.disabled {
   color: #757575;
 }
-/* line 212, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 220, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a.dtp-select-minute.disabled {
   color: #757575;
 }
-/* line 215, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 224, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-picker-time > a.dtp-select-minute.selected {
   background: #3189ff;
   color: #fff;
 }
-/* line 222, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 232, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .p10 {
   width: 10%;
   display: inline-block;
 }
-/* line 225, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 236, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .p10 > a {
   color: #006cfd;
   text-decoration: none;
 }
-/* line 230, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 242, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .p20 {
   width: 20%;
   display: inline-block;
 }
-/* line 234, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 247, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .p60 {
   width: 60%;
   display: inline-block;
 }
-/* line 238, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 252, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .p80 {
   width: 80%;
   display: inline-block;
 }
-/* line 252, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 270, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-hand.on {
   background: #3189ff;
 }
-/* line 259, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 279, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-minute-hand {
   width: 2px;
   margin-left: -1px;
 }
-/* line 263, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 284, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-buttons {
   padding: 0 1rem 1rem;
   text-align: right;
 }
-/* line 267, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 289, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .hidden {
   display: none;
 }
-/* line 270, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 293, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .invisible {
   visibility: hidden;
 }
-/* line 273, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 297, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .left {
   float: left;
 }
-/* line 276, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 301, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .right {
   float: right;
 }
-/* line 279, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 305, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .clearfix {
   clear: both;
 }
-/* line 282, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 309, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .center {
   text-align: center;
 }
-/* line 285, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 313, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp > .dtp-content {
   background: #fff;
   max-width: 300px;
   border: 1px solid #cbd4d9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
   max-height: 500px;
   position: absolute;
   left: 0;
   top: 0;
   width: 240px;
+  margin-top: 0.5rem;
 }
-/* line 297, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 328, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp > .dtp-content > .dtp-date-view > div.dtp-header {
   background: #006cfd;
   color: #fff;
   text-align: center;
   padding: 0.3rem;
 }
-/* line 304, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 336, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days {
   margin: 0;
   border: none;
   margin-top: 5px;
 }
-/* line 309, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 341, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr {
   border: none;
 }
-/* line 312, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 345, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr > td {
   border: none;
   font-weight: normal;
@@ -1386,28 +1351,28 @@ p.nice {
   text-align: center;
   padding: 7px 0;
 }
-/* line 321, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 356, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr > td > a.selected {
   background: #3189ff;
   color: #fff;
 }
-/* line 326, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 362, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr > td > span.dtp-select-day {
   color: #bdbdbd !important;
 }
-/* line 331, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 368, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr > th {
   color: #757575;
   text-align: center;
   font-weight: normal;
   padding: 0.4rem 0.3rem;
 }
-/* line 340, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 378, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp .dtp-actual-meridien a.selected {
   background: #006cfd;
   color: #fff;
 }
-/* line 345, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 384, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .dtp-wrapper .dtp-clock-center {
   width: 15px;
   height: 15px;
@@ -1416,33 +1381,35 @@ p.nice {
   position: absolute;
   z-index: 50;
 }
-/* line 356, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 395, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .btn-primary, .nice-datetime-picker .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetime-picker .btn-dropdown {
   background: #3189ff;
   border-color: #187aff;
   color: white;
 }
-/* line 361, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 400, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .btn-primary:hover, .nice-datetime-picker .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetime-picker .btn-dropdown:hover {
   background: #187aff;
 }
-/* line 367, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
-.nice-datetime-picker .dtp-select-day:hover, .nice-datetime-picker .dtp-picker-time:hover {
+/* line 407, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+.nice-datetime-picker .dtp-select-day:hover,
+.nice-datetime-picker .dtp-picker-time:hover {
   background: #64a6ff;
   color: white !important;
 }
-/* line 370, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
-.nice-datetime-picker .dtp-select-day:hover a, .nice-datetime-picker .dtp-picker-time:hover a {
+/* line 411, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+.nice-datetime-picker .dtp-select-day:hover a,
+.nice-datetime-picker .dtp-picker-time:hover a {
   color: white !important;
 }
-/* line 374, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 417, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-datetime-picker .disabled {
   opacity: 0.5;
   cursor: not-allowed;
   user-select: none;
 }
 
-/* line 381, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
+/* line 424, ../src/components/nice-datetime-picker/nice-datetime-picker.scss */
 .nice-dtp-background {
   position: fixed;
   top: 0;
@@ -1459,28 +1426,6 @@ p.nice {
   border-radius: 3px;
 }
 /* line 8, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
-.nice-datetimerange-picker .form-control {
-  min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
-}
-/* line 13, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
-.nice-datetimerange-picker .form-control:active, .nice-datetimerange-picker .form-control:focus {
-  border-color: #3189ff;
-  -webkit-box-shadow: inset 0 0 0;
-  box-shadow: inset 0 0 0;
-}
-/* line 18, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
-.input-group-addon .nice-datetimerange-picker .form-control:active, .input-group-addon .nice-datetimerange-picker .form-control:focus {
-  border-color: #3189ff;
-}
-/* line 23, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
-.nice-datetimerange-picker .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
-  opacity: 0.65;
-}
-/* line 30, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper {
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1494,48 +1439,48 @@ p.nice {
   border: 1px solid #cbd4d9;
   z-index: 900;
 }
-/* line 43, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 21, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer {
   width: 100%;
   height: 100%;
   position: relative;
 }
-/* line 48, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 26, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-buttons-bottom, .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-buttons-left, .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-left, .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-right {
   position: absolute;
 }
-/* line 52, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 30, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-buttons-left {
   left: 0;
   top: 0;
   width: 100px;
 }
-/* line 58, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 36, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-left {
   left: 110px;
   top: 0;
   width: 40%;
   height: 80%;
 }
-/* line 65, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 43, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-right {
   left: 360px;
   top: 0;
   width: 40%;
   height: 80%;
 }
-/* line 72, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 50, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-layer .dtp-buttons-bottom {
   bottom: 0;
   left: 0;
   width: 100px;
 }
-/* line 81, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 59, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-content {
   border-radius: 3px;
   box-shadow: 0 0 0 !important;
 }
-/* line 85, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
+/* line 63, ../src/components/nice-datetimerange-picker/nice-datetimerange-picker.scss */
 .nice-datetimerange-picker .dtp-range-wrapper .dtp-content .dtp-date-view {
   min-height: 300px;
 }
@@ -1545,63 +1490,27 @@ p.nice {
   margin-bottom: 10px;
   display: block;
 }
-/* line 5, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group, .nice-datetimerange-picker-2 .nice-input .symbol, .nice-input .nice-datetimerange-picker-2 .symbol {
-  display: flex;
-}
-/* line 8, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group .form-control, .nice-datetimerange-picker-2 .nice-input .symbol .form-control, .nice-input .nice-datetimerange-picker-2 .symbol .form-control {
+/* line 6, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+.nice-datetimerange-picker-2 .input-group .form-control {
   cursor: pointer;
-  min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
-/* line 18, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group .form-control:active, .nice-datetimerange-picker-2 .nice-input .symbol .form-control:active, .nice-input .nice-datetimerange-picker-2 .symbol .form-control:active, .nice-datetimerange-picker-2 .input-group .form-control:focus, .nice-datetimerange-picker-2 .nice-input .symbol .form-control:focus, .nice-input .nice-datetimerange-picker-2 .symbol .form-control:focus {
-  border-color: #3189ff;
-  -webkit-box-shadow: inset 0 0 0;
-  box-shadow: inset 0 0 0;
-}
-/* line 23, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.input-group-addon .nice-datetimerange-picker-2 .input-group .form-control:active, .input-group-addon .nice-datetimerange-picker-2 .nice-input .symbol .form-control:active, .nice-input .input-group-addon .nice-datetimerange-picker-2 .symbol .form-control:active, .input-group-addon .nice-datetimerange-picker-2 .input-group .form-control:focus, .input-group-addon .nice-datetimerange-picker-2 .nice-input .symbol .form-control:focus, .nice-input .input-group-addon .nice-datetimerange-picker-2 .symbol .form-control:focus {
+/* line 11, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+.nice-datetimerange-picker-2 .input-group.open .form-control, .nice-datetimerange-picker-2 .input-group.open .input-group-addon {
   border-color: #3189ff;
 }
-/* line 28, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group .form-control:disabled, .nice-datetimerange-picker-2 .nice-input .symbol .form-control:disabled, .nice-input .nice-datetimerange-picker-2 .symbol .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
-  opacity: 0.65;
-}
-/* line 35, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group .input-group-addon, .nice-datetimerange-picker-2 .nice-input .symbol .input-group-addon, .nice-input .nice-datetimerange-picker-2 .symbol .input-group-addon {
-  cursor: pointer;
-  background: #f3f3f3;
-  width: 38px;
-  padding: 0;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-/* line 46, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group .input-group-addon:hover, .nice-datetimerange-picker-2 .nice-input .symbol .input-group-addon:hover, .nice-input .nice-datetimerange-picker-2 .symbol .input-group-addon:hover {
+/* line 15, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+.nice-datetimerange-picker-2 .input-group.open .input-group-addon {
   background-color: #3189ff;
   color: white;
 }
-/* line 54, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
-.nice-datetimerange-picker-2 .input-group.open .form-control, .nice-datetimerange-picker-2 .nice-input .open.symbol .form-control, .nice-input .nice-datetimerange-picker-2 .open.symbol .form-control, .nice-datetimerange-picker-2 .input-group.open .input-group-addon, .nice-datetimerange-picker-2 .nice-input .open.symbol .input-group-addon, .nice-input .nice-datetimerange-picker-2 .open.symbol .input-group-addon {
-  border-color: #3189ff;
-}
-/* line 61, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 23, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper {
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: absolute;
+  margin-top: 0.5rem;
   left: 15px;
-  top: 40px;
+  top: 100%;
   width: 700px;
   padding: 15px;
   background-color: white;
@@ -1609,21 +1518,21 @@ p.nice {
   z-index: 900;
   display: flex;
 }
-/* line 74, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 37, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left {
   min-width: 110px;
   display: flex;
   flex-direction: column;
 }
-/* line 79, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 42, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left .dtp-buttons-top {
   flex-grow: 1;
 }
-/* line 83, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 46, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left .dtp-buttons-bottom {
   margin-top: 5px;
 }
-/* line 88, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 51, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
   display: flex;
   flex-direction: column;
@@ -1631,7 +1540,7 @@ p.nice {
   margin-left: 15px;
   width: 50%;
 }
-/* line 98, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 61, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .nice-dtp-background {
   position: fixed;
   top: 0;
@@ -1640,42 +1549,42 @@ p.nice {
   z-index: 800;
   height: 100%;
 }
-/* line 107, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 70, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn {
   border-radius: 3px;
 }
-/* line 111, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 74, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
   background: #3189ff;
   border-color: #187aff;
 }
-/* line 115, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 78, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn-primary:hover, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:hover {
   background: #187aff;
   border-color: #187aff;
 }
-/* line 120, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+/* line 83, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
 .nice-datetimerange-picker-2 .btn-primary:active, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:active, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:active {
   background: #006cfd;
   border-color: #006cfd;
 }
 @media (max-width: 767px) {
-  /* line 128, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+  /* line 91, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
   .nice-datetimerange-picker-2 .dtp-wrapper {
     width: auto;
     flex-direction: column;
   }
-  /* line 132, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+  /* line 95, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
   .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left {
     margin-bottom: 15px;
     margin-top: 15px;
   }
-  /* line 137, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+  /* line 100, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
   .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
     margin-left: 0;
     width: 100%;
   }
-  /* line 143, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
+  /* line 106, ../src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.scss */
   .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
     padding: 5px;
     line-height: 1;
@@ -1704,40 +1613,29 @@ p.nice {
   background: #f3f3f3;
 }
 
-/* line 3, ../src/components/nice-date-range/nice-date-range.scss */
-.nice-date-range .input-group .input-group-addon, .nice-date-range .nice-input .symbol .input-group-addon, .nice-input .nice-date-range .symbol .input-group-addon {
-  cursor: pointer;
-  background: #f3f3f3;
-}
-/* line 7, ../src/components/nice-date-range/nice-date-range.scss */
-.nice-date-range .input-group .input-group-addon:hover, .nice-date-range .nice-input .symbol .input-group-addon:hover, .nice-input .nice-date-range .symbol .input-group-addon:hover {
-  background-color: #3189ff;
-  color: white;
-}
-
-/* line 16, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 5, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker {
   border-radius: 3px;
   padding: 15px;
   box-shadow: 0px 0px 0px;
 }
-/* line 21, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 10, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .applyBtn {
   width: 78px;
 }
-/* line 25, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 14, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .cancelBtn {
   width: 78px;
 }
-/* line 29, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 18, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .range_inputs {
   margin-top: 10px;
 }
-/* line 35, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 24, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul {
   margin-bottom: 15px;
 }
-/* line 37, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 26, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul li {
   border-color: #3189ff;
   background: #3189ff;
@@ -1746,31 +1644,31 @@ p.nice {
   border-radius: 3px;
   color: white;
 }
-/* line 45, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 34, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul li.active, .daterangepicker .ranges ul .nice-table.nice-table-settings li.nice-table-row:hover, .nice-table.nice-table-settings .daterangepicker .ranges ul li.nice-table-row:hover {
   background: white;
   border-color: white;
   color: black;
 }
-/* line 51, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 40, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul li:hover, .daterangepicker .ranges ul li:active, .daterangepicker .ranges ul li:focus {
   border-color: #3189ff;
   background: #3189ff;
   color: white;
 }
-/* line 62, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 51, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar-date {
   border: 0px none;
 }
-/* line 67, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 56, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar .in-range {
   background: #cae1ff;
 }
-/* line 71, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 60, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar .start-date, .daterangepicker .calendar .end-date {
   background: #3189ff;
 }
-/* line 74, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 63, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar .start-date:hover, .daterangepicker .calendar .end-date:hover {
   background: #3189ff;
 }
@@ -1783,71 +1681,71 @@ p.nice {
  *
  * Built for http://www.improvely.com
  */
-/* line 94, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 83, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.dropdown-menu {
   max-width: auto;
   min-width: 165px;
   z-index: 3000;
 }
 
-/* line 100, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 89, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.opensleft .ranges, .daterangepicker.opensleft .calendar {
   float: left;
   margin: 4px;
 }
 
-/* line 105, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 94, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.opensright .ranges, .daterangepicker.opensright .calendar,
 .daterangepicker.openscenter .ranges, .daterangepicker.openscenter .calendar {
   float: right;
   margin: 4px;
 }
 
-/* line 111, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 100, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.single .ranges, .daterangepicker.single .calendar {
   float: none;
 }
 
-/* line 115, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 104, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges {
   width: 160px;
   text-align: left;
 }
 
-/* line 120, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 109, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges .range_inputs > div {
   float: left;
 }
 
-/* line 124, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 113, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges .range_inputs > div:nth-child(2) {
   padding-left: 11px;
 }
 
-/* line 128, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 117, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar {
   display: none;
   max-width: 270px;
 }
 
-/* line 133, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 122, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.show-calendar .calendar {
   display: block;
 }
 
-/* line 137, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 126, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar.single .calendar-date {
   border: none;
 }
 
-/* line 141, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 130, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar th, .daterangepicker .calendar td {
   white-space: nowrap;
   text-align: center;
   min-width: 32px;
 }
 
-/* line 147, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 136, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .daterangepicker_start_input label,
 .daterangepicker .daterangepicker_end_input label {
   color: #333;
@@ -1862,12 +1760,12 @@ p.nice {
   width: 74px;
 }
 
-/* line 161, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 150, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges input {
   font-size: 11px;
 }
 
-/* line 165, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 154, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges .input-mini {
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -1882,14 +1780,14 @@ p.nice {
   width: 74px;
 }
 
-/* line 179, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 168, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* line 185, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 174, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges li {
   font-size: 13px;
   background: #f5f5f5;
@@ -1903,14 +1801,14 @@ p.nice {
   cursor: pointer;
 }
 
-/* line 198, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 187, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .ranges li.active, .daterangepicker .ranges .nice-table.nice-table-settings li.nice-table-row:hover, .nice-table.nice-table-settings .daterangepicker .ranges li.nice-table-row:hover, .daterangepicker .ranges li:hover {
   background: #08c;
   border: 1px solid #08c;
   color: #fff;
 }
 
-/* line 204, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 193, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar-date {
   border: 1px solid #ddd;
   padding: 4px;
@@ -1918,14 +1816,14 @@ p.nice {
   background: #fff;
 }
 
-/* line 211, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 200, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker .calendar-time {
   text-align: center;
   margin: 8px auto 0 auto;
   line-height: 30px;
 }
 
-/* line 217, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 206, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker {
   position: absolute;
   background: #fff;
@@ -1938,7 +1836,7 @@ p.nice {
   border-radius: 3px;
 }
 
-/* line 229, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 218, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.opensleft:before {
   position: absolute;
   top: -7px;
@@ -1951,7 +1849,7 @@ p.nice {
   content: '';
 }
 
-/* line 241, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 230, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.opensleft:after {
   position: absolute;
   top: -6px;
@@ -1963,7 +1861,7 @@ p.nice {
   content: '';
 }
 
-/* line 252, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 241, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.openscenter:before {
   position: absolute;
   top: -7px;
@@ -1980,7 +1878,7 @@ p.nice {
   content: '';
 }
 
-/* line 268, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 257, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.openscenter:after {
   position: absolute;
   top: -6px;
@@ -1996,7 +1894,7 @@ p.nice {
   content: '';
 }
 
-/* line 283, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 272, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.opensright:before {
   position: absolute;
   top: -7px;
@@ -2009,7 +1907,7 @@ p.nice {
   content: '';
 }
 
-/* line 295, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 284, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker.opensright:after {
   position: absolute;
   top: -6px;
@@ -2021,13 +1919,13 @@ p.nice {
   content: '';
 }
 
-/* line 306, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 295, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker table {
   width: 100%;
   margin: 0;
 }
 
-/* line 311, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 300, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td, .daterangepicker th {
   text-align: center;
   width: 20px;
@@ -2039,22 +1937,22 @@ p.nice {
   white-space: nowrap;
 }
 
-/* line 322, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 311, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.off {
   color: #999;
 }
 
-/* line 326, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 315, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.disabled, .daterangepicker option.disabled {
   color: #999;
 }
 
-/* line 330, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 319, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.available:hover, .daterangepicker th.available:hover {
   background: #eee;
 }
 
-/* line 334, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 323, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.in-range {
   background: #ebf4f8;
   -webkit-border-radius: 0;
@@ -2062,41 +1960,41 @@ p.nice {
   border-radius: 0;
 }
 
-/* line 341, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 330, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.start-date {
   -webkit-border-radius: 4px 0 0 4px;
   -moz-border-radius: 4px 0 0 4px;
   border-radius: 4px 0 0 4px;
 }
 
-/* line 347, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 336, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.end-date {
   -webkit-border-radius: 0 4px 4px 0;
   -moz-border-radius: 0 4px 4px 0;
   border-radius: 0 4px 4px 0;
 }
 
-/* line 353, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 342, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.start-date.end-date {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
 
-/* line 359, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 348, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.active, .daterangepicker .nice-table.nice-table-settings td.nice-table-row:hover, .nice-table.nice-table-settings .daterangepicker td.nice-table-row:hover, .daterangepicker td.active:hover, .daterangepicker .nice-table.nice-table-settings td.nice-table-row:hover, .nice-table.nice-table-settings .daterangepicker td.nice-table-row:hover {
   background-color: #357ebd;
   border-color: #3071a9;
   color: #fff;
 }
 
-/* line 365, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 354, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker td.week, .daterangepicker th.week {
   font-size: 80%;
   color: #ccc;
 }
 
-/* line 370, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 359, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker select.monthselect, .daterangepicker select.yearselect {
   font-size: 12px;
   padding: 1px;
@@ -2105,35 +2003,35 @@ p.nice {
   cursor: default;
 }
 
-/* line 378, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 367, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker select.monthselect {
   margin-right: 2%;
   width: 56%;
 }
 
-/* line 383, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 372, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker select.yearselect {
   width: 40%;
 }
 
-/* line 387, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 376, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
   width: 50px;
   margin-bottom: 0;
 }
 
-/* line 392, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 381, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker_start_input {
   float: left;
 }
 
-/* line 396, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 385, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker_end_input {
   float: left;
   padding-left: 11px;
 }
 
-/* line 401, ../src/components/nice-date-range/nice-date-range.scss */
+/* line 390, ../src/components/nice-date-range/nice-date-range.scss */
 .daterangepicker th.month {
   width: auto;
 }
@@ -2145,13 +2043,14 @@ p.nice {
 /* line 6, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-dropdown {
   position: absolute;
-  top: 40px;
+  margin-top: 0.5rem;
+  top: 100%;
   z-index: 1000;
   width: 300px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   line-height: normal;
 }
-/* line 15, ../src/components/nice-date/nice-date.scss */
+/* line 16, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-background {
   position: fixed;
   top: 0;
@@ -2160,20 +2059,20 @@ p.nice {
   z-index: 999;
   height: 100%;
 }
-/* line 24, ../src/components/nice-date/nice-date.scss */
-.nice-date .input-group, .nice-date .nice-input .symbol, .nice-input .nice-date .symbol {
+/* line 25, ../src/components/nice-date/nice-date.scss */
+.nice-date .input-group {
   cursor: pointer;
 }
-/* line 27, ../src/components/nice-date/nice-date.scss */
-.nice-date .input-group .form-control, .nice-date .nice-input .symbol .form-control, .nice-input .nice-date .symbol .form-control {
-  background: white;
-  border: 1px solid #cbd4d9;
+/* line 29, ../src/components/nice-date/nice-date.scss */
+.nice-date .input-group.open .form-control, .nice-date .input-group.open .input-group-addon {
+  border-color: #3189ff;
 }
-/* line 32, ../src/components/nice-date/nice-date.scss */
-.nice-date .input-group .input-group-addon, .nice-date .nice-input .symbol .input-group-addon, .nice-input .nice-date .symbol .input-group-addon {
-  background: #f3f3f3;
+/* line 33, ../src/components/nice-date/nice-date.scss */
+.nice-date .input-group.open .input-group-addon {
+  background-color: #3189ff;
+  color: white;
 }
-/* line 37, ../src/components/nice-date/nice-date.scss */
+/* line 40, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date {
   border-radius: 3px;
   background: white;
@@ -2185,12 +2084,12 @@ p.nice {
   height: 250px;
   width: 100%;
 }
-/* line 49, ../src/components/nice-date/nice-date.scss */
+/* line 52, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date.with-time {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-/* line 54, ../src/components/nice-date/nice-date.scss */
+/* line 57, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header {
   background: #3189ff;
   line-height: 40px;
@@ -2198,7 +2097,7 @@ p.nice {
   display: flex;
   padding: 0 0 0 10px;
 }
-/* line 61, ../src/components/nice-date/nice-date.scss */
+/* line 64, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i {
   width: 30px;
   font-size: 1.125em;
@@ -2207,41 +2106,41 @@ p.nice {
   cursor: pointer;
   text-align: center;
 }
-/* line 69, ../src/components/nice-date/nice-date.scss */
+/* line 72, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i:hover {
   background: #187aff;
 }
-/* line 73, ../src/components/nice-date/nice-date.scss */
+/* line 76, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header i.fa-circle {
   font-size: 8px;
 }
-/* line 78, ../src/components/nice-date/nice-date.scss */
+/* line 81, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header span {
   flex-grow: 1;
 }
-/* line 81, ../src/components/nice-date/nice-date.scss */
+/* line 84, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header span select {
   background: transparent;
   border: 0px;
   -webkit-appearance: none;
   cursor: pointer;
 }
-/* line 87, ../src/components/nice-date/nice-date.scss */
+/* line 90, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-header span select:focus, .nice-date .nice-date-date .nice-date-header span select:focus {
   outline: 0 none;
 }
-/* line 96, ../src/components/nice-date/nice-date.scss */
+/* line 99, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week {
   width: 100%;
   border-top: solid 1px #cbd4d9;
   display: flex;
   flex-grow: 1;
 }
-/* line 102, ../src/components/nice-date/nice-date.scss */
+/* line 105, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week:first-child {
   border-top: none;
 }
-/* line 106, ../src/components/nice-date/nice-date.scss */
+/* line 109, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day {
   user-select: none;
   position: relative;
@@ -2260,11 +2159,11 @@ p.nice {
   justify-content: center;
   align-items: center;
 }
-/* line 125, ../src/components/nice-date/nice-date.scss */
+/* line 128, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:first-child {
   border-left: none;
 }
-/* line 129, ../src/components/nice-date/nice-date.scss */
+/* line 132, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.today:before {
   content: " ";
   position: absolute;
@@ -2276,50 +2175,50 @@ p.nice {
   border-width: 0 10px 10px 0;
   border-color: transparent #3189ff transparent transparent;
 }
-/* line 141, ../src/components/nice-date/nice-date.scss */
+/* line 144, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.different-month {
   color: #C0C0C0;
 }
-/* line 145, ../src/components/nice-date/nice-date.scss */
+/* line 148, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.weekend {
   background: #fafafa;
 }
-/* line 149, ../src/components/nice-date/nice-date.scss */
+/* line 152, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.disabled {
   opacity: 0.3;
   color: #f22e28;
   cursor: not-allowed;
 }
-/* line 155, ../src/components/nice-date/nice-date.scss */
+/* line 158, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.selected {
   background: #3189ff !important;
   color: white;
 }
-/* line 160, ../src/components/nice-date/nice-date.scss */
+/* line 163, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day.between {
   background: #fdfeff;
 }
-/* line 164, ../src/components/nice-date/nice-date.scss */
+/* line 167, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover {
   background: #cae1ff;
 }
-/* line 167, ../src/components/nice-date/nice-date.scss */
+/* line 170, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover.selected {
   background: #006cfd !important;
 }
-/* line 173, ../src/components/nice-date/nice-date.scss */
+/* line 176, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week.names {
   flex-grow: 0;
   height: 21px;
   flex-shrink: 0;
 }
-/* line 178, ../src/components/nice-date/nice-date.scss */
+/* line 181, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-date .nice-date-week.names > span {
   color: #006cfd;
   min-height: 20px;
   cursor: default;
 }
-/* line 187, ../src/components/nice-date/nice-date.scss */
+/* line 190, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time {
   display: flex;
   width: 100%;
@@ -2330,23 +2229,23 @@ p.nice {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-/* line 198, ../src/components/nice-date/nice-date.scss */
+/* line 201, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .divider {
   line-height: 30px;
   margin: 0 10px;
 }
-/* line 203, ../src/components/nice-date/nice-date.scss */
+/* line 206, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time i {
   line-height: 30px;
   margin-right: 10px;
   color: #cbd4d9;
 }
-/* line 209, ../src/components/nice-date/nice-date.scss */
+/* line 212, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .time-picker {
   position: relative;
   height: 30px;
 }
-/* line 214, ../src/components/nice-date/nice-date.scss */
+/* line 217, ../src/components/nice-date/nice-date.scss */
 .nice-date .nice-date-time .time-picker select {
   width: 100%;
   -webkit-appearance: none;
@@ -2364,7 +2263,7 @@ p.nice {
   height: 30px;
   line-height: auto;
 }
-/* line 254, ../src/components/nice-date/nice-date.scss */
+/* line 257, ../src/components/nice-date/nice-date.scss */
 .nice-date .disabled-shield {
   position: absolute;
   top: 0;
@@ -2394,17 +2293,18 @@ p.nice {
 .nice-comment textarea {
   min-height: 34px !important;
   height: 34px;
+  box-shadow: 0 0 0;
   border-radius: 3px;
   border-color: transparent;
   color: #3189ff;
   -webkit-user-select: none;
   padding: 6px 0px;
 }
-/* line 20, ../src/components/nice-comment/nice-comment.scss */
+/* line 21, ../src/components/nice-comment/nice-comment.scss */
 .nice-comment textarea:focus {
   box-shadow: 0 0 0;
 }
-/* line 30, ../src/components/nice-comment/nice-comment.scss */
+/* line 31, ../src/components/nice-comment/nice-comment.scss */
 .nice-comment textarea.editing {
   padding: 6px 12px;
   border-color: #3189ff;
@@ -2464,7 +2364,7 @@ p.nice {
   right: 10px;
   top: -100px;
   z-index: 99999;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
   font-weight: normal;
   min-width: 300px;
@@ -2846,13 +2746,17 @@ p.nice {
   display: block;
 }
 /* line 5, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+.nice-dropdown-date .form-inline {
+  display: flex;
+}
+/* line 9, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-day,
 .nice-dropdown-date .nice-dropdown-date-month,
 .nice-dropdown-date .nice-dropdown-date-year {
   float: left;
   position: relative;
 }
-/* line 11, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 15, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-day:after,
 .nice-dropdown-date .nice-dropdown-date-month:after,
 .nice-dropdown-date .nice-dropdown-date-year:after {
@@ -2866,53 +2770,54 @@ p.nice {
   border-width: 4px 4px 0 4px;
   margin-top: -2px;
   border-color: #cbd4d9 transparent transparent transparent;
-}
-/* line 25, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
-.nice-dropdown-date .nice-dropdown-date-day,
-.nice-dropdown-date .nice-dropdown-date-month {
-  padding-right: 10px;
+  z-index: 3;
 }
 /* line 30, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+.nice-dropdown-date .nice-dropdown-date-day,
+.nice-dropdown-date .nice-dropdown-date-month {
+  margin-right: 10px;
+}
+/* line 35, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-day {
   width: 30%;
 }
-/* line 34, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 39, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-month {
   width: 40%;
 }
-/* line 38, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 43, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-year {
   width: 30%;
 }
-/* line 41, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 46, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date .nice-dropdown-date-year:after {
   right: 10px;
 }
-/* line 46, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 51, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select {
   width: 100% !important;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   outline: 0;
-  border-radius: 3px;
+  border-radius: 3px !important;
   border: 1px solid #cbd4d9;
   position: relative;
   z-index: 2;
   background: transparent;
 }
-/* line 58, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 63, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select:disabled {
   cursor: not-allowed;
   background: white !important;
   border-color: #EDEFF2 !important;
 }
-/* line 64, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 69, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select:hover {
   border-color: #cbd4d9;
   color: #474F52;
 }
-/* line 70, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
+/* line 75, ../src/components/nice-dropdown-date/nice-dropdown-date.scss */
 .nice-dropdown-date select:active, .nice-dropdown-date select:focus {
   border-color: #3189ff !important;
   color: #474F52 !important;
@@ -2925,61 +2830,28 @@ p.nice {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 6, ../src/components/nice-time-picker/nice-time-picker.scss */
-.nice-time-picker .input-group .input-group-addon, .nice-time-picker .nice-input .symbol .input-group-addon, .nice-input .nice-time-picker .symbol .input-group-addon {
-  cursor: pointer;
-  background: #f3f3f3;
-  border: 1px solid #cbd4d9;
-  border-left: 0;
-}
-/* line 12, ../src/components/nice-time-picker/nice-time-picker.scss */
-.nice-time-picker .input-group .input-group-addon:hover, .nice-time-picker .nice-input .symbol .input-group-addon:hover, .nice-input .nice-time-picker .symbol .input-group-addon:hover {
-  background-color: #3189ff;
-  color: white;
-}
-/* line 20, ../src/components/nice-time-picker/nice-time-picker.scss */
-.nice-time-picker .form-control {
-  min-width: 50px;
-  background: white;
-  border: 1px solid #cbd4d9;
-}
-/* line 25, ../src/components/nice-time-picker/nice-time-picker.scss */
-.nice-time-picker .form-control:active, .nice-time-picker .form-control:focus {
-  border-color: #3189ff;
-  -webkit-box-shadow: inset 0 0 0;
-  box-shadow: inset 0 0 0;
-}
-/* line 30, ../src/components/nice-time-picker/nice-time-picker.scss */
-.input-group-addon .nice-time-picker .form-control:active, .input-group-addon .nice-time-picker .form-control:focus {
-  border-color: #3189ff;
-}
-/* line 35, ../src/components/nice-time-picker/nice-time-picker.scss */
-.nice-time-picker .form-control:disabled {
-  background: white;
-  border-color: #EDEFF2;
-  opacity: 0.65;
-}
-/* line 43, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 5, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown {
   z-index: 900;
   border-radius: 3px;
   position: absolute;
-  top: 40px;
+  top: 100%;
   left: 15px;
   width: 100%;
   background: white;
   border: 1px solid #cbd4d9;
-  box-shadow: 0px 0px 10px #cbd4d9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
+  margin-top: 0.5rem;
   text-align: center;
 }
-/* line 56, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 19, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown .numbers {
   font-size: 28px;
   color: #404040;
   line-height: 1.6;
 }
-/* line 62, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 25, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button {
   width: 100%;
   border: 0;
@@ -2989,22 +2861,22 @@ p.nice {
   border-radius: 3px;
   background: none;
 }
-/* line 71, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 34, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button:hover {
   background: #3189ff;
   color: #ffffff;
 }
-/* line 76, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 39, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button:focus {
   outline: 0;
 }
-/* line 80, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 43, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-time-picker-dropdown button:active {
   outline: 0;
   background: #006cfd;
   color: #ffffff;
 }
-/* line 89, ../src/components/nice-time-picker/nice-time-picker.scss */
+/* line 52, ../src/components/nice-time-picker/nice-time-picker.scss */
 .nice-time-picker .nice-background {
   position: fixed;
   top: 0;

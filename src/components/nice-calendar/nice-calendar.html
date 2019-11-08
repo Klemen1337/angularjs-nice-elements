@@ -13,7 +13,7 @@
             <div class="nice-calendar-wrapper">
                 <div class="header">
                     <i class="fa fa-angle-left" ng-click="previous()" title="{{ translations.prevMonth }}"></i>
-                    <span title="{{ month.format('MM.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
+                    <span title="{{ month.format('M.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
                     <i class="fa fa-angle-right" ng-click="next()" title="{{ translations.nextMonth }}"></i>
                 </div>
 
@@ -30,7 +30,7 @@
                 <div class="week" ng-repeat="week in weeks">
                     <span
                         class="day"
-                        title="{{ day.date.format('DD.MM.YYYY') }}"
+                        title="{{ day.date.format('D.M.YYYY') }}"
                         ng-class="{
                             today: day.isToday,
                             'different-month': !day.isCurrentMonth,

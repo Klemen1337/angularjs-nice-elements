@@ -2,6 +2,10 @@
   margin-bottom: 10px;
   display: block;
 
+  .form-inline {
+    display: flex;
+  }
+
   .nice-dropdown-date-day,
   .nice-dropdown-date-month,
   .nice-dropdown-date-year {
@@ -19,12 +23,13 @@
       border-width: 4px 4px 0 4px;
       margin-top: -2px;
       border-color: $nice-border-color transparent transparent transparent;
+      z-index: 3;
     }
   }
 
   .nice-dropdown-date-day,
   .nice-dropdown-date-month {
-    padding-right: 10px;
+    margin-right: 10px;
   }
 
   .nice-dropdown-date-day{
@@ -43,13 +48,13 @@
     }
   }
 
-  select{
+  select {
     width: 100% !important;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     outline: 0;
-    border-radius: $nice-border-radius;
+    border-radius: $nice-border-radius !important;
     border: 1px solid $nice-border-color;
     position: relative;
     z-index: 2;
