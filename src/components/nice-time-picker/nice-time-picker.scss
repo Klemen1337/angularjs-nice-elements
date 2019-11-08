@@ -6,7 +6,7 @@
     .input-group-addon {
       cursor: pointer;
       background: $nice-addon-bg;
-      border: 1px solid $nice-input-border;
+      border: 1px solid $nice-border-color;
       border-left: 0;
 
       &:hover {
@@ -20,7 +20,7 @@
   .form-control{
     min-width: 50px;
     background: $nice-input-bg;
-    border: 1px solid $nice-input-border;
+    border: 1px solid $nice-border-color;
 
     &:active, &:focus{
       border-color: $nice-focus-border;
@@ -48,8 +48,8 @@
     left: 15px;
     width: 100%;
     background: white;
-    border: 1px solid $nice-input-border;
-    box-shadow: 0px 0px 10px $nice-input-border;
+    border: 1px solid $nice-border-color;
+    box-shadow: 0px 0px 10px $nice-border-color;
     padding: 10px;
     text-align: center;
 

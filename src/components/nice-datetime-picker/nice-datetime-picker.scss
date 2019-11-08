@@ -66,6 +66,11 @@ $color_gallery_approx: #eee;
   margin-bottom: 10px;
 
   .input-group{
+    .form-control {
+      background: $nice-input-bg;
+      border: 1px solid $nice-border-color;
+    }
+
     .input-group-addon {
       background: $nice-addon-bg;
 

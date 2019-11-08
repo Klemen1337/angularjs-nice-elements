@@ -5,11 +5,11 @@ $nice-font-color: #404040 !default;
 
 
 // ---------- Colors ----------
-$nice-base-color: #4abeb4 !default;
-$nice-danger-color: #d9534f !default;
-$nice-success-color: #5cb85c !default;
+$nice-base-color: #3189ff !default;
+$nice-danger-color: #f22e28 !default;
+$nice-success-color: #49AE50 !default;
 $nice-info-color: #31b0d5 !default;
-$nice-warning-color: #ec971f !default;
+$nice-warning-color: #ffc107 !default;
 
 
 // ---------- Border ----------
@@ -38,7 +38,6 @@ $nice-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !default;
 $nice-label-color: $nice-font-color !default;
 $nice-input-placeholder-color: #999999 !default;
 $nice-input-bg: $nice-background !default;
-$nice-input-border: $nice-border-color !default;
 $nice-input-disabled-bg: white !default;
 $nice-input-disabled-border: $nice-disabled-color !default;
 $nice-input-valid: $nice-base-color !default;

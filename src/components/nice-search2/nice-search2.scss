@@ -75,12 +75,14 @@
       }
     }
 
-    &:hover{
-      .active{
+    &:hover {
+      .active {
         color: $text-color;
-        background-color: white;
-        p{
-          color:$text-color;
+        background-color: transparent;
+
+        &:hover {
+          background-color: $nice-hover-color;
+          cursor: pointer;
         }
       }
     }

@@ -36,15 +36,17 @@ angular.module('niceElements')
         $scope.results = [];
         $scope.noResults = false;
         $scope.selectedIndex = 0;
+        $scope.requestNumber = 0;
 
 
         
         // ------------------- On focus -------------------
         $scope.onFocus = function() {
-          if ($scope.showDropdown) {
+          if ($scope.showDropdown && $scope.results.length == 0) {
             $scope.getData($scope.model);
-            $scope.open();
           }
+
+          $scope.open();
 
           var input = $element[0].getElementsByTagName('input')[0];
           if (input) input.focus();
@@ -82,18 +84,22 @@ angular.module('niceElements')
         $scope.getData = function(keywords) {
           if ($scope.refreshFunction != null) {
             $scope.loading = true;
+            $scope.requestNumber += 1;
+            var requestNumber = angular.copy($scope.requestNumber);
             $scope.refreshFunction(keywords).then(function(results) {
-              $timeout(function() {
-                $scope.open();
-                $scope.loading = false;
+              if ($scope.requestNumber == requestNumber) { 
+                $timeout(function() {
+                  $scope.open();
+                  $scope.loading = false;
 
-                $scope.noResults = results.length == 0;
-                $scope.results = results;
+                  $scope.noResults = results.length == 0;
+                  $scope.results = results;
 
-                if (!$scope.noResults) {
-                  $scope.selectedIndex = 0;
-                }
-              });
+                  if (!$scope.noResults) {
+                    $scope.selectedIndex = 0;
+                  }
+                });
+              }
             }, function(error) {
               $scope.loading = false;
               $scope.close();
