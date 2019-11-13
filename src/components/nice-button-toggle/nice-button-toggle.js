@@ -11,8 +11,8 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-button-toggle/nice-button-toggle.html',
       restrict: 'E',
       scope: {
-        model: "=?",
-        label: "@"
+        model: '=?',
+        label: '@'
       },
       link: function postLink(scope, element, attrs) {
         if (angular.isDefined(scope.model)){

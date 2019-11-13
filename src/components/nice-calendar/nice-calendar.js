@@ -25,9 +25,9 @@ angular.module('niceElements')
         isDisabled: '=',
         translations: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
-      link: function(scope) {
+      link: function(scope, element) {
         scope.translations = {
           selectStartDate: "Select start date",
           selectStartTime: "Select start time",
@@ -141,7 +141,7 @@ angular.module('niceElements')
               }
             }
 
-            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate });
+            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate, element: element });
           }
         };
 

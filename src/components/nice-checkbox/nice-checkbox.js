@@ -15,14 +15,14 @@ angular.module('niceElements')
         model: '=',
         title: '@',
         noMargin: '@',
-        onChange: '='
+        onChange: '&?'
       },
-      controller: function($rootScope, $scope) {
+      controller: function($scope) {
         if($scope.model === undefined) $scope.model = false;
 
         $scope.toggle = function(){
           $scope.model = !$scope.model;
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
       }
     };

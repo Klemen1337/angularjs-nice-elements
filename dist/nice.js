@@ -14,8 +14,8 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-button-toggle/nice-button-toggle.html',
       restrict: 'E',
       scope: {
-        model: "=?",
-        label: "@"
+        model: '=?',
+        label: '@'
       },
       link: function postLink(scope, element, attrs) {
         if (angular.isDefined(scope.model)){
@@ -40,8 +40,8 @@ angular.module('niceElements')
       transclude: true,
       scope: {
         niceDisabled: '=',
-        title: "@",
-        noMargin: "=",
+        title: '@',
+        noMargin: '=',
         fieldWidth: '@',
         labelWidth: '@',
         niceClick: '&',
@@ -91,9 +91,9 @@ angular.module('niceElements')
         isDisabled: '=',
         translations: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
-      link: function(scope) {
+      link: function(scope, element) {
         scope.translations = {
           selectStartDate: "Select start date",
           selectStartTime: "Select start time",
@@ -207,7 +207,7 @@ angular.module('niceElements')
               }
             }
 
-            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate });
+            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate, element: element });
           }
         };
 
@@ -398,14 +398,14 @@ angular.module('niceElements')
         model: '=',
         title: '@',
         noMargin: '@',
-        onChange: '='
+        onChange: '&?'
       },
-      controller: function($rootScope, $scope) {
+      controller: function($scope) {
         if($scope.model === undefined) $scope.model = false;
 
         $scope.toggle = function(){
           $scope.model = !$scope.model;
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
       }
     };
@@ -438,7 +438,7 @@ angular.module('niceElements')
         noMargin: '@',
         multiple: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
       link: function (scope, element, attr) {
         if (!attr.title) { attr.title = ''; }
@@ -576,7 +576,7 @@ angular.module('niceElements')
                 $scope.model = value_new[$scope.objKey];
               }
             }
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         });
 
@@ -815,7 +815,7 @@ angular.module('niceElements')
         labelWidth: '@',
         startOfTheYear: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function(scope, iElement, attrs, ctrl){
@@ -928,7 +928,7 @@ angular.module('niceElements')
         minDate: '=',
         nextDate: '=',
         isDisabled: '=',
-        onChange: '='
+        onChange: '&?'
       },
       controller: function($scope) {
         $scope.isOpen = false;
@@ -981,7 +981,7 @@ angular.module('niceElements')
           $scope.innerDate.value = $scope.formatDate(selectedDate);
           
           $scope.model = selectedDate;
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.forma.$setDirty();
         };
 
@@ -994,7 +994,7 @@ angular.module('niceElements')
             selectedDate.minutes($scope.innerDate.minute);
 
             $scope.model = selectedDate;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.forma.$setDirty();
           }
         };
@@ -1216,7 +1216,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
       isDisabled: '=',
       help: '@',
-      onChange: '='
+      onChange: '&?'
     },
     controller: function ($scope) {
         $scope.date = $scope.date == 'true' || $scope.date == true;
@@ -1260,7 +1260,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
         $scope.$watch('internalDate', function (newDate) {
           $scope.model = moment(newDate);
           $scope.value = moment(newDate).format($scope.format);
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         });
 
         $scope.$watch('model', function (newModel, oldModel) {
@@ -1294,7 +1294,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         isDisabled: '=',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
@@ -1349,7 +1349,7 @@ angular.module('niceElements')
         $scope.confirm = function() {
           $scope.startDate = angular.copy($scope.innerStartDate);
           $scope.endDate = angular.copy($scope.innerEndDate);
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.close();
         };
 
@@ -1442,10 +1442,10 @@ angular.module('niceElements')
         noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
-        formatOutput: "@", // Format output or moment
-        isDisabled: "=",
-        help: "@",
-        onChange: '='
+        formatOutput: '@', // Format output or moment
+        isDisabled: '=',
+        help: '@',
+        onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
@@ -1594,7 +1594,7 @@ angular.module('niceElements')
             //$scope.modelEnd = angular.copy($scope.internalEnd);
             $scope.showDtpRange = false;
 
-            if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd});
+            if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd });
           };
 
           $scope.cancelClick = function(){
@@ -1681,7 +1681,7 @@ angular.module('niceElements')
       startingYear: '@',
       mature: '@',
       help: '@',
-      onChange: '='
+      onChange: '&?'
     },
     link: function ($scope) {
       $scope.days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
@@ -1744,8 +1744,7 @@ angular.module('niceElements')
         if(date.isValid()){
           // Format
           $scope.model = date.format();
-
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
 
           // Change dates
           $scope.days = [];
@@ -1814,8 +1813,8 @@ angular.module('niceElements')
         multiple: '@',            // Can select multiple items
         help: '@',
         listenKeydown: '@',
-        noOptionsText: "@",
-        onChange: '='
+        noOptionsText: '@',
+        onChange: '&?'
       },
       controller: function($rootScope, $scope, $document, $element) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -1955,7 +1954,7 @@ angular.module('niceElements')
           // update model only if it is changed
           if (!_.isEqual(_new, $scope.model)){
             $scope.model = _new;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         };
 
@@ -2130,7 +2129,7 @@ angular.module('niceElements')
         title: '@', // Title of the field
         model: '=', // Aka model
         list: '=', // List of options
-        onChange: '=?',
+        onChange: '&?',
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -2144,13 +2143,13 @@ angular.module('niceElements')
         noMargin: '@', // margin-bottom: 0px
         multiple: '@', // Can select multiple items
         help: '@',
-        noOptionsText: "@",
-        noDataText: "@",
-        selectText: "@",
-        searchText: "@",
-        nullableText: "@",
-        searchFunction: "=?",
-        clearOnSelect: "@"
+        noOptionsText: '@',
+        noDataText: '@',
+        selectText: '@',
+        searchText: '@',
+        nullableText: '@',
+        searchFunction: '=?',
+        clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -2305,9 +2304,7 @@ angular.module('niceElements')
           }
           
           // Trigger on change
-          if ($scope.onChange) {
-            $scope.onChange(obj);
-          }
+          if ($scope.onChange) $scope.onChange({ model: obj });
 
           if ($scope.clearOnSelect) {
             // Clear on select
@@ -2453,7 +2450,7 @@ angular.module('niceElements')
 
     return {
       scope: {
-        onChange: '=', // function called on date changed
+        onChange: '&?', // function called on date changed
         model: '=', // binding model
         format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
         modelFormat: '@', // default: ''
@@ -2980,7 +2977,7 @@ angular.module('niceElements')
           },
           setDateModel: function () {
             $scope.model = angular.copy($scope.currentDate);
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             //$scope.model = $scope.currentDate.format(params.modelFormat);
             //$scope.formDatetimePicker.$setDirty();
           },
@@ -3327,7 +3324,7 @@ angular.module('niceElements')
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         tabIndex: '@',
         isFocused: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function (scope, element, attrs) {
@@ -3440,7 +3437,7 @@ angular.module('niceElements')
               }
             }
 
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           };
         }
     };
@@ -3650,7 +3647,7 @@ angular.module('niceElements')
         decimals: '@',
         allowNegative: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function (scope, element, attrs) {
@@ -3716,7 +3713,7 @@ angular.module('niceElements')
             $scope.canAdd = true;
           }
 
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
 
 
@@ -3784,7 +3781,7 @@ angular.module('niceElements')
         placeholder: '@',
         noMargin: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function (scope, element, attrs) {
@@ -3821,7 +3818,7 @@ angular.module('niceElements')
           } else {
             $scope.model = 0;
           }
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
 
         $scope.keypress = function(event) {
@@ -3869,7 +3866,7 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-progress-bar/nice-progress-bar.html',
       scope: {
         title: '@',
-        noMargin: "@",
+        noMargin: '@',
         value: '=',
         max: '=',
         color: '=',
@@ -3924,8 +3921,8 @@ angular.module('niceElements')
         title: '@',
         model: '=',
         max: '=',
-        onChange: "=?",
-        noMargin: "@",
+        onChange: '&?',
+        noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
         isDisabled: '=',
@@ -3940,18 +3937,18 @@ angular.module('niceElements')
           if ($scope.max) {
             if ($scope.max >= $scope.model + 1) {
               $scope.model += 1;
-              if ($scope.onChange) $scope.onChange($scope.model);
+              if ($scope.onChange) $scope.onChange({ model: $scope.model });
             }
           } else {
             $scope.model += 1;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         };
 
         $scope.sub = function () {
           if ($scope.model - 1 >= 0) {
             $scope.model -= 1;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         };
 
@@ -3999,7 +3996,7 @@ angular.module('niceElements')
         tabIndex: '@',
         isFocused: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 
@@ -4169,8 +4166,8 @@ angular.module('niceElements')
           if ($scope.timer_promise)
             $timeout.cancel($scope.timer_promise);
 
-          $scope.timer_promise = $timeout(function(){
-            if ($scope.onChange) $scope.onChange($scope.modelString);
+          $scope.timer_promise = $timeout(function() {
+            if ($scope.onChange) $scope.onChange({ model: $scope.model, modelString: $scope.modelString });
             $scope.requests = $scope.requests + 1;
             var requestNumber = angular.copy($scope.requests);
             $scope.refreshFunction($scope.modelString).then(function(response){
@@ -4228,7 +4225,7 @@ angular.module('niceElements')
         refreshFunction: '=',
         refreshSelectedCallback: '=',
         onSelect: '=',
-        onChange: '=',
+        onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
         help: '@'
@@ -4279,7 +4276,7 @@ angular.module('niceElements')
           }
 
           $scope.debounce = $timeout(function() {
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.getData($scope.model);
           }, 200);
         };
@@ -4452,7 +4449,7 @@ angular.module('niceElements')
         noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
-        onChange: '=',
+        onChange: '&?',
         help: '@'
       },
       restrict: 'E',
@@ -4478,7 +4475,7 @@ angular.module('niceElements')
             $scope.forma.$setValidity("valid-time", true);
             $scope.model = parsedDate;
             $scope.refreshTime();
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           } else {
             $scope.forma.$setValidity("valid-time", false);
             $scope.modelString = "";
@@ -4666,7 +4663,7 @@ angular.module('niceElements')
         options: '=',
         defaultFalse: '@',
         noMargin: '@',
-        onChange: '=',
+        onChange: '&?',
         help: '@'
       },
       controller: function($scope, $attrs) {
@@ -4737,7 +4734,7 @@ angular.module('niceElements')
               }
             }
             
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.formYesno.$setDirty();
           }
         };

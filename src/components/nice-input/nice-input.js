@@ -28,7 +28,7 @@ angular.module('niceElements')
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         tabIndex: '@',
         isFocused: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function (scope, element, attrs) {
@@ -141,7 +141,7 @@ angular.module('niceElements')
               }
             }
 
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           };
         }
     };

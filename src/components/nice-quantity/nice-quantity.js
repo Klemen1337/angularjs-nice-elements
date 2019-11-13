@@ -15,8 +15,8 @@ angular.module('niceElements')
         title: '@',
         model: '=',
         max: '=',
-        onChange: "=?",
-        noMargin: "@",
+        onChange: '&?',
+        noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
         isDisabled: '=',
@@ -31,18 +31,18 @@ angular.module('niceElements')
           if ($scope.max) {
             if ($scope.max >= $scope.model + 1) {
               $scope.model += 1;
-              if ($scope.onChange) $scope.onChange($scope.model);
+              if ($scope.onChange) $scope.onChange({ model: $scope.model });
             }
           } else {
             $scope.model += 1;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         };
 
         $scope.sub = function () {
           if ($scope.model - 1 >= 0) {
             $scope.model -= 1;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         };
 

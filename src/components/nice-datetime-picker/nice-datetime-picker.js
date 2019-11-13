@@ -31,7 +31,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
       isDisabled: '=',
       help: '@',
-      onChange: '='
+      onChange: '&?'
     },
     controller: function ($scope) {
         $scope.date = $scope.date == 'true' || $scope.date == true;
@@ -75,7 +75,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
         $scope.$watch('internalDate', function (newDate) {
           $scope.model = moment(newDate);
           $scope.value = moment(newDate).format($scope.format);
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         });
 
         $scope.$watch('model', function (newModel, oldModel) {

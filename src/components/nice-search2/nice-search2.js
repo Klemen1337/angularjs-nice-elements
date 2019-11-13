@@ -23,7 +23,7 @@ angular.module('niceElements')
         refreshFunction: '=',
         refreshSelectedCallback: '=',
         onSelect: '=',
-        onChange: '=',
+        onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
         help: '@'
@@ -74,7 +74,7 @@ angular.module('niceElements')
           }
 
           $scope.debounce = $timeout(function() {
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.getData($scope.model);
           }, 200);
         };

@@ -29,10 +29,10 @@ angular.module('niceElements')
         noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
-        formatOutput: "@", // Format output or moment
-        isDisabled: "=",
-        help: "@",
-        onChange: '='
+        formatOutput: '@', // Format output or moment
+        isDisabled: '=',
+        help: '@',
+        onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
@@ -181,7 +181,7 @@ angular.module('niceElements')
             //$scope.modelEnd = angular.copy($scope.internalEnd);
             $scope.showDtpRange = false;
 
-            if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd});
+            if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd });
           };
 
           $scope.cancelClick = function(){

@@ -28,7 +28,7 @@ angular.module('niceElements')
         decimals: '@',
         allowNegative: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function (scope, element, attrs) {
@@ -94,7 +94,7 @@ angular.module('niceElements')
             $scope.canAdd = true;
           }
 
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
 
 

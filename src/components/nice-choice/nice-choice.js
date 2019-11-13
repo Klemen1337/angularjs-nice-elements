@@ -25,7 +25,7 @@ angular.module('niceElements')
         noMargin: '@',
         multiple: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
       link: function (scope, element, attr) {
         if (!attr.title) { attr.title = ''; }
@@ -163,7 +163,7 @@ angular.module('niceElements')
                 $scope.model = value_new[$scope.objKey];
               }
             }
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
         });
 

@@ -27,7 +27,7 @@ angular.module('niceElements')
         minDate: '=',
         nextDate: '=',
         isDisabled: '=',
-        onChange: '='
+        onChange: '&?'
       },
       controller: function($scope) {
         $scope.isOpen = false;
@@ -80,7 +80,7 @@ angular.module('niceElements')
           $scope.innerDate.value = $scope.formatDate(selectedDate);
           
           $scope.model = selectedDate;
-          if ($scope.onChange) $scope.onChange($scope.model);
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.forma.$setDirty();
         };
 
@@ -93,7 +93,7 @@ angular.module('niceElements')
             selectedDate.minutes($scope.innerDate.minute);
 
             $scope.model = selectedDate;
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.forma.$setDirty();
           }
         };

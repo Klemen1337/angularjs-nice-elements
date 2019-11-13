@@ -23,7 +23,7 @@ angular.module('niceElements')
         options: '=',
         defaultFalse: '@',
         noMargin: '@',
-        onChange: '=',
+        onChange: '&?',
         help: '@'
       },
       controller: function($scope, $attrs) {
@@ -94,7 +94,7 @@ angular.module('niceElements')
               }
             }
             
-            if ($scope.onChange) $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.formYesno.$setDirty();
           }
         };

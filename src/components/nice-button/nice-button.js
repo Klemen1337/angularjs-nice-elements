@@ -13,8 +13,8 @@ angular.module('niceElements')
       transclude: true,
       scope: {
         niceDisabled: '=',
-        title: "@",
-        noMargin: "=",
+        title: '@',
+        noMargin: '=',
         fieldWidth: '@',
         labelWidth: '@',
         niceClick: '&',

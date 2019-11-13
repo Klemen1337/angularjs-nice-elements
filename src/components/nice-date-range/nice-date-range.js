@@ -24,7 +24,7 @@ angular.module('niceElements')
         labelWidth: '@',
         startOfTheYear: '@',
         help: '@',
-        onChange: '='
+        onChange: '&?'
       },
 
       link: function(scope, iElement, attrs, ctrl){

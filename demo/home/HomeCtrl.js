@@ -32,8 +32,8 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     console.log("test", test);
   }
 
-  $scope.handleChange = function(value) {
-    console.log("Value:", value);
+  $scope.handleChange = function() {
+    console.log("Value:", ...arguments);
   }
 
   $scope.data = {

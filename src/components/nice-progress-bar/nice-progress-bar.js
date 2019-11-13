@@ -14,7 +14,7 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-progress-bar/nice-progress-bar.html',
       scope: {
         title: '@',
-        noMargin: "@",
+        noMargin: '@',
         value: '=',
         max: '=',
         color: '=',

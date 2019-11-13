@@ -19,7 +19,7 @@ angular.module('niceElements')
         title: '@', // Title of the field
         model: '=', // Aka model
         list: '=', // List of options
-        onChange: '=?',
+        onChange: '&?',
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -33,13 +33,13 @@ angular.module('niceElements')
         noMargin: '@', // margin-bottom: 0px
         multiple: '@', // Can select multiple items
         help: '@',
-        noOptionsText: "@",
-        noDataText: "@",
-        selectText: "@",
-        searchText: "@",
-        nullableText: "@",
-        searchFunction: "=?",
-        clearOnSelect: "@"
+        noOptionsText: '@',
+        noDataText: '@',
+        selectText: '@',
+        searchText: '@',
+        nullableText: '@',
+        searchFunction: '=?',
+        clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -194,9 +194,7 @@ angular.module('niceElements')
           }
           
           // Trigger on change
-          if ($scope.onChange) {
-            $scope.onChange(obj);
-          }
+          if ($scope.onChange) $scope.onChange({ model: obj });
 
           if ($scope.clearOnSelect) {
             // Clear on select
