@@ -1,0 +1,28 @@
+# Changelog
+
+## v1.3.4 (13.11.2019)
+- changed on change to function
+
+
+## v1.3.3 (13.11.2019)
+- added on change to components,
+- added requests to nice-serach2,
+- added nice-highlight,
+- added htmlmin to ngtemplates,
+- simplified nice-search2 transclude,
+- worked on unifying style,
+
+
+## v1.3.2 (8.11.2019)
+- created nice-search2 component,
+- style fixes
+
+
+## v1.3.1 (6.11.2019)
+- changed nice help popup,
+- fixed yesno paddings
+
+
+## v1.3.0 (6.11.2019)
+- created nice help component,
+- unified tempalte nice title code
