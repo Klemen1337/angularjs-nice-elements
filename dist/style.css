@@ -314,7 +314,7 @@ p.nice {
 .nice-dropdown .open .btn-dropdown, .nice-search .nice-dropdown-empty .open .btn-dropdown {
   background: white !important;
   border-color: #3189ff !important;
-  color: #474F52 !important;
+  color: #404040 !important;
 }
 /* line 15, ../src/components/nice-dropdown/nice-dropdown.scss */
 .nice-dropdown .open .dropdown-menu, .nice-search .nice-dropdown-empty .open .dropdown-menu {

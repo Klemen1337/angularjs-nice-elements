@@ -18,7 +18,7 @@ angular.module('niceElements')
         label: "@"
       },
       link: function postLink(scope, element, attrs) {
-        if(angular.isDefined(scope.model)){
+        if (angular.isDefined(scope.model)){
           scope.model = false;
         }
       }
@@ -90,7 +90,8 @@ angular.module('niceElements')
         startDate: '=',
         isDisabled: '=',
         translations: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       link: function(scope) {
         scope.translations = {
@@ -205,6 +206,8 @@ angular.module('niceElements')
                 scope.startDate = angular.copy(scope.endDate);
               }
             }
+
+            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate });
           }
         };
 
@@ -394,13 +397,15 @@ angular.module('niceElements')
       scope: {
         model: '=',
         title: '@',
-        noMargin: '@'
+        noMargin: '@',
+        onChange: '='
       },
       controller: function($rootScope, $scope) {
         if($scope.model === undefined) $scope.model = false;
 
         $scope.toggle = function(){
           $scope.model = !$scope.model;
+          if ($scope.onChange) $scope.onChange($scope.model);
         };
       }
     };
@@ -432,7 +437,8 @@ angular.module('niceElements')
         objKey: '@',
         noMargin: '@',
         multiple: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       link: function (scope, element, attr) {
         if (!attr.title) { attr.title = ''; }
@@ -570,6 +576,7 @@ angular.module('niceElements')
                 $scope.model = value_new[$scope.objKey];
               }
             }
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         });
 
@@ -807,7 +814,8 @@ angular.module('niceElements')
         noMargin: '@',
         labelWidth: '@',
         startOfTheYear: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
 
       link: function(scope, iElement, attrs, ctrl){
@@ -818,17 +826,20 @@ angular.module('niceElements')
         attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(!angular.isDefined(scope.model)) {
+          var model = null;
           if(!angular.isDefined(scope.startOfTheYear)){
-            scope.model = {
+            model = {
               startDate: moment().format(),
               endDate: moment().format()
-            }
+            };
           } else {
-            scope.model = {
+            model = {
               startDate: moment([moment().year()]).format(),
               endDate: moment().format()
-            }
+            };
           }
+          scope.model = model;
+          if (scope.onChange) scope.onChange(scope.model);
         }
       },
 
@@ -916,7 +927,8 @@ angular.module('niceElements')
         maxDate: '=',
         minDate: '=',
         nextDate: '=',
-        isDisabled: '='
+        isDisabled: '=',
+        onChange: '='
       },
       controller: function($scope) {
         $scope.isOpen = false;
@@ -969,6 +981,7 @@ angular.module('niceElements')
           $scope.innerDate.value = $scope.formatDate(selectedDate);
           
           $scope.model = selectedDate;
+          if ($scope.onChange) $scope.onChange($scope.model);
           $scope.forma.$setDirty();
         };
 
@@ -981,6 +994,7 @@ angular.module('niceElements')
             selectedDate.minutes($scope.innerDate.minute);
 
             $scope.model = selectedDate;
+            if ($scope.onChange) $scope.onChange($scope.model);
             $scope.forma.$setDirty();
           }
         };
@@ -1201,7 +1215,8 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
       isDisabled: '=',
-      help: '@'
+      help: '@',
+      onChange: '='
     },
     controller: function ($scope) {
         $scope.date = $scope.date == 'true' || $scope.date == true;
@@ -1245,6 +1260,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
         $scope.$watch('internalDate', function (newDate) {
           $scope.model = moment(newDate);
           $scope.value = moment(newDate).format($scope.format);
+          if ($scope.onChange) $scope.onChange($scope.model);
         });
 
         $scope.$watch('model', function (newModel, oldModel) {
@@ -1277,7 +1293,8 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         isDisabled: '=',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
@@ -1332,6 +1349,7 @@ angular.module('niceElements')
         $scope.confirm = function() {
           $scope.startDate = angular.copy($scope.innerStartDate);
           $scope.endDate = angular.copy($scope.innerEndDate);
+          if ($scope.onChange) $scope.onChange($scope.model);
           $scope.close();
         };
 
@@ -1426,7 +1444,8 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
         formatOutput: "@", // Format output or moment
         isDisabled: "=",
-        help: "@"
+        help: "@",
+        onChange: '='
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
@@ -1574,6 +1593,8 @@ angular.module('niceElements')
             //$scope.modelStart = angular.copy($scope.internalStart);
             //$scope.modelEnd = angular.copy($scope.internalEnd);
             $scope.showDtpRange = false;
+
+            if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd});
           };
 
           $scope.cancelClick = function(){
@@ -1659,7 +1680,8 @@ angular.module('niceElements')
       numYears: '@',
       startingYear: '@',
       mature: '@',
-      help: '@'
+      help: '@',
+      onChange: '='
     },
     link: function ($scope) {
       $scope.days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
@@ -1722,6 +1744,8 @@ angular.module('niceElements')
         if(date.isValid()){
           // Format
           $scope.model = date.format();
+
+          if ($scope.onChange) $scope.onChange($scope.model);
 
           // Change dates
           $scope.days = [];
@@ -1790,7 +1814,8 @@ angular.module('niceElements')
         multiple: '@',            // Can select multiple items
         help: '@',
         listenKeydown: '@',
-        noOptionsText: "@"
+        noOptionsText: "@",
+        onChange: '='
       },
       controller: function($rootScope, $scope, $document, $element) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -1930,6 +1955,7 @@ angular.module('niceElements')
           // update model only if it is changed
           if (!_.isEqual(_new, $scope.model)){
             $scope.model = _new;
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         };
 
@@ -2427,7 +2453,7 @@ angular.module('niceElements')
 
     return {
       scope: {
-        //onChange: '&', // function called on date changed
+        onChange: '=', // function called on date changed
         model: '=', // binding model
         format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
         modelFormat: '@', // default: ''
@@ -2954,6 +2980,7 @@ angular.module('niceElements')
           },
           setDateModel: function () {
             $scope.model = angular.copy($scope.currentDate);
+            if ($scope.onChange) $scope.onChange($scope.model);
             //$scope.model = $scope.currentDate.format(params.modelFormat);
             //$scope.formDatetimePicker.$setDirty();
           },
@@ -3299,7 +3326,8 @@ angular.module('niceElements')
         noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         tabIndex: '@',
-        isFocused: '@'
+        isFocused: '@',
+        onChange: '='
       },
 
       link: function (scope, element, attrs) {
@@ -3411,6 +3439,8 @@ angular.module('niceElements')
                 return false;
               }
             }
+
+            if ($scope.onChange) $scope.onChange($scope.model);
           };
         }
     };
@@ -3619,7 +3649,8 @@ angular.module('niceElements')
         step: '@',
         decimals: '@',
         allowNegative: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
 
       link: function (scope, element, attrs) {
@@ -3684,6 +3715,8 @@ angular.module('niceElements')
           } else {
             $scope.canAdd = true;
           }
+
+          if ($scope.onChange) $scope.onChange($scope.model);
         };
 
 
@@ -3692,7 +3725,7 @@ angular.module('niceElements')
 
 
         // On input change
-        $scope.onChange = function(){
+        $scope.inputChanged = function(){
           $scope.check();
         };
 
@@ -3750,7 +3783,8 @@ angular.module('niceElements')
         labelWidth: '@',
         placeholder: '@',
         noMargin: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
 
       link: function (scope, element, attrs) {
@@ -3787,6 +3821,7 @@ angular.module('niceElements')
           } else {
             $scope.model = 0;
           }
+          if ($scope.onChange) $scope.onChange($scope.model);
         };
 
         $scope.keypress = function(event) {
@@ -3889,12 +3924,12 @@ angular.module('niceElements')
         title: '@',
         model: '=',
         max: '=',
-        onChange: "&",
+        onChange: "=?",
         noMargin: "@",
         fieldWidth: '@',
         labelWidth: '@',
         isDisabled: '=',
-        help: '@'
+        help: '@',
       },
       controller: function ($scope) {
         if (!$scope.model) {
@@ -3905,18 +3940,18 @@ angular.module('niceElements')
           if ($scope.max) {
             if ($scope.max >= $scope.model + 1) {
               $scope.model += 1;
-              $scope.onChange($scope.model);
+              if ($scope.onChange) $scope.onChange($scope.model);
             }
           } else {
             $scope.model += 1;
-            $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         };
 
         $scope.sub = function () {
           if ($scope.model - 1 >= 0) {
             $scope.model -= 1;
-            $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         };
 
@@ -3963,7 +3998,8 @@ angular.module('niceElements')
         setText: '@',
         tabIndex: '@',
         isFocused: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 
@@ -4134,6 +4170,7 @@ angular.module('niceElements')
             $timeout.cancel($scope.timer_promise);
 
           $scope.timer_promise = $timeout(function(){
+            if ($scope.onChange) $scope.onChange($scope.modelString);
             $scope.requests = $scope.requests + 1;
             var requestNumber = angular.copy($scope.requests);
             $scope.refreshFunction($scope.modelString).then(function(response){
@@ -4191,6 +4228,7 @@ angular.module('niceElements')
         refreshFunction: '=',
         refreshSelectedCallback: '=',
         onSelect: '=',
+        onChange: '=',
         noMargin: '@',
         tabIndex: '@',
         help: '@'
@@ -4241,6 +4279,7 @@ angular.module('niceElements')
           }
 
           $scope.debounce = $timeout(function() {
+            if ($scope.onChange) $scope.onChange($scope.model);
             $scope.getData($scope.model);
           }, 200);
         };
@@ -4413,6 +4452,7 @@ angular.module('niceElements')
         noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
+        onChange: '=',
         help: '@'
       },
       restrict: 'E',
@@ -4438,6 +4478,7 @@ angular.module('niceElements')
             $scope.forma.$setValidity("valid-time", true);
             $scope.model = parsedDate;
             $scope.refreshTime();
+            if ($scope.onChange) $scope.onChange($scope.model);
           } else {
             $scope.forma.$setValidity("valid-time", false);
             $scope.modelString = "";
@@ -4625,6 +4666,7 @@ angular.module('niceElements')
         options: '=',
         defaultFalse: '@',
         noMargin: '@',
+        onChange: '=',
         help: '@'
       },
       controller: function($scope, $attrs) {
@@ -4686,7 +4728,7 @@ angular.module('niceElements')
         $scope.switch = function(){
           if(!$scope.isDisabled){
             $scope.model = !$scope.model;
-
+            
             if($scope.options){
               if($scope.model){
                 $scope.modelValue = $scope.options[0];
@@ -4694,7 +4736,8 @@ angular.module('niceElements')
                 $scope.modelValue = $scope.options[1];
               }
             }
-
+            
+            if ($scope.onChange) $scope.onChange($scope.model);
             $scope.formYesno.$setDirty();
           }
         };
@@ -5296,13 +5339,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"form-group\" ng-class=\"{\n" +
-    "                'has-feedback': showValid && !hideValid,\n" +
-    "                'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
-    "                'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
-    "                'symbol': symbol,\n" +
-    "                'nice-disabled': isDisabled}\">\n" +
-    "<input ng-show=\"!textArea\" class=\"form-control\" type=\"{{ internalType }}\" ng-model=\"model\" name=\"{{ name }}\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\">\n" +
+    "                  'has-feedback': showValid && !hideValid,\n" +
+    "                  'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
+    "                  'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
+    "                  'symbol': symbol,\n" +
+    "                  'nice-disabled': isDisabled\n" +
+    "                }\">\n" +
     "<textarea ng-show=\"textArea\" class=\"form-control\" ng-model=\"model\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" rows=\"{{textAreaLines}}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\"></textarea>\n" +
+    "<input ng-show=\"!textArea\" class=\"form-control\" type=\"{{ internalType }}\" ng-model=\"model\" name=\"{{ name }}\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\">\n" +
     "<span class=\"input-group-addon\" ng-if=\"symbol\">{{ symbol }}</span>\n" +
     "</div>\n" +
     "<div ng-if=\"forma.$error && forma.$dirty\">\n" +
@@ -5363,7 +5407,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span class=\"input-group-btn\">\n" +
     "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\">-</button>\n" +
     "</span>\n" +
-    "<input type=\"number\" step=\"{{ step }}\" ng-change=\"onChange()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\">\n" +
+    "<input type=\"number\" step=\"{{ step }}\" ng-change=\"inputChanged()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\">\n" +
     "<span class=\"input-group-btn\">\n" +
     "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
     "</span>\n" +
