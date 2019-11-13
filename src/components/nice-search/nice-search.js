@@ -32,7 +32,8 @@ angular.module('niceElements')
         setText: '@',
         tabIndex: '@',
         isFocused: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
 
@@ -203,6 +204,7 @@ angular.module('niceElements')
             $timeout.cancel($scope.timer_promise);
 
           $scope.timer_promise = $timeout(function(){
+            if ($scope.onChange) $scope.onChange($scope.modelString);
             $scope.requests = $scope.requests + 1;
             var requestNumber = angular.copy($scope.requests);
             $scope.refreshFunction($scope.modelString).then(function(response){

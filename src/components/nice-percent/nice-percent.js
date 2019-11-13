@@ -22,7 +22,8 @@ angular.module('niceElements')
         labelWidth: '@',
         placeholder: '@',
         noMargin: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
 
       link: function (scope, element, attrs) {
@@ -59,6 +60,7 @@ angular.module('niceElements')
           } else {
             $scope.model = 0;
           }
+          if ($scope.onChange) $scope.onChange($scope.model);
         };
 
         $scope.keypress = function(event) {

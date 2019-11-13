@@ -31,7 +31,8 @@ angular.module('niceElements')
         multiple: '@',            // Can select multiple items
         help: '@',
         listenKeydown: '@',
-        noOptionsText: "@"
+        noOptionsText: "@",
+        onChange: '='
       },
       controller: function($rootScope, $scope, $document, $element) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -171,6 +172,7 @@ angular.module('niceElements')
           // update model only if it is changed
           if (!_.isEqual(_new, $scope.model)){
             $scope.model = _new;
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         };
 

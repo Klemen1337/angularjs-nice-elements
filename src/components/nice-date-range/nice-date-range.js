@@ -23,7 +23,8 @@ angular.module('niceElements')
         noMargin: '@',
         labelWidth: '@',
         startOfTheYear: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
 
       link: function(scope, iElement, attrs, ctrl){
@@ -34,17 +35,20 @@ angular.module('niceElements')
         attrs.noMargin = angular.isDefined(attrs.noMargin);
 
         if(!angular.isDefined(scope.model)) {
+          var model = null;
           if(!angular.isDefined(scope.startOfTheYear)){
-            scope.model = {
+            model = {
               startDate: moment().format(),
               endDate: moment().format()
-            }
+            };
           } else {
-            scope.model = {
+            model = {
               startDate: moment([moment().year()]).format(),
               endDate: moment().format()
-            }
+            };
           }
+          scope.model = model;
+          if (scope.onChange) scope.onChange(scope.model);
         }
       },
 

@@ -24,7 +24,8 @@ angular.module('niceElements')
         startDate: '=',
         isDisabled: '=',
         translations: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       link: function(scope) {
         scope.translations = {
@@ -139,6 +140,8 @@ angular.module('niceElements')
                 scope.startDate = angular.copy(scope.endDate);
               }
             }
+
+            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate });
           }
         };
 

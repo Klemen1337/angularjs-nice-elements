@@ -22,7 +22,8 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         isDisabled: '=',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($rootScope, $scope) {
@@ -77,6 +78,7 @@ angular.module('niceElements')
         $scope.confirm = function() {
           $scope.startDate = angular.copy($scope.innerStartDate);
           $scope.endDate = angular.copy($scope.innerEndDate);
+          if ($scope.onChange) $scope.onChange($scope.model);
           $scope.close();
         };
 

@@ -23,6 +23,7 @@ angular.module('niceElements')
         options: '=',
         defaultFalse: '@',
         noMargin: '@',
+        onChange: '=',
         help: '@'
       },
       controller: function($scope, $attrs) {
@@ -84,7 +85,7 @@ angular.module('niceElements')
         $scope.switch = function(){
           if(!$scope.isDisabled){
             $scope.model = !$scope.model;
-
+            
             if($scope.options){
               if($scope.model){
                 $scope.modelValue = $scope.options[0];
@@ -92,7 +93,8 @@ angular.module('niceElements')
                 $scope.modelValue = $scope.options[1];
               }
             }
-
+            
+            if ($scope.onChange) $scope.onChange($scope.model);
             $scope.formYesno.$setDirty();
           }
         };

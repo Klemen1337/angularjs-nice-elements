@@ -31,7 +31,8 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label,
         formatOutput: "@", // Format output or moment
         isDisabled: "=",
-        help: "@"
+        help: "@",
+        onChange: '='
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
@@ -179,6 +180,8 @@ angular.module('niceElements')
             //$scope.modelStart = angular.copy($scope.internalStart);
             //$scope.modelEnd = angular.copy($scope.internalEnd);
             $scope.showDtpRange = false;
+
+            if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd});
           };
 
           $scope.cancelClick = function(){

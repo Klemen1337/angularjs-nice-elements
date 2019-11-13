@@ -27,7 +27,8 @@ angular.module('niceElements')
         step: '@',
         decimals: '@',
         allowNegative: '@',
-        help: '@'
+        help: '@',
+        onChange: '='
       },
 
       link: function (scope, element, attrs) {
@@ -92,6 +93,8 @@ angular.module('niceElements')
           } else {
             $scope.canAdd = true;
           }
+
+          if ($scope.onChange) $scope.onChange($scope.model);
         };
 
 
@@ -100,7 +103,7 @@ angular.module('niceElements')
 
 
         // On input change
-        $scope.onChange = function(){
+        $scope.inputChanged = function(){
           $scope.check();
         };
 

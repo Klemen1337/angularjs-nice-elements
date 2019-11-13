@@ -27,7 +27,8 @@ angular.module('niceElements')
         noMargin: '@',
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         tabIndex: '@',
-        isFocused: '@'
+        isFocused: '@',
+        onChange: '='
       },
 
       link: function (scope, element, attrs) {
@@ -139,6 +140,8 @@ angular.module('niceElements')
                 return false;
               }
             }
+
+            if ($scope.onChange) $scope.onChange($scope.model);
           };
         }
     };

@@ -15,12 +15,12 @@ angular.module('niceElements')
         title: '@',
         model: '=',
         max: '=',
-        onChange: "&",
+        onChange: "=?",
         noMargin: "@",
         fieldWidth: '@',
         labelWidth: '@',
         isDisabled: '=',
-        help: '@'
+        help: '@',
       },
       controller: function ($scope) {
         if (!$scope.model) {
@@ -31,18 +31,18 @@ angular.module('niceElements')
           if ($scope.max) {
             if ($scope.max >= $scope.model + 1) {
               $scope.model += 1;
-              $scope.onChange($scope.model);
+              if ($scope.onChange) $scope.onChange($scope.model);
             }
           } else {
             $scope.model += 1;
-            $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         };
 
         $scope.sub = function () {
           if ($scope.model - 1 >= 0) {
             $scope.model -= 1;
-            $scope.onChange($scope.model);
+            if ($scope.onChange) $scope.onChange($scope.model);
           }
         };
 

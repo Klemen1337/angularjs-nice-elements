@@ -116,6 +116,7 @@
                       placeholder="Search item"
                       show-dropdown="true"
                       on-select="countrySelected"
+                      on-change="handleChange"
                     >
                       <div class="person-row">
                         <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
@@ -143,7 +144,7 @@
                       key-for-input-label="name"
                     ></nice-search>
 
-                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled"></nice-date>
+                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange"></nice-date>
                     <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test "></nice-date>
 
                     <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled" help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>"></nice-date>
@@ -151,11 +152,11 @@
 
                     <nice-progress-bar title="Progress bar" value="1" max="2" help="This is a test"></nice-progress-bar>
 
-                    <nice-quantity title="Quantity" model="data.quantity" is-disabled="data.disabled" help="This is a test"></nice-quantity>
+                    <nice-quantity title="Quantity" model="data.quantity" is-disabled="data.disabled" help="This is a test" on-change="handleChange"></nice-quantity>
 
                     <nice-upload title="Nice upload" model="data.upload" is-disabled="data.disabled" help="This is a test"></nice-upload>
 
-                    <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4" help="This is a test"></nice-yesno>
+                    <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4" help="This is a test" on-change="handleChange"></nice-yesno>
 
                 
                     <nice-dropdown 
@@ -167,7 +168,7 @@
                         loading="dropdownLoading"
                         add-button-function="setSlovenia"
                         nullable="true"
-                        on-change="testFunction"
+                        on-change="handleChange"
                         selected-is-key="true"
                         clear-on-select="true"
                         is-disabled="data.disabled"
@@ -270,6 +271,7 @@
                         model="data.dropdownOld"
                         is-disabled="data.disabled"
                         help="This is a test"
+                        on-change="handleChange"
                         list="listObjs">
                     </nice-dropdown-old>
 
@@ -277,6 +279,7 @@
                         title="Birthday" 
                         model="data.birthday"
                         help="This is a test"
+                        on-change="handleChange"
                         is-disabled="data.disabled">
                     </nice-dropdown-date>
 
@@ -289,6 +292,7 @@
                         start-date="data.calendarStartDate"
                         is-disabled="data.disabled"
                         help="This is a test"
+                        on-change="handleChange"
                     ></nice-calendar>
 
                     <div class="row">
@@ -299,9 +303,9 @@
 
                     <nice-comment title="Comment" model="data.comment" placeholder="Add a comment" is-disabled="data.disabled" help="This is a test"></nice-comment>
 
-                    <nice-search title="Search" is-focused="true" is-disabled="data.disabled" help="This is a test"></nice-search>
+                    <nice-search title="Search" is-focused="true" is-disabled="data.disabled" help="This is a test" on-change="handleChange"></nice-search>
 
-                    <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" tab-index="1" is-focused="true" help="This is a test"></nice-input>
+                    <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" tab-index="1" is-focused="true" help="This is a test" on-change="handleChange"></nice-input>
 
                     <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" is-disabled="data.disabled" tab-index="2" help="This is a test"></nice-input>
 
@@ -328,6 +332,7 @@
                         is-disabled="data.disabled"
                         model="data.dt1"
                         title="Datetimepicker all"
+                        on-change="handleChange"
                         date="true"
                         time="true">
                     </nice-datetime-picker>
@@ -378,6 +383,7 @@
                         end-date="dtEnd"
                         help="This is a test"
                         title="Range picker v2"
+                        on-change="handleChange"
                         time="true">
                     </nice-datetimerange-picker2>
 

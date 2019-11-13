@@ -16,6 +16,7 @@ angular.module('niceElements')
         noMargin: '@',
         fieldWidth: '@',
         labelWidth: '@',
+        onChange: '=',
         help: '@'
       },
       restrict: 'E',
@@ -41,6 +42,7 @@ angular.module('niceElements')
             $scope.forma.$setValidity("valid-time", true);
             $scope.model = parsedDate;
             $scope.refreshTime();
+            if ($scope.onChange) $scope.onChange($scope.model);
           } else {
             $scope.forma.$setValidity("valid-time", false);
             $scope.modelString = "";

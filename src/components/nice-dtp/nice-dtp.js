@@ -12,7 +12,7 @@ angular.module('niceElements')
 
     return {
       scope: {
-        //onChange: '&', // function called on date changed
+        onChange: '=', // function called on date changed
         model: '=', // binding model
         format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
         modelFormat: '@', // default: ''
@@ -539,6 +539,7 @@ angular.module('niceElements')
           },
           setDateModel: function () {
             $scope.model = angular.copy($scope.currentDate);
+            if ($scope.onChange) $scope.onChange($scope.model);
             //$scope.model = $scope.currentDate.format(params.modelFormat);
             //$scope.formDatetimePicker.$setDirty();
           },

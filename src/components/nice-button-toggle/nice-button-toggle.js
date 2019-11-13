@@ -15,7 +15,7 @@ angular.module('niceElements')
         label: "@"
       },
       link: function postLink(scope, element, attrs) {
-        if(angular.isDefined(scope.model)){
+        if (angular.isDefined(scope.model)){
           scope.model = false;
         }
       }
