@@ -16,3 +16,8 @@ into `dist/nice.css`.
 Test server is shipped with this project. Then a demo project from `demo` directory is available on `localhost:3030`.
 
     node server.js
+
+
+
+## CHANGELOG
+See [CHANGELOG.md](./CHANGELOG.md)
