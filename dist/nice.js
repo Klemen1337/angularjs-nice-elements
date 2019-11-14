@@ -3404,7 +3404,10 @@ angular.module('niceElements')
             if (typeof value_new != "number") {
               scope.internalModel = value_new.replace(',', '.');
               scope.model = scope.internalModel;
+              if (scope.onChange) scope.onChange({ model: scope.model });
             }
+          } else {
+            if (scope.onChange) scope.onChange({ model: scope.model });
           }
         });
         },
@@ -3436,8 +3439,6 @@ angular.module('niceElements')
                 return false;
               }
             }
-
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
           };
         }
     };

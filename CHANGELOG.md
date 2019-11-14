@@ -1,7 +1,11 @@
 # Changelog
 
+## v1.3.6 (14.11.2019)
+- forgot to rebuild 🤦
+
 ## v1.3.5 (14.11.2019)
-- changed on change to function
+- changed on change to function,
+- added LICENSE.md
 
 
 ## v1.3.4 (13.11.2019)
