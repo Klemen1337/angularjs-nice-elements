@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.5 (14.11.2019)
+- changed on change to function
+
+
 ## v1.3.4 (13.11.2019)
 - changed on change to function
 
