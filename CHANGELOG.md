@@ -1,7 +1,12 @@
 # Changelog
 
+## v1.3.7 (16.11.2019)
+- fixed mobile field size
+
+
 ## v1.3.6 (14.11.2019)
 - forgot to rebuild 🤦
+
 
 ## v1.3.5 (14.11.2019)
 - changed on change to function,
