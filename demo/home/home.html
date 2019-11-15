@@ -217,6 +217,7 @@
                         obj-key="iso"
                         is-disabled="data.disabled"
                         help="This is a test"
+                        on-change="handleChange(model)"
                         multiple="true">
                     </nice-dropdown>
 
@@ -445,52 +446,54 @@
         <div class="white-wrapper" id="common">
             <h2>All have in common</h2>
 
-            <table class="table nice-table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>required</td>
-                        <td>when enabled it will effect ng-form</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>field-width</td>
-                        <td>sets the width of the input field</td>
-                        <td>col-sm-8</td>
-                    </tr>
-                    <tr>
-                        <td>title-width</td>
-                        <td>sets the width of the title</td>
-                        <td>col-sm-4</td>
-                    </tr>
-                    <tr>
-                        <td>disabled</td>
-                        <td>disables the input</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>title</td>
-                        <td>sets the label of the field</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>model</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>valid</td>
-                        <td>is actually ng-form</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table nice-table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>required</td>
+                            <td>when enabled it will effect ng-form</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>field-width</td>
+                            <td>sets the width of the input field</td>
+                            <td>col-sm-8</td>
+                        </tr>
+                        <tr>
+                            <td>title-width</td>
+                            <td>sets the width of the title</td>
+                            <td>col-sm-4</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>disables the input</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>sets the label of the field</td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>model</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>valid</td>
+                            <td>is actually ng-form</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 
@@ -499,82 +502,84 @@
         <div class="white-wrapper" id="nice-input">
             <h2>Nice input</h2>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>type</td>
-                        <td>Sets the input field type</td>
-                        <td>text</td>
-                    </tr>
-                    <tr>
-                        <td>regex</td>
-                        <td></td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>placeholder</td>
-                        <td></td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>minlength</td>
-                        <td>Sets the max character length</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>maxlength</td>
-                        <td>Sets the min character length</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>hideValid</td>
-                        <td>Hides valid check symbol</td>
-                        <td>true</td>
-                    </tr>
-                    <tr>
-                        <td>showValid</td>
-                        <td>wtf</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>textAreaLines</td>
-                        <td>Sets text area number of lines</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>textArea</td>
-                        <td>Sets input field to text area</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>symbol</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>help</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>name</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>minDecimalsCutZeros</td>
-                        <td>Use this field to tell how much decimal places must always be, even if number is ceil.</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>type</td>
+                            <td>Sets the input field type</td>
+                            <td>text</td>
+                        </tr>
+                        <tr>
+                            <td>regex</td>
+                            <td></td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>placeholder</td>
+                            <td></td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>minlength</td>
+                            <td>Sets the max character length</td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>maxlength</td>
+                            <td>Sets the min character length</td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>hideValid</td>
+                            <td>Hides valid check symbol</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td>showValid</td>
+                            <td>wtf</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textAreaLines</td>
+                            <td>Sets text area number of lines</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textArea</td>
+                            <td>Sets input field to text area</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>symbol</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>help</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>minDecimalsCutZeros</td>
+                            <td>Use this field to tell how much decimal places must always be, even if number is ceil.</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <hr>
 
@@ -631,68 +636,70 @@
         <div class="white-wrapper" id="nice-dropdown">
             <h2>Nice dropdown</h2>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>list</td>
-                        <td>List of available options</td>
-                        <td>REQUIRED</td>
-                    </tr>
-                    <tr>
-                        <td>addButtonEnable</td>
-                        <td>Shows the button nex to the dropdown</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>objValue</td>
-                        <td>Used only when returnOnlyKey = true</td>
-                        <td>value</td>
-                    </tr>
-                    <!-- DEPRECATED -->
-                    <!--<tr>-->
-                        <!--<td>listIsObj</td>-->
-                        <!--<td>True - list has objects, False - list has strings</td>-->
-                        <!--<td>false</td>-->
-                    <!--</tr>-->
-                    <tr>
-                        <td>selectedIsObj</td>
-                        <td></td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>showTax</td>
-                        <td></td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>noMargin</td>
-                        <td>margin bottom is set to 0px</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>multiple</td>
-                        <td>Can select multiple items</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>help</td>
-                        <td></td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>listenKeydown</td>
-                        <td>If set to true, dropdown listens to keydown events and scrolls to first occurence that starts with pressed character.</td>
-                        <td>null</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>list</td>
+                            <td>List of available options</td>
+                            <td>REQUIRED</td>
+                        </tr>
+                        <tr>
+                            <td>addButtonEnable</td>
+                            <td>Shows the button nex to the dropdown</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>objValue</td>
+                            <td>Used only when returnOnlyKey = true</td>
+                            <td>value</td>
+                        </tr>
+                        <!-- DEPRECATED -->
+                        <!--<tr>-->
+                            <!--<td>listIsObj</td>-->
+                            <!--<td>True - list has objects, False - list has strings</td>-->
+                            <!--<td>false</td>-->
+                        <!--</tr>-->
+                        <tr>
+                            <td>selectedIsObj</td>
+                            <td></td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>showTax</td>
+                            <td></td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>noMargin</td>
+                            <td>margin bottom is set to 0px</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>multiple</td>
+                            <td>Can select multiple items</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>help</td>
+                            <td></td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>listenKeydown</td>
+                            <td>If set to true, dropdown listens to keydown events and scrolls to first occurence that starts with pressed character.</td>
+                            <td>null</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
 
             <button ng-click="change_options()">change options and test how dropdowns updates internal list</button>
@@ -857,92 +864,94 @@
         <div class="white-wrapper" id="nice-date-time">
             <h2>Nice date time picker</h2>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>model</td>
-                        <td>Binding model</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>format</td>
-                        <td>String, datetime format for input label</td>
-                        <td>DD.MM.YYYY HH:mm</td>
-                    </tr>
-                    <tr>
-                        <td>date</td>
-                        <td>Boolean, is datepicker enabled</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>time</td>
-                        <td>Boolean, is timepicker enabled</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>width</td>
-                        <td>String, width of entire dtp-picker</td>
-                        <td>300</td>
-                    </tr>
-                    <tr>
-                        <td>enable-ok-buttons</td>
-                        <td>Boolean, is ok/cancel buttons enabled</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>lang</td>
-                        <td>String, which locale to use - you must load angular locales first</td>
-                        <td>en</td>
-                    </tr>
-                    <tr>
-                        <td>min-date</td>
-                        <td>String, minimum date (use: 2011-09-01T13:20:30+03:00 for example)</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>max-date</td>
-                        <td>String, maximum date (use: 2011-09-01T13:20:30+03:00 for example)</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>week-start</td>
-                        <td>String, which day does the week start (0-sunday, 1-monday, ...)</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>ok-text</td>
-                        <td>String, text on OK button</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>cancel-text</td>
-                        <td>String, text on CANCEL button</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>title</td>
-                        <td>String, title before input</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>field-width</td>
-                        <td>String, bootstrap classes that defines width of field</td>
-                        <td>col-sm-8</td>
-                    </tr>
-                    <tr>
-                        <td>label-width</td>
-                        <td>String, bootstrap classes that defines width of label</td>
-                        <td>col-sm-4</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>model</td>
+                            <td>Binding model</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>format</td>
+                            <td>String, datetime format for input label</td>
+                            <td>DD.MM.YYYY HH:mm</td>
+                        </tr>
+                        <tr>
+                            <td>date</td>
+                            <td>Boolean, is datepicker enabled</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>time</td>
+                            <td>Boolean, is timepicker enabled</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td>String, width of entire dtp-picker</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>enable-ok-buttons</td>
+                            <td>Boolean, is ok/cancel buttons enabled</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>lang</td>
+                            <td>String, which locale to use - you must load angular locales first</td>
+                            <td>en</td>
+                        </tr>
+                        <tr>
+                            <td>min-date</td>
+                            <td>String, minimum date (use: 2011-09-01T13:20:30+03:00 for example)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>max-date</td>
+                            <td>String, maximum date (use: 2011-09-01T13:20:30+03:00 for example)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>week-start</td>
+                            <td>String, which day does the week start (0-sunday, 1-monday, ...)</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>ok-text</td>
+                            <td>String, text on OK button</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>cancel-text</td>
+                            <td>String, text on CANCEL button</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>String, title before input</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>field-width</td>
+                            <td>String, bootstrap classes that defines width of field</td>
+                            <td>col-sm-8</td>
+                        </tr>
+                        <tr>
+                            <td>label-width</td>
+                            <td>String, bootstrap classes that defines width of label</td>
+                            <td>col-sm-4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <hr>
 
@@ -976,7 +985,7 @@
     title="Datetime picker"
     date="true"
     time="true"
-    format="DD.MM.YYYY | HH:mm">
+    format="DD.MM.YYYY • HH:mm">
 &lt;/nice-datetime-picker></pre>
             <div class="row">
                 <div class="col-sm-6">
@@ -986,7 +995,7 @@
                             date="true"
                             time="true"
                             model-format="DD-MM-YYYY HH:mmZZ"
-                            format="DD.MM.YYYY | HH:mm">
+                            format="DD.MM.YYYY • HH:mm">
                     </nice-datetime-picker>
                 </div>
                 <div class="col-sm-6">
@@ -1098,47 +1107,49 @@
         <div class="white-wrapper" id="nice-choice">
             <h2>Nice choice demo</h2>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>list</td>
-                        <td>List of objects or strings that are available</td>
-                        <td>REQUIRED</td>
-                    </tr>
-                    <tr>
-                        <td>listIsObj</td>
-                        <td>List has objects</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>selectedIsObj</td>
-                        <td>Return object of the selected</td>
-                        <td>false</td>
-                    </tr>
-                    <tr>
-                        <td>objValue</td>
-                        <td>Display selected parameter of the object</td>
-                        <td>value</td>
-                    </tr>
-                    <tr>
-                        <td>objKey</td>
-                        <td>Link objects with this parameter</td>
-                        <td>key</td>
-                    </tr>
-                    <tr>
-                        <td>multiple</td>
-                        <td>When enabled you can select multiple options</td>
-                        <td>false</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>list</td>
+                            <td>List of objects or strings that are available</td>
+                            <td>REQUIRED</td>
+                        </tr>
+                        <tr>
+                            <td>listIsObj</td>
+                            <td>List has objects</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>selectedIsObj</td>
+                            <td>Return object of the selected</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>objValue</td>
+                            <td>Display selected parameter of the object</td>
+                            <td>value</td>
+                        </tr>
+                        <tr>
+                            <td>objKey</td>
+                            <td>Link objects with this parameter</td>
+                            <td>key</td>
+                        </tr>
+                        <tr>
+                            <td>multiple</td>
+                            <td>When enabled you can select multiple options</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <hr>
 
@@ -1210,42 +1221,44 @@
         <div class="white-wrapper" id="nice-yes-no">
             <h2>Nice yes no</h2>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>yes</td>
-                        <td>Set the yes text</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>no</td>
-                        <td>Set the no text</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>options</td>
-                        <td>Custom options instead of true/false, format:['yes','no']</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>model-value</td>
-                        <td>Gets the custom option instead of true/false</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>defaultFalse</td>
-                        <td>sets default value to false</td>
-                        <td>false</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>yes</td>
+                            <td>Set the yes text</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>no</td>
+                            <td>Set the no text</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>options</td>
+                            <td>Custom options instead of true/false, format:['yes','no']</td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>model-value</td>
+                            <td>Gets the custom option instead of true/false</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>defaultFalse</td>
+                            <td>sets default value to false</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <hr>
 
@@ -1365,33 +1378,34 @@
         <div class="white-wrapper" id="nice-button">
             <h2>Nice button</h2>
 
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>nice-click</td>
-                        <td>Set promisified function</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>add-class</td>
-                        <td>Add class to inner button</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>nice-disable</td>
-                        <td>Disable / Enable button</td>
-                        <td>null</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>nice-click</td>
+                            <td>Set promisified function</td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>add-class</td>
+                            <td>Add class to inner button</td>
+                            <td>null</td>
+                        </tr>
+                        <tr>
+                            <td>nice-disable</td>
+                            <td>Disable / Enable button</td>
+                            <td>null</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <hr>
 

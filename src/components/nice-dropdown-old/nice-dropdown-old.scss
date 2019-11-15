@@ -87,6 +87,10 @@
     font-weight: $nice-font-weight;
     min-height: 34px;
 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
     text-align: left;
     padding-right: 25px;
 

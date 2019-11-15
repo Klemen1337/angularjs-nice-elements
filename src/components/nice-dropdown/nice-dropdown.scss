@@ -105,6 +105,8 @@
         padding: 10px;
         position: relative;
         cursor: pointer;
+        display: flex;
+        align-items: center;
 
         .choice-checkbox {
           transition: all 0.2s;
@@ -114,14 +116,9 @@
           width: 25px;
           height: 25px;
           border: 1px solid $nice-border-color;
-          position: absolute;
-          border-radius: 2px;
+          margin-right: 1rem;
+          border-radius: $nice-border-radius;
           text-align: center;
-        }
-
-        .multiple-item {
-          margin-left: 35px;
-          line-height: 26px;
         }
 
         &:hover, &.hover {
@@ -158,6 +155,7 @@
 
     .btn-dropdown-inside {
       overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .caret {

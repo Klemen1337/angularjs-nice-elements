@@ -7,7 +7,7 @@
         </div>
 
         <!------------------------- Field ------------------------->
-        <div ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]" click-outside="close()">
+        <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]" click-outside="close()">
             <div class="input-group" ng-class="{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}">
                 <input
                     class="form-control"

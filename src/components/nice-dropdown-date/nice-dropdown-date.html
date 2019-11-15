@@ -7,12 +7,14 @@
         </div>
 
         <!------------------------- Field ------------------------->
-        <div class="col-sm-8"
-             ng-class="{
-                fieldWidth: fieldWidth,
-                'has-warning': !isDisabled && dropdownDateForm.$invalid && dropdownDateForm.$dirty,
-                'nice-disabled': isDisabled
-            }">
+        <div class="nice-field col-xs-12"
+             ng-class="[
+                fieldWidth ? fieldWidth : 'col-sm-8',
+                {
+                  'has-warning': !isDisabled && dropdownDateForm.$invalid && dropdownDateForm.$dirty,
+                  'nice-disabled': isDisabled
+                }
+            ]">
             <div class="form-inline">
                 <div class="input-group nice-dropdown-date-day">
                     <select

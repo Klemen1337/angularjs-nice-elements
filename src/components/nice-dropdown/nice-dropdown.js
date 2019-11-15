@@ -193,9 +193,6 @@ angular.module('niceElements')
             }
           }
           
-          // Trigger on change
-          if ($scope.onChange) $scope.onChange({ model: obj });
-
           if ($scope.clearOnSelect) {
             // Clear on select
             $scope.model = null;
@@ -203,6 +200,11 @@ angular.module('niceElements')
             // Set model
             $scope.model = obj;
           }
+
+          // Trigger on change
+          $timeout(function () {
+            if ($scope.onChange) $scope.onChange({ model: obj });
+          })
         };
 
 
@@ -235,7 +237,6 @@ angular.module('niceElements')
                     i._selected = true;
                     // $scope.selected.push(i);
                     $scope.selectedIndex = index;
-                    $scope.scrollToHover();
                   }
                 });
               } else {
@@ -256,7 +257,6 @@ angular.module('niceElements')
                     i._selected = true;
                     // $scope.selected.push(i);
                     $scope.selectedIndex = index;
-                    $scope.scrollToHover();
                   }
                 });
               } else {
