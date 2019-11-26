@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.8 (26.11.2019)
+- fixed nice-datetimerange-pricker text overflow,
+- added min and max to nice-input component,
+- added selectedText to nice-dropdown
+
+
 ## v1.3.7 (16.11.2019)
 - fixed mobile field size
 

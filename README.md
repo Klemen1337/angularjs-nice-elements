@@ -21,6 +21,8 @@ It should compile all the js and html files into `dist/nice.js`, and all the sty
 
 ```
 node server.js
+or
+npm run serve
 ```
 
 A demo project from `demo` directory will be available on [http://localhost:3030]().
