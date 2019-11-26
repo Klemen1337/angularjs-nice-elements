@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.9 (26.11.2019)
+- added isInline to components
+
+
 ## v1.3.8 (26.11.2019)
 - fixed nice-datetimerange-pricker text overflow,
 - added min and max to nice-input component,
