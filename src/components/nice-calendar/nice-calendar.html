@@ -1,4 +1,4 @@
-<div class="nice-component nice-calendar" ng-form="formCalendar" ng-class="{ 'margin-bottom-0': noMargin }">
+<div class="nice-component nice-calendar" ng-form="formCalendar" ng-class="{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }">
     <div class="row">
         <!------------------------- Label ------------------------->
         <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
@@ -49,7 +49,7 @@
                         "
                         ng-click="select(day)"
                         ng-repeat="day in week.days"
-                        >
+                    >
                         {{ day.number }}
                         <p class="popup">{{ popupText }}</p>
                     </span>

@@ -31,6 +31,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
       isDisabled: '=',
       help: '@',
+      isInline: '=',
       onChange: '&?'
     },
     controller: function ($scope) {

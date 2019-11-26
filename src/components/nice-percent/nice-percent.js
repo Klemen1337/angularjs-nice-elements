@@ -23,6 +23,7 @@ angular.module('niceElements')
         placeholder: '@',
         noMargin: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
 

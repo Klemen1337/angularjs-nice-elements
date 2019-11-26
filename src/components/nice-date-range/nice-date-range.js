@@ -24,6 +24,7 @@ angular.module('niceElements')
         labelWidth: '@',
         startOfTheYear: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
 

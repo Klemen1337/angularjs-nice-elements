@@ -23,6 +23,7 @@ angular.module('niceElements')
       startingYear: '@',
       mature: '@',
       help: '@',
+      isInline: '=',
       onChange: '&?'
     },
     link: function ($scope) {

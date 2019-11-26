@@ -18,6 +18,7 @@ angular.module('niceElements')
         value: '=',
         max: '=',
         color: '=',
+        isInline: '=',
         help: '@'
       },
 

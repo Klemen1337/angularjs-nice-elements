@@ -20,6 +20,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         isDisabled: '=',
+        isInline: '=',
         help: '@',
       },
       controller: function ($scope) {
@@ -50,7 +51,7 @@ angular.module('niceElements')
           if ($scope.model) {
             $scope.model = Number($scope.model);
           }
-        }
+        };
       }
     };
   });

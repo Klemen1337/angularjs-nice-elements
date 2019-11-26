@@ -1,6 +1,4 @@
 .nice-choice{
-  margin-bottom: 10px;
-
   .selected{
     .choice-checkbox {
       border-color: $nice-choice-selected-bg;
@@ -10,7 +8,6 @@
   }
 
   .disabled{
-
     li{
       cursor: not-allowed;
       opacity: 0.65;

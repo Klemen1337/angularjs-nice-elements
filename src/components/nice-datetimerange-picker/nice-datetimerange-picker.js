@@ -32,6 +32,7 @@ angular.module('niceElements')
         formatOutput: '@', // Format output or moment
         isDisabled: '=',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',

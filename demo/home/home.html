@@ -1,73 +1,72 @@
 <style>
-    body{
-        background: #f7fcfc;
-    }
+body{
+  background: #f7fcfc;
+}
 
-    html { font-size: 62.5%; }
-    body { font-size: 14px; font-size: 1.4rem; } /* =14px */
-    h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
+html { font-size: 62.5%; }
+body { font-size: 14px; font-size: 1.4rem; } /* =14px */
+h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
 
-    .mb-10{
-      margin-bottom: 10px;
-    }
+.mb-10{
+margin-bottom: 10px;
+}
 
-    .headline{
-        text-align:center;
-        font-size: 60px;
-        margin: 30px;
-        margin-top:80px;
-        color: #3189ff;
-        font-weight: bold;
-    }
+.headline{
+  text-align:center;
+  font-size: 60px;
+  margin: 30px;
+  margin-top:80px;
+  color: #3189ff;
+  font-weight: bold;
+}
 
-    .white-wrapper{
-        border: 1px solid #cbd4d9;
-        padding: 4rem;
-        background: white;
-        border-radius: 3px;
-        margin-bottom: 4rem;
-    }
+.white-wrapper{
+  border: 1px solid #cbd4d9;
+  padding: 4rem;
+  background: white;
+  border-radius: 3px;
+  margin-bottom: 4rem;
+}
 
-    .white-wrapper h2{
-        margin: 0 0 25px 0;
-    }
+.white-wrapper h2{
+  margin: 0 0 25px 0;
+}
 
-    .navbar-default{
-        background: #3189ff;
-        color: white;
-    }
+.navbar-default{
+  background: #3189ff;
+  color: white;
+}
 
-    .navbar-default .navbar-brand{
-        color: white;
-        background: #187aff;
-    }
+.navbar-default .navbar-brand{
+  color: white;
+  background: #187aff;
+}
 
-    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-        color: white;
-        background: #187aff;
-    }
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: white;
+  background: #187aff;
+}
 
-    .navbar-default .navbar-nav > li > a {
-        color: white;
-    }
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
 
-    pre{
-        margin-bottom: 20px;
-    }
+pre{
+  margin-bottom: 20px;
+}
 
-    #nice-notification .btn{
-        margin-bottom: 20px;
-    }
+#nice-notification .btn{
+  margin-bottom: 20px;
+}
 
-    .person-row img {
-      height: 30px;
-      border-radius: 50%;
-      margin-right: 1rem;
-    }
+.person-row img {
+height: 30px;
+border-radius: 50%;
+margin-right: 1rem;
+}
 </style>
 
 <div ng-controller='HomeCtrl'>
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -110,53 +109,114 @@
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
                     <nice-search2
-                      title="Search people v2"
-                      model="searchPeopleString"
-                      refresh-function="searchPeople"
-                      placeholder="Search item"
-                      show-dropdown="true"
-                      on-select="countrySelected"
-                      on-change="handleChange(model)"
+                        title="Search people v2"
+                        model="searchPeopleString"
+                        refresh-function="searchPeople"
+                        placeholder="Search item"
+                        show-dropdown="true"
+                        on-select="countrySelected"
+                        on-change="handleChange(model)"
+                        is-inline="isInline"
                     >
-                      <div class="person-row">
-                        <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
-                      </div>
+                        <div class="person-row">
+                            <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
+                        </div>
                     </nice-search2>
 
                     <nice-search2
-                      title="Search country v2"
-                      model="searchCountryString"
-                      refresh-function="searchCountry"
-                      placeholder="Search item"
-                      show-dropdown="true"
-                      on-select="countrySelected"
+                        title="Search country v2"
+                        model="searchCountryString"
+                        refresh-function="searchCountry"
+                        placeholder="Search item"
+                        show-dropdown="true"
+                        on-select="countrySelected"
+                        is-inline="isInline"
                     >
-                      <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> <span>{{ $parent.result.name }}</span>
+                        <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> <span>{{ $parent.result.name }}</span>
                     </nice-search2>
 
                     <nice-search
-                      title="Search"
-                      model="searchCountryString"
-                      refresh-function="searchCountry"
-                      placeholder="Search item"
-                      show-dropdown="false"
-                      on-select="countrySelected"
-                      key-for-input-label="name"
+                        title="Search"
+                        model="searchCountryString"
+                        refresh-function="searchCountry"
+                        placeholder="Search item"
+                        show-dropdown="false"
+                        on-select="countrySelected"
+                        key-for-input-label="name"
+                        is-inline="isInline"
                     ></nice-search>
 
-                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)"></nice-date>
-                    <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test "></nice-date>
+                    <nice-date 
+                        title="Nice date" 
+                        time="true" 
+                        model="data.niceDate" 
+                        is-disabled="data.disabled" 
+                        on-change="handleChange(model)"
+                        help="This is a test This is a test This is a test This is a test This is a test This is a test"
+                        is-inline="isInline"
+                    ></nice-date>
 
-                    <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled" help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>"></nice-date>
-                    <nice-date title="Nice date no time" inline="true" model="data.niceDate2" is-disabled="data.disabled" help="This is a test"></nice-date>
+                    <nice-date 
+                        title="Nice date no time" 
+                        min-date="minDate" 
+                        model="data.niceDate2" 
+                        is-disabled="data.disabled" 
+                        help="This is a test This is a test This is a test This is a test This is a test This is a test"
+                        is-inline="isInline"
+                    ></nice-date>
 
-                    <nice-progress-bar title="Progress bar" value="1" max="2" help="This is a test"></nice-progress-bar>
+                    <nice-date 
+                        title="Nice date" 
+                        time="true" 
+                        inline="true" 
+                        model="eeeey" 
+                        is-disabled="data.disabled" 
+                        help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>"
+                        is-inline="isInline"
+                    ></nice-date>
 
-                    <nice-quantity title="Quantity" model="data.quantity" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)"></nice-quantity>
+                    <nice-date 
+                        title="Nice date no time" 
+                        inline="true" 
+                        model="data.niceDate2" 
+                        is-disabled="data.disabled" 
+                        help="This is a test"
+                        is-inline="isInline"
+                    ></nice-date>
 
-                    <nice-upload title="Nice upload" model="data.upload" is-disabled="data.disabled" help="This is a test"></nice-upload>
+                    <nice-progress-bar 
+                        title="Progress bar" 
+                        value="1" 
+                        max="2" 
+                        help="This is a test"
+                        is-inline="isInline"
+                    ></nice-progress-bar>
 
-                    <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4" help="This is a test" on-change="handleChange(model)"></nice-yesno>
+                    <nice-quantity 
+                        title="Quantity" 
+                        model="data.quantity" 
+                        is-disabled="data.disabled" 
+                        help="This is a test" 
+                        on-change="handleChange(model)"
+                        is-inline="isInline"
+                    ></nice-quantity>
+
+                    <nice-upload 
+                        title="Nice upload" 
+                        model="data.upload" 
+                        is-disabled="data.disabled" 
+                        help="This is a test"
+                        is-inline="isInline"
+                    ></nice-upload>
+
+                    <nice-yesno 
+                        title="Disable?" 
+                        model="data.disabled" 
+                        field-width="col-sm-4" 
+                        help="This is a test" 
+                        on-change="handleChange(model)"
+                        is-inline="isInline"
+                    ></nice-yesno>
 
                 
                     <nice-dropdown 
@@ -173,6 +233,7 @@
                         clear-on-select="true"
                         is-disabled="data.disabled"
                         help="This is a test"
+                        is-inline="isInline"
                     >
                         <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
@@ -189,6 +250,7 @@
                         on-change="testFunction"
                         is-disabled="data.disabled"
                         help="This is a test"
+                        is-inline="isInline"
                     >
                         <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
                         <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
@@ -202,6 +264,7 @@
                         nullable="true"
                         is-disabled="data.disabled"
                         help="This is a test"
+                        is-inline="isInline"
                     >
                         <nice-dropdown-button>
                             <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
@@ -218,8 +281,9 @@
                         is-disabled="data.disabled"
                         help="This is a test"
                         on-change="handleChange(model)"
-                        multiple="true">
-                    </nice-dropdown>
+                        multiple="true"
+                        is-inline="isInline"
+                    ></nice-dropdown>
 
                     <nice-dropdown 
                         title="Country" 
@@ -228,8 +292,9 @@
                         selected-is-key="true"
                         is-disabled="data.disabled"
                         help="This is a test"
-                        nullable="true">
-                    </nice-dropdown>
+                        nullable="true"
+                        is-inline="isInline"
+                    ></nice-dropdown>
 
                     <nice-dropdown 
                         title="Vzdrževanje" 
@@ -239,12 +304,17 @@
                         obj-key="text"
                         is-disabled="data.disabled"
                         help="This is a test"
-                        selected-is-key="true">
+                        selected-is-key="true"
+                        is-inline="isInline"
+                    >
                         <!-- <nice-dropdown-button>{{ $parent.selected.text }}</nice-dropdown-button>
                         <nice-dropdown-option>{{ $parent.item.text }}</nice-dropdown-option> -->
                     </nice-dropdown>
 
-                    <nice-slot title="Simple list">
+                    <nice-slot 
+                        title="Simple list"
+                        is-inline="isInline"
+                    >
                         <pre>{{ simpleListData }}</pre>
                         <pre>{{ simpleList }}</pre>
                     </nice-slot>
@@ -258,11 +328,15 @@
                         add-button-function="addToList"
                         is-disabled="data.disabled"
                         help="This is a test"
-                        nullable="true">
-                    </nice-dropdown>
+                        nullable="true"
+                        is-inline="isInline"
+                    ></nice-dropdown>
 
                     
-                    <nice-slot title="Empty list">
+                    <nice-slot 
+                        title="Empty list"
+                        is-inline="isInline"
+                    >
                         <pre>{{ emptyList | json }}</pre>
                     </nice-slot>
                     
@@ -273,16 +347,18 @@
                         is-disabled="data.disabled"
                         help="This is a test"
                         on-change="handleChange(model)"
-                        list="listObjs">
-                    </nice-dropdown-old>
+                        list="listObjs"
+                        is-inline="isInline"
+                    ></nice-dropdown-old>
 
                     <nice-dropdown-date 
                         title="Birthday" 
                         model="data.birthday"
                         help="This is a test"
                         on-change="handleChange(model)"
-                        is-disabled="data.disabled">
-                    </nice-dropdown-date>
+                        is-disabled="data.disabled"
+                        is-inline="isInline"
+                    ></nice-dropdown-date>
 
                     <nice-calendar 
                         title="Calendar" 
@@ -294,31 +370,77 @@
                         is-disabled="data.disabled"
                         help="This is a test"
                         on-change="handleChange(model)"
+                        is-inline="isInline"
                     ></nice-calendar>
 
-                    <div class="row">
-                        <div class="col-sm-offset-4 col-sm-8 mb-10">
-                            <button class="btn btn-primary" ng-click="changeTestRange()">Change date</button>
-                        </div>
-                    </div>
+                    <nice-slot>
+                        <button class="btn btn-primary" ng-click="changeTestRange()">Change date</button>
+                    </nice-slot>
 
-                    <nice-comment title="Comment" model="data.comment" placeholder="Add a comment" is-disabled="data.disabled" help="This is a test"></nice-comment>
+                    <nice-comment 
+                        title="Comment" 
+                        model="data.comment" 
+                        placeholder="Add a comment" 
+                        is-disabled="data.disabled" 
+                        help="This is a test"
+                        is-inline="isInline"
+                    ></nice-comment>
 
-                    <nice-search title="Search" is-focused="true" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)"></nice-search>
+                    <nice-search 
+                        title="Search" 
+                        is-focused="true" 
+                        is-disabled="data.disabled" 
+                        help="This is a test" 
+                        on-change="handleChange(model)"
+                        is-inline="isInline"
+                    ></nice-search>
 
-                    <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" tab-index="1" is-focused="true" help="This is a test" on-change="handleChange(model)"></nice-input>
+                    <nice-input 
+                        title="First name" 
+                        model="data.first" 
+                        placeholder="Janez" 
+                        is-disabled="data.disabled" 
+                        tab-index="1" 
+                        is-focused="true" 
+                        help="This is a test" 
+                        on-change="handleChange(model)"
+                        is-inline="isInline"
+                    ></nice-input>
 
-                    <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" is-disabled="data.disabled" tab-index="2" help="This is a test"></nice-input>
+                    <nice-input 
+                        title="Last name" 
+                        model="data.last" 
+                        placeholder="Novak" 
+                        minlength="2" required="toggleRequired" 
+                        is-disabled="data.disabled" 
+                        tab-index="2" 
+                        help="This is a test"
+                        is-inline="isInline"
+                    ></nice-input>
 
-                    <nice-input title="Total" model="data.total" placeholder="10.23" required="toggleRequired" is-disabled="data.disabled" tab-index="3" symbol="EUR"></nice-input>
+                    <nice-input 
+                        title="Total" 
+                        model="data.total" 
+                        placeholder="10.23" 
+                        required="toggleRequired" 
+                        is-disabled="data.disabled" 
+                        tab-index="3" 
+                        symbol="EUR"
+                        is-inline="isInline"
+                    ></nice-input>
                     
-                    <nice-input title="Total" model="data.total2" placeholder="10.23" required="toggleRequired" is-disabled="data.disabled" tab-index="3" type="number" min="0" symbol="EUR"></nice-input>
-
-                    <div class="row">
-                        <div class="col-sm-offset-4 col-sm-8 mb-10">
-                            <button class="btn btn-primary" ng-click="toggleRequired = !toggleRequired">Toggle required</button>
-                        </div>
-                    </div>
+                    <nice-input 
+                        title="Total" 
+                        model="data.total2" 
+                        placeholder="10.23" 
+                        required="toggleRequired" 
+                        is-disabled="data.disabled" 
+                        tab-index="3" 
+                        type="number" 
+                        min="0" 
+                        symbol="EUR"
+                        is-inline="isInline"
+                    ></nice-input>
 
                     <nice-input 
                         title="Random number" 
@@ -327,8 +449,9 @@
                         is-disabled="data.disabled" 
                         type="number" 
                         help="This is a test"
-                        tab-index="3">
-                    </nice-input>
+                        tab-index="3"
+                        is-inline="isInline"
+                    ></nice-input>
 
                     <nice-datetime-picker
                         help="This is a test"
@@ -337,8 +460,9 @@
                         title="Datetimepicker all"
                         on-change="handleChange(model)"
                         date="true"
-                        time="true">
-                    </nice-datetime-picker>
+                        time="true"
+                        is-inline="isInline"
+                    ></nice-datetime-picker>
 
                     <nice-datetime-picker
                         is-disabled="data.disabled"
@@ -346,8 +470,9 @@
                         title="Datetimepicker time"
                         help="This is a test"
                         date="false"
-                        time="true">
-                    </nice-datetime-picker>
+                        time="true"
+                        is-inline="isInline"
+                    ></nice-datetime-picker>
 
                     <nice-datetime-picker
                         is-disabled="data.disabled"
@@ -355,8 +480,9 @@
                         title="Datetimepicker date"
                         help="This is a test"
                         date="true"
-                        time="false">
-                    </nice-datetime-picker>
+                        time="false"
+                        is-inline="isInline"
+                    ></nice-datetime-picker>
 
                     <nice-datetime-picker
                         is-disabled="data.disabled"
@@ -366,8 +492,9 @@
                         time="false"
                         format="DD.MM.YYYY"
                         help="This is a test"
-                        model-format="YYYY-MM-DD">
-                    </nice-datetime-picker>
+                        model-format="YYYY-MM-DD"
+                        is-inline="isInline"
+                    ></nice-datetime-picker>
 
                     <nice-datetimerange-picker
                         is-disabled="data.disabled"
@@ -377,8 +504,9 @@
                         field-width="col-sm-8"
                         date="true"
                         help="This is a test"
-                        time="true">
-                    </nice-datetimerange-picker>
+                        time="true"
+                        is-inline="isInline"
+                    ></nice-datetimerange-picker>
 
                     <nice-datetimerange-picker2
                         is-disabled="data.disabled"
@@ -387,10 +515,21 @@
                         help="This is a test"
                         title="Range picker v2"
                         on-change="handleChange(model)"
-                        time="true">
-                    </nice-datetimerange-picker2>
+                        time="true"
+                        is-inline="isInline"
+                    ></nice-datetimerange-picker2>
 
-                    <!--<nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true"></nice-datetimerange-picker>-->
+                    <!-- <nice-datetimerange-picker 
+                        modelStart="data.dateOfBirth" 
+                        modelEnd="data.dateEnd" 
+                        max-date="2015-08-22T05:43:00" 
+                        min-date="2015-08-12T05:01:00" 
+                        title="Date of birth" 
+                        field-width="col-sm-4" 
+                        date="true" 
+                        time="true"
+                        is-inline="isInline"
+                    ></nice-datetimerange-picker> -->
 
                     <nice-input 
                         title="Bio" 
@@ -399,8 +538,9 @@
                         placeholder="Something very very long" 
                         required=true 
                         help="This is a test"
-                        is-disabled="data.disabled">
-                    </nice-input>
+                        is-disabled="data.disabled"
+                        is-inline="isInline"
+                    ></nice-input>
 
                     <nice-yesno 
                         title="Do you like ice cream?" 
@@ -409,8 +549,9 @@
                         no="No." 
                         help="This is a test"
                         field-width="col-sm-4" 
-                        is-disabled="data.disabled">
-                    </nice-yesno>
+                        is-disabled="data.disabled"
+                        is-inline="isInline"
+                    ></nice-yesno>
 
                     <nice-choice
                         title="I like"
@@ -422,17 +563,26 @@
                         list="listObjs"
                         obj-value="value"
                         help="This is a test"
-                        selected-is-obj="true">
-                    </nice-choice>
+                        selected-is-obj="true"
+                        is-inline="isInline"
+                    ></nice-choice>
 
 
-                    <div class="row">
-                        <div class="col-sm-offset-4 col-sm-8 mb-10">
-                            <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">nice-button</i></nice-button>
-                            <button class="btn btn-danger" ng-click="error()">Error Notification</button>
-                            <nice-loader></nice-loader>
-                        </div>
-                    </div>
+                    <nice-slot is-inline="isInline">
+                        <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">Nice button</i></nice-button>
+                    </nice-slot>
+
+                    <nice-slot is-inline="isInline">
+                        <button class="btn btn-danger" ng-click="error()">Error Notification</button>
+                    </nice-slot>
+                    
+                    <nice-slot is-inline="isInline">
+                        <button class="btn btn-primary" ng-click="toggleRequired = !toggleRequired">Toggle required</button>
+                    </nice-slot>
+
+                    <nice-slot is-inline="isInline">
+                        <button class="btn btn-primary" ng-click="isInline = !isInline">Toggle inline</button>
+                    </nice-slot>
                 </div>
 
                 <div class="col-sm-6">

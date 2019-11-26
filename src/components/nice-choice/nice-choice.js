@@ -25,6 +25,7 @@ angular.module('niceElements')
         noMargin: '@',
         multiple: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       link: function (scope, element, attr) {

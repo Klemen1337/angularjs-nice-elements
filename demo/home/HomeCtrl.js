@@ -4,6 +4,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   $scope.emptyList = [];
   $scope.inputNumber = null;
   $scope.dropdownLoading = true;
+  $scope.isInline = false;
 
   $scope.mockData = [];
   $http.get('http://5c9dcf843be4e30014a7d40a.mockapi.io/users').then(function (response) {

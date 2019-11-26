@@ -45,7 +45,8 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         niceClick: '&',
-        addClass: '@'
+        addClass: '@',
+        isInline: '=',
       },
       link: function postLink(scope, element, attrs) {
         scope.loading = false;
@@ -91,6 +92,7 @@ angular.module('niceElements')
         isDisabled: '=',
         translations: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       link: function(scope, element) {
@@ -438,6 +440,7 @@ angular.module('niceElements')
         noMargin: '@',
         multiple: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       link: function (scope, element, attr) {
@@ -743,6 +746,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         help: '@',
+        isInline: '=',
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {
@@ -815,6 +819,7 @@ angular.module('niceElements')
         labelWidth: '@',
         startOfTheYear: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
 
@@ -928,6 +933,7 @@ angular.module('niceElements')
         minDate: '=',
         nextDate: '=',
         isDisabled: '=',
+        isInline: '=',
         onChange: '&?'
       },
       controller: function($scope) {
@@ -1216,6 +1222,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
       isDisabled: '=',
       help: '@',
+      isInline: '=',
       onChange: '&?'
     },
     controller: function ($scope) {
@@ -1294,6 +1301,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         isDisabled: '=',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
@@ -1445,6 +1453,7 @@ angular.module('niceElements')
         formatOutput: '@', // Format output or moment
         isDisabled: '=',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
@@ -1681,6 +1690,7 @@ angular.module('niceElements')
       startingYear: '@',
       mature: '@',
       help: '@',
+      isInline: '=',
       onChange: '&?'
     },
     link: function ($scope) {
@@ -1814,6 +1824,7 @@ angular.module('niceElements')
         help: '@',
         listenKeydown: '@',
         noOptionsText: '@',
+        isInline: '=',
         onChange: '&?'
       },
       controller: function($rootScope, $scope, $document, $element) {
@@ -2150,6 +2161,7 @@ angular.module('niceElements')
         nullableText: '@',
         selectedText: '@',
         searchFunction: '=?',
+        isInline: '=',
         clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout) {
@@ -3328,6 +3340,7 @@ angular.module('niceElements')
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         tabIndex: '@',
         isFocused: '@',
+        isInline: '=',
         onChange: '&?'
       },
 
@@ -3466,6 +3479,8 @@ angular.module('niceElements')
         labelWidth: '@',
         value: '@',
         title: '@',
+        noMargin: '@',
+        isInline: '=',
         help: '@'
       },
       link: function postLink(scope, element, attrs) {
@@ -3652,6 +3667,7 @@ angular.module('niceElements')
         decimals: '@',
         allowNegative: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
 
@@ -3786,6 +3802,7 @@ angular.module('niceElements')
         placeholder: '@',
         noMargin: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
 
@@ -3875,6 +3892,7 @@ angular.module('niceElements')
         value: '=',
         max: '=',
         color: '=',
+        isInline: '=',
         help: '@'
       },
 
@@ -3931,6 +3949,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         isDisabled: '=',
+        isInline: '=',
         help: '@',
       },
       controller: function ($scope) {
@@ -3961,7 +3980,7 @@ angular.module('niceElements')
           if ($scope.model) {
             $scope.model = Number($scope.model);
           }
-        }
+        };
       }
     };
   });
@@ -4001,6 +4020,7 @@ angular.module('niceElements')
         tabIndex: '@',
         isFocused: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {
@@ -4233,6 +4253,7 @@ angular.module('niceElements')
         onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
+        isInline: '=',
         help: '@'
       },
       controller: function($scope, $timeout, $element) {
@@ -4426,6 +4447,8 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         title: '@',
+        noMargin: '@',
+        isInline: '=',
         help: '@'
       },
       link: function postLink(scope, element, attrs) {
@@ -4455,6 +4478,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         onChange: '&?',
+        isInline: '=',
         help: '@'
       },
       restrict: 'E',
@@ -4547,6 +4571,7 @@ angular.module('niceElements')
         callbackFile: '=',
         callbackUrl: '=',
         isDisabled: '=',
+        isInline: '=',
         help: '@'
       },
 
@@ -4669,6 +4694,7 @@ angular.module('niceElements')
         defaultFalse: '@',
         noMargin: '@',
         onChange: '&?',
+        isInline: '=',
         help: '@'
       },
       controller: function($scope, $attrs) {
@@ -4786,7 +4812,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-button/nice-button.html',
-    "<div class=\"nice-component nice-button\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "<div class=\"nice-component nice-button\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
     "<button type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
     "<div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
     "<div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
@@ -4796,7 +4822,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-calendar/nice-calendar.html',
-    "<div class=\"nice-component nice-calendar\" ng-form=\"formCalendar\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-calendar\" ng-form=\"formCalendar\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -4880,7 +4906,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
-    "<div class=\"nice-component nice-checkbox\" ng-class=\"{'checked': model, 'margin-bottom-0' : noMargin}\" ng-click=\"toggle()\">\n" +
+    "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'checked': model, 'margin-bottom-0' : noMargin }\" ng-click=\"toggle()\">\n" +
     "<div class=\"checkbox\">\n" +
     "<svg class=\"check\" viewBox=\"-281 373 48 48\">\n" +
     "<path class=\"check-stroke\" d=\"M-273.2,398.2l10,9.9 l22.4-22.3\"></path>\n" +
@@ -4892,7 +4918,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-choice/nice-choice.html',
-    "<div class=\"nice-component nice-choice\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formChoice\">\n" +
+    "<div class=\"nice-component nice-choice\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" ng-form=\"formChoice\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -4912,7 +4938,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-comment/nice-comment.html',
-    "<div class=\"nice-component nice-comment\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "<div class=\"nice-component nice-comment\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -4927,7 +4953,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-date-range/nice-date-range.html',
-    "<ng-form class=\"nice-component nice-date-range\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<ng-form class=\"nice-component nice-date-range\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"form\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -4945,7 +4971,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-date/nice-date.html',
-    "<div class=\"nice-component nice-date\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-date\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"nice-date-background\" ng-click=\"toggleOpen()\" ng-if=\"isOpen && !inline\"></div>\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -4954,9 +4980,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
-    "<div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-if=\"!inline\">\n" +
-    "<span class=\"form-control\" ng-click=\"toggleOpen()\">{{ innerDate.value }}</span>\n" +
-    "<span class=\"input-group-addon clickable\" ng-click=\"toggleOpen()\">\n" +
+    "<div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-if=\"!inline\" ng-click=\"toggleOpen()\">\n" +
+    "<input type=\"text\" class=\"form-control\" value=\"{{ innerDate.value }}\" readonly=\"readonly\">\n" +
+    "<span class=\"input-group-addon clickable\">\n" +
     "<i class=\"fa fa-calendar\"></i>\n" +
     "</span>\n" +
     "</div>\n" +
@@ -5007,7 +5033,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-datetime-picker/nice-datetime-picker.html',
-    "<div class=\"nice-component nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-datetime-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline  }\">\n" +
     "<div class=\"nice-dtp-background\" ng-click=\"closeDtp(true)\" ng-if=\"isOpen\"></div>\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5032,7 +5058,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
-    "<div class=\"nice-component nice-datetimerange-picker-2\" ng-form=\"formDateRangePicker\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-datetimerange-picker-2\" ng-form=\"formDateRangePicker\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"nice-dtp-background\" ng-click=\"close()\" ng-if=\"isOpen\"></div>\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5071,7 +5097,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
-    "<div class=\"nice-component nice-datetime-picker nice-datetimerange-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-datetime-picker nice-datetimerange-picker\" name=\"form\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"nice-dtp-background\" ng-click=\"cancelClick()\" ng-if=\"showDtpRange\"></div>\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
@@ -5115,7 +5141,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-dropdown-date/nice-dropdown-date.html',
-    "<div class=\"nice-component nice-dropdown-date\" ng-form=\"dropdownDateForm\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-dropdown-date\" ng-form=\"dropdownDateForm\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5146,7 +5172,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-dropdown-old/nice-dropdown-old.html',
-    "<div class=\"nice-component nice-dropdown-old\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-dropdown-old\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5187,7 +5213,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-dropdown/nice-dropdown.html',
-    "<div class=\"nice-component nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5333,7 +5359,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-input/nice-input.html',
-    "<ng-form class=\"nice-component nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"forma\">\n" +
+    "<ng-form class=\"nice-component nice-input\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"forma\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5366,7 +5392,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-label/nice-label.html',
-    "<div class=\"nice-component nice-label\">\n" +
+    "<div class=\"nice-component nice-label\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}</div>\n" +
@@ -5398,7 +5424,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-number/nice-number.html',
-    "<div class=\"nice-component nice-number\" ng-form=\"form\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "<div class=\"nice-component nice-number\" ng-form=\"form\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div ng-class=\"{'row' : !disableRow}\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5426,7 +5452,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-percent/nice-percent.html',
-    "<ng-form class=\"nice-component nice-input\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<ng-form class=\"nice-component nice-input\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"form\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5452,7 +5478,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-progress-bar/nice-progress-bar.html',
-    "<div class=\"nice-component nice-progress-bar\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "<div class=\"nice-component nice-progress-bar\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5472,7 +5498,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-quantity/nice-quantity.html',
-    "<div class=\"nice-component nice-quantity\" ng-class=\"{'margin-bottom-0' : noMargin}\">\n" +
+    "<div class=\"nice-component nice-quantity\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5495,7 +5521,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-search/nice-search.html',
-    "<ng-form class=\"nice-component nice-input nice-search\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<ng-form class=\"nice-component nice-input nice-search\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline}\" name=\"form\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5536,7 +5562,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-search2/nice-search2.html',
-    "<ng-form class=\"nice-component nice-input nice-search2\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<ng-form class=\"nice-component nice-input nice-search2\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"form\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}</div>\n" +
@@ -5566,7 +5592,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-slot/nice-slot.html',
-    "<div class=\"nice-component nice-slot\">\n" +
+    "<div class=\"nice-component nice-slot\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\">\n" +
     "<div class=\"nice-title-text\" ng-if=\"title\">{{ title }}</div>\n" +
@@ -5581,7 +5607,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-time-picker/nice-time-picker.html',
-    "<div class=\"nice-component nice-time-picker\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin }\">\n" +
+    "<div class=\"nice-component nice-time-picker\" ng-form=\"forma\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5625,7 +5651,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-upload/nice-upload.html',
-    "<ng-form class=\"nice-component nice-upload\" ng-class=\"{'margin-bottom-0' : noMargin}\" name=\"form\">\n" +
+    "<ng-form class=\"nice-component nice-upload\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"form\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
@@ -5650,7 +5676,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-yesno/nice-yesno.html',
-    "<div class=\"nice-component nice-yesno\" ng-class=\"{'margin-bottom-0' : noMargin}\" ng-form=\"formYesno\">\n" +
+    "<div class=\"nice-component nice-yesno\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" ng-form=\"formYesno\">\n" +
     "<div class=\"row\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +

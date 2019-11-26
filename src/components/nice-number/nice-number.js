@@ -28,6 +28,7 @@ angular.module('niceElements')
         decimals: '@',
         allowNegative: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
 

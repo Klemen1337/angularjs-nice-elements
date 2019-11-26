@@ -30,6 +30,7 @@ angular.module('niceElements')
         minDecimalsCutZeros: '@', // Use this field to tell how much decimal places must always be, even if number is ceil.
         tabIndex: '@',
         isFocused: '@',
+        isInline: '=',
         onChange: '&?'
       },
 

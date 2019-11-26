@@ -33,6 +33,7 @@ angular.module('niceElements')
         tabIndex: '@',
         isFocused: '@',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       link: function (scope, element, attrs, ctrl, transcludeFn) {

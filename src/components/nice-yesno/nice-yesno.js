@@ -24,6 +24,7 @@ angular.module('niceElements')
         defaultFalse: '@',
         noMargin: '@',
         onChange: '&?',
+        isInline: '=',
         help: '@'
       },
       controller: function($scope, $attrs) {

@@ -27,6 +27,7 @@ angular.module('niceElements')
         minDate: '=',
         nextDate: '=',
         isDisabled: '=',
+        isInline: '=',
         onChange: '&?'
       },
       controller: function($scope) {

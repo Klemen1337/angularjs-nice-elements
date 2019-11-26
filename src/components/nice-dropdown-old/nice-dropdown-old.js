@@ -32,6 +32,7 @@ angular.module('niceElements')
         help: '@',
         listenKeydown: '@',
         noOptionsText: '@',
+        isInline: '=',
         onChange: '&?'
       },
       controller: function($rootScope, $scope, $document, $element) {

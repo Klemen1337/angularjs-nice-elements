@@ -1,6 +1,4 @@
 .nice-yesno{
-  margin-bottom: 10px;
-
   .disabled{
     background-color: $nice-yesno-disabled-bg;
     opacity: 0.65;
@@ -80,13 +78,4 @@
       }
     }
   }
-
-
 }
-
-.no-margin-bottom{
-  .nice-yesno {
-    margin-bottom: 0px;
-  }
-}
-

@@ -40,6 +40,7 @@ angular.module('niceElements')
         nullableText: '@',
         selectedText: '@',
         searchFunction: '=?',
+        isInline: '=',
         clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout) {

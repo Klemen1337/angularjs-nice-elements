@@ -17,6 +17,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         onChange: '&?',
+        isInline: '=',
         help: '@'
       },
       restrict: 'E',

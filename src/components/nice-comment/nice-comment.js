@@ -20,6 +20,7 @@ angular.module('niceElements')
         fieldWidth: '@',
         labelWidth: '@',
         help: '@',
+        isInline: '=',
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {

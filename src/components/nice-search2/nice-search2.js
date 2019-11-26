@@ -26,6 +26,7 @@ angular.module('niceElements')
         onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
+        isInline: '=',
         help: '@'
       },
       controller: function($scope, $timeout, $element) {

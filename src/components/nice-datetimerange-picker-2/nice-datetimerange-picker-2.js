@@ -23,6 +23,7 @@ angular.module('niceElements')
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         isDisabled: '=',
         help: '@',
+        isInline: '=',
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',

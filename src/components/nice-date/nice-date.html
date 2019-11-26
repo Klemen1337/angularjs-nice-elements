@@ -1,4 +1,4 @@
-<div class="nice-component nice-date" ng-form="forma" ng-class="{ 'margin-bottom-0': noMargin }">
+<div class="nice-component nice-date" ng-form="forma" ng-class="{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }">
     <div class="nice-date-background" ng-click="toggleOpen()" ng-if="isOpen && !inline"></div>
 
     <div class="row">
@@ -13,9 +13,9 @@
             <div class="disabled-shield" ng-if="isDisabled"></div>
 
             <!------------------------------ Input ------------------------------>
-            <div class="input-group" ng-class="{ 'open': isOpen }" ng-if="!inline">
-                <span class="form-control" ng-click="toggleOpen()">{{ innerDate.value }}</span>
-                <span class="input-group-addon clickable" ng-click="toggleOpen()">
+            <div class="input-group" ng-class="{ 'open': isOpen }" ng-if="!inline" ng-click="toggleOpen()">
+                <input type="text" class="form-control" value="{{ innerDate.value }}" readonly="readonly" />
+                <span class="input-group-addon clickable">
                     <i class="fa fa-calendar"></i>
                 </span>
             </div>

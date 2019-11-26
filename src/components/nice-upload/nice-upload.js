@@ -26,6 +26,7 @@
         callbackFile: '=',
         callbackUrl: '=',
         isDisabled: '=',
+        isInline: '=',
         help: '@'
       },
 
