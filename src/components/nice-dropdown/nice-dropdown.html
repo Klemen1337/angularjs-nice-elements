@@ -15,15 +15,13 @@
                     <div class="btn-dropdown-inside" ng-transclude="button" ng-if="selected != null">
                         <span ng-if="!multiple">{{ selected[objValue] }}</span>
                         <span ng-if="multiple">
-                            <span ng-if="selected.length > 1">{{ selected.length }} <translate>selected</translate></span>
+                            <span ng-if="selected.length > 1">{{ selected.length }} {{ selectedText }}</span>
                             <span ng-if="selected.length == 1">{{ selected[0][objValue] }}</span>
-                            <span ng-if="selected.length == 0">None</span>
+                            <span ng-if="selected.length == 0">{{ nullableText }}</span>
                         </span>
                     </div>
 
-                    <div class="not-selected" ng-if="selected == null">
-                        {{ selectText }}
-                    </div>
+                    <div class="not-selected" ng-if="selected == null">{{ selectText }}</div>
 
                     <span class="caret" ng-show="!loading"></span>
                     <nice-loader visible-when="!loading"></nice-loader>
@@ -36,7 +34,7 @@
                         <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
                         <span class="icon"><i class="fa fa-search"></i></span>
                     </div>
-                    <div class="no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
+                    <div class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
                     <ul>
                         <li class="null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
                             {{ nullableText }}

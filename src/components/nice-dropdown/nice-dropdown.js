@@ -38,6 +38,7 @@ angular.module('niceElements')
         selectText: '@',
         searchText: '@',
         nullableText: '@',
+        selectedText: '@',
         searchFunction: '=?',
         clearOnSelect: '@'
       },
@@ -49,6 +50,7 @@ angular.module('niceElements')
         if (!$scope.searchText) { $scope.searchText = "Search..."; }
         if (!$scope.nullableText) { $scope.nullableText = "None"; }
         if (!$scope.selectText) { $scope.selectText = "None"; }
+        if (!$scope.selectedText) { $scope.selectedText = "selected"; }
         if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;

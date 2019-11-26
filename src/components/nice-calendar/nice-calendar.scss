@@ -52,9 +52,10 @@
         width: 0;
         height: 0;
         border-style: solid;
-        border-width: 6px 4px 0 4px;
-        margin-top: -3px;
-        border-color: #404040 transparent transparent transparent;
+        border-width: 4px 4px 0 4px;
+        margin-top: -2px;
+        border-color: $nice-border-color transparent transparent transparent;
+        z-index: 3;
       }
     }
 

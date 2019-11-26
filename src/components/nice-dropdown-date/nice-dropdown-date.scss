@@ -16,7 +16,7 @@
       content: " ";
       position: absolute;
       top: 50%;
-      right: 20px;
+      right: 10px;
       width: 0;
       height: 0;
       border-style: solid;
@@ -42,10 +42,6 @@
 
   .nice-dropdown-date-year{
     width: 30%;
-
-    &:after{
-      right: 10px;
-    }
   }
 
   select {

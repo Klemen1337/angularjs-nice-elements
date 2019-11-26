@@ -24,6 +24,11 @@
 
   .input-group {
     cursor: pointer;
+    width: 100%;
+
+    .form-control {
+      text-overflow: ellipsis;
+    }
   
     &.open {
       .form-control, .input-group-addon{

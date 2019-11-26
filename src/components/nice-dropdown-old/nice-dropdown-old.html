@@ -15,7 +15,8 @@
                         class="btn btn-block btn-dropdown dropdown-toggle"
                         title="{{ getLabel(internalSelected) }}"
                         dropdown-toggle
-                        ng-disabled="isDisabled || emptyList">
+                        ng-disabled="isDisabled || emptyList"
+                    >
 
                         <span ng-if="internalSelected.color_hex_code" class="dropdown-color" ng-style="{'background': internalSelected.color_hex_code}"></span>
                         <span ng-if="!multiple">{{ getLabel(internalSelected) }}</span>

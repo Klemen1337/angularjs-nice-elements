@@ -8,9 +8,13 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-            <div class="input-group" ng-class="{
-                'has-warning': !isDisabled && forma.$invalid && forma.$dirty,
-                'disabled': isDisabled }">
+            <div 
+                class="input-group" 
+                ng-class="{
+                    'has-warning': !isDisabled && forma.$invalid && forma.$dirty,
+                    'disabled': isDisabled
+                }"
+            >
                 <input type="text" class="form-control" ng-model="modelString" ng-keyup="$event.keyCode == 13 && validateDate()" ng-blur="validateDate()">
                 <span class="input-group-addon clickable" ng-click="open = !open"><i class="fa fa-clock-o"></i></span>
             </div>

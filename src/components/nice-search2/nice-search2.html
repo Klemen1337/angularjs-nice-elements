@@ -28,13 +28,13 @@
 
                 <div class="nice-dropdown" ng-if="showDropdown && isOpen">
                     <div class="nice-search-row nice-search-row-loading" ng-if="loading && results.length == 0">
-                      <nice-loader visible-when="!loading"></nice-loader>
+                        <nice-loader visible-when="!loading"></nice-loader>
                     </div>
 
                     <div class="nice-search-row nice-search-row-empty" ng-if="!loading && results.length == 0">No results found.</div>
 
                     <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectItem(result)">
-                      <ng-transclude>{{ result[keyForInputLabel] }}</ng-transclude>
+                        <ng-transclude>{{ result[keyForInputLabel] }}</ng-transclude>
                     </div>
                 </div>
             </div>

@@ -11,8 +11,8 @@
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
             <div class="input-group" ng-class="{ 'open': isOpen }" ng-click="open()">
-                <!-- <input type="text" class="form-control" value="{{ modelFormat }}" ng-keyup="inputChanged()"> -->
-                <div class="form-control" title="{{ modelFormat }}">{{ modelFormat }}</div>
+                <input type="text" class="form-control" value="{{ modelFormat }}" readonly="readonly" />
+                <!-- <div class="form-control" title="{{ modelFormat }}">{{ modelFormat }}</div> -->
                 <span class="input-group-addon clickable"><i class="fa fa-calendar"></i></span>
             </div>
 

@@ -2148,6 +2148,7 @@ angular.module('niceElements')
         selectText: '@',
         searchText: '@',
         nullableText: '@',
+        selectedText: '@',
         searchFunction: '=?',
         clearOnSelect: '@'
       },
@@ -2159,6 +2160,7 @@ angular.module('niceElements')
         if (!$scope.searchText) { $scope.searchText = "Search..."; }
         if (!$scope.nullableText) { $scope.nullableText = "None"; }
         if (!$scope.selectText) { $scope.selectText = "None"; }
+        if (!$scope.selectedText) { $scope.selectedText = "selected"; }
         if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;
@@ -3308,6 +3310,8 @@ angular.module('niceElements')
         title: '@?',
         regex: '@?',
         placeholder: '@',
+        min: '@?',
+        max: '@?',
         minlength: '@?',
         maxlength: '@?',
         required: '=',
@@ -5037,7 +5041,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
-    "<div class=\"form-control\" title=\"{{ modelFormat }}\">{{ modelFormat }}</div>\n" +
+    "<input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" readonly=\"readonly\">\n" +
     "<span class=\"input-group-addon clickable\"><i class=\"fa fa-calendar\"></i></span>\n" +
     "</div>\n" +
     "<div class=\"dtp-wrapper\" ng-show=\"isOpen\">\n" +
@@ -5195,14 +5199,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"btn-dropdown-inside\" ng-transclude=\"button\" ng-if=\"selected != null\">\n" +
     "<span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\n" +
     "<span ng-if=\"multiple\">\n" +
-    "<span ng-if=\"selected.length > 1\">{{ selected.length }}<translate>selected</translate></span>\n" +
+    "<span ng-if=\"selected.length > 1\">{{ selected.length }} {{ selectedText }}</span>\n" +
     "<span ng-if=\"selected.length == 1\">{{ selected[0][objValue] }}</span>\n" +
-    "<span ng-if=\"selected.length == 0\">None</span>\n" +
+    "<span ng-if=\"selected.length == 0\">{{ nullableText }}</span>\n" +
     "</span>\n" +
     "</div>\n" +
-    "<div class=\"not-selected\" ng-if=\"selected == null\">\n" +
-    "{{ selectText }}\n" +
-    "</div>\n" +
+    "<div class=\"not-selected\" ng-if=\"selected == null\">{{ selectText }}</div>\n" +
     "<span class=\"caret\" ng-show=\"!loading\"></span>\n" +
     "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
     "</button>\n" +
@@ -5211,7 +5213,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\">\n" +
     "<span class=\"icon\"><i class=\"fa fa-search\"></i></span>\n" +
     "</div>\n" +
-    "<div class=\"no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
+    "<div class=\"nice-no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
     "<ul>\n" +
     "<li class=\"null-item\" ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\">\n" +
     "{{ nullableText }}\n" +
@@ -5339,14 +5341,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"form-group\" ng-class=\"{\n" +
-    "                  'has-feedback': showValid && !hideValid,\n" +
-    "                  'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
-    "                  'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
-    "                  'symbol': symbol,\n" +
-    "                  'nice-disabled': isDisabled\n" +
+    "                    'has-feedback': showValid && !hideValid,\n" +
+    "                    'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
+    "                    'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
+    "                    'symbol': symbol,\n" +
+    "                    'nice-disabled': isDisabled\n" +
     "                }\">\n" +
-    "<textarea ng-show=\"textArea\" class=\"form-control\" ng-model=\"model\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" rows=\"{{textAreaLines}}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\"></textarea>\n" +
-    "<input ng-show=\"!textArea\" class=\"form-control\" type=\"{{ internalType }}\" ng-model=\"model\" name=\"{{ name }}\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\">\n" +
+    "<textarea ng-show=\"textArea\" class=\"form-control\" ng-model=\"model\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" rows=\"{{textAreaLines}}\" max=\"{{ max }}\" min=\"{{ min }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\"></textarea>\n" +
+    "<input ng-show=\"!textArea\" class=\"form-control\" type=\"{{ internalType }}\" ng-model=\"model\" name=\"{{ name }}\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" max=\"{{ max }}\" min=\"{{ min }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\">\n" +
     "<span class=\"input-group-addon\" ng-if=\"symbol\">{{ symbol }}</span>\n" +
     "</div>\n" +
     "<div ng-if=\"forma.$error && forma.$dirty\">\n" +
@@ -5501,9 +5503,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"input-group\" ng-class=\"{\n" +
-    "                'disabled': isDisabled,\n" +
-    "                'has-warning': !isDisabled && form.$invalid && form.$dirty,\n" +
-    "                'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
+    "                    'disabled': isDisabled,\n" +
+    "                    'has-warning': !isDisabled && form.$invalid && form.$dirty,\n" +
+    "                    'has-success': !isDisabled && form.$valid && form.$dirty}\n" +
+    "                \">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"modelString\" ng-keypress=\"keypress($event)\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-required=\"required\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"search()\" ng-if=\"!model\">\n" +
     "<i ng-show=\"!loading\" class=\"fa fa-search\"></i>\n" +
@@ -5565,8 +5568,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   $templateCache.put('src/components/nice-slot/nice-slot.html',
     "<div class=\"nice-component nice-slot\">\n" +
     "<div class=\"row\">\n" +
-    "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
-    "<div class=\"nice-title-text\">{{ title }}</div>\n" +
+    "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\">\n" +
+    "<div class=\"nice-title-text\" ng-if=\"title\">{{ title }}</div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-xs-8'\">\n" +
@@ -5586,8 +5589,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"input-group\" ng-class=\"{\n" +
-    "                'has-warning': !isDisabled && forma.$invalid && forma.$dirty,\n" +
-    "                'disabled': isDisabled }\">\n" +
+    "                    'has-warning': !isDisabled && forma.$invalid && forma.$dirty,\n" +
+    "                    'disabled': isDisabled\n" +
+    "                }\">\n" +
     "<input type=\"text\" class=\"form-control\" ng-model=\"modelString\" ng-keyup=\"$event.keyCode == 13 && validateDate()\" ng-blur=\"validateDate()\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"open = !open\"><i class=\"fa fa-clock-o\"></i></span>\n" +
     "</div>\n" +

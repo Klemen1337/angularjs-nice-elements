@@ -11,43 +11,47 @@
             <div 
                 class="form-group"
                 ng-class="{
-                  'has-feedback': showValid && !hideValid,
-                  'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
-                  'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
-                  'symbol': symbol,
-                  'nice-disabled': isDisabled
+                    'has-feedback': showValid && !hideValid,
+                    'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
+                    'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
+                    'symbol': symbol,
+                    'nice-disabled': isDisabled
                 }"
             >
                 <textarea 
-                  ng-show="textArea"
-                  class="form-control"
-                  ng-model="model"
-                  id="{{ id }}"
-                  tabindex="{{ tabIndex }}"
-                  placeholder="{{ placeholder }}"
-                  rows="{{textAreaLines}}"
-                  ng-minlength="minlength"
-                  ng-maxlength="maxlength"
-                  ng-required="required"
-                  ng-pattern="regexexp"
-                  ng-disabled="isDisabled"
+                    ng-show="textArea"
+                    class="form-control"
+                    ng-model="model"
+                    id="{{ id }}"
+                    tabindex="{{ tabIndex }}"
+                    placeholder="{{ placeholder }}"
+                    rows="{{textAreaLines}}"
+                    max="{{ max }}"
+                    min="{{ min }}"
+                    ng-minlength="minlength"
+                    ng-maxlength="maxlength"
+                    ng-required="required"
+                    ng-pattern="regexexp"
+                    ng-disabled="isDisabled"
                 ></textarea>
                 
                 <input 
-                  ng-show="!textArea"
-                  class="form-control"
-                  type="{{ internalType }}"
-                  ng-model="model"
-                  name="{{ name }}"
-                  id="{{ id }}"
-                  tabindex="{{ tabIndex }}"
-                  placeholder="{{ placeholder }}"
-                  ng-minlength="minlength"
-                  ng-maxlength="maxlength"
-                  ng-required="required"
-                  ng-keypress="keypress($event)"
-                  ng-pattern="regexexp"
-                  ng-disabled="isDisabled"
+                    ng-show="!textArea"
+                    class="form-control"
+                    type="{{ internalType }}"
+                    ng-model="model"
+                    name="{{ name }}"
+                    id="{{ id }}"
+                    tabindex="{{ tabIndex }}"
+                    placeholder="{{ placeholder }}"
+                    max="{{ max }}"
+                    min="{{ min }}"
+                    ng-minlength="minlength"
+                    ng-maxlength="maxlength"
+                    ng-required="required"
+                    ng-keypress="keypress($event)"
+                    ng-pattern="regexexp"
+                    ng-disabled="isDisabled"
                 />
 
                 <span class="input-group-addon" ng-if="symbol">{{ symbol }}</span>

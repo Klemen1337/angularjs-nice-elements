@@ -12,6 +12,8 @@ angular.module('niceElements')
         title: '@?',
         regex: '@?',
         placeholder: '@',
+        min: '@?',
+        max: '@?',
         minlength: '@?',
         maxlength: '@?',
         required: '=',

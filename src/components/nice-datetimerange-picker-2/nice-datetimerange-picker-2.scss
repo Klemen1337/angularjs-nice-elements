@@ -5,6 +5,7 @@
   .input-group{
     .form-control{
       cursor: pointer;
+      text-overflow: ellipsis;
     }
 
     &.open {
