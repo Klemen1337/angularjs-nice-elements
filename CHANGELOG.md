@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.10 (27.11.2019)
+- fixed nice search v2 blur
+
+
 ## v1.3.9 (26.11.2019)
 - added isInline to components
 
