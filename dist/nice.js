@@ -4334,7 +4334,7 @@ angular.module('niceElements')
             });
           } else {
             $scope.loading = false;
-            $scope.close();
+            // $scope.close();
           }
         };
 
@@ -4353,7 +4353,6 @@ angular.module('niceElements')
         // ------------------------ Clear search ------------------------
         $scope.clear = function () {
           $scope.model = "";
-          $scope.close();
         };
 
 

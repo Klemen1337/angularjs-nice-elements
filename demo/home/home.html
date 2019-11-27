@@ -122,6 +122,19 @@ margin-right: 1rem;
                             <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
                         </div>
                     </nice-search2>
+                    
+                    <nice-search2
+                        title="Search v2"
+                        model="data.searchvtwo"
+                        placeholder="Search item"
+                        on-select="countrySelected"
+                        on-change="handleChange(model)"
+                        is-inline="isInline"
+                    >
+                        <div class="person-row">
+                            <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
+                        </div>
+                    </nice-search2>
 
                     <nice-search2
                         title="Search country v2"
