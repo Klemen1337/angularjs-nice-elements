@@ -37,6 +37,13 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     console.log("Value:", ...arguments);
   }
 
+  
+  $scope.changeDate = function(add) {
+    if (add) $scope.data.niceDate2.add(1, "day");
+    else $scope.data.niceDate2.subtract(1, "day");
+  };
+
+
   $scope.data = {
     disabled: false,
     dropdownCountryKey: "US",
@@ -58,12 +65,12 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
   }
 
   $scope.listObjs = [
-    {id: 0, iso: "SI",value: "Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia"},
-    {id: 1, iso: "ZA",value: "South Africa"},
-    {id: 2, iso: "BR",value: "Brazil"},
-    {id: 3, iso: "AF", value: "Afganistan"},
-    {id: 4, iso: "CA",value: "Canada"},
-    {id: 5, iso: "US",value: "United States"}
+    { id: 0, iso: "SI", value: "Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia" },
+    { id: 1, iso: "ZA", value: "South Africa" },
+    { id: 2, iso: "BR", value: "Brazil" },
+    { id: 3, iso: "AF", value: "Afganistan" },
+    { id: 4, iso: "CA", value: "Canada" },
+    { id: 5, iso: "US", value: "United States" }
   ];
 
   $scope.simpleListData = "ODPIS";

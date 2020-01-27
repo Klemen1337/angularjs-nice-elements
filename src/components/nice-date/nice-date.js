@@ -175,7 +175,7 @@ angular.module('niceElements')
 
 
         // ------------------ Format date ------------------
-        $scope.formatDate = function(date){
+        $scope.formatDate = function(date) {
           if($scope.time) return date.format('D.M.YYYY • H:mm');
           else return date.format('D.M.YYYY');
         };
@@ -238,10 +238,10 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value){
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value) {
           $scope.boostrap();
         });
-
+        
 
         // ------------------ Get time ------------------
         $scope.getTime = function() {

@@ -424,6 +424,7 @@ angular.module('niceElements')
 angular.module('niceElements')
   .directive('niceChoice', function () {
     return {
+      transclude: true,
       templateUrl: 'src/components/nice-choice/nice-choice.html',
       restrict: 'E',
       scope: {
@@ -1081,7 +1082,7 @@ angular.module('niceElements')
 
 
         // ------------------ Format date ------------------
-        $scope.formatDate = function(date){
+        $scope.formatDate = function(date) {
           if($scope.time) return date.format('D.M.YYYY • H:mm');
           else return date.format('D.M.YYYY');
         };
@@ -1144,10 +1145,10 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value){
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value) {
           $scope.boostrap();
         });
-
+        
 
         // ------------------ Get time ------------------
         $scope.getTime = function() {
@@ -4780,6 +4781,21 @@ angular.module('niceElements')
 
 /**
  * @ngdoc date
+ * @name niceElements.filter:niceDate
+ * @function
+ * @description
+ * # niceDate
+ * Filter in the niceElements.
+ */
+angular.module('niceElements').filter('niceDate', function () {
+  return function(object, addDate) {
+    var formatString = "D.M.YYYY";
+    if (addDate) formatString = "D.M.YYYY • H:mm";
+    return moment(object).format(formatString);
+  };
+});
+/**
+ * @ngdoc date
  * @name niceElements.filter:niceHighlight
  * @function
  * @description
@@ -4927,7 +4943,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
     "<div class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></div>\n" +
-    "<div class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
+    "<div ng-transclude class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
     "</li>\n" +
     "</ul>\n" +
     "</div>\n" +
@@ -4980,7 +4996,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
     "<div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-if=\"!inline\" ng-click=\"toggleOpen()\">\n" +
-    "<input type=\"text\" class=\"form-control\" value=\"{{ innerDate.value }}\" readonly=\"readonly\">\n" +
+    "<input type=\"text\" class=\"form-control\" value=\"{{ model | niceDate:time }}\" readonly=\"readonly\">\n" +
     "<span class=\"input-group-addon clickable\">\n" +
     "<i class=\"fa fa-calendar\"></i>\n" +
     "</span>\n" +

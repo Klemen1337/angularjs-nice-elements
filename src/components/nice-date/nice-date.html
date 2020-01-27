@@ -14,7 +14,7 @@
 
             <!------------------------------ Input ------------------------------>
             <div class="input-group" ng-class="{ 'open': isOpen }" ng-if="!inline" ng-click="toggleOpen()">
-                <input type="text" class="form-control" value="{{ innerDate.value }}" readonly="readonly" />
+                <input type="text" class="form-control" value="{{ model | niceDate:time }}" readonly="readonly" />
                 <span class="input-group-addon clickable">
                     <i class="fa fa-calendar"></i>
                 </span>

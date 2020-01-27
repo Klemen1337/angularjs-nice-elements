@@ -9,6 +9,7 @@
 angular.module('niceElements')
   .directive('niceChoice', function () {
     return {
+      transclude: true,
       templateUrl: 'src/components/nice-choice/nice-choice.html',
       restrict: 'E',
       scope: {

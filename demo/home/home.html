@@ -178,6 +178,12 @@ margin-right: 1rem;
                         is-inline="isInline"
                     ></nice-date>
 
+                    <nice-slot>
+                        <pre>{{ data.niceDate2 }}</pre>
+                        <button class="btn btn-primary" ng-click="changeDate(false)">Prev</button>
+                        <button class="btn btn-primary" ng-click="changeDate(true)">Next</button>
+                    </nice-slot>
+
                     <nice-date 
                         title="Nice date" 
                         time="true" 
@@ -578,7 +584,9 @@ margin-right: 1rem;
                         help="This is a test"
                         selected-is-obj="true"
                         is-inline="isInline"
-                    ></nice-choice>
+                    >
+                        <img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.value }}
+                    </nice-choice>
 
 
                     <nice-slot is-inline="isInline">
