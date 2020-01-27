@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.11 (27.1.2020)
+- created nice date filter, 
+- added nice choice transclude, 
+- fixed nice date input value not changing
+
+
 ## v1.3.10 (27.11.2019)
 - fixed nice search v2 blur
 
