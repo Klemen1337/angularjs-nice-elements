@@ -20,12 +20,13 @@ angular.module('niceElements')
         niceClick: '&',
         addClass: '@',
         isInline: '=',
+        type: '@'
       },
       link: function postLink(scope, element, attrs) {
         scope.loading = false;
+        if (!scope.type) scope.type = "button";
 
         scope.click = function(){
-
           if (scope.loading===false && scope.niceDisabled!==true){
             scope.loading = true;
 
@@ -33,7 +34,7 @@ angular.module('niceElements')
               scope.loading = false;
             });
           }
-        }
+        };
       }
     };
   });

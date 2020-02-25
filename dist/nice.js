@@ -47,12 +47,13 @@ angular.module('niceElements')
         niceClick: '&',
         addClass: '@',
         isInline: '=',
+        type: '@'
       },
       link: function postLink(scope, element, attrs) {
         scope.loading = false;
+        if (!scope.type) scope.type = "button";
 
         scope.click = function(){
-
           if (scope.loading===false && scope.niceDisabled!==true){
             scope.loading = true;
 
@@ -60,7 +61,7 @@ angular.module('niceElements')
               scope.loading = false;
             });
           }
-        }
+        };
       }
     };
   });
@@ -4828,7 +4829,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('src/components/nice-button/nice-button.html',
     "<div class=\"nice-component nice-button\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
-    "<button type=\"button\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
+    "<button type=\"{{ type }}\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
     "<div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
     "<div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
     "</button>\n" +
