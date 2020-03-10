@@ -13,6 +13,11 @@
   margin-bottom: 0 !important;
 }
 
+/* line 18, ../src/styles/_nice.scss */
+.has-feedback .form-control {
+  padding-right: 12px;
+}
+
 /* line 1, ../src/styles/_nice-common.scss */
 label.nice {
   color: #404040;
@@ -245,39 +250,35 @@ p.nice {
 .nice-submenu .width-300 {
   width: 300px;
 }
-/* line 247, ../src/styles/_nice-common.scss */
-.nice-submenu .has-feedback .form-control {
-  padding-right: 0;
-}
-/* line 252, ../src/styles/_nice-common.scss */
+/* line 246, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-inline {
   margin-right: 10px;
   float: left;
   line-height: 34px;
 }
-/* line 258, ../src/styles/_nice-common.scss */
+/* line 252, ../src/styles/_nice-common.scss */
 .nice-submenu .nice-inline-right {
   margin-left: 10px;
   float: right;
   line-height: 34px;
 }
 @media (max-width: 992px) {
-  /* line 258, ../src/styles/_nice-common.scss */
+  /* line 252, ../src/styles/_nice-common.scss */
   .nice-submenu .nice-inline-right {
     float: left;
   }
 }
 
-/* line 266, ../src/styles/_nice-common.scss */
+/* line 260, ../src/styles/_nice-common.scss */
 .nice-label {
   display: block;
 }
-/* line 268, ../src/styles/_nice-common.scss */
+/* line 262, ../src/styles/_nice-common.scss */
 .nice-label p.value {
   line-height: 34px;
 }
 
-/* line 273, ../src/styles/_nice-common.scss */
+/* line 267, ../src/styles/_nice-common.scss */
 .error-message {
   padding: 5px 0px 0px 0px;
   text-align: right;
@@ -285,39 +286,39 @@ p.nice {
   color: #f22e28;
 }
 
-/* line 280, ../src/styles/_nice-common.scss */
+/* line 274, ../src/styles/_nice-common.scss */
 .feedback-invalid {
   color: #f22e28 !important;
 }
 
-/* line 284, ../src/styles/_nice-common.scss */
+/* line 278, ../src/styles/_nice-common.scss */
 .feedback-valid {
   color: #3189ff;
 }
 
-/* line 289, ../src/styles/_nice-common.scss */
+/* line 283, ../src/styles/_nice-common.scss */
 .has-warning .form-control {
   border-color: #f22e28 !important;
 }
-/* line 293, ../src/styles/_nice-common.scss */
+/* line 287, ../src/styles/_nice-common.scss */
 .has-warning .input-group-addon {
   background: #f22e28 !important;
   border-color: #f22e28 !important;
   color: white;
 }
 
-/* line 301, ../src/styles/_nice-common.scss */
+/* line 295, ../src/styles/_nice-common.scss */
 .has-success .form-control {
   border-color: #3189ff;
 }
-/* line 305, ../src/styles/_nice-common.scss */
+/* line 299, ../src/styles/_nice-common.scss */
 .has-success .input-group-addon {
   background: #3189ff;
   border-color: #3189ff;
   color: white;
 }
 
-/* line 312, ../src/styles/_nice-common.scss */
+/* line 306, ../src/styles/_nice-common.scss */
 .nice-highligh {
   background: yellow;
 }

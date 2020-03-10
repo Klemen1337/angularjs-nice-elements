@@ -33,9 +33,9 @@
                 <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
             </div>
 
-            <div ng-messages="form.$error">
-                <div class="error-message" ng-message="pattern" ng-if="form.$dirty">This field requires a specific pattern.</div>
-                <div class="error-message" ng-message="required" ng-if="form.$dirty">This field is required.</div>
+            <div ng-if="form.$error">
+                <div class="error-message" ng-if="form.$dirty && form.$error.pattern">This field requires a specific pattern.</div>
+                <div class="error-message" ng-if="form.$dirty && form.$error.required">This field is required.</div>
             </div>
         </div>
     </div>

@@ -5456,10 +5456,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
     "</span>\n" +
     "</div>\n" +
-    "<div ng-messages=\"form.$error\" ng-if=\"showError\">\n" +
-    "<div class=\"error-message\" ng-message=\"number\" ng-if=\"form.$dirty\" translate>This field requires a number</div>\n" +
-    "<div class=\"error-message\" ng-message=\"min\"><translate>Min value is</translate>{{ min }}</div>\n" +
-    "<div class=\"error-message\" ng-message=\"max\"><translate>Max value is</translate>{{ max }}</div>\n" +
+    "<div ng-if=\"form.$error && showError\">\n" +
+    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.number\" translate>This field requires a number</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.min\"><translate>Min value is</translate>{{ min }}</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.max\"><translate>Max value is</translate>{{ max }}</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5483,9 +5483,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<input class=\"form-control\" type=\"text\" max=\"100\" min=\"0\" ng-model=\"internalModel\" placeholder=\"{{ placeholder }}\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-change=\"change()\" ng-disabled=\"isDisabled\">\n" +
     "<span class=\"input-group-addon\">%</span>\n" +
     "</div>\n" +
-    "<div ng-messages=\"form.$error\">\n" +
-    "<div class=\"error-message\" ng-message=\"pattern\" ng-if=\"form.$dirty\">This field requires a specific pattern.</div>\n" +
-    "<div class=\"error-message\" ng-message=\"required\" ng-if=\"form.$dirty\">This field is required.</div>\n" +
+    "<div ng-if=\"form.$error\">\n" +
+    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.pattern\">This field requires a specific pattern.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.required\">This field is required.</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

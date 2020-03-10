@@ -14,6 +14,12 @@
   margin-bottom: 0 !important;
 }
 
+.has-feedback {
+  .form-control {
+    padding-right: 12px;
+  }
+}
+
 @import "nice-common";
 @import "../components/nice-dropdown/nice-dropdown";
 @import "../components/nice-dropdown-old/nice-dropdown-old";
