@@ -1,8 +1,18 @@
 # Changelog
 
+
+## v1.3.12 (10.3.2020)
+- added nice choice transclude,
+- added type prop to nice-button,
+- created nice date filter,
+- fixed nice date input value not changing,
+- fixed has-feedback form control,
+- removed angular-messages dependencie
+
+
 ## v1.3.11 (27.1.2020)
-- created nice date filter, 
-- added nice choice transclude, 
+- created nice date filter,
+- added nice choice transclude,
 - fixed nice date input value not changing
 
 
