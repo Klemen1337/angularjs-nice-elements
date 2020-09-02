@@ -38,8 +38,6 @@ angular.module('niceElements')
         $scope.canSubstract = true;
         $scope.preventZero = $scope.preventZero == "true";
 
-        console.log($scope)
-
         // Link form object with valid object
         if ($scope.valid) {
           $scope.valid = $scope.form;
@@ -56,7 +54,6 @@ angular.module('niceElements')
         if ($scope.max) $scope.max = parseFloat($scope.max);
 
         // Set default value
-        console.log($scope.defaultValue)
         if (!$scope.defaultValue) {
           if ($scope.min != 0 && $scope.min != -Infinity) $scope.defaultValue = $scope.min;
           else $scope.defaultValue = 0;
