@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.3.13 (2.9.2020)
+- added hideHover to nice-calendar component, 
+- worked on nice-number component, 
+- added preventZero to nice-number component, 
+- changed showError to hideError in nice-number component, 
+- added debounceTime to nice-search component Sep 2020 at 11:10
+
 
 ## v1.3.12 (10.3.2020)
 - added nice choice transclude,
