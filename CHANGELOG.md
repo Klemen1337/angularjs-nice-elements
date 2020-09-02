@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3.15 (2.9.2020)
+- added validity check for nice-number component,
+- added floatingError attr to nice-number component
+
+
 ## v1.3.14 (2.9.2020)
 - fixed nice-number edge cases,
 - cleared console logs in nice-number component
