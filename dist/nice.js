@@ -3680,8 +3680,6 @@ angular.module('niceElements')
         $scope.canSubstract = true;
         $scope.preventZero = $scope.preventZero == "true";
 
-        console.log($scope)
-
         // Link form object with valid object
         if ($scope.valid) {
           $scope.valid = $scope.form;
@@ -3698,7 +3696,6 @@ angular.module('niceElements')
         if ($scope.max) $scope.max = parseFloat($scope.max);
 
         // Set default value
-        console.log($scope.defaultValue)
         if (!$scope.defaultValue) {
           if ($scope.min != 0 && $scope.min != -Infinity) $scope.defaultValue = $scope.min;
           else $scope.defaultValue = 0;
@@ -3762,11 +3759,17 @@ angular.module('niceElements')
         $scope.inputChanged = function() {
           $scope.check();
         };
+        
+
+        // Watch for model change
+        $scope.$watch("model", function() {
+          $scope.check();
+        });
 
 
         // Add to the value
         $scope.add = function() {
-          var result = (new Decimal($scope.model) || new Decimal($scope.defaultValue)).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
+          var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
           if ($scope.max) {
             if (result <= parseFloat($scope.max)) {
               $scope.model = result;
@@ -3782,7 +3785,7 @@ angular.module('niceElements')
 
         // Subtract to the value
         $scope.subtract = function() {
-          var result = (new Decimal($scope.model) || new Decimal($scope.defaultValue)).minus($scope.step).toNumber();
+          var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).minus($scope.step).toNumber();
           if (result >= Number($scope.min)) {
             $scope.model = result;
             $scope.form.$setDirty();
