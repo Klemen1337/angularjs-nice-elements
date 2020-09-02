@@ -3670,6 +3670,7 @@ angular.module('niceElements')
         step: '@',
         decimals: '@',
         allowNegative: '@',
+        floatingError: '@',
         help: '@',
         isInline: '=',
         onChange: '&?'
@@ -3725,6 +3726,12 @@ angular.module('niceElements')
 
         // Check canAdd or canSubtract
         $scope.check = function() {
+          if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
+            $scope.form.$setValidity("noValue", false);
+          } else {
+            $scope.form.$setValidity("noValue", null);
+          }
+
           if ($scope.min && parseFloat($scope.model) <= $scope.min) {
             $scope.canSubstract = false;
             // $scope.model = $scope.min;
@@ -5475,11 +5482,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
     "</span>\n" +
     "</div>\n" +
-    "<div ng-if=\"form.$error && !hideError\">\n" +
+    "<div class=\"error-messages\" ng-if=\"form.$error && !hideError\" ng-class=\"{ 'floating-error': floatingError }\">\n" +
     "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.number\" translate>This field requires a number</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.min\"><translate>Min value is</translate>{{ min }}</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.max\"><translate>Max value is</translate>{{ max }}</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.min\"><translate>Minimum value is</translate>{{ min }}</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.max\"><translate>Maximum value is</translate>{{ max }}</div>\n" +
     "<div class=\"error-message\" ng-if=\"form.$error.zero\"><translate>0 is not allowed</translate></div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.noValue && !form.$error.zero && !form.$error.min && !form.$error.max\"><translate>Value is missing</translate></div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

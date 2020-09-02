@@ -21,11 +21,12 @@
                 </span>
             </div>
             
-            <div ng-if="form.$error && !hideError">
+            <div class="error-messages" ng-if="form.$error && !hideError" ng-class="{ 'floating-error': floatingError }">
                 <div class="error-message" ng-if="form.$dirty && form.$error.number" translate>This field requires a number</div>
-                <div class="error-message" ng-if="form.$error.min"><translate>Min value is</translate> {{ min }}</div>
-                <div class="error-message" ng-if="form.$error.max"><translate>Max value is</translate> {{ max }}</div>
+                <div class="error-message" ng-if="form.$error.min"><translate>Minimum value is</translate> {{ min }}</div>
+                <div class="error-message" ng-if="form.$error.max"><translate>Maximum value is</translate> {{ max }}</div>
                 <div class="error-message" ng-if="form.$error.zero"><translate>0 is not allowed</translate></div>
+                <div class="error-message" ng-if="form.$error.noValue && !form.$error.zero && !form.$error.min && !form.$error.max"><translate>Value is missing</translate></div>
             </div>
         </div>
     </div>

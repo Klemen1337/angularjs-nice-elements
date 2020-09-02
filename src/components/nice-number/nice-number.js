@@ -28,6 +28,7 @@ angular.module('niceElements')
         step: '@',
         decimals: '@',
         allowNegative: '@',
+        floatingError: '@',
         help: '@',
         isInline: '=',
         onChange: '&?'
@@ -83,6 +84,12 @@ angular.module('niceElements')
 
         // Check canAdd or canSubtract
         $scope.check = function() {
+          if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
+            $scope.form.$setValidity("noValue", false);
+          } else {
+            $scope.form.$setValidity("noValue", null);
+          }
+
           if ($scope.min && parseFloat($scope.model) <= $scope.min) {
             $scope.canSubstract = false;
             // $scope.model = $scope.min;

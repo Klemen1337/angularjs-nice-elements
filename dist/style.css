@@ -1609,6 +1609,11 @@ p.nice {
 .nice-number .input-group-btn .btn {
   background: #f3f3f3;
 }
+/* line 18, ../src/components/nice-number/nice-number.scss */
+.nice-number .error-messages.floating-error {
+  position: absolute;
+  right: 15px;
+}
 
 /* line 1, ../src/components/nice-date-range/nice-date-range.scss */
 .nice-date-range {

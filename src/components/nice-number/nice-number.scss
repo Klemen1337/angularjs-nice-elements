@@ -13,4 +13,11 @@
       background: $nice-addon-bg;
     }
   }
+
+  .error-messages {
+    &.floating-error {
+      position: absolute;
+      right: 15px;
+    }
+  }
 }
