@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3.14 (2.9.2020)
+- fixed nice-number edge cases,
+- cleared console logs in nice-number component
+
+
 ## v1.3.13 (2.9.2020)
 - added hideHover to nice-calendar component, 
 - worked on nice-number component, 
