@@ -1,8 +1,11 @@
-.nice-number{
-  .form-control{
-    text-align: center;
-    padding: 0;
-    min-width: 30px;
+.nice-number {
+  .input-group {
+    .form-control {
+      text-align: center;
+      padding: 0;
+      min-width: 30px;
+      border-left: 0 none;
+    }
   }
 
   .input-group-btn {

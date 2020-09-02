@@ -108,6 +108,15 @@ margin-right: 1rem;
         <div class="white-wrapper">
             <div class="row">
                 <div ng-form="forme" class="col-sm-6">
+                    <nice-number 
+                        title="Test" 
+                        model="niceNumberTest" 
+                        step="1"
+                        allow-negative="true"
+                        prevent-zero="true"
+                        default-value="1"
+                    ></nice-number>
+
                     <nice-search2
                         title="Search people v2"
                         model="searchPeopleString"
@@ -381,9 +390,7 @@ margin-right: 1rem;
 
                     <nice-calendar 
                         title="Calendar" 
-                        time="true" 
-                        min-date="minRange" 
-                        max-date="maxRange" 
+                        time="true"
                         end-date="data.calendarEndDate" 
                         start-date="data.calendarStartDate"
                         is-disabled="data.disabled"

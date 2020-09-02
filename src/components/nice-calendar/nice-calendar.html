@@ -51,7 +51,7 @@
                         ng-repeat="day in week.days"
                     >
                         {{ day.number }}
-                        <p class="popup">{{ popupText }}</p>
+                        <p class="popup" ng-if="!hideHover">{{ popupText }}</p>
                     </span>
                 </div>
                 <div class="clearfix"></div>

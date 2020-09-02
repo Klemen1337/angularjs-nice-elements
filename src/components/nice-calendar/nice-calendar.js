@@ -17,6 +17,7 @@ angular.module('niceElements')
         labelWidth: '@',
         minDate: '=',
         maxDate: '=',
+        hideHover: '=',
         time: '@',
         noMargin: '@',
         color: '@',
@@ -142,7 +143,7 @@ angular.module('niceElements')
               }
             }
 
-            if (scope.onChange) scope.onChange({ startDate: scope.startDate, endDate: scope.endDate, element: element });
+            if (scope.onChange) scope.onChange({ model: {startDate: scope.startDate, endDate: scope.endDate}, element: element });
           }
         };
 

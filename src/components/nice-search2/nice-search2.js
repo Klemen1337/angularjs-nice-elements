@@ -26,6 +26,7 @@ angular.module('niceElements')
         onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
+        debounceTime: '@',
         isInline: '=',
         help: '@'
       },
@@ -38,6 +39,7 @@ angular.module('niceElements')
         $scope.selectedIndex = 0;
         $scope.requestNumber = 0;
 
+        if (!$scope.debounceTime) $scope.debounceTime = 500;
         if (!$scope.model) $scope.model = "";
         
         // ------------------- On focus -------------------
@@ -77,7 +79,7 @@ angular.module('niceElements')
           $scope.debounce = $timeout(function() {
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.getData($scope.model);
-          }, 200);
+          }, $scope.debounceTime);
         };
 
 
