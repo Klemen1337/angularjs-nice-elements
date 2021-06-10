@@ -121,67 +121,6 @@ module.exports = function (grunt) {
         }
       },
 
-
-      // postcss: {
-      //   options: {
-      //     map: true,
-      //     syntax: require('postcss-scss'), // work with SCSS directly
-      //     processors: [
-      //       require('autoprefixer')({
-      //         browsers: ['last 8 versions']
-      //       })
-      //     ]
-      //   },
-      //   server: {
-      //     options: {
-      //       map: true,
-      //       syntax: require('postcss-scss'), // work with SCSS directly,
-      //       processors: [
-      //         require('autoprefixer')({
-      //           browsers: ['last 8 versions']
-      //         })
-      //       ]
-      //     },
-      //     files: [{
-      //       expand: true,
-      //       cwd: '.tmp/styles/',
-      //       src: '{,*/}*.css',
-      //       dest: '.tmp/styles/'
-      //     }]
-      //   },
-      //   dist: {
-      //     expand: true,
-      //     cwd: '.tmp/styles/',
-      //     src: '{,*/}*.css',
-      //     dest: '.tmp/styles/'
-      //   }
-      // },
-
-
-      // // Compiles Sass to CSS and generates necessary files if requested
-      // compass: {
-      //   options: {
-      //     sassDir: '<%= yeoman.src %>/styles/',
-      //     cssDir: '<%= yeoman.dist %>',
-      //     generatedImagesDir: '<%= yeoman.dist %>/images/generated',
-      //     imagesDir: '<%= yeoman.dist %>/images',
-      //     javascriptsDir: '<%= yeoman.dist %>/scripts',
-      //     fontsDir: '<%= yeoman.dist %>/fonts',
-      //     importPath: './node_modules',
-      //     httpImagesPath: '/images',
-      //     httpGeneratedImagesPath: '/images/generated',
-      //     httpFontsPath: '/styles/fonts',
-      //     relativeAssets: false,
-      //     assetCacheBuster: false,
-      //     raw: 'Sass::Script::Number.precision = 10\n'
-      //   },
-      //   dist: {
-      //     options: {
-      //       generatedImagesDir: '<%= yeoman.dist %>/images/generated'
-      //     }
-      //   }
-      // },
-
       sass: {
         options: {
           implementation: sass,
