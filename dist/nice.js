@@ -2131,7 +2131,7 @@ angular.module('niceElements')
  * # nice-dropdown
  */
 angular.module('niceElements')
-  .directive('niceDropdown', function () {
+  .directive('niceDropdown', function ($window) {
     return {
       templateUrl: 'src/components/nice-dropdown/nice-dropdown.html',
       restrict: 'E',
@@ -2165,7 +2165,8 @@ angular.module('niceElements')
         selectedText: '@',
         searchFunction: '=?',
         isInline: '=',
-        clearOnSelect: '@'
+        clearOnSelect: '@',
+        positionFixed: '=' // Dropdown menu will be fixed to page
       },
       controller: function ($scope, $element, $timeout) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -2207,6 +2208,7 @@ angular.module('niceElements')
         $scope.open = function () {
           $scope.focusInput();
           $scope.isOpen = true;
+          if($scope.positionFixed) $scope.updateStyle();
           $timeout(function() {
             $scope.scrollToHover(true);
           }, 100);
@@ -2337,7 +2339,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Handle default -----------------------------------
         $scope.handleDefault = function() {
-          if (!$scope.nullable && !$scope.model && $scope.internalList && $scope.internalList.length > 0) {
+          if (!$scope.nullable && !$scope.model && !$scope.clearOnSelect && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
           }
         };
@@ -2374,7 +2376,7 @@ angular.module('niceElements')
                   $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
-              }
+              } 
             } else {
               // Is object
               if ($scope.multiple) {
@@ -2398,6 +2400,30 @@ angular.module('niceElements')
             }
           });
         });
+        
+        // ----------------------------------- Handle fixed position -----------------------------------
+        if ($scope.positionFixed) {
+          $scope.dropdownButton = $element[0].getElementsByClassName('btn-dropdown')[0]
+          $scope.dropdownMenu = $element[0].getElementsByClassName('dropdown-menu')[0]
+          $scope.updateStyle = function () {
+            if (this.isOpen) {
+              var buttonPos = $scope.dropdownButton.getBoundingClientRect();
+              $scope.dropdownMenu.style.top = (buttonPos.top + buttonPos.height) + "px";
+              $scope.dropdownMenu.style.left = buttonPos.left + "px";
+              $scope.dropdownMenu.style.width = buttonPos.width + "px";
+            }
+          }
+
+          $scope.updateStyle();
+
+          angular.element($window).on("resize", function () {
+            $scope.updateStyle();
+          })
+
+          angular.element($window).on("scroll", function () {
+            $scope.updateStyle();
+          })
+        }
 
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------
@@ -5263,7 +5289,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
     "<div class=\"nice-field-wrapper\">\n" +
-    "<button type=\"button\" class=\"btn btn-dropdown\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
+    "<button type=\"button\" class=\"btn btn-dropdown\" ng-ref=\"dropdown-button\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
     "<div class=\"btn-dropdown-inside\" ng-transclude=\"button\" ng-if=\"selected != null\">\n" +
     "<span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\n" +
     "<span ng-if=\"multiple\">\n" +
@@ -5276,7 +5302,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span class=\"caret\" ng-show=\"!loading\"></span>\n" +
     "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
     "</button>\n" +
-    "<div class=\"dropdown-menu\">\n" +
+    "<div class=\"dropdown-menu\" ng-class=\"{ 'dropdown-menu-fixed': positionFixed }\">\n" +
     "<div class=\"search-bar\" ng-if=\"searchFunction\">\n" +
     "<input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\">\n" +
     "<span class=\"icon\"><i class=\"fa fa-search\"></i></span>\n" +

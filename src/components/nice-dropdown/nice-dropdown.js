@@ -7,7 +7,7 @@
  * # nice-dropdown
  */
 angular.module('niceElements')
-  .directive('niceDropdown', function () {
+  .directive('niceDropdown', function ($window) {
     return {
       templateUrl: 'src/components/nice-dropdown/nice-dropdown.html',
       restrict: 'E',
@@ -41,7 +41,8 @@ angular.module('niceElements')
         selectedText: '@',
         searchFunction: '=?',
         isInline: '=',
-        clearOnSelect: '@'
+        clearOnSelect: '@',
+        positionFixed: '=' // Dropdown menu will be fixed to page
       },
       controller: function ($scope, $element, $timeout) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -83,6 +84,7 @@ angular.module('niceElements')
         $scope.open = function () {
           $scope.focusInput();
           $scope.isOpen = true;
+          if($scope.positionFixed) $scope.updateStyle();
           $timeout(function() {
             $scope.scrollToHover(true);
           }, 100);
@@ -213,7 +215,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Handle default -----------------------------------
         $scope.handleDefault = function() {
-          if (!$scope.nullable && !$scope.model && $scope.internalList && $scope.internalList.length > 0) {
+          if (!$scope.nullable && !$scope.model && !$scope.clearOnSelect && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
           }
         };
@@ -250,7 +252,7 @@ angular.module('niceElements')
                   $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
-              }
+              } 
             } else {
               // Is object
               if ($scope.multiple) {
@@ -274,6 +276,30 @@ angular.module('niceElements')
             }
           });
         });
+        
+        // ----------------------------------- Handle fixed position -----------------------------------
+        if ($scope.positionFixed) {
+          $scope.dropdownButton = $element[0].getElementsByClassName('btn-dropdown')[0]
+          $scope.dropdownMenu = $element[0].getElementsByClassName('dropdown-menu')[0]
+          $scope.updateStyle = function () {
+            if (this.isOpen) {
+              var buttonPos = $scope.dropdownButton.getBoundingClientRect();
+              $scope.dropdownMenu.style.top = (buttonPos.top + buttonPos.height) + "px";
+              $scope.dropdownMenu.style.left = buttonPos.left + "px";
+              $scope.dropdownMenu.style.width = buttonPos.width + "px";
+            }
+          }
+
+          $scope.updateStyle();
+
+          angular.element($window).on("resize", function () {
+            $scope.updateStyle();
+          })
+
+          angular.element($window).on("scroll", function () {
+            $scope.updateStyle();
+          })
+        }
 
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------

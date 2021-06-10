@@ -13,6 +13,10 @@
     .dropdown-menu {
       display: flex;
     }
+
+    .dropdown-menu-fixed {
+      position: fixed;
+    }
   }
 
   .not-selected {

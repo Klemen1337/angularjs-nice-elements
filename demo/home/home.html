@@ -60,9 +60,13 @@ pre{
 }
 
 .person-row img {
-height: 30px;
-border-radius: 50%;
-margin-right: 1rem;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 </style>
 
@@ -348,6 +352,31 @@ margin-right: 1rem;
                         <nice-dropdown-option>{{ $parent.item.text }}</nice-dropdown-option> -->
                     </nice-dropdown>
 
+                    <div class="overflow-hidden">
+                      <nice-dropdown 
+                          title="Country (position fixed)" 
+                          model="data.dropdownListObj"
+                          list="listObjs"
+                          selected-is-key="true"
+                          is-disabled="data.disabled"
+                          help="Position of the dropdown is fixed not absolute"
+                          nullable="true"
+                          is-inline="isInline"
+                          position-fixed="true"
+                      ></nice-dropdown>
+
+                      <nice-dropdown 
+                        title="Country (not position fixed)" 
+                        model="data.dropdownListObj"
+                        list="listObjs"
+                        selected-is-key="true"
+                        is-disabled="data.disabled"
+                        help="Position of the dropdown is fixed not absolute"
+                        nullable="true"
+                        is-inline="isInline"
+                      ></nice-dropdown>
+                    </div>
+
                     <nice-slot 
                         title="Simple list"
                         is-inline="isInline"
@@ -618,7 +647,7 @@ margin-right: 1rem;
                     </nice-slot>
 
                     <nice-slot is-inline="isInline">
-                        <button class="btn btn-primary" ng-click="isInline = !isInline">Toggle inline</button>
+                        <button class="btn btn-primary" ng-click="isInline = !isInline">Toggle inline ({{ isInline }})</button>
                     </nice-slot>
                 </div>
 
