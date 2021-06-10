@@ -11,7 +11,7 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 grunt build
 ```
 
-It should compile all the js and html files into `dist/nice.js`, and all the styles into `dist/nice.css`.
+It should compile all the js and html files into `dist/nice.js`, and all the styles into `dist/style.css`.
 
 
 ---
