@@ -25,7 +25,7 @@ or
 npm run serve
 ```
 
-A demo project from `demo` directory will be available on [http://localhost:3030]().
+A demo project from `demo` directory will be available on [http://localhost:3031]().
 
 
 ---

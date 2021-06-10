@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 
-var port = 3030;
+var port = 3031;
 var host ='localhost';
 
 app.use('/demo', express.static('demo'));

@@ -1,3 +1,4 @@
+'use strict';
 /**
 @toc
 2. load grunt plugins
@@ -5,10 +6,9 @@
 4. setup variables
 5. grunt.initConfig
 6. register grunt tasks
-
 */
 
-'use strict';
+var sass = require('node-sass');
 
 module.exports = function (grunt) {
 
@@ -16,16 +16,14 @@ module.exports = function (grunt) {
   Load grunt plugins
   @toc 2.
   */
+  require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-postcss');
+
 
   // Configurable paths for the application
   var appConfig = {
@@ -124,62 +122,75 @@ module.exports = function (grunt) {
       },
 
 
-      postcss: {
-        options: {
-          map: true,
-          syntax: require('postcss-scss'), // work with SCSS directly
-          processors: [
-            require('autoprefixer')({
-              browsers: ['last 8 versions']
-            })
-          ]
-        },
-        server: {
-          options: {
-            map: true,
-            syntax: require('postcss-scss'), // work with SCSS directly,
-            processors: [
-              require('autoprefixer')({
-                browsers: ['last 8 versions']
-              })
-            ]
-          },
-          files: [{
-            expand: true,
-            cwd: '.tmp/styles/',
-            src: '{,*/}*.css',
-            dest: '.tmp/styles/'
-          }]
-        },
-        dist: {
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }
-      },
+      // postcss: {
+      //   options: {
+      //     map: true,
+      //     syntax: require('postcss-scss'), // work with SCSS directly
+      //     processors: [
+      //       require('autoprefixer')({
+      //         browsers: ['last 8 versions']
+      //       })
+      //     ]
+      //   },
+      //   server: {
+      //     options: {
+      //       map: true,
+      //       syntax: require('postcss-scss'), // work with SCSS directly,
+      //       processors: [
+      //         require('autoprefixer')({
+      //           browsers: ['last 8 versions']
+      //         })
+      //       ]
+      //     },
+      //     files: [{
+      //       expand: true,
+      //       cwd: '.tmp/styles/',
+      //       src: '{,*/}*.css',
+      //       dest: '.tmp/styles/'
+      //     }]
+      //   },
+      //   dist: {
+      //     expand: true,
+      //     cwd: '.tmp/styles/',
+      //     src: '{,*/}*.css',
+      //     dest: '.tmp/styles/'
+      //   }
+      // },
 
 
-      // Compiles Sass to CSS and generates necessary files if requested
-      compass: {
+      // // Compiles Sass to CSS and generates necessary files if requested
+      // compass: {
+      //   options: {
+      //     sassDir: '<%= yeoman.src %>/styles/',
+      //     cssDir: '<%= yeoman.dist %>',
+      //     generatedImagesDir: '<%= yeoman.dist %>/images/generated',
+      //     imagesDir: '<%= yeoman.dist %>/images',
+      //     javascriptsDir: '<%= yeoman.dist %>/scripts',
+      //     fontsDir: '<%= yeoman.dist %>/fonts',
+      //     importPath: './node_modules',
+      //     httpImagesPath: '/images',
+      //     httpGeneratedImagesPath: '/images/generated',
+      //     httpFontsPath: '/styles/fonts',
+      //     relativeAssets: false,
+      //     assetCacheBuster: false,
+      //     raw: 'Sass::Script::Number.precision = 10\n'
+      //   },
+      //   dist: {
+      //     options: {
+      //       generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+      //     }
+      //   }
+      // },
+
+      sass: {
         options: {
-          sassDir: '<%= yeoman.src %>/styles/',
-          cssDir: '<%= yeoman.dist %>',
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated',
-          imagesDir: '<%= yeoman.dist %>/images',
-          javascriptsDir: '<%= yeoman.dist %>/scripts',
-          fontsDir: '<%= yeoman.dist %>/fonts',
-          importPath: './node_modules',
-          httpImagesPath: '/images',
-          httpGeneratedImagesPath: '/images/generated',
-          httpFontsPath: '/styles/fonts',
-          relativeAssets: false,
-          assetCacheBuster: false,
-          raw: 'Sass::Script::Number.precision = 10\n'
+          implementation: sass,
+          sourceMap: true,
+          outputStyle: 'expanded'
         },
         dist: {
-          options: {
-            generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+          files: {
+            'dist/style.css': 'src/styles/style.scss'
           }
         }
       },
@@ -211,11 +222,10 @@ module.exports = function (grunt) {
     */
     grunt.registerTask('default', [
       'clean:dist',
+      'sass',
       'ngtemplates',
-      'postcss',
       'concat:build',
       'jshint:beforeconcatQ',
-      'compass:dist',
       'cssmin',
       'clean:tmp',
       'uglify:build'
