@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.17 (31.8.2021)
+
+- fixed dropdown with search function model preselected
+
 ## v1.3.16 (10.6.2021)
 
 - added position fixed flag to nice-dropdown component,
