@@ -50,7 +50,8 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, Nice
     dropdownListObj2: [
       {'iso' : 'AF', 'name' : 'Afghanistan'},
       {'iso' : 'AL', 'name' : 'Albania'}
-    ]
+    ],
+    dropdownPerson2: 2
   };
   
 

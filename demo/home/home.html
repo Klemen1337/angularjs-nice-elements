@@ -299,7 +299,7 @@ pre{
 
 
                     <nice-dropdown 
-                        title="Search" 
+                        title="Search (object)" 
                         model="data.dropdownPerson"
                         search-function="searchFunction"
                         nullable="true"
@@ -307,10 +307,19 @@ pre{
                         help="This is a test"
                         is-inline="isInline"
                     >
-                        <nice-dropdown-button>
-                            <img ng-src="{{ $parent.selected.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.selected.name }}
-                        </nice-dropdown-button>
-                        <nice-dropdown-option><img ng-src="{{ $parent.item.avatar }}" style="height: 20px; border-radius: 50%; margin-right: 0.5rem;"> {{ $parent.item.name }}</nice-dropdown-option>
+                        <nice-dropdown-button>{{ $parent.selected.name }}</nice-dropdown-button>
+                        <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
+                    </nice-dropdown>
+
+                    <nice-dropdown 
+                        title="Search (value)" 
+                        model="data.dropdownPerson2"
+                        search-function="searchFunction"
+                        is-inline="isInline"
+                        selected-is-key="true"
+                    >
+                        <nice-dropdown-button>{{ $parent.selected.name }}</nice-dropdown-button>
+                        <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
                     </nice-dropdown>
 
                     <nice-dropdown 

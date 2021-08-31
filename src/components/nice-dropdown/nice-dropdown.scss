@@ -3,6 +3,10 @@
     cursor: not-allowed !important;
   }
 
+  .dropdown-menu-fixed {
+    position: fixed !important;
+  }
+
   .open {
     .btn-dropdown {
       background: $nice-focus-bg !important;
@@ -12,10 +16,6 @@
 
     .dropdown-menu {
       display: flex;
-    }
-
-    .dropdown-menu-fixed {
-      position: fixed;
     }
   }
 

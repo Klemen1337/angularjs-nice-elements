@@ -306,6 +306,10 @@ p.nice {
   cursor: not-allowed !important;
 }
 
+.nice-dropdown .dropdown-menu-fixed, .nice-search .nice-dropdown-empty .dropdown-menu-fixed {
+  position: fixed !important;
+}
+
 .nice-dropdown .open .btn-dropdown, .nice-search .nice-dropdown-empty .open .btn-dropdown {
   background: white !important;
   border-color: #3189ff !important;
@@ -314,10 +318,6 @@ p.nice {
 
 .nice-dropdown .open .dropdown-menu, .nice-search .nice-dropdown-empty .open .dropdown-menu {
   display: flex;
-}
-
-.nice-dropdown .open .dropdown-menu-fixed, .nice-search .nice-dropdown-empty .open .dropdown-menu-fixed {
-  position: fixed;
 }
 
 .nice-dropdown .not-selected, .nice-search .nice-dropdown-empty .not-selected {

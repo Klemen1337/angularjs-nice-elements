@@ -215,6 +215,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Handle default -----------------------------------
         $scope.handleDefault = function() {
+          if ($scope.model) $scope.handleModelChange();
           if (!$scope.nullable && !$scope.model && !$scope.clearOnSelect && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
           }
@@ -229,6 +230,10 @@ angular.module('niceElements')
 
         // ----------------------------------- Watch for model change -----------------------------------
         $scope.$watch('model', function (value_new, value_old) {
+          $scope.handleModelChange();
+        });
+
+        $scope.handleModelChange = function() {
           $scope.selected = angular.copy($scope.model);
           angular.forEach($scope.internalList, function(i, index) {
             i._selected = false;
@@ -275,7 +280,7 @@ angular.module('niceElements')
               }
             }
           });
-        });
+        }
         
         // ----------------------------------- Handle fixed position -----------------------------------
         if ($scope.positionFixed) {
