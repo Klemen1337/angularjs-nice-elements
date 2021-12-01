@@ -50,13 +50,13 @@ angular.module('niceElements')
 
         // $scope.weekdays = moment.weekdaysShort(false);
         $scope.weekdays = [
-          gettextCatalog.getString("Pon", null, "Nice"), 
-          gettextCatalog.getString("Tor", null, "Nice"), 
-          gettextCatalog.getString("Sre", null, "Nice"), 
-          gettextCatalog.getString("Čet", null, "Nice"), 
-          gettextCatalog.getString("Pet", null, "Nice"), 
-          gettextCatalog.getString("Sob", null, "Nice"), 
-          gettextCatalog.getString("Ned", null, "Nice")
+          gettextCatalog.getString("Mon", null, "Nice"), 
+          gettextCatalog.getString("Tue", null, "Nice"), 
+          gettextCatalog.getString("Wed", null, "Nice"), 
+          gettextCatalog.getString("Thu", null, "Nice"), 
+          gettextCatalog.getString("Fri", null, "Nice"), 
+          gettextCatalog.getString("Sat", null, "Nice"), 
+          gettextCatalog.getString("Sun", null, "Nice")
         ];
 
         $scope.years = [];
@@ -65,10 +65,21 @@ angular.module('niceElements')
           $scope.years.push(year + i);
         }
 
-        $scope.months = [];
-        angular.forEach(moment.months(), function(month, index) {
-          $scope.months.push({ value: index, name: month });
-        });
+        $scope.months =  [
+          { value: 0, name: gettextCatalog.getString("January", null, "Nice") },
+          { value: 1, name: gettextCatalog.getString("February", null, "Nice") },
+          { value: 2, name: gettextCatalog.getString("March", null, "Nice") },
+          { value: 3, name: gettextCatalog.getString("April", null, "Nice") },
+          { value: 4, name: gettextCatalog.getString("May", null, "Nice") },
+          { value: 5, name: gettextCatalog.getString("June", null, "Nice") },
+          { value: 6, name: gettextCatalog.getString("July", null, "Nice") },
+          { value: 7, name: gettextCatalog.getString("August", null, "Nice") },
+          { value: 8, name: gettextCatalog.getString("September", null, "Nice") },
+          { value: 9, name: gettextCatalog.getString("October", null, "Nice") },
+          { value: 10, name: gettextCatalog.getString("November", null, "Nice") },
+          { value: 11, name: gettextCatalog.getString("December", null, "Nice") }
+        ]
+
 
         if(!$scope.model) $scope.model = moment();
 
