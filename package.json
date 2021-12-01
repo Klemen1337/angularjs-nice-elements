@@ -9,7 +9,7 @@
     "build": "./node_modules/.bin/grunt"
   },
   "dependencies": {
-    "angular": "1.5.8",
+    "angular": "1.8.0",
     "angular-animate": "1.5.8",
     "angular-route": "1.5.8",
     "angular-sanitize": "1.5.8",
