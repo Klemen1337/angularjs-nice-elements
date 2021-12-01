@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.4.0 (1.12.2021)
+
+- added translation tags,
+- added message, fulldiv and fullscreen props to nice-loader
+
 ## v1.3.17 (31.8.2021)
 
 - fixed dropdown with search function model preselected
