@@ -1,4 +1,4 @@
-# Nice elements v1.4.0
+# Nice elements v1.4.1
 Nice elements is an AngularJS v1.5.8 module that contains nice form elements like inputs, choice fields, search, toggle, dropdown, etc.
 
 

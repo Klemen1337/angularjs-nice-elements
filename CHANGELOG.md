@@ -2,6 +2,9 @@
 
 ## v1.4.0 (1.12.2021)
 
+- added more translation tags
+## v1.4.0 (1.12.2021)
+
 - added translation tags,
 - added message, fulldiv and fullscreen props to nice-loader
 
