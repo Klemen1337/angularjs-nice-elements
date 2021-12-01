@@ -1,10 +1,15 @@
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', function ($scope, $http, $q, NiceNotification, $timeout) {
+angular.module('niceElementsDemo').controller('HomeCtrl', function ($scope, $http, $q, NiceNotification, $timeout) {
   $scope.emptyList = [];
   $scope.inputNumber = null;
   $scope.dropdownLoading = true;
   $scope.isInline = false;
+  
+  $scope.showLoading = false;
+  $scope.toggleLoading = function() {
+    $scope.showLoading = !$scope.showLoading;
+  }
 
   $scope.mockData = [];
   $http.get('http://5c9dcf843be4e30014a7d40a.mockapi.io/users').then(function (response) {

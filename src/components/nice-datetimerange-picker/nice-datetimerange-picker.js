@@ -7,12 +7,12 @@
  * # niceDatetimerangePicker
  */
 angular.module('niceElements')
-  .directive('niceDatetimerangePicker', ['$window', '$timeout', function($window, $timeout) {
+  .directive('niceDatetimerangePicker', function(gettextCatalog) {
     return {
       scope: {
         modelStart: '=', // binding model
         modelEnd: '=', // binding model
-        format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        format: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
         date: '@', // default: true, is date picker enabled?
         time: '@', // default: false, is time picker enabled?
@@ -37,22 +37,22 @@ angular.module('niceElements')
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
-        pre: function($scope, $element, $attrs) {
+        pre: function($scope) {
           // Default parameters
           var params = {
             title: '',
             noMargin: false,
             fieldWidth: 'col-sm-8',
             labelWidth: 'col-sm-4',
-            format: 'D.M.YYYY H:mm',
+            format: 'D.M.YYYY • H:mm',
             modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
             minDate: null,
             maxDate: null,
             lang: 'en',
             weekStart: 1,
             shortTime: false,
-            cancelText: 'Cancel',
-            okText: 'OK',
+            cancelText: gettextCatalog.getString('Cancel', null, 'Nice'),
+            okText: gettextCatalog.getString('OK', null, 'Nice'),
             date: true,
             time: false,
             width: 300,
@@ -243,4 +243,4 @@ angular.module('niceElements')
       }
     };
 
-  }]);
+  });

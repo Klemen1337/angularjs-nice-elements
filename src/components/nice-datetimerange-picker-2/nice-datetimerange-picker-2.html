@@ -19,15 +19,15 @@
             <div class="dtp-wrapper" ng-show="isOpen">
                 <div class="dtp-buttons-left">
                     <div class="dtp-buttons-top">
-                        <a class="btn btn-primary btn-block" ng-click="selectToday()">Last 24 hours</a>
-                        <a class="btn btn-primary btn-block" ng-click="selectLastNDays(7)">Last 7 days</a>
-                        <a class="btn btn-primary btn-block" ng-click="selectLastMonth()">Last month</a>
-                        <a class="btn btn-primary btn-block" ng-click="selectThisMonth()">This month</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectToday()" translate translate-context="Nice">Last 24 hours</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectLastNDays(7)" translate translate-context="Nice">Last 7 days</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectLastMonth()" translate translate-context="Nice">Last month</a>
+                        <a class="btn btn-primary btn-block" ng-click="selectThisMonth()" translate translate-context="Nice">This month</a>
                     </div>
 
                     <div class="dtp-buttons-bottom">
-                        <a class="btn btn-danger btn-block" ng-click="close()">Cancel</a>
-                        <a class="btn btn-success btn-block" ng-click="confirm()">OK</a>
+                        <a class="btn btn-danger btn-block" ng-click="close()" translate translate-context="Nice">Cancel</a>
+                        <a class="btn btn-success btn-block" ng-click="confirm()" translate translate-context="Nice">OK</a>
                     </div>
                 </div>
 

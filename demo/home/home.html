@@ -167,7 +167,7 @@ pre{
                         on-select="countrySelected"
                         is-inline="isInline"
                     >
-                        <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> <span>{{ $parent.result.name }}</span>
+                        <!-- <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> --><span>{{ $parent.result.name }}</span>
                     </nice-search2>
 
                     <nice-search
@@ -276,8 +276,8 @@ pre{
                         help="This is a test"
                         is-inline="isInline"
                     >
-                        <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
-                        <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
+                        <nice-dropdown-button><!-- <img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> --><span>{{ $parent.selected.name }}</span></nice-dropdown-button>
+                        <nice-dropdown-option><!-- <img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> -->{{ $parent.item.name }}</nice-dropdown-option>
                     </nice-dropdown>
 
                     <nice-dropdown 
@@ -293,8 +293,8 @@ pre{
                         help="This is a test"
                         is-inline="isInline"
                     >
-                        <nice-dropdown-button><img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> <span>{{ $parent.selected.name }}</span></nice-dropdown-button>
-                        <nice-dropdown-option><img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.name }}</nice-dropdown-option>
+                        <nice-dropdown-button><!-- <img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> --><span>{{ $parent.selected.name }}</span></nice-dropdown-button>
+                        <nice-dropdown-option><!-- <img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> -->{{ $parent.item.name }}</nice-dropdown-option>
                     </nice-dropdown>
 
 
@@ -639,7 +639,8 @@ pre{
                         selected-is-obj="true"
                         is-inline="isInline"
                     >
-                        <img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png"> {{ $parent.item.value }}
+                        <!-- <img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png">  -->
+                        {{ $parent.item.value }}
                     </nice-choice>
 
 
@@ -664,6 +665,12 @@ pre{
                     <pre>{{ data | json }}</pre>
                     <!--<pre>{{ forme | json }}</pre>-->
                     <nice-help text="This is nice help"></nice-help>
+
+                    <!-- Loading -->
+                    <nice-loader fulldiv="true" message="Loading something good..." ng-if="showLoading">
+                        <button class="btn btn-sm btn-primary" style="margin-top: 5px;" ng-click="toggleLoading()">Close</button>
+                    </nice-loader>
+                    <button class="btn btn-sm btn-primary" ng-click="toggleLoading()">Open loading</button>
                 </div>
             </div>
         </div>

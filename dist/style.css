@@ -2231,13 +2231,15 @@ p.nice {
 
 .nice-loader {
   padding: 25px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .nice-loader svg {
   width: 40px;
   height: 40px;
-  margin: 0 auto;
 }
 
 .nice-loader svg path,
@@ -2248,6 +2250,26 @@ p.nice {
 .nice-loader #loader {
   animation: spin 0.5s infinite;
   animation-delay: 0s;
+}
+
+.nice-loader .nice-loader-message {
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.nice-loader.nice-loader-fulldiv, .nice-loader.nice-loader-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.65);
+  z-index: 9999;
+}
+
+.nice-loader.nice-loader-fulldiv {
+  position: absolute;
+  z-index: auto;
 }
 
 @-moz-keyframes spin {

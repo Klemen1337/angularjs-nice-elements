@@ -12,7 +12,7 @@ angular.module('niceElements')
       scope: {
         startDate: '=', // binding model
         endDate: '=', // binding model
-        formatString: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        formatString: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
         time: '@', // default: false, is time picker enabled?
         minDate: '@', // default: undefined
@@ -38,7 +38,7 @@ angular.module('niceElements')
 
         // Set format string
         if(!$scope.formatString) {
-          if($scope.time) $scope.formatString = 'D.M.YYYY H:mm';
+          if($scope.time) $scope.formatString = 'D.M.YYYY • H:mm';
           else $scope.formatString = 'D.M.YYYY';
         }
 

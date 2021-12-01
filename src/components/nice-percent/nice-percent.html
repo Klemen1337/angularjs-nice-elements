@@ -34,8 +34,8 @@
             </div>
 
             <div ng-if="form.$error">
-                <div class="error-message" ng-if="form.$dirty && form.$error.pattern">This field requires a specific pattern.</div>
-                <div class="error-message" ng-if="form.$dirty && form.$error.required">This field is required.</div>
+                <div class="error-message" ng-if="form.$dirty && form.$error.pattern" translate translate-context="Nice">This field requires a specific pattern.</div>
+                <div class="error-message" ng-if="form.$dirty && form.$error.required" translate translate-context="Nice">This field is required.</div>
             </div>
         </div>
     </div>

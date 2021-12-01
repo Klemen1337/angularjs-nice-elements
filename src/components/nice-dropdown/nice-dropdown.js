@@ -44,15 +44,15 @@ angular.module('niceElements')
         clearOnSelect: '@',
         positionFixed: '=' // Dropdown menu will be fixed to page
       },
-      controller: function ($scope, $element, $timeout) {
+      controller: function ($scope, $element, $timeout, gettextCatalog) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
-        if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
-        if (!$scope.noDataText) { $scope.noDataText = "No options"; }
-        if (!$scope.searchText) { $scope.searchText = "Search..."; }
-        if (!$scope.nullableText) { $scope.nullableText = "None"; }
-        if (!$scope.selectText) { $scope.selectText = "None"; }
-        if (!$scope.selectedText) { $scope.selectedText = "selected"; }
+        if (!$scope.noOptionsText) { $scope.noOptionsText = gettextCatalog.getString("No options", null, "Nice"); }
+        if (!$scope.noDataText) { $scope.noDataText = gettextCatalog.getString("No options", null, "Nice"); }
+        if (!$scope.searchText) { $scope.searchText = gettextCatalog.getString("Search...", null, "Nice"); }
+        if (!$scope.nullableText) { $scope.nullableText = gettextCatalog.getString("None", null, "Nice"); }
+        if (!$scope.selectText) { $scope.selectText = gettextCatalog.getString("None", null, "Nice"); }
+        if (!$scope.selectedText) { $scope.selectedText = gettextCatalog.getString("selected", null, "Nice"); }
         if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;

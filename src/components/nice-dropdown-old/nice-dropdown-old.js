@@ -35,11 +35,11 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($rootScope, $scope, $document, $element) {
+      controller: function($scope, $element, gettextCatalog) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
         if (!$scope.list) { $scope.list = []; }
-        if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
+        if (!$scope.noOptionsText) { $scope.noOptionsText = gettextCatalog.getString("No options", null, "Nice"); }
         if(!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         if(!$scope.listenKeydown) { $scope.listenKeydown = false; }
         $scope.valid = $scope.formDropdown;

@@ -11,9 +11,13 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-loader/nice-loader.html',
       restrict: 'E',
+      transclude: true,
       scope: {
-          visibleWhen: '=',
-          addClass: '@'
+        visibleWhen: '=',
+        message: '@',
+        fullscreen: '@',
+        fulldiv: '@',
+        addClass: '@'
       }
     };
   });

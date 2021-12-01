@@ -7,13 +7,12 @@
  */
 
 angular.module('niceElements')
-  .factory('NiceNotification', function ($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce) {
+  .factory('NiceNotification', function ($timeout, $http, $compile, $templateCache, $rootScope, $sce) {
 
     var startTop = 10;
     var startRight = 10;
     var verticalSpacing = 10;
     var horizontalSpacing = 10;
-    var type = '';
     var delay = 5000;
 
     var messageElements = [];

@@ -7,7 +7,7 @@
  * # niceCalendar
  */
 angular.module('niceElements')
-  .directive("niceCalendar", function($timeout) {
+  .directive("niceCalendar", function($timeout, gettextCatalog) {
     return {
       restrict: "E",
       templateUrl: "src/components/nice-calendar/nice-calendar.html",
@@ -24,36 +24,14 @@ angular.module('niceElements')
         endDate: '=',
         startDate: '=',
         isDisabled: '=',
-        translations: '@',
         help: '@',
         isInline: '=',
         onChange: '&?'
       },
       link: function(scope, element) {
-        scope.translations = {
-          selectStartDate: "Select start date",
-          selectStartTime: "Select start time",
-          selectEndDate: "Select end date",
-          selectEndTime: "Select end time",
-          nextMonth: "Next month",
-          prevMonth: "Previous month",
-          start: "Start",
-          end: "End",
-          mon: "Mon",
-          tue: "Tue",
-          wed: "Wed",
-          thu: "Thu",
-          fri: "Fri",
-          sat: "Sat",
-          sun: "Sun",
-          january: "January",
-          february: "February",
-
-        };
-
         // ------------------ Init default values ------------------
         scope.selectStart = true;
-        scope.popupText = scope.translations.selectStartDate;
+        scope.popupText = gettextCatalog.getString("Select start date", null, "Nice");
 
         scope.hours = [
           0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
@@ -118,7 +96,7 @@ angular.module('niceElements')
               // Set start date
               scope.startDate = selectedDate;
               scope.selectStart = false;
-              scope.popupText = scope.translations.selectEndDate;
+              scope.popupText = gettextCatalog.getString("Select end date", null, "Nice");
               scope.formCalendar.$setDirty();
               scope.displayStartChange();
 
@@ -133,7 +111,7 @@ angular.module('niceElements')
               // Set end date
               scope.endDate = selectedDate;
               scope.selectStart = true;
-              scope.popupText = scope.translations.selectStartDate;
+              scope.popupText = gettextCatalog.getString("Select start date", null, "Nice");
               scope.formCalendar.$setDirty();
               scope.displayEndChange();
 

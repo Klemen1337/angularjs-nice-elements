@@ -15,6 +15,7 @@
     "angular-sanitize": "1.5.8",
     "angular-touch": "1.5.8",
     "angular-truncate": "latest",
+    "angular-gettext": "2.4.2",
     "bootstrap": "3.3.7",
     "decimal.js": "4.0.3",
     "font-awesome": "4.3.0",

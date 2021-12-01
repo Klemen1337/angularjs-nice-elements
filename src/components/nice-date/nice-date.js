@@ -30,13 +30,13 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope) {
+      controller: function($scope, gettextCatalog) {
         $scope.isOpen = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
         $scope.translations = {
-          nextMonth: "Next month",
-          prevMonth: "Previous month",
+          nextMonth: gettextCatalog.getString("Next month", null, "Nice"),
+          prevMonth: gettextCatalog.getString("Previous month", null, "Nice"),
         };
         $scope.innerDate = {
           month: 0,
@@ -49,7 +49,15 @@ angular.module('niceElements')
         $scope.days = [];
 
         // $scope.weekdays = moment.weekdaysShort(false);
-        $scope.weekdays = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"];
+        $scope.weekdays = [
+          gettextCatalog.getString("Pon", null, "Nice"), 
+          gettextCatalog.getString("Tor", null, "Nice"), 
+          gettextCatalog.getString("Sre", null, "Nice"), 
+          gettextCatalog.getString("Čet", null, "Nice"), 
+          gettextCatalog.getString("Pet", null, "Nice"), 
+          gettextCatalog.getString("Sob", null, "Nice"), 
+          gettextCatalog.getString("Ned", null, "Nice")
+        ];
 
         $scope.years = [];
         var year = moment().year()-100;

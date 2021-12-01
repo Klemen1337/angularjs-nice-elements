@@ -13,12 +13,6 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         text: '@'
-      },
-      link: function postLink(scope, element, attrs) {
-
-      },
-      controller: function($rootScope, $scope) {
-
       }
     };
   });

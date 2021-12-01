@@ -27,9 +27,9 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function($scope, $attrs) {
-        if (!$attrs.yes) { $attrs.yes = 'Yes'; }
-        if (!$attrs.no) { $attrs.no = 'No'; }
+      controller: function($scope, $attrs, gettextCatalog) {
+        if (!$attrs.yes) { $attrs.yes = gettextCatalog.getString('Yes', null, "Nice"); }
+        if (!$attrs.no) { $attrs.no = gettextCatalog.getString('No', null, "Nice"); }
         if (!$attrs.title) { $attrs.title = ''; }
         if (!$attrs.fieldWidth) { $attrs.fieldWidth = 'col-sm-8'; }
         if (!$attrs.labelWidth) { $attrs.labelWidth = 'col-sm-4'; }

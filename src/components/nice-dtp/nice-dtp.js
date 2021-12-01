@@ -14,7 +14,7 @@ angular.module('niceElements')
       scope: {
         onChange: '&?', // function called on date changed
         model: '=', // binding model
-        format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        format: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@', // default: ''
         //currentDate: '@',
         date: '@', // default: true, is date picker enabled?
@@ -35,7 +35,7 @@ angular.module('niceElements')
         closed: '='
       },
       templateUrl: 'src/components/nice-dtp/nice-dtp.html',
-      link: function ($scope, $element, $attrs) {
+      controller: function ($scope, $element, $attrs, gettextCatalog) {
 
         // default parameters
         var params = {
@@ -43,15 +43,15 @@ angular.module('niceElements')
           noMargin: false,
           fieldWidth: 'col-sm-8',
           labelWidth: 'col-sm-4',
-          format: 'DD.MM.YYYY HH:mm',
+          format: 'D.M.YYYY • H:mm',
           modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
           minDate: null,
           maxDate: null,
           lang: 'en',
           weekStart: 1,
           shortTime: false,
-          cancelText: 'Cancel',
-          okText: 'OK',
+          cancelText: gettextCatalog.getString('Cancel', null, 'Nice'),
+          okText: gettextCatalog.getString('OK', null, 'Nice'),
           date: true,
           time: false,
           width: 300,

@@ -12,19 +12,19 @@
 
             <div class="nice-calendar-wrapper">
                 <div class="header">
-                    <i class="fa fa-angle-left" ng-click="previous()" title="{{ translations.prevMonth }}"></i>
+                    <i class="fa fa-angle-left" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}"></i>
                     <span title="{{ month.format('M.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
-                    <i class="fa fa-angle-right" ng-click="next()" title="{{ translations.nextMonth }}"></i>
+                    <i class="fa fa-angle-right" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}"></i>
                 </div>
 
                 <div class="week names">
-                    <span class="day" translate>{{ translations.mon }}</span>
-                    <span class="day" translate>{{ translations.tue }}</span>
-                    <span class="day" translate>{{ translations.wed }}</span>
-                    <span class="day" translate>{{ translations.thu }}</span>
-                    <span class="day" translate>{{ translations.fri }}</span>
-                    <span class="day weekend" translate>{{ translations.sat }}</span>
-                    <span class="day weekend" translate>{{ translations.sun }}</span>
+                    <span class="day" translate translate-context="Nice">Mon</span>
+                    <span class="day" translate translate-context="Nice">Tue</span>
+                    <span class="day" translate translate-context="Nice">Wed</span>
+                    <span class="day" translate translate-context="Nice">Thu</span>
+                    <span class="day" translate translate-context="Nice">Fri</span>
+                    <span class="day weekend" translate translate-context="Nice">Sat</span>
+                    <span class="day weekend" translate translate-context="Nice">Sun</span>
                 </div>
 
                 <div class="week" ng-repeat="week in weeks">
@@ -60,7 +60,7 @@
                 <div class="nice-calendar-time" ng-if="time">
                     <div class="time-picker">
                         <select
-                          title="{{ translations.selectStartTime }}"
+                          title="{{ 'Select start time' | translate:'Nice' }}"
                           class="time-picker-hour"
                           ng-model="startDateHour"
                           ng-change="startHourChange(startDateHour)"
@@ -70,7 +70,7 @@
 
                     <div class="time-picker">
                         <select
-                          title="{{ translations.selectStartTime }}"
+                          title="{{ 'Select start time' | translate:'Nice' }}"
                           class="time-picker-minute"
                           ng-model="startDateMinute"
                           ng-change="startMinuteChange(startDateMinute)"
@@ -84,7 +84,7 @@
 
                     <div class="time-picker">
                          <select
-                          title="{{ translations.selectEndTime }}"
+                          title="{{ 'Select end time' | translate:'Nice' }}"
                           class="time-picker-hour"
                           ng-model="endDateHour"
                           ng-change="endHourChange(endDateHour)"
@@ -94,7 +94,7 @@
 
                     <div class="time-picker no-border-right">
                         <select
-                          title="{{ translations.selectEndTime }}"
+                          title="{{ 'Select end time' | translate:'Nice' }}"
                           class="time-picker-minute"
                           ng-model="endDateMinute"
                           ng-change="endMinuteChange(endDateMinute)"
@@ -105,11 +105,11 @@
 
                 <div class="nice-selected-dates">
                     <div class="nice-start-date">
-                        <label>{{ translations.start }}</label>
+                        <label translate translate-context="Nice">Start</label>
                         <div ng-class="startTimeClass">{{ formatDate(startDate) }}</div>
                     </div>
                     <div class="nice-end-date">
-                        <label>{{ translations.end }}</label>
+                        <label translate translate-context="Nice">End</label>
                         <div ng-class="endTimeClass">{{ formatDate(endDate) }}</div>
                     </div>
                     <div class="clearfix"></div>

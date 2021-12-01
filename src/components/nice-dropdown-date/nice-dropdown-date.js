@@ -7,7 +7,7 @@
  * # niceDropdownDate
  */
 angular.module('niceElements')
-  .directive('niceDropdownDate', function (){
+  .directive('niceDropdownDate', function (gettextCatalog) {
   return {
     restrict: 'E',
     replace: true,
@@ -29,18 +29,18 @@ angular.module('niceElements')
     link: function ($scope) {
       $scope.days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
       $scope.months = [
-        { value: 0, name: 'Jan' },
-        { value: 1, name: 'Feb' },
-        { value: 2, name: 'Mar' },
-        { value: 3, name: 'Apr' },
-        { value: 4, name: 'May' },
-        { value: 5, name: 'Jun' },
-        { value: 6, name: 'Jul' },
-        { value: 7, name: 'Aug' },
-        { value: 8, name: 'Sep' },
-        { value: 9, name: 'Oct' },
-        { value: 10, name: 'Nov' },
-        { value: 11, name: 'Dec' }
+        { value: 0, name: gettextCatalog.getString('Jan', null, 'Nice') },
+        { value: 1, name: gettextCatalog.getString('Feb', null, 'Nice') },
+        { value: 2, name: gettextCatalog.getString('Mar', null, 'Nice') },
+        { value: 3, name: gettextCatalog.getString('Apr', null, 'Nice') },
+        { value: 4, name: gettextCatalog.getString('May', null, 'Nice') },
+        { value: 5, name: gettextCatalog.getString('Jun', null, 'Nice') },
+        { value: 6, name: gettextCatalog.getString('Jul', null, 'Nice') },
+        { value: 7, name: gettextCatalog.getString('Aug', null, 'Nice') },
+        { value: 8, name: gettextCatalog.getString('Sep', null, 'Nice') },
+        { value: 9, name: gettextCatalog.getString('Oct', null, 'Nice') },
+        { value: 10, name: gettextCatalog.getString('Nov', null, 'Nice') },
+        { value: 11, name: gettextCatalog.getString('Dec', null, 'Nice') }
       ];
 
 
@@ -82,7 +82,7 @@ angular.module('niceElements')
 
       // validate that the date selected is accurate
       $scope.checkDate = function(){
-        var date = moment($scope.dateFields.day + "." + ($scope.dateFields.month + 1) + "." + $scope.dateFields.year, "DD.MM.YYYY");
+        var date = moment($scope.dateFields.day + "." + ($scope.dateFields.month + 1) + "." + $scope.dateFields.year, "D.M.YYYY");
 
         if(date.isValid()){
           // Format

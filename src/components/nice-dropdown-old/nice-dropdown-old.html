@@ -23,9 +23,9 @@
 
                         <span ng-if="multiple">
                             <!--<span ng-repeat="item in internalSelected"><span ng-if="$index > 0">, </span>{{ getLabel(item) }}</span>-->
-                            <span ng-if="internalSelected.length  > 1">{{ internalSelected.length }} <translate>selected</translate></span>
+                            <span ng-if="internalSelected.length  > 1">{{ internalSelected.length }} <translate translate-context="Nice">selected</translate></span>
                             <span ng-if="internalSelected.length  == 1">{{ getLabel(internalSelected[0]) }}</span>
-                            <span ng-if="internalSelected.length == 0" translate>None</span>
+                            <span ng-if="internalSelected.length == 0" translate translate-context="Nice">None</span>
                         </span>
 
                         <!--<span ng-if="showTax && internalSelected.value">{{ internalSelected.value * 100 }}%</span>-->

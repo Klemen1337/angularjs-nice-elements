@@ -13,7 +13,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
     templateUrl: 'src/components/nice-datetime-picker/nice-datetime-picker.html',
     scope: {
       model: '=', // binding model
-      format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+      format: '@', // default: 'D.M.YYYY • H:mm', format for input label string
       date: '@', // default: true, is date picker enabled?
       time: '@', // default: false, is time picker enabled?
       width: '@', // default: 300, width of entire dtp-picker in px
@@ -34,14 +34,14 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       isInline: '=',
       onChange: '&?'
     },
-    controller: function ($scope) {
+    controller: function ($scope, gettextCatalog) {
         $scope.date = $scope.date == 'true' || $scope.date == true;
         $scope.time = $scope.time == 'true' || $scope.time == true;
         $scope.noMargin === 'true' || $scope.noMargin === true;
         $scope.enableOkButtons === 'true' || $scope.enableOkButtons === true;
         $scope.lang = $scope.lang || 'en';
-        $scope.okText = $scope.okText || 'OK';
-        $scope.cancelText = $scope.cancelText || 'Cancel';
+        $scope.okText = $scope.okText || gettextCatalog.getString('OK', null, 'Nice');
+        $scope.cancelText = $scope.cancelText || gettextCatalog.getString('Cancel', null, 'Nice');
         $scope.weekStart = parseInt($scope.weekStart) || 1;
         $scope.width = parseInt($scope.width) || 300;
         $scope.isOpen = false;
@@ -49,11 +49,11 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
 
         if (!$scope.format) {
           if ($scope.date && !$scope.time) {
-            $scope.format = 'DD.MM.YYYY';
+            $scope.format = 'D.M.YYYY';
           } else if (!$scope.date && $scope.time) {
             $scope.format = 'HH:mm';
           } else {
-            $scope.format = 'DD.MM.YYYY HH:mm';
+            $scope.format = 'D.M.YYYY • H:mm';
           }
         }
 

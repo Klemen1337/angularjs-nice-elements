@@ -75,7 +75,7 @@ angular.module('niceElements')
  * # niceCalendar
  */
 angular.module('niceElements')
-  .directive("niceCalendar", function($timeout) {
+  .directive("niceCalendar", function($timeout, gettextCatalog) {
     return {
       restrict: "E",
       templateUrl: "src/components/nice-calendar/nice-calendar.html",
@@ -92,36 +92,14 @@ angular.module('niceElements')
         endDate: '=',
         startDate: '=',
         isDisabled: '=',
-        translations: '@',
         help: '@',
         isInline: '=',
         onChange: '&?'
       },
       link: function(scope, element) {
-        scope.translations = {
-          selectStartDate: "Select start date",
-          selectStartTime: "Select start time",
-          selectEndDate: "Select end date",
-          selectEndTime: "Select end time",
-          nextMonth: "Next month",
-          prevMonth: "Previous month",
-          start: "Start",
-          end: "End",
-          mon: "Mon",
-          tue: "Tue",
-          wed: "Wed",
-          thu: "Thu",
-          fri: "Fri",
-          sat: "Sat",
-          sun: "Sun",
-          january: "January",
-          february: "February",
-
-        };
-
         // ------------------ Init default values ------------------
         scope.selectStart = true;
-        scope.popupText = scope.translations.selectStartDate;
+        scope.popupText = gettextCatalog.getString("Select start date", null, "Nice");
 
         scope.hours = [
           0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
@@ -186,7 +164,7 @@ angular.module('niceElements')
               // Set start date
               scope.startDate = selectedDate;
               scope.selectStart = false;
-              scope.popupText = scope.translations.selectEndDate;
+              scope.popupText = gettextCatalog.getString("Select end date", null, "Nice");
               scope.formCalendar.$setDirty();
               scope.displayStartChange();
 
@@ -201,7 +179,7 @@ angular.module('niceElements')
               // Set end date
               scope.endDate = selectedDate;
               scope.selectStart = true;
-              scope.popupText = scope.translations.selectStartDate;
+              scope.popupText = gettextCatalog.getString("Select start date", null, "Nice");
               scope.formCalendar.$setDirty();
               scope.displayEndChange();
 
@@ -826,7 +804,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
 
-      link: function(scope, iElement, attrs, ctrl){
+      link: function(scope, attrs){
         if (!attrs.title) { attrs.title = ''; }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
@@ -851,55 +829,21 @@ angular.module('niceElements')
         }
       },
 
-      controller: function($scope, $filter) { //gettextCatalog
+      controller: function($scope) {
         $scope.opts = {
-          //format: 'DD.MM.YYYY',
           locale: {
             applyClass: 'btn-green',
-            //applyLabel: gettextCatalog.getString("Apply"),
-            //fromLabel: gettextCatalog.getString("From"),
-            //toLabel: gettextCatalog.getString("To"),
-            //cancelLabel: gettextCatalog.getString("Cancel"),
-            //customRangeLabel: gettextCatalog.getString("Custom range"),
             firstDay: 1
-            //daysOfWeek: [
-            //  gettextCatalog.getString("Sun"),
-            //  gettextCatalog.getString("Mon"),
-            //  gettextCatalog.getString("Tue"),
-            //  gettextCatalog.getString("Wed"),
-            //  gettextCatalog.getString("Thu"),
-            //  gettextCatalog.getString("Fri"),
-            //  gettextCatalog.getString("Sat")
-            //],
-            //monthNames: [
-            //  gettextCatalog.getString("January"),
-            //  gettextCatalog.getString("February"),
-            //  gettextCatalog.getString("March"),
-            //  gettextCatalog.getString("April"),
-            //  gettextCatalog.getString("May"),
-            //  gettextCatalog.getString("June"),
-            //  gettextCatalog.getString("July"),
-            //  gettextCatalog.getString("August"),
-            //  gettextCatalog.getString("September"),
-            //  gettextCatalog.getString("October"),
-            //  gettextCatalog.getString("November"),
-            //  gettextCatalog.getString("December")
-            //]
           },
           ranges: {},
           min: $scope.min,
           max: $scope.max
         };
 
-        //$scope.opts.ranges[gettextCatalog.getString("Today")] = [moment(), moment()];
-        //$scope.opts.ranges[gettextCatalog.getString("Last 7 days")] = [moment().subtract(7, 'days'), moment()];
-        //$scope.opts.ranges[gettextCatalog.getString("Last 30 days")] = [moment().subtract(30, 'days'), moment()];
-        //$scope.opts.ranges[gettextCatalog.getString("This month")] = [moment().startOf('month'), moment().endOf('month')];
-
-        $scope.opts.ranges["Today"] = [moment(), moment()];
-        $scope.opts.ranges["Last 7 days"] = [moment().subtract(7, 'days'), moment()];
-        $scope.opts.ranges["Last 30 days"] = [moment().subtract(30, 'days'), moment()];
-        $scope.opts.ranges["This month"] = [moment().startOf('month'), moment().endOf('month')];
+        $scope.opts.ranges[gettextCatalog.getString("Today", null, "Nice")] = [moment(), moment()];
+        $scope.opts.ranges[gettextCatalog.getString("Last 7 days", null, "Nice")] = [moment().subtract(7, 'days'), moment()];
+        $scope.opts.ranges[gettextCatalog.getString("Last 30 days", null, "Nice")] = [moment().subtract(30, 'days'), moment()];
+        $scope.opts.ranges[gettextCatalog.getString("This month", null, "Nice")] = [moment().startOf('month'), moment().endOf('month')];
 
         if(angular.isDefined($scope.format)) $scope.opts.format = format;
       }
@@ -939,13 +883,13 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope) {
+      controller: function($scope, gettextCatalog) {
         $scope.isOpen = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
         $scope.translations = {
-          nextMonth: "Next month",
-          prevMonth: "Previous month",
+          nextMonth: gettextCatalog.getString("Next month", null, "Nice"),
+          prevMonth: gettextCatalog.getString("Previous month", null, "Nice"),
         };
         $scope.innerDate = {
           month: 0,
@@ -958,7 +902,15 @@ angular.module('niceElements')
         $scope.days = [];
 
         // $scope.weekdays = moment.weekdaysShort(false);
-        $scope.weekdays = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"];
+        $scope.weekdays = [
+          gettextCatalog.getString("Pon", null, "Nice"), 
+          gettextCatalog.getString("Tor", null, "Nice"), 
+          gettextCatalog.getString("Sre", null, "Nice"), 
+          gettextCatalog.getString("Čet", null, "Nice"), 
+          gettextCatalog.getString("Pet", null, "Nice"), 
+          gettextCatalog.getString("Sob", null, "Nice"), 
+          gettextCatalog.getString("Ned", null, "Nice")
+        ];
 
         $scope.years = [];
         var year = moment().year()-100;
@@ -1207,7 +1159,7 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
     templateUrl: 'src/components/nice-datetime-picker/nice-datetime-picker.html',
     scope: {
       model: '=', // binding model
-      format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+      format: '@', // default: 'D.M.YYYY • H:mm', format for input label string
       date: '@', // default: true, is date picker enabled?
       time: '@', // default: false, is time picker enabled?
       width: '@', // default: 300, width of entire dtp-picker in px
@@ -1228,14 +1180,14 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       isInline: '=',
       onChange: '&?'
     },
-    controller: function ($scope) {
+    controller: function ($scope, gettextCatalog) {
         $scope.date = $scope.date == 'true' || $scope.date == true;
         $scope.time = $scope.time == 'true' || $scope.time == true;
         $scope.noMargin === 'true' || $scope.noMargin === true;
         $scope.enableOkButtons === 'true' || $scope.enableOkButtons === true;
         $scope.lang = $scope.lang || 'en';
-        $scope.okText = $scope.okText || 'OK';
-        $scope.cancelText = $scope.cancelText || 'Cancel';
+        $scope.okText = $scope.okText || gettextCatalog.getString('OK', null, 'Nice');
+        $scope.cancelText = $scope.cancelText || gettextCatalog.getString('Cancel', null, 'Nice');
         $scope.weekStart = parseInt($scope.weekStart) || 1;
         $scope.width = parseInt($scope.width) || 300;
         $scope.isOpen = false;
@@ -1243,11 +1195,11 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
 
         if (!$scope.format) {
           if ($scope.date && !$scope.time) {
-            $scope.format = 'DD.MM.YYYY';
+            $scope.format = 'D.M.YYYY';
           } else if (!$scope.date && $scope.time) {
             $scope.format = 'HH:mm';
           } else {
-            $scope.format = 'DD.MM.YYYY HH:mm';
+            $scope.format = 'D.M.YYYY • H:mm';
           }
         }
 
@@ -1293,7 +1245,7 @@ angular.module('niceElements')
       scope: {
         startDate: '=', // binding model
         endDate: '=', // binding model
-        formatString: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        formatString: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
         time: '@', // default: false, is time picker enabled?
         minDate: '@', // default: undefined
@@ -1319,7 +1271,7 @@ angular.module('niceElements')
 
         // Set format string
         if(!$scope.formatString) {
-          if($scope.time) $scope.formatString = 'D.M.YYYY H:mm';
+          if($scope.time) $scope.formatString = 'D.M.YYYY • H:mm';
           else $scope.formatString = 'D.M.YYYY';
         }
 
@@ -1431,12 +1383,12 @@ angular.module('niceElements')
  * # niceDatetimerangePicker
  */
 angular.module('niceElements')
-  .directive('niceDatetimerangePicker', ['$window', '$timeout', function($window, $timeout) {
+  .directive('niceDatetimerangePicker', function(gettextCatalog) {
     return {
       scope: {
         modelStart: '=', // binding model
         modelEnd: '=', // binding model
-        format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        format: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
         date: '@', // default: true, is date picker enabled?
         time: '@', // default: false, is time picker enabled?
@@ -1461,22 +1413,22 @@ angular.module('niceElements')
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
-        pre: function($scope, $element, $attrs) {
+        pre: function($scope) {
           // Default parameters
           var params = {
             title: '',
             noMargin: false,
             fieldWidth: 'col-sm-8',
             labelWidth: 'col-sm-4',
-            format: 'D.M.YYYY H:mm',
+            format: 'D.M.YYYY • H:mm',
             modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
             minDate: null,
             maxDate: null,
             lang: 'en',
             weekStart: 1,
             shortTime: false,
-            cancelText: 'Cancel',
-            okText: 'OK',
+            cancelText: gettextCatalog.getString('Cancel', null, 'Nice'),
+            okText: gettextCatalog.getString('OK', null, 'Nice'),
             date: true,
             time: false,
             width: 300,
@@ -1667,7 +1619,7 @@ angular.module('niceElements')
       }
     };
 
-  }]);
+  });
 'use strict';
 
 /**
@@ -1677,7 +1629,7 @@ angular.module('niceElements')
  * # niceDropdownDate
  */
 angular.module('niceElements')
-  .directive('niceDropdownDate', function (){
+  .directive('niceDropdownDate', function (gettextCatalog) {
   return {
     restrict: 'E',
     replace: true,
@@ -1699,18 +1651,18 @@ angular.module('niceElements')
     link: function ($scope) {
       $scope.days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
       $scope.months = [
-        { value: 0, name: 'Jan' },
-        { value: 1, name: 'Feb' },
-        { value: 2, name: 'Mar' },
-        { value: 3, name: 'Apr' },
-        { value: 4, name: 'May' },
-        { value: 5, name: 'Jun' },
-        { value: 6, name: 'Jul' },
-        { value: 7, name: 'Aug' },
-        { value: 8, name: 'Sep' },
-        { value: 9, name: 'Oct' },
-        { value: 10, name: 'Nov' },
-        { value: 11, name: 'Dec' }
+        { value: 0, name: gettextCatalog.getString('Jan', null, 'Nice') },
+        { value: 1, name: gettextCatalog.getString('Feb', null, 'Nice') },
+        { value: 2, name: gettextCatalog.getString('Mar', null, 'Nice') },
+        { value: 3, name: gettextCatalog.getString('Apr', null, 'Nice') },
+        { value: 4, name: gettextCatalog.getString('May', null, 'Nice') },
+        { value: 5, name: gettextCatalog.getString('Jun', null, 'Nice') },
+        { value: 6, name: gettextCatalog.getString('Jul', null, 'Nice') },
+        { value: 7, name: gettextCatalog.getString('Aug', null, 'Nice') },
+        { value: 8, name: gettextCatalog.getString('Sep', null, 'Nice') },
+        { value: 9, name: gettextCatalog.getString('Oct', null, 'Nice') },
+        { value: 10, name: gettextCatalog.getString('Nov', null, 'Nice') },
+        { value: 11, name: gettextCatalog.getString('Dec', null, 'Nice') }
       ];
 
 
@@ -1752,7 +1704,7 @@ angular.module('niceElements')
 
       // validate that the date selected is accurate
       $scope.checkDate = function(){
-        var date = moment($scope.dateFields.day + "." + ($scope.dateFields.month + 1) + "." + $scope.dateFields.year, "DD.MM.YYYY");
+        var date = moment($scope.dateFields.day + "." + ($scope.dateFields.month + 1) + "." + $scope.dateFields.year, "D.M.YYYY");
 
         if(date.isValid()){
           // Format
@@ -1830,11 +1782,11 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($rootScope, $scope, $document, $element) {
+      controller: function($scope, $element, gettextCatalog) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
         if (!$scope.list) { $scope.list = []; }
-        if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
+        if (!$scope.noOptionsText) { $scope.noOptionsText = gettextCatalog.getString("No options", null, "Nice"); }
         if(!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         if(!$scope.listenKeydown) { $scope.listenKeydown = false; }
         $scope.valid = $scope.formDropdown;
@@ -2168,15 +2120,15 @@ angular.module('niceElements')
         clearOnSelect: '@',
         positionFixed: '=' // Dropdown menu will be fixed to page
       },
-      controller: function ($scope, $element, $timeout) {
+      controller: function ($scope, $element, $timeout, gettextCatalog) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
-        if (!$scope.noOptionsText) { $scope.noOptionsText = "No options"; }
-        if (!$scope.noDataText) { $scope.noDataText = "No options"; }
-        if (!$scope.searchText) { $scope.searchText = "Search..."; }
-        if (!$scope.nullableText) { $scope.nullableText = "None"; }
-        if (!$scope.selectText) { $scope.selectText = "None"; }
-        if (!$scope.selectedText) { $scope.selectedText = "selected"; }
+        if (!$scope.noOptionsText) { $scope.noOptionsText = gettextCatalog.getString("No options", null, "Nice"); }
+        if (!$scope.noDataText) { $scope.noDataText = gettextCatalog.getString("No options", null, "Nice"); }
+        if (!$scope.searchText) { $scope.searchText = gettextCatalog.getString("Search...", null, "Nice"); }
+        if (!$scope.nullableText) { $scope.nullableText = gettextCatalog.getString("None", null, "Nice"); }
+        if (!$scope.selectText) { $scope.selectText = gettextCatalog.getString("None", null, "Nice"); }
+        if (!$scope.selectedText) { $scope.selectedText = gettextCatalog.getString("selected", null, "Nice"); }
         if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
         $scope.required = $scope.required === 'true' || $scope.required === true;
@@ -2500,7 +2452,7 @@ angular.module('niceElements')
       scope: {
         onChange: '&?', // function called on date changed
         model: '=', // binding model
-        format: '@', // default: 'DD.MM.YYYY HH:mm', format for input label string
+        format: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@', // default: ''
         //currentDate: '@',
         date: '@', // default: true, is date picker enabled?
@@ -2521,7 +2473,7 @@ angular.module('niceElements')
         closed: '='
       },
       templateUrl: 'src/components/nice-dtp/nice-dtp.html',
-      link: function ($scope, $element, $attrs) {
+      controller: function ($scope, $element, $attrs, gettextCatalog) {
 
         // default parameters
         var params = {
@@ -2529,15 +2481,15 @@ angular.module('niceElements')
           noMargin: false,
           fieldWidth: 'col-sm-8',
           labelWidth: 'col-sm-4',
-          format: 'DD.MM.YYYY HH:mm',
+          format: 'D.M.YYYY • H:mm',
           modelFormat: 'YYYY-MM-DDTHH:mm:ss.SSS',
           minDate: null,
           maxDate: null,
           lang: 'en',
           weekStart: 1,
           shortTime: false,
-          cancelText: 'Cancel',
-          okText: 'OK',
+          cancelText: gettextCatalog.getString('Cancel', null, 'Nice'),
+          okText: gettextCatalog.getString('OK', null, 'Nice'),
           date: true,
           time: false,
           width: 300,
@@ -3332,12 +3284,6 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         text: '@'
-      },
-      link: function postLink(scope, element, attrs) {
-
-      },
-      controller: function($rootScope, $scope) {
-
       }
     };
   });
@@ -3539,9 +3485,13 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-loader/nice-loader.html',
       restrict: 'E',
+      transclude: true,
       scope: {
-          visibleWhen: '=',
-          addClass: '@'
+        visibleWhen: '=',
+        message: '@',
+        fullscreen: '@',
+        fulldiv: '@',
+        addClass: '@'
       }
     };
   });
@@ -3554,13 +3504,12 @@ angular.module('niceElements')
  */
 
 angular.module('niceElements')
-  .factory('NiceNotification', function ($timeout, $http, $compile, $templateCache, $rootScope, $injector, $sce) {
+  .factory('NiceNotification', function ($timeout, $http, $compile, $templateCache, $rootScope, $sce) {
 
     var startTop = 10;
     var startRight = 10;
     var verticalSpacing = 10;
     var horizontalSpacing = 10;
-    var type = '';
     var delay = 5000;
 
     var messageElements = [];
@@ -4610,7 +4559,7 @@ angular.module('niceElements')
  * # niceUpload
  */
  angular.module('niceElements')
-   .directive('niceUpload', function ($timeout) {
+   .directive('niceUpload', function ($timeout, gettextCatalog) {
     return {
       restrict: 'E',
       replace: true,
@@ -4633,9 +4582,9 @@ angular.module('niceElements')
         help: '@'
       },
 
-      link: function(scope, element, attrs, ctrl){
+      link: function(scope, element, attrs){
         if (!attrs.title) { attrs.title = ''; }
-        if (!attrs.text) { attrs.text = 'Click to upload file'; }
+        if (!attrs.text) { attrs.text = gettextCatalog.getString('Click to upload file', null, 'Nice'); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
@@ -4694,7 +4643,7 @@ angular.module('niceElements')
                       }
                     } else {
                       // Handle file too big error
-                      scope.error = "File must be smaller than 1MB";
+                      scope.error = gettextCatalog.getString("File must be smaller than 1MB", null, "Nice");
                       scope.loading = false;
                       scope.imageSource = null;
                     }
@@ -4703,7 +4652,7 @@ angular.module('niceElements')
 
               } catch (err) {
                 // Handle try catch
-                scope.error = "Something went wrong";
+                scope.error = gettextCatalog.getString("Something went wrong", null, "Nice");
                 scope.loading = false;
                 scope.imageSource = null;
               }
@@ -4755,9 +4704,9 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function($scope, $attrs) {
-        if (!$attrs.yes) { $attrs.yes = 'Yes'; }
-        if (!$attrs.no) { $attrs.no = 'No'; }
+      controller: function($scope, $attrs, gettextCatalog) {
+        if (!$attrs.yes) { $attrs.yes = gettextCatalog.getString('Yes', null, "Nice"); }
+        if (!$attrs.no) { $attrs.no = gettextCatalog.getString('No', null, "Nice"); }
         if (!$attrs.title) { $attrs.title = ''; }
         if (!$attrs.fieldWidth) { $attrs.fieldWidth = 'col-sm-8'; }
         if (!$attrs.labelWidth) { $attrs.labelWidth = 'col-sm-4'; }
@@ -4905,18 +4854,18 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
     "<div class=\"nice-calendar-wrapper\">\n" +
     "<div class=\"header\">\n" +
-    "<i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ translations.prevMonth }}\"></i>\n" +
+    "<i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ 'Previous month' | translate:'Nice' }}\"></i>\n" +
     "<span title=\"{{ month.format('M.YYYY' )}}\">{{ month.format(\"MMMM, YYYY\" )}}</span>\n" +
-    "<i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ translations.nextMonth }}\"></i>\n" +
+    "<i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ 'Next month' | translate:'Nice' }}\"></i>\n" +
     "</div>\n" +
     "<div class=\"week names\">\n" +
-    "<span class=\"day\" translate>{{ translations.mon }}</span>\n" +
-    "<span class=\"day\" translate>{{ translations.tue }}</span>\n" +
-    "<span class=\"day\" translate>{{ translations.wed }}</span>\n" +
-    "<span class=\"day\" translate>{{ translations.thu }}</span>\n" +
-    "<span class=\"day\" translate>{{ translations.fri }}</span>\n" +
-    "<span class=\"day weekend\" translate>{{ translations.sat }}</span>\n" +
-    "<span class=\"day weekend\" translate>{{ translations.sun }}</span>\n" +
+    "<span class=\"day\" translate translate-context=\"Nice\">Mon</span>\n" +
+    "<span class=\"day\" translate translate-context=\"Nice\">Tue</span>\n" +
+    "<span class=\"day\" translate translate-context=\"Nice\">Wed</span>\n" +
+    "<span class=\"day\" translate translate-context=\"Nice\">Thu</span>\n" +
+    "<span class=\"day\" translate translate-context=\"Nice\">Fri</span>\n" +
+    "<span class=\"day weekend\" translate translate-context=\"Nice\">Sat</span>\n" +
+    "<span class=\"day weekend\" translate translate-context=\"Nice\">Sun</span>\n" +
     "</div>\n" +
     "<div class=\"week\" ng-repeat=\"week in weeks\">\n" +
     "<span class=\"day\" title=\"{{ day.date.format('D.M.YYYY') }}\" ng-class=\"{\n" +
@@ -4941,32 +4890,32 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"clearfix\"></div>\n" +
     "<div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
     "<div class=\"time-picker\">\n" +
-    "<select title=\"{{ translations.selectStartTime }}\" class=\"time-picker-hour\" ng-model=\"startDateHour\" ng-change=\"startHourChange(startDateHour)\" ng-options=\"hour for hour in hours\">\n" +
+    "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"startDateHour\" ng-change=\"startHourChange(startDateHour)\" ng-options=\"hour for hour in hours\">\n" +
     "</select>\n" +
     "</div>\n" +
     "<div class=\"time-picker\">\n" +
-    "<select title=\"{{ translations.selectStartTime }}\" class=\"time-picker-minute\" ng-model=\"startDateMinute\" ng-change=\"startMinuteChange(startDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
+    "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"startDateMinute\" ng-change=\"startMinuteChange(startDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
     "</select>\n" +
     "</div>\n" +
     "<div class=\"time-picket-icon\">\n" +
     "<i class=\"fa fa-clock-o\"></i>\n" +
     "</div>\n" +
     "<div class=\"time-picker\">\n" +
-    "<select title=\"{{ translations.selectEndTime }}\" class=\"time-picker-hour\" ng-model=\"endDateHour\" ng-change=\"endHourChange(endDateHour)\" ng-options=\"hour for hour in hours\">\n" +
+    "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"endDateHour\" ng-change=\"endHourChange(endDateHour)\" ng-options=\"hour for hour in hours\">\n" +
     "</select>\n" +
     "</div>\n" +
     "<div class=\"time-picker no-border-right\">\n" +
-    "<select title=\"{{ translations.selectEndTime }}\" class=\"time-picker-minute\" ng-model=\"endDateMinute\" ng-change=\"endMinuteChange(endDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
+    "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"endDateMinute\" ng-change=\"endMinuteChange(endDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
     "</select>\n" +
     "</div>\n" +
     "</div>\n" +
     "<div class=\"nice-selected-dates\">\n" +
     "<div class=\"nice-start-date\">\n" +
-    "<label>{{ translations.start }}</label>\n" +
+    "<label translate translate-context=\"Nice\">Start</label>\n" +
     "<div ng-class=\"startTimeClass\">{{ formatDate(startDate) }}</div>\n" +
     "</div>\n" +
     "<div class=\"nice-end-date\">\n" +
-    "<label>{{ translations.end }}</label>\n" +
+    "<label translate translate-context=\"Nice\">End</label>\n" +
     "<div ng-class=\"endTimeClass\">{{ formatDate(endDate) }}</div>\n" +
     "</div>\n" +
     "<div class=\"clearfix\"></div>\n" +
@@ -5146,14 +5095,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"dtp-wrapper\" ng-show=\"isOpen\">\n" +
     "<div class=\"dtp-buttons-left\">\n" +
     "<div class=\"dtp-buttons-top\">\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectToday()\">Last 24 hours</a>\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectToday()\" translate translate-context=\"Nice\">Last 24 hours</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\" translate translate-context=\"Nice\">Last 7 days</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\" translate translate-context=\"Nice\">Last month</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\" translate translate-context=\"Nice\">This month</a>\n" +
     "</div>\n" +
     "<div class=\"dtp-buttons-bottom\">\n" +
-    "<a class=\"btn btn-danger btn-block\" ng-click=\"close()\">Cancel</a>\n" +
-    "<a class=\"btn btn-success btn-block\" ng-click=\"confirm()\">OK</a>\n" +
+    "<a class=\"btn btn-danger btn-block\" ng-click=\"close()\" translate translate-context=\"Nice\">Cancel</a>\n" +
+    "<a class=\"btn btn-success btn-block\" ng-click=\"confirm()\" translate translate-context=\"Nice\">OK</a>\n" +
     "</div>\n" +
     "</div>\n" +
     "<div class=\"dtp-left\">\n" +
@@ -5190,10 +5139,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"dtp-range-wrapper\" ng-show=\"showDtpRange\">\n" +
     "<div class=\"dtp-layer\">\n" +
     "<div class=\"dtp-buttons-left\">\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(1)\">Last 24 hours</a>\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\">Last 7 days</a>\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\">Last month</a>\n" +
-    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\">This month</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(1)\" translate translate-context=\"Nice\">Last 24 hours</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastNDays(7)\" translate translate-context=\"Nice\">Last 7 days</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectLastMonth()\" translate translate-context=\"Nice\">Last month</a>\n" +
+    "<a class=\"btn btn-primary btn-block\" ng-click=\"selectThisMonth()\" translate translate-context=\"Nice\">This month</a>\n" +
     "</div>\n" +
     "<div class=\"dtp-left\">\n" +
     "<nice-dtp model=\"dateStart\" format=\"{{format}}\" model-format=\"{{modelFormat}}\" date=\"{{date}}\" time=\"{{time}}\" width=\"{{width}}\" enable-ok-buttons=\"{{enableOkButtons}}\" lang=\"{{lang}}\" min-date=\"{{minDate}}\" max-date=\"{{maxDate}}\" week-start=\"{{weekStart}}\" ok-text=\"{{okText}}\" cancel-text=\"{{cancelText}}\" inline=\"true\"></nice-dtp>\n" +
@@ -5202,8 +5151,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-dtp model=\"dateEnd\" format=\"{{format}}\" model-format=\"{{modelFormat}}\" date=\"{{date}}\" time=\"{{time}}\" width=\"{{width}}\" enable-ok-buttons=\"{{enableOkButtons}}\" lang=\"{{lang}}\" min-date=\"{{minDate}}\" max-date=\"{{maxDate}}\" week-start=\"{{weekStart}}\" ok-text=\"{{okText}}\" cancel-text=\"{{cancelText}}\" inline=\"true\"></nice-dtp>\n" +
     "</div>\n" +
     "<div class=\"dtp-buttons-bottom\">\n" +
-    "<a class=\"btn btn-danger btn-block margin-right-20\" ng-click=\"cancelClick()\">Cancel</a>\n" +
-    "<a class=\"btn btn-success btn-block\" ng-click=\"okClick()\">OK</a>\n" +
+    "<a class=\"btn btn-danger btn-block margin-right-20\" ng-click=\"cancelClick()\" translate translate-context=\"Nice\">Cancel</a>\n" +
+    "<a class=\"btn btn-success btn-block\" ng-click=\"okClick()\" translate translate-context=\"Nice\">OK</a>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5258,9 +5207,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span ng-if=\"internalSelected.color_hex_code\" class=\"dropdown-color\" ng-style=\"{'background': internalSelected.color_hex_code}\"></span>\n" +
     "<span ng-if=\"!multiple\">{{ getLabel(internalSelected) }}</span>\n" +
     "<span ng-if=\"multiple\">\n" +
-    "<span ng-if=\"internalSelected.length  > 1\">{{ internalSelected.length }}<translate>selected</translate></span>\n" +
+    "<span ng-if=\"internalSelected.length  > 1\">{{ internalSelected.length }}<translate translate-context=\"Nice\">selected</translate></span>\n" +
     "<span ng-if=\"internalSelected.length  == 1\">{{ getLabel(internalSelected[0]) }}</span>\n" +
-    "<span ng-if=\"internalSelected.length == 0\" translate>None</span>\n" +
+    "<span ng-if=\"internalSelected.length == 0\" translate translate-context=\"Nice\">None</span>\n" +
     "</span>\n" +
     "<span class=\"caret\"></span>\n" +
     "</button>\n" +
@@ -5451,12 +5400,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span class=\"input-group-addon\" ng-if=\"symbol\">{{ symbol }}</span>\n" +
     "</div>\n" +
     "<div ng-if=\"forma.$error && forma.$dirty\">\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate>Email is not valid.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\" translate>This field requires a specific pattern.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.minlength\"><translate>Your input is too short. It must contain at least</translate>{{ minlength }}<translate>characters</translate>.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.maxlength\" translate>Your input is too long</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.required\" ng-if=\"forma.$dirty\" translate>This field is required.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.unique\" translate>This field must be unique.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate translate-context=\"Nice\">Email is not valid.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\" translate translate-context=\"Nice\">This field requires a specific pattern.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$error.minlength\"><translate translate-context=\"Nice\">Your input is too short. It must contain at least</translate>{{ minlength }}<translate translate-context=\"Nice\">characters</translate>.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$error.maxlength\" translate translate-context=\"Nice\">Your input is too long</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$error.required\" ng-if=\"forma.$dirty\" translate translate-context=\"Nice\">This field is required.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$error.unique\" translate translate-context=\"Nice\">This field must be unique.</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5480,10 +5429,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-loader/nice-loader.html',
-    "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"addClass\">\n" +
+    "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"[addClass, { 'nice-loader-fullscreen': fullscreen, 'nice-loader-fulldiv': fulldiv }]\">\n" +
     "<svg version=\"1.1\" id=\"loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
     "<path fill=\"#000\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\n" +
     "</svg>\n" +
+    "<div class=\"nice-loader-message\" ng-if=\"message\">{{ message }}</div>\n" +
+    "<ng-transclude></ng-transclude>\n" +
     "</div>"
   );
 
@@ -5514,11 +5465,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</span>\n" +
     "</div>\n" +
     "<div class=\"error-messages\" ng-if=\"form.$error && !hideError\" ng-class=\"{ 'floating-error': floatingError }\">\n" +
-    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.number\" translate>This field requires a number</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.min\"><translate>Minimum value is</translate>{{ min }}</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.max\"><translate>Maximum value is</translate>{{ max }}</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.zero\"><translate>0 is not allowed</translate></div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.noValue && !form.$error.zero && !form.$error.min && !form.$error.max\"><translate>Value is missing</translate></div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.number\" translate translate-context=\"Nice\">This field requires a number</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.min\"><translate translate-context=\"Nice\">Minimum value is</translate>{{ min }}</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.max\"><translate translate-context=\"Nice\">Maximum value is</translate>{{ max }}</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.zero\"><translate translate-context=\"Nice\">0 is not allowed</translate></div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$error.noValue && !form.$error.zero && !form.$error.min && !form.$error.max\"><translate translate-context=\"Nice\">Value is missing</translate></div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5543,8 +5494,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span class=\"input-group-addon\">%</span>\n" +
     "</div>\n" +
     "<div ng-if=\"form.$error\">\n" +
-    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.pattern\">This field requires a specific pattern.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.required\">This field is required.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.pattern\" translate translate-context=\"Nice\">This field requires a specific pattern.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.required\" translate translate-context=\"Nice\">This field is required.</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5623,7 +5574,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\"></div>\n" +
     "<div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"nice-dropdown-empty\" ng-if=\"noResults\">\n" +
-    "<div class=\"nice-search-row\">No results found.</div>\n" +
+    "<div class=\"nice-search-row\" translate translate-context=\"Nice\">No results found.</div>\n" +
     "</div>\n" +
     "<div class=\"nice-dropdown\" ng-if=\"results.length\">\n" +
     "<div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectRow(result)\">\n" +
@@ -5654,7 +5605,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-search-row nice-search-row-loading\" ng-if=\"loading && results.length == 0\">\n" +
     "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
     "</div>\n" +
-    "<div class=\"nice-search-row nice-search-row-empty\" ng-if=\"!loading && results.length == 0\">No results found.</div>\n" +
+    "<div class=\"nice-search-row nice-search-row-empty\" ng-if=\"!loading && results.length == 0\" translate translate-context=\"Nice\">No results found.</div>\n" +
     "<div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectItem(result)\">\n" +
     "<ng-transclude>{{ result[keyForInputLabel] }}</ng-transclude>\n" +
     "</div>\n" +

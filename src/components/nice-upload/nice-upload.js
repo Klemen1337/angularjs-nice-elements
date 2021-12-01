@@ -7,7 +7,7 @@
  * # niceUpload
  */
  angular.module('niceElements')
-   .directive('niceUpload', function ($timeout) {
+   .directive('niceUpload', function ($timeout, gettextCatalog) {
     return {
       restrict: 'E',
       replace: true,
@@ -30,9 +30,9 @@
         help: '@'
       },
 
-      link: function(scope, element, attrs, ctrl){
+      link: function(scope, element, attrs){
         if (!attrs.title) { attrs.title = ''; }
-        if (!attrs.text) { attrs.text = 'Click to upload file'; }
+        if (!attrs.text) { attrs.text = gettextCatalog.getString('Click to upload file', null, 'Nice'); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
@@ -91,7 +91,7 @@
                       }
                     } else {
                       // Handle file too big error
-                      scope.error = "File must be smaller than 1MB";
+                      scope.error = gettextCatalog.getString("File must be smaller than 1MB", null, "Nice");
                       scope.loading = false;
                       scope.imageSource = null;
                     }
@@ -100,7 +100,7 @@
 
               } catch (err) {
                 // Handle try catch
-                scope.error = "Something went wrong";
+                scope.error = gettextCatalog.getString("Something went wrong", null, "Nice");
                 scope.loading = false;
                 scope.imageSource = null;
               }
