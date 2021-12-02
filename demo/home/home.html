@@ -118,6 +118,7 @@ pre{
                         min="1"
                         max="10"
                         required="true"
+                        is-inline="isInline"
                     ></nice-number>                    
                     
                     <nice-number 
@@ -128,6 +129,7 @@ pre{
                         prevent-zero="true"
                         default-value="1"
                         floating-error="true"
+                        is-inline="isInline"
                     ></nice-number>
 
                     <nice-search2
@@ -200,7 +202,7 @@ pre{
                         is-inline="isInline"
                     ></nice-date>
 
-                    <nice-slot>
+                    <nice-slot is-inline="isInline">
                         <pre>{{ data.niceDate2 }}</pre>
                         <button class="btn btn-primary" ng-click="changeDate(false)">Prev</button>
                         <button class="btn btn-primary" ng-click="changeDate(true)">Next</button>
@@ -657,7 +659,7 @@ pre{
                     </nice-slot>
 
                     <nice-slot is-inline="isInline">
-                        <button class="btn btn-primary" ng-click="isInline = !isInline">Toggle inline ({{ isInline }})</button>
+                        <button class="btn btn-primary" ng-click="toggleInline()">Toggle inline ({{ isInline }})</button>
                     </nice-slot>
                 </div>
 
@@ -670,7 +672,8 @@ pre{
                     <nice-loader fulldiv="true" message="Loading something good..." ng-if="showLoading">
                         <button class="btn btn-sm btn-primary" style="margin-top: 5px;" ng-click="toggleLoading()">Close</button>
                     </nice-loader>
-                    <button class="btn btn-sm btn-primary" ng-click="toggleLoading()">Open loading</button>
+                    <button class="btn btn-sm btn-primary" ng-click="toggleLoading()" nice-tooltip="Is inline: {{ isInline }}">Open loading</button>
+                    <div nice-tooltip="This is a nice tooltip example">Test</button>
                 </div>
             </div>
         </div>
