@@ -20,7 +20,7 @@
     "decimal.js": "4.0.3",
     "font-awesome": "4.3.0",
     "lodash": "3.9.3",
-    "moment": "2.24.0"
+    "moment": "2.29.2"
   },
   "devDependencies": {
     "express": "4.17.1",
