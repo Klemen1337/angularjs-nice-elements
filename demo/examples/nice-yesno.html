@@ -1,0 +1,75 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice yes no</h1>
+
+    <div class="white-wrapper" id="nice-yes-no">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>yes</td>
+                        <td>Set the yes text</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>no</td>
+                        <td>Set the no text</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>options</td>
+                        <td>Custom options instead of true/false, format:['yes','no']</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>model-value</td>
+                        <td>Gets the custom option instead of true/false</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>defaultFalse</td>
+                        <td>sets default value to false</td>
+                        <td>false</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?">&lt;/nice-yesno></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?"></nice-yesno>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ yesNoDemo }}</code>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-yesno
+    model="yesNoDemo2"
+    yes="Bleerp"
+    no="Woorp"
+    model-value="yesNoModelDemo"
+    options="['PERSON','COMPANY']"
+    title="Bloop?">
+&lt;/nice-yesno></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-yesno model="yesNoDemo2" yes="Bleerp" no="Woorp" model-value="yesNoModelDemo" options="['PERSON','COMPANY']" title="Bloop?"></nice-yesno>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ yesNoModelDemo }}</code>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice input</h1>
+
+    <div class="white-wrapper" id="nice-input">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>type</td>
+                        <td>Sets the input field type</td>
+                        <td>text</td>
+                    </tr>
+                    <tr>
+                        <td>regex</td>
+                        <td></td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>placeholder</td>
+                        <td></td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>minlength</td>
+                        <td>Sets the max character length</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>maxlength</td>
+                        <td>Sets the min character length</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>hideValid</td>
+                        <td>Hides valid check symbol</td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>showValid</td>
+                        <td>wtf</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>textAreaLines</td>
+                        <td>Sets text area number of lines</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>textArea</td>
+                        <td>Sets input field to text area</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>symbol</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>help</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>minDecimalsCutZeros</td>
+                        <td>Use this field to tell how much decimal places must always be, even if number is ceil.
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint lang-html">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Text" model="inputText"></nice-input>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ inputText }}</code>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-input title="Number" model="inputNumber" type="number">&lt;/nice-input></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Number" model="inputNumber" type="number"></nice-input>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ inputNumber }}</code>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-input title="Email" model="inputEmail" type="email">&lt;/nice-input></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Email" model="inputEmail" type="email"></nice-input>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ inputEmail }}</code>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-input title="Textarea" model="inputTextArea" text-area="true">&lt;/nice-input></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Textarea" model="inputTextArea" text-area="true"></nice-input>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ inputTextArea }}</code>
+            </div>
+        </div>
+    </div>
+</div>

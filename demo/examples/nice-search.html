@@ -1,0 +1,69 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice search</h1>
+
+    <div class="white-wrapper" id="nice-search">
+        <pre class="prettyprint">&lt;nice-search >&lt;/nice-search></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-search refresh-function="getAddresses" model="searchItem" field-width="col-xs-12" placeholder="Search item" show-dropdown="true" key-for-input-label="formatted_address">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div ng-if="results" class="nice-dropdown">
+                                <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
+                                    <span class="text-bold">{{ result.formatted_address }}</span>
+                                    <div>{{ result.geometry.location.lat }}</div>
+                                    <div>{{ result.geometry.location.lng }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nice-search>
+            </div>
+
+            <div class="col-sm-6">
+                <pre>{{ searchItem | json }}</pre>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-search model="searchItem" refresh-function="getAddresses" field-width="col-xs-12" placeholder="Search item" show-dropdown="true" key-for-input-label="formatted_address">
+                    <span class="text-bold">{{ result.formatted_address }}</span>
+                    <div>{{ result.geometry.location.lat }}</div>
+                    <div>{{ result.geometry.location.lng }}</div>
+                </nice-search>
+            </div>
+
+            <div class="col-sm-6">
+                <pre>{{ searchItem | json }}</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-search refresh-function="getAddresses" model="searchItem" field-width="col-xs-12" placeholder="Search item" key-for-input-label="formatted_address">
+                </nice-search>
+            </div>
+
+            <div class="col-sm-6">
+                <pre>{{ searchItem | json }}</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-search refresh-function="resolve" model="searchText" field-width="col-xs-12" placeholder="Search item">
+                </nice-search>
+            </div>
+
+            <div class="col-sm-6">
+                <pre>{{ searchText | json }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice time picker</h1>
+
+    <div class="white-wrapper" id="nice-time-picker">
+        <pre class="prettyprint">&lt;nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"&lt;/nice-time-picker></pre>
+        <div class="row" ng-form="forma">
+            <div class="col-sm-6">
+                <nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"></nice-time-picker>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dtTime | json }}</pre>
+                <button ng-click="change_hour()">Change hour</button>
+            </div>
+
+            <pre>{{ forma | json }}</pre>
+        </div>
+    </div>
+</div>

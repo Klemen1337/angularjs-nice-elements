@@ -1,0 +1,132 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice date time picker</h1>
+
+    <div class="white-wrapper" id="nice-date-time">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>model</td>
+                        <td>Binding model</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>format</td>
+                        <td>String, datetime format for input label</td>
+                        <td>DD.MM.YYYY HH:mm</td>
+                    </tr>
+                    <tr>
+                        <td>date</td>
+                        <td>Boolean, is datepicker enabled</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>time</td>
+                        <td>Boolean, is timepicker enabled</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>width</td>
+                        <td>String, width of entire dtp-picker</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>enable-ok-buttons</td>
+                        <td>Boolean, is ok/cancel buttons enabled</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>lang</td>
+                        <td>String, which locale to use - you must load angular locales first</td>
+                        <td>en</td>
+                    </tr>
+                    <tr>
+                        <td>min-date</td>
+                        <td>String, minimum date (use: 2011-09-01T13:20:30+03:00 for example)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>max-date</td>
+                        <td>String, maximum date (use: 2011-09-01T13:20:30+03:00 for example)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>week-start</td>
+                        <td>String, which day does the week start (0-sunday, 1-monday, ...)</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>ok-text</td>
+                        <td>String, text on OK button</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>cancel-text</td>
+                        <td>String, text on CANCEL button</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>String, title before input</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>field-width</td>
+                        <td>String, bootstrap classes that defines width of field</td>
+                        <td>col-sm-8</td>
+                    </tr>
+                    <tr>
+                        <td>label-width</td>
+                        <td>String, bootstrap classes that defines width of label</td>
+                        <td>col-sm-4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-datetime-picker
+    model="dateTimePicker"
+    title="Date picker"
+    date="true"
+    time="false"
+    format="DD.MM.YYYY">
+&lt;/nice-datetime-picker></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetime-picker model="dateTimePicker" title="Date picker" date="true" time="false" format="DD.MM.YYYY" model-format="DD-MM-YYYY HH:mmZZ">
+                </nice-datetime-picker>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dateTimePicker | json }}</pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-datetime-picker
+    model="dateTimePicker"
+    title="Datetime picker"
+    date="true"
+    time="true"
+    format="DD.MM.YYYY • HH:mm">
+&lt;/nice-datetime-picker></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetime-picker model="dateTimePicker4" title="Datetime picker" date="true" time="true" model-format="DD-MM-YYYY HH:mmZZ" format="DD.MM.YYYY • HH:mm">
+                </nice-datetime-picker>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dateTimePicker | json }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

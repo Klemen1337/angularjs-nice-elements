@@ -1,0 +1,59 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice date range</h1>
+
+    <div class="white-wrapper" id="nice-date-range">
+        <h2>Nice date range v2</h2>
+        <pre class="prettyprint">&lt;nice-datetimerange-picker2
+    start-date="dtStart"
+    end-date="dtEnd"
+    title="Date range"
+    field-width="col-sm-8"
+    time="true">
+&lt;/nice-date-range2></pre>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetimerange-picker2 start-date="dtp2.startDate" end-date="dtp2.endDate" title="Datetime range picker 2" time="true"></nice-datetimerange-picker2>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dtp2 | json }}</pre>
+            </div>
+
+            <div class="col-sm-6">
+                <nice-datetimerange-picker2 start-date="dtp3.startDate" end-date="dtp3.endDate" title="Datetime range picker 3"></nice-datetimerange-picker2>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dtp3 | json }}</pre>
+            </div>
+        </div>
+    </div>
+
+
+    <!-------------------------------- NICE DATE RANGE -------------------------------->
+    <div class="white-wrapper">
+        <h2>Nice date range</h2>
+        <pre class="prettyprint">&lt;nice-datetimerange-picker
+    model-start="dtStart"
+    model-end="dtEnd"
+    title="Date range"
+    field-width="col-sm-8"
+    date="true"
+    time="true">
+&lt;/nice-date-range></pre>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetimerange-picker model-start="dtStart" model-end="dtEnd" title="Date range" field-width="col-sm-8" date="true" time="true">
+                </nice-datetimerange-picker>
+
+
+                <nice-datetimerange-picker model-start="dtStart2" model-end="dtEnd2" title="Date range 2" field-width="col-sm-8" date="true" format-output="true" time="true">
+                </nice-datetimerange-picker>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dtStart }}<br> {{ dtEnd }}</pre>
+                <pre>{{ dtStart2 }}<br> {{ dtEnd2 }}</pre>
+            </div>
+        </div>
+    </div>
+</div>
