@@ -48,7 +48,6 @@
 
                 <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4" help="This is a test" on-change="handleChange(model)" is-inline="isInline"></nice-yesno>
 
-
                 <nice-dropdown title="Country (value)" model="data.dropdownCountryKey" list="countries" no-options-text="Brez opcij" obj-key="iso" loading="dropdownLoading" add-button-function="setSlovenia" nullable="true" on-change="handleChange(model)" selected-is-key="true" clear-on-select="true" is-disabled="data.disabled" help="This is a test" is-inline="isInline">
                     <nice-dropdown-button>
                         <!-- <img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> --><span>{{

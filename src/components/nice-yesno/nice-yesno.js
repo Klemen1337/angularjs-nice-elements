@@ -38,7 +38,6 @@ angular.module('niceElements')
 
         $scope.defaultFalse = angular.isDefined($scope.defaultFalse);
         $scope.noMargin = angular.isDefined($scope.noMargin);
-        $scope.isDisabled = angular.isDefined($scope.isDisabled);
 
         $scope.buttonClass = "";
         
