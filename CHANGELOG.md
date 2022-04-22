@@ -1,8 +1,15 @@
 # Changelog
 
-## v1.4.0 (1.12.2021)
+## v1.4.2 (22.4.2022)
+
+- created nice-tooltip component,
+- fixed nice-yesno state not visible,
+- worked on demo project
+
+## v1.4.1 (1.12.2021)
 
 - added more translation tags
+
 ## v1.4.0 (1.12.2021)
 
 - added translation tags,
