@@ -4736,18 +4736,17 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function($scope, $attrs, gettextCatalog) {
-        if (!$attrs.yes) { $attrs.yes = gettextCatalog.getString('Yes', null, "Nice"); }
-        if (!$attrs.no) { $attrs.no = gettextCatalog.getString('No', null, "Nice"); }
-        if (!$attrs.title) { $attrs.title = ''; }
-        if (!$attrs.fieldWidth) { $attrs.fieldWidth = 'col-sm-8'; }
-        if (!$attrs.labelWidth) { $attrs.labelWidth = 'col-sm-4'; }
+      controller: function($scope, gettextCatalog) {
+        if (!$scope.yes) { $scope.yes = gettextCatalog.getString('Yes', null, "Nice"); }
+        if (!$scope.no) { $scope.no = gettextCatalog.getString('No', null, "Nice"); }
+        if (!$scope.title) { $scope.title = ''; }
+        if (!$scope.fieldWidth) { $scope.fieldWidth = 'col-sm-8'; }
+        if (!$scope.labelWidth) { $scope.labelWidth = 'col-sm-4'; }
         if(!angular.isDefined($scope.model) && !angular.isDefined($scope.options)) $scope.model = !angular.isDefined($scope.defaultFalse);
         if(!angular.isDefined($scope.modelValue) && angular.isDefined($scope.options)) $scope.modelValue = $scope.options[0];
 
-        $attrs.defaultFalse = angular.isDefined($attrs.defaultFalse);
-        $attrs.noMargin = angular.isDefined($attrs.noMargin);
-        $attrs.isDisabled = angular.isDefined($attrs.isDisabled);
+        $scope.defaultFalse = angular.isDefined($scope.defaultFalse);
+        $scope.noMargin = angular.isDefined($scope.noMargin);
 
         $scope.buttonClass = "";
         
