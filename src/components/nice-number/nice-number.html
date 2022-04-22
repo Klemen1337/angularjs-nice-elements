@@ -1,4 +1,4 @@
-<div class="nice-component nice-number" ng-form="form" ng-class="{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }">
+<div class="nice-component nice-number" ng-form="niceNumberForm" ng-class="{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }">
     <div ng-class="{'row' : !disableRow}">
         <!------------------------- Label ------------------------->
         <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
@@ -8,8 +8,7 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-            <div class="input-group"
-                ng-class="{'has-warning': !disabled && form.$invalid && form.$dirty}">
+            <div class="input-group" ng-class="{'has-warning': !disabled && niceNumberForm.$invalid && niceNumberForm.$dirty}">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-disabled="!canSubstract" ng-click="subtract()">-</button>
                 </span>
@@ -20,13 +19,21 @@
                     <button class="btn btn-default" type="button" ng-disabled="!canAdd" ng-click="add()">+</button>
                 </span>
             </div>
-            
-            <div class="error-messages" ng-if="form.$error && !hideError" ng-class="{ 'floating-error': floatingError }">
-                <div class="error-message" ng-if="form.$dirty && form.$error.number" translate translate-context="Nice">This field requires a number</div>
-                <div class="error-message" ng-if="form.$error.min"><translate translate-context="Nice">Minimum value is</translate> {{ min }}</div>
-                <div class="error-message" ng-if="form.$error.max"><translate translate-context="Nice">Maximum value is</translate> {{ max }}</div>
-                <div class="error-message" ng-if="form.$error.zero"><translate translate-context="Nice">0 is not allowed</translate></div>
-                <div class="error-message" ng-if="form.$error.noValue && !form.$error.zero && !form.$error.min && !form.$error.max"><translate translate-context="Nice">Value is missing</translate></div>
+
+            <div class="error-messages" ng-if="niceNumberForm.$error && !hideError" ng-class="{ 'floating-error': floatingError }">
+                <div class="error-message" ng-if="niceNumberForm.$dirty && niceNumberForm.$error.number" translate translate-context="Nice">This field requires a number</div>
+                <div class="error-message" ng-if="niceNumberForm.$error.min">
+                    <translate translate-context="Nice">Minimum value is</translate> {{ min }}
+                </div>
+                <div class="error-message" ng-if="niceNumberForm.$error.max">
+                    <translate translate-context="Nice">Maximum value is</translate> {{ max }}
+                </div>
+                <div class="error-message" ng-if="niceNumberForm.$error.zero">
+                    <translate translate-context="Nice">0 is not allowed</translate>
+                </div>
+                <div class="error-message" ng-if="niceNumberForm.$error.no-value && !niceNumberForm.$error.zero && !niceNumberForm.$error.min && !niceNumberForm.$error.max">
+                    <translate translate-context="Nice">Value is missing</translate>
+                </div>
             </div>
         </div>
     </div>

@@ -3674,7 +3674,7 @@ angular.module('niceElements')
 
         // Link form object with valid object
         if ($scope.valid) {
-          $scope.valid = $scope.form;
+          $scope.valid = $scope.forma;
         }
 
         // Fix min
@@ -3718,9 +3718,9 @@ angular.module('niceElements')
         // Check canAdd or canSubtract
         $scope.check = function() {
           if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
-            $scope.form.$setValidity("noValue", false);
+            $scope.niceNumberForm.$setValidity("no-value", false);
           } else {
-            $scope.form.$setValidity("noValue", null);
+            $scope.niceNumberForm.$setValidity("no-value", null);
           }
 
           if ($scope.min && parseFloat($scope.model) <= $scope.min) {
@@ -3738,9 +3738,9 @@ angular.module('niceElements')
           }
 
           if ($scope.preventZero && parseFloat($scope.model) == 0) {
-            $scope.form.$setValidity("zero", false);
+            $scope.niceNumberForm.$setValidity("zero", false);
           } else {
-            $scope.form.$setValidity("zero", null);
+            $scope.niceNumberForm.$setValidity("zero", null);
           }
 
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
@@ -3771,11 +3771,11 @@ angular.module('niceElements')
           if ($scope.max) {
             if (result <= parseFloat($scope.max)) {
               $scope.model = result;
-              $scope.form.$setDirty();
+              $scope.niceNumberForm.$setDirty();
             }
           } else {
             $scope.model = result;
-            $scope.form.$setDirty();
+            $scope.niceNumberForm.$setDirty();
           }
           $scope.check();
         };
@@ -3786,7 +3786,7 @@ angular.module('niceElements')
           var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).minus($scope.step).toNumber();
           if (result >= Number($scope.min)) {
             $scope.model = result;
-            $scope.form.$setDirty();
+            $scope.niceNumberForm.$setDirty();
           }
           $scope.check();
         };
@@ -5479,14 +5479,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-number/nice-number.html',
-    "<div class=\"nice-component nice-number\" ng-form=\"form\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
+    "<div class=\"nice-component nice-number\" ng-form=\"niceNumberForm\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
     "<div ng-class=\"{'row' : !disableRow}\">\n" +
     "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "<div class=\"input-group\" ng-class=\"{'has-warning': !disabled && form.$invalid && form.$dirty}\">\n" +
+    "<div class=\"input-group\" ng-class=\"{'has-warning': !disabled && niceNumberForm.$invalid && niceNumberForm.$dirty}\">\n" +
     "<span class=\"input-group-btn\">\n" +
     "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\">-</button>\n" +
     "</span>\n" +
@@ -5495,12 +5495,20 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
     "</span>\n" +
     "</div>\n" +
-    "<div class=\"error-messages\" ng-if=\"form.$error && !hideError\" ng-class=\"{ 'floating-error': floatingError }\">\n" +
-    "<div class=\"error-message\" ng-if=\"form.$dirty && form.$error.number\" translate translate-context=\"Nice\">This field requires a number</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.min\"><translate translate-context=\"Nice\">Minimum value is</translate>{{ min }}</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.max\"><translate translate-context=\"Nice\">Maximum value is</translate>{{ max }}</div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.zero\"><translate translate-context=\"Nice\">0 is not allowed</translate></div>\n" +
-    "<div class=\"error-message\" ng-if=\"form.$error.noValue && !form.$error.zero && !form.$error.min && !form.$error.max\"><translate translate-context=\"Nice\">Value is missing</translate></div>\n" +
+    "<div class=\"error-messages\" ng-if=\"niceNumberForm.$error && !hideError\" ng-class=\"{ 'floating-error': floatingError }\">\n" +
+    "<div class=\"error-message\" ng-if=\"niceNumberForm.$dirty && niceNumberForm.$error.number\" translate translate-context=\"Nice\">This field requires a number</div>\n" +
+    "<div class=\"error-message\" ng-if=\"niceNumberForm.$error.min\">\n" +
+    "<translate translate-context=\"Nice\">Minimum value is</translate>{{ min }}\n" +
+    "</div>\n" +
+    "<div class=\"error-message\" ng-if=\"niceNumberForm.$error.max\">\n" +
+    "<translate translate-context=\"Nice\">Maximum value is</translate>{{ max }}\n" +
+    "</div>\n" +
+    "<div class=\"error-message\" ng-if=\"niceNumberForm.$error.zero\">\n" +
+    "<translate translate-context=\"Nice\">0 is not allowed</translate>\n" +
+    "</div>\n" +
+    "<div class=\"error-message\" ng-if=\"niceNumberForm.$error.no-value && !niceNumberForm.$error.zero && !niceNumberForm.$error.min && !niceNumberForm.$error.max\">\n" +
+    "<translate translate-context=\"Nice\">Value is missing</translate>\n" +
+    "</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

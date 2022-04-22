@@ -41,7 +41,7 @@ angular.module('niceElements')
 
         // Link form object with valid object
         if ($scope.valid) {
-          $scope.valid = $scope.form;
+          $scope.valid = $scope.forma;
         }
 
         // Fix min
@@ -85,9 +85,9 @@ angular.module('niceElements')
         // Check canAdd or canSubtract
         $scope.check = function() {
           if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
-            $scope.form.$setValidity("noValue", false);
+            $scope.niceNumberForm.$setValidity("no-value", false);
           } else {
-            $scope.form.$setValidity("noValue", null);
+            $scope.niceNumberForm.$setValidity("no-value", null);
           }
 
           if ($scope.min && parseFloat($scope.model) <= $scope.min) {
@@ -105,9 +105,9 @@ angular.module('niceElements')
           }
 
           if ($scope.preventZero && parseFloat($scope.model) == 0) {
-            $scope.form.$setValidity("zero", false);
+            $scope.niceNumberForm.$setValidity("zero", false);
           } else {
-            $scope.form.$setValidity("zero", null);
+            $scope.niceNumberForm.$setValidity("zero", null);
           }
 
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
@@ -138,11 +138,11 @@ angular.module('niceElements')
           if ($scope.max) {
             if (result <= parseFloat($scope.max)) {
               $scope.model = result;
-              $scope.form.$setDirty();
+              $scope.niceNumberForm.$setDirty();
             }
           } else {
             $scope.model = result;
-            $scope.form.$setDirty();
+            $scope.niceNumberForm.$setDirty();
           }
           $scope.check();
         };
@@ -153,7 +153,7 @@ angular.module('niceElements')
           var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).minus($scope.step).toNumber();
           if (result >= Number($scope.min)) {
             $scope.model = result;
-            $scope.form.$setDirty();
+            $scope.niceNumberForm.$setDirty();
           }
           $scope.check();
         };
