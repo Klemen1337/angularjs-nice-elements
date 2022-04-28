@@ -9,13 +9,12 @@ angular.module('niceElementsDemo', [
   'niceElements'
 ]).config(['$routeProvider', '$locationProvider', '$compileProvider', function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(false);
-  var staticPath;
-  staticPath = '/';
+  var staticPath = '/';
   var appPathRoute = '/';
   var pagesPath = staticPath + 'demo/';
 
-  $routeProvider.when(appPathRoute + 'home', { templateUrl: pagesPath + 'home/home.html' });
   $routeProvider.otherwise({ redirectTo: appPathRoute + 'home' });
+  $routeProvider.when(appPathRoute + 'home', { templateUrl: pagesPath + 'home/home.html' });
 
   $routeProvider.when(appPathRoute + 'nice-input', { templateUrl: pagesPath + 'examples/nice-input.html' });
   $routeProvider.when(appPathRoute + 'nice-dropdown', { templateUrl: pagesPath + 'examples/nice-dropdown.html' });
@@ -30,4 +29,5 @@ angular.module('niceElementsDemo', [
   $routeProvider.when(appPathRoute + 'nice-number', { templateUrl: pagesPath + 'examples/nice-number.html' });
   $routeProvider.when(appPathRoute + 'nice-checkbox', { templateUrl: pagesPath + 'examples/nice-checkbox.html' });
   $routeProvider.when(appPathRoute + 'nice-button', { templateUrl: pagesPath + 'examples/nice-button.html' });
+  $routeProvider.when(appPathRoute + 'nice-calendar', { templateUrl: pagesPath + 'examples/nice-calendar.html' });
 }]);

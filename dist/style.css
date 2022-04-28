@@ -2409,12 +2409,12 @@ p.nice {
 }
 
 .nice-calendar .nice-selected-dates {
-  padding: 5px 10px;
+  padding: 0 10px 5px 10px;
+  display: flex;
 }
 
 .nice-calendar .nice-selected-dates .nice-start-date, .nice-calendar .nice-selected-dates .nice-end-date {
   width: 50%;
-  float: left;
   color: #404040;
   transition: all 0.3s ease;
 }
@@ -2422,20 +2422,20 @@ p.nice {
 .nice-calendar .nice-selected-dates .nice-start-date label, .nice-calendar .nice-selected-dates .nice-end-date label {
   font-size: 9px;
   font-weight: normal;
-}
-
-.nice-calendar .nice-selected-dates .nice-start-date {
-  padding-right: 10px;
+  margin: 0;
+  line-height: 1;
 }
 
 .nice-calendar .nice-selected-dates .nice-end-date {
-  padding-left: 10px;
   text-align: right;
 }
 
+.nice-calendar .nice-calendar-weeks {
+  border-bottom: 1px solid #cbd4d9;
+}
+
 .nice-calendar .nice-calendar-time {
-  border-top: 1px solid #cbd4d9;
-  position: relative;
+  display: flex;
 }
 
 .nice-calendar .nice-calendar-time .no-border-right .time-picker-minute {
@@ -2445,7 +2445,6 @@ p.nice {
 .nice-calendar .nice-calendar-time .time-picker {
   position: relative;
   width: 20%;
-  float: left;
   height: 30px;
 }
 
@@ -2543,7 +2542,7 @@ p.nice {
 }
 
 .nice-calendar .nice-calendar-wrapper .week {
-  float: left;
+  display: flex;
   width: 100%;
   border-top: solid 1px #cbd4d9;
 }
@@ -2554,7 +2553,6 @@ p.nice {
 
 .nice-calendar .nice-calendar-wrapper .week .day {
   position: relative;
-  float: left;
   width: 14.28571%;
   height: 25px;
   line-height: 25px;

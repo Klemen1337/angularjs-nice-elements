@@ -2,34 +2,34 @@
   display: block;
 
   .nice-selected-dates {
-    padding: 5px 10px;
+    padding: 0 10px 5px 10px;
+    display: flex;
 
     .nice-start-date, .nice-end-date{
       width: 50%;
-      float: left;
       color: $nice-font-color;
       transition: all 0.3s ease;
 
       label{
         font-size: 9px;
         font-weight: normal;
+        margin: 0;
+        line-height: 1;
       }
     }
 
-    .nice-start-date{
-      padding-right: 10px;
-    }
-
-    .nice-end-date{
-      padding-left: 10px;
+    .nice-end-date {
       text-align: right;
     }
   }
 
+  .nice-calendar-weeks {
+    border-bottom: 1px solid $nice-border-color;
+  }
 
-  .nice-calendar-time{
-    border-top: 1px solid $nice-border-color;
-    position: relative;
+
+  .nice-calendar-time {
+    display: flex;
 
     .no-border-right{
       .time-picker-minute{
@@ -40,7 +40,6 @@
     .time-picker{
       position: relative;
       width: 20%;
-      float: left;
       height: 30px;
 
       &:after{
@@ -145,7 +144,7 @@
     }
 
     .week {
-      float: left;
+      display: flex;
       width: 100%;
       border-top: solid 1px $nice-border-color;
 
@@ -155,7 +154,6 @@
 
       .day {
         position: relative;
-        float: left;
         width: $day-width;
         height: $day-height;
         line-height: $day-height;

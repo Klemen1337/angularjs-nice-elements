@@ -1,0 +1,104 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice calendar</h1>
+
+    <div class="white-wrapper" id="nice-calendar">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>startDate</td>
+                        <td>Start date model</td>
+                        <td>null</td>
+                    </tr>
+
+                    <tr>
+                        <td>endDate</td>
+                        <td>End date model</td>
+                        <td>null</td>
+                    </tr>
+
+                    <tr>
+                        <td>time</td>
+                        <td>Show time select</td>
+                        <td>false</td>
+                    </tr>
+
+                    <tr>
+                        <td>minDate</td>
+                        <td>Minimum date</td>
+                        <td>null</td>
+                    </tr>
+
+                    <tr>
+                        <td>maxDate</td>
+                        <td>Max date</td>
+                        <td>null</td>
+                    </tr>
+
+                    <tr>
+                        <td>hideHover</td>
+                        <td>Hide help texts</td>
+                        <td>false</td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>change the color of date range</td>
+                        <td>null</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-calendar start-date="calendarDemoStart" end-date="calendarDemoEnd" min-date="minDate" max-date="maxDate" time="true" title="Calendar with time" color="#AA0000" on-change="calendarChange(model)"></nice-calendar>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint mb-10">
+&lt;nice-calendar
+    start-date="calendarDemoStart"
+    end-date="calendarDemoEnd"
+    time="true"
+    color="#AA0000"
+    min-date="minDate"
+    max-date="maxDate"
+    title="Calendar with time">
+&lt;/nice-calendar></pre>
+
+                <code>{{ calendarDemoStart }}</code>
+                <code>{{ calendarDemoEnd }}</code>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-calendar start-date="calendarDemo2start" end-date="calendarDemo2end" time="false" hide-hover="true" title="Calendar no time" on-change="calendarChange(model)"></nice-calendar>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint mb-10">
+&lt;nice-calendar
+    start-date="calendarDemo2start"
+    end-date="calendarDemo2end"
+    time="false"
+    hide-hover="true"
+    title="Calendar no time">
+&lt;/nice-calendar></pre>
+
+                <code>{{ calendarDemo2start }}</code>
+                <code>{{ calendarDemo2end }}</code>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,64 +1,91 @@
-body{
+body {
   background: #f7fcfc;
 }
 
-html { font-size: 62.5%; }
-body { font-size: 14px; font-size: 1.4rem; } /* =14px */
-h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 14px;
+  font-size: 1.4rem;
+} /* =14px */
+h1 {
+  font-size: 24px;
+  font-size: 2.4rem;
+} /* =24px */
 
-.mb-10{
-margin-bottom: 10px;
+.mb-10 {
+  margin-bottom: 10px;
 }
 
-h1{
-  text-align:center;
+h1 {
+  text-align: center;
   font-size: 60px;
   margin: 30px;
-  margin-top:80px;
+  margin-top: 80px;
   color: #3189ff;
   font-weight: bold;
 }
 
-.white-wrapper{
-  border: 1px solid #cbd4d9;
+.white-wrapper {
+  border: 1px
+    solid
+    #cbd4d9;
   padding: 4rem;
   background: white;
   border-radius: 3px;
   margin-bottom: 4rem;
 }
 
-.white-wrapper h2{
-  margin: 0 0 25px 0;
+.white-wrapper
+  h2 {
+  margin: 0
+    0
+    25px
+    0;
 }
 
-.navbar-default{
+.navbar-default {
   background: #3189ff;
   color: white;
 }
 
-.navbar-default .navbar-brand{
+.navbar-default
+  .navbar-brand {
   color: white;
   background: #187aff;
 }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+.navbar-default
+  .navbar-nav
+  > li
+  > a:hover,
+.navbar-default
+  .navbar-nav
+  > li
+  > a:focus {
   color: white;
   background: #187aff;
 }
 
-.navbar-default .navbar-nav > li > a {
+.navbar-default
+  .navbar-nav
+  > li
+  > a {
   color: white;
 }
 
-pre{
+pre {
   margin-bottom: 20px;
 }
 
-#nice-notification .btn{
+#nice-notification
+  .btn {
   margin-bottom: 20px;
 }
 
-.person-row img {
+.person-row
+  img {
   height: 30px;
   border-radius: 50%;
   margin-right: 1rem;
