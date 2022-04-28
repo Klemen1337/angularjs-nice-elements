@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.4.3 (28.4.2022)
+
+- worked on nice calendar time prop,
+- added nice calendar demo
+
 ## v1.4.2 (22.4.2022)
 
 - created nice-tooltip component,
