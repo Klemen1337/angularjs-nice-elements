@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.4 (1.8.2022)
+
+- fixed nice-calendar update on time select
+
 ## v1.4.3 (28.4.2022)
 
 - worked on nice calendar time prop,
