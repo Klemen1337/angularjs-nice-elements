@@ -69,7 +69,7 @@ angular.module('niceElements')
         function bootstrap() {
           // scope.startDate = moment(scope.startDate.second(0).millisecond(0));
           // scope.endDate = moment(scope.endDate.second(0).millisecond(0));
-  
+
           if (!scope.time) {
             scope.startDateHour = 0;
             scope.startDateMinute = 0;
@@ -87,7 +87,7 @@ angular.module('niceElements')
             scope.startDateHour = moment(scope.startDate).hours();
             scope.startDateMinute = moment(scope.startDate).minutes();
             scope.endDateHour = moment(scope.endDate).hours();
-            scope.endDateMinute = moment(scope.endDate).minutes();  
+            scope.endDateMinute = moment(scope.endDate).minutes();
           }
 
           scope.month = angular.copy(moment(scope.startDate));
@@ -127,8 +127,6 @@ angular.module('niceElements')
                 scope.endDate = angular.copy(scope.startDate);
               }
             } else {
-              
-
               if (!scope.time) {
                 selectedDate.hours(23);
                 selectedDate.minutes(59);
@@ -138,7 +136,6 @@ angular.module('niceElements')
                 selectedDate.hours(scope.endDateHour);
                 selectedDate.minutes(scope.endDateMinute);
               }
-
 
               // Set end date
               scope.endDate = selectedDate;
@@ -180,6 +177,7 @@ angular.module('niceElements')
           scope.startDate = moment(scope.startDate).hours(scope.startDateHour);
           scope.formCalendar.$setDirty();
           scope.displayStartChange();
+          scope.handleUpdate();
         };
 
 
@@ -188,6 +186,7 @@ angular.module('niceElements')
           scope.startDate = moment(scope.startDate).minutes(scope.startDateMinute);
           scope.formCalendar.$setDirty();
           scope.displayStartChange();
+          scope.handleUpdate();
         };
 
 
@@ -196,6 +195,7 @@ angular.module('niceElements')
           scope.endDate = moment(scope.endDate).hours(scope.endDateHour);
           scope.formCalendar.$setDirty();
           scope.displayEndChange();
+          scope.handleUpdate();
         };
 
 
@@ -204,6 +204,12 @@ angular.module('niceElements')
           scope.endDate = moment(scope.endDate).minutes(scope.endDateMinute);
           scope.formCalendar.$setDirty();
           scope.displayEndChange();
+          scope.handleUpdate();
+        };
+
+
+        scope.handleUpdate = function () {
+          if (scope.onChange) scope.onChange({ model: { startDate: scope.startDate, endDate: scope.endDate }, element: element });
         };
 
 
