@@ -19,19 +19,18 @@
     }
   }
 
+  .nice-daterange-picker-wrapper {
+    z-index: 900;
+    max-width: 700px;
+  }
 
   .dtp-wrapper {
     border-radius: $nice-border-radius;
     box-shadow: $nice-box-shadow;
-    position: absolute;
-    margin-top: 0.5rem;
-    left: 15px;
-    top: 100%;
-    width: 700px;
+    
     padding: 15px;
     background-color: white;
     border: 1px solid $nice-border-color;
-    z-index: 900;
     display: flex;
 
     .dtp-buttons-left {

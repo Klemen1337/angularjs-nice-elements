@@ -41,8 +41,7 @@ angular.module('niceElements')
         selectedText: '@',
         searchFunction: '=?',
         isInline: '=',
-        clearOnSelect: '@',
-        positionFixed: '=' // Dropdown menu will be fixed to page
+        clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout, gettextCatalog) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -63,10 +62,46 @@ angular.module('niceElements')
         $scope.isOpen = false;
         $scope.selected = null;
         $scope.selectedIndex = 0;
+        $scope.popper = null;
 
         $scope.internal = {
           search: ""
         };
+
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('btn-dropdown')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-dropdown-menu-wrapper')[0];
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            scroll: true,
+            resize: true,
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              },
+              {
+                name: "sameWidth",
+                enabled: true,
+                phase: "beforeWrite",
+                requires: ["computeStyles"],
+                fn: ({ state }) => {
+                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                },
+                effect: ({ state }) => {
+                  state.elements.popper.style.width = `${
+                    state.elements.reference.offsetWidth
+                  }px`;
+                }
+              }
+            ],
+          });
+        };
+        $scope.setupPopper();
 
         // -----------------------------------Open -----------------------------------
         $scope.toggle = function () {
@@ -82,10 +117,10 @@ angular.module('niceElements')
         };
 
         $scope.open = function () {
-          $scope.focusInput();
           $scope.isOpen = true;
-          if($scope.positionFixed) $scope.updateStyle();
-          $timeout(function() {
+          $timeout(function () {
+            $scope.popper.update();
+            $scope.focusInput();
             $scope.scrollToHover(true);
           }, 100);
         };
@@ -103,18 +138,18 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Scroll to hover -----------------------------------
-        $scope.scrollToHover = function(notSmooth) {
-          var dropdownMenu = $element[0].getElementsByClassName("dropdown-menu")[0];
-          var dorpdownList = dropdownMenu.getElementsByTagName("ul")[0];
+        $scope.scrollToHover = function (notSmooth) {
+          var dropdownMenu = $element[0].getElementsByClassName("nice-dropdown-menu")[0];
+          if (!dropdownMenu) return;
+          var dorpdownList = dropdownMenu.getElementsByClassName("nice-dropdown-items")[0];
           var hoverItem = dorpdownList.getElementsByClassName("hover")[0];
-          if (hoverItem) {
-            var topPos = hoverItem.offsetTop;
-            dorpdownList.scroll({
-              top: topPos - 120,
-              left: 0,
-              behavior: notSmooth ? 'auto' : 'smooth'
-            });
-          }
+          if (!hoverItem) return
+          var topPos = hoverItem.offsetTop;
+          dorpdownList.scroll({
+            top: topPos - 120,
+            left: 0,
+            behavior: notSmooth ? 'auto' : 'smooth'
+          });
         };
 
 
@@ -149,11 +184,11 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle multiple select -----------------------------------
-        $scope.handleMultipleSelect = function(item, index) {
+        $scope.handleMultipleSelect = function (item, index) {
           if (!$scope.selected) $scope.selected = [];
 
-          if(item._selected) {
-            $scope.selected = $scope.selected.filter(function(s) {
+          if (item._selected) {
+            $scope.selected = $scope.selected.filter(function (s) {
               return s[$scope.objKey] != item[$scope.objKey];
             });
           } else {
@@ -165,7 +200,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle single slect -----------------------------------
-        $scope.handleSingleSelect = function(item, index) {
+        $scope.handleSingleSelect = function (item, index) {
           $scope.selected = item;
           $scope.close();
           $scope.handleSetModel();
@@ -173,13 +208,13 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle set model -----------------------------------
-        $scope.handleSetModel = function() {
+        $scope.handleSetModel = function () {
           var obj = angular.copy($scope.selected);
 
           if ($scope.selected != null) {
             // Remove selected flag
             if ($scope.multiple) {
-              angular.forEach(obj, function(o) {
+              angular.forEach(obj, function (o) {
                 o._selected = undefined;
               });
             } else {
@@ -189,7 +224,7 @@ angular.module('niceElements')
             // Selected is object
             if ($scope.selectedIsKey) {
               if ($scope.multiple) {
-                angular.forEach(obj, function(o) {
+                angular.forEach(obj, function (o) {
                   o = o[$scope.objKey];
                 });
               } else {
@@ -197,7 +232,7 @@ angular.module('niceElements')
               }
             }
           }
-          
+
           if ($scope.clearOnSelect) {
             // Clear on select
             $scope.model = null;
@@ -214,7 +249,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle default -----------------------------------
-        $scope.handleDefault = function() {
+        $scope.handleDefault = function () {
           if ($scope.model) $scope.handleModelChange();
           if (!$scope.nullable && !$scope.model && !$scope.clearOnSelect && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
@@ -233,16 +268,16 @@ angular.module('niceElements')
           $scope.handleModelChange();
         });
 
-        $scope.handleModelChange = function() {
+        $scope.handleModelChange = function () {
           $scope.selected = angular.copy($scope.model);
-          angular.forEach($scope.internalList, function(i, index) {
+          angular.forEach($scope.internalList, function (i, index) {
             i._selected = false;
 
             if ($scope.selectedIsKey) {
               // Not object
               if ($scope.multiple) {
                 // Multiple
-                angular.forEach($scope.selected, function(s) {
+                angular.forEach($scope.selected, function (s) {
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
                     // $scope.selected.push(i);
@@ -257,12 +292,12 @@ angular.module('niceElements')
                   $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
-              } 
+              }
             } else {
               // Is object
               if ($scope.multiple) {
                 // Multiple
-                angular.forEach($scope.selected, function(s) {
+                angular.forEach($scope.selected, function (s) {
                   if (i[$scope.objKey] == s[$scope.objKey]) {
                     i._selected = true;
                     // $scope.selected.push(i);
@@ -281,41 +316,16 @@ angular.module('niceElements')
             }
           });
         }
-        
-        // ----------------------------------- Handle fixed position -----------------------------------
-        if ($scope.positionFixed) {
-          $scope.dropdownButton = $element[0].getElementsByClassName('btn-dropdown')[0]
-          $scope.dropdownMenu = $element[0].getElementsByClassName('dropdown-menu')[0]
-          $scope.updateStyle = function () {
-            if (this.isOpen) {
-              var buttonPos = $scope.dropdownButton.getBoundingClientRect();
-              $scope.dropdownMenu.style.top = (buttonPos.top + buttonPos.height) + "px";
-              $scope.dropdownMenu.style.left = buttonPos.left + "px";
-              $scope.dropdownMenu.style.width = buttonPos.width + "px";
-            }
-          }
-
-          $scope.updateStyle();
-
-          angular.element($window).on("resize", function () {
-            $scope.updateStyle();
-          })
-
-          angular.element($window).on("scroll", function () {
-            $scope.updateStyle();
-          })
-        }
-
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------
         $element.bind("keydown keypress", function (event) {
           // Arrow Up
           if (event.keyCode == 38) {
             event.preventDefault();
-            $timeout(function() {
-              if ( $scope.selectedIndex > 0) {
+            $timeout(function () {
+              if ($scope.selectedIndex > 0) {
                 $scope.selectedIndex -= 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -325,10 +335,10 @@ angular.module('niceElements')
           // Arrow Down
           if (event.keyCode == 40) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
                 $scope.selectedIndex += 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -338,14 +348,14 @@ angular.module('niceElements')
           // Enter
           if (event.keyCode == 13) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
             });
           }
 
           // Escape
           if (event.keyCode == 27) {
-            $timeout(function() {
+            $timeout(function () {
               $scope.close();
             });
           }

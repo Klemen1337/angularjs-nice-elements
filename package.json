@@ -9,6 +9,7 @@
     "build": "./node_modules/.bin/grunt"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "angular": "1.5.8",
     "angular-animate": "1.5.8",
     "angular-gettext": "2.4.2",

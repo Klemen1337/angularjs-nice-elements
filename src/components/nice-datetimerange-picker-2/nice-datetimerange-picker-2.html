@@ -10,34 +10,36 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
-            <div class="input-group" ng-class="{ 'open': isOpen }" ng-click="open()">
+            <div class="nice-daterange-picker-button input-group" ng-class="{ 'open': isOpen }" ng-click="open()">
                 <input type="text" class="form-control" value="{{ modelFormat }}" readonly="readonly" />
                 <!-- <div class="form-control" title="{{ modelFormat }}">{{ modelFormat }}</div> -->
                 <span class="input-group-addon clickable"><i class="fa fa-calendar"></i></span>
             </div>
 
-            <div class="dtp-wrapper" ng-show="isOpen">
-                <div class="dtp-buttons-left">
-                    <div class="dtp-buttons-top">
-                        <a class="btn btn-primary btn-block" ng-click="selectToday()" translate translate-context="Nice">Last 24 hours</a>
-                        <a class="btn btn-primary btn-block" ng-click="selectLastNDays(7)" translate translate-context="Nice">Last 7 days</a>
-                        <a class="btn btn-primary btn-block" ng-click="selectLastMonth()" translate translate-context="Nice">Last month</a>
-                        <a class="btn btn-primary btn-block" ng-click="selectThisMonth()" translate translate-context="Nice">This month</a>
+            <div class="nice-daterange-picker-wrapper">
+                <div class="dtp-wrapper" ng-if="isOpen">
+                    <div class="dtp-buttons-left">
+                        <div class="dtp-buttons-top">
+                            <a class="btn btn-primary btn-block" ng-click="selectToday()" translate translate-context="Nice">Last 24 hours</a>
+                            <a class="btn btn-primary btn-block" ng-click="selectLastNDays(7)" translate translate-context="Nice">Last 7 days</a>
+                            <a class="btn btn-primary btn-block" ng-click="selectLastMonth()" translate translate-context="Nice">Last month</a>
+                            <a class="btn btn-primary btn-block" ng-click="selectThisMonth()" translate translate-context="Nice">This month</a>
+                        </div>
+
+                        <div class="dtp-buttons-bottom">
+                            <a class="btn btn-danger btn-block" ng-click="close()" translate translate-context="Nice">Cancel</a>
+                            <a class="btn btn-success btn-block" ng-click="confirm()" translate translate-context="Nice">OK</a>
+                        </div>
                     </div>
 
-                    <div class="dtp-buttons-bottom">
-                        <a class="btn btn-danger btn-block" ng-click="close()" translate translate-context="Nice">Cancel</a>
-                        <a class="btn btn-success btn-block" ng-click="confirm()" translate translate-context="Nice">OK</a>
+
+                    <div class="dtp-left">
+                        <nice-date model="innerStartDate" next-date="innerEndDate" field-width="col-xs-12" no-margin="true" inline="true" time="time"></nice-date>
                     </div>
-                </div>
 
-
-                <div class="dtp-left">
-                    <nice-date model="innerStartDate" next-date="innerEndDate" field-width="col-xs-12" no-margin="true" inline="true" time="time"></nice-date>
-                </div>
-
-                <div class="dtp-right">
-                    <nice-date model="innerEndDate" next-date="innerStartDate" field-width="col-xs-12" no-margin="true" inline="true" time="time"></nice-date>
+                    <div class="dtp-right">
+                        <nice-date model="innerEndDate" next-date="innerStartDate" field-width="col-xs-12" no-margin="true" inline="true" time="time"></nice-date>
+                    </div>
                 </div>
             </div>
         </div>

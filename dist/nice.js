@@ -921,7 +921,7 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope, gettextCatalog) {
+      controller: function($scope, $element, gettextCatalog) {
         $scope.isOpen = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
@@ -980,6 +980,28 @@ angular.module('niceElements')
 
         if ($scope.maxDate) $scope.maxDate = moment($scope.maxDate);
         if ($scope.minDate) $scope.minDate = moment($scope.minDate);
+
+        
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('nice-date-button')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-date-dropdown-wrapper')[0];
+          console.log(button, tooltip)
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            placement: 'bottom-start',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              }
+            ],
+          });
+        };
+        if (!$scope.inline) $scope.setupPopper();
 
 
         // ------------------ Time changes ------------------
@@ -1187,6 +1209,7 @@ angular.module('niceElements')
         $scope.toggleOpen = function() {
           if (!$scope.isDisabled) {
             $scope.isOpen = !$scope.isOpen;
+            $scope.popper.update();
           }
         };
       }
@@ -1309,7 +1332,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
-      controller: function ($rootScope, $scope) {
+      controller: function ($element, $scope) {
         $scope.isOpen = false;
 
 
@@ -1339,6 +1362,27 @@ angular.module('niceElements')
         }
 
 
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('nice-daterange-picker-button')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-daterange-picker-wrapper')[0];
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            placement: 'bottom-start',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              }
+            ],
+          });
+        };
+        $scope.setupPopper();
+
+
         $scope.format = function(){
           $scope.modelFormat = $scope.startDate.format($scope.formatString) + " - " + $scope.endDate.format($scope.formatString);
         };
@@ -1347,6 +1391,7 @@ angular.module('niceElements')
         $scope.open = function() {
           if (!$scope.isDisabled) {
             $scope.isOpen = true;
+            $scope.popper.update();
           }
         };
 
@@ -2166,8 +2211,7 @@ angular.module('niceElements')
         selectedText: '@',
         searchFunction: '=?',
         isInline: '=',
-        clearOnSelect: '@',
-        positionFixed: '=' // Dropdown menu will be fixed to page
+        clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout, gettextCatalog) {
         if (!$scope.objValue) { $scope.objValue = 'value'; }
@@ -2188,10 +2232,46 @@ angular.module('niceElements')
         $scope.isOpen = false;
         $scope.selected = null;
         $scope.selectedIndex = 0;
+        $scope.popper = null;
 
         $scope.internal = {
           search: ""
         };
+
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('btn-dropdown')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-dropdown-menu-wrapper')[0];
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            scroll: true,
+            resize: true,
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              },
+              {
+                name: "sameWidth",
+                enabled: true,
+                phase: "beforeWrite",
+                requires: ["computeStyles"],
+                fn: ({ state }) => {
+                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                },
+                effect: ({ state }) => {
+                  state.elements.popper.style.width = `${
+                    state.elements.reference.offsetWidth
+                  }px`;
+                }
+              }
+            ],
+          });
+        };
+        $scope.setupPopper();
 
         // -----------------------------------Open -----------------------------------
         $scope.toggle = function () {
@@ -2207,10 +2287,10 @@ angular.module('niceElements')
         };
 
         $scope.open = function () {
-          $scope.focusInput();
           $scope.isOpen = true;
-          if($scope.positionFixed) $scope.updateStyle();
-          $timeout(function() {
+          $timeout(function () {
+            $scope.popper.update();
+            $scope.focusInput();
             $scope.scrollToHover(true);
           }, 100);
         };
@@ -2228,18 +2308,18 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Scroll to hover -----------------------------------
-        $scope.scrollToHover = function(notSmooth) {
-          var dropdownMenu = $element[0].getElementsByClassName("dropdown-menu")[0];
-          var dorpdownList = dropdownMenu.getElementsByTagName("ul")[0];
+        $scope.scrollToHover = function (notSmooth) {
+          var dropdownMenu = $element[0].getElementsByClassName("nice-dropdown-menu")[0];
+          if (!dropdownMenu) return;
+          var dorpdownList = dropdownMenu.getElementsByClassName("nice-dropdown-items")[0];
           var hoverItem = dorpdownList.getElementsByClassName("hover")[0];
-          if (hoverItem) {
-            var topPos = hoverItem.offsetTop;
-            dorpdownList.scroll({
-              top: topPos - 120,
-              left: 0,
-              behavior: notSmooth ? 'auto' : 'smooth'
-            });
-          }
+          if (!hoverItem) return
+          var topPos = hoverItem.offsetTop;
+          dorpdownList.scroll({
+            top: topPos - 120,
+            left: 0,
+            behavior: notSmooth ? 'auto' : 'smooth'
+          });
         };
 
 
@@ -2274,11 +2354,11 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle multiple select -----------------------------------
-        $scope.handleMultipleSelect = function(item, index) {
+        $scope.handleMultipleSelect = function (item, index) {
           if (!$scope.selected) $scope.selected = [];
 
-          if(item._selected) {
-            $scope.selected = $scope.selected.filter(function(s) {
+          if (item._selected) {
+            $scope.selected = $scope.selected.filter(function (s) {
               return s[$scope.objKey] != item[$scope.objKey];
             });
           } else {
@@ -2290,7 +2370,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle single slect -----------------------------------
-        $scope.handleSingleSelect = function(item, index) {
+        $scope.handleSingleSelect = function (item, index) {
           $scope.selected = item;
           $scope.close();
           $scope.handleSetModel();
@@ -2298,13 +2378,13 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle set model -----------------------------------
-        $scope.handleSetModel = function() {
+        $scope.handleSetModel = function () {
           var obj = angular.copy($scope.selected);
 
           if ($scope.selected != null) {
             // Remove selected flag
             if ($scope.multiple) {
-              angular.forEach(obj, function(o) {
+              angular.forEach(obj, function (o) {
                 o._selected = undefined;
               });
             } else {
@@ -2314,7 +2394,7 @@ angular.module('niceElements')
             // Selected is object
             if ($scope.selectedIsKey) {
               if ($scope.multiple) {
-                angular.forEach(obj, function(o) {
+                angular.forEach(obj, function (o) {
                   o = o[$scope.objKey];
                 });
               } else {
@@ -2322,7 +2402,7 @@ angular.module('niceElements')
               }
             }
           }
-          
+
           if ($scope.clearOnSelect) {
             // Clear on select
             $scope.model = null;
@@ -2339,7 +2419,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Handle default -----------------------------------
-        $scope.handleDefault = function() {
+        $scope.handleDefault = function () {
           if ($scope.model) $scope.handleModelChange();
           if (!$scope.nullable && !$scope.model && !$scope.clearOnSelect && $scope.internalList && $scope.internalList.length > 0) {
             $scope.handleSelected($scope.internalList[0], 0);
@@ -2358,16 +2438,16 @@ angular.module('niceElements')
           $scope.handleModelChange();
         });
 
-        $scope.handleModelChange = function() {
+        $scope.handleModelChange = function () {
           $scope.selected = angular.copy($scope.model);
-          angular.forEach($scope.internalList, function(i, index) {
+          angular.forEach($scope.internalList, function (i, index) {
             i._selected = false;
 
             if ($scope.selectedIsKey) {
               // Not object
               if ($scope.multiple) {
                 // Multiple
-                angular.forEach($scope.selected, function(s) {
+                angular.forEach($scope.selected, function (s) {
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
                     // $scope.selected.push(i);
@@ -2382,12 +2462,12 @@ angular.module('niceElements')
                   $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
-              } 
+              }
             } else {
               // Is object
               if ($scope.multiple) {
                 // Multiple
-                angular.forEach($scope.selected, function(s) {
+                angular.forEach($scope.selected, function (s) {
                   if (i[$scope.objKey] == s[$scope.objKey]) {
                     i._selected = true;
                     // $scope.selected.push(i);
@@ -2406,41 +2486,16 @@ angular.module('niceElements')
             }
           });
         }
-        
-        // ----------------------------------- Handle fixed position -----------------------------------
-        if ($scope.positionFixed) {
-          $scope.dropdownButton = $element[0].getElementsByClassName('btn-dropdown')[0]
-          $scope.dropdownMenu = $element[0].getElementsByClassName('dropdown-menu')[0]
-          $scope.updateStyle = function () {
-            if (this.isOpen) {
-              var buttonPos = $scope.dropdownButton.getBoundingClientRect();
-              $scope.dropdownMenu.style.top = (buttonPos.top + buttonPos.height) + "px";
-              $scope.dropdownMenu.style.left = buttonPos.left + "px";
-              $scope.dropdownMenu.style.width = buttonPos.width + "px";
-            }
-          }
-
-          $scope.updateStyle();
-
-          angular.element($window).on("resize", function () {
-            $scope.updateStyle();
-          })
-
-          angular.element($window).on("scroll", function () {
-            $scope.updateStyle();
-          })
-        }
-
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------
         $element.bind("keydown keypress", function (event) {
           // Arrow Up
           if (event.keyCode == 38) {
             event.preventDefault();
-            $timeout(function() {
-              if ( $scope.selectedIndex > 0) {
+            $timeout(function () {
+              if ($scope.selectedIndex > 0) {
                 $scope.selectedIndex -= 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -2450,10 +2505,10 @@ angular.module('niceElements')
           // Arrow Down
           if (event.keyCode == 40) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
                 $scope.selectedIndex += 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -2463,14 +2518,14 @@ angular.module('niceElements')
           // Enter
           if (event.keyCode == 13) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
             });
           }
 
           // Escape
           if (event.keyCode == 27) {
-            $timeout(function() {
+            $timeout(function () {
               $scope.close();
             });
           }
@@ -5071,12 +5126,13 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
-    "<div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-if=\"!inline\" ng-click=\"toggleOpen()\">\n" +
+    "<div class=\"nice-date-button input-group\" ng-class=\"{ 'open': isOpen }\" ng-show=\"!inline\" ng-click=\"toggleOpen()\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{ model | niceDate:time }}\" readonly=\"readonly\">\n" +
     "<span class=\"input-group-addon clickable\">\n" +
     "<i class=\"fa fa-calendar\"></i>\n" +
     "</span>\n" +
     "</div>\n" +
+    "<div class=\"nice-date-dropdown-wrapper\">\n" +
     "<div ng-class=\"{ 'nice-date-dropdown': !inline }\" ng-if=\"inline || isOpen\">\n" +
     "<div class=\"nice-date-date\" ng-class=\"{ 'with-time': time }\">\n" +
     "<div class=\"nice-date-header\">\n" +
@@ -5095,13 +5151,13 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-date-week\" ng-repeat=\"week in weeks\">\n" +
     "<span class=\"nice-date-day\" title=\"{{ day.value }}\" ng-class=\"{\n" +
-    "                                'today': day.isToday,\n" +
-    "                                'different-month': !day.isCurrentMonth,\n" +
-    "                                'selected': isSameDay(model, day.date),\n" +
-    "                                'weekend': day.isWeekday,\n" +
-    "                                'disabled': day.isDisabled,\n" +
-    "                                'between': isBetween(day.date, model, nextDate)\n" +
-    "                            }\" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">{{ day.number }}</span>\n" +
+    "                                    'today': day.isToday,\n" +
+    "                                    'different-month': !day.isCurrentMonth,\n" +
+    "                                    'selected': isSameDay(model, day.date),\n" +
+    "                                    'weekend': day.isWeekday,\n" +
+    "                                    'disabled': day.isDisabled,\n" +
+    "                                    'between': isBetween(day.date, model, nextDate)\n" +
+    "                                }\" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">{{ day.number }}</span>\n" +
     "</div>\n" +
     "</div>\n" +
     "<div class=\"nice-date-time\" ng-if=\"time\">\n" +
@@ -5114,6 +5170,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"time-picker time-picker-minute\">\n" +
     "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.minute\" ng-change=\"timeChange()\" ng-options=\"minute as minute for minute in minutes track by minute\">\n" +
     "</select>\n" +
+    "</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5157,11 +5214,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
-    "<div class=\"input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
+    "<div class=\"nice-daterange-picker-button input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" readonly=\"readonly\">\n" +
     "<span class=\"input-group-addon clickable\"><i class=\"fa fa-calendar\"></i></span>\n" +
     "</div>\n" +
-    "<div class=\"dtp-wrapper\" ng-show=\"isOpen\">\n" +
+    "<div class=\"nice-daterange-picker-wrapper\">\n" +
+    "<div class=\"dtp-wrapper\" ng-if=\"isOpen\">\n" +
     "<div class=\"dtp-buttons-left\">\n" +
     "<div class=\"dtp-buttons-top\">\n" +
     "<a class=\"btn btn-primary btn-block\" ng-click=\"selectToday()\" translate translate-context=\"Nice\">Last 24 hours</a>\n" +
@@ -5179,6 +5237,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"dtp-right\">\n" +
     "<nice-date model=\"innerEndDate\" next-date=\"innerStartDate\" field-width=\"col-xs-12\" no-margin=\"true\" inline=\"true\" time=\"time\"></nice-date>\n" +
+    "</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5325,23 +5384,25 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span class=\"caret\" ng-show=\"!loading\"></span>\n" +
     "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
     "</button>\n" +
-    "<div class=\"dropdown-menu\" ng-class=\"{ 'dropdown-menu-fixed': positionFixed }\">\n" +
+    "<div class=\"nice-dropdown-menu-wrapper\">\n" +
+    "<div class=\"nice-dropdown-menu\" ng-if=\"isOpen\">\n" +
     "<div class=\"search-bar\" ng-if=\"searchFunction\">\n" +
     "<input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\">\n" +
     "<span class=\"icon\"><i class=\"fa fa-search\"></i></span>\n" +
     "</div>\n" +
+    "<div class=\"nice-dropdown-items\">\n" +
     "<div class=\"nice-no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
-    "<ul>\n" +
-    "<li class=\"null-item\" ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\">\n" +
+    "<div class=\"nice-dropdown-item null-item\" ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\">\n" +
     "{{ nullableText }}\n" +
-    "</li>\n" +
-    "<li ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected, 'hover': $index == selectedIndex }\">\n" +
+    "</div>\n" +
+    "<div class=\"nice-dropdown-item\" ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected, 'hover': $index == selectedIndex }\">\n" +
     "<span class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></span>\n" +
     "<span ng-transclude=\"option\">\n" +
     "<span ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</span>\n" +
     "</span>\n" +
-    "</li>\n" +
-    "</ul>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</div>\n" +
     "</div>\n" +
     "<button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction && !isDisabled\" ng-click=\"addButtonFunction()\">+</button>\n" +
     "</div>\n" +

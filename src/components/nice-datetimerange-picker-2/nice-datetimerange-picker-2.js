@@ -27,7 +27,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
-      controller: function ($rootScope, $scope) {
+      controller: function ($element, $scope) {
         $scope.isOpen = false;
 
 
@@ -57,6 +57,27 @@ angular.module('niceElements')
         }
 
 
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('nice-daterange-picker-button')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-daterange-picker-wrapper')[0];
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            placement: 'bottom-start',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              }
+            ],
+          });
+        };
+        $scope.setupPopper();
+
+
         $scope.format = function(){
           $scope.modelFormat = $scope.startDate.format($scope.formatString) + " - " + $scope.endDate.format($scope.formatString);
         };
@@ -65,6 +86,7 @@ angular.module('niceElements')
         $scope.open = function() {
           if (!$scope.isDisabled) {
             $scope.isOpen = true;
+            $scope.popper.update();
           }
         };
 

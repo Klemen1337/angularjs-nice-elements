@@ -2,12 +2,12 @@
   $spacing: 10px;
   $icon-width: 40px;
 
-  .nice-date-dropdown {
-    position: absolute;
-    margin-top: 0.5rem;
-    top: 100%;
+  .nice-date-dropdown-wrapper {
     z-index: 1000;
     width: 300px;
+  }
+
+  .nice-date-dropdown {
     box-shadow: $nice-box-shadow;
     line-height: normal;
   }

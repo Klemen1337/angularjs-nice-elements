@@ -30,7 +30,7 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope, gettextCatalog) {
+      controller: function($scope, $element, gettextCatalog) {
         $scope.isOpen = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
@@ -89,6 +89,28 @@ angular.module('niceElements')
 
         if ($scope.maxDate) $scope.maxDate = moment($scope.maxDate);
         if ($scope.minDate) $scope.minDate = moment($scope.minDate);
+
+        
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('nice-date-button')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-date-dropdown-wrapper')[0];
+          console.log(button, tooltip)
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            placement: 'bottom-start',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              }
+            ],
+          });
+        };
+        if (!$scope.inline) $scope.setupPopper();
 
 
         // ------------------ Time changes ------------------
@@ -296,6 +318,7 @@ angular.module('niceElements')
         $scope.toggleOpen = function() {
           if (!$scope.isDisabled) {
             $scope.isOpen = !$scope.isOpen;
+            $scope.popper.update();
           }
         };
       }

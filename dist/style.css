@@ -316,10 +316,6 @@ p.nice {
   color: #404040 !important;
 }
 
-.nice-dropdown .open .dropdown-menu, .nice-search .nice-dropdown-empty .open .dropdown-menu {
-  display: flex;
-}
-
 .nice-dropdown .not-selected, .nice-search .nice-dropdown-empty .not-selected {
   opacity: 0.5;
 }
@@ -338,26 +334,29 @@ p.nice {
   border-radius: 3px;
 }
 
-.nice-dropdown .dropdown-menu, .nice-search .nice-dropdown-empty .dropdown-menu {
+.nice-dropdown .nice-dropdown-menu-wrapper, .nice-search .nice-dropdown-empty .nice-dropdown-menu-wrapper {
+  z-index: 1000;
+}
+
+.nice-dropdown .nice-dropdown-menu, .nice-search .nice-dropdown-empty .nice-dropdown-menu {
   min-width: 200px;
-  width: 100%;
-  padding: 0;
   max-height: 300px;
+  padding: 0;
   border: 1px solid #cbd4d9;
   flex-direction: column;
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
-  z-index: 1000;
+  display: flex;
+  background: white;
+  display: flex;
 }
 
-.nice-dropdown .dropdown-menu .null-item, .nice-search .nice-dropdown-empty .dropdown-menu .null-item {
+.nice-dropdown .nice-dropdown-menu .null-item, .nice-search .nice-dropdown-empty .nice-dropdown-menu .null-item {
   color: #ccc;
 }
 
-.nice-dropdown .dropdown-menu .search-bar, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar {
+.nice-dropdown .nice-dropdown-menu .search-bar, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar {
   flex-shrink: 0;
   border-bottom: 1px solid #cbd4d9;
   position: relative;
@@ -365,22 +364,22 @@ p.nice {
   border-top-right-radius: 3px;
 }
 
-.nice-dropdown .dropdown-menu .search-bar input, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input {
+.nice-dropdown .nice-dropdown-menu .search-bar input, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar input {
   width: 100%;
   padding: 8px 30px 8px 10px;
   border: 0 none;
   flex-grow: 1;
 }
 
-.nice-dropdown .dropdown-menu .search-bar input:focus, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input:focus {
+.nice-dropdown .nice-dropdown-menu .search-bar input:focus, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar input:focus {
   outline: 0;
 }
 
-.nice-dropdown .dropdown-menu .search-bar input::placeholder, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar input::placeholder {
+.nice-dropdown .nice-dropdown-menu .search-bar input::placeholder, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar input::placeholder {
   color: #ccc;
 }
 
-.nice-dropdown .dropdown-menu .search-bar .icon, .nice-search .nice-dropdown-empty .dropdown-menu .search-bar .icon {
+.nice-dropdown .nice-dropdown-menu .search-bar .icon, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar .icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -390,13 +389,13 @@ p.nice {
   transform: translate(0, -50%);
 }
 
-.nice-dropdown .dropdown-menu .nice-no-data, .nice-search .nice-dropdown-empty .dropdown-menu .nice-no-data {
+.nice-dropdown .nice-dropdown-menu .nice-no-data, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-no-data {
   padding: 10px;
   text-align: center;
   color: #ccc;
 }
 
-.nice-dropdown .dropdown-menu ul, .nice-search .nice-dropdown-empty .dropdown-menu ul {
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items {
   overflow-y: auto;
   overflow-x: hidden;
   flex-grow: 1;
@@ -405,7 +404,7 @@ p.nice {
   margin: 0;
 }
 
-.nice-dropdown .dropdown-menu ul li, .nice-search .nice-dropdown-empty .dropdown-menu ul li {
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item {
   padding: 10px;
   position: relative;
   cursor: pointer;
@@ -413,7 +412,7 @@ p.nice {
   align-items: center;
 }
 
-.nice-dropdown .dropdown-menu ul li .choice-checkbox, .nice-search .nice-dropdown-empty .dropdown-menu ul li .choice-checkbox {
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item .choice-checkbox, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item .choice-checkbox {
   transition: all 0.2s;
   background: white;
   color: white;
@@ -426,16 +425,16 @@ p.nice {
   text-align: center;
 }
 
-.nice-dropdown .dropdown-menu ul li:hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li:hover, .nice-dropdown .dropdown-menu ul li.hover, .nice-search .nice-dropdown-empty .dropdown-menu ul li.hover {
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item:hover, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item:hover, .nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.hover, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.hover {
   background: #EDEDED;
 }
 
-.nice-dropdown .dropdown-menu ul li.selected, .nice-search .nice-dropdown-empty .dropdown-menu ul li.selected {
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.selected, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.selected {
   background: #3189ff;
   color: white;
 }
 
-.nice-dropdown .dropdown-menu ul li.selected .choice-checkbox, .nice-search .nice-dropdown-empty .dropdown-menu ul li.selected .choice-checkbox {
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.selected .choice-checkbox, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.selected .choice-checkbox {
   border-color: #3189ff;
   background: #3189ff;
   color: white;
@@ -1471,18 +1470,17 @@ p.nice {
   color: white;
 }
 
+.nice-datetimerange-picker-2 .nice-daterange-picker-wrapper {
+  z-index: 900;
+  max-width: 700px;
+}
+
 .nice-datetimerange-picker-2 .dtp-wrapper {
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  margin-top: 0.5rem;
-  left: 15px;
-  top: 100%;
-  width: 700px;
   padding: 15px;
   background-color: white;
   border: 1px solid #cbd4d9;
-  z-index: 900;
   display: flex;
 }
 
@@ -1958,12 +1956,12 @@ p.nice {
   width: auto;
 }
 
-.nice-date .nice-date-dropdown {
-  position: absolute;
-  margin-top: 0.5rem;
-  top: 100%;
+.nice-date .nice-date-dropdown-wrapper {
   z-index: 1000;
   width: 300px;
+}
+
+.nice-date .nice-date-dropdown {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   line-height: normal;
 }

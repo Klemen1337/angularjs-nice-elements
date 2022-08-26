@@ -29,23 +29,25 @@
 
 
                 <!------------------------- Dropdown menu ------------------------->
-                <div class="dropdown-menu" ng-class="{ 'dropdown-menu-fixed': positionFixed }">
-                    <div class="search-bar" ng-if="searchFunction">
-                        <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
-                        <span class="icon"><i class="fa fa-search"></i></span>
+                <div class="nice-dropdown-menu-wrapper">
+                    <div class="nice-dropdown-menu" ng-if="isOpen">
+                        <div class="search-bar" ng-if="searchFunction">
+                            <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
+                            <span class="icon"><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="nice-dropdown-items">
+                            <div class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
+                            <div class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
+                                {{ nullableText }}
+                            </div>
+                            <div class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected, 'hover': $index == selectedIndex }">
+                                <span class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></span>
+                                <span ng-transclude="option">
+                                    <span ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
-                    <ul>
-                        <li class="null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
-                            {{ nullableText }}
-                        </li>
-                        <li ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected, 'hover': $index == selectedIndex }">
-                            <span class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></span>
-                            <span ng-transclude="option">
-                                <span ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</span>
-                            </span>
-                        </li>
-                    </ul>
                 </div>
 
 
