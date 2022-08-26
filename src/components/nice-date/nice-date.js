@@ -96,7 +96,6 @@ angular.module('niceElements')
         $scope.setupPopper = function() {
           var button = $element[0].getElementsByClassName('nice-date-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-date-dropdown-wrapper')[0];
-          console.log(button, tooltip)
           $scope.popper = Popper.createPopper(button, tooltip, {
             strategy: 'fixed',
             placement: 'bottom-start',

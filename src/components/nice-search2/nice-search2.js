@@ -41,6 +41,40 @@ angular.module('niceElements')
 
         if (!$scope.debounceTime) $scope.debounceTime = 500;
         if (!$scope.model) $scope.model = "";
+
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('nice-search-button')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-search-dropdown-wrapper')[0];
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            placement: 'bottom-start',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              },
+              {
+                name: "sameWidth",
+                enabled: true,
+                phase: "beforeWrite",
+                requires: ["computeStyles"],
+                fn: ({ state }) => {
+                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                },
+                effect: ({ state }) => {
+                  state.elements.popper.style.width = `${
+                    state.elements.reference.offsetWidth
+                  }px`;
+                }
+              }
+            ],
+          });
+        };
+        $scope.setupPopper();
         
         // ------------------- On focus -------------------
         $scope.onFocus = function() {
@@ -67,6 +101,10 @@ angular.module('niceElements')
 
           var input = $element[0].getElementsByTagName('input')[0];
           if (input) input.blur();
+
+          $timeout(function() {
+            $scope.popper.update();
+          })
         };
 
 

@@ -14,22 +14,18 @@
     }
   }
 
-  .nice-dropdown {
-    position: absolute;
+  .nice-search-dropdown-wrapper {
     z-index: 999;
-    left: 0;
-    top: 100%;
-    right: 0;
+  }
+
+  .nice-search-dropdown {
     max-height: 300px;
     background-color: white;
     border-radius: $nice-border-radius;
     border: 1px solid $nice-border-color;
     overflow-x: auto;
     box-shadow: $nice-box-shadow;
-    margin-top: .5rem;
-    margin-bottom: 2rem;
     
-
     .nice-search-row {
       padding: 10px 15px;
       z-index: 1000;

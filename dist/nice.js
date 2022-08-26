@@ -987,7 +987,6 @@ angular.module('niceElements')
         $scope.setupPopper = function() {
           var button = $element[0].getElementsByClassName('nice-date-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-date-dropdown-wrapper')[0];
-          console.log(button, tooltip)
           $scope.popper = Popper.createPopper(button, tooltip, {
             strategy: 'fixed',
             placement: 'bottom-start',
@@ -4378,6 +4377,40 @@ angular.module('niceElements')
 
         if (!$scope.debounceTime) $scope.debounceTime = 500;
         if (!$scope.model) $scope.model = "";
+
+        // Setup popper
+        // https://popper.js.org/docs/v2/constructors/
+        $scope.setupPopper = function() {
+          var button = $element[0].getElementsByClassName('nice-search-button')[0];
+          var tooltip = $element[0].getElementsByClassName('nice-search-dropdown-wrapper')[0];
+          $scope.popper = Popper.createPopper(button, tooltip, {
+            strategy: 'fixed',
+            placement: 'bottom-start',
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 5],
+                },
+              },
+              {
+                name: "sameWidth",
+                enabled: true,
+                phase: "beforeWrite",
+                requires: ["computeStyles"],
+                fn: ({ state }) => {
+                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                },
+                effect: ({ state }) => {
+                  state.elements.popper.style.width = `${
+                    state.elements.reference.offsetWidth
+                  }px`;
+                }
+              }
+            ],
+          });
+        };
+        $scope.setupPopper();
         
         // ------------------- On focus -------------------
         $scope.onFocus = function() {
@@ -4404,6 +4437,10 @@ angular.module('niceElements')
 
           var input = $element[0].getElementsByTagName('input')[0];
           if (input) input.blur();
+
+          $timeout(function() {
+            $scope.popper.update();
+          })
         };
 
 
@@ -5733,13 +5770,15 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\" click-outside=\"close()\">\n" +
-    "<div class=\"input-group\" ng-class=\"{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
+    "<div class=\"nice-search-button input-group\" ng-class=\"{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"model\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-focus=\"onFocus()\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"onFocus()\">\n" +
     "<i ng-show=\"!loading\" class=\"fa fa-search\"></i>\n" +
     "<i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\n" +
     "</span>\n" +
-    "<div class=\"nice-dropdown\" ng-if=\"showDropdown && isOpen\">\n" +
+    "</div>\n" +
+    "<div class=\"nice-search-dropdown-wrapper\">\n" +
+    "<div class=\"nice-search-dropdown\" ng-if=\"showDropdown && isOpen\">\n" +
     "<div class=\"nice-search-row nice-search-row-loading\" ng-if=\"loading && results.length == 0\">\n" +
     "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
     "</div>\n" +

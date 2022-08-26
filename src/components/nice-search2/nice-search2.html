@@ -8,7 +8,7 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]" click-outside="close()">
-            <div class="input-group" ng-class="{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}">
+            <div class="nice-search-button input-group" ng-class="{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}">
                 <input
                     class="form-control"
                     type="text"
@@ -25,8 +25,10 @@
                     <i ng-show="!loading" class="fa fa-search"></i>
                     <i ng-show="loading" class="fa fa-refresh fa-spin"></i>
                 </span>
+            </div>
 
-                <div class="nice-dropdown" ng-if="showDropdown && isOpen">
+            <div class="nice-search-dropdown-wrapper">
+                <div class="nice-search-dropdown" ng-if="showDropdown && isOpen">
                     <div class="nice-search-row nice-search-row-loading" ng-if="loading && results.length == 0">
                         <nice-loader visible-when="!loading"></nice-loader>
                     </div>
