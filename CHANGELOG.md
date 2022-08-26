@@ -1,6 +1,11 @@
 # Changelog
 
-## v1.4.5 (1.8.2022)
+## v1.4.6 (26.8.2022)
+
+- fixed popper in nice-date, nice-search,
+- fixed with in nice-daterange-picker-2
+
+## v1.4.5 (26.8.2022)
 
 - added @popperjs/core v2.11.6,
 - changed dropdown to popper in nice-dropdown, nice-date, nice-search2 and nice-daterange-picker-2
