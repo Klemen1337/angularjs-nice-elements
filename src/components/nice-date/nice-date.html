@@ -21,7 +21,7 @@
             </div>
 
             <!-------- Dropdown -------->
-            <div class="nice-date-dropdown-wrapper">
+            <div ng-class="{ 'nice-date-dropdown-wrapper': !inline }">
                 <div ng-class="{ 'nice-date-dropdown': !inline }" ng-if="inline || isOpen">
                     <!------------------------------ Date picker ------------------------------>
                     <div class="nice-date-date" ng-class="{ 'with-time': time }">

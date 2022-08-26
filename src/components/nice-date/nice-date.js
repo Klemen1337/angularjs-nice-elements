@@ -30,7 +30,7 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope, $element, gettextCatalog) {
+      controller: function($scope, $element, $timeout, gettextCatalog) {
         $scope.isOpen = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
@@ -109,7 +109,10 @@ angular.module('niceElements')
             ],
           });
         };
-        if (!$scope.inline) $scope.setupPopper();
+
+        $timeout(function() {
+          if (!$scope.isInline) $scope.setupPopper();
+        })
 
 
         // ------------------ Time changes ------------------
@@ -317,7 +320,9 @@ angular.module('niceElements')
         $scope.toggleOpen = function() {
           if (!$scope.isDisabled) {
             $scope.isOpen = !$scope.isOpen;
-            $scope.popper.update();
+            $timeout(function() {
+              if ($scope.popper) $scope.popper.update();
+            })
           }
         };
       }

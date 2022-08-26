@@ -1469,7 +1469,8 @@ p.nice {
 
 .nice-datetimerange-picker-2 .nice-daterange-picker-wrapper {
   z-index: 900;
-  max-width: 700px;
+  width: 700px;
+  max-width: 80%;
 }
 
 .nice-datetimerange-picker-2 .dtp-wrapper {
@@ -2113,7 +2114,7 @@ p.nice {
 }
 
 .nice-date .nice-date-date .nice-date-week .nice-date-day.between {
-  background: #fdfeff;
+  background: #e4efff;
 }
 
 .nice-date .nice-date-date .nice-date-week .nice-date-day:hover {

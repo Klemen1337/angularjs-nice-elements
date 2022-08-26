@@ -92,6 +92,9 @@ angular.module('niceElements')
         // ------------------- On focus -------------------
         $scope.open = function() {
           $scope.isOpen = true;
+          $timeout(function() {
+            if ($scope.popper) $scope.popper.update();
+          });
         };
 
 
