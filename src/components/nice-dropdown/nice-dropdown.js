@@ -89,10 +89,12 @@ angular.module('niceElements')
                 enabled: true,
                 phase: "beforeWrite",
                 requires: ["computeStyles"],
-                fn: ({ state }) => {
+                fn: function(e) {
+                  var state = e.state;
                   state.styles.popper.width = `${state.rects.reference.width}px`;
                 },
-                effect: ({ state }) => {
+                effect: function(e) {
+                  var state = e.state;
                   state.elements.popper.style.width = `${
                     state.elements.reference.offsetWidth
                   }px`;

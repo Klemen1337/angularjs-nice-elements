@@ -1002,8 +1002,8 @@ angular.module('niceElements')
         };
 
         $timeout(function() {
-          if (!$scope.isInline) $scope.setupPopper();
-        })
+          if (!$scope.inline) $scope.setupPopper();
+        });
 
 
         // ------------------ Time changes ------------------
@@ -2263,10 +2263,12 @@ angular.module('niceElements')
                 enabled: true,
                 phase: "beforeWrite",
                 requires: ["computeStyles"],
-                fn: ({ state }) => {
+                fn: function(e) {
+                  var state = e.state;
                   state.styles.popper.width = `${state.rects.reference.width}px`;
                 },
-                effect: ({ state }) => {
+                effect: function(e) {
+                  var state = e.state;
                   state.elements.popper.style.width = `${
                     state.elements.reference.offsetWidth
                   }px`;
@@ -4403,10 +4405,12 @@ angular.module('niceElements')
                 enabled: true,
                 phase: "beforeWrite",
                 requires: ["computeStyles"],
-                fn: ({ state }) => {
+                fn: function(e) {
+                  var state = e.state;
                   state.styles.popper.width = `${state.rects.reference.width}px`;
                 },
-                effect: ({ state }) => {
+                effect: function(e) {
+                  var state = e.state;
                   state.elements.popper.style.width = `${
                     state.elements.reference.offsetWidth
                   }px`;

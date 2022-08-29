@@ -111,8 +111,8 @@ angular.module('niceElements')
         };
 
         $timeout(function() {
-          if (!$scope.isInline) $scope.setupPopper();
-        })
+          if (!$scope.inline) $scope.setupPopper();
+        });
 
 
         // ------------------ Time changes ------------------
