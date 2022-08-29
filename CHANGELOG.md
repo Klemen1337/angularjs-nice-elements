@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.7 (29.8.2022)
+
+- fixes
+
 ## v1.4.6 (26.8.2022)
 
 - fixed popper in nice-date, nice-search,
