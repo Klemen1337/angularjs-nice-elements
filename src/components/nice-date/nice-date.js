@@ -110,7 +110,7 @@ angular.module('niceElements')
           });
         };
 
-        $timeout(function() {
+        $timeout(function () {
           if (!$scope.inline) $scope.setupPopper();
         });
 

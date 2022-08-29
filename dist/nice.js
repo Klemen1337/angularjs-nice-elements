@@ -1001,7 +1001,7 @@ angular.module('niceElements')
           });
         };
 
-        $timeout(function() {
+        $timeout(function () {
           if (!$scope.inline) $scope.setupPopper();
         });
 
@@ -1336,7 +1336,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
-      controller: function ($element, $scope) {
+      controller: function ($element, $timeout, $scope) {
         $scope.isOpen = false;
 
 
@@ -1384,7 +1384,10 @@ angular.module('niceElements')
             ],
           });
         };
-        $scope.setupPopper();
+        
+        $timeout(function () {
+          $scope.setupPopper();
+        });
 
 
         $scope.format = function(){
@@ -2265,19 +2268,20 @@ angular.module('niceElements')
                 requires: ["computeStyles"],
                 fn: function(e) {
                   var state = e.state;
-                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                  state.styles.popper.width = state.rects.reference.width + "px";
                 },
                 effect: function(e) {
                   var state = e.state;
-                  state.elements.popper.style.width = `${
-                    state.elements.reference.offsetWidth
-                  }px`;
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
                 }
               }
             ],
           });
         };
-        $scope.setupPopper();
+
+        $timeout(function () {
+          $scope.setupPopper();
+        });
 
         // -----------------------------------Open -----------------------------------
         $scope.toggle = function () {
@@ -2293,9 +2297,14 @@ angular.module('niceElements')
         };
 
         $scope.open = function () {
-          $scope.isOpen = true;
+          $scope.popper.update();
           $timeout(function () {
-            $scope.popper.update();
+            $scope.isOpen = true;
+            $timeout(function () {
+              $scope.popper.update();
+            });
+          });
+          $timeout(function () {
             $scope.focusInput();
             $scope.scrollToHover(true);
           }, 100);
@@ -4407,19 +4416,20 @@ angular.module('niceElements')
                 requires: ["computeStyles"],
                 fn: function(e) {
                   var state = e.state;
-                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                  state.styles.popper.width = state.rects.reference.width + "px";
                 },
                 effect: function(e) {
                   var state = e.state;
-                  state.elements.popper.style.width = `${
-                    state.elements.reference.offsetWidth
-                  }px`;
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
                 }
               }
             ],
           });
         };
-        $scope.setupPopper();
+
+        $timeout(function () {
+          $scope.setupPopper();
+        })
         
         // ------------------- On focus -------------------
         $scope.onFocus = function() {

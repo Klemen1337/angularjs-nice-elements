@@ -36,6 +36,15 @@
                     <button class="btn btn-primary" ng-click="changeDate(true)">Next</button>
                 </nice-slot>
 
+                <div ng-show="showMore">
+                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline"></nice-date>
+                    <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline"></nice-dropdown>
+                </div>
+
+                <nice-slot is-inline="isInline">
+                    <button ng-click="toggleShowMore()" class="btn btn-primary">Show more {{ showMore }}</button>
+                </nice-slot>
+
                 <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled" help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>" is-inline="isInline"></nice-date>
 
                 <nice-date title="Nice date no time" inline="true" model="data.niceDate2" is-disabled="data.disabled" help="This is a test" is-inline="isInline"></nice-date>

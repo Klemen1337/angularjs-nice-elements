@@ -27,7 +27,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
-      controller: function ($element, $scope) {
+      controller: function ($element, $timeout, $scope) {
         $scope.isOpen = false;
 
 
@@ -75,7 +75,10 @@ angular.module('niceElements')
             ],
           });
         };
-        $scope.setupPopper();
+        
+        $timeout(function () {
+          $scope.setupPopper();
+        });
 
 
         $scope.format = function(){

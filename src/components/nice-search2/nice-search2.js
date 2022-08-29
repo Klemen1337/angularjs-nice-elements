@@ -64,19 +64,20 @@ angular.module('niceElements')
                 requires: ["computeStyles"],
                 fn: function(e) {
                   var state = e.state;
-                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                  state.styles.popper.width = state.rects.reference.width + "px";
                 },
                 effect: function(e) {
                   var state = e.state;
-                  state.elements.popper.style.width = `${
-                    state.elements.reference.offsetWidth
-                  }px`;
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
                 }
               }
             ],
           });
         };
-        $scope.setupPopper();
+
+        $timeout(function () {
+          $scope.setupPopper();
+        })
         
         // ------------------- On focus -------------------
         $scope.onFocus = function() {

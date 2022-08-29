@@ -6,6 +6,8 @@ angular.module('niceElementsDemo').controller('HomeCtrl', function ($scope, $htt
   $scope.dropdownLoading = true;
   $scope.isInline = false;
   $scope.toggleInline = function() { $scope.isInline = !$scope.isInline }
+  $scope.showMore = false;
+  $scope.toggleShowMore = function() { $scope.showMore = !$scope.showMore }
   
   $scope.showLoading = false;
   $scope.toggleLoading = function() {

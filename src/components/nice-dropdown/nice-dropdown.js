@@ -91,19 +91,20 @@ angular.module('niceElements')
                 requires: ["computeStyles"],
                 fn: function(e) {
                   var state = e.state;
-                  state.styles.popper.width = `${state.rects.reference.width}px`;
+                  state.styles.popper.width = state.rects.reference.width + "px";
                 },
                 effect: function(e) {
                   var state = e.state;
-                  state.elements.popper.style.width = `${
-                    state.elements.reference.offsetWidth
-                  }px`;
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
                 }
               }
             ],
           });
         };
-        $scope.setupPopper();
+
+        $timeout(function () {
+          $scope.setupPopper();
+        });
 
         // -----------------------------------Open -----------------------------------
         $scope.toggle = function () {
@@ -119,9 +120,14 @@ angular.module('niceElements')
         };
 
         $scope.open = function () {
-          $scope.isOpen = true;
+          $scope.popper.update();
           $timeout(function () {
-            $scope.popper.update();
+            $scope.isOpen = true;
+            $timeout(function () {
+              $scope.popper.update();
+            });
+          });
+          $timeout(function () {
             $scope.focusInput();
             $scope.scrollToHover(true);
           }, 100);
