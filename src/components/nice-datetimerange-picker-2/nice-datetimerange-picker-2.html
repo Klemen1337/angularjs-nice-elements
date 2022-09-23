@@ -32,13 +32,12 @@
                         </div>
                     </div>
 
-
                     <div class="dtp-left">
-                        <nice-date model="innerStartDate" next-date="innerEndDate" field-width="col-xs-12" no-margin="true" inline="true" time="time"></nice-date>
+                        <nice-date model="model.innerStartDate" next-date="model.innerEndDate" is-inline="true" no-margin="true" inline="true" time="{{ time }}" on-change="dateChanged(model)"></nice-date>
                     </div>
 
                     <div class="dtp-right">
-                        <nice-date model="innerEndDate" next-date="innerStartDate" field-width="col-xs-12" no-margin="true" inline="true" time="time"></nice-date>
+                        <nice-date model="model.innerEndDate" next-date="model.innerStartDate" is-inline="true" no-margin="true" inline="true" time="{{ time }}" on-change="dateChanged(model)"></nice-date>
                     </div>
                 </div>
             </div>

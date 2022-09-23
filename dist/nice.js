@@ -956,7 +956,7 @@ angular.module('niceElements')
           $scope.years.push(year + i);
         }
 
-        $scope.months =  [
+        $scope.months = [
           { value: 0, name: gettextCatalog.getString("January", null, "Nice") },
           { value: 1, name: gettextCatalog.getString("February", null, "Nice") },
           { value: 2, name: gettextCatalog.getString("March", null, "Nice") },
@@ -1192,7 +1192,7 @@ angular.module('niceElements')
 
 
         // ------------------ Bootstrap ------------------
-        $scope.boostrap = function(){
+        $scope.boostrap = function() {
           $scope.setInnerDate(moment($scope.model));
           $scope.getTime();
           
@@ -1338,6 +1338,10 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-datetimerange-picker-2/nice-datetimerange-picker-2.html',
       controller: function ($element, $timeout, $scope) {
         $scope.isOpen = false;
+        $scope.model = {
+          innerStartDate: null,
+          innerEndDate: null,
+        }
 
 
         // Set defaults
@@ -1355,14 +1359,14 @@ angular.module('niceElements')
         if(!$scope.startDate) {
           $scope.startDate = moment();
         } else {
-          $scope.innerStartDate = angular.copy($scope.startDate);
+          $scope.model.innerStartDate = angular.copy($scope.startDate);
         }
 
         // Set end date
         if(!$scope.endDate) {
           $scope.endDate = moment();
         } else {
-          $scope.innerEndDate = angular.copy($scope.endDate);
+          $scope.model.innerEndDate = angular.copy($scope.endDate);
         }
 
 
@@ -1404,41 +1408,41 @@ angular.module('niceElements')
 
 
         $scope.close = function() {
-          $scope.innerStartDate = angular.copy($scope.startDate);
-          $scope.innerEndDate = angular.copy($scope.endDate);
+          $scope.model.innerStartDate = angular.copy($scope.startDate);
+          $scope.model.innerEndDate = angular.copy($scope.endDate);
           $scope.isOpen = false;
         };
 
 
         $scope.confirm = function() {
-          $scope.startDate = angular.copy($scope.innerStartDate);
-          $scope.endDate = angular.copy($scope.innerEndDate);
-          if ($scope.onChange) $scope.onChange({ model: $scope.model });
-          $scope.close();
+          $scope.startDate = angular.copy($scope.model.innerStartDate);
+          $scope.endDate = angular.copy($scope.model.innerEndDate);
+          if ($scope.onChange) $scope.onChange({ startDate: $scope.startDate, endDate: $scope.endDate });
+          $scope.isOpen = false;
         };
 
 
         $scope.selectToday = function(){
-          $scope.innerStartDate = moment().startOf('day');
-          $scope.innerEndDate = moment().endOf('day');
+          $scope.model.innerStartDate = moment().startOf('day');
+          $scope.model.innerEndDate = moment().endOf('day');
         };
 
 
         $scope.selectLastNDays = function(days){
-          $scope.innerStartDate = moment().subtract(days, 'days').startOf('day');
-          $scope.innerEndDate = moment().endOf('day');
+          $scope.model.innerStartDate = moment().subtract(days, 'days').startOf('day');
+          $scope.model.innerEndDate = moment().endOf('day');
         };
 
 
         $scope.selectLastMonth = function(){
-          $scope.innerStartDate = moment().subtract(1, 'months').startOf('month').startOf('date');
-          $scope.innerEndDate = moment().subtract(1, 'months').endOf('month').endOf('date');
+          $scope.model.innerStartDate = moment().subtract(1, 'months').startOf('month').startOf('date');
+          $scope.model.innerEndDate = moment().subtract(1, 'months').endOf('month').endOf('date');
         };
 
 
         $scope.selectThisMonth = function(){
-          $scope.innerStartDate = moment().startOf('month').startOf('date');
-          $scope.innerEndDate = moment().endOf('month').endOf('date');
+          $scope.model.innerStartDate = moment().startOf('month').startOf('date');
+          $scope.model.innerEndDate = moment().endOf('month').endOf('date');
         };
 
 
@@ -1448,28 +1452,30 @@ angular.module('niceElements')
         };
 
 
-        $scope.$watchGroup(["innerStartDate", "innerEndDate"], function(newValues){
-          if (newValues[0] && newValues[1]) {
-            // Check if start date is after end date
-            if ($scope.innerStartDate.isAfter($scope.innerEndDate)) {
-              var temp = angular.copy($scope.innerStartDate);
-              $scope.innerStartDate = angular.copy($scope.innerEndDate); 
-              $scope.innerEndDate = temp; 
+        $scope.dateChanged = function() {
+          $timeout(function() {
+            if ($scope.model.innerStartDate && $scope.model.innerEndDate) {
+              // Check if start date is after end date
+              if ($scope.model.innerStartDate.isAfter($scope.model.innerEndDate)) {
+                var temp = angular.copy($scope.model.innerStartDate);
+                $scope.model.innerStartDate = angular.copy($scope.model.innerEndDate); 
+                $scope.model.innerEndDate = temp; 
+              }
+
+              // Check if end date is before start date
+              if ($scope.model.innerEndDate.isBefore($scope.model.innerStartDate)) {
+                var temp = angular.copy($scope.model.innerStartDate);
+                $scope.model.innerStartDate = angular.copy($scope.model.innerEndDate); 
+                $scope.model.innerEndDate = temp; 
+              }
             }
-
-            // Check if end date is before start date
-            if ($scope.innerEndDate.isBefore($scope.innerStartDate)) {
-              var temp = angular.copy($scope.innerStartDate);
-              $scope.innerStartDate = angular.copy($scope.innerEndDate); 
-              $scope.innerEndDate = temp; 
-            }
-          }
-        });
+          });
+        }
 
 
-        $scope.$watchGroup(["startDate", "endDate"], function(){
-          $scope.innerStartDate = angular.copy($scope.startDate);
-          $scope.innerEndDate = angular.copy($scope.endDate);
+        $scope.$watchGroup(["startDate", "endDate"], function() {
+          $scope.model.innerStartDate = angular.copy($scope.startDate);
+          $scope.model.innerEndDate = angular.copy($scope.endDate);
           $scope.format();
         });
       }
@@ -5292,10 +5298,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "<div class=\"dtp-left\">\n" +
-    "<nice-date model=\"innerStartDate\" next-date=\"innerEndDate\" field-width=\"col-xs-12\" no-margin=\"true\" inline=\"true\" time=\"time\"></nice-date>\n" +
+    "<nice-date model=\"model.innerStartDate\" next-date=\"model.innerEndDate\" is-inline=\"true\" no-margin=\"true\" inline=\"true\" time=\"{{ time }}\" on-change=\"dateChanged(model)\"></nice-date>\n" +
     "</div>\n" +
     "<div class=\"dtp-right\">\n" +
-    "<nice-date model=\"innerEndDate\" next-date=\"innerStartDate\" field-width=\"col-xs-12\" no-margin=\"true\" inline=\"true\" time=\"time\"></nice-date>\n" +
+    "<nice-date model=\"model.innerEndDate\" next-date=\"model.innerStartDate\" is-inline=\"true\" no-margin=\"true\" inline=\"true\" time=\"{{ time }}\" on-change=\"dateChanged(model)\"></nice-date>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

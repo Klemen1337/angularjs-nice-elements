@@ -65,7 +65,7 @@ angular.module('niceElements')
           $scope.years.push(year + i);
         }
 
-        $scope.months =  [
+        $scope.months = [
           { value: 0, name: gettextCatalog.getString("January", null, "Nice") },
           { value: 1, name: gettextCatalog.getString("February", null, "Nice") },
           { value: 2, name: gettextCatalog.getString("March", null, "Nice") },
@@ -301,7 +301,7 @@ angular.module('niceElements')
 
 
         // ------------------ Bootstrap ------------------
-        $scope.boostrap = function(){
+        $scope.boostrap = function() {
           $scope.setInnerDate(moment($scope.model));
           $scope.getTime();
           
