@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.9 (23.9.2022)
+
+- fixed nice-datetimerange-picker-2 model change
+
 ## v1.4.8 (29.8.2022)
 
 - fixes
