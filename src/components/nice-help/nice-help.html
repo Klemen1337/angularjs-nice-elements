@@ -1,4 +1,7 @@
-<div class="nice-help">
-    <i class="fa fa-question-circle"></i>
-    <div class="help-window" ng-bind-html="text">{{ text }}</div>
+<div class="nice-help" ng-mouseover="onHover()">
+    <i class="fa fa-question-circle nice-help-button" aria-label=""></i>
+    <div class="nice-help-popup">
+        <span ng-bind-html="text">{{ text }}</span>
+        <div data-popper-arrow class="nice-help-arrow"></div>
+    </div>
 </div>
