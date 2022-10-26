@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.11 (26.10.2022)
+
+- added dropdown distance prop
+
 ## v1.4.10 (13.10.2022)
 
 - used popper for nice help
