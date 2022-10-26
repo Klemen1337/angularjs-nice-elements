@@ -1,0 +1,75 @@
+.nice-toasts {
+  z-index: 9999999;
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 0.5rem;
+  padding: 1rem;
+
+  &.top {
+    top: $nice-navbar-height;
+  }
+
+  &.bottom {
+    bottom: 0;
+    flex-direction: column-reverse;
+  }
+
+  &.center {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  &.left {
+    left: 0;
+    align-items: flex-start;
+  }
+
+  &.right {
+    right: 0;
+    align-items: flex-end;
+  }
+
+  .nice-toast {
+    background: $nice-hover-color;
+    padding: 0.3rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.8em;
+    font-weight: bold;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+
+    &.success {
+      color: white;
+      background: $nice-notification-success-bg;
+    }
+
+    &.error {
+      color: white;
+      background: $nice-notification-danger-color-bg;
+    }
+  }
+}
+
+.toast-enter-active {
+  animation: bounce-in .5s;
+}
+
+.toast-leave-active {
+  animation: bounce-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  from {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

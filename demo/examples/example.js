@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('niceElementsDemo').controller('ExampleCtrl', function ($scope, $http, $q, NiceNotification, $timeout) {
+angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScope, $scope, $http, $q, NiceNotification, $timeout) {
   $scope.emptyList = [];
   $scope.inputNumber = null;
   $scope.dropdownLoading = true;
@@ -11,6 +11,18 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($scope, $
   $scope.showLoading = false;
   $scope.toggleLoading = function () {
     $scope.showLoading = !$scope.showLoading;
+  }
+
+
+  $scope.copyText = function (text) {
+    try {
+      navigator.clipboard.writeText(text);
+      var message = `Copied '${text}'`
+      console.log(message)
+      $rootScope.$broadcast('toast', message);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   $scope.mockData = [];
