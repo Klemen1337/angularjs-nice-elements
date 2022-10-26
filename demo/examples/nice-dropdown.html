@@ -27,6 +27,11 @@
                         <td>Used only when returnOnlyKey = true</td>
                         <td>value</td>
                     </tr>
+                    <tr>
+                        <td>dropdownDistance</td>
+                        <td>Dropdown menu distance form button</td>
+                        <td>5</td>
+                    </tr>
                     <!-- DEPRECATED -->
                     <!--<tr>-->
                     <!--<td>listIsObj</td>-->
@@ -77,11 +82,12 @@
     model="dropdown"
     list="listObjs"
     selected-is-obj="true"
+    dropdown-distance="0"
     multiple="true">
 &lt;/nice-dropdown></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" selected-is-obj="true" multiple="true"></nice-dropdown>
+                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" selected-is-obj="true" multiple="true"></nice-dropdown>
             </div>
             <div class="col-sm-6">
                 <pre>{{ dropdown | json }}</pre>

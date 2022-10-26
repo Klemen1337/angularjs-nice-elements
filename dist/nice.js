@@ -2222,11 +2222,13 @@ angular.module('niceElements')
         searchText: '@',
         nullableText: '@',
         selectedText: '@',
+        dropdownDistance: '@',
         searchFunction: '=?',
         isInline: '=',
         clearOnSelect: '@'
       },
       controller: function ($scope, $element, $timeout, gettextCatalog) {
+        if (!$scope.dropdownDistance) { $scope.dropdownDistance = 5; }
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
         if (!$scope.noOptionsText) { $scope.noOptionsText = gettextCatalog.getString("No options", null, "Nice"); }
@@ -2253,7 +2255,7 @@ angular.module('niceElements')
 
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
-        $scope.setupPopper = function() {
+        $scope.setupPopper = function () {
           var button = $element[0].getElementsByClassName('btn-dropdown')[0];
           var tooltip = $element[0].getElementsByClassName('nice-dropdown-menu-wrapper')[0];
           $scope.popper = Popper.createPopper(button, tooltip, {
@@ -2264,7 +2266,7 @@ angular.module('niceElements')
               {
                 name: 'offset',
                 options: {
-                  offset: [0, 5],
+                  offset: [0, $scope.dropdownDistance],
                 },
               },
               {
@@ -2272,13 +2274,13 @@ angular.module('niceElements')
                 enabled: true,
                 phase: "beforeWrite",
                 requires: ["computeStyles"],
-                fn: function(e) {
+                fn: function (e) {
                   var state = e.state;
                   state.styles.popper.width = state.rects.reference.width + "px";
                 },
-                effect: function(e) {
+                effect: function (e) {
                   var state = e.state;
-                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth + "px";
                 }
               }
             ],
