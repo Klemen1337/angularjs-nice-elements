@@ -4950,11 +4950,10 @@ angular.module('niceElements')
           };
 
           // Append toast
-          // $scope.toasts.unshift(toast);
           $scope.toasts.push(toast);
 
           // Remove after some time
-          setTimeout(function () {
+          $timeout(function () {
             $scope.removeToast(toast);
           }, $scope.timeoutTime);
         };
@@ -4963,11 +4962,8 @@ angular.module('niceElements')
         // -------------------------- Remove toast --------------------------
         $scope.removeToast = function (toast) {
           var toastIndex = $scope.toasts.findIndex(function (a) { return a.id == toast.id })
-          console.log(toastIndex)
           if (toastIndex >= 0) {
-            $timeout(function () {
-              $scope.toasts.splice(toastIndex, 1);
-            });
+            $scope.toasts.splice(toastIndex, 1);
           }
         }
       }
