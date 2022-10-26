@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5.0 (26.10.2022)
+
+- created nice-icon component,
+- created nice-svgs component,
+- fixed nice-tooltip html injection,
+- created nice-toast component,
+- created nice-popup component
+
 ## v1.4.11 (26.10.2022)
 
 - added dropdown distance prop
