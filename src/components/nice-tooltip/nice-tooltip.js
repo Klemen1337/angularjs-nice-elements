@@ -7,14 +7,17 @@
  * # niceTooltip
  */
 angular.module('niceElements')
-  .directive('niceTooltip', function() {
+  .directive('niceTooltip', function () {
     return {
       restrict: 'EA',
-      link: function(scope, element, attrs) {
-        var html = element.html();
+      link: function (scope, element, attrs) {
         element.addClass("nice-tooltip");
-        html = html + "<span class='nice-tooltip-window'>" + attrs.niceTooltip + "</span>"
-        element.html(html);
-    }
+
+        var tooltipWindow = document.createElement('span')
+        tooltipWindow.className = 'nice-tooltip-window';
+        tooltipWindow.innerHTML = attrs.niceTooltip;
+
+        element.append(tooltipWindow);
+      }
     };
   });
