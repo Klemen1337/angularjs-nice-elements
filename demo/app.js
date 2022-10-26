@@ -30,4 +30,5 @@ angular.module('niceElementsDemo', [
   $routeProvider.when(appPathRoute + 'nice-checkbox', { templateUrl: pagesPath + 'examples/nice-checkbox.html' });
   $routeProvider.when(appPathRoute + 'nice-button', { templateUrl: pagesPath + 'examples/nice-button.html' });
   $routeProvider.when(appPathRoute + 'nice-calendar', { templateUrl: pagesPath + 'examples/nice-calendar.html' });
+  $routeProvider.when(appPathRoute + 'nice-popup', { templateUrl: pagesPath + 'examples/nice-popup.html' });
 }]);

@@ -94,3 +94,19 @@ pre {
 .overflow-hidden {
   overflow: hidden;
 }
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.p-2 {
+  padding: 2rem;
+}
+
+.w-300 {
+  width: 300px;
+}

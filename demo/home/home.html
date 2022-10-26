@@ -181,24 +181,20 @@
                     {{ $parent.item.value }}
                 </nice-choice>
 
-
                 <nice-slot is-inline="isInline">
-                    <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">Nice
-                        button</i></nice-button>
-                </nice-slot>
-
-                <nice-slot is-inline="isInline">
-                    <button class="btn btn-danger" ng-click="error()">Error Notification</button>
-                </nice-slot>
-
-                <nice-slot is-inline="isInline">
-                    <button class="btn btn-primary" ng-click="toggleRequired = !toggleRequired">Toggle
-                        required</button>
-                </nice-slot>
-
-                <nice-slot is-inline="isInline">
-                    <button class="btn btn-primary" ng-click="toggleInline()">Toggle inline ({{ isInline
-                        }})</button>
+                    <nice-popup placement="auto" show-arrow="true">
+                        <nice-popup-target>
+                            <button class="btn btn-primary">More options</button>
+                        </nice-popup-target>
+                        <nice-popup-content>
+                            <div class="white-wrapper w-300 p-2 mb-0">
+                                <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">Nice button</i></nice-button>
+                                <button class="btn btn-block btn-danger mb-1" ng-click="error()">Error Notification</button>
+                                <button class="btn btn-block btn-primary mb-1" ng-click="toggleRequired = !toggleRequired">Toggle required ({{ toggleRequired }})</button>
+                                <button class="btn btn-block btn-primary" ng-click="toggleInline()">Toggle inline ({{ isInline }})</button>
+                            </div>
+                        </nice-popup-content>
+                    </nice-popup>
                 </nice-slot>
             </div>
 
@@ -212,8 +208,7 @@
                     <button class="btn btn-sm btn-primary" style="margin-top: 5px;" ng-click="toggleLoading()">Close</button>
                 </nice-loader>
                 <button class="btn btn-sm btn-primary" ng-click="toggleLoading()" nice-tooltip="Is inline: {{ isInline }}">Open loading</button>
-                <div nice-tooltip="This is a nice tooltip example">Test</button>
-                </div>
+                <button class="btn btn-sm btn-primary" nice-tooltip="This is a nice tooltip example">Test</button>
             </div>
         </div>
     </div>

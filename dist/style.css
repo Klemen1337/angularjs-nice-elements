@@ -3149,4 +3149,43 @@ p.nice {
   border-top: 3px solid #3e3e3e;
 }
 
+.nice-popup .nice-popup-target {
+  display: inline-block;
+}
+
+.nice-popup .nice-popup-arrow[data-hide] {
+  visibility: hidden;
+}
+
+.nice-popup .nice-popup-arrow,
+.nice-popup .nice-popup-arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
+
+.nice-popup .nice-popup-arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #ffffff;
+  border: 1px solid #cbd4d9;
+}
+
+.nice-popup .nice-popup-content[data-popper-placement^='top'] > .nice-popup-arrow {
+  bottom: -4px;
+}
+
+.nice-popup .nice-popup-content[data-popper-placement^='bottom'] > .nice-popup-arrow {
+  top: -4px;
+}
+
+.nice-popup .nice-popup-content[data-popper-placement^='left'] > .nice-popup-arrow {
+  right: -4px;
+}
+
+.nice-popup .nice-popup-content[data-popper-placement^='right'] > .nice-popup-arrow {
+  left: -4px;
+}
+
 /*# sourceMappingURL=style.css.map */

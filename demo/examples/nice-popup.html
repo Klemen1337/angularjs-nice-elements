@@ -1,0 +1,73 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice popup</h1>
+
+    <div class="white-wrapper" id="nice-button">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>showArrow</td>
+                        <td>Show or hide arrow</td>
+                        <td>False</td>
+                    </tr>
+                    <tr>
+                        <td>offsetDistance</td>
+                        <td>distance, displaces the popper away from, or toward, the reference element in the direction of its placement</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>offsetSkidding</td>
+                        <td>skidding, displaces the popper along the reference element.</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>placement</td>
+                        <td>Describes the preferred placement of the popper. 'auto','auto-start','auto-end','top','top-start','top-end','bottom','bottom-start','bottom-end','right','right-start','right-end','left','left-start','left-end'</td>
+                        <td>auto</td>
+                    </tr>
+                    <tr>
+                        <td>strategy</td>
+                        <td>Describes the positioning strategy to use. By default, it is absolute, which in the simplest cases does not require repositioning of the popper.</td>
+                        <td>fixed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">
+&lt;nice-popup show-arrow="true">
+    &lt;nice-popup-target>
+        &lt;button class="btn btn-primary">This is a test button&lt;/button>
+    &lt;/nice-popup-target>
+    &lt;nice-popup-content>
+        &lt;div class="white-wrapper">
+            Test popup content
+        &lt;/div>
+    &lt;/nice-popup-content>
+&lt;/nice-popup>
+</pre>
+
+        <nice-popup show-arrow="true">
+            <nice-popup-target>
+                <button class="btn btn-primary">This is a test button</button>
+            </nice-popup-target>
+            <nice-popup-content>
+                <div class="white-wrapper mb-0 p-2">
+                    <h2>Test popup content</h2>
+                    <nice-input model="data.test" title="Name" is-inline="true"></nice-input>
+                    <nice-input model="data.test2" title="Surname" is-inline="true"></nice-input>
+                    <nice-input model="data.test3" title="Comment" is-inline="true" no-margin="true"></nice-input>
+                </div>
+            </nice-popup-content>
+        </nice-popup>
+    </div>
+</div>

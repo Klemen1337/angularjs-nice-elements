@@ -1,0 +1,7 @@
+<div class="nice-popup" click-outside="close()">
+    <div class="nice-popup-target" ng-transclude="target" ng-click="toggle()"></div>
+    <div class="nice-popup-content">
+        <div class="nice-popup-arrow" data-popper-arrow ng-show="isOpen && showArrow"></div>
+        <div ng-transclude="content" ng-if="isOpen"></div>
+    </div>
+</div>
