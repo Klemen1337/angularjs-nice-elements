@@ -3188,4 +3188,84 @@ p.nice {
   left: -4px;
 }
 
+.nice-icon {
+  display: flex;
+  fill: currentColor;
+  width: 20px;
+  height: 20px;
+}
+
+.nice-toasts {
+  z-index: 9999999;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.nice-toasts.top {
+  top: 50px;
+}
+
+.nice-toasts.bottom {
+  bottom: 0;
+  flex-direction: column-reverse;
+}
+
+.nice-toasts.center {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.nice-toasts.left {
+  left: 0;
+  align-items: flex-start;
+}
+
+.nice-toasts.right {
+  right: 0;
+  align-items: flex-end;
+}
+
+.nice-toasts .nice-toast {
+  background: #EDEDED;
+  padding: 0.3rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.8em;
+  font-weight: bold;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+}
+
+.nice-toasts .nice-toast.success {
+  color: white;
+  background: #49AE50;
+}
+
+.nice-toasts .nice-toast.error {
+  color: white;
+  background: #f22e28;
+}
+
+.toast-enter-active {
+  animation: bounce-in .5s;
+}
+
+.toast-leave-active {
+  animation: bounce-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  from {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

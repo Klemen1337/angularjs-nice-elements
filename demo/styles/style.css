@@ -91,6 +91,12 @@ pre {
   margin-right: 1rem;
 }
 
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }

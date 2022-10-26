@@ -276,6 +276,7 @@ angular.module('niceElementsDemo').controller('HomeCtrl', function ($scope, $htt
     });
   }
 
+
   $scope.countries = [
     { 'iso': 'AF', 'name': 'Afghanistan' },
     { 'iso': 'AX', 'name': 'Aland Islands' },

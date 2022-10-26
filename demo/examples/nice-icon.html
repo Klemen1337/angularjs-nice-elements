@@ -1,0 +1,17 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice icon</h1>
+
+    <div class="white-wrapper" id="nice-icon">
+        <pre class="prettyprint">&lt;nice-icon icon="olaii-logo">&lt;/nice-icon></pre>
+
+        <nice-icon icon="olaii-logo"></nice-icon>
+
+        <hr />
+
+        <h4>Icons ({{ icons.length }})</h4>
+
+        <div class="icons">
+            <nice-icon ng-repeat="icon in icons" icon="{{ icon }}" nice-tooltip="{{ icon }}" ng-click="copyText(icon)"></nice-icon>
+        </div>
+    </div>
+</div>
