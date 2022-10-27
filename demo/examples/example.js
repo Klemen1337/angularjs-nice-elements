@@ -6,13 +6,19 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
   $scope.dropdownLoading = true;
   $scope.isInline = false;
   $scope.toggleInline = function () { $scope.isInline = !$scope.isInline }
-
+  $scope.filters = {
+    search: ""
+  }
 
   $scope.showLoading = false;
   $scope.toggleLoading = function () {
     $scope.showLoading = !$scope.showLoading;
   }
 
+  $scope.selectIcon = function (icon) {
+    $scope.selectedIcon = icon;
+    $scope.copyText(icon);
+  }
 
   $scope.copyText = function (text) {
     try {
@@ -292,6 +298,7 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     });
   }
 
+  $scope.selectedIcon = "icon-activity";
   $scope.icons = [
     "olaii-logo",
     "icon-activity",
