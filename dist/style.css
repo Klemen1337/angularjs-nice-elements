@@ -65,10 +65,10 @@ label.nice {
 }
 
 .nice-focus, .nice-component .input-group:focus-within,
-.nice-component .form-group:focus-within, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
-  outline: 2px solid var(--nice-primary-color);
+.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
+  outline: 2px solid;
+  outline-color: var(--nice-primary-color);
   outline-offset: 2px;
-  border-radius: 1px;
   z-index: 1;
 }
 
@@ -83,6 +83,11 @@ label.nice {
   outline-offset: 2px;
   border-radius: 1px;
   z-index: 1;
+}
+
+.nice-component .input-group:focus-within,
+.nice-component .form-group:focus-within {
+  border-radius: var(--nice-border-radius);
 }
 
 .nice-component .input-group:focus-within input,
@@ -380,10 +385,6 @@ p.nice {
   color: white;
 }
 
-.btn:active:focus {
-  outline: 0;
-}
-
 .btn svg,
 .btn img {
   width: 15px;
@@ -402,15 +403,16 @@ p.nice {
 .btn-primary, .btn-primary-plain, .btn-primary-naked, .nice-dropdown .btn-dropdown, .nice-search .nice-dropdown-empty .btn-dropdown, .nice-dropdown-old .btn-dropdown {
   background: var(--nice-primary-color);
   border-color: var(--nice-primary-color-darker);
+  outline-color: var(--nice-primary-color);
   color: white;
 }
 
-.btn-primary:active, .btn-primary-plain:active, .btn-primary-naked:active, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:active {
+.btn-primary:active, .btn-primary-plain:active, .btn-primary-naked:active, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:active, .btn-primary.active, .nice-table.nice-table-settings .btn-primary.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-primary-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-primary-naked:hover, .nice-table.nice-table-settings .nice-dropdown .nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-dropdown-old .nice-table-row.btn-dropdown:hover, .nice-dropdown-old .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .active.btn-primary-plain, .active.btn-primary-naked, .nice-dropdown .active.btn-dropdown, .nice-search .nice-dropdown-empty .active.btn-dropdown, .nice-dropdown-old .active.btn-dropdown {
   background: var(--nice-primary-color-lighter);
   border-color: var(--nice-primary-color-lighter);
 }
 
-.btn-primary:active:focus, .btn-primary-plain:active:focus, .btn-primary-naked:active:focus, .nice-dropdown .btn-dropdown:active:focus, .nice-search .nice-dropdown-empty .btn-dropdown:active:focus, .nice-dropdown-old .btn-dropdown:active:focus, .btn-primary:active:hover, .btn-primary-plain:active:hover, .btn-primary-naked:active:hover, .nice-dropdown .btn-dropdown:active:hover, .nice-search .nice-dropdown-empty .btn-dropdown:active:hover, .nice-dropdown-old .btn-dropdown:active:hover {
+.btn-primary:active:focus, .btn-primary-plain:active:focus, .btn-primary-naked:active:focus, .nice-dropdown .btn-dropdown:active:focus, .nice-search .nice-dropdown-empty .btn-dropdown:active:focus, .nice-dropdown-old .btn-dropdown:active:focus, .btn-primary:active:hover, .btn-primary-plain:active:hover, .btn-primary-naked:active:hover, .nice-dropdown .btn-dropdown:active:hover, .nice-search .nice-dropdown-empty .btn-dropdown:active:hover, .nice-dropdown-old .btn-dropdown:active:hover, .btn-primary.active:focus, .nice-table.nice-table-settings .btn-primary.nice-table-row:focus:hover, .nice-table.nice-table-settings .nice-table-row.btn-primary-plain:focus:hover, .nice-table.nice-table-settings .nice-table-row.btn-primary-naked:focus:hover, .nice-table.nice-table-settings .nice-dropdown .nice-table-row.btn-dropdown:focus:hover, .nice-dropdown .nice-table.nice-table-settings .nice-table-row.btn-dropdown:focus:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-table-row.btn-dropdown:focus:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-table-row.btn-dropdown:focus:hover, .nice-table.nice-table-settings .nice-dropdown-old .nice-table-row.btn-dropdown:focus:hover, .nice-dropdown-old .nice-table.nice-table-settings .nice-table-row.btn-dropdown:focus:hover, .active.btn-primary-plain:focus, .active.btn-primary-naked:focus, .nice-dropdown .active.btn-dropdown:focus, .nice-search .nice-dropdown-empty .active.btn-dropdown:focus, .nice-dropdown-old .active.btn-dropdown:focus, .btn-primary.active:hover, .nice-table.nice-table-settings .btn-primary.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-primary-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-primary-naked:hover, .nice-table.nice-table-settings .nice-dropdown .nice-table-row.btn-dropdown:hover, .nice-dropdown .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-search .nice-dropdown-empty .nice-table-row.btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .nice-table.nice-table-settings .nice-dropdown-old .nice-table-row.btn-dropdown:hover, .nice-dropdown-old .nice-table.nice-table-settings .nice-table-row.btn-dropdown:hover, .active.btn-primary-plain:hover, .active.btn-primary-naked:hover, .nice-dropdown .active.btn-dropdown:hover, .nice-search .nice-dropdown-empty .active.btn-dropdown:hover, .nice-dropdown-old .active.btn-dropdown:hover {
   background: var(--nice-primary-color-lighter);
   border-color: var(--nice-primary-color-lighter);
 }
@@ -439,7 +441,7 @@ p.nice {
   border-color: var(--nice-secondary-color);
 }
 
-.btn-default:active, .btn-default-plain:active, .btn-default-naked:active, .btn-default.active, .nice-table.nice-table-settings .btn-default.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-naked:hover, .active.btn-default-plain, .active.btn-default-naked, .btn-default:hover:active, .btn-default-plain:hover:active, .btn-default-naked:hover:active {
+.btn-default:active, .btn-default-plain:active, .btn-default-naked:active, .btn-default.active, .nice-table.nice-table-settings .btn-default.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-naked:hover, .active.btn-default-plain, .active.btn-default-naked, .btn-default:hover:active, .btn-default-plain:hover:active, .btn-default-naked:hover:active, .btn-default:hover.active, .nice-table.nice-table-settings .btn-default.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-naked:hover, .btn-default-plain:hover.active, .btn-default-naked:hover.active {
   background: var(--nice-secondary-color-lighter);
   border-color: var(--nice-secondary-color-lighter);
 }
@@ -466,6 +468,7 @@ p.nice {
   color: var(--nice-secondary-font-color);
   background: var(--nice-secondary-color);
   border-color: var(--nice-border-color);
+  outline-color: var(--nice-secondary-color) !important;
 }
 
 .btn-secondary:active, .btn-secondary-plain:active, .btn-secondary-naked:active, .btn-secondary.active, .nice-table.nice-table-settings .btn-secondary.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-secondary-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-secondary-naked:hover, .active.btn-secondary-plain, .active.btn-secondary-naked, .btn-secondary:hover:active, .btn-secondary-plain:hover:active, .btn-secondary-naked:hover:active {
@@ -495,6 +498,7 @@ p.nice {
   color: white;
   background: var(--nice-success-color);
   border-color: var(--nice-success-color);
+  outline-color: var(--nice-success-color) !important;
 }
 
 .btn-success:active, .btn-success-plain:active, .btn-success-naked:active, .btn-success.active, .nice-table.nice-table-settings .btn-success.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-success-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-success-naked:hover, .active.btn-success-plain, .active.btn-success-naked, .btn-success:hover:active, .btn-success-plain:hover:active, .btn-success-naked:hover:active {
@@ -523,6 +527,7 @@ p.nice {
   color: white;
   background: var(--nice-danger-color);
   border-color: var(--nice-danger-color);
+  outline-color: var(--nice-danger-color) !important;
 }
 
 .btn-danger:active, .btn-danger-plain:active, .btn-danger-naked:active, .btn-danger.active, .nice-table.nice-table-settings .btn-danger.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-danger-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-danger-naked:hover, .active.btn-danger-plain, .active.btn-danger-naked, .btn-danger:hover:active, .btn-danger-plain:hover:active, .btn-danger-naked:hover:active {
@@ -551,6 +556,7 @@ p.nice {
   color: white;
   background: var(--nice-info-color);
   border-color: var(--nice-info-color);
+  outline-color: var(--nice-info-color) !important;
 }
 
 .btn-info:active, .btn-info-plain:active, .btn-info-naked:active, .btn-info.active, .nice-table.nice-table-settings .btn-info.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-info-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-info-naked:hover, .active.btn-info-plain, .active.btn-info-naked, .btn-info:hover:active, .btn-info-plain:hover:active, .btn-info-naked:hover:active {
@@ -579,6 +585,7 @@ p.nice {
   color: white;
   background: var(--nice-warning-color);
   border-color: var(--nice-warning-color);
+  outline-color: var(--nice-warning-color) !important;
 }
 
 .btn-warning:active, .btn-warning-plain:active, .btn-warning-naked:active, .btn-warning.active, .nice-table.nice-table-settings .btn-warning.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-warning-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-warning-naked:hover, .active.btn-warning-plain, .active.btn-warning-naked, .btn-warning:hover:active, .btn-warning-plain:hover:active, .btn-warning-naked:hover:active {
@@ -3170,6 +3177,7 @@ p.nice {
   width: 34px;
   border: 1px solid #cbd4d9;
   border-radius: 3px;
+  background: transparent;
   margin: 0;
   padding: 4px;
 }

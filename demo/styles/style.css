@@ -98,18 +98,18 @@ pre {
   cursor: pointer;
   display: flex;
   align-items: center;
+  border: 0 none;
 }
 
 .icon:hover {
   color: #187aff;
 }
 
-.icon span {
-  margin-left: 5px;
-}
-
-.icon.active {
-  color: #3189ff;
+.icon.active,
+.icon:focus {
+  color: #3189ff !important;
+  background: transparent !important;
+  box-shadow: 0 0 0;
 }
 
 .overflow-hidden {

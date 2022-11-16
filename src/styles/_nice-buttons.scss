@@ -12,10 +12,6 @@
     color: white;
   }
 
-  &:active:focus {
-    outline: 0;
-  }
-
   svg,
   img {
     width: 15px;
@@ -31,6 +27,11 @@
     margin-left: 0.5rem;
   }
 
+  &.focus,
+  &.active.focus,
+  &.active:focus,
+  &:active.focus,
+  &:active:focus,
   &:focus {
     @extend .nice-focus;
   }
@@ -41,9 +42,11 @@
 .btn-primary {
   background: var(--nice-primary-color);
   border-color: var(--nice-primary-color-darker);
+  outline-color: var(--nice-primary-color);
   color: white;
 
-  &:active {
+  &:active,
+  &.active {
     background: var(--nice-primary-color-lighter);
     border-color: var(--nice-primary-color-lighter);
 
@@ -85,7 +88,8 @@
 
   &:active,
   &.active,
-  &:hover:active {
+  &:hover:active,
+  &:hover.active {
     background: var(--nice-secondary-color-lighter);
     border-color: var(--nice-secondary-color-lighter);
   }
@@ -117,6 +121,7 @@
   color: var(--nice-secondary-font-color);
   background: var(--nice-secondary-color);
   border-color: var(--nice-border-color);
+  outline-color: var(--nice-secondary-color) !important;
 
   &:active,
   &.active,
@@ -152,6 +157,7 @@
   color: white;
   background: var(--nice-success-color);
   border-color: var(--nice-success-color);
+  outline-color: var(--nice-success-color) !important;
 
   &:active,
   &.active,
@@ -187,6 +193,7 @@
   color: white;
   background: var(--nice-danger-color);
   border-color: var(--nice-danger-color);
+  outline-color: var(--nice-danger-color) !important;
 
   &:active,
   &.active,
@@ -222,6 +229,7 @@
   color: white;
   background: var(--nice-info-color);
   border-color: var(--nice-info-color);
+  outline-color: var(--nice-info-color) !important;
 
   &:active,
   &.active,
@@ -257,6 +265,7 @@
   color: white;
   background: var(--nice-warning-color);
   border-color: var(--nice-warning-color);
+  outline-color: var(--nice-warning-color) !important;
 
   &:active,
   &.active,

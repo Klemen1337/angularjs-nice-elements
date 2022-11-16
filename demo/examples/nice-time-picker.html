@@ -8,8 +8,8 @@
                 <nice-time-picker model="dtTime" title="Timepicker" field-width="col-sm-4"></nice-time-picker>
             </div>
             <div class="col-sm-6">
+                <button class="btn btn-primary-plain mb-10" ng-click="change_hour()">Change hour</button>
                 <pre>{{ dtTime | json }}</pre>
-                <button ng-click="change_hour()">Change hour</button>
             </div>
 
             <pre>{{ forma | json }}</pre>

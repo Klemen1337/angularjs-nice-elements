@@ -14,12 +14,12 @@
             <div ng-form="formDatetimeRangePicker"></div>
 
             <div class="dropdown">
-                <a class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="openDtpRange()" href="javascript:void(0);">
+                <div class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="openDtpRange()">
                     <div class="input-group">
                         <input type="text" class="form-control" value="{{value}}" ng-click="openDtpRange()">
                         <span class="input-group-addon clickable"><i class="fa" ng-class="{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}"></i></span>
                     </div>
-                </a>
+                </div>
             </div>
 
             <div class="dtp-range-wrapper" ng-show="showDtpRange">
@@ -35,41 +35,11 @@
 
                     <div class="dtp-left">
                         <!-- inject nice-dtp here -->
-                        <nice-dtp
-                            model="dateStart"
-                            format="{{format}}"
-                            model-format="{{modelFormat}}"
-                            date="{{date}}"
-                            time="{{time}}"
-                            width="{{width}}"
-                            enable-ok-buttons="{{enableOkButtons}}"
-                            lang="{{lang}}"
-                            min-date="{{minDate}}"
-                            max-date="{{maxDate}}"
-                            week-start="{{weekStart}}"
-                            ok-text="{{okText}}"
-                            cancel-text="{{cancelText}}"
-                            inline="true"
-                        ></nice-dtp>
+                        <nice-dtp model="dateStart" format="{{format}}" model-format="{{modelFormat}}" date="{{date}}" time="{{time}}" width="{{width}}" enable-ok-buttons="{{enableOkButtons}}" lang="{{lang}}" min-date="{{minDate}}" max-date="{{maxDate}}" week-start="{{weekStart}}" ok-text="{{okText}}" cancel-text="{{cancelText}}" inline="true"></nice-dtp>
                     </div>
                     <div class="dtp-right">
                         <!-- inject nice-dtp here -->
-                        <nice-dtp
-                            model="dateEnd"
-                            format="{{format}}"
-                            model-format="{{modelFormat}}"
-                            date="{{date}}"
-                            time="{{time}}"
-                            width="{{width}}"
-                            enable-ok-buttons="{{enableOkButtons}}"
-                            lang="{{lang}}"
-                            min-date="{{minDate}}"
-                            max-date="{{maxDate}}"
-                            week-start="{{weekStart}}"
-                            ok-text="{{okText}}"
-                            cancel-text="{{cancelText}}"
-                            inline="true"
-                         ></nice-dtp>
+                        <nice-dtp model="dateEnd" format="{{format}}" model-format="{{modelFormat}}" date="{{date}}" time="{{time}}" width="{{width}}" enable-ok-buttons="{{enableOkButtons}}" lang="{{lang}}" min-date="{{minDate}}" max-date="{{maxDate}}" week-start="{{weekStart}}" ok-text="{{okText}}" cancel-text="{{cancelText}}" inline="true"></nice-dtp>
                     </div>
 
                     <div class="dtp-buttons-bottom">

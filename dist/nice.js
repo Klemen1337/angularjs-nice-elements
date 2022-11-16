@@ -5386,11 +5386,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
     "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'checked': model, 'margin-bottom-0' : noMargin }\" ng-click=\"toggle()\">\n" +
-    "<div class=\"checkbox\">\n" +
+    "<button class=\"btn checkbox\">\n" +
     "<svg class=\"check\" viewBox=\"-281 373 48 48\">\n" +
     "<path class=\"check-stroke\" d=\"M-273.2,398.2l10,9.9 l22.4-22.3\"></path>\n" +
     "</svg>\n" +
-    "</div>\n" +
+    "</button>\n" +
     "<div ng-if=\"title\" class=\"message\">{{ title }}</div>\n" +
     "</div>"
   );
@@ -5592,12 +5592,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div ng-form=\"formDatetimeRangePicker\"></div>\n" +
     "<div class=\"dropdown\">\n" +
-    "<a class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtpRange()\" href=\"javascript:void(0);\">\n" +
+    "<div class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtpRange()\">\n" +
     "<div class=\"input-group\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtpRange()\">\n" +
     "<span class=\"input-group-addon clickable\"><i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i></span>\n" +
     "</div>\n" +
-    "</a>\n" +
+    "</div>\n" +
     "</div>\n" +
     "<div class=\"dtp-range-wrapper\" ng-show=\"showDtpRange\">\n" +
     "<div class=\"dtp-layer\">\n" +

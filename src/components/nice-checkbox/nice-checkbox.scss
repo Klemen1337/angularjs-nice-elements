@@ -8,10 +8,11 @@
     width: 34px;
     border: 1px solid $nice-border-color;
     border-radius: $nice-border-radius-small;
+    background: transparent;
     margin: 0;
     padding: 4px;
 
-    .check{
+    .check {
       opacity: 0;
     }
 
@@ -44,7 +45,7 @@
       border-color: $nice-border-color;
       background: white;
 
-      .check{
+      .check {
         opacity: 1;
       }
 
@@ -53,7 +54,7 @@
       }
     }
 
-    &:hover{
+    &:hover {
       .checkbox {
         border-color: darken($nice-border-color, 15%);
       }

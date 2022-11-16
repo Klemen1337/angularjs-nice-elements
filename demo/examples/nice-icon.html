@@ -13,10 +13,10 @@
         <nice-search2 model="filters.search" class="mb-1"></nice-search2>
 
         <div class="icons">
-            <div class="icon" ng-repeat="icon in icons | filter:filters.search" ng-class="{ 'active': selectedIcon == icon }" ng-click="selectIcon(icon)">
+            <button class="btn btn-default-naked icon" ng-repeat="icon in icons | filter:filters.search" ng-class="{ 'active': selectedIcon == icon }" ng-click="selectIcon(icon)">
                 <nice-icon icon="{{ icon }}"></nice-icon>
                 <span>{{ icon }}</span>
-            </div>
+            </button>
         </div>
     </div>
 </div>
