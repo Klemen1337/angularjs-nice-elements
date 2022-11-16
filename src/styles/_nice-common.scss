@@ -11,6 +11,12 @@ label.nice {
   }
 }
 
+.nice-focus {
+  outline: 2px solid var(--nice-primary-color);
+  outline-offset: 2px;
+  border-radius: 1px;
+  z-index: 1;
+}
 
 .nice-component {
   margin-bottom: 10px;
@@ -26,11 +32,10 @@ label.nice {
     }
   }
 
-  .input-group {
+  .input-group,
+  .form-group {
     &:focus-within {
-      outline: 2px solid var(--nice-primary-color);
-      outline-offset: 2px;
-      border-radius: 1px;
+      @extend .nice-focus;
 
       input {
         outline: 0 none;

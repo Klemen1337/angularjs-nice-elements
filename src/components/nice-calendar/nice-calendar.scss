@@ -5,12 +5,13 @@
     padding: 0 10px 5px 10px;
     display: flex;
 
-    .nice-start-date, .nice-end-date{
+    .nice-start-date,
+    .nice-end-date {
       width: 50%;
       color: $nice-font-color;
       transition: all 0.3s ease;
 
-      label{
+      label {
         font-size: 9px;
         font-weight: normal;
         margin: 0;
@@ -31,18 +32,18 @@
   .nice-calendar-time {
     display: flex;
 
-    .no-border-right{
-      .time-picker-minute{
+    .no-border-right {
+      .time-picker-minute {
         border-right: 0;
       }
     }
 
-    .time-picker{
+    .time-picker {
       position: relative;
       width: 20%;
       height: 30px;
 
-      &:after{
+      &:after {
         content: " ";
         position: absolute;
         top: 50%;
@@ -57,12 +58,12 @@
       }
     }
 
-    .time-picker-hour, .time-picker-minute{
+    .time-picker-hour,
+    .time-picker-minute {
       width: 100%;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
-      outline: 0;
       border-radius: 0px;
       border: 1px solid $nice-border-color;
       border-top: 0;
@@ -76,7 +77,7 @@
       height: 30px;
     }
 
-    .time-picket-icon{
+    .time-picket-icon {
       border-right: 1px solid $nice-border-color;
       width: 20%;
       float: left;
@@ -110,16 +111,18 @@
       height: $header-height;
       line-height: $header-height;
       color: white;
+      display: flex;
 
-      i {
-        float: left;
+      button {
         width: $icon-width;
-        font-size: 1.125em;
+        font-size: 1.2em;
         font-weight: bold;
         position: relative;
         line-height: 40px;
         padding: 0 $spacing;
-        cursor: pointer;
+        flex-shrink: 0;
+        color: white;
+        background: transparent;
 
         &.fa-angle-left {
           text-align: left;
@@ -132,13 +135,9 @@
       }
 
       span {
-        float: left;
-        width: 100%;
+        flex-grow: 1;
         text-transform: uppercase;
-        padding-left: $icon-width+$spacing;
-        margin-left: $icon-width*-1;
         text-align: center;
-        padding-right: $icon-width;
         color: inherit;
       }
     }
@@ -157,12 +156,14 @@
         width: $day-width;
         height: $day-height;
         line-height: $day-height;
+        box-shadow: 0 0 0;
+        border: 0 none;
         border-left: solid 1px $nice-border-color;
         font-size: 12px;
         text-align: center;
         background: white;
-        cursor: pointer;
         color: $nice-font-color;
+
 
         &:first-child {
           border-left: none;
@@ -184,11 +185,11 @@
           color: #C0C0C0;
         }
 
-        &.weekend{
+        &.weekend {
           background: #fafafa;
         }
 
-        &.disabled{
+        &.disabled {
           opacity: 0.3;
           color: $nice-danger-color;
           cursor: not-allowed;
@@ -230,7 +231,7 @@
           }
         }
 
-        .popup{
+        .popup {
           position: relative;
           bottom: 45px;
           left: 0;
@@ -246,14 +247,14 @@
           width: fit-content;
         }
 
-        &:hover{
+        &:hover {
           .popup {
             display: block;
           }
         }
       }
 
-      &.names > span {
+      &.names>span {
         color: darken($nice-base-color, 10%);
         line-height: 20px;
         height: 20px;

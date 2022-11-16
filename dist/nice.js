@@ -5312,9 +5312,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-calendar-wrapper\">\n" +
     "<div class=\"nice-calendar-weeks\">\n" +
     "<div class=\"header\">\n" +
-    "<i class=\"fa fa-angle-left\" ng-click=\"previous()\" title=\"{{ 'Previous month' | translate:'Nice' }}\"></i>\n" +
+    "<button class=\"btn\" ng-click=\"previous()\" title=\"{{ 'Previous month' | translate:'Nice' }}\"><i class=\"fa fa-angle-left\"></i></button>\n" +
     "<span title=\"{{ month.format('M.YYYY' )}}\">{{ month.format(\"MMMM, YYYY\" )}}</span>\n" +
-    "<i class=\"fa fa-angle-right\" ng-click=\"next()\" title=\"{{ 'Next month' | translate:'Nice' }}\"></i>\n" +
+    "<button class=\"btn\" ng-click=\"next()\" title=\"{{ 'Next month' | translate:'Nice' }}\"><i class=\"fa fa-angle-right\"></i></button>\n" +
     "</div>\n" +
     "<div class=\"week names\">\n" +
     "<span class=\"day\" translate translate-context=\"Nice\">Mon</span>\n" +
@@ -5326,7 +5326,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<span class=\"day weekend\" translate translate-context=\"Nice\">Sun</span>\n" +
     "</div>\n" +
     "<div class=\"week\" ng-repeat=\"week in weeks\">\n" +
-    "<span class=\"day\" title=\"{{ day.date.format('D.M.YYYY') }}\" ng-class=\"{\n" +
+    "<button class=\"day\" title=\"{{ day.date.format('D.M.YYYY') }}\" ng-class=\"{\n" +
     "                                today: day.isToday,\n" +
     "                                'different-month': !day.isCurrentMonth,\n" +
     "                                'start-selected': isSameDay(day.date, startDate),\n" +
@@ -5343,7 +5343,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                            \" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">\n" +
     "{{ day.number }}\n" +
     "<p class=\"popup\" ng-if=\"!hideHover\">{{ popupText }}</p>\n" +
-    "</span>\n" +
+    "</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "<div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
@@ -5406,7 +5406,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
-    "<div class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></div>\n" +
+    "<button class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></button>\n" +
     "<div ng-transclude class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
     "</li>\n" +
     "</ul>\n" +

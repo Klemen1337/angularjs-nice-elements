@@ -10,7 +10,7 @@
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <ul class="list-unstyled" ng-class="{ 'disabled': isDisabled }">
                 <li ng-repeat="item in internalList" ng-class="{ 'selected' : isItemSelected(item) }" ng-click="toggle(item)">
-                    <div class="choice-checkbox" ng-class="{'circle' : !multiple }"><i class="fa fa-check"></i></div>
+                    <button class="choice-checkbox" ng-class="{'circle' : !multiple }"><i class="fa fa-check"></i></button>
                     <div ng-transclude class="choice-label">{{ getLabel(item) }}</div>
                 </li>
             </ul>

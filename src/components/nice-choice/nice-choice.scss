@@ -1,5 +1,5 @@
-.nice-choice{
-  .selected{
+.nice-choice {
+  .selected {
     .choice-checkbox {
       border-color: $nice-choice-selected-bg;
       background: $nice-choice-selected-bg;
@@ -7,38 +7,38 @@
     }
   }
 
-  .disabled{
-    li{
+  .disabled {
+    li {
       cursor: not-allowed;
       opacity: 0.65;
 
-      &:hover{
-        .choice-checkbox{
+      &:hover {
+        .choice-checkbox {
           border-color: $nice-border-color !important;
         }
       }
     }
 
-    .selected{
-      &:hover{
+    .selected {
+      &:hover {
         .choice-checkbox {
-          border-color:$nice-choice-selected-bg !important;
+          border-color: $nice-choice-selected-bg !important;
         }
       }
     }
 
   }
 
-  ul{
+  ul {
     margin-bottom: 0;
   }
 
-  li{
-    padding:5px 0px;
+  li {
+    padding: 5px 0px;
     @extend .noselect;
     cursor: pointer;
 
-    .choice-checkbox{
+    .choice-checkbox {
       -webkit-transition: all 0.2s;
       -moz-transition: all 0.2s;
       -ms-transition: all 0.2s;
@@ -48,6 +48,7 @@
       background: $nice-choice-bg;
       color: $nice-choice-bg;
       line-height: 22px;
+      font-size: 12px;
       width: 25px;
       height: 25px;
       border: 1px solid $nice-border-color;
@@ -56,17 +57,17 @@
       text-align: center;
     }
 
-    &:hover{
-      .choice-checkbox{
+    &:hover {
+      .choice-checkbox {
         border-color: $nice-choice-hover-border;
       }
     }
 
-    .circle{
+    .circle {
       border-radius: 100px;
     }
 
-    .choice-label{
+    .choice-label {
       margin-left: 35px;
       line-height: 26px;
     }

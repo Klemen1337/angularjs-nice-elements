@@ -46,7 +46,7 @@
   .nice-date-date {
     border-radius: $nice-border-radius;
     background: white;
-    overflow: hidden;
+    // overflow: hidden;
     border: solid 1px $nice-border-color;
 
     color: white;
@@ -72,9 +72,21 @@
         font-size: 1.125em;
         font-weight: bold;
         line-height: 40px;
+        border: 0 none;
 
-        &:hover {
-          background: darken($nice-base-color, 5%);
+        &:focus {
+          outline-color: $nice-base-color-darker;
+        }
+
+        &:hover,
+        &:focus {
+          background: $nice-base-color-darker;
+          color: white;
+        }
+
+        &:active {
+          background: $nice-base-color-lighter;
+          color: white;
         }
 
         .fa-circle {
@@ -90,6 +102,21 @@
           border: 0px;
           -webkit-appearance: none;
           cursor: pointer;
+
+          &:focus {
+            outline-color: $nice-base-color-darker;
+          }
+
+          &:hover,
+          &:focus {
+            background: $nice-base-color-darker;
+            color: white;
+          }
+
+          &:active {
+            background: $nice-base-color-lighter;
+            color: white;
+          }
         }
       }
 

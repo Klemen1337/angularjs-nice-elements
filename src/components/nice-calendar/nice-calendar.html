@@ -13,9 +13,9 @@
             <div class="nice-calendar-wrapper">
                 <div class="nice-calendar-weeks">
                     <div class="header">
-                        <i class="fa fa-angle-left" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}"></i>
+                        <button class="btn" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}"><i class="fa fa-angle-left"></i></button>
                         <span title="{{ month.format('M.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
-                        <i class="fa fa-angle-right" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}"></i>
+                        <button class="btn" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}"><i class="fa fa-angle-right"></i></button>
                     </div>
 
                     <div class="week names">
@@ -29,10 +29,7 @@
                     </div>
 
                     <div class="week" ng-repeat="week in weeks">
-                        <span
-                            class="day"
-                            title="{{ day.date.format('D.M.YYYY') }}"
-                            ng-class="{
+                        <button class="day" title="{{ day.date.format('D.M.YYYY') }}" ng-class="{
                                 today: day.isToday,
                                 'different-month': !day.isCurrentMonth,
                                 'start-selected': isSameDay(day.date, startDate),
@@ -42,40 +39,26 @@
                                 'selecting-end': !selectStart,
                                 'weekend': day.isWeekday,
                                 'disabled': day.isDisabled
-                            }"
-                            ng-style="
+                            }" ng-style="
                                 (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||
                                 (color && isSameDay(day.date, startDate)) && {'background-color': color } ||
                                 (color && isSameDay(day.date, endDate)) && {'background-color': color }
-                            "
-                            ng-click="select(day)"
-                            ng-repeat="day in week.days"
-                        >
+                            " ng-click="select(day)" ng-repeat="day in week.days">
                             {{ day.number }}
                             <p class="popup" ng-if="!hideHover">{{ popupText }}</p>
-                        </span>
+                        </button>
                     </div>
                 </div>
 
 
                 <div class="nice-calendar-time" ng-if="time">
                     <div class="time-picker">
-                        <select
-                          title="{{ 'Select start time' | translate:'Nice' }}"
-                          class="time-picker-hour"
-                          ng-model="startDateHour"
-                          ng-change="startHourChange(startDateHour)"
-                          ng-options="hour for hour in hours">
+                        <select title="{{ 'Select start time' | translate:'Nice' }}" class="time-picker-hour" ng-model="startDateHour" ng-change="startHourChange(startDateHour)" ng-options="hour for hour in hours">
                         </select>
                     </div>
 
                     <div class="time-picker">
-                        <select
-                          title="{{ 'Select start time' | translate:'Nice' }}"
-                          class="time-picker-minute"
-                          ng-model="startDateMinute"
-                          ng-change="startMinuteChange(startDateMinute)"
-                          ng-options="minute for minute in minutes">
+                        <select title="{{ 'Select start time' | translate:'Nice' }}" class="time-picker-minute" ng-model="startDateMinute" ng-change="startMinuteChange(startDateMinute)" ng-options="minute for minute in minutes">
                         </select>
                     </div>
 
@@ -84,22 +67,12 @@
                     </div>
 
                     <div class="time-picker">
-                         <select
-                          title="{{ 'Select end time' | translate:'Nice' }}"
-                          class="time-picker-hour"
-                          ng-model="endDateHour"
-                          ng-change="endHourChange(endDateHour)"
-                          ng-options="hour for hour in hours">
+                        <select title="{{ 'Select end time' | translate:'Nice' }}" class="time-picker-hour" ng-model="endDateHour" ng-change="endHourChange(endDateHour)" ng-options="hour for hour in hours">
                         </select>
                     </div>
 
                     <div class="time-picker no-border-right">
-                        <select
-                          title="{{ 'Select end time' | translate:'Nice' }}"
-                          class="time-picker-minute"
-                          ng-model="endDateMinute"
-                          ng-change="endMinuteChange(endDateMinute)"
-                          ng-options="minute for minute in minutes">
+                        <select title="{{ 'Select end time' | translate:'Nice' }}" class="time-picker-minute" ng-model="endDateMinute" ng-change="endMinuteChange(endDateMinute)" ng-options="minute for minute in minutes">
                         </select>
                     </div>
                 </div>
