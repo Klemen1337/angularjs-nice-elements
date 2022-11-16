@@ -39,12 +39,7 @@
     cursor: pointer;
 
     .choice-checkbox {
-      -webkit-transition: all 0.2s;
-      -moz-transition: all 0.2s;
-      -ms-transition: all 0.2s;
-      -o-transition: all 0.2s;
       transition: all 0.2s;
-
       background: $nice-choice-bg;
       color: $nice-choice-bg;
       line-height: 22px;
@@ -55,6 +50,10 @@
       position: absolute;
       border-radius: $nice-border-radius;
       text-align: center;
+
+      &:focus {
+        @extend .nice-focus;
+      }
     }
 
     &:hover {

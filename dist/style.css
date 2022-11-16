@@ -65,7 +65,7 @@ label.nice {
 }
 
 .nice-focus, .nice-component .input-group:focus-within,
-.nice-component .form-group:focus-within, button:focus, .nice-upload .nice-field:focus-within .input-area {
+.nice-component .form-group:focus-within, .btn:focus, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
   outline: 2px solid var(--nice-primary-color);
   outline-offset: 2px;
   border-radius: 1px;
@@ -1335,10 +1335,6 @@ p.nice {
 }
 
 .nice-choice li .choice-checkbox {
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
   transition: all 0.2s;
   background: white;
   color: white;

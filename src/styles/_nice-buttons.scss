@@ -1,10 +1,3 @@
-button {
-  &:focus {
-    @extend .nice-focus;
-  }
-}
-
-
 // -------------------------------- Btn --------------------------------
 .btn {
   display: inline-flex;
@@ -36,6 +29,10 @@ button {
   span+svg,
   span+nice-icon {
     margin-left: 0.5rem;
+  }
+
+  &:focus {
+    @extend .nice-focus;
   }
 }
 
