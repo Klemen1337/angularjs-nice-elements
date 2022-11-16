@@ -21,6 +21,7 @@ angular.module('niceElements')
         placement: '@', // Describes the preferred placement of the popper
         strategy: '@',
         showArrow: '@',
+        onChange: '&?',
       },
       controller: function ($scope, $element, $timeout) {
         $scope.isOpen = false;
@@ -106,11 +107,13 @@ angular.module('niceElements')
 
         $scope.close = function () {
           $scope.isOpen = false;
+          if ($scope.onChange) $scope.onChange($scope.isOpen);
         };
 
         $scope.open = function () {
           $scope.popper.update();
           $scope.isOpen = true;
+          if ($scope.onChange) $scope.onChange($scope.isOpen);
           $timeout(function () {
             $scope.popper.update();
           });
