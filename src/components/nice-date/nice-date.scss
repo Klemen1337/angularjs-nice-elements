@@ -28,13 +28,15 @@
     .form-control {
       text-overflow: ellipsis;
     }
-  
+
     &.open {
-      .form-control, .input-group-addon{
+
+      .form-control,
+      .input-group-addon {
         border-color: $nice-base-color;
       }
 
-      .input-group-addon{
+      .input-group-addon {
         background-color: $nice-base-color;
         color: white;
       }
@@ -65,19 +67,17 @@
       display: flex;
       padding: 0 0 0 $spacing;
 
-      i {
+      button {
         width: 30px;
         font-size: 1.125em;
         font-weight: bold;
         line-height: 40px;
-        cursor: pointer;
-        text-align: center;
 
         &:hover {
           background: darken($nice-base-color, 5%);
         }
 
-        &.fa-circle {
+        .fa-circle {
           font-size: 8px;
         }
       }
@@ -90,14 +90,10 @@
           border: 0px;
           -webkit-appearance: none;
           cursor: pointer;
-  
-          &:focus, &:focus {
-            outline: 0 none;
-          }
         }
       }
 
-      
+
     }
 
     .nice-date-week {
@@ -111,11 +107,13 @@
       }
 
       .nice-date-day {
+        box-shadow: 0 0 0;
         user-select: none;
         position: relative;
         min-height: 20px;
         width: 14.2857%;
         border-radius: $nice-border-radius;
+        border: 0 none;
         border-left: solid 1px $nice-border-color;
         font-size: 12px;
         text-align: center;
@@ -164,7 +162,7 @@
           color: white;
         }
 
-        &.between{
+        &.between {
           background: lighten($nice-base-color, 35%);
         }
 
@@ -182,7 +180,7 @@
         height: 21px;
         flex-shrink: 0;
 
-        & > span {
+        &>span {
           color: darken($nice-base-color, 10%);
           min-height: 20px;
           cursor: default;
@@ -223,7 +221,6 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        outline: 0;
         border-radius: $nice-border-radius;
         border: 1px solid $nice-border-color;
         padding: 0 10px;

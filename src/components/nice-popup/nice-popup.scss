@@ -22,6 +22,10 @@
     border: 1px solid $nice-border-color;
   }
 
+  .nice-popup-content {
+    z-index: 1;
+  }
+
   .nice-popup-content[data-popper-placement^='top']>.nice-popup-arrow {
     bottom: -4px;
   }

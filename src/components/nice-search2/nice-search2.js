@@ -30,7 +30,7 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function($scope, $timeout, $element) {
+      controller: function ($scope, $timeout, $element) {
         $scope.loading = false;
         $scope.isOpen = false;
         $scope.debounce = null;
@@ -44,7 +44,7 @@ angular.module('niceElements')
 
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
-        $scope.setupPopper = function() {
+        $scope.setupPopper = function () {
           var button = $element[0].getElementsByClassName('nice-search-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-search-dropdown-wrapper')[0];
           $scope.popper = Popper.createPopper(button, tooltip, {
@@ -62,13 +62,13 @@ angular.module('niceElements')
                 enabled: true,
                 phase: "beforeWrite",
                 requires: ["computeStyles"],
-                fn: function(e) {
+                fn: function (e) {
                   var state = e.state;
                   state.styles.popper.width = state.rects.reference.width + "px";
                 },
-                effect: function(e) {
+                effect: function (e) {
                   var state = e.state;
-                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth + "px";
                 }
               }
             ],
@@ -77,10 +77,11 @@ angular.module('niceElements')
 
         $timeout(function () {
           $scope.setupPopper();
-        })
-        
+        });
+
+
         // ------------------- On focus -------------------
-        $scope.onFocus = function() {
+        $scope.onFocus = function () {
           if ($scope.showDropdown && $scope.results.length == 0) {
             $scope.getData($scope.model);
           }
@@ -92,23 +93,29 @@ angular.module('niceElements')
         };
 
 
+        // ------------------- On blur -------------------
+        $scope.onBlur = function () {
+          $scope.close();
+        };
+
+
         // ------------------- On focus -------------------
-        $scope.open = function() {
+        $scope.open = function () {
           $scope.isOpen = true;
-          $timeout(function() {
+          $timeout(function () {
             if ($scope.popper) $scope.popper.update();
           });
         };
 
 
         // ------------------- On blur -------------------
-        $scope.close = function() {
+        $scope.close = function () {
           $scope.isOpen = false;
 
           var input = $element[0].getElementsByTagName('input')[0];
           if (input) input.blur();
 
-          $timeout(function() {
+          $timeout(function () {
             $scope.popper.update();
           })
         };
@@ -120,7 +127,7 @@ angular.module('niceElements')
             $timeout.cancel($scope.debounce);
           }
 
-          $scope.debounce = $timeout(function() {
+          $scope.debounce = $timeout(function () {
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.getData($scope.model);
           }, $scope.debounceTime);
@@ -128,14 +135,14 @@ angular.module('niceElements')
 
 
         // ------------------- Get data -------------------
-        $scope.getData = function(keywords) {
+        $scope.getData = function (keywords) {
           if ($scope.refreshFunction != null) {
             $scope.loading = true;
             $scope.requestNumber += 1;
             var requestNumber = angular.copy($scope.requestNumber);
-            $scope.refreshFunction(keywords).then(function(results) {
-              if ($scope.requestNumber == requestNumber) { 
-                $timeout(function() {
+            $scope.refreshFunction(keywords).then(function (results) {
+              if ($scope.requestNumber == requestNumber) {
+                $timeout(function () {
                   $scope.open();
                   $scope.loading = false;
 
@@ -147,7 +154,7 @@ angular.module('niceElements')
                   }
                 });
               }
-            }, function(error) {
+            }, function (error) {
               $scope.loading = false;
               $scope.close();
             });
@@ -159,7 +166,7 @@ angular.module('niceElements')
 
 
         // ------------------------ If search button is clicked set focus or make request ------------------------
-        $scope.search = function() {
+        $scope.search = function () {
           if (!$scope.isDisabled) {
             if ($scope.showDropdown) {
               $scope.updateSearch();
@@ -186,7 +193,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Scroll to hover -----------------------------------
-        $scope.scrollToHover = function(notSmooth) {
+        $scope.scrollToHover = function (notSmooth) {
           var dropdownMenu = $element[0].getElementsByClassName("nice-dropdown")[0];
           var hoverItem = dropdownMenu.getElementsByClassName("active")[0];
           if (hoverItem) {
@@ -205,10 +212,10 @@ angular.module('niceElements')
           // Arrow Up
           if (event.keyCode == 38) {
             event.preventDefault();
-            $timeout(function() {
-              if ( $scope.selectedIndex > 0) {
+            $timeout(function () {
+              if ($scope.selectedIndex > 0) {
                 $scope.selectedIndex -= 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -218,10 +225,10 @@ angular.module('niceElements')
           // Arrow Down
           if (event.keyCode == 40) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               if ($scope.results && $scope.selectedIndex < $scope.results.length - 1) {
                 $scope.selectedIndex += 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -231,14 +238,14 @@ angular.module('niceElements')
           // Enter
           if (event.keyCode == 13) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               $scope.selectItem($scope.results[$scope.selectedIndex], $scope.selectedIndex);
             });
           }
 
           // Escape
           if (event.keyCode == 27) {
-            $timeout(function() {
+            $timeout(function () {
               $scope.close();
             });
           }

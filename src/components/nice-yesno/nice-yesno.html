@@ -11,7 +11,7 @@
             <div class="yesno-wrapper noselect" ng-class="{ 'disabled': isDisabled }">
                 <div class="yesno-yes-bg" ng-click="switch()">{{ yes }}</div>
                 <div class="yesno-no-bg" ng-click="switch()">{{ no }}</div>
-                <div class="yesno-button" ng-class="buttonClass" ng-click="switch()">{{ state }}</div>
+                <button class="yesno-button btn btn-primary" ng-class="buttonClass" ng-click="switch()">{{ state }}</button>
             </div>
         </div>
     </div>

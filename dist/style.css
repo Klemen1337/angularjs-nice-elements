@@ -1,3 +1,37 @@
+:root {
+  --nice-font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --nice-font-weight: normal;
+  --nice-font-color: #404040;
+  --nice-primary-color: #3189ff;
+  --nice-primary-color-lighter: #64a6ff;
+  --nice-primary-color-darker: #006cfd;
+  --secondary-font-color: #404040;
+  --secondary-color: #efefef;
+  --secondary-color-lighter: #f4f4f4;
+  --secondary-color-darker: #d6d5d5;
+  --nice-secondary-color: #efefef;
+  --nice-secondary-color-lighter: #f4f4f4;
+  --nice-secondary-color-darker: #d6d5d5;
+  --nice-danger-color: #f22e28;
+  --nice-danger-color-lighter: #f55d58;
+  --nice-danger-color-darker: #da130d;
+  --nice-success-color: #49AE50;
+  --nice-success-color-lighter: #6ac070;
+  --nice-success-color-darker: #3a8a3f;
+  --nice-info-color: #31b0d5;
+  --nice-info-color-lighter: #5bc0de;
+  --nice-info-color-darker: #2490af;
+  --nice-warning-color: #ffc107;
+  --nice-warning-color-lighter: #ffce3a;
+  --nice-warning-color-darker: #d39e00;
+  --nice-border-color: #cbd4d9;
+  --nice-border-radius: 3px;
+  --nice-border-radius-small: 3px;
+  --nice-disabled-color: #EDEFF2;
+  --nice-disabled-border: #D2D9D9;
+  --nice-disabled-bg: white;
+}
+
 .noselect, .nice-choice li {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -34,6 +68,26 @@ label.nice {
   margin-bottom: 10px;
 }
 
+.nice-component select:focus,
+.nice-component input:focus,
+.nice-component textarea:focus {
+  outline: 2px solid var(--nice-primary-color);
+  outline-offset: 2px;
+  border-radius: 1px;
+  z-index: 1;
+}
+
+.nice-component .input-group:focus-within {
+  outline: 2px solid var(--nice-primary-color);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+.nice-component .input-group:focus-within input {
+  outline: 0 none;
+  border-color: var(--nice-border-color) !important;
+}
+
 .nice-component .nice-title {
   display: flex;
   justify-content: flex-end;
@@ -60,31 +114,38 @@ label.nice {
   }
 }
 
-.nice-component .input-group .form-control, .nice-component .form-group .form-control {
+.nice-component .input-group .form-control,
+.nice-component .form-group .form-control {
   min-width: 50px;
   background: white;
   border: 1px solid #cbd4d9;
   box-shadow: 0 0 0;
 }
 
-.nice-component .input-group .form-control:active, .nice-component .input-group .form-control:focus, .nice-component .form-group .form-control:active, .nice-component .form-group .form-control:focus {
+.nice-component .input-group .form-control:active, .nice-component .input-group .form-control:focus,
+.nice-component .form-group .form-control:active,
+.nice-component .form-group .form-control:focus {
   border-color: #3189ff;
   box-shadow: 0 0 0;
 }
 
-.nice-component .input-group .form-control:active + .input-group-addon, .nice-component .input-group .form-control:focus + .input-group-addon, .nice-component .form-group .form-control:active + .input-group-addon, .nice-component .form-group .form-control:focus + .input-group-addon {
+.nice-component .input-group .form-control:active + .input-group-addon, .nice-component .input-group .form-control:focus + .input-group-addon,
+.nice-component .form-group .form-control:active + .input-group-addon,
+.nice-component .form-group .form-control:focus + .input-group-addon {
   border-color: #3189ff;
   background-color: #3189ff;
   color: white;
 }
 
-.nice-component .input-group .form-control:disabled, .nice-component .form-group .form-control:disabled {
+.nice-component .input-group .form-control:disabled,
+.nice-component .form-group .form-control:disabled {
   background: white;
   border-color: #EDEFF2;
   opacity: 0.65;
 }
 
-.nice-component .input-group .input-group-addon, .nice-component .form-group .input-group-addon {
+.nice-component .input-group .input-group-addon,
+.nice-component .form-group .input-group-addon {
   background: #f3f3f3;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -93,7 +154,8 @@ label.nice {
   border-left: 0 none;
 }
 
-.nice-component .input-group .input-group-addon.clickable:hover, .nice-component .form-group .input-group-addon.clickable:hover {
+.nice-component .input-group .input-group-addon.clickable:hover,
+.nice-component .form-group .input-group-addon.clickable:hover {
   cursor: pointer;
   background-color: #3189ff;
   color: white;
@@ -302,6 +364,274 @@ p.nice {
   background: yellow;
 }
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  padding: 6px 12px;
+  position: relative;
+}
+
+.btn:hover, .btn:focus {
+  color: white;
+}
+
+.btn:active:focus {
+  outline: 0;
+}
+
+.btn svg,
+.btn img {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.btn svg + span,
+.btn nice-icon + span,
+.btn span + svg,
+.btn span + nice-icon {
+  margin-left: 0.5rem;
+}
+
+.btn:focus {
+  outline: 2px solid var(--nice-primary-color);
+  outline-offset: 1px;
+  z-index: 1;
+}
+
+.btn-primary, .btn-primary-plain, .btn-primary-naked, .nice-dropdown .btn-dropdown, .nice-search .nice-dropdown-empty .btn-dropdown, .nice-dropdown-old .btn-dropdown {
+  background: var(--nice-primary-color);
+  border-color: var(--nice-primary-color-darker);
+  color: white;
+}
+
+.btn-primary:active, .btn-primary-plain:active, .btn-primary-naked:active, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:active {
+  background: var(--nice-primary-color-lighter);
+  border-color: var(--nice-primary-color-lighter);
+}
+
+.btn-primary:active:focus, .btn-primary-plain:active:focus, .btn-primary-naked:active:focus, .nice-dropdown .btn-dropdown:active:focus, .nice-search .nice-dropdown-empty .btn-dropdown:active:focus, .nice-dropdown-old .btn-dropdown:active:focus, .btn-primary:active:hover, .btn-primary-plain:active:hover, .btn-primary-naked:active:hover, .nice-dropdown .btn-dropdown:active:hover, .nice-search .nice-dropdown-empty .btn-dropdown:active:hover, .nice-dropdown-old .btn-dropdown:active:hover {
+  background: var(--nice-primary-color-lighter);
+  border-color: var(--nice-primary-color-lighter);
+}
+
+.btn-primary:focus, .btn-primary-plain:focus, .btn-primary-naked:focus, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:focus, .btn-primary:hover, .btn-primary-plain:hover, .btn-primary-naked:hover, .nice-dropdown .btn-dropdown:hover, .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-dropdown-old .btn-dropdown:hover {
+  background: var(--nice-primary-color-darker);
+  border-color: var(--nice-primary-color-darker);
+  outline-color: var(--nice-primary-color);
+}
+
+.btn-primary-plain {
+  color: var(--nice-primary-color);
+  background: #e3eafd;
+  border-color: #e3eafd;
+}
+
+.btn-primary-naked {
+  color: var(--nice-primary-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-default, .btn-default-plain, .btn-default-naked {
+  color: var(--nice-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-secondary-color);
+}
+
+.btn-default:active, .btn-default-plain:active, .btn-default-naked:active, .btn-default.active, .nice-table.nice-table-settings .btn-default.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-default-naked:hover, .active.btn-default-plain, .active.btn-default-naked, .btn-default:hover:active, .btn-default-plain:hover:active, .btn-default-naked:hover:active {
+  background: var(--nice-secondary-color-lighter);
+  border-color: var(--nice-secondary-color-lighter);
+}
+
+.btn-default:focus, .btn-default-plain:focus, .btn-default-naked:focus, .btn-default:hover, .btn-default-plain:hover, .btn-default-naked:hover {
+  color: var(--nice-font-color);
+  background: var(--nice-secondary-color-darker);
+  border-color: var(--nice-secondary-color-darker);
+}
+
+.btn-default-plain {
+  color: var(--nice-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-secondary-color);
+}
+
+.btn-default-naked {
+  color: var(--font-card);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-secondary, .btn-secondary-plain, .btn-secondary-naked {
+  color: var(--nice-secondary-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-border-color);
+}
+
+.btn-secondary:active, .btn-secondary-plain:active, .btn-secondary-naked:active, .btn-secondary.active, .nice-table.nice-table-settings .btn-secondary.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-secondary-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-secondary-naked:hover, .active.btn-secondary-plain, .active.btn-secondary-naked, .btn-secondary:hover:active, .btn-secondary-plain:hover:active, .btn-secondary-naked:hover:active {
+  background: var(--nice-secondary-color-lighter);
+}
+
+.btn-secondary:focus, .btn-secondary-plain:focus, .btn-secondary-naked:focus, .btn-secondary:hover, .btn-secondary-plain:hover, .btn-secondary-naked:hover {
+  color: var(--nice-secondary-font-color);
+  background: var(--nice-secondary-color-darker);
+  border-color: var(--nice-secondary-color-darker);
+  outline-color: var(--nice-secondary-color);
+}
+
+.btn-secondary-plain {
+  color: var(--nice-secondary-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-secondary-color);
+}
+
+.btn-secondary-naked {
+  color: var(--nice-secondary-font-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-success, .btn-success-plain, .btn-success-naked {
+  color: white;
+  background: var(--nice-success-color);
+  border-color: var(--nice-success-color);
+}
+
+.btn-success:active, .btn-success-plain:active, .btn-success-naked:active, .btn-success.active, .nice-table.nice-table-settings .btn-success.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-success-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-success-naked:hover, .active.btn-success-plain, .active.btn-success-naked, .btn-success:hover:active, .btn-success-plain:hover:active, .btn-success-naked:hover:active {
+  background: var(--nice-success-color-lighter);
+}
+
+.btn-success:focus, .btn-success-plain:focus, .btn-success-naked:focus, .btn-success:hover, .btn-success-plain:hover, .btn-success-naked:hover {
+  background: var(--nice-success-color-darker);
+  border-color: var(--nice-success-color-darker);
+  outline-color: var(--nice-success-color);
+}
+
+.btn-success-plain {
+  color: #49ae4f;
+  background: #e2efe3;
+  border-color: #e2efe3;
+}
+
+.btn-success-naked {
+  color: var(--nice-success-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-danger, .btn-danger-plain, .btn-danger-naked {
+  color: white;
+  background: var(--nice-danger-color);
+  border-color: var(--nice-danger-color);
+}
+
+.btn-danger:active, .btn-danger-plain:active, .btn-danger-naked:active, .btn-danger.active, .nice-table.nice-table-settings .btn-danger.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-danger-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-danger-naked:hover, .active.btn-danger-plain, .active.btn-danger-naked, .btn-danger:hover:active, .btn-danger-plain:hover:active, .btn-danger-naked:hover:active {
+  background: var(--nice-danger-color-lighter);
+}
+
+.btn-danger:focus, .btn-danger-plain:focus, .btn-danger-naked:focus, .btn-danger:hover, .btn-danger-plain:hover, .btn-danger-naked:hover {
+  background: var(--nice-danger-color-darker);
+  border-color: var(--nice-danger-color-darker);
+  outline-color: var(--nice-danger-color);
+}
+
+.btn-danger-plain {
+  color: var(--nice-danger-color);
+  background: #ffe4e4;
+  border-color: #ffe4e4;
+}
+
+.btn-danger-naked {
+  color: var(--nice-danger-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-info, .btn-info-plain, .btn-info-naked {
+  color: white;
+  background: var(--nice-info-color);
+  border-color: var(--nice-info-color);
+}
+
+.btn-info:active, .btn-info-plain:active, .btn-info-naked:active, .btn-info.active, .nice-table.nice-table-settings .btn-info.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-info-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-info-naked:hover, .active.btn-info-plain, .active.btn-info-naked, .btn-info:hover:active, .btn-info-plain:hover:active, .btn-info-naked:hover:active {
+  background: var(--nice-info-color-lighter);
+}
+
+.btn-info:focus, .btn-info-plain:focus, .btn-info-naked:focus, .btn-info:hover, .btn-info-plain:hover, .btn-info-naked:hover {
+  background: var(--nice-info-color-darker);
+  border-color: var(--nice-info-color-darker);
+  outline-color: var(--nice-info-color);
+}
+
+.btn-info-plain {
+  color: var(--nice-info-color);
+  background: #d9f3f7;
+  border-color: #d9f3f7;
+}
+
+.btn-info-naked {
+  color: var(--nice-info-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-warning, .btn-warning-plain, .btn-warning-naked {
+  color: white;
+  background: var(--nice-warning-color);
+  border-color: var(--nice-warning-color);
+}
+
+.btn-warning:active, .btn-warning-plain:active, .btn-warning-naked:active, .btn-warning.active, .nice-table.nice-table-settings .btn-warning.nice-table-row:hover, .nice-table.nice-table-settings .nice-table-row.btn-warning-plain:hover, .nice-table.nice-table-settings .nice-table-row.btn-warning-naked:hover, .active.btn-warning-plain, .active.btn-warning-naked, .btn-warning:hover:active, .btn-warning-plain:hover:active, .btn-warning-naked:hover:active {
+  background: var(--nice-warning-color-lighter);
+}
+
+.btn-warning:focus, .btn-warning-plain:focus, .btn-warning-naked:focus, .btn-warning:hover, .btn-warning-plain:hover, .btn-warning-naked:hover {
+  background: var(--nice-warning-color-darker);
+  border-color: var(--nice-warning-color-darker);
+  outline-color: var(--nice-warning-color);
+}
+
+.btn-warning-plain {
+  color: var(--nice-warning-color);
+  background: #fff9e8;
+  border-color: #fff9e8;
+}
+
+.btn-warning-naked {
+  color: var(--nice-warning-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn-big {
+  font-size: 1.2em;
+  padding: 1.5rem;
+  min-height: 72px;
+}
+
+.btn-big svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.btn-medium {
+  height: 40px !important;
+}
+
+.btn-icon {
+  font-size: 1.2em !important;
+}
+
+.btn-icon svg,
+.btn-icon img {
+  width: 24px;
+  height: 24px;
+}
+
 .nice-dropdown .disabled, .nice-search .nice-dropdown-empty .disabled {
   cursor: not-allowed !important;
 }
@@ -496,9 +826,9 @@ p.nice {
 
 .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus {
   background: white !important;
-  border-color: #3189ff !important;
   color: #474F52 !important;
-  outline: 0 none;
+  outline: 2px solid var(--nice-primary-color);
+  outline-offset: 2px;
 }
 
 .nice-dropdown-old .disabled {
@@ -826,7 +1156,9 @@ p.nice {
   border: #D2D9D9;
 }
 
-.nice-yesno .disabled .yesno-yes-bg, .nice-yesno .disabled .yesno-no-bg, .nice-yesno .disabled .yesno-button {
+.nice-yesno .disabled .yesno-yes-bg,
+.nice-yesno .disabled .yesno-no-bg,
+.nice-yesno .disabled .yesno-button {
   cursor: not-allowed !important;
 }
 
@@ -839,13 +1171,16 @@ p.nice {
   position: relative;
 }
 
-.nice-yesno .yesno-wrapper .yesno-yes-bg, .nice-yesno .yesno-wrapper .yesno-no-bg, .nice-yesno .yesno-wrapper .yesno-button {
+.nice-yesno .yesno-wrapper .yesno-yes-bg,
+.nice-yesno .yesno-wrapper .yesno-no-bg,
+.nice-yesno .yesno-wrapper .yesno-button {
   text-align: center;
   line-height: 34px;
   cursor: pointer;
 }
 
-.nice-yesno .yesno-wrapper .yesno-yes-bg, .nice-yesno .yesno-wrapper .yesno-no-bg {
+.nice-yesno .yesno-wrapper .yesno-yes-bg,
+.nice-yesno .yesno-wrapper .yesno-no-bg {
   opacity: 0.8;
   height: 100%;
   position: absolute;
@@ -870,6 +1205,7 @@ p.nice {
   color: white;
   position: absolute;
   line-height: 28px;
+  padding: 0;
   top: 2px;
   left: 2px;
   right: 50%;
@@ -1344,13 +1680,13 @@ p.nice {
   z-index: 50;
 }
 
-.nice-datetime-picker .btn-primary, .nice-datetime-picker .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetime-picker .btn-dropdown {
+.nice-datetime-picker .btn-primary, .nice-datetime-picker .btn-primary-plain, .nice-datetime-picker .btn-primary-naked, .nice-datetime-picker .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown, .nice-datetime-picker .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetime-picker .btn-dropdown {
   background: #3189ff;
   border-color: #187aff;
   color: white;
 }
 
-.nice-datetime-picker .btn-primary:hover, .nice-datetime-picker .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetime-picker .btn-dropdown:hover {
+.nice-datetime-picker .btn-primary:hover, .nice-datetime-picker .btn-primary-plain:hover, .nice-datetime-picker .btn-primary-naked:hover, .nice-datetime-picker .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetime-picker .btn-dropdown:hover, .nice-datetime-picker .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetime-picker .btn-dropdown:hover {
   background: #187aff;
 }
 
@@ -1517,17 +1853,17 @@ p.nice {
   border-radius: 3px;
 }
 
-.nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
+.nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .btn-primary-plain, .nice-datetimerange-picker-2 .btn-primary-naked, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
   background: #3189ff;
   border-color: #187aff;
 }
 
-.nice-datetimerange-picker-2 .btn-primary:hover, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:hover {
+.nice-datetimerange-picker-2 .btn-primary:hover, .nice-datetimerange-picker-2 .btn-primary-plain:hover, .nice-datetimerange-picker-2 .btn-primary-naked:hover, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:hover, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:hover, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:hover, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:hover, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:hover {
   background: #187aff;
   border-color: #187aff;
 }
 
-.nice-datetimerange-picker-2 .btn-primary:active, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:active, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:active {
+.nice-datetimerange-picker-2 .btn-primary:active, .nice-datetimerange-picker-2 .btn-primary-plain:active, .nice-datetimerange-picker-2 .btn-primary-naked:active, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown:active, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown:active, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown:active {
   background: #006cfd;
   border-color: #006cfd;
 }
@@ -1545,7 +1881,7 @@ p.nice {
     margin-left: 0;
     width: 100%;
   }
-  .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
+  .nice-datetimerange-picker-2 .btn-primary, .nice-datetimerange-picker-2 .btn-primary-plain, .nice-datetimerange-picker-2 .btn-primary-naked, .nice-datetimerange-picker-2 .nice-dropdown .btn-dropdown, .nice-dropdown .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-search .nice-dropdown-empty .btn-dropdown, .nice-search .nice-dropdown-empty .nice-datetimerange-picker-2 .btn-dropdown, .nice-datetimerange-picker-2 .nice-dropdown-old .btn-dropdown, .nice-dropdown-old .nice-datetimerange-picker-2 .btn-dropdown {
     padding: 5px;
     line-height: 1;
     font-size: 12px;
@@ -1558,14 +1894,21 @@ p.nice {
 }
 
 .nice-number .input-group .form-control {
+  z-index: 0;
   text-align: center;
   padding: 0;
   min-width: 30px;
   border-left: 0 none;
 }
 
+.nice-number .input-group-btn {
+  z-index: 1;
+}
+
 .nice-number .input-group-btn .btn {
   background: #f3f3f3;
+  height: 34px;
+  border: 1px solid #cbd4d9;
 }
 
 .nice-number .error-messages.floating-error {
@@ -1982,7 +2325,8 @@ p.nice {
   text-overflow: ellipsis;
 }
 
-.nice-date .input-group.open .form-control, .nice-date .input-group.open .input-group-addon {
+.nice-date .input-group.open .form-control,
+.nice-date .input-group.open .input-group-addon {
   border-color: #3189ff;
 }
 
@@ -2016,20 +2360,18 @@ p.nice {
   padding: 0 0 0 10px;
 }
 
-.nice-date .nice-date-date .nice-date-header i {
+.nice-date .nice-date-date .nice-date-header button {
   width: 30px;
   font-size: 1.125em;
   font-weight: bold;
   line-height: 40px;
-  cursor: pointer;
-  text-align: center;
 }
 
-.nice-date .nice-date-date .nice-date-header i:hover {
+.nice-date .nice-date-date .nice-date-header button:hover {
   background: #187aff;
 }
 
-.nice-date .nice-date-date .nice-date-header i.fa-circle {
+.nice-date .nice-date-date .nice-date-header button .fa-circle {
   font-size: 8px;
 }
 
@@ -2044,10 +2386,6 @@ p.nice {
   cursor: pointer;
 }
 
-.nice-date .nice-date-date .nice-date-header span select:focus, .nice-date .nice-date-date .nice-date-header span select:focus {
-  outline: 0 none;
-}
-
 .nice-date .nice-date-date .nice-date-week {
   width: 100%;
   border-top: solid 1px #cbd4d9;
@@ -2060,11 +2398,13 @@ p.nice {
 }
 
 .nice-date .nice-date-date .nice-date-week .nice-date-day {
+  box-shadow: 0 0 0;
   user-select: none;
   position: relative;
   min-height: 20px;
   width: 14.2857%;
   border-radius: 3px;
+  border: 0 none;
   border-left: solid 1px #cbd4d9;
   font-size: 12px;
   text-align: center;
@@ -2169,7 +2509,6 @@ p.nice {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  outline: 0;
   border-radius: 3px;
   border: 1px solid #cbd4d9;
   padding: 0 10px;
@@ -3170,6 +3509,10 @@ p.nice {
   transform: rotate(45deg);
   background: #ffffff;
   border: 1px solid #cbd4d9;
+}
+
+.nice-popup .nice-popup-content {
+  z-index: 1;
 }
 
 .nice-popup .nice-popup-content[data-popper-placement^='top'] > .nice-popup-arrow {

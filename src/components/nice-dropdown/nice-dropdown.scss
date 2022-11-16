@@ -32,6 +32,7 @@
       border-radius: $nice-border-radius;
     }
   }
+
   .nice-dropdown-menu-wrapper {
     z-index: 1000;
   }
@@ -121,7 +122,8 @@
           text-align: center;
         }
 
-        &:hover, &.hover {
+        &:hover,
+        &.hover {
           background: $nice-hover-color;
         }
 
@@ -197,9 +199,9 @@
     &:active,
     &:focus {
       background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
       color: $nice-focus-color !important;
-      outline: 0 none;
+      outline: 2px solid var(--nice-primary-color);
+      outline-offset: 2px;
     }
   }
 }

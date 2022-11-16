@@ -1,0 +1,321 @@
+// -------------------------------- Btn --------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  padding: 6px 12px;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
+
+  &:active:focus {
+    outline: 0;
+  }
+
+  svg,
+  img {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  svg+span,
+  nice-icon+span,
+  span+svg,
+  span+nice-icon {
+    margin-left: 0.5rem;
+  }
+
+  &:focus {
+    outline: 2px solid var(--nice-primary-color);
+    outline-offset: 1px;
+    z-index: 1;
+  }
+}
+
+
+// -------------------------------- Btn primary --------------------------------
+.btn-primary {
+  background: var(--nice-primary-color);
+  border-color: var(--nice-primary-color-darker);
+  color: white;
+
+  &:active {
+    background: var(--nice-primary-color-lighter);
+    border-color: var(--nice-primary-color-lighter);
+
+    &:focus,
+    &:hover {
+      background: var(--nice-primary-color-lighter);
+      border-color: var(--nice-primary-color-lighter);
+    }
+  }
+
+  &:focus,
+  &:hover {
+    background: var(--nice-primary-color-darker);
+    border-color: var(--nice-primary-color-darker);
+    outline-color: var(--nice-primary-color);
+  }
+}
+
+.btn-primary-plain {
+  @extend .btn-primary;
+  color: var(--nice-primary-color);
+  background: #e3eafd;
+  border-color: #e3eafd;
+}
+
+.btn-primary-naked {
+  @extend .btn-primary;
+  color: var(--nice-primary-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+
+// -------------------------- Default --------------------------
+.btn-default {
+  color: var(--nice-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-secondary-color);
+
+  &:active,
+  &.active,
+  &:hover:active {
+    background: var(--nice-secondary-color-lighter);
+    border-color: var(--nice-secondary-color-lighter);
+  }
+
+  &:focus,
+  &:hover {
+    color: var(--nice-font-color);
+    background: var(--nice-secondary-color-darker);
+    border-color: var(--nice-secondary-color-darker);
+  }
+}
+
+.btn-default-plain {
+  @extend .btn-default;
+  color: var(--nice-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-secondary-color);
+}
+
+.btn-default-naked {
+  @extend .btn-default;
+  color: var(--font-card);
+  background: transparent;
+  border-color: transparent;
+}
+
+// -------------------------- Secondary --------------------------
+.btn-secondary {
+  color: var(--nice-secondary-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-border-color);
+
+  &:active,
+  &.active,
+  &:hover:active {
+    background: var(--nice-secondary-color-lighter);
+  }
+
+  &:focus,
+  &:hover {
+    color: var(--nice-secondary-font-color);
+    background: var(--nice-secondary-color-darker);
+    border-color: var(--nice-secondary-color-darker);
+    outline-color: var(--nice-secondary-color);
+  }
+}
+
+.btn-secondary-plain {
+  @extend .btn-secondary;
+  color: var(--nice-secondary-font-color);
+  background: var(--nice-secondary-color);
+  border-color: var(--nice-secondary-color);
+}
+
+.btn-secondary-naked {
+  @extend .btn-secondary;
+  color: var(--nice-secondary-font-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+// -------------------------- Success --------------------------
+.btn-success {
+  color: white;
+  background: var(--nice-success-color);
+  border-color: var(--nice-success-color);
+
+  &:active,
+  &.active,
+  &:hover:active {
+    background: var(--nice-success-color-lighter);
+  }
+
+  &:focus,
+  &:hover {
+    background: var(--nice-success-color-darker);
+    border-color: var(--nice-success-color-darker);
+    outline-color: var(--nice-success-color);
+  }
+}
+
+.btn-success-plain {
+  @extend .btn-success;
+  color: #49ae4f;
+  background: #e2efe3;
+  border-color: #e2efe3;
+}
+
+.btn-success-naked {
+  @extend .btn-success;
+  color: var(--nice-success-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+
+// -------------------------- Danger --------------------------
+.btn-danger {
+  color: white;
+  background: var(--nice-danger-color);
+  border-color: var(--nice-danger-color);
+
+  &:active,
+  &.active,
+  &:hover:active {
+    background: var(--nice-danger-color-lighter);
+  }
+
+  &:focus,
+  &:hover {
+    background: var(--nice-danger-color-darker);
+    border-color: var(--nice-danger-color-darker);
+    outline-color: var(--nice-danger-color);
+  }
+}
+
+.btn-danger-plain {
+  @extend .btn-danger;
+  color: var(--nice-danger-color);
+  background: #ffe4e4;
+  border-color: #ffe4e4;
+}
+
+.btn-danger-naked {
+  @extend .btn-danger;
+  color: var(--nice-danger-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+
+// -------------------------- Info --------------------------
+.btn-info {
+  color: white;
+  background: var(--nice-info-color);
+  border-color: var(--nice-info-color);
+
+  &:active,
+  &.active,
+  &:hover:active {
+    background: var(--nice-info-color-lighter);
+  }
+
+  &:focus,
+  &:hover {
+    background: var(--nice-info-color-darker);
+    border-color: var(--nice-info-color-darker);
+    outline-color: var(--nice-info-color);
+  }
+}
+
+.btn-info-plain {
+  @extend .btn-info;
+  color: var(--nice-info-color);
+  background: #d9f3f7;
+  border-color: #d9f3f7;
+}
+
+.btn-info-naked {
+  @extend .btn-info;
+  color: var(--nice-info-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+
+// -------------------------- Warning --------------------------
+.btn-warning {
+  color: white;
+  background: var(--nice-warning-color);
+  border-color: var(--nice-warning-color);
+
+  &:active,
+  &.active,
+  &:hover:active {
+    background: var(--nice-warning-color-lighter);
+  }
+
+  &:focus,
+  &:hover {
+    background: var(--nice-warning-color-darker);
+    border-color: var(--nice-warning-color-darker);
+    outline-color: var(--nice-warning-color);
+  }
+}
+
+.btn-warning-plain {
+  @extend .btn-warning;
+  color: var(--nice-warning-color);
+  background: #fff9e8;
+  border-color: #fff9e8;
+}
+
+.btn-warning-naked {
+  @extend .btn-warning;
+  color: var(--nice-warning-color);
+  background: transparent;
+  border-color: transparent;
+}
+
+
+// -------------------------------- Btn big --------------------------------
+.btn-big {
+  font-size: 1.2em;
+  padding: 1.5rem;
+  min-height: 72px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+}
+
+
+// -------------------------------- Btn medium --------------------------------
+.btn-medium {
+  height: 40px !important;
+}
+
+
+// -------------------------------- Btn icon --------------------------------
+.btn-icon {
+  font-size: 1.2em !important;
+
+  svg,
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}

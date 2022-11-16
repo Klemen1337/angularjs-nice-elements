@@ -2329,6 +2329,11 @@ angular.module('niceElements')
           }
         };
 
+        // ------------------- On blur -------------------
+        $scope.onBlur = function () {
+          $scope.close();
+        };
+
 
         // ----------------------------------- Scroll to hover -----------------------------------
         $scope.scrollToHover = function (notSmooth) {
@@ -4082,6 +4087,7 @@ angular.module('niceElements')
         placement: '@', // Describes the preferred placement of the popper
         strategy: '@',
         showArrow: '@',
+        onChange: '&?',
       },
       controller: function ($scope, $element, $timeout) {
         $scope.isOpen = false;
@@ -4167,11 +4173,13 @@ angular.module('niceElements')
 
         $scope.close = function () {
           $scope.isOpen = false;
+          if ($scope.onChange) $scope.onChange($scope.isOpen);
         };
 
         $scope.open = function () {
           $scope.popper.update();
           $scope.isOpen = true;
+          if ($scope.onChange) $scope.onChange($scope.isOpen);
           $timeout(function () {
             $scope.popper.update();
           });
@@ -4564,7 +4572,7 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function($scope, $timeout, $element) {
+      controller: function ($scope, $timeout, $element) {
         $scope.loading = false;
         $scope.isOpen = false;
         $scope.debounce = null;
@@ -4578,7 +4586,7 @@ angular.module('niceElements')
 
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
-        $scope.setupPopper = function() {
+        $scope.setupPopper = function () {
           var button = $element[0].getElementsByClassName('nice-search-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-search-dropdown-wrapper')[0];
           $scope.popper = Popper.createPopper(button, tooltip, {
@@ -4596,13 +4604,13 @@ angular.module('niceElements')
                 enabled: true,
                 phase: "beforeWrite",
                 requires: ["computeStyles"],
-                fn: function(e) {
+                fn: function (e) {
                   var state = e.state;
                   state.styles.popper.width = state.rects.reference.width + "px";
                 },
-                effect: function(e) {
+                effect: function (e) {
                   var state = e.state;
-                  state.elements.popper.style.width = state.elements.reference.offsetWidth  + "px";
+                  state.elements.popper.style.width = state.elements.reference.offsetWidth + "px";
                 }
               }
             ],
@@ -4611,10 +4619,11 @@ angular.module('niceElements')
 
         $timeout(function () {
           $scope.setupPopper();
-        })
-        
+        });
+
+
         // ------------------- On focus -------------------
-        $scope.onFocus = function() {
+        $scope.onFocus = function () {
           if ($scope.showDropdown && $scope.results.length == 0) {
             $scope.getData($scope.model);
           }
@@ -4626,23 +4635,29 @@ angular.module('niceElements')
         };
 
 
+        // ------------------- On blur -------------------
+        $scope.onBlur = function () {
+          $scope.close();
+        };
+
+
         // ------------------- On focus -------------------
-        $scope.open = function() {
+        $scope.open = function () {
           $scope.isOpen = true;
-          $timeout(function() {
+          $timeout(function () {
             if ($scope.popper) $scope.popper.update();
           });
         };
 
 
         // ------------------- On blur -------------------
-        $scope.close = function() {
+        $scope.close = function () {
           $scope.isOpen = false;
 
           var input = $element[0].getElementsByTagName('input')[0];
           if (input) input.blur();
 
-          $timeout(function() {
+          $timeout(function () {
             $scope.popper.update();
           })
         };
@@ -4654,7 +4669,7 @@ angular.module('niceElements')
             $timeout.cancel($scope.debounce);
           }
 
-          $scope.debounce = $timeout(function() {
+          $scope.debounce = $timeout(function () {
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.getData($scope.model);
           }, $scope.debounceTime);
@@ -4662,14 +4677,14 @@ angular.module('niceElements')
 
 
         // ------------------- Get data -------------------
-        $scope.getData = function(keywords) {
+        $scope.getData = function (keywords) {
           if ($scope.refreshFunction != null) {
             $scope.loading = true;
             $scope.requestNumber += 1;
             var requestNumber = angular.copy($scope.requestNumber);
-            $scope.refreshFunction(keywords).then(function(results) {
-              if ($scope.requestNumber == requestNumber) { 
-                $timeout(function() {
+            $scope.refreshFunction(keywords).then(function (results) {
+              if ($scope.requestNumber == requestNumber) {
+                $timeout(function () {
                   $scope.open();
                   $scope.loading = false;
 
@@ -4681,7 +4696,7 @@ angular.module('niceElements')
                   }
                 });
               }
-            }, function(error) {
+            }, function (error) {
               $scope.loading = false;
               $scope.close();
             });
@@ -4693,7 +4708,7 @@ angular.module('niceElements')
 
 
         // ------------------------ If search button is clicked set focus or make request ------------------------
-        $scope.search = function() {
+        $scope.search = function () {
           if (!$scope.isDisabled) {
             if ($scope.showDropdown) {
               $scope.updateSearch();
@@ -4720,7 +4735,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Scroll to hover -----------------------------------
-        $scope.scrollToHover = function(notSmooth) {
+        $scope.scrollToHover = function (notSmooth) {
           var dropdownMenu = $element[0].getElementsByClassName("nice-dropdown")[0];
           var hoverItem = dropdownMenu.getElementsByClassName("active")[0];
           if (hoverItem) {
@@ -4739,10 +4754,10 @@ angular.module('niceElements')
           // Arrow Up
           if (event.keyCode == 38) {
             event.preventDefault();
-            $timeout(function() {
-              if ( $scope.selectedIndex > 0) {
+            $timeout(function () {
+              if ($scope.selectedIndex > 0) {
                 $scope.selectedIndex -= 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -4752,10 +4767,10 @@ angular.module('niceElements')
           // Arrow Down
           if (event.keyCode == 40) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               if ($scope.results && $scope.selectedIndex < $scope.results.length - 1) {
                 $scope.selectedIndex += 1;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.scrollToHover();
                 });
               }
@@ -4765,14 +4780,14 @@ angular.module('niceElements')
           // Enter
           if (event.keyCode == 13) {
             event.preventDefault();
-            $timeout(function() {
+            $timeout(function () {
               $scope.selectItem($scope.results[$scope.selectedIndex], $scope.selectedIndex);
             });
           }
 
           // Escape
           if (event.keyCode == 27) {
-            $timeout(function() {
+            $timeout(function () {
               $scope.close();
             });
           }
@@ -5452,7 +5467,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div ng-class=\"{ 'nice-date-dropdown-wrapper': !inline }\">\n" +
     "<div ng-class=\"{ 'nice-date-dropdown': !inline }\" ng-if=\"inline || isOpen\">\n" +
-    "<div class=\"nice-date-date\" ng-class=\"{ 'with-time': time }\">\n" +
+    "<div class=\"nice-date-date\" ng-class=\"{ 'with-time': time }\" role=\"grid\">\n" +
     "<div class=\"nice-date-header\">\n" +
     "<span>\n" +
     "<select class=\"year-picker\" ng-model=\"innerDate.year\" ng-change=\"handleDateChange()\" ng-options=\"year for year in years\">\n" +
@@ -5460,22 +5475,24 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<select class=\"month-picker\" ng-model=\"innerDate.month\" ng-change=\"handleDateChange()\" ng-options=\"month.value as month.name for month in months\">\n" +
     "</select>\n" +
     "</span>\n" +
-    "<i class=\"fa fa-angle-left\" ng-click=\"previous()\"></i>\n" +
-    "<i class=\"fa fa-circle\" ng-click=\"today()\"></i>\n" +
-    "<i class=\"fa fa-angle-right\" ng-click=\"next()\"></i>\n" +
+    "<button class=\"btn btn-default-naked\" ng-click=\"previous()\"><i class=\"fa fa-angle-left\"></i></button>\n" +
+    "<button class=\"btn btn-default-naked\" ng-click=\"today()\"><i class=\"fa fa-circle\"></i></button>\n" +
+    "<button class=\"btn btn-default-naked\" ng-click=\"next()\"><i class=\"fa fa-angle-right\"></i></button>\n" +
     "</div>\n" +
     "<div class=\"nice-date-week names\">\n" +
     "<span class=\"nice-date-day\" ng-class=\"{ 'weekend': $index == 6 || $index == 5 }\" ng-repeat=\"day in weekdays\">{{ day }}</span>\n" +
     "</div>\n" +
-    "<div class=\"nice-date-week\" ng-repeat=\"week in weeks\">\n" +
-    "<span class=\"nice-date-day\" title=\"{{ day.value }}\" ng-class=\"{\n" +
+    "<div class=\"nice-date-week\" role=\"row\" ng-repeat=\"week in weeks\">\n" +
+    "<button class=\"nice-date-day\" role=\"gridcell\" title=\"{{ day.value }}\" ng-class=\"{\n" +
     "                                    'today': day.isToday,\n" +
     "                                    'different-month': !day.isCurrentMonth,\n" +
     "                                    'selected': isSameDay(model, day.date),\n" +
     "                                    'weekend': day.isWeekday,\n" +
     "                                    'disabled': day.isDisabled,\n" +
     "                                    'between': isBetween(day.date, model, nextDate)\n" +
-    "                                }\" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">{{ day.number }}</span>\n" +
+    "                                }\" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">\n" +
+    "{{ day.number }}\n" +
+    "</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "<div class=\"nice-date-time\" ng-if=\"time\">\n" +
@@ -6073,7 +6090,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\" click-outside=\"close()\">\n" +
     "<div class=\"nice-search-button input-group\" ng-class=\"{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
-    "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"model\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-focus=\"onFocus()\" tabindex=\"{{ tabIndex }}\">\n" +
+    "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"model\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-focus=\"onFocus()\" ng-blur=\"onBlur()\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"onFocus()\">\n" +
     "<i ng-show=\"!loading\" class=\"fa fa-search\"></i>\n" +
     "<i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\n" +
@@ -7070,7 +7087,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"yesno-wrapper noselect\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<div class=\"yesno-yes-bg\" ng-click=\"switch()\">{{ yes }}</div>\n" +
     "<div class=\"yesno-no-bg\" ng-click=\"switch()\">{{ no }}</div>\n" +
-    "<div class=\"yesno-button\" ng-class=\"buttonClass\" ng-click=\"switch()\">{{ state }}</div>\n" +
+    "<button class=\"yesno-button btn btn-primary\" ng-class=\"buttonClass\" ng-click=\"switch()\">{{ state }}</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

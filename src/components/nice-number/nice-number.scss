@@ -1,6 +1,7 @@
 .nice-number {
   .input-group {
     .form-control {
+      z-index: 0;
       text-align: center;
       padding: 0;
       min-width: 30px;
@@ -9,8 +10,12 @@
   }
 
   .input-group-btn {
+    z-index: 1;
+
     .btn {
       background: $nice-addon-bg;
+      height: 34px;
+      border: 1px solid $nice-border-color;
     }
   }
 

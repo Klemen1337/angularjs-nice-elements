@@ -6,16 +6,34 @@ $nice-font-color: #404040 !default;
 
 // ---------- Colors ----------
 $nice-base-color: #3189ff !default;
+$nice-base-color-lighter: lighten($nice-base-color, 10%) !default;
+$nice-base-color-darker: darken($nice-base-color, 10%) !default;
+
+$nice-secondary-color: #efefef !default;
+$nice-secondary-color-lighter: lighten($nice-secondary-color, 2%) !default;
+$nice-secondary-color-darker: darken($nice-secondary-color, 10%) !default;
+
 $nice-danger-color: #f22e28 !default;
+$nice-danger-color-lighter: lighten($nice-danger-color, 10%) !default;
+$nice-danger-color-darker: darken($nice-danger-color, 10%) !default;
+
 $nice-success-color: #49AE50 !default;
+$nice-success-color-lighter: lighten($nice-success-color, 10%) !default;
+$nice-success-color-darker: darken($nice-success-color, 10%) !default;
+
 $nice-info-color: #31b0d5 !default;
+$nice-info-color-lighter: lighten($nice-info-color, 10%) !default;
+$nice-info-color-darker: darken($nice-info-color, 10%) !default;
+
 $nice-warning-color: #ffc107 !default;
+$nice-warning-color-lighter: lighten($nice-warning-color, 10%) !default;
+$nice-warning-color-darker: darken($nice-warning-color, 10%) !default;
 
 
 // ---------- Border ----------
 $nice-border-color: #cbd4d9 !default;
 $nice-border-radius: 3px !default;
-$nice-border-radius-small: $nice-border-radius  !default;
+$nice-border-radius-small: $nice-border-radius !default;
 
 $border-radius-base: 3px;
 
@@ -28,7 +46,7 @@ $nice-disabled-bg: white !default;
 
 // ---------- Nice global settings ----------
 $nice-focus-bg: white !default;
-$nice-focus-border: $nice-base-color  !default;
+$nice-focus-border: $nice-base-color !default;
 $nice-focus-color: #474F52 !default;
 
 $nice-background: white !default;
@@ -39,64 +57,64 @@ $nice-navbar-height: 50px;
 
 
 // ---------- Input colors override ----------
-$nice-label-color: $nice-font-color  !default;
+$nice-label-color: $nice-font-color !default;
 $nice-input-placeholder-color: #999999 !default;
-$nice-input-bg: $nice-background  !default;
+$nice-input-bg: $nice-background !default;
 $nice-input-disabled-bg: white !default;
-$nice-input-disabled-border: $nice-disabled-color  !default;
-$nice-input-valid: $nice-base-color  !default;
-$nice-input-invalid: $nice-danger-color  !default;
+$nice-input-disabled-border: $nice-disabled-color !default;
+$nice-input-valid: $nice-base-color !default;
+$nice-input-invalid: $nice-danger-color !default;
 $nice-addon-bg: #f3f3f3 !default;
 
 
 // ---------- Dropdown colors override ----------
-$nice-dropdown-bg: $nice-background  !default;
-$nice-dropdown-border: $nice-border-color  !default;
-$nice-dropdown-color: $nice-font-color  !default;
+$nice-dropdown-bg: $nice-background !default;
+$nice-dropdown-border: $nice-border-color !default;
+$nice-dropdown-color: $nice-font-color !default;
 
 $nice-dropdown-hover-bg: white !default;
-$nice-dropdown-hover-border: $nice-border-color  !default;
+$nice-dropdown-hover-border: $nice-border-color !default;
 $nice-dropdown-hover-color: #474F52 !default;
 
-$nice-dropdown-disabled-bg: $nice-disabled-bg  !default;
-$nice-dropdown-disabled-border: $nice-disabled-color  !default;
+$nice-dropdown-disabled-bg: $nice-disabled-bg !default;
+$nice-dropdown-disabled-border: $nice-disabled-color !default;
 
 
 // ---------- Yes no colors override ----------
-$nice-yesno-bg: $nice-background  !default;
-$nice-yesno-slider-bg: $nice-base-color  !default;
+$nice-yesno-bg: $nice-background !default;
+$nice-yesno-slider-bg: $nice-base-color !default;
 
-$nice-yesno-disabled-color: $nice-disabled-color  !default;
-$nice-yesno-disabled-bg: $nice-disabled-bg  !default;
-$nice-yesno-disabled-border: $nice-disabled-border  !default;
+$nice-yesno-disabled-color: $nice-disabled-color !default;
+$nice-yesno-disabled-bg: $nice-disabled-bg !default;
+$nice-yesno-disabled-border: $nice-disabled-border !default;
 
 
 // ---------- Choice colors override ----------
-$nice-choice-bg: $nice-background  !default;
-$nice-choice-hover-border: $nice-base-color  !default;
-$nice-choice-selected-bg: $nice-base-color  !default;
+$nice-choice-bg: $nice-background !default;
+$nice-choice-hover-border: $nice-base-color !default;
+$nice-choice-selected-bg: $nice-base-color !default;
 $nice-choice-selected-color: white !default;
 
 
 // ---------- Loader ----------
-$nice-loader-color: $nice-base-color  !default;
+$nice-loader-color: $nice-base-color !default;
 
 
 // ---------- Notifications ----------
 $nice-notification-color: white !default;
-$nice-notification-bg: $nice-base-color  !default;
+$nice-notification-bg: $nice-base-color !default;
 
-$nice-notification-warning-color: $nice-notification-color  !default;
-$nice-notification-warning-bg: $nice-warning-color  !default;
+$nice-notification-warning-color: $nice-notification-color !default;
+$nice-notification-warning-bg: $nice-warning-color !default;
 
-$nice-notification-danger-color: $nice-notification-color  !default;
-$nice-notification-danger-color-bg: $nice-danger-color  !default;
+$nice-notification-danger-color: $nice-notification-color !default;
+$nice-notification-danger-color-bg: $nice-danger-color !default;
 
-$nice-notification-success-color: $nice-notification-color  !default;
-$nice-notification-success-bg: $nice-success-color  !default;
+$nice-notification-success-color: $nice-notification-color !default;
+$nice-notification-success-bg: $nice-success-color !default;
 
-$nice-notification-info-color: $nice-notification-color  !default;
-$nice-notification-info-bg: $nice-info-color  !default;
+$nice-notification-info-color: $nice-notification-color !default;
+$nice-notification-info-bg: $nice-info-color !default;
 
 
 // ---------- Submenu ----------
@@ -107,3 +125,52 @@ $nice-submenu-gray-color: #b0bec5 !default;
 // ---------- Table ----------
 $nice-table-bg-hover: #f5f5f5 !default;
 $nice-table-bg-active: #f5f5f5 !default;
+
+
+:root {
+  // ---------- Fonts ----------
+  --nice-font-family: #{$nice-font-family};
+  --nice-font-weight: #{$nice-font-weight};
+  --nice-font-color: #{$nice-font-color};
+
+  // ---------- Colors ----------
+  --nice-primary-color: #{$nice-base-color};
+  --nice-primary-color-lighter: #{$nice-base-color-lighter};
+  --nice-primary-color-darker: #{$nice-base-color-darker};
+
+  --secondary-font-color: #{$nice-font-color};
+  --secondary-color: #{$nice-secondary-color};
+  --secondary-color-lighter: #{$nice-secondary-color-lighter};
+  --secondary-color-darker: #{$nice-secondary-color-darker};
+
+  --nice-secondary-color: #{$nice-secondary-color};
+  --nice-secondary-color-lighter: #{$nice-secondary-color-lighter};
+  --nice-secondary-color-darker: #{$nice-secondary-color-darker};
+
+  --nice-danger-color: #{$nice-danger-color};
+  --nice-danger-color-lighter: #{$nice-danger-color-lighter};
+  --nice-danger-color-darker: #{$nice-danger-color-darker};
+
+  --nice-success-color: #{$nice-success-color};
+  --nice-success-color-lighter: #{$nice-success-color-lighter};
+  --nice-success-color-darker: #{$nice-success-color-darker};
+
+  --nice-info-color: #{$nice-info-color};
+  --nice-info-color-lighter: #{$nice-info-color-lighter};
+  --nice-info-color-darker: #{$nice-info-color-darker};
+
+  --nice-warning-color: #{$nice-warning-color};
+  --nice-warning-color-lighter: #{$nice-warning-color-lighter};
+  --nice-warning-color-darker: #{$nice-warning-color-darker};
+
+
+  // ---------- Border ----------
+  --nice-border-color: #{$nice-border-color};
+  --nice-border-radius: #{$nice-border-radius};
+  --nice-border-radius-small: #{$nice-border-radius-small};
+
+  // ---------- Disabled ----------
+  --nice-disabled-color: #{$nice-disabled-color};
+  --nice-disabled-border: #{$nice-disabled-border};
+  --nice-disabled-bg: #{$nice-disabled-bg};
+}

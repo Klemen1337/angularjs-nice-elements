@@ -146,6 +146,11 @@ angular.module('niceElements')
           }
         };
 
+        // ------------------- On blur -------------------
+        $scope.onBlur = function () {
+          $scope.close();
+        };
+
 
         // ----------------------------------- Scroll to hover -----------------------------------
         $scope.scrollToHover = function (notSmooth) {
