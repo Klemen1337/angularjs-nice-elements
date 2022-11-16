@@ -10,13 +10,13 @@
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <div class="input-group" ng-class="{'has-warning': !disabled && niceNumberForm.$invalid && niceNumberForm.$dirty}">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-disabled="!canSubstract" ng-click="subtract()">-</button>
+                    <button class="btn btn-default" type="button" ng-disabled="!canSubstract" ng-click="subtract()" tabindex="-1">-</button>
                 </span>
 
                 <input type="number" step="{{ step }}" ng-change="inputChanged()" class="form-control" max="{{ max }}" min="{{ min }}" ng-model="model" />
 
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-disabled="!canAdd" ng-click="add()">+</button>
+                    <button class="btn btn-default" type="button" ng-disabled="!canAdd" ng-click="add()" tabindex="-1">+</button>
                 </span>
             </div>
 

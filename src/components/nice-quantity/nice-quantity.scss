@@ -1,35 +1,38 @@
-.nice-quantity{
+.nice-quantity {
   $nice-quantity-height: 35px;
   width: 100%;
 
-  .btn {
-    height: $nice-quantity-height;
-    width: $nice-quantity-height;
-    line-height: $nice-quantity-height - 2;
-    padding: 0;
-    border: 1px solid $nice-border-color;
+  .input-group {
+    display: flex;
   }
 
-  .btn-left{
+  .btn {
+    border: 1px solid $nice-border-color;
+    border-radius: 0;
+  }
+
+  .btn-left {
     border-bottom-left-radius: $nice-border-radius;
     border-top-left-radius: $nice-border-radius;
-    width: 45px;
+    border-right: 0 none;
   }
 
-  .btn-right{
+  .btn-right {
     border-bottom-right-radius: $nice-border-radius;
     border-top-right-radius: $nice-border-radius;
-    width: 45px;
+    border-left: 0 none;
   }
 
   input {
     text-align: center;
+    flex-grow: 1;
+
     &:focus {
       outline: 0 none;
     }
   }
 
-  .value{
+  .value {
     line-height: $nice-quantity-height - 2;
     padding: 0px 10px;
     text-align: center;

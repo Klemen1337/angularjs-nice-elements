@@ -10,7 +10,6 @@
   .open {
     .btn-dropdown {
       background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
       color: $nice-font-color !important;
     }
   }
@@ -200,8 +199,7 @@
     &:focus {
       background: $nice-focus-bg !important;
       color: $nice-focus-color !important;
-      outline: 2px solid var(--nice-primary-color);
-      outline-offset: 2px;
+      @extend .nice-focus;
     }
   }
 }

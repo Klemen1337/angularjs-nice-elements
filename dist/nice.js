@@ -5932,11 +5932,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"input-group\" ng-class=\"{'has-warning': !disabled && niceNumberForm.$invalid && niceNumberForm.$dirty}\">\n" +
     "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\">-</button>\n" +
+    "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\" tabindex=\"-1\">-</button>\n" +
     "</span>\n" +
     "<input type=\"number\" step=\"{{ step }}\" ng-change=\"inputChanged()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\">\n" +
     "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\">+</button>\n" +
+    "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\" tabindex=\"-1\">+</button>\n" +
     "</span>\n" +
     "</div>\n" +
     "<div class=\"error-messages\" ng-if=\"niceNumberForm.$error && !hideError\" ng-class=\"{ 'floating-error': floatingError }\">\n" +
@@ -6026,17 +6026,13 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"input-group\">\n" +
-    "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-primary btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\">-</button>\n" +
-    "</span>\n" +
+    "<button class=\"btn btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">-</button>\n" +
     "<input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" ng-disabled=\"isDisabled\">\n" +
-    "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-primary btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\">+</button>\n" +
-    "</span>\n" +
+    "<button class=\"btn btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">+</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "</div>\n"
+    "</div>"
   );
 
 

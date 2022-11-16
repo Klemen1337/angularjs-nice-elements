@@ -65,7 +65,7 @@ label.nice {
 }
 
 .nice-focus, .nice-component .input-group:focus-within,
-.nice-component .form-group:focus-within, .btn:focus, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
+.nice-component .form-group:focus-within, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
   outline: 2px solid var(--nice-primary-color);
   outline-offset: 2px;
   border-radius: 1px;
@@ -639,7 +639,6 @@ p.nice {
 
 .nice-dropdown .open .btn-dropdown, .nice-search .nice-dropdown-empty .open .btn-dropdown {
   background: white !important;
-  border-color: #3189ff !important;
   color: #404040 !important;
 }
 
@@ -824,8 +823,6 @@ p.nice {
 .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus {
   background: white !important;
   color: #474F52 !important;
-  outline: 2px solid var(--nice-primary-color);
-  outline-offset: 2px;
 }
 
 .nice-dropdown-old .disabled {
@@ -834,7 +831,6 @@ p.nice {
 
 .nice-dropdown-old .open .btn-dropdown {
   background: white !important;
-  border-color: #3189ff !important;
   color: #474F52 !important;
 }
 
@@ -932,7 +928,6 @@ p.nice {
 
 .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus {
   background: white !important;
-  border-color: #3189ff !important;
   color: #474F52 !important;
 }
 
@@ -3362,28 +3357,30 @@ p.nice {
   width: 100%;
 }
 
+.nice-quantity .input-group {
+  display: flex;
+}
+
 .nice-quantity .btn {
-  height: 35px;
-  width: 35px;
-  line-height: 33px;
-  padding: 0;
   border: 1px solid #cbd4d9;
+  border-radius: 0;
 }
 
 .nice-quantity .btn-left {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
-  width: 45px;
+  border-right: 0 none;
 }
 
 .nice-quantity .btn-right {
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
-  width: 45px;
+  border-left: 0 none;
 }
 
 .nice-quantity input {
   text-align: center;
+  flex-grow: 1;
 }
 
 .nice-quantity input:focus {
