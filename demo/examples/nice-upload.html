@@ -1,0 +1,23 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice upload</h1>
+
+    <div class="white-wrapper" id="nice-upload">
+        <pre class="prettyprint">&lt;nice-upload 
+    title="Nice upload"
+    model="niceUpload" 
+    callback-file="niceUploadCallbackFile" 
+    callback-function="niceUploadCallback"
+>&lt;/nice-upload></pre>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-upload title="Nice upload" model="niceUpload" callback-file="niceUploadCallbackFile" callback-function="niceUploadCallback"></nice-upload>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ niceUpload | json }}</pre>
+                <pre>{{ niceUploadFile | json }}</pre>
+                <pre>{{ niceUploadCallback | json }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

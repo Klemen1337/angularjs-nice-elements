@@ -298,6 +298,10 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     });
   }
 
+  $scope.niceUploadCallback = function (response) { $scope.niceUpload = response }
+  $scope.niceUploadCallbackFile = function (file) { $scope.niceUploadFile = file }
+  $scope.niceUpload = null;
+
   $scope.selectedIcon = "icon-activity";
   $scope.icons = [
     "olaii-logo",

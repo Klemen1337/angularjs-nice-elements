@@ -5016,8 +5016,8 @@ angular.module('niceElements')
  * @description
  * # niceUpload
  */
- angular.module('niceElements')
-   .directive('niceUpload', function ($timeout, gettextCatalog) {
+angular.module('niceElements')
+  .directive('niceUpload', function ($timeout, gettextCatalog) {
     return {
       restrict: 'E',
       replace: true,
@@ -5040,7 +5040,7 @@ angular.module('niceElements')
         help: '@'
       },
 
-      link: function(scope, element, attrs){
+      link: function (scope, element, attrs) {
         if (!attrs.title) { attrs.title = ''; }
         if (!attrs.text) { attrs.text = gettextCatalog.getString('Click to upload file', null, 'Nice'); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
@@ -5048,17 +5048,46 @@ angular.module('niceElements')
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         var maxImageSize = 1000000; // 1MB
 
-        element.bind("change", function (changeEvent) {
+        scope.startDragging = function () { $timeout(function () { scope.dragging = true; }); }
+        scope.endDragging = function () { $timeout(function () { scope.dragging = false; }); }
+        scope.startDraggingGlobal = function () { $timeout(function () { scope.draggingGlobal = true; }); }
+        scope.endDraggingGlobal = function () { $timeout(function () { scope.dragging = false; scope.draggingGlobal = false; }); }
 
+        scope.dragging = false;
+        scope.draggingGlobal = false;
+        var inputElement = element[0].querySelector(".input-file");
+        // document.addEventListener("dragenter", scope.startDraggingGlobal);
+        // document.addEventListener("drop", scope.endDraggingGlobal);
+        // document.addEventListener("dragend", scope.endDraggingGlobal);
+        // document.addEventListener("mouseleave", scope.endDraggingGlobal);
+        // document.addEventListener("dragleave", scope.endDragging);
+        inputElement.addEventListener("dragenter", scope.startDragging);
+        inputElement.addEventListener("dragleave", scope.endDragging);
+        inputElement.addEventListener("dragend", scope.endDraggingGlobal);
+        inputElement.addEventListener("drop", scope.endDraggingGlobal);
+
+        scope.$on('$destroy', function () {
+          // document.removeEventListener("dragenter", scope.startDraggingGlobal);
+          // document.removeEventListener("drop", scope.endDraggingGlobal);
+          // document.removeEventListener("dragend", scope.endDraggingGlobal);
+          // document.removeEventListener("mouseleave", scope.endDraggingGlobal);
+          // document.removeEventListener("dragleave", scope.endDraggingGlobal);
+          inputElement.removeEventListener("dragenter", scope.startDragging);
+          inputElement.removeEventListener("dragleave", scope.endDragging);
+          inputElement.removeEventListener("dragend", scope.endDraggingGlobal);
+          inputElement.removeEventListener("drop", scope.endDraggingGlobal);
+        });
+
+
+        element.bind("change", function (changeEvent) {
           if (scope.callbackUrl != undefined) {
             scope.callbackUrl(URL.createObjectURL(changeEvent.target.files[0]));
           }
 
           $timeout(function () {
-            var inputObj = changeEvent.target;
-
             scope.loading = true;
             scope.error = null;
+            var inputObj = changeEvent.target;
             var reader = new FileReader();
 
             if (inputObj.files) {
@@ -5066,44 +5095,47 @@ angular.module('niceElements')
                 var fileSize = inputObj.files[0].size; // in bytes
 
                 reader.onload = function (event) {
-                  $timeout(function(){
+                  $timeout(function () {
                     // file size must be smaller than 1MB.
-                    if (fileSize <= maxImageSize) {
-                      if (scope.callbackFunction != undefined) {
-                        scope.loading = false;
-                        scope.imageSource = null;
-                        scope.callbackFunction(event.target.result);
-                        scope.text = inputObj.files[0].name;
-                        scope.form.$setDirty();
-                      }
-
-                      if(scope.callbackFile != undefined){
-                        scope.loading = false;
-                        scope.text = inputObj.files[0].name;
-                        scope.callbackFile(inputObj.files[0]);
-                        scope.form.$setDirty();
-                      }
-
-                      if (scope.uploadFunction != undefined) {
-                        scope.uploadFunction(inputObj.files[0]).then(function (response) {
-                          scope.loading = false;
-                          scope.imageSource = event.target.result;
-                          scope.model = response.data.url;
-                          scope.form.$setDirty();
-                        }, function (error) {
-                          // Handle upload function error
-                          scope.error = error;
-                          scope.loading = false;
-                          scope.imageSource = null;
-                        });
-                      } else {
-                        // console.error("No upload function set!");
-                      }
-                    } else {
-                      // Handle file too big error
+                    if (fileSize > maxImageSize) {
                       scope.error = gettextCatalog.getString("File must be smaller than 1MB", null, "Nice");
                       scope.loading = false;
                       scope.imageSource = null;
+                      return;
+                    }
+
+                    if (scope.callbackFunction != undefined) {
+                      scope.loading = false;
+                      scope.imageSource = null;
+                      scope.callbackFunction(event.target.result);
+                      scope.text = inputObj.files[0].name;
+                      scope.form.$setDirty();
+                    }
+
+                    if (scope.callbackFile != undefined) {
+                      scope.loading = false;
+                      scope.text = inputObj.files[0].name;
+                      scope.callbackFile(inputObj.files[0]);
+                      scope.form.$setDirty();
+                    }
+
+                    if (scope.uploadFunction != undefined) {
+                      scope.uploadFunction(inputObj.files[0]).then(function (response) {
+                        scope.loading = false;
+                        scope.imageSource = event.target.result;
+                        scope.model = response.data.url;
+                        scope.form.$setDirty();
+                      }, function (error) {
+                        // Handle upload function error
+                        scope.error = error;
+                        scope.loading = false;
+                        scope.imageSource = null;
+                      });
+                    } else {
+                      // console.error("No upload function set!");
+                      if (event.target.result.substring(0, 10) == "data:image") {
+                        scope.imageSource = event.target.result;
+                      }
                     }
                   });
                 };
@@ -5124,8 +5156,8 @@ angular.module('niceElements')
         });
       },
 
-      controller: function($scope) {
-        $scope.$watch("model", function(value){
+      controller: function ($scope) {
+        $scope.$watch("model", function (value) {
           $scope.imageSource = angular.copy($scope.model);
         });
       }
@@ -7056,15 +7088,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" ng-disabled=\"isDisabled\">\n" +
-    "<div class=\"input-area\">\n" +
+    "<div class=\"input-area\" ng-class=\"{ 'dragging': dragging || draggingGlobal }\">\n" +
     "<div class=\"middle-text\" ng-if=\"!imageSource && !loading\">\n" +
-    "<div class=\"text\">{{ text }}</div>\n" +
+    "<div class=\"text text-placeholder\" ng-if=\"!dragging\">{{ text }}</div>\n" +
+    "<div class=\"text text-placeholder\" ng-if=\"dragging\" translate translate-group=\"Nice\">Drop file here</div>\n" +
     "<div class=\"error\" ng-if=\"error\">{{ error }}</div>\n" +
     "</div>\n" +
     "<img ng-if=\"imageSource\" data-ng-src=\"{{ imageSource }}\">\n" +
-    "</div>\n" +
-    "<div class=\"loading\" ng-if=\"loading\">\n" +
-    "<nice-loader></nice-loader>\n" +
+    "<nice-loader fulldiv=\"true\" ng-if=\"loading\"></nice-loader>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

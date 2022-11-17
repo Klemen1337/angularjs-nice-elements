@@ -32,4 +32,5 @@ angular.module('niceElementsDemo', [
   $routeProvider.when(appPathRoute + 'nice-calendar', { templateUrl: pagesPath + 'examples/nice-calendar.html' });
   $routeProvider.when(appPathRoute + 'nice-popup', { templateUrl: pagesPath + 'examples/nice-popup.html' });
   $routeProvider.when(appPathRoute + 'nice-icon', { templateUrl: pagesPath + 'examples/nice-icon.html' });
+  $routeProvider.when(appPathRoute + 'nice-upload', { templateUrl: pagesPath + 'examples/nice-upload.html' });
 }]);

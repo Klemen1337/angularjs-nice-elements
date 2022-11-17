@@ -36,14 +36,25 @@
     display: table;
     padding: 15px;
 
+    &.dragging {
+      outline: 2px dashed var(--nice-primary-color);
+      outline-offset: -7px;
+    }
+
     .middle-text {
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+
+      .text-placeholder {
+        font-size: 0.9em;
+        opacity: 0.6;
+      }
 
       .error {
         color: $nice-danger-color;
-        margin-top: 10px;
       }
     }
 
