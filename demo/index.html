@@ -15,11 +15,14 @@
 
     <body>
         <navigation></navigation>
-        <div class="container">
-            <div ng-view></div>
-            <nice-toast position="bottom left"></nice-toast>
-            <nice-svgs></nice-svgs>
+        <div class="main-view">
+            <div class="container">
+                <div ng-view></div>
+            </div>
         </div>
+
+        <nice-toast position="bottom left"></nice-toast>
+        <nice-svgs></nice-svgs>
 
         <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
         <script type="text/javascript" src="/node_modules/moment/moment.js"></script>

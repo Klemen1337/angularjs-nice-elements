@@ -3,9 +3,11 @@
     <div class="white-wrapper">
         <div class="row">
             <div ng-form="forme" class="col-sm-6">
-                <nice-number title="Test" model="niceNumberTest" min="1" max="10" required="true" is-inline="isInline"></nice-number>
+                <nice-quantity title="Quantity" model="data.niceQuantity" min="1" max="10" required="true" is-inline="isInline"></nice-quantity>
 
-                <nice-number title="Test" model="niceNumberTest" step="1" allow-negative="true" prevent-zero="true" default-value="1" floating-error="true" is-inline="isInline"></nice-number>
+                <nice-number title="Number" model="niceNumberTest" min="1" max="10" required="true" is-inline="isInline"></nice-number>
+
+                <nice-number title="Number" model="niceNumberTest" step="1" allow-negative="true" prevent-zero="true" default-value="1" floating-error="true" is-inline="isInline"></nice-number>
 
                 <nice-search2 title="Search people v2" model="searchPeopleString" refresh-function="searchPeople" placeholder="Search item" show-dropdown="true" on-select="countrySelected" on-change="handleChange(model)" is-inline="isInline">
                     <div class="person-row">

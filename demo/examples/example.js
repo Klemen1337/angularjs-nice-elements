@@ -31,6 +31,8 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     }
   }
 
+  $scope.copyClass = function (event) { }
+
   $scope.mockData = [];
   $http.get('http://5c9dcf843be4e30014a7d40a.mockapi.io/users').then(function (response) {
     $scope.mockData = response.data;
