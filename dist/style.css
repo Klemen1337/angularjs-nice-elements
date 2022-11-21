@@ -5,6 +5,7 @@
   --nice-primary-color: #3189ff;
   --nice-primary-color-lighter: #64a6ff;
   --nice-primary-color-darker: #006cfd;
+  --nice-primary-color-plain: #e3eafd;
   --secondary-font-color: #404040;
   --secondary-color: #efefef;
   --secondary-color-lighter: #f4f4f4;
@@ -15,15 +16,19 @@
   --nice-danger-color: #f22e28;
   --nice-danger-color-lighter: #f55d58;
   --nice-danger-color-darker: #da130d;
+  --nice-danger-color-plain: #ffe4e4;
   --nice-success-color: #49AE50;
   --nice-success-color-lighter: #6ac070;
   --nice-success-color-darker: #3a8a3f;
+  --nice-success-color-plain: #e2efe3;
   --nice-info-color: #31b0d5;
   --nice-info-color-lighter: #5bc0de;
   --nice-info-color-darker: #2490af;
+  --nice-info-color-plain: #d9f3f7;
   --nice-warning-color: #ffc107;
   --nice-warning-color-lighter: #ffce3a;
   --nice-warning-color-darker: #d39e00;
+  --nice-warning-color-plain: #fff9e8;
   --nice-border-color: #cbd4d9;
   --nice-border-radius: 3px;
   --nice-border-radius-small: 3px;
@@ -376,8 +381,9 @@ p.nice {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.2;
+  line-height: 1;
   padding: 6px 12px;
+  min-height: 34px;
   position: relative;
 }
 
@@ -425,8 +431,8 @@ p.nice {
 
 .btn-primary-plain {
   color: var(--nice-primary-color);
-  background: #e3eafd;
-  border-color: #e3eafd;
+  background: var(--nice-primary-color-plain);
+  border-color: var(--nice-primary-color-plain);
 }
 
 .btn-primary-naked {
@@ -512,9 +518,9 @@ p.nice {
 }
 
 .btn-success-plain {
-  color: #49ae4f;
-  background: #e2efe3;
-  border-color: #e2efe3;
+  color: var(--nice-success-color);
+  background: var(--nice-success-color-plain);
+  border-color: var(--nice-success-color-plain);
 }
 
 .btn-success-naked {
@@ -542,8 +548,8 @@ p.nice {
 
 .btn-danger-plain {
   color: var(--nice-danger-color);
-  background: #ffe4e4;
-  border-color: #ffe4e4;
+  background: var(--nice-danger-color-plain);
+  border-color: var(--nice-danger-color-plain);
 }
 
 .btn-danger-naked {
@@ -571,8 +577,8 @@ p.nice {
 
 .btn-info-plain {
   color: var(--nice-info-color);
-  background: #d9f3f7;
-  border-color: #d9f3f7;
+  background: var(--nice-info-color-plain);
+  border-color: var(--nice-info-color-plain);
 }
 
 .btn-info-naked {
@@ -600,8 +606,8 @@ p.nice {
 
 .btn-warning-plain {
   color: var(--nice-warning-color);
-  background: #fff9e8;
-  border-color: #fff9e8;
+  background: var(--nice-warning-color-plain);
+  border-color: var(--nice-warning-color-plain);
 }
 
 .btn-warning-naked {
@@ -610,13 +616,15 @@ p.nice {
   border-color: transparent;
 }
 
-.btn-big {
+.btn-big,
+.btn-lg {
   font-size: 1.2em;
-  padding: 1.5rem;
-  min-height: 72px;
+  padding: 0.2rem 1.5rem;
+  min-height: 42px;
 }
 
-.btn-big svg {
+.btn-big svg,
+.btn-lg svg {
   width: 24px;
   height: 24px;
   fill: currentColor;
@@ -624,6 +632,11 @@ p.nice {
 
 .btn-medium {
   height: 40px !important;
+}
+
+.btn-sm {
+  min-height: 30px !important;
+  padding: 4px 10px;
 }
 
 .btn-icon {
@@ -1182,6 +1195,7 @@ p.nice {
   position: relative;
   overflow: hidden;
   flex-grow: 1;
+  justify-content: flex-start;
   text-align: left;
   padding-right: 25px;
 }
@@ -1307,6 +1321,7 @@ p.nice {
   color: #404040;
   font-weight: normal;
   min-height: 34px;
+  justify-content: flex-start;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -1575,6 +1590,7 @@ p.nice {
 .nice-yesno .yesno-wrapper .yesno-button {
   text-align: center;
   line-height: 34px;
+  min-height: unset;
   cursor: pointer;
 }
 
@@ -2190,7 +2206,8 @@ p.nice {
   text-overflow: ellipsis;
 }
 
-.nice-datetimerange-picker-2 .input-group.open .form-control, .nice-datetimerange-picker-2 .input-group.open .input-group-addon {
+.nice-datetimerange-picker-2 .input-group.open .form-control,
+.nice-datetimerange-picker-2 .input-group.open .input-group-addon {
   border-color: #3189ff;
 }
 
@@ -2215,7 +2232,7 @@ p.nice {
 }
 
 .nice-datetimerange-picker-2 .dtp-wrapper .dtp-buttons-left {
-  min-width: 110px;
+  width: 110px;
   display: flex;
   flex-direction: column;
 }
@@ -2228,7 +2245,8 @@ p.nice {
   margin-top: 5px;
 }
 
-.nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
+.nice-datetimerange-picker-2 .dtp-wrapper .dtp-left,
+.nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -2273,7 +2291,8 @@ p.nice {
     margin-bottom: 15px;
     margin-top: 15px;
   }
-  .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left, .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
+  .nice-datetimerange-picker-2 .dtp-wrapper .dtp-left,
+  .nice-datetimerange-picker-2 .dtp-wrapper .dtp-right {
     margin-left: 0;
     width: 100%;
   }
@@ -2305,6 +2324,10 @@ p.nice {
   background: #f3f3f3;
   height: 34px;
   border: 1px solid #cbd4d9;
+}
+
+.nice-number .input-group-btn .btn:focus {
+  outline: 0;
 }
 
 .nice-number .error-messages.floating-error {
@@ -3783,6 +3806,10 @@ p.nice {
 .nice-quantity .btn {
   border: 1px solid #cbd4d9;
   border-radius: 0;
+}
+
+.nice-quantity .btn:focus {
+  outline: 0 none;
 }
 
 .nice-quantity .btn-left {

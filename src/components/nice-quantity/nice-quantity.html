@@ -9,9 +9,9 @@
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
             <div class="input-group">
-                <button class="btn btn-left" ng-click="sub()" type="button" ng-disabled="isDisabled" tabindex="-1">-</button>
+                <button class="btn btn-default btn-left" ng-click="sub()" type="button" ng-disabled="isDisabled" tabindex="-1">-</button>
                 <input class="value form-control" ng-model="model" type="number" ng-change="handleChange()" ng-disabled="isDisabled" />
-                <button class="btn btn-right" ng-click="add()" type="button" ng-disabled="isDisabled" tabindex="-1">+</button>
+                <button class="btn btn-default btn-right" ng-click="add()" type="button" ng-disabled="isDisabled" tabindex="-1">+</button>
             </div>
         </div>
     </div>

@@ -16,6 +16,10 @@
       background: $nice-addon-bg;
       height: 34px;
       border: 1px solid $nice-border-color;
+
+      &:focus {
+        outline: 0;
+      }
     }
   }
 

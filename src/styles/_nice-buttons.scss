@@ -3,8 +3,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.2;
+  line-height: 1;
   padding: 6px 12px;
+  min-height: 34px;
   position: relative;
 
   &:hover,
@@ -68,8 +69,8 @@
 .btn-primary-plain {
   @extend .btn-primary;
   color: var(--nice-primary-color);
-  background: #e3eafd;
-  border-color: #e3eafd;
+  background: var(--nice-primary-color-plain);
+  border-color: var(--nice-primary-color-plain);
 }
 
 .btn-primary-naked {
@@ -175,9 +176,9 @@
 
 .btn-success-plain {
   @extend .btn-success;
-  color: #49ae4f;
-  background: #e2efe3;
-  border-color: #e2efe3;
+  color: var(--nice-success-color);
+  background: var(--nice-success-color-plain);
+  border-color: var(--nice-success-color-plain);
 }
 
 .btn-success-naked {
@@ -212,8 +213,8 @@
 .btn-danger-plain {
   @extend .btn-danger;
   color: var(--nice-danger-color);
-  background: #ffe4e4;
-  border-color: #ffe4e4;
+  background: var(--nice-danger-color-plain);
+  border-color: var(--nice-danger-color-plain);
 }
 
 .btn-danger-naked {
@@ -248,8 +249,8 @@
 .btn-info-plain {
   @extend .btn-info;
   color: var(--nice-info-color);
-  background: #d9f3f7;
-  border-color: #d9f3f7;
+  background: var(--nice-info-color-plain);
+  border-color: var(--nice-info-color-plain);
 }
 
 .btn-info-naked {
@@ -284,8 +285,8 @@
 .btn-warning-plain {
   @extend .btn-warning;
   color: var(--nice-warning-color);
-  background: #fff9e8;
-  border-color: #fff9e8;
+  background: var(--nice-warning-color-plain);
+  border-color: var(--nice-warning-color-plain);
 }
 
 .btn-warning-naked {
@@ -297,10 +298,11 @@
 
 
 // -------------------------------- Btn big --------------------------------
-.btn-big {
+.btn-big,
+.btn-lg {
   font-size: 1.2em;
-  padding: 1.5rem;
-  min-height: 72px;
+  padding: 0.2rem 1.5rem;
+  min-height: 42px;
 
   svg {
     width: 24px;
@@ -315,6 +317,11 @@
   height: 40px !important;
 }
 
+// -------------------------------- Btn sm --------------------------------
+.btn-sm {
+  min-height: 30px !important;
+  padding: 4px 10px;
+}
 
 // -------------------------------- Btn icon --------------------------------
 .btn-icon {

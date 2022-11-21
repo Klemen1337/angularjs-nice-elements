@@ -1,18 +1,20 @@
 .nice-datetimerange-picker-2 {
   display: block;
 
-  .input-group{
-    .form-control{
+  .input-group {
+    .form-control {
       cursor: pointer;
       text-overflow: ellipsis;
     }
 
     &.open {
-      .form-control, .input-group-addon{
+
+      .form-control,
+      .input-group-addon {
         border-color: $nice-base-color;
       }
 
-      .input-group-addon{
+      .input-group-addon {
         background-color: $nice-base-color;
         color: white;
       }
@@ -28,14 +30,14 @@
   .dtp-wrapper {
     border-radius: $nice-border-radius;
     box-shadow: $nice-box-shadow;
-    
+
     padding: 15px;
     background-color: white;
     border: 1px solid $nice-border-color;
     display: flex;
 
     .dtp-buttons-left {
-      min-width: 110px;
+      width: 110px;
       display: flex;
       flex-direction: column;
 
@@ -48,7 +50,8 @@
       }
     }
 
-    .dtp-left, .dtp-right {
+    .dtp-left,
+    .dtp-right {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -58,7 +61,7 @@
   }
 
 
-  .nice-dtp-background{
+  .nice-dtp-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -67,20 +70,20 @@
     height: 100%;
   }
 
-  .btn{
+  .btn {
     border-radius: $nice-border-radius;
   }
 
-  .btn-primary{
+  .btn-primary {
     background: $nice-base-color;
     border-color: darken($nice-base-color, 5%);
 
-    &:hover{
+    &:hover {
       background: darken($nice-base-color, 5%);
       border-color: darken($nice-base-color, 5%);
     }
 
-    &:active{
+    &:active {
       background: darken($nice-base-color, 10%);
       border-color: darken($nice-base-color, 10%);
     }
@@ -92,12 +95,13 @@
       width: auto;
       flex-direction: column;
 
-      .dtp-left{
+      .dtp-left {
         margin-bottom: 15px;
         margin-top: 15px;
       }
 
-      .dtp-left, .dtp-right {
+      .dtp-left,
+      .dtp-right {
         margin-left: 0;
         width: 100%;
       }

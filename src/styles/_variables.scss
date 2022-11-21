@@ -8,6 +8,7 @@ $nice-font-color: #404040 !default;
 $nice-base-color: #3189ff !default;
 $nice-base-color-lighter: lighten($nice-base-color, 10%) !default;
 $nice-base-color-darker: darken($nice-base-color, 10%) !default;
+$nice-base-color-plain: #e3eafd !default;
 
 $nice-secondary-color: #efefef !default;
 $nice-secondary-color-lighter: lighten($nice-secondary-color, 2%) !default;
@@ -16,18 +17,22 @@ $nice-secondary-color-darker: darken($nice-secondary-color, 10%) !default;
 $nice-danger-color: #f22e28 !default;
 $nice-danger-color-lighter: lighten($nice-danger-color, 10%) !default;
 $nice-danger-color-darker: darken($nice-danger-color, 10%) !default;
+$nice-danger-color-plain: #ffe4e4 !default;
 
 $nice-success-color: #49AE50 !default;
 $nice-success-color-lighter: lighten($nice-success-color, 10%) !default;
 $nice-success-color-darker: darken($nice-success-color, 10%) !default;
+$nice-success-color-plain: #e2efe3 !default;
 
 $nice-info-color: #31b0d5 !default;
 $nice-info-color-lighter: lighten($nice-info-color, 10%) !default;
 $nice-info-color-darker: darken($nice-info-color, 10%) !default;
+$nice-info-color-plain: #d9f3f7 !default;
 
 $nice-warning-color: #ffc107 !default;
 $nice-warning-color-lighter: lighten($nice-warning-color, 10%) !default;
 $nice-warning-color-darker: darken($nice-warning-color, 10%) !default;
+$nice-warning-color-plain: #fff9e8 !default;
 
 
 // ---------- Border ----------
@@ -137,6 +142,7 @@ $nice-table-bg-active: #f5f5f5 !default;
   --nice-primary-color: #{$nice-base-color};
   --nice-primary-color-lighter: #{$nice-base-color-lighter};
   --nice-primary-color-darker: #{$nice-base-color-darker};
+  --nice-primary-color-plain: #{$nice-base-color-plain};
 
   --secondary-font-color: #{$nice-font-color};
   --secondary-color: #{$nice-secondary-color};
@@ -150,19 +156,22 @@ $nice-table-bg-active: #f5f5f5 !default;
   --nice-danger-color: #{$nice-danger-color};
   --nice-danger-color-lighter: #{$nice-danger-color-lighter};
   --nice-danger-color-darker: #{$nice-danger-color-darker};
+  --nice-danger-color-plain: #{$nice-danger-color-plain};
 
   --nice-success-color: #{$nice-success-color};
   --nice-success-color-lighter: #{$nice-success-color-lighter};
   --nice-success-color-darker: #{$nice-success-color-darker};
+  --nice-success-color-plain: #{$nice-success-color-plain};
 
   --nice-info-color: #{$nice-info-color};
   --nice-info-color-lighter: #{$nice-info-color-lighter};
   --nice-info-color-darker: #{$nice-info-color-darker};
+  --nice-info-color-plain: #{$nice-info-color-plain};
 
   --nice-warning-color: #{$nice-warning-color};
   --nice-warning-color-lighter: #{$nice-warning-color-lighter};
   --nice-warning-color-darker: #{$nice-warning-color-darker};
-
+  --nice-warning-color-plain: #{$nice-warning-color-plain};
 
   // ---------- Border ----------
   --nice-border-color: #{$nice-border-color};

@@ -6058,9 +6058,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"input-group\">\n" +
-    "<button class=\"btn btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">-</button>\n" +
+    "<button class=\"btn btn-default btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">-</button>\n" +
     "<input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" ng-disabled=\"isDisabled\">\n" +
-    "<button class=\"btn btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">+</button>\n" +
+    "<button class=\"btn btn-default btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">+</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

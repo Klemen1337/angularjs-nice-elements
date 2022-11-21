@@ -84,6 +84,7 @@
     color: $nice-dropdown-color;
     font-weight: $nice-font-weight;
     min-height: 34px;
+    justify-content: flex-start;
 
     white-space: nowrap;
     text-overflow: ellipsis;

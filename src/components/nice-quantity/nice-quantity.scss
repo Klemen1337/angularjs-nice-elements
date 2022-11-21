@@ -9,6 +9,10 @@
   .btn {
     border: 1px solid $nice-border-color;
     border-radius: 0;
+
+    &:focus {
+      outline: 0 none;
+    }
   }
 
   .btn-left {
