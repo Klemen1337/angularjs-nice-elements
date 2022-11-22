@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.6.0 (22.11.2022)
+
+- worked on nice-calendar, nice-choice, nice-date and nice-upload focus styles,
+- worked on nice-checkbox and nice-daterange-picker,
+- worked on buttons focus style,
+- worked on nice-upload,
+- worked on demo examples,
+- worked on buttons,
+- worked on button plain color variables,
+- worked on nice-number and nice-quantity buttons
+- added css variables,
+- added button styles,
+- added nice-popup on change callback,
+- added logo,
+- added assets to dev server,
+- updated nice icon example page,
+- updated readme,
+- added nice spacing,
+- created nice upload demo view
+
 ## v1.5.0 (26.10.2022)
 
 - created nice-icon component,
