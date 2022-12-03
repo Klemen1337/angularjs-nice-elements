@@ -21,10 +21,12 @@
     flex-shrink: 0;
   }
 
+  i+span,
   svg+span,
   nice-icon+span,
   span+svg,
-  span+nice-icon {
+  span+nice-icon,
+  span+i {
     margin-left: 0.5rem;
   }
 
