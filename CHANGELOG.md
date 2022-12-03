@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.6.1 (3.12.2022)
+
+- fixed nice search 2 item select
+- added negative spacings,
+- worked on button icons spacing
+
 ## v1.6.0 (22.11.2022)
 
 - worked on nice-calendar, nice-choice, nice-date and nice-upload focus styles,
