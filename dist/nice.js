@@ -816,6 +816,103 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceDatetimePicker
+ * @description
+ * # niceDatetimePicker
+ */
+angular.module('niceElements')
+  .directive('niceDateInput', function () {
+    return {
+      restrict: 'E',
+      transclude: false,
+      templateUrl: 'src/components/nice-date-input/nice-date-input.html',
+      scope: {
+        model: '=', // binding model
+        date: '=?', // default: true, is date picker enabled?
+        time: '=?', // default: false, is time picker enabled?
+        minDate: '@', // default: undefined
+        maxDate: '@', // default: undefined
+        title: '@', // default: ''
+        noMargin: '@', // default: false, if noMargin==true then entire directive can be injected inside other divs
+        fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
+        labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
+        isDisabled: '=',
+        help: '@',
+        isInline: '=',
+        onChange: '&?'
+      },
+      controller: function ($scope) {
+        $scope.formatDate = "DD.MM.YYYY";
+        $scope.formatTime = "HH:mm";
+        $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+        $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
+        $scope.model = moment($scope.model) || moment().set({ 'second': 0, 'millisecond': 0 });
+
+        $scope.dateChanged = function (date) {
+          $scope.modelDate = date.format($scope.formatDate);
+          $scope.handleChange();
+        }
+
+        $scope.timeChanged = function (date) {
+          $scope.modelTime = date.format($scope.formatTime);
+          $scope.handleChange();
+        }
+
+        // -------------------- On date change --------------------
+        $scope.handleChange = function () {
+          var newModel = moment($scope.modelDate + " " + $scope.modelTime, $scope.formatDate + " " + $scope.formatTime).seconds(0).milliseconds(0);
+          if (newModel.isValid()) {
+            $scope.model = newModel;
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
+            $scope.niceDateInputForm.$setValidity('validDate', true);
+          } else {
+            $scope.model = null;
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
+            $scope.niceDateInputForm.$setValidity('validDate', false);
+          }
+        }
+
+        // -------------------- Format model --------------------
+        $scope.formatModel = function () {
+          $scope.modelDate = $scope.model.format($scope.formatDate);
+          $scope.modelTime = $scope.model.format($scope.formatTime);
+        }
+        $scope.formatModel();
+
+        // -------------------- Date --------------------
+        $scope.dateBlur = function () {
+          var newDate = moment($scope.modelDate, $scope.formatDate);
+          if (newDate.isValid()) {
+            $scope.niceDateInputForm.$setValidity('validDate', true);
+            $scope.handleChange();
+          } else {
+            $scope.niceDateInputForm.$setValidity('validDate', false);
+          }
+        };
+
+        // -------------------- Time --------------------
+        $scope.timeBlur = function () {
+          var newTime = moment($scope.modelTime, $scope.formatTime);
+          if (newTime.isValid()) {
+            $scope.niceDateInputForm.$setValidity('validDate', true);
+            $scope.handleChange();
+          } else {
+            $scope.niceDateInputForm.$setValidity('validDate', false);
+          }
+        };
+
+        // -------------------- Watch model --------------------
+        $scope.$watch('model', function () {
+          $scope.formatModel();
+        });
+      }
+    }
+  }
+  );
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceDateRange
  * @description
  * # niceDateRange
@@ -5463,6 +5560,48 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('src/components/nice-date-input/nice-date-input.html',
+    "<div class=\"nice-component nice-date-input\" ng-form=\"niceDateInputForm\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline, 'error': niceDateInputForm.$invalid }\">\n" +
+    "<div class=\"row\">\n" +
+    "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\">\n" +
+    "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
+    "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
+    "</div>\n" +
+    "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
+    "<div class=\"input-group nice-date-input\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
+    "<input type=\"text\" class=\"form-control\" ng-model=\"modelDate\" ng-blur=\"dateBlur()\" ng-disabled=\"isDisabled\">\n" +
+    "<nice-popup placement=\"bottom\">\n" +
+    "<nice-popup-target>\n" +
+    "<button class=\"input-group-addon btn btn-default\" tabindex=\"-1\">\n" +
+    "<nice-icon icon=\"icon-calendar\"></nice-icon>\n" +
+    "</button>\n" +
+    "</nice-popup-target>\n" +
+    "<nice-popup-content>\n" +
+    "<nice-date is-inline=\"true\" inline=\"true\" model=\"model\" on-change=\"dateChanged(model)\" no-margin=\"true\"></nice-date>\n" +
+    "</nice-popup-content>\n" +
+    "</nice-popup>\n" +
+    "</div>\n" +
+    "<div class=\"input-group nice-time-input\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
+    "<input type=\"text\" class=\"form-control\" ng-model=\"modelTime\" ng-blur=\"timeBlur()\" ng-disabled=\"isDisabled\">\n" +
+    "<nice-popup placement=\"bottom\">\n" +
+    "<nice-popup-target>\n" +
+    "<button class=\"input-group-addon btn btn-default\" tabindex=\"-1\">\n" +
+    "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
+    "</button>\n" +
+    "</nice-popup-target>\n" +
+    "<nice-popup-content>\n" +
+    "<div class=\"dates\">\n" +
+    "<div class=\"date\"></div>\n" +
+    "</div>\n" +
+    "</nice-popup-content>\n" +
+    "</nice-popup>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('src/components/nice-date-range/nice-date-range.html',
     "<ng-form class=\"nice-component nice-date-range\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"form\">\n" +
     "<div class=\"row\">\n" +
@@ -7087,14 +7226,17 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
-    "<input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" ng-disabled=\"isDisabled\">\n" +
+    "<div class=\"nice-upload-area\">\n" +
     "<div class=\"input-area\" ng-class=\"{ 'dragging': dragging || draggingGlobal }\">\n" +
     "<div class=\"middle-text\" ng-if=\"!imageSource && !loading\">\n" +
+    "<nice-icon icon=\"icon-upload\"></nice-icon>\n" +
     "<div class=\"text text-placeholder\" ng-if=\"!dragging\">{{ text }}</div>\n" +
     "<div class=\"text text-placeholder\" ng-if=\"dragging\" translate translate-group=\"Nice\">Drop file here</div>\n" +
     "<div class=\"error\" ng-if=\"error\">{{ error }}</div>\n" +
     "</div>\n" +
     "<img ng-if=\"imageSource\" data-ng-src=\"{{ imageSource }}\">\n" +
+    "</div>\n" +
+    "<input class=\"input-file\" type=\"file\" accept=\"{{ accept }}\" ng-model=\"file\" ng-disabled=\"isDisabled || loading\">\n" +
     "<nice-loader fulldiv=\"true\" ng-if=\"loading\"></nice-loader>\n" +
     "</div>\n" +
     "</div>\n" +
