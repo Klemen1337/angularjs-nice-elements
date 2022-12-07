@@ -1,8 +1,12 @@
 # Changelog
 
+## v1.6.2 (7.12.2022)
+
+- fixed nice upload - OLA-199
+
 ## v1.6.1 (3.12.2022)
 
-- fixed nice search 2 item select
+- fixed nice search 2 item select,
 - added negative spacings,
 - worked on button icons spacing
 
