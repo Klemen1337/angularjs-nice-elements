@@ -31,6 +31,7 @@ angular.module('niceElementsDemo')
           { title: "Popup", href: "nice-popup" },
           { title: "Icon", href: "nice-icon" },
           { title: "Upload", href: "nice-upload" },
+          { title: "Date input", href: "nice-date-input" },
         ];
 
         $scope.location = $location.path().replace("/", "");

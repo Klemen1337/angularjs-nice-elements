@@ -1,0 +1,49 @@
+.nice-date-input {
+  .nice-field {
+    display: flex;
+    gap: 1rem;
+
+    .input-group {
+      display: flex;
+
+      .form-control {
+        border-right: 0 none;
+      }
+
+      .input-group-addon {
+        flex-shrink: 0;
+        width: 34px;
+
+        &:focus {
+          outline: 0 none;
+        }
+      }
+
+      .form-control {
+        z-index: unset;
+      }
+
+      &.nice-date-input {
+        flex-grow: 1;
+
+        .nice-popup-content {
+          .nice-date-date {
+            width: 250px;
+          }
+        }
+      }
+
+      &.nice-time-input {
+        width: 100px;
+      }
+
+      .nice-popup-content {
+        z-index: 10;
+      }
+
+      .nice-date {
+        width: 250px;
+      }
+    }
+  }
+}

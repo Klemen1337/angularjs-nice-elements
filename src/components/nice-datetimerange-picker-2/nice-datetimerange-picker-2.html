@@ -13,7 +13,9 @@
             <div class="nice-daterange-picker-button input-group" ng-class="{ 'open': isOpen }" ng-click="open()">
                 <input type="text" class="form-control" value="{{ modelFormat }}" readonly="readonly" />
                 <!-- <div class="form-control" title="{{ modelFormat }}">{{ modelFormat }}</div> -->
-                <span class="input-group-addon clickable"><i class="fa fa-calendar"></i></span>
+                <span class="input-group-addon clickable">
+                    <nice-icon icon="icon-calendar"></nice-icon>
+                </span>
             </div>
 
             <div class="nice-daterange-picker-wrapper">
@@ -33,11 +35,11 @@
                     </div>
 
                     <div class="dtp-left">
-                        <nice-date model="model.innerStartDate" next-date="model.innerEndDate" is-inline="true" no-margin="true" inline="true" time="{{ time }}" on-change="dateChanged(model)"></nice-date>
+                        <nice-date model="model.innerStartDate" next-date="model.innerEndDate" is-inline="true" no-margin="true" inline="true" time="time" on-change="dateChanged(model)"></nice-date>
                     </div>
 
                     <div class="dtp-right">
-                        <nice-date model="model.innerEndDate" next-date="model.innerStartDate" is-inline="true" no-margin="true" inline="true" time="{{ time }}" on-change="dateChanged(model)"></nice-date>
+                        <nice-date model="model.innerEndDate" next-date="model.innerStartDate" is-inline="true" no-margin="true" inline="true" time="time" on-change="dateChanged(model)"></nice-date>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,22 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice date input</h1>
+
+    <div class="white-wrapper" id="nice-date-input">
+        <pre class="prettyprint">&lt;nice-date-input title="Nice date input" model="model.niceDateInput"&gt;&lt;/nice-date-input></pre>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-date-input title="Nice date input" model="model.niceDateInput"></nice-date-input>
+                <nice-date-input title="Time only" time="false" model="model.niceDateInputTime"></nice-date-input>
+                <nice-date-input title="Date only" date="false" model="model.niceDateInputDate"></nice-date-input>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-6">
+                    <code>{{ model.niceDateInput }}</code>
+                    <code>{{ model.niceDateInputTime }}</code>
+                    <code>{{ model.niceDateInputDate }}</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
