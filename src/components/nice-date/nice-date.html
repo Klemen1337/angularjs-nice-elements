@@ -16,15 +16,16 @@
             <div class="nice-date-button input-group" ng-class="{ 'open': isOpen }" ng-show="!inline" ng-click="toggleOpen()">
                 <input type="text" class="form-control" value="{{ model | niceDate:time }}" readonly="readonly" />
                 <span class="input-group-addon clickable">
-                    <i class="fa fa-calendar"></i>
+                    <!-- <i class="fa fa-calendar"></i> -->
+                    <nice-icon icon="icon-calendar"></nice-icon>
                 </span>
             </div>
 
             <!-------- Dropdown -------->
             <div ng-class="{ 'nice-date-dropdown-wrapper': !inline }">
-                <div ng-class="{ 'nice-date-dropdown': !inline }" ng-if="inline || isOpen">
+                <div ng-class="{ 'nice-date-dropdown': !inline, 'with-time': time, 'no-date': !date }" ng-if="inline || isOpen">
                     <!------------------------------ Date picker ------------------------------>
-                    <div class="nice-date-date" ng-class="{ 'with-time': time }" role="grid">
+                    <div class="nice-date-date" ng-if="date" role="grid">
                         <div class="nice-date-header">
                             <span>
                                 <select class="year-picker" ng-model="innerDate.year" ng-change="handleDateChange()" ng-options="year for year in years">
@@ -57,7 +58,7 @@
 
                     <!------------------------------ Time picker ------------------------------>
                     <div class="nice-date-time" ng-if="time">
-                        <i class="fa fa-clock-o"></i>
+                        <nice-icon icon="icon-clock"></nice-icon>
 
                         <div class="time-picker time-picker-hour">
                             <select ng-disabled="isDisabled" ng-model="innerDate.hour" ng-change="timeChange()" ng-options="hour as hour for hour in hours track by hour">

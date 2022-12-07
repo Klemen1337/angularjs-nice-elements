@@ -8,7 +8,7 @@
  */
 angular.module('niceElements')
 
-  .directive('niceDate', function() {
+  .directive('niceDate', function () {
     return {
       restrict: 'E',
       replace: true,
@@ -20,7 +20,8 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         model: '=',
-        time: '@',
+        time: '=?',
+        date: '=?',
         help: '@',
         inline: '@',
         maxDate: '=',
@@ -30,14 +31,17 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope, $element, $timeout, gettextCatalog) {
+      controller: function ($scope, $element, $timeout, gettextCatalog) {
         $scope.isOpen = false;
+        if ($scope.date == undefined) $scope.date = true;
+        if ($scope.time == undefined) $scope.time = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
         $scope.translations = {
           nextMonth: gettextCatalog.getString("Next month", null, "Nice"),
           prevMonth: gettextCatalog.getString("Previous month", null, "Nice"),
         };
+        if (!$scope.model) $scope.model = moment();
         $scope.innerDate = {
           month: 0,
           year: 0,
@@ -50,18 +54,18 @@ angular.module('niceElements')
 
         // $scope.weekdays = moment.weekdaysShort(false);
         $scope.weekdays = [
-          gettextCatalog.getString("Mon", null, "Nice"), 
-          gettextCatalog.getString("Tue", null, "Nice"), 
-          gettextCatalog.getString("Wed", null, "Nice"), 
-          gettextCatalog.getString("Thu", null, "Nice"), 
-          gettextCatalog.getString("Fri", null, "Nice"), 
-          gettextCatalog.getString("Sat", null, "Nice"), 
+          gettextCatalog.getString("Mon", null, "Nice"),
+          gettextCatalog.getString("Tue", null, "Nice"),
+          gettextCatalog.getString("Wed", null, "Nice"),
+          gettextCatalog.getString("Thu", null, "Nice"),
+          gettextCatalog.getString("Fri", null, "Nice"),
+          gettextCatalog.getString("Sat", null, "Nice"),
           gettextCatalog.getString("Sun", null, "Nice")
         ];
 
         $scope.years = [];
-        var year = moment().year()-100;
-        for(var i=0; i<200; i++) {
+        var year = moment().year() - 100;
+        for (var i = 0; i < 200; i++) {
           $scope.years.push(year + i);
         }
 
@@ -80,20 +84,13 @@ angular.module('niceElements')
           { value: 11, name: gettextCatalog.getString("December", null, "Nice") }
         ]
 
-
-        if(!$scope.model) $scope.model = moment();
-
-        if(!$scope.time) $scope.time = false;
-        else $scope.time = $scope.time == "true";
-
-
         if ($scope.maxDate) $scope.maxDate = moment($scope.maxDate);
         if ($scope.minDate) $scope.minDate = moment($scope.minDate);
 
-        
+
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
-        $scope.setupPopper = function() {
+        $scope.setupPopper = function () {
           var button = $element[0].getElementsByClassName('nice-date-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-date-dropdown-wrapper')[0];
           $scope.popper = Popper.createPopper(button, tooltip, {
@@ -116,13 +113,13 @@ angular.module('niceElements')
 
 
         // ------------------ Time changes ------------------
-        $scope.timeChange = function() {
+        $scope.timeChange = function () {
           var selectedDate = angular.copy($scope.model);
           selectedDate = $scope._removeTime(selectedDate);
           selectedDate.hours($scope.innerDate.hour);
           selectedDate.minutes($scope.innerDate.minute);
           $scope.innerDate.value = $scope.formatDate(selectedDate);
-          
+
           $scope.model = selectedDate;
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.forma.$setDirty();
@@ -130,8 +127,8 @@ angular.module('niceElements')
 
 
         // ------------------ Day was selected ------------------
-        $scope.select = function(day) {
-          if(!day.isDisabled){
+        $scope.select = function (day) {
+          if (!day.isDisabled) {
             var selectedDate = angular.copy(day.date);
             selectedDate.hours($scope.innerDate.hour);
             selectedDate.minutes($scope.innerDate.minute);
@@ -152,7 +149,7 @@ angular.module('niceElements')
 
 
         // ------------------ Set inner date ------------------
-        $scope.setInnerDate = function(date) {
+        $scope.setInnerDate = function (date) {
           $scope.innerDate.year = date.year();
           $scope.innerDate.month = date.month();
           $scope.innerDate.date = date;
@@ -160,14 +157,14 @@ angular.module('niceElements')
 
 
         // ------------------ Today ------------------
-        $scope.today = function() {
+        $scope.today = function () {
           $scope.setInnerDate(moment());
           $scope._buildMonth();
         };
 
 
         // ------------------ Go to next month ------------------
-        $scope.next = function() {
+        $scope.next = function () {
           $scope.innerDate.date.add(1, "month");
           $scope.setInnerDate($scope.innerDate.date);
           $scope._buildMonth();
@@ -175,7 +172,7 @@ angular.module('niceElements')
 
 
         // ------------------ Go to previous month ------------------
-        $scope.previous = function() {
+        $scope.previous = function () {
           $scope.innerDate.date.subtract(1, "month");
           $scope.setInnerDate($scope.innerDate.date);
           $scope._buildMonth();
@@ -183,7 +180,7 @@ angular.module('niceElements')
 
 
         // ------------------ Check if dates are equal without time ------------------
-        $scope.isSameDay = function(date1, date2){
+        $scope.isSameDay = function (date1, date2) {
           date1 = moment(date1);
           date2 = moment(date2);
           return (
@@ -194,7 +191,7 @@ angular.module('niceElements')
         };
 
         // ------------------ Check month ------------------
-        $scope.isSameMonth = function(date1, date2){
+        $scope.isSameMonth = function (date1, date2) {
           date1 = moment(date1);
           date2 = moment(date2);
           return (
@@ -204,12 +201,12 @@ angular.module('niceElements')
         };
 
 
-        $scope.isBetween = function(date1, date2, date3){
-          if(!$scope.nextDate){
+        $scope.isBetween = function (date1, date2, date3) {
+          if (!$scope.nextDate) {
             return false;
-          } else if($scope.isSameDay(date1, date2) || $scope.isSameDay(date1, date3)){
+          } else if ($scope.isSameDay(date1, date2) || $scope.isSameDay(date1, date3)) {
             return true;
-          } else if(date2.isBefore(date3)){
+          } else if (date2.isBefore(date3)) {
             return $scope._removeTime(date1).isBetween(date2, date3);
           } else {
             return $scope._removeTime(date1).isBetween(date3, date2);
@@ -218,24 +215,25 @@ angular.module('niceElements')
 
 
         // ------------------ Format date ------------------
-        $scope.formatDate = function(date) {
-          if($scope.time) return date.format('D.M.YYYY • H:mm');
+        $scope.formatDate = function (date) {
+          if ($scope.time) return date.format('D.M.YYYY • H:mm');
           else return date.format('D.M.YYYY');
         };
 
 
         // ------------------ Remove time from date ------------------
-        $scope._removeTime = function(date) {
+        $scope._removeTime = function (date) {
+          if (!date) return date;
           return date.hour(0).minute(0).second(0).millisecond(0);
         };
 
-        $scope._removeTimeWithDate = function(date) {
+        $scope._removeTimeWithDate = function (date) {
           return date.date(0).hour(0).minute(0).second(0).millisecond(0);
         };
 
 
         // ------------------ Build month ------------------
-        $scope._buildMonth = function() {
+        $scope._buildMonth = function () {
           var done = false;
           var date = angular.copy($scope.innerDate.date).date(0).startOf('week').isoWeekday(1);
           var monthIndex = date.month();
@@ -254,7 +252,7 @@ angular.module('niceElements')
 
 
         // ------------------ Build week ------------------
-        $scope._buildWeek = function(date) {
+        $scope._buildWeek = function (date) {
           var days = [];
           for (var i = 0; i < 7; i++) {
             var day = {
@@ -267,9 +265,9 @@ angular.module('niceElements')
               date: date
             };
 
-            if($scope.minDate) day.isDisabled = date.isBefore($scope.minDate);
-            if($scope.maxDate) day.isDisabled = date.isAfter($scope.maxDate);
-            if($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween($scope.minDate, $scope.maxDate);
+            if ($scope.minDate) day.isDisabled = date.isBefore($scope.minDate);
+            if ($scope.maxDate) day.isDisabled = date.isAfter($scope.maxDate);
+            if ($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween($scope.minDate, $scope.maxDate);
 
             days.push(day);
             date = date.clone();
@@ -281,13 +279,13 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value) {
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function (value) {
           $scope.boostrap();
         });
-        
+
 
         // ------------------ Get time ------------------
-        $scope.getTime = function() {
+        $scope.getTime = function () {
           if ($scope.time) {
             $scope.innerDate.hour = moment($scope.model).hours();
             $scope.innerDate.minute = moment($scope.model).minutes();
@@ -301,14 +299,14 @@ angular.module('niceElements')
 
 
         // ------------------ Bootstrap ------------------
-        $scope.boostrap = function() {
+        $scope.boostrap = function () {
           $scope.setInnerDate(moment($scope.model));
           $scope.getTime();
-          
-          if(!$scope.time) {
+
+          if (!$scope.time) {
             $scope.model = $scope._removeTime($scope.model);
           }
-          
+
           $scope.innerDate.value = $scope.formatDate(moment($scope.model));
           $scope._buildMonth();
         };
@@ -317,10 +315,10 @@ angular.module('niceElements')
 
 
         // ------------------ Toggle open ------------------
-        $scope.toggleOpen = function() {
+        $scope.toggleOpen = function () {
           if (!$scope.isDisabled) {
             $scope.isOpen = !$scope.isOpen;
-            $timeout(function() {
+            $timeout(function () {
               if ($scope.popper) $scope.popper.update();
             })
           }

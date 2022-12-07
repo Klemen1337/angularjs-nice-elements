@@ -138,6 +138,9 @@ $nice-table-bg-active: #f5f5f5 !default;
   --nice-font-weight: #{$nice-font-weight};
   --nice-font-color: #{$nice-font-color};
 
+  // ---------- Common ----------
+  --nice-hover-color: #{$nice-hover-color};
+
   // ---------- Colors ----------
   --nice-primary-color: #{$nice-base-color};
   --nice-primary-color-lighter: #{$nice-base-color-lighter};

@@ -8,6 +8,13 @@
     cursor: help;
   }
 
+  svg {
+    height: 14px;
+    width: 14px;
+    cursor: help;
+    display: block;
+  }
+
   &:hover {
     .nice-help-popup {
       display: block;

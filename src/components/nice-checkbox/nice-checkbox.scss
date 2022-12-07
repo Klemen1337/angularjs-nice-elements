@@ -4,28 +4,28 @@
   cursor: pointer;
 
   .checkbox {
-    height: 34px;
-    width: 34px;
+    height: 20px;
+    width: 20px;
+    min-height: unset;
     border: 1px solid $nice-border-color;
     border-radius: $nice-border-radius-small;
     background: transparent;
     margin: 0;
-    padding: 4px;
+    padding: 0;
 
     .check {
       opacity: 0;
-    }
+      color: white;
 
-    .check-stroke {
-      stroke: $nice-base-color;
-      fill: none;
-      stroke-width: 4;
-      stroke-linecap: round;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 
   .message {
-    margin-left: 15px;
+    margin-left: 10px;
     user-select: none;
     color: $nice-font-color;
   }
@@ -42,8 +42,8 @@
 
   &.checked {
     .checkbox {
-      border-color: $nice-border-color;
-      background: white;
+      border-color: var(--nice-primary-color);
+      background: var(--nice-primary-color);
 
       .check {
         opacity: 1;

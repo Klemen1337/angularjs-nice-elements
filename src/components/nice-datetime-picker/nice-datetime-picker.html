@@ -16,30 +16,16 @@
             <div class="input-group" id="dropdown{{randNum}}">
                 <input type="text" class="form-control" value="{{ value }}" ng-click="openDtp()" ng-disabled="isDisabled">
                 <span class="input-group-addon clickable" ng-click="openDtp()">
-                    <i class="fa" ng-class="date == 'true' ? 'fa-calendar' : 'fa-clock-o'"></i>
+                    <!-- <i class="fa" ng-class="date == 'true' ? 'fa-calendar' : 'fa-clock-o'"></i> -->
+                    <nice-icon ng-if="date == 'true'" icon="icon-calendar"></nice-icon>
+                    <nice-icon ng-if="date != 'true'" icon="icon-clock"></nice-icon>
                 </span>
             </div>
 
             <!-- inject nice-dtp here -->
             <div ng-show="isOpen">
-                <nice-dtp
-                    model="internalDate"
-                    format="{{ format }}"
-                    model-format="{{ modelFormat }}"
-                    date="{{ date == 'true' }}"
-                    time="{{ time == 'true' }}"
-                    width="{{ width }}"
-                    enable-ok-buttons="{{ enableOkButtons }}"
-                    lang="{{ lang }}"
-                    min-date="{{ minDate }}"
-                    max-date="{{ maxDate }}"
-                    week-start="{{ weekStart }}"
-                    ok-text="{{ okText }}"
-                    cancel-text="{{ cancelText }}"
-                    closed="closeDtp"
-                ></nice-dtp>
+                <nice-dtp model="internalDate" format="{{ format }}" model-format="{{ modelFormat }}" date="{{ date == 'true' }}" time="{{ time == 'true' }}" width="{{ width }}" enable-ok-buttons="{{ enableOkButtons }}" lang="{{ lang }}" min-date="{{ minDate }}" max-date="{{ maxDate }}" week-start="{{ weekStart }}" ok-text="{{ okText }}" cancel-text="{{ cancelText }}" closed="closeDtp"></nice-dtp>
             </div>
         </div>
     </div>
 </div>
-

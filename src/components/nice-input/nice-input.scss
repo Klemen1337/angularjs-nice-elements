@@ -1,42 +1,49 @@
-.nice-input{
-  color:black;
+.nice-input {
+  color: var(--nice-font-color);
   display: block;
 
-  ::-webkit-input-placeholder { /* WebKit browsers */
+  ::-webkit-input-placeholder {
+    /* WebKit browsers */
     color: $nice-input-placeholder-color;
-//    opacity: 0.1;
   }
 
-  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
     color: $nice-input-placeholder-color;
-//    opacity: 0.1;
   }
 
-  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+  ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
     color: $nice-input-placeholder-color;
-//    opacity: 0.1;
   }
 
-  :-ms-input-placeholder { /* Internet Explorer 10+ */
+  :-ms-input-placeholder {
+    /* Internet Explorer 10+ */
     color: $nice-input-placeholder-color;
-//    opacity: 0.1;
   }
 
-  :disabled::-webkit-input-placeholder { /* WebKit browsers */
+  :disabled::-webkit-input-placeholder {
+    /* WebKit browsers */
     color: $nice-input-disabled-bg;
   }
 
-  :disabled:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  :disabled:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
     color: $nice-input-disabled-bg;
-//    opacity:  0;
   }
-  :disabled::-moz-placeholder { /* Mozilla Firefox 19+ */
+
+  :disabled::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
     color: $nice-input-disabled-bg;
-//    opacity:  0;
   }
-  :disabled:-ms-input-placeholder { /* Internet Explorer 10+ */
+
+  :disabled:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
     color: $nice-input-disabled-bg;
-//    opacity:  0;
+  }
+
+  textarea {
+    border-right: 1px solid var(--nice-border-color) !important;
   }
 
 
@@ -44,17 +51,17 @@
     margin-bottom: 0px;
   }
 
-  .symbol{
+  .symbol {
     position: relative;
     display: table;
     border-collapse: separate;
-    
+
     .form-control-feedback {
       left: 0;
       right: auto;
     }
 
-    .form-control{
+    .form-control {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       text-align: right;

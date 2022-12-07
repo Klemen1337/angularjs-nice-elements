@@ -69,8 +69,15 @@ pre {
   margin-bottom: 20px;
 }
 
-#nice-notification .btn {
-  margin-bottom: 20px;
+.nice-notification {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.nice-notification:last-child {
+  margin-bottom: 0;
 }
 
 .nice-icon-large svg {
@@ -94,6 +101,7 @@ pre {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: flex-start !important;
   border: 0 none;
 }
 
@@ -135,6 +143,7 @@ pre {
   color: white;
   border-right: 1px solid var(--nice-border-color);
   overflow: auto;
+  box-shadow: 0 0 20px #00000012;
 }
 
 .sidebar .logo {
@@ -170,4 +179,20 @@ pre {
 .sidebar ul li.active a {
   background: white;
   color: var(--nice-primary-color);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: 0 0 0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--nice-primary-color-darker);
 }

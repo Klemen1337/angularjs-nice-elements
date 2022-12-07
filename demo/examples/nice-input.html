@@ -87,10 +87,10 @@
         <pre class="prettyprint lang-html">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-input title="Text" model="inputText"></nice-input>
+                <nice-input title="Text" model="model.inputText"></nice-input>
             </div>
             <div class="col-sm-6">
-                <code>{{ inputText }}</code>
+                <code>{{ model.inputText }}</code>
             </div>
         </div>
 
@@ -99,10 +99,10 @@
         <pre class="prettyprint">&lt;nice-input title="Number" model="inputNumber" type="number">&lt;/nice-input></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-input title="Number" model="inputNumber" type="number"></nice-input>
+                <nice-input title="Number" model="model.inputNumber" type="number"></nice-input>
             </div>
             <div class="col-sm-6">
-                <code>{{ inputNumber }}</code>
+                <code>{{ model.inputNumber }}</code>
             </div>
         </div>
 
@@ -111,10 +111,10 @@
         <pre class="prettyprint">&lt;nice-input title="Email" model="inputEmail" type="email">&lt;/nice-input></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-input title="Email" model="inputEmail" type="email"></nice-input>
+                <nice-input title="Email" model="model.inputEmail" type="email"></nice-input>
             </div>
             <div class="col-sm-6">
-                <code>{{ inputEmail }}</code>
+                <code>{{ model.inputEmail }}</code>
             </div>
         </div>
 
@@ -123,11 +123,13 @@
         <pre class="prettyprint">&lt;nice-input title="Textarea" model="inputTextArea" text-area="true">&lt;/nice-input></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-input title="Textarea" model="inputTextArea" text-area="true"></nice-input>
+                <nice-input title="Textarea" model="model.inputTextArea" text-area="true"></nice-input>
             </div>
             <div class="col-sm-6">
-                <code>{{ inputTextArea }}</code>
+                <code>{{ model.inputTextArea }}</code>
             </div>
         </div>
     </div>
+
+    <pre>{{ model | json }}</pre>
 </div>

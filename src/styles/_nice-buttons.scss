@@ -8,6 +8,16 @@
   min-height: 34px;
   position: relative;
 
+  &.btn-icon {
+    padding: 6px;
+    width: 34px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   &:hover,
   &:focus {
     color: white;
@@ -306,6 +316,11 @@
   padding: 0.2rem 1.5rem;
   min-height: 42px;
 
+  &.btn-icon {
+    padding: 0.2rem;
+    width: 42px;
+  }
+
   svg {
     width: 24px;
     height: 24px;
@@ -317,21 +332,19 @@
 // -------------------------------- Btn medium --------------------------------
 .btn-medium {
   height: 40px !important;
+
+  &.btn-icon {
+    width: 40px;
+  }
 }
 
 // -------------------------------- Btn sm --------------------------------
 .btn-sm {
   min-height: 30px !important;
   padding: 4px 10px;
-}
 
-// -------------------------------- Btn icon --------------------------------
-.btn-icon {
-  font-size: 1.2em !important;
-
-  svg,
-  img {
-    width: 24px;
-    height: 24px;
+  &.btn-icon {
+    padding: 4px;
+    height: 30px;
   }
 }

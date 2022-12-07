@@ -2,6 +2,7 @@
   --nice-font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   --nice-font-weight: normal;
   --nice-font-color: #404040;
+  --nice-hover-color: #EDEDED;
   --nice-primary-color: #3189ff;
   --nice-primary-color-lighter: #64a6ff;
   --nice-primary-color-darker: #006cfd;
@@ -70,7 +71,7 @@ label.nice {
 }
 
 .nice-focus, .nice-component .input-group:focus-within,
-.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
+.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-yesno .yesno-wrapper:focus-within, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
   outline: 2px solid;
   outline-color: var(--nice-primary-color);
   outline-offset: 2px;
@@ -88,6 +89,23 @@ label.nice {
   outline-offset: 2px;
   border-radius: 1px;
   z-index: 1;
+}
+
+.nice-component .input-group .form-control,
+.nice-component .form-group .form-control {
+  z-index: unset;
+}
+
+.nice-component .input-group .input-group-btn:last-child > .btn,
+.nice-component .input-group .input-group-btn:last-child > .btn-group,
+.nice-component .form-group .input-group-btn:last-child > .btn,
+.nice-component .form-group .input-group-btn:last-child > .btn-group {
+  z-index: unset;
+}
+
+.nice-component .input-group .form-control:not(:last-child),
+.nice-component .form-group .form-control:not(:last-child) {
+  border-right: 0 none;
 }
 
 .nice-component .input-group:focus-within,
@@ -133,45 +151,42 @@ label.nice {
   background: white;
   border: 1px solid #cbd4d9;
   box-shadow: 0 0 0;
+  color: var(--nice-font-color);
 }
 
 .nice-component .input-group .form-control:active, .nice-component .input-group .form-control:focus,
 .nice-component .form-group .form-control:active,
 .nice-component .form-group .form-control:focus {
-  border-color: #3189ff;
   box-shadow: 0 0 0;
-}
-
-.nice-component .input-group .form-control:active + .input-group-addon, .nice-component .input-group .form-control:focus + .input-group-addon,
-.nice-component .form-group .form-control:active + .input-group-addon,
-.nice-component .form-group .form-control:focus + .input-group-addon {
-  border-color: #3189ff;
-  background-color: #3189ff;
-  color: white;
 }
 
 .nice-component .input-group .form-control:disabled,
 .nice-component .form-group .form-control:disabled {
   background: white;
-  border-color: #EDEFF2;
   opacity: 0.65;
 }
 
 .nice-component .input-group .input-group-addon,
 .nice-component .form-group .input-group-addon {
-  background: #f3f3f3;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  color: #404040;
   border: 1px solid #cbd4d9;
   border-left: 0 none;
+  background: white;
+  padding: 0 9px;
+  color: var(--nice-font-color);
+}
+
+.nice-component .input-group .input-group-addon svg,
+.nice-component .form-group .input-group-addon svg {
+  height: 16px;
+  width: 16px;
 }
 
 .nice-component .input-group .input-group-addon.clickable:hover,
 .nice-component .form-group .input-group-addon.clickable:hover {
   cursor: pointer;
-  background-color: #3189ff;
-  color: white;
+  background-color: var(--nice-hover-color);
 }
 
 .nice-component-inline .nice-title {
@@ -353,6 +368,10 @@ p.nice {
   color: #3189ff;
 }
 
+.has-warning {
+  outline-color: #f22e28 !important;
+}
+
 .has-warning .form-control {
   border-color: #f22e28 !important;
 }
@@ -368,13 +387,32 @@ p.nice {
 }
 
 .has-success .input-group-addon {
-  background: #3189ff;
-  border-color: #3189ff;
-  color: white;
+  color: var(--nice-font-color);
 }
 
 .nice-highligh {
   background: yellow;
+}
+
+.nice-animation-spin {
+  animation: nice-spin 2s infinite linear;
+}
+
+.nice-animation-spin.ng-hide {
+  display: none;
+}
+
+@keyframes nice-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.d-block {
+  display: block;
 }
 
 .btn {
@@ -385,6 +423,16 @@ p.nice {
   padding: 6px 12px;
   min-height: 34px;
   position: relative;
+}
+
+.btn.btn-icon {
+  padding: 6px;
+  width: 34px;
+}
+
+.btn.btn-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .btn:hover, .btn:focus {
@@ -625,6 +673,12 @@ p.nice {
   min-height: 42px;
 }
 
+.btn-big.btn-icon,
+.btn-lg.btn-icon {
+  padding: 0.2rem;
+  width: 42px;
+}
+
 .btn-big svg,
 .btn-lg svg {
   width: 24px;
@@ -636,19 +690,18 @@ p.nice {
   height: 40px !important;
 }
 
+.btn-medium.btn-icon {
+  width: 40px;
+}
+
 .btn-sm {
   min-height: 30px !important;
   padding: 4px 10px;
 }
 
-.btn-icon {
-  font-size: 1.2em !important;
-}
-
-.btn-icon svg,
-.btn-icon img {
-  width: 24px;
-  height: 24px;
+.btn-sm.btn-icon {
+  padding: 4px;
+  height: 30px;
 }
 
 .mt-0 {
@@ -1557,6 +1610,7 @@ p.nice {
 .nice-dropdown .btn-dropdown .btn-dropdown-inside, .nice-search .nice-dropdown-empty .btn-dropdown .btn-dropdown-inside {
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .nice-dropdown .btn-dropdown .caret, .nice-search .nice-dropdown-empty .btn-dropdown .caret {
@@ -1716,7 +1770,7 @@ p.nice {
 }
 
 .nice-input {
-  color: black;
+  color: var(--nice-font-color);
   display: block;
 }
 
@@ -1758,6 +1812,10 @@ p.nice {
 .nice-input :disabled:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: white;
+}
+
+.nice-input textarea {
+  border-right: 1px solid var(--nice-border-color) !important;
 }
 
 .nice-input .form-group {
@@ -1955,6 +2013,11 @@ p.nice {
   position: absolute;
   top: 0;
   bottom: 0;
+  appearance: none;
+  background: none;
+  border: 0 none;
+  padding: 0;
+  line-height: 1;
 }
 
 .nice-yesno .yesno-wrapper .yesno-no-bg {
@@ -1982,6 +2045,10 @@ p.nice {
 
 .nice-yesno .yesno-wrapper .yesno-button:hover {
   background-color: #187aff;
+}
+
+.nice-yesno .yesno-wrapper .yesno-button:focus {
+  outline: 0 none;
 }
 
 .nice-yesno .yesno-wrapper .yesno-button-no {
@@ -2110,14 +2177,25 @@ p.nice {
   transition: all 0.2s;
   background: white;
   color: white;
-  line-height: 22px;
-  font-size: 12px;
   width: 25px;
   height: 25px;
   border: 1px solid #cbd4d9;
   position: absolute;
   border-radius: 3px;
-  text-align: center;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.nice-choice li .choice-checkbox nice-icon {
+  display: block;
+}
+
+.nice-choice li .choice-checkbox svg {
+  height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .nice-choice li:hover .choice-checkbox {
@@ -2668,20 +2746,30 @@ p.nice {
   padding: 0;
   min-width: 30px;
   border-left: 0 none;
-}
-
-.nice-number .input-group-btn {
-  z-index: 1;
+  border-right: 0 none;
 }
 
 .nice-number .input-group-btn .btn {
-  background: #f3f3f3;
+  background: white;
   height: 34px;
+  width: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
   border: 1px solid #cbd4d9;
 }
 
 .nice-number .input-group-btn .btn:focus {
   outline: 0;
+}
+
+.nice-number .input-group-btn .btn.btn-left {
+  border-right: 0 none;
+}
+
+.nice-number .input-group-btn .btn.btn-right {
+  border-left: 0 none;
 }
 
 .nice-number .error-messages.floating-error {
@@ -3108,6 +3196,19 @@ p.nice {
   color: white;
 }
 
+.nice-date .with-time .nice-date-date {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.nice-date .with-time .nice-date-time {
+  border-top: 0 none;
+}
+
+.nice-date .no-date .nice-date-time {
+  border-top: 1px solid #cbd4d9;
+}
+
 .nice-date .nice-date-date {
   border-radius: 3px;
   background: white;
@@ -3117,11 +3218,6 @@ p.nice {
   flex-direction: column;
   height: 250px;
   width: 100%;
-}
-
-.nice-date .nice-date-date.with-time {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 .nice-date .nice-date-date .nice-date-header {
@@ -3166,6 +3262,7 @@ p.nice {
   background: transparent;
   border: 0px;
   -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
 }
 
@@ -3274,13 +3371,17 @@ p.nice {
   cursor: default;
 }
 
+.nice-date .nice-date-date .nice-date-week.names > span:hover {
+  background: white;
+}
+
 .nice-date .nice-date-time {
   display: flex;
   width: 100%;
   padding: 10px;
   background: #ffffff;
   border: 1px solid #cad4d9;
-  border-top: 0;
+  align-items: center;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
@@ -3294,6 +3395,12 @@ p.nice {
   line-height: 30px;
   margin-right: 10px;
   color: #cbd4d9;
+}
+
+.nice-date .nice-date-time svg {
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
 }
 
 .nice-date .nice-date-time .time-picker {
@@ -3615,16 +3722,20 @@ p.nice {
   height: 30px;
 }
 
-.nice-calendar .nice-calendar-time .time-picket-icon {
+.nice-calendar .nice-calendar-time .time-picker-icon {
   border-right: 1px solid #cbd4d9;
   width: 20%;
-  float: left;
-  font-size: 14px;
-  text-align: center;
-  line-height: 30px;
   color: #404040;
   border-bottom: 1px solid #cbd4d9;
   height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nice-calendar .nice-calendar-time .time-picker-icon svg {
+  height: 15px;
+  width: 15px;
 }
 
 .nice-calendar .nice-calendar-wrapper {
@@ -3894,44 +4005,23 @@ p.nice {
   position: absolute;
   top: 100%;
   left: 15px;
-  width: 100%;
+  width: 130px;
   background: white;
   border: 1px solid #cbd4d9;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
   margin-top: 0.5rem;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .nice-time-picker .nice-time-picker-dropdown .numbers {
-  font-size: 28px;
-  color: #404040;
-  line-height: 1.6;
-}
-
-.nice-time-picker .nice-time-picker-dropdown button {
-  width: 100%;
-  border: 0;
+  font-size: 1.5rem;
   color: #404040;
   line-height: 1;
-  padding: 5px;
-  border-radius: 3px;
-  background: none;
-}
-
-.nice-time-picker .nice-time-picker-dropdown button:hover {
-  background: #3189ff;
-  color: #ffffff;
-}
-
-.nice-time-picker .nice-time-picker-dropdown button:focus {
-  outline: 0;
-}
-
-.nice-time-picker .nice-time-picker-dropdown button:active {
-  outline: 0;
-  background: #006cfd;
-  color: #ffffff;
+  text-align: center;
+  padding: 5px 0;
 }
 
 .nice-time-picker .nice-background {
@@ -3950,28 +4040,28 @@ p.nice {
 }
 
 .nice-checkbox .checkbox {
-  height: 34px;
-  width: 34px;
+  height: 20px;
+  width: 20px;
+  min-height: unset;
   border: 1px solid #cbd4d9;
   border-radius: 3px;
   background: transparent;
   margin: 0;
-  padding: 4px;
+  padding: 0;
 }
 
 .nice-checkbox .checkbox .check {
   opacity: 0;
+  color: white;
 }
 
-.nice-checkbox .checkbox .check-stroke {
-  stroke: #3189ff;
-  fill: none;
-  stroke-width: 4;
-  stroke-linecap: round;
+.nice-checkbox .checkbox .check svg {
+  width: 16px;
+  height: 16px;
 }
 
 .nice-checkbox .message {
-  margin-left: 15px;
+  margin-left: 10px;
   user-select: none;
   color: #404040;
 }
@@ -3985,8 +4075,8 @@ p.nice {
 }
 
 .nice-checkbox.checked .checkbox {
-  border-color: #cbd4d9;
-  background: white;
+  border-color: var(--nice-primary-color);
+  background: var(--nice-primary-color);
 }
 
 .nice-checkbox.checked .checkbox .check {
@@ -4083,6 +4173,13 @@ p.nice {
   cursor: help;
 }
 
+.nice-help svg {
+  height: 14px;
+  width: 14px;
+  cursor: help;
+  display: block;
+}
+
 .nice-help:hover .nice-help-popup {
   display: block;
 }
@@ -4151,9 +4248,20 @@ p.nice {
   display: flex;
 }
 
+.nice-quantity .form-control {
+  border-left: 0 none !important;
+  border-right: 0 none !important;
+}
+
 .nice-quantity .btn {
   border: 1px solid #cbd4d9;
   border-radius: 0;
+  width: 34px;
+  display: flex;
+  background: white;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
 }
 
 .nice-quantity .btn:focus {
@@ -4418,6 +4526,52 @@ p.nice {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.nice-date-input .nice-field {
+  display: flex;
+  gap: 1rem;
+}
+
+.nice-date-input .nice-field .input-group {
+  display: flex;
+}
+
+.nice-date-input .nice-field .input-group .form-control {
+  border-right: 0 none;
+}
+
+.nice-date-input .nice-field .input-group .input-group-addon {
+  flex-shrink: 0;
+  width: 34px;
+}
+
+.nice-date-input .nice-field .input-group .input-group-addon:focus {
+  outline: 0 none;
+}
+
+.nice-date-input .nice-field .input-group .form-control {
+  z-index: unset;
+}
+
+.nice-date-input .nice-field .input-group.nice-date-input {
+  flex-grow: 1;
+}
+
+.nice-date-input .nice-field .input-group.nice-date-input .nice-popup-content .nice-date-date {
+  width: 250px;
+}
+
+.nice-date-input .nice-field .input-group.nice-time-input {
+  width: 100px;
+}
+
+.nice-date-input .nice-field .input-group .nice-popup-content {
+  z-index: 10;
+}
+
+.nice-date-input .nice-field .input-group .nice-date {
+  width: 250px;
 }
 
 /*# sourceMappingURL=style.css.map */

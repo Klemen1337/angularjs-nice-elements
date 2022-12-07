@@ -20,7 +20,7 @@
                     <div class="dtp-actual-num" ng-click="initDate()">{{actualNum}}</div>
                     <div>
                         <div class="left center p10">
-                            <a href="javascript:void(0);" class="dtp-select-year-before" ng-click="onYearBeforeClick()" ng-class="{'disabled': !btnYearBeforeEnabled}""><i class="fa fa-chevron-left"></i></a>
+                            <a href="javascript:void(0);" class="dtp-select-year-before" ng-click="onYearBeforeClick()" ng-class="{'disabled': !btnYearBeforeEnabled}""><i class=" fa fa-chevron-left"></i></a>
                         </div>
                         <div class="dtp-actual-year p80" ng-click="initDate()">{{actualYear}}</div>
                         <div class="right center p10">
@@ -48,15 +48,15 @@
 
                         <table class="table dtp-picker-days">
                             <thead>
-                            <th ng-repeat="weekDay in weekDays track by $index">{{weekDay}}</th>
+                                <th ng-repeat="weekDay in weekDays track by $index">{{weekDay}}</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="week in weeks">
-                                <td ng-repeat="day in week">
-                                    <span ng-if="day.disabled" class="dtp-select-day">{{day.label}}</span>
-                                    <a ng-if="!day.disabled" ng-click="onSelectDate(day)" href="javascript:void(0);" class="dtp-select-day" ng-class="{'selected': day.selected}">{{day.label}}</a>
-                                </td>
-                            </tr>
+                                <tr ng-repeat="week in weeks">
+                                    <td ng-repeat="day in week">
+                                        <span ng-if="day.disabled" class="dtp-select-day">{{day.label}}</span>
+                                        <a ng-if="!day.disabled" ng-click="onSelectDate(day)" href="javascript:void(0);" class="dtp-select-day" ng-class="{'selected': day.selected}">{{day.label}}</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -83,9 +83,9 @@
                 </div>
             </div>
             <!--<div class="dtp-buttons" ng-if="enableOkButtons">-->
-                <!--<button class="dtp-btn-cancel btn btn-flat" ng-click="onCancelClick()">{{cancelText}}</button>-->
-                <!--<button class="dtp-btn-ok btn btn-flat" ng-click="onOKClick()"> {{okText}} </button>-->
-                <!--<div class="clearfix"></div>-->
+            <!--<button class="dtp-btn-cancel btn btn-flat" ng-click="onCancelClick()">{{cancelText}}</button>-->
+            <!--<button class="dtp-btn-ok btn btn-flat" ng-click="onOKClick()"> {{okText}} </button>-->
+            <!--<div class="clearfix"></div>-->
             <!--</div>-->
         </div>
     </div>

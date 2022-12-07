@@ -9,8 +9,8 @@
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <div class="yesno-wrapper noselect" ng-class="{ 'disabled': isDisabled }">
-                <div class="yesno-yes-bg" ng-click="switch()">{{ yes }}</div>
-                <div class="yesno-no-bg" ng-click="switch()">{{ no }}</div>
+                <button class="yesno-yes-bg" ng-click="switch()" tabindex="-1">{{ yes }}</button>
+                <button class="yesno-no-bg" ng-click="switch()" tabindex="-1">{{ no }}</button>
                 <button class="yesno-button btn btn-primary" ng-class="buttonClass" ng-click="switch()">{{ state }}</button>
             </div>
         </div>

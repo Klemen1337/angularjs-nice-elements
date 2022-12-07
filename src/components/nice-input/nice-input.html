@@ -8,51 +8,16 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-            <div 
-                class="form-group"
-                ng-class="{
+            <div class="form-group" ng-class="{
                     'has-feedback': showValid && !hideValid,
                     'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
                     'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
                     'symbol': symbol,
                     'nice-disabled': isDisabled
-                }"
-            >
-                <textarea 
-                    ng-show="textArea"
-                    class="form-control"
-                    ng-model="model"
-                    id="{{ id }}"
-                    tabindex="{{ tabIndex }}"
-                    placeholder="{{ placeholder }}"
-                    rows="{{textAreaLines}}"
-                    max="{{ max }}"
-                    min="{{ min }}"
-                    ng-minlength="minlength"
-                    ng-maxlength="maxlength"
-                    ng-required="required"
-                    ng-pattern="regexexp"
-                    ng-disabled="isDisabled"
-                ></textarea>
-                
-                <input 
-                    ng-show="!textArea"
-                    class="form-control"
-                    type="{{ internalType }}"
-                    ng-model="model"
-                    name="{{ name }}"
-                    id="{{ id }}"
-                    tabindex="{{ tabIndex }}"
-                    placeholder="{{ placeholder }}"
-                    max="{{ max }}"
-                    min="{{ min }}"
-                    ng-minlength="minlength"
-                    ng-maxlength="maxlength"
-                    ng-required="required"
-                    ng-keypress="keypress($event)"
-                    ng-pattern="regexexp"
-                    ng-disabled="isDisabled"
-                />
+                }">
+
+                <textarea ng-show="textArea" class="form-control" ng-model="model" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" rows="{{textAreaLines}}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-pattern="regexexp" ng-disabled="isDisabled"></textarea>
+                <input ng-show="!textArea" class="form-control" type="{{ internalType }}" ng-model="model" name="{{ name }}" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-keypress="keypress($event)" ng-pattern="regexexp" ng-disabled="isDisabled" />
 
                 <span class="input-group-addon" ng-if="symbol">{{ symbol }}</span>
                 <!--<span ng-if="!disabled && showValid && form.$valid && form.$dirty" class="glyphicon glyphicon-ok form-control-feedback feedback-valid" aria-hidden="true"></span>-->
@@ -62,7 +27,9 @@
             <div ng-if="forma.$error && forma.$dirty">
                 <div class="error-message" ng-if="forma.$dirty && forma.$error.email" translate translate-context="Nice">Email is not valid.</div>
                 <div class="error-message" ng-if="forma.$dirty && forma.$error.pattern" translate translate-context="Nice">This field requires a specific pattern.</div>
-                <div class="error-message" ng-if="forma.$error.minlength"><translate translate-context="Nice">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context="Nice">characters</translate>.</div>
+                <div class="error-message" ng-if="forma.$error.minlength">
+                    <translate translate-context="Nice">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context="Nice">characters</translate>.
+                </div>
                 <div class="error-message" ng-if="forma.$error.maxlength" translate translate-context="Nice">Your input is too long</div>
                 <div class="error-message" ng-if="forma.$error.required" ng-if="forma.$dirty" translate translate-context="Nice">This field is required.</div>
                 <div class="error-message" ng-if="forma.$error.unique" translate translate-context="Nice">This field must be unique.</div>

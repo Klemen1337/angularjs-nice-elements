@@ -6,19 +6,31 @@
       padding: 0;
       min-width: 30px;
       border-left: 0 none;
+      border-right: 0 none;
     }
   }
 
   .input-group-btn {
-    z-index: 1;
-
     .btn {
-      background: $nice-addon-bg;
+      background: $nice-input-bg;
       height: 34px;
+      width: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 0;
       border: 1px solid $nice-border-color;
 
       &:focus {
         outline: 0;
+      }
+
+      &.btn-left {
+        border-right: 0 none;
+      }
+
+      &.btn-right {
+        border-left: 0 none;
       }
     }
   }

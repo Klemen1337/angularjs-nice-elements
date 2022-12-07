@@ -55,7 +55,7 @@ angular.module('niceElements')
         attrs.required = attrs.required === 'true';
         //attrs.required = angular.isDefined(attrs.required);
 
-        if(!scope.textArea) {
+        if (!scope.textArea) {
           scope.elementType = "input";
         } else {
           scope.elementType = "textarea";
@@ -63,9 +63,7 @@ angular.module('niceElements')
 
         if (scope.isFocused) {
           var input = element[0].getElementsByTagName(scope.elementType)[0];
-          if (input) {
-            input.focus();
-          }
+          if (input) input.focus();
         }
 
         // Set internal type
@@ -94,8 +92,9 @@ angular.module('niceElements')
 
         if (angular.isDefined(attrs.minDecimalsCutZeros) && attrs.type == 'number') {
           scope.model = Number(scope.model);
-          if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros))
-            scope.model = (Number(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros));
+          if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros)) {
+            scope.model = Number((Number(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros)));
+          }
         }
 
         if (angular.isDefined(scope.regex) && scope.regex != '') {
@@ -114,39 +113,40 @@ angular.module('niceElements')
               if (scope.onChange) scope.onChange({ model: scope.model });
             }
           } else {
+            scope.model = scope.internalModel;
             if (scope.onChange) scope.onChange({ model: scope.model });
           }
         });
-        },
+      },
 
-        controller: function ($scope) {
-          $scope.id = Math.random().toString(36).substring(7);
+      controller: function ($scope) {
+        $scope.id = Math.random().toString(36).substring(7);
 
-          $scope.keypress = function (event) {
-            if ($scope.type == "number" || $scope.type == "integer") {
-              if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
-                if ($scope.type == "number") {
-                  if (String($scope.model).indexOf(".") >= 0) {
-                    event.preventDefault();
-                    return false;
-                  }
-                } else {
+        $scope.keypress = function (event) {
+          if ($scope.type == "number" || $scope.type == "integer") {
+            if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
+              if ($scope.type == "number") {
+                if (String($scope.model).indexOf(".") >= 0) {
                   event.preventDefault();
                   return false;
                 }
-              } else if (event.charCode == 45) {
-                if (String($scope.model).indexOf("-") >= 0) {
-                  event.preventDefault();
-                  return false;
-                }
-              } else if ((event.charCode >= 48 && event.charCode <= 58) || event.charCode == 0) { // Allow only numbers
-                return true;
-              } else { // Prevent everything else
+              } else {
                 event.preventDefault();
                 return false;
               }
+            } else if (event.charCode == 45) {
+              if (String($scope.model).indexOf("-") >= 0) {
+                event.preventDefault();
+                return false;
+              }
+            } else if ((event.charCode >= 48 && event.charCode <= 58) || event.charCode == 0) { // Allow only numbers
+              return true;
+            } else { // Prevent everything else
+              event.preventDefault();
+              return false;
             }
-          };
-        }
+          }
+        };
+      }
     };
   });

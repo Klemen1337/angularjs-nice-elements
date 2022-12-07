@@ -844,8 +844,8 @@ angular.module('niceElements')
       controller: function ($scope) {
         $scope.formatDate = "DD.MM.YYYY";
         $scope.formatTime = "HH:mm";
-        $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-        $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
+        if ($scope.date === undefined) $scope.date = true;
+        if ($scope.time === undefined) $scope.time = true;
         $scope.model = moment($scope.model) || moment().set({ 'second': 0, 'millisecond': 0 });
 
         $scope.dateChanged = function (date) {
@@ -996,7 +996,7 @@ angular.module('niceElements')
  */
 angular.module('niceElements')
 
-  .directive('niceDate', function() {
+  .directive('niceDate', function () {
     return {
       restrict: 'E',
       replace: true,
@@ -1008,7 +1008,8 @@ angular.module('niceElements')
         fieldWidth: '@', // default: 'col-sm-8', bootstrap classes that defines width of field
         labelWidth: '@', // default: 'col-sm-4', bootstrap classes that defines width of label
         model: '=',
-        time: '@',
+        time: '=?',
+        date: '=?',
         help: '@',
         inline: '@',
         maxDate: '=',
@@ -1018,14 +1019,17 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope, $element, $timeout, gettextCatalog) {
+      controller: function ($scope, $element, $timeout, gettextCatalog) {
         $scope.isOpen = false;
+        if ($scope.date == undefined) $scope.date = true;
+        if ($scope.time == undefined) $scope.time = false;
         $scope.hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
         $scope.minutes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
         $scope.translations = {
           nextMonth: gettextCatalog.getString("Next month", null, "Nice"),
           prevMonth: gettextCatalog.getString("Previous month", null, "Nice"),
         };
+        if (!$scope.model) $scope.model = moment();
         $scope.innerDate = {
           month: 0,
           year: 0,
@@ -1038,18 +1042,18 @@ angular.module('niceElements')
 
         // $scope.weekdays = moment.weekdaysShort(false);
         $scope.weekdays = [
-          gettextCatalog.getString("Mon", null, "Nice"), 
-          gettextCatalog.getString("Tue", null, "Nice"), 
-          gettextCatalog.getString("Wed", null, "Nice"), 
-          gettextCatalog.getString("Thu", null, "Nice"), 
-          gettextCatalog.getString("Fri", null, "Nice"), 
-          gettextCatalog.getString("Sat", null, "Nice"), 
+          gettextCatalog.getString("Mon", null, "Nice"),
+          gettextCatalog.getString("Tue", null, "Nice"),
+          gettextCatalog.getString("Wed", null, "Nice"),
+          gettextCatalog.getString("Thu", null, "Nice"),
+          gettextCatalog.getString("Fri", null, "Nice"),
+          gettextCatalog.getString("Sat", null, "Nice"),
           gettextCatalog.getString("Sun", null, "Nice")
         ];
 
         $scope.years = [];
-        var year = moment().year()-100;
-        for(var i=0; i<200; i++) {
+        var year = moment().year() - 100;
+        for (var i = 0; i < 200; i++) {
           $scope.years.push(year + i);
         }
 
@@ -1068,20 +1072,13 @@ angular.module('niceElements')
           { value: 11, name: gettextCatalog.getString("December", null, "Nice") }
         ]
 
-
-        if(!$scope.model) $scope.model = moment();
-
-        if(!$scope.time) $scope.time = false;
-        else $scope.time = $scope.time == "true";
-
-
         if ($scope.maxDate) $scope.maxDate = moment($scope.maxDate);
         if ($scope.minDate) $scope.minDate = moment($scope.minDate);
 
-        
+
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
-        $scope.setupPopper = function() {
+        $scope.setupPopper = function () {
           var button = $element[0].getElementsByClassName('nice-date-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-date-dropdown-wrapper')[0];
           $scope.popper = Popper.createPopper(button, tooltip, {
@@ -1104,13 +1101,13 @@ angular.module('niceElements')
 
 
         // ------------------ Time changes ------------------
-        $scope.timeChange = function() {
+        $scope.timeChange = function () {
           var selectedDate = angular.copy($scope.model);
           selectedDate = $scope._removeTime(selectedDate);
           selectedDate.hours($scope.innerDate.hour);
           selectedDate.minutes($scope.innerDate.minute);
           $scope.innerDate.value = $scope.formatDate(selectedDate);
-          
+
           $scope.model = selectedDate;
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.forma.$setDirty();
@@ -1118,8 +1115,8 @@ angular.module('niceElements')
 
 
         // ------------------ Day was selected ------------------
-        $scope.select = function(day) {
-          if(!day.isDisabled){
+        $scope.select = function (day) {
+          if (!day.isDisabled) {
             var selectedDate = angular.copy(day.date);
             selectedDate.hours($scope.innerDate.hour);
             selectedDate.minutes($scope.innerDate.minute);
@@ -1140,7 +1137,7 @@ angular.module('niceElements')
 
 
         // ------------------ Set inner date ------------------
-        $scope.setInnerDate = function(date) {
+        $scope.setInnerDate = function (date) {
           $scope.innerDate.year = date.year();
           $scope.innerDate.month = date.month();
           $scope.innerDate.date = date;
@@ -1148,14 +1145,14 @@ angular.module('niceElements')
 
 
         // ------------------ Today ------------------
-        $scope.today = function() {
+        $scope.today = function () {
           $scope.setInnerDate(moment());
           $scope._buildMonth();
         };
 
 
         // ------------------ Go to next month ------------------
-        $scope.next = function() {
+        $scope.next = function () {
           $scope.innerDate.date.add(1, "month");
           $scope.setInnerDate($scope.innerDate.date);
           $scope._buildMonth();
@@ -1163,7 +1160,7 @@ angular.module('niceElements')
 
 
         // ------------------ Go to previous month ------------------
-        $scope.previous = function() {
+        $scope.previous = function () {
           $scope.innerDate.date.subtract(1, "month");
           $scope.setInnerDate($scope.innerDate.date);
           $scope._buildMonth();
@@ -1171,7 +1168,7 @@ angular.module('niceElements')
 
 
         // ------------------ Check if dates are equal without time ------------------
-        $scope.isSameDay = function(date1, date2){
+        $scope.isSameDay = function (date1, date2) {
           date1 = moment(date1);
           date2 = moment(date2);
           return (
@@ -1182,7 +1179,7 @@ angular.module('niceElements')
         };
 
         // ------------------ Check month ------------------
-        $scope.isSameMonth = function(date1, date2){
+        $scope.isSameMonth = function (date1, date2) {
           date1 = moment(date1);
           date2 = moment(date2);
           return (
@@ -1192,12 +1189,12 @@ angular.module('niceElements')
         };
 
 
-        $scope.isBetween = function(date1, date2, date3){
-          if(!$scope.nextDate){
+        $scope.isBetween = function (date1, date2, date3) {
+          if (!$scope.nextDate) {
             return false;
-          } else if($scope.isSameDay(date1, date2) || $scope.isSameDay(date1, date3)){
+          } else if ($scope.isSameDay(date1, date2) || $scope.isSameDay(date1, date3)) {
             return true;
-          } else if(date2.isBefore(date3)){
+          } else if (date2.isBefore(date3)) {
             return $scope._removeTime(date1).isBetween(date2, date3);
           } else {
             return $scope._removeTime(date1).isBetween(date3, date2);
@@ -1206,24 +1203,25 @@ angular.module('niceElements')
 
 
         // ------------------ Format date ------------------
-        $scope.formatDate = function(date) {
-          if($scope.time) return date.format('D.M.YYYY • H:mm');
+        $scope.formatDate = function (date) {
+          if ($scope.time) return date.format('D.M.YYYY • H:mm');
           else return date.format('D.M.YYYY');
         };
 
 
         // ------------------ Remove time from date ------------------
-        $scope._removeTime = function(date) {
+        $scope._removeTime = function (date) {
+          if (!date) return date;
           return date.hour(0).minute(0).second(0).millisecond(0);
         };
 
-        $scope._removeTimeWithDate = function(date) {
+        $scope._removeTimeWithDate = function (date) {
           return date.date(0).hour(0).minute(0).second(0).millisecond(0);
         };
 
 
         // ------------------ Build month ------------------
-        $scope._buildMonth = function() {
+        $scope._buildMonth = function () {
           var done = false;
           var date = angular.copy($scope.innerDate.date).date(0).startOf('week').isoWeekday(1);
           var monthIndex = date.month();
@@ -1242,7 +1240,7 @@ angular.module('niceElements')
 
 
         // ------------------ Build week ------------------
-        $scope._buildWeek = function(date) {
+        $scope._buildWeek = function (date) {
           var days = [];
           for (var i = 0; i < 7; i++) {
             var day = {
@@ -1255,9 +1253,9 @@ angular.module('niceElements')
               date: date
             };
 
-            if($scope.minDate) day.isDisabled = date.isBefore($scope.minDate);
-            if($scope.maxDate) day.isDisabled = date.isAfter($scope.maxDate);
-            if($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween($scope.minDate, $scope.maxDate);
+            if ($scope.minDate) day.isDisabled = date.isBefore($scope.minDate);
+            if ($scope.maxDate) day.isDisabled = date.isAfter($scope.maxDate);
+            if ($scope.minDate && $scope.maxDate) day.isDisabled = !date.isBetween($scope.minDate, $scope.maxDate);
 
             days.push(day);
             date = date.clone();
@@ -1269,13 +1267,13 @@ angular.module('niceElements')
 
 
         // ------------------ Watch for model change ------------------
-        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function(value) {
+        $scope.$watchGroup(["model", 'minDate', 'maxDate', 'nextDate'], function (value) {
           $scope.boostrap();
         });
-        
+
 
         // ------------------ Get time ------------------
-        $scope.getTime = function() {
+        $scope.getTime = function () {
           if ($scope.time) {
             $scope.innerDate.hour = moment($scope.model).hours();
             $scope.innerDate.minute = moment($scope.model).minutes();
@@ -1289,14 +1287,14 @@ angular.module('niceElements')
 
 
         // ------------------ Bootstrap ------------------
-        $scope.boostrap = function() {
+        $scope.boostrap = function () {
           $scope.setInnerDate(moment($scope.model));
           $scope.getTime();
-          
-          if(!$scope.time) {
+
+          if (!$scope.time) {
             $scope.model = $scope._removeTime($scope.model);
           }
-          
+
           $scope.innerDate.value = $scope.formatDate(moment($scope.model));
           $scope._buildMonth();
         };
@@ -1305,10 +1303,10 @@ angular.module('niceElements')
 
 
         // ------------------ Toggle open ------------------
-        $scope.toggleOpen = function() {
+        $scope.toggleOpen = function () {
           if (!$scope.isDisabled) {
             $scope.isOpen = !$scope.isOpen;
-            $timeout(function() {
+            $timeout(function () {
               if ($scope.popper) $scope.popper.update();
             })
           }
@@ -1413,14 +1411,14 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
  * # niceDatetimerangePicker2
  */
 angular.module('niceElements')
-  .directive('niceDatetimerangePicker2', function() {
+  .directive('niceDatetimerangePicker2', function () {
     return {
       scope: {
         startDate: '=', // binding model
         endDate: '=', // binding model
         formatString: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
-        time: '@', // default: false, is time picker enabled?
+        time: '=', // default: false, is time picker enabled?
         minDate: '@', // default: undefined
         maxDate: '@', // default: undefined
         title: '@', // default: ''
@@ -1442,25 +1440,24 @@ angular.module('niceElements')
 
 
         // Set defaults
-        if(!$scope.time) $scope.time = false;
-        else $scope.time = $scope.time == "true";
+        if ($scope.time == undefined) $scope.time = false;
 
 
         // Set format string
-        if(!$scope.formatString) {
-          if($scope.time) $scope.formatString = 'D.M.YYYY • H:mm';
+        if (!$scope.formatString) {
+          if ($scope.time) $scope.formatString = 'D.M.YYYY • H:mm';
           else $scope.formatString = 'D.M.YYYY';
         }
 
         // Set start date
-        if(!$scope.startDate) {
+        if (!$scope.startDate) {
           $scope.startDate = moment();
         } else {
           $scope.model.innerStartDate = angular.copy($scope.startDate);
         }
 
         // Set end date
-        if(!$scope.endDate) {
+        if (!$scope.endDate) {
           $scope.endDate = moment();
         } else {
           $scope.model.innerEndDate = angular.copy($scope.endDate);
@@ -1469,7 +1466,7 @@ angular.module('niceElements')
 
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
-        $scope.setupPopper = function() {
+        $scope.setupPopper = function () {
           var button = $element[0].getElementsByClassName('nice-daterange-picker-button')[0];
           var tooltip = $element[0].getElementsByClassName('nice-daterange-picker-wrapper')[0];
           $scope.popper = Popper.createPopper(button, tooltip, {
@@ -1485,18 +1482,18 @@ angular.module('niceElements')
             ],
           });
         };
-        
+
         $timeout(function () {
           $scope.setupPopper();
         });
 
 
-        $scope.format = function(){
+        $scope.format = function () {
           $scope.modelFormat = $scope.startDate.format($scope.formatString) + " - " + $scope.endDate.format($scope.formatString);
         };
 
 
-        $scope.open = function() {
+        $scope.open = function () {
           if (!$scope.isDisabled) {
             $scope.isOpen = true;
             $scope.popper.update();
@@ -1504,14 +1501,14 @@ angular.module('niceElements')
         };
 
 
-        $scope.close = function() {
+        $scope.close = function () {
           $scope.model.innerStartDate = angular.copy($scope.startDate);
           $scope.model.innerEndDate = angular.copy($scope.endDate);
           $scope.isOpen = false;
         };
 
 
-        $scope.confirm = function() {
+        $scope.confirm = function () {
           $scope.startDate = angular.copy($scope.model.innerStartDate);
           $scope.endDate = angular.copy($scope.model.innerEndDate);
           if ($scope.onChange) $scope.onChange({ startDate: $scope.startDate, endDate: $scope.endDate });
@@ -1519,58 +1516,58 @@ angular.module('niceElements')
         };
 
 
-        $scope.selectToday = function(){
+        $scope.selectToday = function () {
           $scope.model.innerStartDate = moment().startOf('day');
           $scope.model.innerEndDate = moment().endOf('day');
         };
 
 
-        $scope.selectLastNDays = function(days){
+        $scope.selectLastNDays = function (days) {
           $scope.model.innerStartDate = moment().subtract(days, 'days').startOf('day');
           $scope.model.innerEndDate = moment().endOf('day');
         };
 
 
-        $scope.selectLastMonth = function(){
+        $scope.selectLastMonth = function () {
           $scope.model.innerStartDate = moment().subtract(1, 'months').startOf('month').startOf('date');
           $scope.model.innerEndDate = moment().subtract(1, 'months').endOf('month').endOf('date');
         };
 
 
-        $scope.selectThisMonth = function(){
+        $scope.selectThisMonth = function () {
           $scope.model.innerStartDate = moment().startOf('month').startOf('date');
           $scope.model.innerEndDate = moment().endOf('month').endOf('date');
         };
 
 
         // ------------------ Remove time from date ------------------
-        $scope._removeTime = function(date) {
+        $scope._removeTime = function (date) {
           return date.hour(0).minute(0).second(0).millisecond(0);
         };
 
 
-        $scope.dateChanged = function() {
-          $timeout(function() {
+        $scope.dateChanged = function () {
+          $timeout(function () {
             if ($scope.model.innerStartDate && $scope.model.innerEndDate) {
               // Check if start date is after end date
               if ($scope.model.innerStartDate.isAfter($scope.model.innerEndDate)) {
                 var temp = angular.copy($scope.model.innerStartDate);
-                $scope.model.innerStartDate = angular.copy($scope.model.innerEndDate); 
-                $scope.model.innerEndDate = temp; 
+                $scope.model.innerStartDate = angular.copy($scope.model.innerEndDate);
+                $scope.model.innerEndDate = temp;
               }
 
               // Check if end date is before start date
               if ($scope.model.innerEndDate.isBefore($scope.model.innerStartDate)) {
                 var temp = angular.copy($scope.model.innerStartDate);
-                $scope.model.innerStartDate = angular.copy($scope.model.innerEndDate); 
-                $scope.model.innerEndDate = temp; 
+                $scope.model.innerStartDate = angular.copy($scope.model.innerEndDate);
+                $scope.model.innerEndDate = temp;
               }
             }
           });
         }
 
 
-        $scope.$watchGroup(["startDate", "endDate"], function() {
+        $scope.$watchGroup(["startDate", "endDate"], function () {
           $scope.model.innerStartDate = angular.copy($scope.startDate);
           $scope.model.innerEndDate = angular.copy($scope.endDate);
           $scope.format();
@@ -3628,7 +3625,7 @@ angular.module('niceElements')
         attrs.required = attrs.required === 'true';
         //attrs.required = angular.isDefined(attrs.required);
 
-        if(!scope.textArea) {
+        if (!scope.textArea) {
           scope.elementType = "input";
         } else {
           scope.elementType = "textarea";
@@ -3636,9 +3633,7 @@ angular.module('niceElements')
 
         if (scope.isFocused) {
           var input = element[0].getElementsByTagName(scope.elementType)[0];
-          if (input) {
-            input.focus();
-          }
+          if (input) input.focus();
         }
 
         // Set internal type
@@ -3667,8 +3662,9 @@ angular.module('niceElements')
 
         if (angular.isDefined(attrs.minDecimalsCutZeros) && attrs.type == 'number') {
           scope.model = Number(scope.model);
-          if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros))
-            scope.model = (Number(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros));
+          if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros)) {
+            scope.model = Number((Number(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros)));
+          }
         }
 
         if (angular.isDefined(scope.regex) && scope.regex != '') {
@@ -3687,40 +3683,41 @@ angular.module('niceElements')
               if (scope.onChange) scope.onChange({ model: scope.model });
             }
           } else {
+            scope.model = scope.internalModel;
             if (scope.onChange) scope.onChange({ model: scope.model });
           }
         });
-        },
+      },
 
-        controller: function ($scope) {
-          $scope.id = Math.random().toString(36).substring(7);
+      controller: function ($scope) {
+        $scope.id = Math.random().toString(36).substring(7);
 
-          $scope.keypress = function (event) {
-            if ($scope.type == "number" || $scope.type == "integer") {
-              if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
-                if ($scope.type == "number") {
-                  if (String($scope.model).indexOf(".") >= 0) {
-                    event.preventDefault();
-                    return false;
-                  }
-                } else {
+        $scope.keypress = function (event) {
+          if ($scope.type == "number" || $scope.type == "integer") {
+            if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
+              if ($scope.type == "number") {
+                if (String($scope.model).indexOf(".") >= 0) {
                   event.preventDefault();
                   return false;
                 }
-              } else if (event.charCode == 45) {
-                if (String($scope.model).indexOf("-") >= 0) {
-                  event.preventDefault();
-                  return false;
-                }
-              } else if ((event.charCode >= 48 && event.charCode <= 58) || event.charCode == 0) { // Allow only numbers
-                return true;
-              } else { // Prevent everything else
+              } else {
                 event.preventDefault();
                 return false;
               }
+            } else if (event.charCode == 45) {
+              if (String($scope.model).indexOf("-") >= 0) {
+                event.preventDefault();
+                return false;
+              }
+            } else if ((event.charCode >= 48 && event.charCode <= 58) || event.charCode == 0) { // Allow only numbers
+              return true;
+            } else { // Prevent everything else
+              event.preventDefault();
+              return false;
             }
-          };
-        }
+          }
+        };
+      }
     };
   });
 
@@ -5484,8 +5481,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"startDateMinute\" ng-change=\"startMinuteChange(startDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
     "</select>\n" +
     "</div>\n" +
-    "<div class=\"time-picket-icon\">\n" +
-    "<i class=\"fa fa-clock-o\"></i>\n" +
+    "<div class=\"time-picker-icon\">\n" +
+    "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
     "</div>\n" +
     "<div class=\"time-picker\">\n" +
     "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"endDateHour\" ng-change=\"endHourChange(endDateHour)\" ng-options=\"hour for hour in hours\">\n" +
@@ -5516,9 +5513,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
   $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
     "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'checked': model, 'margin-bottom-0' : noMargin }\" ng-click=\"toggle()\">\n" +
     "<button class=\"btn checkbox\">\n" +
-    "<svg class=\"check\" viewBox=\"-281 373 48 48\">\n" +
-    "<path class=\"check-stroke\" d=\"M-273.2,398.2l10,9.9 l22.4-22.3\"></path>\n" +
-    "</svg>\n" +
+    "<nice-icon class=\"check\" icon=\"icon-check\"></nice-icon>\n" +
     "</button>\n" +
     "<div ng-if=\"title\" class=\"message\">{{ title }}</div>\n" +
     "</div>"
@@ -5535,7 +5530,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
-    "<button class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\"><i class=\"fa fa-check\"></i></button>\n" +
+    "<button class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\">\n" +
+    "<nice-icon icon=\"icon-check\"></nice-icon>\n" +
+    "</button>\n" +
     "<div ng-transclude class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
     "</li>\n" +
     "</ul>\n" +
@@ -5568,7 +5565,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
-    "<div class=\"input-group nice-date-input\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
+    "<div class=\"input-group nice-date-input\" ng-if=\"date\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
     "<input type=\"text\" class=\"form-control\" ng-model=\"modelDate\" ng-blur=\"dateBlur()\" ng-disabled=\"isDisabled\">\n" +
     "<nice-popup placement=\"bottom\">\n" +
     "<nice-popup-target>\n" +
@@ -5581,7 +5578,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</nice-popup-content>\n" +
     "</nice-popup>\n" +
     "</div>\n" +
-    "<div class=\"input-group nice-time-input\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
+    "<div class=\"input-group nice-time-input\" ng-if=\"time\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
     "<input type=\"text\" class=\"form-control\" ng-model=\"modelTime\" ng-blur=\"timeBlur()\" ng-disabled=\"isDisabled\">\n" +
     "<nice-popup placement=\"bottom\">\n" +
     "<nice-popup-target>\n" +
@@ -5590,9 +5587,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</button>\n" +
     "</nice-popup-target>\n" +
     "<nice-popup-content>\n" +
-    "<div class=\"dates\">\n" +
-    "<div class=\"date\"></div>\n" +
-    "</div>\n" +
+    "<nice-date is-inline=\"true\" inline=\"true\" time=\"true\" date=\"false\" on-change=\"timeChanged(model)\" model=\"model\"></nice-date>\n" +
     "</nice-popup-content>\n" +
     "</nice-popup>\n" +
     "</div>\n" +
@@ -5612,7 +5607,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"input-group\">\n" +
     "<input date-range-picker class=\"form-control date-picker\" type=\"text\" options=\"opts\" ng-model=\"model\">\n" +
-    "<span date-range-picker options=\"opts\" ng-model=\"model\" class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\n" +
+    "<span date-range-picker options=\"opts\" ng-model=\"model\" class=\"input-group-addon\">\n" +
+    "<nice-icon icon=\"icon-calendar\"></nice-icon>\n" +
+    "</span>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5633,12 +5630,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-date-button input-group\" ng-class=\"{ 'open': isOpen }\" ng-show=\"!inline\" ng-click=\"toggleOpen()\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{ model | niceDate:time }}\" readonly=\"readonly\">\n" +
     "<span class=\"input-group-addon clickable\">\n" +
-    "<i class=\"fa fa-calendar\"></i>\n" +
+    "<nice-icon icon=\"icon-calendar\"></nice-icon>\n" +
     "</span>\n" +
     "</div>\n" +
     "<div ng-class=\"{ 'nice-date-dropdown-wrapper': !inline }\">\n" +
-    "<div ng-class=\"{ 'nice-date-dropdown': !inline }\" ng-if=\"inline || isOpen\">\n" +
-    "<div class=\"nice-date-date\" ng-class=\"{ 'with-time': time }\" role=\"grid\">\n" +
+    "<div ng-class=\"{ 'nice-date-dropdown': !inline, 'with-time': time, 'no-date': !date }\" ng-if=\"inline || isOpen\">\n" +
+    "<div class=\"nice-date-date\" ng-if=\"date\" role=\"grid\">\n" +
     "<div class=\"nice-date-header\">\n" +
     "<span>\n" +
     "<select class=\"year-picker\" ng-model=\"innerDate.year\" ng-change=\"handleDateChange()\" ng-options=\"year for year in years\">\n" +
@@ -5667,7 +5664,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "<div class=\"nice-date-time\" ng-if=\"time\">\n" +
-    "<i class=\"fa fa-clock-o\"></i>\n" +
+    "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
     "<div class=\"time-picker time-picker-hour\">\n" +
     "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.hour\" ng-change=\"timeChange()\" ng-options=\"hour as hour for hour in hours track by hour\">\n" +
     "</select>\n" +
@@ -5699,7 +5696,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"input-group\" id=\"dropdown{{randNum}}\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{ value }}\" ng-click=\"openDtp()\" ng-disabled=\"isDisabled\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"openDtp()\">\n" +
-    "<i class=\"fa\" ng-class=\"date == 'true' ? 'fa-calendar' : 'fa-clock-o'\"></i>\n" +
+    "<nice-icon ng-if=\"date == 'true'\" icon=\"icon-calendar\"></nice-icon>\n" +
+    "<nice-icon ng-if=\"date != 'true'\" icon=\"icon-clock\"></nice-icon>\n" +
     "</span>\n" +
     "</div>\n" +
     "<div ng-show=\"isOpen\">\n" +
@@ -5707,7 +5705,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "</div>\n"
+    "</div>"
   );
 
 
@@ -5722,7 +5720,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"nice-daterange-picker-button input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" readonly=\"readonly\">\n" +
-    "<span class=\"input-group-addon clickable\"><i class=\"fa fa-calendar\"></i></span>\n" +
+    "<span class=\"input-group-addon clickable\">\n" +
+    "<nice-icon icon=\"icon-calendar\"></nice-icon>\n" +
+    "</span>\n" +
     "</div>\n" +
     "<div class=\"nice-daterange-picker-wrapper\">\n" +
     "<div class=\"dtp-wrapper\" ng-if=\"isOpen\">\n" +
@@ -5739,10 +5739,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "<div class=\"dtp-left\">\n" +
-    "<nice-date model=\"model.innerStartDate\" next-date=\"model.innerEndDate\" is-inline=\"true\" no-margin=\"true\" inline=\"true\" time=\"{{ time }}\" on-change=\"dateChanged(model)\"></nice-date>\n" +
+    "<nice-date model=\"model.innerStartDate\" next-date=\"model.innerEndDate\" is-inline=\"true\" no-margin=\"true\" inline=\"true\" time=\"time\" on-change=\"dateChanged(model)\"></nice-date>\n" +
     "</div>\n" +
     "<div class=\"dtp-right\">\n" +
-    "<nice-date model=\"model.innerEndDate\" next-date=\"model.innerStartDate\" is-inline=\"true\" no-margin=\"true\" inline=\"true\" time=\"{{ time }}\" on-change=\"dateChanged(model)\"></nice-date>\n" +
+    "<nice-date model=\"model.innerEndDate\" next-date=\"model.innerStartDate\" is-inline=\"true\" no-margin=\"true\" inline=\"true\" time=\"time\" on-change=\"dateChanged(model)\"></nice-date>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5766,7 +5766,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtpRange()\">\n" +
     "<div class=\"input-group\">\n" +
     "<input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtpRange()\">\n" +
-    "<span class=\"input-group-addon clickable\"><i class=\"fa\" ng-class=\"{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}\"></i></span>\n" +
+    "<span class=\"input-group-addon clickable\">\n" +
+    "<nice-icon ng-if=\"date != 'false'\" icon=\"icon-calendar\"></nice-icon>\n" +
+    "<nice-icon ng-if=\"date == 'false'\" icon=\"icon-clock\"></nice-icon>\n" +
+    "</span>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5910,7 +5913,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "<button class=\"btn btn-primary add-btn\" type=\"button\" ng-if=\"addButtonFunction && !isDisabled\" ng-click=\"addButtonFunction()\">+</button>\n" +
+    "<button class=\"btn btn-primary btn-icon add-btn\" type=\"button\" ng-if=\"addButtonFunction && !isDisabled\" ng-click=\"addButtonFunction()\">\n" +
+    "<nice-icon icon=\"icon-plus\"></nice-icon>\n" +
+    "</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -6004,13 +6009,13 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "</div>\n"
+    "</div>"
   );
 
 
   $templateCache.put('src/components/nice-help/nice-help.html',
     "<div class=\"nice-help\" ng-mouseover=\"onHover()\">\n" +
-    "<i class=\"fa fa-question-circle nice-help-button\" aria-label=\"\"></i>\n" +
+    "<nice-icon icon=\"icon-help-circle\" class=\"nice-help-button\"></nice-icon>\n" +
     "<div class=\"nice-help-popup\">\n" +
     "<span ng-bind-html=\"text\">{{ text }}</span>\n" +
     "<div data-popper-arrow class=\"nice-help-arrow\"></div>\n" +
@@ -6048,14 +6053,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div ng-if=\"forma.$error && forma.$dirty\">\n" +
     "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate translate-context=\"Nice\">Email is not valid.</div>\n" +
     "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\" translate translate-context=\"Nice\">This field requires a specific pattern.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.minlength\"><translate translate-context=\"Nice\">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context=\"Nice\">characters</translate>.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$error.minlength\">\n" +
+    "<translate translate-context=\"Nice\">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context=\"Nice\">characters</translate>.\n" +
+    "</div>\n" +
     "<div class=\"error-message\" ng-if=\"forma.$error.maxlength\" translate translate-context=\"Nice\">Your input is too long</div>\n" +
     "<div class=\"error-message\" ng-if=\"forma.$error.required\" ng-if=\"forma.$dirty\" translate translate-context=\"Nice\">This field is required.</div>\n" +
     "<div class=\"error-message\" ng-if=\"forma.$error.unique\" translate translate-context=\"Nice\">This field must be unique.</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "</ng-form>\n"
+    "</ng-form>"
   );
 
 
@@ -6103,11 +6110,15 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"input-group\" ng-class=\"{'has-warning': !disabled && niceNumberForm.$invalid && niceNumberForm.$dirty}\">\n" +
     "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\" tabindex=\"-1\">-</button>\n" +
+    "<button class=\"btn btn-default btn-left\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\" tabindex=\"-1\">\n" +
+    "<nice-icon icon=\"icon-minus\"></nice-icon>\n" +
+    "</button>\n" +
     "</span>\n" +
     "<input type=\"number\" step=\"{{ step }}\" ng-change=\"inputChanged()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\">\n" +
     "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-default\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\" tabindex=\"-1\">+</button>\n" +
+    "<button class=\"btn btn-default btn-right\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\" tabindex=\"-1\">\n" +
+    "<nice-icon icon=\"icon-plus\"></nice-icon>\n" +
+    "</button>\n" +
     "</span>\n" +
     "</div>\n" +
     "<div class=\"error-messages\" ng-if=\"niceNumberForm.$error && !hideError\" ng-class=\"{ 'floating-error': floatingError }\">\n" +
@@ -6197,9 +6208,13 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"input-group\">\n" +
-    "<button class=\"btn btn-default btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">-</button>\n" +
+    "<button class=\"btn btn-default btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">\n" +
+    "<nice-icon icon=\"icon-minus\"></nice-icon>\n" +
+    "</button>\n" +
     "<input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" ng-disabled=\"isDisabled\">\n" +
-    "<button class=\"btn btn-default btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">+</button>\n" +
+    "<button class=\"btn btn-default btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">\n" +
+    "<nice-icon icon=\"icon-plus\"></nice-icon>\n" +
+    "</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -6222,11 +6237,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                \">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"modelString\" ng-keypress=\"keypress($event)\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-required=\"required\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"search()\" ng-if=\"!model\">\n" +
-    "<i ng-show=\"!loading\" class=\"fa fa-search\"></i>\n" +
-    "<i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\n" +
+    "<nice-icon ng-show=\"!loading\" icon=\"icon-search\"></nice-icon>\n" +
+    "<nice-icon ng-show=\"loading\" icon=\"icon-loader\" class=\"d-block nice-animation-spin\"></nice-icon>\n" +
     "</span>\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"remove()\" ng-if=\"model\">\n" +
-    "<i ng-show=\"!loading\" class=\"fa fa-remove\"></i>\n" +
+    "<nice-icon ng-show=\"!loading\" icon=\"icon-x\"></nice-icon>\n" +
     "</span>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -6259,8 +6274,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-search-button input-group\" ng-class=\"{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}\">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"model\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-focus=\"onFocus()\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"onFocus()\">\n" +
-    "<i ng-show=\"!loading\" class=\"fa fa-search\"></i>\n" +
-    "<i ng-show=\"loading\" class=\"fa fa-refresh fa-spin\"></i>\n" +
+    "<nice-icon ng-show=\"!loading\" icon=\"icon-search\"></nice-icon>\n" +
+    "<nice-icon ng-show=\"loading\" icon=\"icon-loader\" class=\"d-block nice-animation-spin\"></nice-icon>\n" +
     "</span>\n" +
     "</div>\n" +
     "<div class=\"nice-search-dropdown-wrapper\">\n" +
@@ -7180,28 +7195,28 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    'disabled': isDisabled\n" +
     "                }\">\n" +
     "<input type=\"text\" class=\"form-control\" ng-model=\"modelString\" ng-keyup=\"$event.keyCode == 13 && validateDate()\" ng-blur=\"validateDate()\">\n" +
-    "<span class=\"input-group-addon clickable\" ng-click=\"open = !open\"><i class=\"fa fa-clock-o\"></i></span>\n" +
+    "<span class=\"input-group-addon clickable\" ng-click=\"open = !open\">\n" +
+    "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
+    "</span>\n" +
     "</div>\n" +
     "<div class=\"nice-time-picker-dropdown\" ng-if=\"open\">\n" +
-    "<div class=\"row\">\n" +
-    "<div class=\"col-xs-6\">\n" +
-    "<button ng-click=\"changeHour(true)\"><i class=\"fa fa-chevron-up\"></i></button>\n" +
+    "<div>\n" +
+    "<button class=\"btn btn-sm btn-block btn-default\" ng-click=\"changeHour(true)\">\n" +
+    "<nice-icon icon=\"icon-chevron-up\"></nice-icon>\n" +
+    "</button>\n" +
+    "<div class=\"numbers\">{{ hours }}</div>\n" +
+    "<button class=\"btn btn-sm btn-block btn-default\" ng-click=\"changeHour(false)\">\n" +
+    "<nice-icon icon=\"icon-chevron-down\"></nice-icon>\n" +
+    "</button>\n" +
     "</div>\n" +
-    "<div class=\"col-xs-6\">\n" +
-    "<button ng-click=\"changeMinutes(true)\"><i class=\"fa fa-chevron-up\"></i></button>\n" +
-    "</div>\n" +
-    "</div>\n" +
-    "<div class=\"row numbers\">\n" +
-    "<div class=\"col-xs-6\">{{ hours }}</div>\n" +
-    "<div class=\"col-xs-6\">{{ minutes }}</div>\n" +
-    "</div>\n" +
-    "<div class=\"row\">\n" +
-    "<div class=\"col-xs-6\">\n" +
-    "<button ng-click=\"changeHour(false)\"><i class=\"fa fa-chevron-down\"></i></button>\n" +
-    "</div>\n" +
-    "<div class=\"col-xs-6\">\n" +
-    "<button ng-click=\"changeMinutes(false)\"><i class=\"fa fa-chevron-down\"></i></button>\n" +
-    "</div>\n" +
+    "<div>\n" +
+    "<button class=\"btn btn-sm btn-block btn-default\" ng-click=\"changeMinutes(true)\">\n" +
+    "<nice-icon icon=\"icon-chevron-up\"></nice-icon>\n" +
+    "</button>\n" +
+    "<div class=\"numbers\">{{ minutes }}</div>\n" +
+    "<button class=\"btn btn-sm btn-block btn-default\" ng-click=\"changeMinutes(false)\">\n" +
+    "<nice-icon icon=\"icon-chevron-down\"></nice-icon>\n" +
+    "</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -7254,8 +7269,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"yesno-wrapper noselect\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
-    "<div class=\"yesno-yes-bg\" ng-click=\"switch()\">{{ yes }}</div>\n" +
-    "<div class=\"yesno-no-bg\" ng-click=\"switch()\">{{ no }}</div>\n" +
+    "<button class=\"yesno-yes-bg\" ng-click=\"switch()\" tabindex=\"-1\">{{ yes }}</button>\n" +
+    "<button class=\"yesno-no-bg\" ng-click=\"switch()\" tabindex=\"-1\">{{ no }}</button>\n" +
     "<button class=\"yesno-button btn btn-primary\" ng-class=\"buttonClass\" ng-click=\"switch()\">{{ state }}</button>\n" +
     "</div>\n" +
     "</div>\n" +

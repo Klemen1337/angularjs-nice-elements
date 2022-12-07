@@ -20,6 +20,10 @@
     height: 34px;
     position: relative;
 
+    &:focus-within {
+      @extend .nice-focus;
+    }
+
     .yesno-yes-bg,
     .yesno-no-bg,
     .yesno-button {
@@ -36,6 +40,11 @@
       position: absolute;
       top: 0;
       bottom: 0;
+      appearance: none;
+      background: none;
+      border: 0 none;
+      padding: 0;
+      line-height: 1;
     }
 
     .yesno-no-bg {
@@ -62,6 +71,10 @@
 
       &:hover {
         background-color: darken($nice-yesno-slider-bg, 5%);
+      }
+
+      &:focus {
+        outline: 0 none;
       }
     }
 
