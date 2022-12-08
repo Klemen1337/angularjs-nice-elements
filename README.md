@@ -1,6 +1,6 @@
 ![Nice elements](/demo/assets/logo.png)
 
-# Nice elements v1.7.0
+# Nice elements v1.7.1
 
 Nice elements is an AngularJS v1.5.8 module that contains nice form elements like inputs, choice fields, search, toggle, dropdown, etc.
 
@@ -16,6 +16,7 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 - nice-click-outside
 - nice-comment
 - nice-date
+- nice-date-input
 - nice-date-range
 - nice-datetime-picker
 - nice-datetimerange-picker

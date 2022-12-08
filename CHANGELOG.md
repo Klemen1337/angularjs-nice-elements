@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.7.1 (8.12.2022)
+
+- fixed nice-date-input,
+- added deprecation warnings,
+- fixes
+
 ## v1.7.0 (7.12.2022)
 
 - created nice-date-input component - OLA-191
