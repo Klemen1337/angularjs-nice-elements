@@ -1996,13 +1996,15 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function($scope, $element, gettextCatalog) {
+      controller: function ($scope, $element, gettextCatalog) {
+        console.warn("[NICE ELEMENTS] nice-dropdown-old component is deprecated!");
+
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
         if (!$scope.list) { $scope.list = []; }
         if (!$scope.noOptionsText) { $scope.noOptionsText = gettextCatalog.getString("No options", null, "Nice"); }
-        if(!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
-        if(!$scope.listenKeydown) { $scope.listenKeydown = false; }
+        if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
+        if (!$scope.listenKeydown) { $scope.listenKeydown = false; }
         $scope.valid = $scope.formDropdown;
 
 
@@ -2017,13 +2019,13 @@ angular.module('niceElements')
         $scope.id = Math.random().toString(36).substring(7);
 
         $scope.isOpen = false;
-        $scope.toggle = function(){ $scope.isOpen = !$scope.isOpen; };
-        $scope.close = function(){ $scope.isOpen = false; };
-        $scope.open = function(){ $scope.isOpen = true; };
+        $scope.toggle = function () { $scope.isOpen = !$scope.isOpen; };
+        $scope.close = function () { $scope.isOpen = false; };
+        $scope.open = function () { $scope.isOpen = true; };
 
 
         // ----------------------------------- Get filter -----------------------------------
-        var getFilter = function(item){
+        var getFilter = function (item) {
           // Create filter for finding object by objValue with _.where()
           var filter = {};
           if (item.hasOwnProperty($scope.objKey))
@@ -2035,13 +2037,13 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Set internal list -----------------------------------
-        var _set_internal_list = function(){
+        var _set_internal_list = function () {
           $scope.internalList = angular.copy($scope.list);
         };
 
 
         // ----------------------------------- Add null object to internal list -----------------------------------
-        var _add_null_object_to_internal = function(){
+        var _add_null_object_to_internal = function () {
           if ($scope.nullable && !$scope.multiple) {
             var nullObj = {};
             nullObj[$scope.objKey] = null;
@@ -2052,7 +2054,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Get selected object -----------------------------------
-        var _get_selected_object = function(selected){
+        var _get_selected_object = function (selected) {
           if (!selected) return null;
           if ($scope.selectedIsObj) {
             return selected;
@@ -2063,12 +2065,12 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Init -----------------------------------
-        var _set_internal_selected_one = function(selected){
+        var _set_internal_selected_one = function (selected) {
           var obj = {};
 
           var selectedObj = _get_selected_object(selected);
           // console.log('_set_internal_selected_one', selected, selectedObj);
-          if(selectedObj && _.find($scope.internalList, getFilter(selected))){
+          if (selectedObj && _.find($scope.internalList, getFilter(selected))) {
             obj = selectedObj;
           } else {
             obj = $scope.internalList[0];
@@ -2079,7 +2081,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Get selected objects -----------------------------------
-        var _get_selected_objects = function(selected){
+        var _get_selected_objects = function (selected) {
           if (!selected)
             return null;
 
@@ -2095,9 +2097,9 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Set internal selected multiple -----------------------------------
-        var _set_internal_selected_multiple = function(item){
+        var _set_internal_selected_multiple = function (item) {
           var _selected_objects = _get_selected_objects(item);
-          if (_selected_objects){
+          if (_selected_objects) {
             $scope.internalSelected = _selected_objects;
             _set_model($scope.internalSelected);
           } else {
@@ -2108,21 +2110,21 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Set model -----------------------------------
-        var _set_model = function(value){
+        var _set_model = function (value) {
           var _new = angular.copy($scope.model);
 
-          if(!$scope.multiple){
-            if (value[$scope.objKey]==null){
+          if (!$scope.multiple) {
+            if (value[$scope.objKey] == null) {
               _new = null;
             } else {
-              if ($scope.selectedIsObj){
+              if ($scope.selectedIsObj) {
                 _new = value;
               } else {
                 _new = value[$scope.objKey];
               }
             }
           } else {
-            if ($scope.selectedIsObj){
+            if ($scope.selectedIsObj) {
               _new = value;
             } else {
               _new = _.map(value, function (val) {
@@ -2132,7 +2134,7 @@ angular.module('niceElements')
           }
 
           // update model only if it is changed
-          if (!_.isEqual(_new, $scope.model)){
+          if (!_.isEqual(_new, $scope.model)) {
             $scope.model = _new;
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
           }
@@ -2140,11 +2142,11 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Init -----------------------------------
-        var init = function() {
+        var init = function () {
           _set_internal_list();
           _add_null_object_to_internal();
 
-          if($scope.multiple && $scope.model){
+          if ($scope.multiple && $scope.model) {
             if ($scope.internalSelected) {
               // remove already selected but not in list - this happens when list changes from outside
               _set_internal_selected_multiple(_.filter($scope.internalSelected, function (obj) {
@@ -2156,7 +2158,7 @@ angular.module('niceElements')
           }
 
           // Set internalSelected
-          if($scope.internalList && $scope.internalList.length>0){
+          if ($scope.internalList && $scope.internalList.length > 0) {
             $scope.emptyList = false;
 
             if ($scope.multiple) {
@@ -2165,7 +2167,7 @@ angular.module('niceElements')
               _set_internal_selected_one($scope.model);
             }
 
-            if($scope.formDropdown && $scope.required){
+            if ($scope.formDropdown && $scope.required) {
               $scope.formDropdown.$setValidity('required', true);
             }
           } else {
@@ -2176,7 +2178,7 @@ angular.module('niceElements')
             sel[$scope.objValue] = $scope.noOptionsText;
             $scope.internalList = [sel];
 
-            if($scope.formDropdown && $scope.required){
+            if ($scope.formDropdown && $scope.required) {
               $scope.formDropdown.$setValidity('required', false); // Form is not valid because dropdown is empty and required
             }
 
@@ -2190,12 +2192,12 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Is Item selected -----------------------------------
-        $scope.isItemSelected = function(item){
+        $scope.isItemSelected = function (item) {
           if (!$scope.internalSelected) return false;
 
           // Which item is selected
           if ($scope.multiple) {
-            return _.where($scope.internalSelected, {'id':item.id}).length > 0;
+            return _.where($scope.internalSelected, { 'id': item.id }).length > 0;
           } else {
             return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
           }
@@ -2203,12 +2205,12 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Item clicked -----------------------------------
-        $scope.clicked = function(item){
+        $scope.clicked = function (item) {
           $scope.formDropdown.$setDirty();
-          if($scope.multiple){
+          if ($scope.multiple) {
             // This actually toggles selection
             var _current = angular.copy($scope.internalSelected);
-            if(!_.find(_current, getFilter(item))){
+            if (!_.find(_current, getFilter(item))) {
               _current.push(item);
             } else {
               _current = _.reject(_current, getFilter(item[$scope.objKey]));
@@ -2223,7 +2225,7 @@ angular.module('niceElements')
 
 
         // ----------------------------------- Get label -----------------------------------
-        $scope.getLabel = function(item){
+        $scope.getLabel = function (item) {
           if (item) {
             return item[$scope.objValue];
           } else {
@@ -2246,14 +2248,14 @@ angular.module('niceElements')
             var _new_model_object = _get_selected_objects(value_new);
           }
 
-          if (!_.isEqual(_new_model_object, $scope.internalSelected)){
+          if (!_.isEqual(_new_model_object, $scope.internalSelected)) {
             init();
           }
         });
 
 
         // ----------------------------------- Listen keydown -----------------------------------
-        $scope.bindKeypress = function(){
+        $scope.bindKeypress = function () {
           if ($scope.listenKeydown) {
             $element.bind('keyup', function (e) {
               // bind to keypress events if dropdown list is opened
@@ -2280,8 +2282,8 @@ angular.module('niceElements')
           }
         };
 
-        $scope.unbindKeypress = function(){
-          $element.off('keyup', function (e) {});
+        $scope.unbindKeypress = function () {
+          $element.off('keyup', function (e) { });
         };
 
       }
@@ -2713,6 +2715,7 @@ angular.module('niceElements')
       },
       templateUrl: 'src/components/nice-dtp/nice-dtp.html',
       controller: function ($scope, $element, $attrs, gettextCatalog) {
+        console.warn("[NICE ELEMENTS] nice-dtp component is deprecated!");
 
         // default parameters
         var params = {

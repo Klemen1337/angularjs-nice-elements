@@ -36,6 +36,7 @@ angular.module('niceElements')
       },
       templateUrl: 'src/components/nice-dtp/nice-dtp.html',
       controller: function ($scope, $element, $attrs, gettextCatalog) {
+        console.warn("[NICE ELEMENTS] nice-dtp component is deprecated!");
 
         // default parameters
         var params = {
