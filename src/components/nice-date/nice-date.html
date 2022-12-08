@@ -61,15 +61,13 @@
                         <nice-icon icon="icon-clock"></nice-icon>
 
                         <div class="time-picker time-picker-hour">
-                            <select ng-disabled="isDisabled" ng-model="innerDate.hour" ng-change="timeChange()" ng-options="hour as hour for hour in hours track by hour">
-                            </select>
+                            <select ng-disabled="isDisabled" ng-model="innerDate.hour" ng-change="timeChange()" ng-options="hour as hour for hour in hours track by hour"></select>
                         </div>
 
                         <div class="divider">:</div>
 
                         <div class="time-picker time-picker-minute">
-                            <select ng-disabled="isDisabled" ng-model="innerDate.minute" ng-change="timeChange()" ng-options="minute as minute for minute in minutes track by minute">
-                            </select>
+                            <select ng-disabled="isDisabled" ng-model="innerDate.minute" ng-change="timeChange()" ng-options="minute as minute for minute in minutes track by minute"></select>
                         </div>
                     </div>
                 </div>

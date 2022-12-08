@@ -344,21 +344,25 @@ p.nice {
   }
 
   .input-group-addon {
-    background: $nice-input-invalid !important;
+    // background: $nice-input-invalid !important;
+    // color: white !important;
     border-color: $nice-input-invalid !important;
-    color: white;
+    color: $nice-input-invalid !important;
   }
 }
 
 .has-success {
+  outline-color: $nice-input-valid !important;
+
   .form-control {
-    border-color: $nice-input-valid;
+    border-color: $nice-input-valid !important;
   }
 
   .input-group-addon {
-    // background: $nice-input-valid;
-    // border-color: $nice-input-valid;
-    color: var(--nice-font-color);
+    // background: $nice-input-valid !important;
+    // color: white !important;
+    border-color: $nice-input-valid !important;
+    color: $nice-input-valid !important;
   }
 }
 

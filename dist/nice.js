@@ -841,21 +841,29 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function ($scope) {
+      controller: function ($scope, $timeout) {
         $scope.formatDate = "DD.MM.YYYY";
         $scope.formatTime = "HH:mm";
         if ($scope.date === undefined) $scope.date = true;
         if ($scope.time === undefined) $scope.time = true;
         $scope.model = moment($scope.model) || moment().set({ 'second': 0, 'millisecond': 0 });
+        $scope.inner = {
+          timeModel: angular.copy($scope.model),
+          dateModel: angular.copy($scope.model)
+        };
 
-        $scope.dateChanged = function (date) {
-          $scope.modelDate = date.format($scope.formatDate);
-          $scope.handleChange();
+        $scope.dateChanged = function () {
+          $timeout(function () {
+            $scope.modelDate = $scope.inner.dateModel.format($scope.formatDate);
+            $scope.handleChange();
+          });
         }
 
-        $scope.timeChanged = function (date) {
-          $scope.modelTime = date.format($scope.formatTime);
-          $scope.handleChange();
+        $scope.timeChanged = function () {
+          $timeout(function () {
+            $scope.modelTime = $scope.inner.timeModel.format($scope.formatTime);
+            $scope.handleChange();
+          });
         }
 
         // -------------------- On date change --------------------
@@ -863,13 +871,13 @@ angular.module('niceElements')
           var newModel = moment($scope.modelDate + " " + $scope.modelTime, $scope.formatDate + " " + $scope.formatTime).seconds(0).milliseconds(0);
           if (newModel.isValid()) {
             $scope.model = newModel;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.niceDateInputForm.$setValidity('validDate', true);
           } else {
             $scope.model = null;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.niceDateInputForm.$setValidity('validDate', false);
           }
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
+          $scope.niceDateInputForm.$setDirty();
         }
 
         // -------------------- Format model --------------------
@@ -904,6 +912,11 @@ angular.module('niceElements')
         // -------------------- Watch model --------------------
         $scope.$watch('model', function () {
           $scope.formatModel();
+          $scope.inner = {
+            timeModel: angular.copy($scope.model),
+            dateModel: angular.copy($scope.model)
+          };
+
         });
       }
     }
@@ -1108,7 +1121,7 @@ angular.module('niceElements')
           selectedDate.minutes($scope.innerDate.minute);
           $scope.innerDate.value = $scope.formatDate(selectedDate);
 
-          $scope.model = selectedDate;
+          $scope.model = angular.copy(selectedDate);
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.forma.$setDirty();
         };
@@ -5565,8 +5578,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
-    "<div class=\"input-group nice-date-input\" ng-if=\"date\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
-    "<input type=\"text\" class=\"form-control\" ng-model=\"modelDate\" ng-blur=\"dateBlur()\" ng-disabled=\"isDisabled\">\n" +
+    "<div class=\"input-group nice-date-input\" ng-show=\"date\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
+    "<input type=\"text\" class=\"form-control\" ng-model=\"modelDate\" ng-blur=\"dateBlur($event)\" ng-disabled=\"isDisabled\">\n" +
     "<nice-popup placement=\"bottom\">\n" +
     "<nice-popup-target>\n" +
     "<button class=\"input-group-addon btn btn-default\" tabindex=\"-1\">\n" +
@@ -5574,12 +5587,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</button>\n" +
     "</nice-popup-target>\n" +
     "<nice-popup-content>\n" +
-    "<nice-date is-inline=\"true\" inline=\"true\" model=\"model\" on-change=\"dateChanged(model)\" no-margin=\"true\"></nice-date>\n" +
+    "<nice-date is-inline=\"true\" inline=\"true\" model=\"inner.dateModel\" on-change=\"dateChanged()\" no-margin=\"true\"></nice-date>\n" +
     "</nice-popup-content>\n" +
     "</nice-popup>\n" +
     "</div>\n" +
-    "<div class=\"input-group nice-time-input\" ng-if=\"time\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
-    "<input type=\"text\" class=\"form-control\" ng-model=\"modelTime\" ng-blur=\"timeBlur()\" ng-disabled=\"isDisabled\">\n" +
+    "<div class=\"input-group nice-time-input\" ng-show=\"time\" ng-class=\"{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }\">\n" +
+    "<input type=\"text\" class=\"form-control\" ng-model=\"modelTime\" ng-blur=\"timeBlur($event)\" ng-disabled=\"isDisabled\">\n" +
     "<nice-popup placement=\"bottom\">\n" +
     "<nice-popup-target>\n" +
     "<button class=\"input-group-addon btn btn-default\" tabindex=\"-1\">\n" +
@@ -5587,7 +5600,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</button>\n" +
     "</nice-popup-target>\n" +
     "<nice-popup-content>\n" +
-    "<nice-date is-inline=\"true\" inline=\"true\" time=\"true\" date=\"false\" on-change=\"timeChanged(model)\" model=\"model\"></nice-date>\n" +
+    "<nice-date is-inline=\"true\" inline=\"true\" model=\"inner.timeModel\" on-change=\"timeChanged()\" time=\"true\" date=\"false\" no-margin=\"true\"></nice-date>\n" +
     "</nice-popup-content>\n" +
     "</nice-popup>\n" +
     "</div>\n" +
@@ -5666,13 +5679,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-date-time\" ng-if=\"time\">\n" +
     "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
     "<div class=\"time-picker time-picker-hour\">\n" +
-    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.hour\" ng-change=\"timeChange()\" ng-options=\"hour as hour for hour in hours track by hour\">\n" +
-    "</select>\n" +
+    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.hour\" ng-change=\"timeChange()\" ng-options=\"hour as hour for hour in hours track by hour\"></select>\n" +
     "</div>\n" +
     "<div class=\"divider\">:</div>\n" +
     "<div class=\"time-picker time-picker-minute\">\n" +
-    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.minute\" ng-change=\"timeChange()\" ng-options=\"minute as minute for minute in minutes track by minute\">\n" +
-    "</select>\n" +
+    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.minute\" ng-change=\"timeChange()\" ng-options=\"minute as minute for minute in minutes track by minute\"></select>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

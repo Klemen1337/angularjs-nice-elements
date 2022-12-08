@@ -9,6 +9,10 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
   $scope.filters = {
     search: ""
   }
+  $scope.model = {
+    niceDateInputStart: moment().add("days", 1).hours(19).minutes(0).seconds(0),
+    niceDateInputEnd: moment().add("days", 2).hours(3).minutes(0).seconds(0)
+  };
 
   $scope.showLoading = false;
   $scope.toggleLoading = function () {

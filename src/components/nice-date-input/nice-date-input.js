@@ -27,21 +27,29 @@ angular.module('niceElements')
         isInline: '=',
         onChange: '&?'
       },
-      controller: function ($scope) {
+      controller: function ($scope, $timeout) {
         $scope.formatDate = "DD.MM.YYYY";
         $scope.formatTime = "HH:mm";
         if ($scope.date === undefined) $scope.date = true;
         if ($scope.time === undefined) $scope.time = true;
         $scope.model = moment($scope.model) || moment().set({ 'second': 0, 'millisecond': 0 });
+        $scope.inner = {
+          timeModel: angular.copy($scope.model),
+          dateModel: angular.copy($scope.model)
+        };
 
-        $scope.dateChanged = function (date) {
-          $scope.modelDate = date.format($scope.formatDate);
-          $scope.handleChange();
+        $scope.dateChanged = function () {
+          $timeout(function () {
+            $scope.modelDate = $scope.inner.dateModel.format($scope.formatDate);
+            $scope.handleChange();
+          });
         }
 
-        $scope.timeChanged = function (date) {
-          $scope.modelTime = date.format($scope.formatTime);
-          $scope.handleChange();
+        $scope.timeChanged = function () {
+          $timeout(function () {
+            $scope.modelTime = $scope.inner.timeModel.format($scope.formatTime);
+            $scope.handleChange();
+          });
         }
 
         // -------------------- On date change --------------------
@@ -49,13 +57,13 @@ angular.module('niceElements')
           var newModel = moment($scope.modelDate + " " + $scope.modelTime, $scope.formatDate + " " + $scope.formatTime).seconds(0).milliseconds(0);
           if (newModel.isValid()) {
             $scope.model = newModel;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.niceDateInputForm.$setValidity('validDate', true);
           } else {
             $scope.model = null;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.niceDateInputForm.$setValidity('validDate', false);
           }
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
+          $scope.niceDateInputForm.$setDirty();
         }
 
         // -------------------- Format model --------------------
@@ -90,6 +98,11 @@ angular.module('niceElements')
         // -------------------- Watch model --------------------
         $scope.$watch('model', function () {
           $scope.formatModel();
+          $scope.inner = {
+            timeModel: angular.copy($scope.model),
+            dateModel: angular.copy($scope.model)
+          };
+
         });
       }
     }

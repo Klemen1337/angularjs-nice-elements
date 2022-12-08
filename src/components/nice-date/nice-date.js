@@ -120,7 +120,7 @@ angular.module('niceElements')
           selectedDate.minutes($scope.innerDate.minute);
           $scope.innerDate.value = $scope.formatDate(selectedDate);
 
-          $scope.model = selectedDate;
+          $scope.model = angular.copy(selectedDate);
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
           $scope.forma.$setDirty();
         };

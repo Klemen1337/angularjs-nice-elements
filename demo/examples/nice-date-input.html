@@ -18,5 +18,22 @@
                 </div>
             </div>
         </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-calendar title="Start/End" start-date="model.niceDateInputStart" end-date="model.niceDateInputEnd" time="true"></nice-calendar>
+                <nice-date-input title="Start" model="model.niceDateInputStart"></nice-date-input>
+                <nice-date-input title="End" model="model.niceDateInputEnd"></nice-date-input>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-6">
+                    <code>{{ model.niceDateInputStart }}</code>
+                    <code>{{ model.niceDateInputEnd }}</code>
+                    <code>{{ model.modelInnerTime }}</code>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

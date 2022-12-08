@@ -377,17 +377,21 @@ p.nice {
 }
 
 .has-warning .input-group-addon {
-  background: #f22e28 !important;
   border-color: #f22e28 !important;
-  color: white;
+  color: #f22e28 !important;
+}
+
+.has-success {
+  outline-color: #3189ff !important;
 }
 
 .has-success .form-control {
-  border-color: #3189ff;
+  border-color: #3189ff !important;
 }
 
 .has-success .input-group-addon {
-  color: var(--nice-font-color);
+  border-color: #3189ff !important;
+  color: #3189ff !important;
 }
 
 .nice-highligh {
@@ -2489,7 +2493,7 @@ p.nice {
 .nice-datetime-picker .dtp-wrapper .dtp table.dtp-picker-days tr > td {
   border: none;
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 12px;
   text-align: center;
   padding: 7px 0;
 }

@@ -8,8 +8,8 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
-            <div class="input-group nice-date-input" ng-if="date" ng-class="{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }">
-                <input type="text" class="form-control" ng-model="modelDate" ng-blur="dateBlur()" ng-disabled="isDisabled">
+            <div class="input-group nice-date-input" ng-show="date" ng-class="{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }">
+                <input type="text" class="form-control" ng-model="modelDate" ng-blur="dateBlur($event)" ng-disabled="isDisabled">
                 <nice-popup placement="bottom">
                     <nice-popup-target>
                         <button class="input-group-addon btn btn-default" tabindex="-1">
@@ -18,12 +18,12 @@
                     </nice-popup-target>
 
                     <nice-popup-content>
-                        <nice-date is-inline="true" inline="true" model="model" on-change="dateChanged(model)" no-margin="true"></nice-date>
+                        <nice-date is-inline="true" inline="true" model="inner.dateModel" on-change="dateChanged()" no-margin="true"></nice-date>
                     </nice-popup-content>
                 </nice-popup>
             </div>
-            <div class="input-group nice-time-input" ng-if="time" ng-class="{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }">
-                <input type="text" class="form-control" ng-model="modelTime" ng-blur="timeBlur()" ng-disabled="isDisabled">
+            <div class="input-group nice-time-input" ng-show="time" ng-class="{ 'has-warning': !disabled && niceDateInputForm.$invalid && niceDateInputForm.$dirty }">
+                <input type="text" class="form-control" ng-model="modelTime" ng-blur="timeBlur($event)" ng-disabled="isDisabled">
                 <nice-popup placement="bottom">
                     <nice-popup-target>
                         <button class="input-group-addon btn btn-default" tabindex="-1">
@@ -32,7 +32,7 @@
                     </nice-popup-target>
 
                     <nice-popup-content>
-                        <nice-date is-inline="true" inline="true" time="true" date="false" on-change="timeChanged(model)" model="model"></nice-date>
+                        <nice-date is-inline="true" inline="true" model="inner.timeModel" on-change="timeChanged()" time="true" date="false" no-margin="true"></nice-date>
                     </nice-popup-content>
                 </nice-popup>
             </div>
