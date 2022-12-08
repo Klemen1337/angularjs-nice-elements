@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.7.0 (7.12.2022)
+
+- created nice-date-input component - OLA-191
+- replaced favicons with nice-icons,
+- worked on style,
+- worked on demo project
+
 ## v1.6.2 (7.12.2022)
 
 - fixed nice upload - OLA-199
