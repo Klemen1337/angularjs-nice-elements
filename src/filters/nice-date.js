@@ -7,9 +7,12 @@
  * Filter in the niceElements.
  */
 angular.module('niceElements').filter('niceDate', function () {
-  return function(object, addDate) {
+  return function (object, addTime, addSeconds) {
     var formatString = "D.M.YYYY";
-    if (addDate) formatString = "D.M.YYYY • H:mm";
+    if (addTime) {
+      formatString = "D.M.YYYY • H:mm";
+      if (addSeconds) formatString += ":ss";
+    }
     return moment(object).format(formatString);
   };
 });
