@@ -31,12 +31,18 @@
     flex-shrink: 0;
   }
 
-  i+span,
+  // Icon padding
+  svg+translate,
   svg+span,
-  nice-icon+span,
+  translate+svg,
   span+svg,
+  nice-icon+translate,
+  nice-icon+span,
+  translate+nice-icon,
   span+nice-icon,
-  span+i {
+  span+i,
+  translate+i i+span,
+  i+translate {
     margin-left: 0.5rem;
   }
 
