@@ -55,6 +55,10 @@ label.nice {
         outline: 0 none;
         border-color: var(--nice-border-color) !important;
       }
+
+      .input-group-addon {
+        border-color: var(--nice-border-color) !important;
+      }
     }
   }
 

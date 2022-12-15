@@ -119,6 +119,11 @@ label.nice {
   border-color: var(--nice-border-color) !important;
 }
 
+.nice-component .input-group:focus-within .input-group-addon,
+.nice-component .form-group:focus-within .input-group-addon {
+  border-color: var(--nice-border-color) !important;
+}
+
 .nice-component .nice-title {
   display: flex;
   justify-content: flex-end;
@@ -451,12 +456,17 @@ p.nice {
   flex-shrink: 0;
 }
 
-.btn i + span,
+.btn svg + translate,
 .btn svg + span,
-.btn nice-icon + span,
+.btn translate + svg,
 .btn span + svg,
+.btn nice-icon + translate,
+.btn nice-icon + span,
+.btn translate + nice-icon,
 .btn span + nice-icon,
-.btn span + i {
+.btn span + i,
+.btn translate + i i + span,
+.btn i + translate {
   margin-left: 0.5rem;
 }
 
@@ -1615,6 +1625,7 @@ p.nice {
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.2;
+  margin-top: 1px;
 }
 
 .nice-dropdown .btn-dropdown .caret, .nice-search .nice-dropdown-empty .btn-dropdown .caret {
@@ -4554,6 +4565,7 @@ p.nice {
 
 .nice-date-input .nice-field .input-group .form-control {
   z-index: unset;
+  padding-right: 0;
 }
 
 .nice-date-input .nice-field .input-group.nice-date-input {
@@ -4566,6 +4578,7 @@ p.nice {
 
 .nice-date-input .nice-field .input-group.nice-time-input {
   width: 100px;
+  flex-shrink: 0;
 }
 
 .nice-date-input .nice-field .input-group .nice-popup-content {

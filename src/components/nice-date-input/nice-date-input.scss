@@ -21,6 +21,7 @@
 
       .form-control {
         z-index: unset;
+        padding-right: 0;
       }
 
       &.nice-date-input {
@@ -35,6 +36,7 @@
 
       &.nice-time-input {
         width: 100px;
+        flex-shrink: 0;
       }
 
       .nice-popup-content {
