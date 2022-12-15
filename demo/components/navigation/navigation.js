@@ -32,6 +32,7 @@ angular.module('niceElementsDemo')
           { title: "Icon", href: "nice-icon" },
           { title: "Upload", href: "nice-upload" },
           { title: "Date input", href: "nice-date-input" },
+          { title: "Filters", href: "nice-filters" },
         ];
 
         $scope.location = $location.path().replace("/", "");

@@ -33,6 +33,14 @@ h1 {
   font-weight: bold;
 }
 
+h5 {
+  margin: 0;
+  margin-bottom: 1rem;
+  color: #3189ff;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
 .white-wrapper {
   border: 1px solid #cbd4d9;
   padding: 2rem;
