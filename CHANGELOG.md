@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.7.2 (15.12.2022)
+
+- fixed nice dropdown alignment,
+- fixed input addon border color on focus,
+- fixed nice highlight null value,
+- added more button icon and text margins,
+- added addSeconds to niceDate filter,
+- added filters example page
+
 ## v1.7.1 (8.12.2022)
 
 - fixed nice-date-input,
