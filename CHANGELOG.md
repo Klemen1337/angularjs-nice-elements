@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.3 (22.12.2022)
+
+- added regex error and regex-raw to nice input component
+
 ## v1.7.2 (15.12.2022)
 
 - fixed nice dropdown alignment,
