@@ -3597,6 +3597,8 @@ angular.module('niceElements')
         type: '@',
         title: '@?',
         regex: '@?',
+        regexRaw: '@?',
+        regexError: '@?',
         placeholder: '@',
         min: '@?',
         max: '@?',
@@ -3685,6 +3687,10 @@ angular.module('niceElements')
 
         if (angular.isDefined(scope.regex) && scope.regex != '') {
           scope.regexexp = new RegExp(scope.regex);
+        }
+
+        if (angular.isDefined(scope.regexRaw) && scope.regexRaw != '') {
+          scope.regexexp = regexRaw;
         }
 
         scope.$watch('model', function (value_new, value_old) {
@@ -6070,7 +6076,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div ng-if=\"forma.$error && forma.$dirty\">\n" +
     "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate translate-context=\"Nice\">Email is not valid.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\" translate translate-context=\"Nice\">This field requires a specific pattern.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\">\n" +
+    "<span ng-if=\"regexError\">{{ regexError }}</span>\n" +
+    "<span ng-if=\"!regexError\" translate translate-context=\"Nice\">This field requires a specific pattern.</span>\n" +
+    "</div>\n" +
     "<div class=\"error-message\" ng-if=\"forma.$error.minlength\">\n" +
     "<translate translate-context=\"Nice\">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context=\"Nice\">characters</translate>.\n" +
     "</div>\n" +

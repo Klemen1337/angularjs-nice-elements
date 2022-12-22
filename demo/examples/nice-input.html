@@ -22,6 +22,12 @@
                         <td></td>
                         <td>null</td>
                     </tr>
+
+                    <tr>
+                        <td>regex-error</td>
+                        <td>Show this error if regex validation fails</td>
+                        <td>null</td>
+                    </tr>
                     <tr>
                         <td>placeholder</td>
                         <td></td>
@@ -127,6 +133,19 @@
             </div>
             <div class="col-sm-6">
                 <code>{{ model.inputTextArea }}</code>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-input title="Regex" model="model.inputeTextRegex" regex="^[a-zA-Z0-9]+$" regex-error="Only special characters!">&lt;/nice-input></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Regex (no special charecters)" model="model.inputeTextRegex" regex="^[a-zA-Z0-9]+$" regex-error="Only special characters!"></nice-input>
+                <nice-input title="Regex (email)" model="model.inputeTextRegexRaw" regex="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" regex-error="Email please!"></nice-input>
+            </div>
+            <div class="col-sm-6">
+                <code>{{ model.inputeTextRegex }}</code>
             </div>
         </div>
     </div>

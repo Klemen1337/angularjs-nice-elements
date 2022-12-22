@@ -11,6 +11,8 @@ angular.module('niceElements')
         type: '@',
         title: '@?',
         regex: '@?',
+        regexRaw: '@?',
+        regexError: '@?',
         placeholder: '@',
         min: '@?',
         max: '@?',
@@ -99,6 +101,10 @@ angular.module('niceElements')
 
         if (angular.isDefined(scope.regex) && scope.regex != '') {
           scope.regexexp = new RegExp(scope.regex);
+        }
+
+        if (angular.isDefined(scope.regexRaw) && scope.regexRaw != '') {
+          scope.regexexp = regexRaw;
         }
 
         scope.$watch('model', function (value_new, value_old) {

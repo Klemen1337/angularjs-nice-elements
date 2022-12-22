@@ -26,7 +26,10 @@
 
             <div ng-if="forma.$error && forma.$dirty">
                 <div class="error-message" ng-if="forma.$dirty && forma.$error.email" translate translate-context="Nice">Email is not valid.</div>
-                <div class="error-message" ng-if="forma.$dirty && forma.$error.pattern" translate translate-context="Nice">This field requires a specific pattern.</div>
+                <div class="error-message" ng-if="forma.$dirty && forma.$error.pattern">
+                    <span ng-if="regexError">{{ regexError }}</span>
+                    <span ng-if="!regexError" translate translate-context="Nice">This field requires a specific pattern.</span>
+                </div>
                 <div class="error-message" ng-if="forma.$error.minlength">
                     <translate translate-context="Nice">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context="Nice">characters</translate>.
                 </div>
