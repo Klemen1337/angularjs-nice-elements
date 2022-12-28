@@ -42,6 +42,7 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 - nice-steps
 - nice-svgs
 - nice-time-picker
+- nice-title
 - nice-toast
 - nice-tooltip
 - nice-upload
