@@ -1,4 +1,4 @@
-.nice-dropdown-date{
+.nice-dropdown-date {
   display: block;
 
   .form-inline {
@@ -11,7 +11,7 @@
     float: left;
     position: relative;
 
-    &:after{
+    &:after {
       content: " ";
       position: absolute;
       top: 50%;
@@ -31,15 +31,15 @@
     margin-right: 10px;
   }
 
-  .nice-dropdown-date-day{
+  .nice-dropdown-date-day {
     width: 30%;
   }
 
-  .nice-dropdown-date-month{
+  .nice-dropdown-date-month {
     width: 40%;
   }
 
-  .nice-dropdown-date-year{
+  .nice-dropdown-date-year {
     width: 30%;
   }
 
@@ -55,24 +55,24 @@
     z-index: 2;
     background: transparent;
 
-    &:disabled{
+    &:disabled {
       cursor: not-allowed;
       background: $nice-dropdown-disabled-bg !important;
-      border-color: $nice-dropdown-disabled-border !important;
+      border-color: var(--nice-border-color);
     }
 
-    &:hover{
-      //background: $nice-dropdown-hover-bg;
-      border-color: $nice-dropdown-hover-border;
+    &:hover {
+      background: $nice-dropdown-hover-bg;
+      border-color: var(--nice-border-color);
       color: $nice-dropdown-hover-color;
     }
 
-    &:active, &:focus{
-      //background: $nice-focus-bg !important;
-      border-color: $nice-focus-border !important;
+    &:active,
+    &:focus {
+      background: $nice-focus-bg !important;
       color: $nice-focus-color !important;
-      -webkit-box-shadow: 0 0 0;
-      box-shadow: 0 0 0;
+      border-color: var(--nice-border-color);
+      @extend .nice-focus;
     }
   }
 }

@@ -14,7 +14,7 @@
 
             <!------------------------------ Input ------------------------------>
             <div class="nice-date-button input-group" ng-class="{ 'open': isOpen }" ng-show="!inline" ng-click="toggleOpen()">
-                <input type="text" class="form-control" value="{{ model | niceDate:time }}" readonly="readonly" />
+                <input type="text" class="form-control" value="{{ model | niceDate:time }}" readonly="readonly" ng-disabled="isDisabled" />
                 <span class="input-group-addon clickable">
                     <!-- <i class="fa fa-calendar"></i> -->
                     <nice-icon icon="icon-calendar"></nice-icon>
@@ -28,14 +28,14 @@
                     <div class="nice-date-date" ng-if="date" role="grid">
                         <div class="nice-date-header">
                             <span>
-                                <select class="year-picker" ng-model="innerDate.year" ng-change="handleDateChange()" ng-options="year for year in years">
+                                <select class="year-picker" ng-model="innerDate.year" ng-change="handleDateChange()" ng-options="year for year in years" ng-disabled="isDisabled">
                                 </select>,
-                                <select class="month-picker" ng-model="innerDate.month" ng-change="handleDateChange()" ng-options="month.value as month.name for month in months">
+                                <select class="month-picker" ng-model="innerDate.month" ng-change="handleDateChange()" ng-options="month.value as month.name for month in months" ng-disabled="isDisabled">
                                 </select>
                             </span>
-                            <button class="btn btn-default-naked" ng-click="previous()"><i class="fa fa-angle-left"></i></button>
-                            <button class="btn btn-default-naked" ng-click="today()"><i class="fa fa-circle"></i></button>
-                            <button class="btn btn-default-naked" ng-click="next()"><i class="fa fa-angle-right"></i></button>
+                            <button class="btn btn-default-naked" ng-disabled="isDisabled" ng-click="previous()"><i class="fa fa-angle-left"></i></button>
+                            <button class="btn btn-default-naked" ng-disabled="isDisabled" ng-click="today()"><i class="fa fa-circle"></i></button>
+                            <button class="btn btn-default-naked" ng-disabled="isDisabled" ng-click="next()"><i class="fa fa-angle-right"></i></button>
                         </div>
 
                         <div class="nice-date-week names">
@@ -50,7 +50,7 @@
                                     'weekend': day.isWeekday,
                                     'disabled': day.isDisabled,
                                     'between': isBetween(day.date, model, nextDate)
-                                }" ng-click="select(day)" ng-repeat="day in week.days">
+                                }" ng-click="select(day)" ng-repeat="day in week.days" ng-disabled="isDisabled">
                                 {{ day.number }}
                             </button>
                         </div>
@@ -61,13 +61,13 @@
                         <nice-icon icon="icon-clock"></nice-icon>
 
                         <div class="time-picker time-picker-hour">
-                            <select ng-disabled="isDisabled" ng-model="innerDate.hour" ng-change="timeChange()" ng-options="hour as hour for hour in hours track by hour"></select>
+                            <select ng-disabled="isDisabled" ng-model="innerDate.hour" ng-change="timeChange()" ng-options="hour as hour for hour in hours track by hour" ng-disabled="isDisabled"></select>
                         </div>
 
                         <div class="divider">:</div>
 
                         <div class="time-picker time-picker-minute">
-                            <select ng-disabled="isDisabled" ng-model="innerDate.minute" ng-change="timeChange()" ng-options="minute as minute for minute in minutes track by minute"></select>
+                            <select ng-disabled="isDisabled" ng-model="innerDate.minute" ng-change="timeChange()" ng-options="minute as minute for minute in minutes track by minute" ng-disabled="isDisabled"></select>
                         </div>
                     </div>
                 </div>

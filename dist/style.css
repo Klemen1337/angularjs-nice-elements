@@ -71,7 +71,7 @@ label.nice {
 }
 
 .nice-focus, .nice-component .input-group:focus-within,
-.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-yesno .yesno-wrapper:focus-within, .nice-choice li .choice-checkbox:focus, .nice-upload .nice-field:focus-within .input-area {
+.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-yesno .yesno-wrapper:focus-within, .nice-choice li .choice-checkbox:focus, .nice-dropdown-date select:active, .nice-dropdown-date select:focus, .nice-upload .nice-field:focus-within .input-area {
   outline: 2px solid;
   outline-color: var(--nice-primary-color);
   outline-offset: 2px;
@@ -1655,18 +1655,19 @@ p.nice {
 .nice-dropdown .btn-dropdown:disabled, .nice-search .nice-dropdown-empty .btn-dropdown:disabled {
   cursor: not-allowed;
   background: white !important;
-  border-color: #EDEFF2 !important;
+  border-color: var(--nice-border-color);
 }
 
 .nice-dropdown .btn-dropdown:hover, .nice-search .nice-dropdown-empty .btn-dropdown:hover {
   background: white;
-  border-color: #cbd4d9;
+  border-color: var(--nice-border-color);
   color: #474F52;
 }
 
 .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus {
   background: white !important;
   color: #474F52 !important;
+  border-color: var(--nice-border-color);
 }
 
 .nice-dropdown-old .disabled {
@@ -3461,6 +3462,10 @@ p.nice {
   top: 40px;
 }
 
+.nice-comment .form-control[disabled] {
+  background: transparent;
+}
+
 .nice-comment textarea {
   min-height: 34px !important;
   height: 34px;
@@ -3474,11 +3479,11 @@ p.nice {
 
 .nice-comment textarea:focus {
   box-shadow: 0 0 0;
+  border-color: transparent;
 }
 
 .nice-comment textarea.editing {
   padding: 6px 12px;
-  border-color: #3189ff;
   color: #404040;
   -webkit-user-select: initial;
 }
@@ -3993,19 +3998,19 @@ p.nice {
 .nice-dropdown-date select:disabled {
   cursor: not-allowed;
   background: white !important;
-  border-color: #EDEFF2 !important;
+  border-color: var(--nice-border-color);
 }
 
 .nice-dropdown-date select:hover {
-  border-color: #cbd4d9;
+  background: white;
+  border-color: var(--nice-border-color);
   color: #474F52;
 }
 
 .nice-dropdown-date select:active, .nice-dropdown-date select:focus {
-  border-color: #3189ff !important;
+  background: white !important;
   color: #474F52 !important;
-  -webkit-box-shadow: 0 0 0;
-  box-shadow: 0 0 0;
+  border-color: var(--nice-border-color);
 }
 
 .nice-time-picker {
@@ -4174,6 +4179,10 @@ p.nice {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+nice-help {
+  display: inline-flex;
 }
 
 .nice-help {

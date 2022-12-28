@@ -1,23 +1,28 @@
-.nice-comment{
-  .btn-comment-save{
+.nice-comment {
+  .btn-comment-save {
     position: absolute;
     right: 20px;
     top: 4px;
   }
 
-  .btn-comment-cancel{
+  .btn-comment-cancel {
     position: absolute;
     right: 20px;
     top: 40px;
   }
 
-  textarea{
+  .form-control[disabled] {
+    background: transparent;
+  }
+
+  textarea {
     min-height: 34px !important;
     height: 34px;
     box-shadow: 0 0 0;
 
-    &:focus{
+    &:focus {
       box-shadow: 0 0 0;
+      border-color: transparent;
     }
 
     border-radius: $nice-border-radius;
@@ -26,9 +31,8 @@
     -webkit-user-select: none;
     padding: 6px 0px;
 
-    &.editing{
+    &.editing {
       padding: 6px 12px;
-      border-color: $nice-base-color;
       color: $nice-font-color;
       -webkit-user-select: initial;
     }

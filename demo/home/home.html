@@ -3,32 +3,32 @@
     <div class="white-wrapper">
         <div class="row">
             <div ng-form="forme" class="col-sm-6">
-                <nice-date-input title="Date input" model="data.niceDateInput" required="true" is-inline="isInline"></nice-date-input>
+                <nice-date-input title="Date input" model="data.niceDateInput" required="true" is-disabled="data.disabled" is-inline="isInline"></nice-date-input>
 
-                <nice-quantity title="Quantity" model="data.niceQuantity" min="1" max="10" required="true" is-inline="isInline"></nice-quantity>
+                <nice-quantity title="Quantity" model="data.niceQuantity" min="1" max="10" required="true" is-disabled="data.disabled" is-inline="isInline"></nice-quantity>
 
-                <nice-number title="Number" model="niceNumberTest" min="1" max="10" required="true" is-inline="isInline"></nice-number>
+                <nice-number title="Number" model="niceNumberTest" min="1" max="10" required="true" is-disabled="data.disabled" is-inline="isInline"></nice-number>
 
-                <nice-number title="Number" model="niceNumberTest" step="1" allow-negative="true" prevent-zero="true" default-value="1" floating-error="true" is-inline="isInline"></nice-number>
+                <nice-number title="Number" model="niceNumberTest" step="1" allow-negative="true" prevent-zero="true" default-value="1" floating-error="true" is-disabled="data.disabled" is-inline="isInline"></nice-number>
 
-                <nice-search2 title="Search people v2" model="searchPeopleString" refresh-function="searchPeople" placeholder="Search item" show-dropdown="true" on-select="countrySelected" on-change="handleChange(model)" is-inline="isInline">
+                <nice-search2 title="Search people v2" model="searchPeopleString" refresh-function="searchPeople" placeholder="Search item" show-dropdown="true" on-select="countrySelected" on-change="handleChange(model)" is-disabled="data.disabled" is-inline="isInline">
                     <div class="person-row">
                         <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
                     </div>
                 </nice-search2>
 
-                <nice-search2 title="Search v2" model="data.searchvtwo" placeholder="Search item" on-select="countrySelected" on-change="handleChange(model)" is-inline="isInline">
+                <nice-search2 title="Search v2" model="data.searchvtwo" placeholder="Search item" on-select="countrySelected" on-change="handleChange(model)" is-disabled="data.disabled" is-inline="isInline">
                     <div class="person-row">
                         <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
                     </div>
                 </nice-search2>
 
-                <nice-search2 title="Search country v2" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="true" on-select="countrySelected" is-inline="isInline">
+                <nice-search2 title="Search country v2" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="true" on-select="countrySelected" is-disabled="data.disabled" is-inline="isInline">
                     <!-- <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> --><span>{{
                         $parent.result.name }}</span>
                 </nice-search2>
 
-                <nice-search title="Search" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="false" on-select="countrySelected" key-for-input-label="name" is-inline="isInline"></nice-search>
+                <nice-search title="Search" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="false" on-select="countrySelected" key-for-input-label="name" is-disabled="data.disabled" is-inline="isInline"></nice-search>
 
                 <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline"></nice-date>
 
@@ -89,7 +89,7 @@
                     <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
                 </nice-dropdown>
 
-                <nice-dropdown title="Search (value)" model="data.dropdownPerson2" search-function="searchFunction" is-inline="isInline" selected-is-key="true">
+                <nice-dropdown title="Search (value)" model="data.dropdownPerson2" search-function="searchFunction" is-inline="isInline" is-disabled="data.disabled" selected-is-key="true">
                     <nice-dropdown-button>{{ $parent.selected.name }}</nice-dropdown-button>
                     <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
                 </nice-dropdown>

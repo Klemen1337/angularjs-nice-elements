@@ -759,6 +759,7 @@ angular.module('niceElements')
       scope: {
         model: '=',
         title: '@?',
+        isDisabled: '=',
         placeholder: '@',
         noTextLabel: '@',
         noMargin: '@',
@@ -769,7 +770,7 @@ angular.module('niceElements')
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (scope.model == null) { scope.model =  ''; }
+        if (scope.model == null) { scope.model = ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
@@ -779,9 +780,9 @@ angular.module('niceElements')
 
         var textareas = element.find('textarea');
 
-        scope.edit = function(){
-          scope.editing=true;
-          $timeout(function(){
+        scope.edit = function () {
+          scope.editing = true;
+          $timeout(function () {
             textareas[0].focus();
           });
         };
@@ -802,10 +803,10 @@ angular.module('niceElements')
           });
         }
       },
-      controller: function($scope){
+      controller: function ($scope) {
         $scope.editing = false;
 
-        $scope.save = function(){
+        $scope.save = function () {
           $scope.editing = false;
         };
       }
@@ -3938,7 +3939,7 @@ angular.module('niceElements')
       scope: {
         model: '=',
         valid: '=',
-        disabled: '=',
+        isDisabled: '=',
         title: '@?',
         min: '@',
         max: '@',
@@ -3958,7 +3959,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
 
-      controller: function($scope, $timeout) {
+      controller: function ($scope, $timeout) {
         $scope.canAdd = true;
         $scope.canSubstract = true;
         $scope.preventZero = $scope.preventZero == "true";
@@ -3999,7 +4000,7 @@ angular.module('niceElements')
         if (!$scope.model) {
           $scope.model = $scope.defaultValue;
         } else {
-          if(parseFloat($scope.model)) {
+          if (parseFloat($scope.model)) {
             $scope.model = parseFloat($scope.model);
           } else {
             $scope.model = $scope.defaultValue;
@@ -4007,7 +4008,7 @@ angular.module('niceElements')
         }
 
         // Check canAdd or canSubtract
-        $scope.check = function() {
+        $scope.check = function () {
           if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
             $scope.niceNumberForm.$setValidity("no-value", false);
           } else {
@@ -4039,25 +4040,25 @@ angular.module('niceElements')
 
 
         // Check when load
-        $timeout(function() {
+        $timeout(function () {
           $scope.check();
         });
 
 
         // On input change
-        $scope.inputChanged = function() {
+        $scope.inputChanged = function () {
           $scope.check();
         };
-        
+
 
         // Watch for model change
-        $scope.$watch("model", function() {
+        $scope.$watch("model", function () {
           $scope.check();
         });
 
 
         // Add to the value
-        $scope.add = function() {
+        $scope.add = function () {
           var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
           if ($scope.max) {
             if (result <= parseFloat($scope.max)) {
@@ -4073,7 +4074,7 @@ angular.module('niceElements')
 
 
         // Subtract to the value
-        $scope.subtract = function() {
+        $scope.subtract = function () {
           var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).minus($scope.step).toNumber();
           if (result >= Number($scope.min)) {
             $scope.model = result;
@@ -5464,9 +5465,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-calendar-wrapper\">\n" +
     "<div class=\"nice-calendar-weeks\">\n" +
     "<div class=\"header\">\n" +
-    "<button class=\"btn\" ng-click=\"previous()\" title=\"{{ 'Previous month' | translate:'Nice' }}\"><i class=\"fa fa-angle-left\"></i></button>\n" +
+    "<button class=\"btn\" ng-click=\"previous()\" title=\"{{ 'Previous month' | translate:'Nice' }}\" ng-disabled=\"isDisabled\"><i class=\"fa fa-angle-left\"></i></button>\n" +
     "<span title=\"{{ month.format('M.YYYY' )}}\">{{ month.format(\"MMMM, YYYY\" )}}</span>\n" +
-    "<button class=\"btn\" ng-click=\"next()\" title=\"{{ 'Next month' | translate:'Nice' }}\"><i class=\"fa fa-angle-right\"></i></button>\n" +
+    "<button class=\"btn\" ng-click=\"next()\" title=\"{{ 'Next month' | translate:'Nice' }}\" ng-disabled=\"isDisabled\"><i class=\"fa fa-angle-right\"></i></button>\n" +
     "</div>\n" +
     "<div class=\"week names\">\n" +
     "<span class=\"day\" translate translate-context=\"Nice\">Mon</span>\n" +
@@ -5492,7 +5493,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                                (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||\n" +
     "                                (color && isSameDay(day.date, startDate)) && {'background-color': color } ||\n" +
     "                                (color && isSameDay(day.date, endDate)) && {'background-color': color }\n" +
-    "                            \" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">\n" +
+    "                            \" ng-click=\"select(day)\" ng-repeat=\"day in week.days\" ng-disabled=\"isDisabled\">\n" +
     "{{ day.number }}\n" +
     "<p class=\"popup\" ng-if=\"!hideHover\">{{ popupText }}</p>\n" +
     "</button>\n" +
@@ -5500,22 +5501,22 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-calendar-time\" ng-if=\"time\">\n" +
     "<div class=\"time-picker\">\n" +
-    "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"startDateHour\" ng-change=\"startHourChange(startDateHour)\" ng-options=\"hour for hour in hours\">\n" +
+    "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"startDateHour\" ng-change=\"startHourChange(startDateHour)\" ng-options=\"hour for hour in hours\" ng-disabled=\"isDisabled\">\n" +
     "</select>\n" +
     "</div>\n" +
     "<div class=\"time-picker\">\n" +
-    "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"startDateMinute\" ng-change=\"startMinuteChange(startDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
+    "<select title=\"{{ 'Select start time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"startDateMinute\" ng-change=\"startMinuteChange(startDateMinute)\" ng-options=\"minute for minute in minutes\" ng-disabled=\"isDisabled\">\n" +
     "</select>\n" +
     "</div>\n" +
     "<div class=\"time-picker-icon\">\n" +
     "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
     "</div>\n" +
     "<div class=\"time-picker\">\n" +
-    "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"endDateHour\" ng-change=\"endHourChange(endDateHour)\" ng-options=\"hour for hour in hours\">\n" +
+    "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-hour\" ng-model=\"endDateHour\" ng-change=\"endHourChange(endDateHour)\" ng-options=\"hour for hour in hours\" ng-disabled=\"isDisabled\">\n" +
     "</select>\n" +
     "</div>\n" +
     "<div class=\"time-picker no-border-right\">\n" +
-    "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"endDateMinute\" ng-change=\"endMinuteChange(endDateMinute)\" ng-options=\"minute for minute in minutes\">\n" +
+    "<select title=\"{{ 'Select end time' | translate:'Nice' }}\" class=\"time-picker-minute\" ng-model=\"endDateMinute\" ng-change=\"endMinuteChange(endDateMinute)\" ng-options=\"minute for minute in minutes\" ng-disabled=\"isDisabled\">\n" +
     "</select>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5556,7 +5557,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
-    "<button class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\">\n" +
+    "<button class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\" ng-disabled=\"isDisabled\">\n" +
     "<nice-icon icon=\"icon-check\"></nice-icon>\n" +
     "</button>\n" +
     "<div ng-transclude class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
@@ -5575,11 +5576,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
-    "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\" ng-click=\"edit()\">\n" +
-    "<textarea ng-class=\"{'editing': editing}\" class=\"form-control\" ng-model=\"model\" placeholder=\"{{placeholder}}\" rows=\"{{rows}}\" ng-blur=\"save()\"></textarea>\n" +
+    "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\" ng-click=\"edit()\">\n" +
+    "<textarea ng-class=\"{'editing': editing}\" class=\"form-control\" ng-model=\"model\" placeholder=\"{{placeholder}}\" rows=\"{{rows}}\" ng-blur=\"save()\" ng-disabled=\"isDisabled\"></textarea>\n" +
     "</div>\n" +
     "</div>\n" +
-    "</div>\n"
+    "</div>"
   );
 
 
@@ -5654,7 +5655,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"disabled-shield\" ng-if=\"isDisabled\"></div>\n" +
     "<div class=\"nice-date-button input-group\" ng-class=\"{ 'open': isOpen }\" ng-show=\"!inline\" ng-click=\"toggleOpen()\">\n" +
-    "<input type=\"text\" class=\"form-control\" value=\"{{ model | niceDate:time }}\" readonly=\"readonly\">\n" +
+    "<input type=\"text\" class=\"form-control\" value=\"{{ model | niceDate:time }}\" readonly=\"readonly\" ng-disabled=\"isDisabled\">\n" +
     "<span class=\"input-group-addon clickable\">\n" +
     "<nice-icon icon=\"icon-calendar\"></nice-icon>\n" +
     "</span>\n" +
@@ -5664,14 +5665,14 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-date-date\" ng-if=\"date\" role=\"grid\">\n" +
     "<div class=\"nice-date-header\">\n" +
     "<span>\n" +
-    "<select class=\"year-picker\" ng-model=\"innerDate.year\" ng-change=\"handleDateChange()\" ng-options=\"year for year in years\">\n" +
+    "<select class=\"year-picker\" ng-model=\"innerDate.year\" ng-change=\"handleDateChange()\" ng-options=\"year for year in years\" ng-disabled=\"isDisabled\">\n" +
     "</select>,\n" +
-    "<select class=\"month-picker\" ng-model=\"innerDate.month\" ng-change=\"handleDateChange()\" ng-options=\"month.value as month.name for month in months\">\n" +
+    "<select class=\"month-picker\" ng-model=\"innerDate.month\" ng-change=\"handleDateChange()\" ng-options=\"month.value as month.name for month in months\" ng-disabled=\"isDisabled\">\n" +
     "</select>\n" +
     "</span>\n" +
-    "<button class=\"btn btn-default-naked\" ng-click=\"previous()\"><i class=\"fa fa-angle-left\"></i></button>\n" +
-    "<button class=\"btn btn-default-naked\" ng-click=\"today()\"><i class=\"fa fa-circle\"></i></button>\n" +
-    "<button class=\"btn btn-default-naked\" ng-click=\"next()\"><i class=\"fa fa-angle-right\"></i></button>\n" +
+    "<button class=\"btn btn-default-naked\" ng-disabled=\"isDisabled\" ng-click=\"previous()\"><i class=\"fa fa-angle-left\"></i></button>\n" +
+    "<button class=\"btn btn-default-naked\" ng-disabled=\"isDisabled\" ng-click=\"today()\"><i class=\"fa fa-circle\"></i></button>\n" +
+    "<button class=\"btn btn-default-naked\" ng-disabled=\"isDisabled\" ng-click=\"next()\"><i class=\"fa fa-angle-right\"></i></button>\n" +
     "</div>\n" +
     "<div class=\"nice-date-week names\">\n" +
     "<span class=\"nice-date-day\" ng-class=\"{ 'weekend': $index == 6 || $index == 5 }\" ng-repeat=\"day in weekdays\">{{ day }}</span>\n" +
@@ -5684,7 +5685,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                                    'weekend': day.isWeekday,\n" +
     "                                    'disabled': day.isDisabled,\n" +
     "                                    'between': isBetween(day.date, model, nextDate)\n" +
-    "                                }\" ng-click=\"select(day)\" ng-repeat=\"day in week.days\">\n" +
+    "                                }\" ng-click=\"select(day)\" ng-repeat=\"day in week.days\" ng-disabled=\"isDisabled\">\n" +
     "{{ day.number }}\n" +
     "</button>\n" +
     "</div>\n" +
@@ -5692,11 +5693,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-date-time\" ng-if=\"time\">\n" +
     "<nice-icon icon=\"icon-clock\"></nice-icon>\n" +
     "<div class=\"time-picker time-picker-hour\">\n" +
-    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.hour\" ng-change=\"timeChange()\" ng-options=\"hour as hour for hour in hours track by hour\"></select>\n" +
+    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.hour\" ng-change=\"timeChange()\" ng-options=\"hour as hour for hour in hours track by hour\" ng-disabled=\"isDisabled\"></select>\n" +
     "</div>\n" +
     "<div class=\"divider\">:</div>\n" +
     "<div class=\"time-picker time-picker-minute\">\n" +
-    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.minute\" ng-change=\"timeChange()\" ng-options=\"minute as minute for minute in minutes track by minute\"></select>\n" +
+    "<select ng-disabled=\"isDisabled\" ng-model=\"innerDate.minute\" ng-change=\"timeChange()\" ng-options=\"minute as minute for minute in minutes track by minute\" ng-disabled=\"isDisabled\"></select>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
@@ -5743,7 +5744,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"nice-daterange-picker-button input-group\" ng-class=\"{ 'open': isOpen }\" ng-click=\"open()\">\n" +
-    "<input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" readonly=\"readonly\">\n" +
+    "<input type=\"text\" class=\"form-control\" value=\"{{ modelFormat }}\" readonly=\"readonly\" ng-disabled=\"isDisabled\">\n" +
     "<span class=\"input-group-addon clickable\">\n" +
     "<nice-icon icon=\"icon-calendar\"></nice-icon>\n" +
     "</span>\n" +
@@ -5789,7 +5790,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"dropdown\">\n" +
     "<div class=\"dropdown-toggle\" id=\"dropdown{{randNum}}\" role=\"button\" ng-click=\"openDtpRange()\">\n" +
     "<div class=\"input-group\">\n" +
-    "<input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-click=\"openDtpRange()\">\n" +
+    "<input type=\"text\" class=\"form-control\" value=\"{{value}}\" ng-disabled=\"isDisabled\" ng-click=\"openDtpRange()\">\n" +
     "<span class=\"input-group-addon clickable\">\n" +
     "<nice-icon ng-if=\"date != 'false'\" icon=\"icon-calendar\"></nice-icon>\n" +
     "<nice-icon ng-if=\"date == 'false'\" icon=\"icon-clock\"></nice-icon>\n" +
@@ -6050,7 +6051,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('src/components/nice-icon/nice-icon.html',
     "<svg class=\"nice-icon\">\n" +
-    "<use ng-attr-xlink:href=\"{{ '#' + icon }}\" xlink:href=\"{{ '#' + icon }}\"></use>\n" +
+    "<use ng-attr-xlink:href=\"{{ '#' + icon }}\" xlink:href=\"\"></use>\n" +
     "</svg>"
   );
 
@@ -6134,16 +6135,16 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
-    "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "<div class=\"input-group\" ng-class=\"{'has-warning': !disabled && niceNumberForm.$invalid && niceNumberForm.$dirty}\">\n" +
+    "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
+    "<div class=\"input-group\" ng-class=\"{'has-warning': !isDisabled && niceNumberForm.$invalid && niceNumberForm.$dirty}\">\n" +
     "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-default btn-left\" type=\"button\" ng-disabled=\"!canSubstract\" ng-click=\"subtract()\" tabindex=\"-1\">\n" +
+    "<button class=\"btn btn-default btn-left\" type=\"button\" ng-disabled=\"!canSubstract || isDisabled\" ng-click=\"subtract()\" tabindex=\"-1\">\n" +
     "<nice-icon icon=\"icon-minus\"></nice-icon>\n" +
     "</button>\n" +
     "</span>\n" +
-    "<input type=\"number\" step=\"{{ step }}\" ng-change=\"inputChanged()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-model=\"model\">\n" +
+    "<input type=\"number\" step=\"{{ step }}\" ng-change=\"inputChanged()\" class=\"form-control\" max=\"{{ max }}\" min=\"{{ min }}\" ng-disabled=\"isDisabled\" ng-model=\"model\">\n" +
     "<span class=\"input-group-btn\">\n" +
-    "<button class=\"btn btn-default btn-right\" type=\"button\" ng-disabled=\"!canAdd\" ng-click=\"add()\" tabindex=\"-1\">\n" +
+    "<button class=\"btn btn-default btn-right\" type=\"button\" ng-disabled=\"!canAdd || isDisabled\" ng-click=\"add()\" tabindex=\"-1\">\n" +
     "<nice-icon icon=\"icon-plus\"></nice-icon>\n" +
     "</button>\n" +
     "</span>\n" +
@@ -7294,11 +7295,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>\n" +
-    "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
-    "<div class=\"yesno-wrapper noselect\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
+    "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
+    "<div class=\"yesno-wrapper noselect\">\n" +
     "<button class=\"yesno-yes-bg\" ng-click=\"switch()\" tabindex=\"-1\">{{ yes }}</button>\n" +
     "<button class=\"yesno-no-bg\" ng-click=\"switch()\" tabindex=\"-1\">{{ no }}</button>\n" +
-    "<button class=\"yesno-button btn btn-primary\" ng-class=\"buttonClass\" ng-click=\"switch()\">{{ state }}</button>\n" +
+    "<button class=\"yesno-button btn btn-primary\" ng-class=\"buttonClass\" ng-click=\"switch()\" ng-disabled=\"isDisabled\">{{ state }}</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

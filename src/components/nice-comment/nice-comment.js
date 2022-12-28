@@ -14,6 +14,7 @@ angular.module('niceElements')
       scope: {
         model: '=',
         title: '@?',
+        isDisabled: '=',
         placeholder: '@',
         noTextLabel: '@',
         noMargin: '@',
@@ -24,7 +25,7 @@ angular.module('niceElements')
         rows: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (scope.model == null) { scope.model =  ''; }
+        if (scope.model == null) { scope.model = ''; }
         if (!attrs.placeholder) { attrs.placeholder = ''; }
         if (!attrs.noTextLabel) { angular.isDefined(attrs.noTextLabel); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
@@ -34,9 +35,9 @@ angular.module('niceElements')
 
         var textareas = element.find('textarea');
 
-        scope.edit = function(){
-          scope.editing=true;
-          $timeout(function(){
+        scope.edit = function () {
+          scope.editing = true;
+          $timeout(function () {
             textareas[0].focus();
           });
         };
@@ -57,10 +58,10 @@ angular.module('niceElements')
           });
         }
       },
-      controller: function($scope){
+      controller: function ($scope) {
         $scope.editing = false;
 
-        $scope.save = function(){
+        $scope.save = function () {
           $scope.editing = false;
         };
       }

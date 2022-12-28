@@ -16,13 +16,11 @@
             <div class="dropdown">
                 <div class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="openDtpRange()">
                     <div class="input-group">
-                        <input type="text" class="form-control" value="{{value}}" ng-click="openDtpRange()">
+                        <input type="text" class="form-control" value="{{value}}" ng-disabled="isDisabled" ng-click="openDtpRange()">
                         <span class="input-group-addon clickable">
-                            <!-- <i class="fa" ng-class="{'fa-clock-o': date=='false', 'fa-calendar': date!='false'}"></i> -->
                             <nice-icon ng-if="date != 'false'" icon="icon-calendar"></nice-icon>
                             <nice-icon ng-if="date == 'false'" icon="icon-clock"></nice-icon>
                         </span>
-
                     </div>
                 </div>
             </div>

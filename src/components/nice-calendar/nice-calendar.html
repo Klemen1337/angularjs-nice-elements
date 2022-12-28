@@ -13,9 +13,9 @@
             <div class="nice-calendar-wrapper">
                 <div class="nice-calendar-weeks">
                     <div class="header">
-                        <button class="btn" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}"><i class="fa fa-angle-left"></i></button>
+                        <button class="btn" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}" ng-disabled="isDisabled"><i class="fa fa-angle-left"></i></button>
                         <span title="{{ month.format('M.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
-                        <button class="btn" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}"><i class="fa fa-angle-right"></i></button>
+                        <button class="btn" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}" ng-disabled="isDisabled"><i class="fa fa-angle-right"></i></button>
                     </div>
 
                     <div class="week names">
@@ -43,7 +43,7 @@
                                 (color && isBetweenRange(day.date)) && {'background-color': lighten(color) } ||
                                 (color && isSameDay(day.date, startDate)) && {'background-color': color } ||
                                 (color && isSameDay(day.date, endDate)) && {'background-color': color }
-                            " ng-click="select(day)" ng-repeat="day in week.days">
+                            " ng-click="select(day)" ng-repeat="day in week.days" ng-disabled="isDisabled">
                             {{ day.number }}
                             <p class="popup" ng-if="!hideHover">{{ popupText }}</p>
                         </button>
@@ -53,12 +53,12 @@
 
                 <div class="nice-calendar-time" ng-if="time">
                     <div class="time-picker">
-                        <select title="{{ 'Select start time' | translate:'Nice' }}" class="time-picker-hour" ng-model="startDateHour" ng-change="startHourChange(startDateHour)" ng-options="hour for hour in hours">
+                        <select title="{{ 'Select start time' | translate:'Nice' }}" class="time-picker-hour" ng-model="startDateHour" ng-change="startHourChange(startDateHour)" ng-options="hour for hour in hours" ng-disabled="isDisabled">
                         </select>
                     </div>
 
                     <div class="time-picker">
-                        <select title="{{ 'Select start time' | translate:'Nice' }}" class="time-picker-minute" ng-model="startDateMinute" ng-change="startMinuteChange(startDateMinute)" ng-options="minute for minute in minutes">
+                        <select title="{{ 'Select start time' | translate:'Nice' }}" class="time-picker-minute" ng-model="startDateMinute" ng-change="startMinuteChange(startDateMinute)" ng-options="minute for minute in minutes" ng-disabled="isDisabled">
                         </select>
                     </div>
 
@@ -68,12 +68,12 @@
                     </div>
 
                     <div class="time-picker">
-                        <select title="{{ 'Select end time' | translate:'Nice' }}" class="time-picker-hour" ng-model="endDateHour" ng-change="endHourChange(endDateHour)" ng-options="hour for hour in hours">
+                        <select title="{{ 'Select end time' | translate:'Nice' }}" class="time-picker-hour" ng-model="endDateHour" ng-change="endHourChange(endDateHour)" ng-options="hour for hour in hours" ng-disabled="isDisabled">
                         </select>
                     </div>
 
                     <div class="time-picker no-border-right">
-                        <select title="{{ 'Select end time' | translate:'Nice' }}" class="time-picker-minute" ng-model="endDateMinute" ng-change="endMinuteChange(endDateMinute)" ng-options="minute for minute in minutes">
+                        <select title="{{ 'Select end time' | translate:'Nice' }}" class="time-picker-minute" ng-model="endDateMinute" ng-change="endMinuteChange(endDateMinute)" ng-options="minute for minute in minutes" ng-disabled="isDisabled">
                         </select>
                     </div>
                 </div>

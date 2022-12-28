@@ -14,7 +14,7 @@ angular.module('niceElements')
       scope: {
         model: '=',
         valid: '=',
-        disabled: '=',
+        isDisabled: '=',
         title: '@?',
         min: '@',
         max: '@',
@@ -34,7 +34,7 @@ angular.module('niceElements')
         onChange: '&?'
       },
 
-      controller: function($scope, $timeout) {
+      controller: function ($scope, $timeout) {
         $scope.canAdd = true;
         $scope.canSubstract = true;
         $scope.preventZero = $scope.preventZero == "true";
@@ -75,7 +75,7 @@ angular.module('niceElements')
         if (!$scope.model) {
           $scope.model = $scope.defaultValue;
         } else {
-          if(parseFloat($scope.model)) {
+          if (parseFloat($scope.model)) {
             $scope.model = parseFloat($scope.model);
           } else {
             $scope.model = $scope.defaultValue;
@@ -83,7 +83,7 @@ angular.module('niceElements')
         }
 
         // Check canAdd or canSubtract
-        $scope.check = function() {
+        $scope.check = function () {
           if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
             $scope.niceNumberForm.$setValidity("no-value", false);
           } else {
@@ -115,25 +115,25 @@ angular.module('niceElements')
 
 
         // Check when load
-        $timeout(function() {
+        $timeout(function () {
           $scope.check();
         });
 
 
         // On input change
-        $scope.inputChanged = function() {
+        $scope.inputChanged = function () {
           $scope.check();
         };
-        
+
 
         // Watch for model change
-        $scope.$watch("model", function() {
+        $scope.$watch("model", function () {
           $scope.check();
         });
 
 
         // Add to the value
-        $scope.add = function() {
+        $scope.add = function () {
           var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).plus($scope.step).toNumber(); //.toFixed($scope.decimals);
           if ($scope.max) {
             if (result <= parseFloat($scope.max)) {
@@ -149,7 +149,7 @@ angular.module('niceElements')
 
 
         // Subtract to the value
-        $scope.subtract = function() {
+        $scope.subtract = function () {
           var result = new Decimal($scope.model != undefined ? $scope.model : $scope.defaultValue).minus($scope.step).toNumber();
           if (result >= Number($scope.min)) {
             $scope.model = result;

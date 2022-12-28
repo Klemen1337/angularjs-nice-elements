@@ -189,12 +189,12 @@
     &:disabled {
       cursor: not-allowed;
       background: $nice-dropdown-disabled-bg !important;
-      border-color: $nice-dropdown-disabled-border !important;
+      border-color: var(--nice-border-color);
     }
 
     &:hover {
       background: $nice-dropdown-hover-bg;
-      border-color: $nice-dropdown-hover-border;
+      border-color: var(--nice-border-color);
       color: $nice-dropdown-hover-color;
     }
 
@@ -202,6 +202,7 @@
     &:focus {
       background: $nice-focus-bg !important;
       color: $nice-focus-color !important;
+      border-color: var(--nice-border-color);
       @extend .nice-focus;
     }
   }

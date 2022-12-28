@@ -11,7 +11,7 @@
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
             <div class="nice-daterange-picker-button input-group" ng-class="{ 'open': isOpen }" ng-click="open()">
-                <input type="text" class="form-control" value="{{ modelFormat }}" readonly="readonly" />
+                <input type="text" class="form-control" value="{{ modelFormat }}" readonly="readonly" ng-disabled="isDisabled" />
                 <!-- <div class="form-control" title="{{ modelFormat }}">{{ modelFormat }}</div> -->
                 <span class="input-group-addon clickable">
                     <nice-icon icon="icon-calendar"></nice-icon>
