@@ -73,13 +73,19 @@ label.nice {
       color: $nice-label-color;
     }
 
-    .nice-title-help {
+    .nice-title-text+.nice-title-help {
       margin-left: 5px;
       line-height: 1;
     }
 
     @media (max-width: $screen-xs-max) {
       justify-content: flex-start;
+      min-height: auto;
+      margin-bottom: 3px;
+
+      &.nice-title-empty {
+        margin-bottom: 0;
+      }
 
       .nice-title-text {
         text-align: left;

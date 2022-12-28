@@ -7215,7 +7215,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-title/nice-title.html',
-    "<div class=\"nice-title col-xs-12\" ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\">\n" +
+    "<div class=\"nice-title col-xs-12\" ng-class=\"[labelWidth ? labelWidth : 'col-sm-4', {'nice-title-empty': !title && !help} ]\">\n" +
     "<div class=\"nice-title-text\">{{ title }}<span ng-if=\"required\">*</span></div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>"

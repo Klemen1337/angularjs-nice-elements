@@ -136,7 +136,7 @@ label.nice {
   color: #404040;
 }
 
-.nice-component .nice-title .nice-title-help {
+.nice-component .nice-title .nice-title-text + .nice-title-help {
   margin-left: 5px;
   line-height: 1;
 }
@@ -144,6 +144,11 @@ label.nice {
 @media (max-width: 767px) {
   .nice-component .nice-title {
     justify-content: flex-start;
+    min-height: auto;
+    margin-bottom: 3px;
+  }
+  .nice-component .nice-title.nice-title-empty {
+    margin-bottom: 0;
   }
   .nice-component .nice-title .nice-title-text {
     text-align: left;
