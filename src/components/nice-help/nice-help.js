@@ -11,6 +11,7 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-help/nice-help.html',
       restrict: 'E',
+      replace: true,
       scope: {
         text: '@'
       },
