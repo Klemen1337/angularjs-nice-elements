@@ -4181,10 +4181,6 @@ p.nice {
   object-fit: contain;
 }
 
-nice-help {
-  display: inline-flex;
-}
-
 .nice-help {
   position: relative;
   display: inline-block;
