@@ -35,7 +35,6 @@
                 <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline"></nice-date>
 
                 <nice-slot is-inline="isInline">
-                    <pre>{{ data.niceDate2 }}</pre>
                     <button class="btn btn-primary" ng-click="changeDate(false)">Prev</button>
                     <button class="btn btn-primary" ng-click="changeDate(true)">Next</button>
                 </nice-slot>
@@ -132,7 +131,7 @@
 
                 <nice-calendar title="Calendar" time="true" end-date="data.calendarEndDate" start-date="data.calendarStartDate" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" is-inline="isInline"></nice-calendar>
 
-                <nice-slot>
+                <nice-slot help="This is a test" is-inline="isInline">
                     <button class="btn btn-primary" ng-click="changeTestRange()">Change date</button>
                 </nice-slot>
 

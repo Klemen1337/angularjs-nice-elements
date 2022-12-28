@@ -1,10 +1,7 @@
 <div class="nice-component nice-label" ng-class="{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }">
     <div class="row">
-        <!------------------------- Label ------------------------->
-        <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-            <div class="nice-title-text">{{ title }}</div>
-            <nice-help class="nice-title-help" ng-if="help" text="{{ help }}"></nice-help>
-        </div>
+        <!------------------------- Title ------------------------->
+        <nice-title title="title" help="help" required="required" label-width="labelWidth"></nice-title>
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-xs-8'">

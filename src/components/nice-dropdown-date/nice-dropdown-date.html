@@ -1,14 +1,10 @@
 <div class="nice-component nice-dropdown-date" ng-form="dropdownDateForm" ng-class="{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }">
     <div class="row">
-        <!------------------------- Label ------------------------->
-        <div class="nice-title col-xs-12" ng-class="labelWidth ? labelWidth : 'col-sm-4'" ng-if="title">
-            <div class="nice-title-text">{{ title }}<span ng-if="required">*</span></div>
-            <nice-help class="nice-title-help" ng-if="help" text="{{ help }}"></nice-help>
-        </div>
+        <!------------------------- Title ------------------------->
+        <nice-title title="title" help="help" required="required" label-width="labelWidth"></nice-title>
 
         <!------------------------- Field ------------------------->
-        <div class="nice-field col-xs-12"
-             ng-class="[
+        <div class="nice-field col-xs-12" ng-class="[
                 fieldWidth ? fieldWidth : 'col-sm-8',
                 {
                   'has-warning': !isDisabled && dropdownDateForm.$invalid && dropdownDateForm.$dirty,
@@ -17,39 +13,17 @@
             ]">
             <div class="form-inline">
                 <div class="input-group nice-dropdown-date-day">
-                    <select
-                        ng-model="dateFields.day"
-                        class="form-control"
-                        ng-options="day for day in days"
-                        ng-change="checkDate()"
-                        ng-disabled="isDisabled"
-                        required="true"
-                    ></select>
+                    <select ng-model="dateFields.day" class="form-control" ng-options="day for day in days" ng-change="checkDate()" ng-disabled="isDisabled" required="true"></select>
                 </div>
 
                 <div class="input-group nice-dropdown-date-month">
-                    <select
-                        ng-model="dateFields.month"
-                        class="form-control"
-                        ng-options="month.value as month.name for month in months"
-                        ng-change="checkDate()"
-                        ng-disabled="isDisabled"
-                        required="true"
-                    ></select>
+                    <select ng-model="dateFields.month" class="form-control" ng-options="month.value as month.name for month in months" ng-change="checkDate()" ng-disabled="isDisabled" required="true"></select>
                 </div>
 
                 <div class="input-group nice-dropdown-date-year">
-                    <select
-                        ng-model="dateFields.year"
-                        class="form-control"
-                        ng-options="year for year in years"
-                        ng-change="checkDate()"
-                        ng-disabled="isDisabled"
-                        required="true"
-                    ></select>
+                    <select ng-model="dateFields.year" class="form-control" ng-options="year for year in years" ng-change="checkDate()" ng-disabled="isDisabled" required="true"></select>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
