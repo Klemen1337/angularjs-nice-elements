@@ -1,4 +1,4 @@
-![Nice elements](/demo/assets/logo.png)
+![Nice elements](demo/assets/logo.png)
 
 # Nice elements v1.7.3
 
@@ -18,13 +18,10 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 - nice-date
 - nice-date-input
 - nice-date-range
-- nice-datetime-picker
-- nice-datetimerange-picker
 - nice-datetimerange-picker-2
 - nice-dropdown
 - nice-dropdown-date
 - nice-dropdown-old
-- nice-dtp
 - nice-help
 - nice-icon
 - nice-input
@@ -47,6 +44,9 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 - nice-tooltip
 - nice-upload
 - nice-yesno
+- ~~nice-datetime-picker~~ (DEPREACATED)
+- ~~nice-datetimerange-picker~~ (DEPREACATED)
+- ~~nice-dtp~~ (DEPREACATED)
 
 ## Filters
 

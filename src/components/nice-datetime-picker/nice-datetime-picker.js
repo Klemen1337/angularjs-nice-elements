@@ -35,53 +35,54 @@ angular.module('niceElements').directive('niceDatetimePicker', function () {
       onChange: '&?'
     },
     controller: function ($scope, gettextCatalog) {
-        $scope.date = $scope.date == 'true' || $scope.date == true;
-        $scope.time = $scope.time == 'true' || $scope.time == true;
-        $scope.noMargin === 'true' || $scope.noMargin === true;
-        $scope.enableOkButtons === 'true' || $scope.enableOkButtons === true;
-        $scope.lang = $scope.lang || 'en';
-        $scope.okText = $scope.okText || gettextCatalog.getString('OK', null, 'Nice');
-        $scope.cancelText = $scope.cancelText || gettextCatalog.getString('Cancel', null, 'Nice');
-        $scope.weekStart = parseInt($scope.weekStart) || 1;
-        $scope.width = parseInt($scope.width) || 300;
-        $scope.isOpen = false;
-        $scope.internalDate = moment($scope.model) || moment();
+      console.warn("[NICE ELEMENTS] nice-datetime-picker component is deprecated!");
+      $scope.date = $scope.date == 'true' || $scope.date == true;
+      $scope.time = $scope.time == 'true' || $scope.time == true;
+      $scope.noMargin === 'true' || $scope.noMargin === true;
+      $scope.enableOkButtons === 'true' || $scope.enableOkButtons === true;
+      $scope.lang = $scope.lang || 'en';
+      $scope.okText = $scope.okText || gettextCatalog.getString('OK', null, 'Nice');
+      $scope.cancelText = $scope.cancelText || gettextCatalog.getString('Cancel', null, 'Nice');
+      $scope.weekStart = parseInt($scope.weekStart) || 1;
+      $scope.width = parseInt($scope.width) || 300;
+      $scope.isOpen = false;
+      $scope.internalDate = moment($scope.model) || moment();
 
-        if (!$scope.format) {
-          if ($scope.date && !$scope.time) {
-            $scope.format = 'D.M.YYYY';
-          } else if (!$scope.date && $scope.time) {
-            $scope.format = 'HH:mm';
-          } else {
-            $scope.format = 'D.M.YYYY • H:mm';
-          }
+      if (!$scope.format) {
+        if ($scope.date && !$scope.time) {
+          $scope.format = 'D.M.YYYY';
+        } else if (!$scope.date && $scope.time) {
+          $scope.format = 'HH:mm';
+        } else {
+          $scope.format = 'D.M.YYYY • H:mm';
         }
-
-        $scope.openDtp = function () {
-          if (!$scope.isDisabled) {
-            $scope.isOpen = true;
-            $scope.$broadcast('dtp-open-click');
-          }
-        };
-
-        $scope.closeDtp = function (response) {
-          $scope.isOpen = false;
-          $scope.$broadcast('dtp-close-click');
-        };
-
-        $scope.$on('dateSelected', function () {
-          $scope.formDatetimePicker.$setDirty();
-        });
-
-        $scope.$watch('internalDate', function (newDate) {
-          $scope.model = moment(newDate);
-          $scope.value = moment(newDate).format($scope.format);
-          if ($scope.onChange) $scope.onChange({ model: $scope.model });
-        });
-
-        $scope.$watch('model', function (newModel, oldModel) {
-          $scope.value = moment(newModel).format($scope.format);
-        });
       }
+
+      $scope.openDtp = function () {
+        if (!$scope.isDisabled) {
+          $scope.isOpen = true;
+          $scope.$broadcast('dtp-open-click');
+        }
+      };
+
+      $scope.closeDtp = function (response) {
+        $scope.isOpen = false;
+        $scope.$broadcast('dtp-close-click');
+      };
+
+      $scope.$on('dateSelected', function () {
+        $scope.formDatetimePicker.$setDirty();
+      });
+
+      $scope.$watch('internalDate', function (newDate) {
+        $scope.model = moment(newDate);
+        $scope.value = moment(newDate).format($scope.format);
+        if ($scope.onChange) $scope.onChange({ model: $scope.model });
+      });
+
+      $scope.$watch('model', function (newModel, oldModel) {
+        $scope.value = moment(newModel).format($scope.format);
+      });
     }
+  }
 });

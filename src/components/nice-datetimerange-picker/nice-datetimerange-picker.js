@@ -7,7 +7,7 @@
  * # niceDatetimerangePicker
  */
 angular.module('niceElements')
-  .directive('niceDatetimerangePicker', function(gettextCatalog) {
+  .directive('niceDatetimerangePicker', function (gettextCatalog) {
     return {
       scope: {
         modelStart: '=', // binding model
@@ -37,7 +37,8 @@ angular.module('niceElements')
       },
       templateUrl: 'src/components/nice-datetimerange-picker/nice-datetimerange-picker.html',
       link: {
-        pre: function($scope) {
+        pre: function ($scope) {
+          console.warn("[NICE ELEMENTS] nice-datetimerange-picker component is deprecated!");
           // Default parameters
           var params = {
             title: '',
@@ -59,18 +60,18 @@ angular.module('niceElements')
             enableOkButtons: false
           };
 
-          if($scope.formatOutput === undefined) $scope.formatOutput = false;
+          if ($scope.formatOutput === undefined) $scope.formatOutput = false;
 
-          var setLabelValue = function(){
+          var setLabelValue = function () {
             var _from = moment($scope.internalStart).format(params.format);
             var _to = moment($scope.internalEnd).format(params.format);
             $scope.value = _from + ' - ' + _to;
           };
 
           var initCurrentDates = function () {
-            if (typeof($scope.modelStart) === 'undefined' || $scope.modelStart === null) {
+            if (typeof ($scope.modelStart) === 'undefined' || $scope.modelStart === null) {
               var _start = moment().subtract(1, 'days');
-              if($scope.formatOutput) _start = _start.format(params.modelFormat);
+              if ($scope.formatOutput) _start = _start.format(params.modelFormat);
               $scope.modelStart = _start;
 
             } else {
@@ -97,9 +98,9 @@ angular.module('niceElements')
             }
 
             // initialize dateEnd
-            if (typeof($scope.modelEnd) === 'undefined' || $scope.modelEnd === null) {
+            if (typeof ($scope.modelEnd) === 'undefined' || $scope.modelEnd === null) {
               var _end = moment();
-              if($scope.formatOutput) _end = _end.format(params.modelFormat);
+              if ($scope.formatOutput) _end = _end.format(params.modelFormat);
               $scope.modelEnd = _end;
 
             } else {
@@ -168,14 +169,14 @@ angular.module('niceElements')
             }
           };
 
-          $scope.okClick = function(){
+          $scope.okClick = function () {
             setLabelValue();
             var _start = moment($scope.internalStart, params.modelFormat);
-            if($scope.formatOutput) _start = _start.format(params.modelFormat);
+            if ($scope.formatOutput) _start = _start.format(params.modelFormat);
             $scope.modelStart = _start;
 
             var _end = moment($scope.internalEnd, params.modelFormat);
-            if($scope.formatOutput) _end = _end.format(params.modelFormat);
+            if ($scope.formatOutput) _end = _end.format(params.modelFormat);
             $scope.modelEnd = _end;
 
             //$scope.modelStart = angular.copy($scope.internalStart);
@@ -185,21 +186,21 @@ angular.module('niceElements')
             if ($scope.onChange) $scope.onChange({ modelStart: $scope.modelStart, modelEnd: $scope.modelEnd });
           };
 
-          $scope.cancelClick = function(){
+          $scope.cancelClick = function () {
             $scope.showDtpRange = false;
             //$scope.internalStart = angular.copy($scope.modelStart);
             //$scope.internalEnd = angular.copy($scope.modelEnd);
             var _start = moment($scope.modelStart);
-            if($scope.formatOutput) _start = _start.format(params.modelFormat);
+            if ($scope.formatOutput) _start = _start.format(params.modelFormat);
             var _end = moment($scope.modelEnd);
-            if($scope.formatOutput) _end = _end.format(params.modelFormat);
+            if ($scope.formatOutput) _end = _end.format(params.modelFormat);
 
             $scope.internalStart = _start;
             $scope.internalEnd = _end;
             setLabelValue();
           };
 
-          $scope.selectLastNDays = function(days){
+          $scope.selectLastNDays = function (days) {
             $scope.dateStart = moment().subtract(days, 'days');
             $scope.dateEnd = moment();
             $scope.internalStart = $scope.dateStart;
@@ -207,7 +208,7 @@ angular.module('niceElements')
             setLabelValue();
           };
 
-          $scope.selectLastMonth = function(){
+          $scope.selectLastMonth = function () {
             $scope.dateStart = moment().subtract(1, 'months');
             $scope.dateEnd = moment();
             $scope.internalStart = $scope.dateStart;
@@ -215,7 +216,7 @@ angular.module('niceElements')
             setLabelValue();
           };
 
-          $scope.selectThisMonth = function(){
+          $scope.selectThisMonth = function () {
             $scope.dateStart = moment().date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
             $scope.dateEnd = moment().endOf('month');
             $scope.internalStart = $scope.dateStart;
@@ -235,7 +236,7 @@ angular.module('niceElements')
             setLabelValue();
           });
 
-          $scope.$watchGroup(['modelStart', 'modelEnd'], function(){
+          $scope.$watchGroup(['modelStart', 'modelEnd'], function () {
             initCurrentDates();
           });
 

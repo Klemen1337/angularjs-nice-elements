@@ -150,28 +150,14 @@
 
                 <nice-input title="Random number" model="data.number" placeholder="1234" is-disabled="data.disabled" type="number" help="This is a test" is-inline="isInline"></nice-input>
 
-                <nice-datetime-picker help="This is a test" is-disabled="data.disabled" model="data.dt1" title="Datetimepicker all" on-change="handleChange(model)" date="true" time="true" is-inline="isInline"></nice-datetime-picker>
-
-                <nice-datetime-picker is-disabled="data.disabled" model="data.dt2" title="Datetimepicker time" help="This is a test" date="false" time="true" is-inline="isInline"></nice-datetime-picker>
-
-                <nice-datetime-picker is-disabled="data.disabled" model="data.dt3" title="Datetimepicker date" help="This is a test" date="true" time="false" is-inline="isInline"></nice-datetime-picker>
-
-                <nice-datetime-picker is-disabled="data.disabled" model="data.dt4" title="Datetimepicker custom" date="true" time="false" format="DD.MM.YYYY" help="This is a test" model-format="YYYY-MM-DD" is-inline="isInline"></nice-datetime-picker>
-
-                <nice-datetimerange-picker is-disabled="data.disabled" model-start="dtStart" model-end="dtEnd" title="Range picker" field-width="col-sm-8" date="true" help="This is a test" time="true" is-inline="isInline"></nice-datetimerange-picker>
+                <!-- <nice-datetime-picker help="This is a test" is-disabled="data.disabled" model="data.dt1" title="Datetimepicker all" on-change="handleChange(model)" date="true" time="true" is-inline="isInline"></nice-datetime-picker> -->
+                <!-- <nice-datetime-picker is-disabled="data.disabled" model="data.dt2" title="Datetimepicker time" help="This is a test" date="false" time="true" is-inline="isInline"></nice-datetime-picker> -->
+                <!-- <nice-datetime-picker is-disabled="data.disabled" model="data.dt3" title="Datetimepicker date" help="This is a test" date="true" time="false" is-inline="isInline"></nice-datetime-picker> -->
+                <!-- <nice-datetime-picker is-disabled="data.disabled" model="data.dt4" title="Datetimepicker custom" date="true" time="false" format="DD.MM.YYYY" help="This is a test" model-format="YYYY-MM-DD" is-inline="isInline"></nice-datetime-picker> -->
+                <!-- <nice-datetimerange-picker is-disabled="data.disabled" model-start="dtStart" model-end="dtEnd" title="Range picker" field-width="col-sm-8" date="true" help="This is a test" time="true" is-inline="isInline"></nice-datetimerange-picker> -->
+                <!-- <nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true" is-inline="isInline"></nice-datetimerange-picker> -->
 
                 <nice-datetimerange-picker2 is-disabled="data.disabled" start-date="dtStart" end-date="dtEnd" help="This is a test" title="Range picker v2" on-change="handleChange(startDate, endDate)" time="true" is-inline="isInline"></nice-datetimerange-picker2>
-                <!-- <nice-datetimerange-picker 
-                    modelStart="data.dateOfBirth" 
-                    modelEnd="data.dateEnd" 
-                    max-date="2015-08-22T05:43:00" 
-                    min-date="2015-08-12T05:01:00" 
-                    title="Date of birth" 
-                    field-width="col-sm-4" 
-                    date="true" 
-                    time="true"
-                    is-inline="isInline"
-                ></nice-datetimerange-picker> -->
 
                 <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true help="This is a test" is-disabled="data.disabled" is-inline="isInline">
                 </nice-input>
