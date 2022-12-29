@@ -3582,7 +3582,6 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-icon/nice-icon.html',
       restrict: 'E',
-      replace: true,
       scope: {
         icon: '@'
       },
@@ -5059,7 +5058,7 @@ angular.module('niceElements')
   .directive('niceTitle', function () {
     return {
       templateUrl: 'src/components/nice-title/nice-title.html',
-      replace: true,
+      restrict: 'E',
       scope: {
         labelWidth: '=?',
         title: '=?',

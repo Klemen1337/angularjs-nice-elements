@@ -11,7 +11,6 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-icon/nice-icon.html',
       restrict: 'E',
-      replace: true,
       scope: {
         icon: '@'
       },

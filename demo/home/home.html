@@ -39,7 +39,7 @@
                     <button class="btn btn-primary" ng-click="changeDate(true)">Next</button>
                 </nice-slot>
 
-                <div ng-show="showMore">
+                <div ng-if="showMore">
                     <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline" required="isRequired"></nice-date>
                     <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline" required="isRequired"></nice-dropdown>
                 </div>
