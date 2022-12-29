@@ -25,7 +25,7 @@ angular.module('niceElements')
         objKey: '@?',             // Optional - default is 'id'. Used only when returnOnlyKey=true
         selectedIsObj: '@',       // Optional parameter.
         nullable: '@',            // No selection is possible
-        required: '@',            // Model cannot be NULL
+        required: '=',            // Model cannot be NULL
         showTax: '@',             // Shows tax rate
         noMargin: '@',            // margin-bottom: 0px
         multiple: '@',            // Can select multiple items

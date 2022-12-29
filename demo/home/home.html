@@ -3,36 +3,36 @@
     <div class="white-wrapper">
         <div class="row">
             <div ng-form="forme" class="col-sm-6">
-                <nice-date-input title="Date input" model="data.niceDateInput" required="true" is-disabled="data.disabled" is-inline="isInline"></nice-date-input>
+                <nice-date-input title="Date input" model="data.niceDateInput" required="isRequired" is-disabled="data.disabled" is-inline="isInline"></nice-date-input>
 
-                <nice-quantity title="Quantity" model="data.niceQuantity" min="1" max="10" required="true" is-disabled="data.disabled" is-inline="isInline"></nice-quantity>
+                <nice-quantity title="Quantity" model="data.niceQuantity" min="1" max="10" required="isRequired" is-disabled="data.disabled" is-inline="isInline"></nice-quantity>
 
-                <nice-number title="Number" model="niceNumberTest" min="1" max="10" required="true" is-disabled="data.disabled" is-inline="isInline"></nice-number>
+                <nice-number title="Number" model="niceNumberTest" min="1" max="10" required="isRequired" is-disabled="data.disabled" is-inline="isInline"></nice-number>
 
-                <nice-number title="Number" model="niceNumberTest" step="1" allow-negative="true" prevent-zero="true" default-value="1" floating-error="true" is-disabled="data.disabled" is-inline="isInline"></nice-number>
+                <nice-number title="Number" model="niceNumberTest" step="1" allow-negative="true" prevent-zero="true" default-value="1" floating-error="true" is-disabled="data.disabled" is-inline="isInline" required="isRequired"></nice-number>
 
-                <nice-search2 title="Search people v2" model="searchPeopleString" refresh-function="searchPeople" placeholder="Search item" show-dropdown="true" on-select="countrySelected" on-change="handleChange(model)" is-disabled="data.disabled" is-inline="isInline">
+                <nice-search2 title="Search people v2" model="searchPeopleString" refresh-function="searchPeople" placeholder="Search item" show-dropdown="true" on-select="countrySelected" on-change="handleChange(model)" is-disabled="data.disabled" is-inline="isInline" required="isRequired">
                     <div class="person-row">
                         <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
                     </div>
                 </nice-search2>
 
-                <nice-search2 title="Search v2" model="data.searchvtwo" placeholder="Search item" on-select="countrySelected" on-change="handleChange(model)" is-disabled="data.disabled" is-inline="isInline">
+                <nice-search2 title="Search v2" model="data.searchvtwo" placeholder="Search item" on-select="countrySelected" on-change="handleChange(model)" is-disabled="data.disabled" is-inline="isInline" required="isRequired">
                     <div class="person-row">
                         <img ng-src="{{ $parent.result.avatar }}"> <span ng-bind-html="$parent.result.name | niceHighlight:$parent.model"></span>
                     </div>
                 </nice-search2>
 
-                <nice-search2 title="Search country v2" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="true" on-select="countrySelected" is-disabled="data.disabled" is-inline="isInline">
+                <nice-search2 title="Search country v2" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="true" on-select="countrySelected" is-disabled="data.disabled" is-inline="isInline" required="isRequired">
                     <!-- <img ng-src="https://www.countryflags.io/{{ $parent.result.iso }}/flat/16.png"> --><span>{{
                         $parent.result.name }}</span>
                 </nice-search2>
 
-                <nice-search title="Search" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="false" on-select="countrySelected" key-for-input-label="name" is-disabled="data.disabled" is-inline="isInline"></nice-search>
+                <nice-search title="Search" model="searchCountryString" refresh-function="searchCountry" placeholder="Search item" show-dropdown="false" on-select="countrySelected" key-for-input-label="name" is-disabled="data.disabled" is-inline="isInline" required="isRequired"></nice-search>
 
-                <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline"></nice-date>
+                <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline" required="isRequired"></nice-date>
 
-                <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline"></nice-date>
+                <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline" required="isRequired"></nice-date>
 
                 <nice-slot is-inline="isInline">
                     <button class="btn btn-primary" ng-click="changeDate(false)">Prev</button>
@@ -40,27 +40,27 @@
                 </nice-slot>
 
                 <div ng-show="showMore">
-                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline"></nice-date>
-                    <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline"></nice-dropdown>
+                    <nice-date title="Nice date" time="true" model="data.niceDate" is-disabled="data.disabled" on-change="handleChange(model)" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline" required="isRequired"></nice-date>
+                    <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline" required="isRequired"></nice-dropdown>
                 </div>
 
                 <nice-slot is-inline="isInline">
                     <button ng-click="toggleShowMore()" class="btn btn-primary">Show more {{ showMore }}</button>
                 </nice-slot>
 
-                <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled" help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>" is-inline="isInline"></nice-date>
+                <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled" help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>" is-inline="isInline" required="isRequired"></nice-date>
 
-                <nice-date title="Nice date no time" inline="true" model="data.niceDate2" is-disabled="data.disabled" help="This is a test" is-inline="isInline"></nice-date>
+                <nice-date title="Nice date no time" inline="true" model="data.niceDate2" is-disabled="data.disabled" help="This is a test" is-inline="isInline" required="isRequired"></nice-date>
 
-                <nice-progress-bar title="Progress bar" value="1" max="2" help="This is a test" is-inline="isInline"></nice-progress-bar>
+                <nice-progress-bar title="Progress bar" value="1" max="2" help="This is a test" is-inline="isInline" required="isRequired"></nice-progress-bar>
 
-                <nice-quantity title="Quantity" model="data.quantity" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" is-inline="isInline"></nice-quantity>
+                <nice-quantity title="Quantity" model="data.quantity" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" is-inline="isInline" required="isRequired"></nice-quantity>
 
-                <nice-upload title="Nice upload" model="data.upload" is-disabled="data.disabled" help="This is a test" is-inline="isInline"></nice-upload>
+                <nice-upload title="Nice upload" model="data.upload" is-disabled="data.disabled" help="This is a test" is-inline="isInline" required="isRequired"></nice-upload>
 
-                <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4" help="This is a test" on-change="handleChange(model)" is-inline="isInline"></nice-yesno>
+                <nice-yesno title="Disable?" model="data.disabled" field-width="col-sm-4" help="This is a test" on-change="handleChange(model)" is-inline="isInline" required="isRequired"></nice-yesno>
 
-                <nice-dropdown title="Country (value)" model="data.dropdownCountryKey" list="countries" no-options-text="Brez opcij" obj-key="iso" loading="dropdownLoading" add-button-function="setSlovenia" nullable="true" on-change="handleChange(model)" selected-is-key="true" clear-on-select="true" is-disabled="data.disabled" help="This is a test" is-inline="isInline">
+                <nice-dropdown title="Country (value)" model="data.dropdownCountryKey" list="countries" no-options-text="Brez opcij" obj-key="iso" loading="dropdownLoading" add-button-function="setSlovenia" nullable="true" on-change="handleChange(model)" selected-is-key="true" clear-on-select="true" is-disabled="data.disabled" help="This is a test" is-inline="isInline" required="isRequired">
                     <nice-dropdown-button>
                         <!-- <img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> --><span>{{
                             $parent.selected.name }}</span>
@@ -71,7 +71,7 @@
                     </nice-dropdown-option>
                 </nice-dropdown>
 
-                <nice-dropdown title="Country (object)" model="data.dropdownCountry" list="countries" no-options-text="Brez opcij" obj-key="iso" loading="dropdownLoading" add-button-function="testFunction" on-change="testFunction" is-disabled="data.disabled" help="This is a test" is-inline="isInline">
+                <nice-dropdown title="Country (object)" model="data.dropdownCountry" list="countries" no-options-text="Brez opcij" obj-key="iso" loading="dropdownLoading" add-button-function="testFunction" on-change="testFunction" is-disabled="data.disabled" help="This is a test" is-inline="isInline" required="isRequired">
                     <nice-dropdown-button>
                         <!-- <img ng-src="https://www.countryflags.io/{{ $parent.selected.iso }}/flat/16.png"> --><span>{{
                             $parent.selected.name }}</span>
@@ -88,39 +88,39 @@
                     <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
                 </nice-dropdown>
 
-                <nice-dropdown title="Search (value)" model="data.dropdownPerson2" search-function="searchFunction" is-inline="isInline" is-disabled="data.disabled" selected-is-key="true">
+                <nice-dropdown title="Search (value)" model="data.dropdownPerson2" search-function="searchFunction" is-inline="isInline" is-disabled="data.disabled" selected-is-key="true" required="isRequired">
                     <nice-dropdown-button>{{ $parent.selected.name }}</nice-dropdown-button>
                     <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
                 </nice-dropdown>
 
-                <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline"></nice-dropdown>
+                <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline" required="isRequired"></nice-dropdown>
 
-                <nice-dropdown title="Country" model="data.dropdownListObj" list="listObjs" selected-is-key="true" is-disabled="data.disabled" help="This is a test" nullable="true" is-inline="isInline">
+                <nice-dropdown title="Country" model="data.dropdownListObj" list="listObjs" selected-is-key="true" is-disabled="data.disabled" help="This is a test" nullable="true" is-inline="isInline" required="isRequired">
                 </nice-dropdown>
 
-                <nice-dropdown title="Vzdrževanje" model="simpleListData" list="simpleList" obj-value="text" obj-key="text" is-disabled="data.disabled" help="This is a test" selected-is-key="true" is-inline="isInline">
+                <nice-dropdown title="Vzdrževanje" model="simpleListData" list="simpleList" obj-value="text" obj-key="text" is-disabled="data.disabled" help="This is a test" selected-is-key="true" is-inline="isInline" required="isRequired">
                     <!-- <nice-dropdown-button>{{ $parent.selected.text }}</nice-dropdown-button>
                     <nice-dropdown-option>{{ $parent.item.text }}</nice-dropdown-option> -->
                 </nice-dropdown>
 
                 <div class="overflow-hidden">
-                    <nice-dropdown title="Country (position fixed)" model="data.dropdownListObj" list="listObjs" selected-is-key="true" is-disabled="data.disabled" help="Position of the dropdown is fixed not absolute" nullable="true" is-inline="isInline" position-fixed="true"></nice-dropdown>
+                    <nice-dropdown title="Country (position fixed)" model="data.dropdownListObj" list="listObjs" selected-is-key="true" is-disabled="data.disabled" help="Position of the dropdown is fixed not absolute" nullable="true" is-inline="isInline" required="isRequired" position-fixed="true"></nice-dropdown>
 
-                    <nice-dropdown title="Country (not position fixed)" model="data.dropdownListObj" list="listObjs" selected-is-key="true" is-disabled="data.disabled" help="Position of the dropdown is fixed not absolute" nullable="true" is-inline="isInline">
+                    <nice-dropdown title="Country (not position fixed)" model="data.dropdownListObj" list="listObjs" selected-is-key="true" is-disabled="data.disabled" help="Position of the dropdown is fixed not absolute" nullable="true" is-inline="isInline" required="isRequired">
                     </nice-dropdown>
                 </div>
 
                 <nice-slot title="Simple list" is-inline="isInline">
-                    <pre>{{ simpleListData }}</pre>
-                    <pre>{{ simpleList }}</pre>
+                    <pre class="mb-1">{{ simpleListData }}</pre>
+                    <pre class="mb-0">{{ simpleList | json }}</pre>
                 </nice-slot>
 
 
-                <nice-dropdown title="Empty list" model="data.dropdownemptyList" list="emptyList" selected-is-key="true" add-button-function="addToList" is-disabled="data.disabled" help="This is a test" nullable="true" is-inline="isInline"></nice-dropdown>
+                <nice-dropdown title="Empty list" model="data.dropdownemptyList" list="emptyList" selected-is-key="true" add-button-function="addToList" is-disabled="data.disabled" help="This is a test" nullable="true" is-inline="isInline" required="isRequired"></nice-dropdown>
 
 
                 <nice-slot title="Empty list" is-inline="isInline">
-                    <pre>{{ emptyList | json }}</pre>
+                    <pre class="mb-0">{{ emptyList | json }}</pre>
                 </nice-slot>
 
 
@@ -135,19 +135,19 @@
                     <button class="btn btn-primary" ng-click="changeTestRange()">Change date</button>
                 </nice-slot>
 
-                <nice-comment title="Comment" model="data.comment" placeholder="Add a comment" is-disabled="data.disabled" help="This is a test" is-inline="isInline"></nice-comment>
+                <nice-comment title="Comment" model="data.comment" placeholder="Add a comment" is-disabled="data.disabled" help="This is a test" is-inline="isInline" required="isRequired"></nice-comment>
 
-                <nice-search title="Search" is-focused="true" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" is-inline="isInline"></nice-search>
+                <nice-search title="Search" is-focused="true" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" is-inline="isInline" required="isRequired"></nice-search>
 
-                <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" is-focused="true" help="This is a test" on-change="handleChange(model)" is-inline="isInline"></nice-input>
+                <nice-input title="First name" model="data.first" placeholder="Janez" is-disabled="data.disabled" is-focused="true" help="This is a test" on-change="handleChange(model)" is-inline="isInline" required="isRequired"></nice-input>
 
-                <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" required="toggleRequired" is-disabled="data.disabled" help="This is a test" is-inline="isInline"></nice-input>
+                <nice-input title="Last name" model="data.last" placeholder="Novak" minlength="2" is-disabled="data.disabled" help="This is a test" is-inline="isInline" required="isRequired"></nice-input>
 
-                <nice-input title="Total" model="data.total" placeholder="10.23" required="toggleRequired" is-disabled="data.disabled" symbol="EUR" is-inline="isInline"></nice-input>
+                <nice-input title="Total" model="data.total" placeholder="10.23" is-disabled="data.disabled" symbol="EUR" is-inline="isInline" required="isRequired"></nice-input>
 
-                <nice-input title="Total" model="data.total2" placeholder="10.23" required="toggleRequired" is-disabled="data.disabled" type="number" min="0" symbol="EUR" is-inline="isInline"></nice-input>
+                <nice-input title="Total" model="data.total2" placeholder="10.23" is-disabled="data.disabled" type="number" min="0" symbol="EUR" is-inline="isInline" required="isRequired"></nice-input>
 
-                <nice-input title="Random number" model="data.number" placeholder="1234" is-disabled="data.disabled" type="number" help="This is a test" is-inline="isInline"></nice-input>
+                <nice-input title="Random number" model="data.number" placeholder="1234" is-disabled="data.disabled" type="number" help="This is a test" is-inline="isInline" required="isRequired"></nice-input>
 
                 <!-- <nice-datetime-picker help="This is a test" is-disabled="data.disabled" model="data.dt1" title="Datetimepicker all" on-change="handleChange(model)" date="true" time="true" is-inline="isInline"></nice-datetime-picker> -->
                 <!-- <nice-datetime-picker is-disabled="data.disabled" model="data.dt2" title="Datetimepicker time" help="This is a test" date="false" time="true" is-inline="isInline"></nice-datetime-picker> -->
@@ -156,15 +156,15 @@
                 <!-- <nice-datetimerange-picker is-disabled="data.disabled" model-start="dtStart" model-end="dtEnd" title="Range picker" field-width="col-sm-8" date="true" help="This is a test" time="true" is-inline="isInline"></nice-datetimerange-picker> -->
                 <!-- <nice-datetimerange-picker modelStart="data.dateOfBirth" modelEnd="data.dateEnd" max-date="2015-08-22T05:43:00" min-date="2015-08-12T05:01:00" title="Date of birth" field-width="col-sm-4" date="true" time="true" is-inline="isInline"></nice-datetimerange-picker> -->
 
-                <nice-datetimerange-picker2 is-disabled="data.disabled" start-date="dtStart" end-date="dtEnd" help="This is a test" title="Range picker v2" on-change="handleChange(startDate, endDate)" time="true" is-inline="isInline"></nice-datetimerange-picker2>
+                <nice-datetimerange-picker2 is-disabled="data.disabled" start-date="dtStart" end-date="dtEnd" help="This is a test" title="Range picker v2" on-change="handleChange(startDate, endDate)" time="true" is-inline="isInline" required="isRequired"></nice-datetimerange-picker2>
 
-                <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required=true help="This is a test" is-disabled="data.disabled" is-inline="isInline">
+                <nice-input title="Bio" model="data.box" text-area="" placeholder="Something very very long" required="isRequired" help="This is a test" is-disabled="data.disabled" is-inline="isInline" required="isRequired">
                 </nice-input>
 
-                <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." help="This is a test" field-width="col-sm-4" is-disabled="data.disabled" is-inline="isInline">
+                <nice-yesno title="Do you like ice cream?" model="data.iceCream" yes="YUSS!" no="No." help="This is a test" field-width="col-sm-4" is-disabled="data.disabled" is-inline="isInline" required="isRequired">
                 </nice-yesno>
 
-                <nice-choice title="I like" model="data.likes" list="listObjs" multiple="true" is-disabled="data.disabled" list-is-obj="true" list="listObjs" obj-value="value" help="This is a test" selected-is-obj="true" is-inline="isInline">
+                <nice-choice title="I like" model="data.likes" list="listObjs" multiple="true" is-disabled="data.disabled" list-is-obj="true" list="listObjs" obj-value="value" help="This is a test" selected-is-obj="true" is-inline="isInline" required="isRequired">
                     <!-- <img ng-src="https://www.countryflags.io/{{ $parent.item.iso }}/flat/16.png">  -->
                     {{ $parent.item.value }}
                 </nice-choice>
@@ -178,7 +178,7 @@
                             <div class="white-wrapper w-300 p-2 mb-0">
                                 <nice-button nice-click="doSomethingLong()" add-class="btn-block" nice-disabled="disbled">Nice button</i></nice-button>
                                 <button class="btn btn-block btn-danger mb-1" ng-click="error()">Error Notification</button>
-                                <button class="btn btn-block btn-primary mb-1" ng-click="toggleRequired = !toggleRequired">Toggle required ({{ toggleRequired }})</button>
+                                <button class="btn btn-block btn-primary mb-1" ng-click="toggleRequired()">Toggle required ({{ isRequired }})</button>
                                 <button class="btn btn-block btn-primary" ng-click="toggleInline()">Toggle inline ({{ isInline }})</button>
                             </div>
                         </nice-popup-content>

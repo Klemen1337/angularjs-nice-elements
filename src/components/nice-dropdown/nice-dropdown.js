@@ -29,7 +29,7 @@ angular.module('niceElements')
         objKey: '@?', // Optional - default is 'id'. Used only when returnOnlyKey=true.
         selectedIsKey: '@?',
         nullable: '@', // No selection is possible
-        required: '@', // Model cannot be NULL
+        required: '=', // Model cannot be NULL
         noMargin: '@', // margin-bottom: 0px
         multiple: '@', // Can select multiple items
         help: '@',
@@ -56,7 +56,6 @@ angular.module('niceElements')
         if (!$scope.selectedText) { $scope.selectedText = gettextCatalog.getString("selected", null, "Nice"); }
         if (!$scope.addButtonFunction) { $scope.addButtonFunction = null; }
         $scope.nullable = $scope.nullable === 'true' || $scope.nullable === true;
-        $scope.required = $scope.required === 'true' || $scope.required === true;
         $scope.noMargin = $scope.noMargin === 'true' || $scope.noMargin === true;
         $scope.multiple = $scope.multiple === 'true' || $scope.multiple === true;
         $scope.clearOnSelect = $scope.clearOnSelect === 'true' || $scope.clearOnSelect === true;

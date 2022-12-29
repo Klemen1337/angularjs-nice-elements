@@ -1,4 +1,4 @@
 <div class="nice-title col-xs-12" ng-class="[labelWidth ? labelWidth : 'col-sm-4', {'nice-title-empty': !title && !help} ]">
-    <div class="nice-title-text" ng-if="title">{{ title }}<span ng-if="required">*</span></div>
+    <div class="nice-title-text" ng-if="title">{{ title }}<span class="nice-title-required" ng-if="required">*</span></div>
     <nice-help class="nice-title-help" ng-if="help" text="{{ help }}"></nice-help>
 </div>

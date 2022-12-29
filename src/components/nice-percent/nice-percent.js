@@ -17,7 +17,7 @@ angular.module('niceElements')
         valid: '=',
         isDisabled: '=',
         title: '@?',
-        required: '@',
+        required: '=',
         fieldWidth: '@',
         labelWidth: '@',
         placeholder: '@',
@@ -36,27 +36,27 @@ angular.module('niceElements')
         attrs.noMargin = angular.isDefined(attrs.noMargin);
       },
 
-      controller: function($rootScope, $scope) {
+      controller: function ($rootScope, $scope) {
         // Link form object with valid object
-        if (angular.isDefined($scope.valid)){
+        if (angular.isDefined($scope.valid)) {
           $scope.valid = $scope.form;
         }
 
-        var roundN = function(number, decimals){
+        var roundN = function (number, decimals) {
           return Number(new Decimal(String(number)).toFixed(decimals, 4));
         };
 
-        if (angular.isDefined($scope.model)){
+        if (angular.isDefined($scope.model)) {
           $scope.internalModel = roundN((angular.copy($scope.model) * 100), 6);
         } else {
           $scope.internalModel = "0";
           $scope.model = 0;
         }
 
-        $scope.change = function(){
-          if($scope.internalModel){
+        $scope.change = function () {
+          if ($scope.internalModel) {
             $scope.internalModel = String($scope.internalModel).replace(',', '.');
-            if(parseFloat($scope.internalModel) > 100) $scope.internalModel = 100;
+            if (parseFloat($scope.internalModel) > 100) $scope.internalModel = 100;
             $scope.model = roundN(parseFloat($scope.internalModel) / 100, 6);
           } else {
             $scope.model = 0;
@@ -64,9 +64,9 @@ angular.module('niceElements')
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
 
-        $scope.keypress = function(event) {
+        $scope.keypress = function (event) {
           if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
-            if($scope.internalModel.indexOf(".") >= 0){
+            if ($scope.internalModel.indexOf(".") >= 0) {
               event.preventDefault();
               return false;
             }
@@ -79,13 +79,13 @@ angular.module('niceElements')
         };
 
         $scope.$watch('model', function (value_new, value_old) {
-          if (value_new){
+          if (value_new) {
             $scope.internalModel = roundN(angular.copy($scope.model) * 100, 6);
           }
         });
 
         $scope.$watch('internalModel', function (value_new, value_old) {
-          if(!$scope.internalModel){
+          if (!$scope.internalModel) {
             $scope.internalModel = "0";
           }
         });

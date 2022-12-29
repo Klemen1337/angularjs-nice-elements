@@ -73,6 +73,11 @@ label.nice {
       color: $nice-label-color;
     }
 
+    .nice-title-required {
+      color: var(--nice-danger-color);
+      padding-left: 1px;
+    }
+
     .nice-title-text+.nice-title-help {
       margin-left: 5px;
       line-height: 1;

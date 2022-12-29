@@ -12,10 +12,10 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-title/nice-title.html',
       replace: true,
       scope: {
-        labelWidth: '=',
-        title: '=',
-        isInline: '=',
-        help: '='
+        labelWidth: '=?',
+        title: '=?',
+        required: '=?',
+        help: '=?'
       }
     };
   });

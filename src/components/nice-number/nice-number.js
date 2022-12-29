@@ -19,7 +19,7 @@ angular.module('niceElements')
         min: '@',
         max: '@',
         defaultValue: '@',
-        required: '@',
+        required: '=',
         fieldWidth: '@',
         labelWidth: '@',
         hideError: '@',

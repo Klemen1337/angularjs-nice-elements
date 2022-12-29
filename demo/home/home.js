@@ -4,8 +4,9 @@ angular.module('niceElementsDemo').controller('HomeCtrl', function ($scope, $htt
   $scope.emptyList = [];
   $scope.inputNumber = null;
   $scope.dropdownLoading = true;
+  $scope.isRequired = true;
+  $scope.toggleRequired = function () { $scope.isRequired = !$scope.isRequired }
   $scope.isInline = false;
-  $scope.toggleRequired = false;
   $scope.toggleInline = function () { $scope.isInline = !$scope.isInline }
   $scope.showMore = false;
   $scope.toggleShowMore = function () { $scope.showMore = !$scope.showMore }

@@ -136,6 +136,11 @@ label.nice {
   color: #404040;
 }
 
+.nice-component .nice-title .nice-title-required {
+  color: var(--nice-danger-color);
+  padding-left: 1px;
+}
+
 .nice-component .nice-title .nice-title-text + .nice-title-help {
   margin-left: 5px;
   line-height: 1;
@@ -3488,7 +3493,7 @@ p.nice {
 }
 
 .nice-comment textarea.editing {
-  padding: 6px 12px;
+  padding: 6px;
   color: #404040;
   -webkit-user-select: initial;
 }
