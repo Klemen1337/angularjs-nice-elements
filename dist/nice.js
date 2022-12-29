@@ -1433,7 +1433,7 @@ angular.module('niceElements')
         endDate: '=', // binding model
         formatString: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
-        time: '=', // default: false, is time picker enabled?
+        time: '=?', // default: false, is time picker enabled?
         minDate: '@', // default: undefined
         maxDate: '@', // default: undefined
         title: '@', // default: ''
@@ -4941,7 +4941,7 @@ angular.module('niceElements')
       link: function postLink(scope, element, attrs) {
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
-        if (!attrs.title) { attrs.labelWidth = ''; }
+        if (!attrs.title) { attrs.title = ' '; }
       }
     };
   });
@@ -7214,8 +7214,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-title/nice-title.html',
-    "<div class=\"nice-title col-xs-12\" ng-class=\"[labelWidth ? labelWidth : 'col-sm-4', {'nice-title-empty': !title && !help} ]\">\n" +
-    "<div class=\"nice-title-text\" ng-if=\"title\">{{ title }}<span class=\"nice-title-required\" ng-if=\"required\">*</span></div>\n" +
+    "<div class=\"nice-title col-xs-12\" ng-class=\"[labelWidth ? labelWidth : 'col-sm-4', {'nice-title-empty': !title && !help} ]\" ng-if=\"title\">\n" +
+    "<div class=\"nice-title-text\">{{ title }}<span class=\"nice-title-required\" ng-if=\"required\">*</span></div>\n" +
     "<nice-help class=\"nice-title-help\" ng-if=\"help\" text=\"{{ help }}\"></nice-help>\n" +
     "</div>"
   );

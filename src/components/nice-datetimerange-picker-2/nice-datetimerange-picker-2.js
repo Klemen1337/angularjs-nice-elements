@@ -14,7 +14,7 @@ angular.module('niceElements')
         endDate: '=', // binding model
         formatString: '@', // default: 'D.M.YYYY • H:mm', format for input label string
         modelFormat: '@',
-        time: '=', // default: false, is time picker enabled?
+        time: '=?', // default: false, is time picker enabled?
         minDate: '@', // default: undefined
         maxDate: '@', // default: undefined
         title: '@', // default: ''
