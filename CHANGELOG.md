@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.5 (29.12.2022)
+
+- fixed replace true bug
+
 ## v1.7.4 (29.12.2022)
 
 - created nice-title component,
