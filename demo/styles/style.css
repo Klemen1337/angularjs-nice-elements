@@ -152,6 +152,7 @@ pre {
   border-right: 1px solid var(--nice-border-color);
   overflow: auto;
   box-shadow: 0 0 20px #00000012;
+  flex-shrink: 0;
 }
 
 .sidebar .logo {

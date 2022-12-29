@@ -29,7 +29,7 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
       navigator.clipboard.writeText(text);
       var message = `Copied '${text}'`
       console.log(message)
-      $rootScope.$broadcast('toast', message);
+      $rootScope.$broadcast('toast', message, 'success');
     } catch (error) {
       console.error(error);
     }
