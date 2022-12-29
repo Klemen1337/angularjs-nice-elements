@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.7.4 (29.12.2022)
+
+- created nice-title component,
+- added replace to nice-icon and nice-help,
+- added deprecation warning to nice-datetime-picker and nice-datetimerange-picker,
+- worked on required prop,
+- worked on nice-comment,
+- fixed disabled states,
+- fixed nice icon errors
+
 ## v1.7.3 (22.12.2022)
 
 - added regex error and regex-raw to nice input component
