@@ -1,4 +1,4 @@
-![Nice elements](demo/assets/logo.png)
+![Nice elements](https://github.com/Klemen1337/angularjs-nice-elements/raw/master/demo/assets/logo.png)
 
 # Nice elements v1.7.4
 
