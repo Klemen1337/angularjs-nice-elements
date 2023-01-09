@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.6 (9.1.2023)
+
+- added form required check to nice dropdown
+
 ## v1.7.5 (29.12.2022)
 
 - fixed replace true bug

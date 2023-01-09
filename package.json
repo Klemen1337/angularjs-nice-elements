@@ -1,6 +1,6 @@
 {
   "name": "nice-elements",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "description": "Nice elements used in olaii angular 1.x webapps.",
   "main": "dist/nice.js",
   "license": "MIT",
