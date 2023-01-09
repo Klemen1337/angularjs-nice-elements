@@ -131,10 +131,17 @@
         <pre class="prettyprint">&lt;nice-dropdown title="Dropdown" model="dropdown4" list="listObjs" nullable="true">&lt;/nice-dropdown></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Dropdown" model="dropdown4" list="listObjs" nullable="true"></nice-dropdown>
+                <ng-form name="forma">
+                    <nice-dropdown title="Dropdown" model="dropdown4" list="listObjs" nullable="true" required="true"></nice-dropdown>
+                    <nice-dropdown title="Dropdown 2" model="dropdown5" list="listObjs" nullable="true"></nice-dropdown>
+                    <div class="text-right">
+                        <button class="btn btn-primary" ng-disabled="forma.$invalid">Submit</button>
+                    </div>
+                </ng-form>
             </div>
             <div class="col-sm-6">
                 <pre>{{ dropdown4 | json }}</pre>
+                <pre>{{ forma | json }}</pre>
             </div>
         </div>
     </div>

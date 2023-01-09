@@ -2354,7 +2354,6 @@ angular.module('niceElements')
         $scope.noMargin = $scope.noMargin === 'true' || $scope.noMargin === true;
         $scope.multiple = $scope.multiple === 'true' || $scope.multiple === true;
         $scope.clearOnSelect = $scope.clearOnSelect === 'true' || $scope.clearOnSelect === true;
-        $scope.valid = $scope.formDropdown;
         $scope.isOpen = false;
         $scope.selected = null;
         $scope.selectedIndex = 0;
@@ -2623,6 +2622,11 @@ angular.module('niceElements')
                 }
               }
             }
+          });
+
+          // Handle required
+          $timeout(function () {
+            $scope.formDropdown.$setValidity('required', !(!$scope.selected && $scope.required));
           });
         }
 
