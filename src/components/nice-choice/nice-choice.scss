@@ -14,7 +14,12 @@
 
       &:hover {
         .choice-checkbox {
+          cursor: not-allowed;
           border-color: $nice-border-color !important;
+        }
+
+        .choice-label {
+          color: $nice-font-color;
         }
       }
     }

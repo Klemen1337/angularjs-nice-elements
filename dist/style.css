@@ -2183,7 +2183,12 @@ p.nice {
 }
 
 .nice-choice .disabled li:hover .choice-checkbox {
+  cursor: not-allowed;
   border-color: #cbd4d9 !important;
+}
+
+.nice-choice .disabled li:hover .choice-label {
+  color: #404040;
 }
 
 .nice-choice .disabled .selected:hover .choice-checkbox {
@@ -4137,6 +4142,22 @@ p.nice {
 
 .nice-checkbox.checked:hover .checkbox {
   border-color: #3189ff;
+}
+
+.nice-checkbox.nice-checkbox-disabled {
+  cursor: not-allowed;
+}
+
+.nice-checkbox.nice-checkbox-disabled:hover .checkbox {
+  border-color: #cbd4d9;
+}
+
+.nice-checkbox.nice-checkbox-disabled:hover .message {
+  color: #404040;
+}
+
+.nice-checkbox.nice-checkbox-disabled.checked:hover .checkbox {
+  border-color: #cbd4d9;
 }
 
 .nice-upload {

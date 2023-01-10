@@ -111,6 +111,7 @@
                 </div>
 
                 <nice-slot title="Simple list" is-inline="isInline">
+                    <nice-checkbox title="I like milk" model="niceCheckbox" required="isRequired" is-disabled="data.disabled" is-inline="isInline"></nice-checkbox>
                     <pre class="mb-1">{{ simpleListData }}</pre>
                     <pre class="mb-0">{{ simpleList | json }}</pre>
                 </nice-slot>

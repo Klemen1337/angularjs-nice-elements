@@ -410,7 +410,7 @@ angular.module('niceElements')
  * # niceCheckbox
  */
 angular.module('niceElements')
-  .directive('niceCheckbox', function() {
+  .directive('niceCheckbox', function () {
     return {
       templateUrl: 'src/components/nice-checkbox/nice-checkbox.html',
       restrict: 'E',
@@ -418,12 +418,14 @@ angular.module('niceElements')
         model: '=',
         title: '@',
         noMargin: '@',
-        onChange: '&?'
+        onChange: '&?',
+        isDisabled: '=',
       },
-      controller: function($scope) {
-        if($scope.model === undefined) $scope.model = false;
+      controller: function ($scope) {
+        if ($scope.model === undefined) $scope.model = false;
 
-        $scope.toggle = function(){
+        $scope.toggle = function () {
+          if ($scope.isDisabled) return;
           $scope.model = !$scope.model;
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
@@ -473,17 +475,17 @@ angular.module('niceElements')
         attr.multiple = angular.isDefined(attr.multiple);
 
         scope.firstTime = true;
-        scope.checkIfFirstTime = function(){
-          if (scope.firstTime){
+        scope.checkIfFirstTime = function () {
+          if (scope.firstTime) {
             scope.firstTime = false;
             return true;
-          }else{
+          } else {
             return false;
           }
         };
 
         // If selected is not yet defined
-        if(!angular.isDefined(scope.model)){
+        if (!angular.isDefined(scope.model)) {
           if (scope.multiple) {
             scope.model = [];
           }
@@ -493,7 +495,7 @@ angular.module('niceElements')
         if (scope.listIsObj) {
           scope.internalList = scope.list;
         } else {
-          scope.internalList =_.map(scope.list, function(val) {
+          scope.internalList = _.map(scope.list, function (val) {
             var obj = {};
             obj[scope.objKey] = val;
             obj[scope.objValue] = val;
@@ -504,9 +506,9 @@ angular.module('niceElements')
         // Set internalSelected
         if (scope.selectedIsObj) {
           scope.internalSelected = scope.model;
-        }else {
+        } else {
           if (scope.multiple) {
-            scope.internalSelected =_.map(scope.model, function(val) {
+            scope.internalSelected = _.map(scope.model, function (val) {
               var obj = {};
               obj[scope.objKey] = val;
               obj[scope.objValue] = val;
@@ -518,14 +520,14 @@ angular.module('niceElements')
               obj[scope.objKey] = scope.model;
               obj[scope.objValue] = scope.model;
               scope.internalSelected = obj;
-            }else{
+            } else {
               scope.internalSelected = scope.internalList[0];
             }
           }
         }
       },
-      controller: function($rootScope, $scope) {
-        var getFilter = function(item){
+      controller: function ($rootScope, $scope) {
+        var getFilter = function (item) {
           // Create filter for finding object by objValue with _.where()
           var filter = {};
           if (item.hasOwnProperty($scope.objKey))
@@ -535,40 +537,39 @@ angular.module('niceElements')
           return filter;
         };
 
-        $scope.setDefault = function(){
-          if(!$scope.multiple){
+        $scope.setDefault = function () {
+          if (!$scope.multiple) {
             $scope.internalSelected = $scope.internalList[0];
           }
         };
 
-        $scope.isItemSelected = function(item){
+        $scope.isItemSelected = function (item) {
           if (!$scope.internalSelected)
             return false;
           // Which item is selected
           if ($scope.multiple) {
-              return _.where($scope.internalSelected, getFilter(item)).length > 0;
-          }else{
-              return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
+            return _.where($scope.internalSelected, getFilter(item)).length > 0;
+          } else {
+            return $scope.internalSelected[$scope.objKey] == item[$scope.objKey];
           }
         };
 
-        $scope.toggle = function(item) {
-          if (!$scope.isDisabled) {
-            $scope.formChoice.$setDirty();
+        $scope.toggle = function (item) {
+          if ($scope.isDisabled) return;
+          $scope.formChoice.$setDirty();
 
-            if (!$scope.multiple) {
-              $scope.internalSelected = item;
+          if (!$scope.multiple) {
+            $scope.internalSelected = item;
+          } else {
+            if ($scope.isItemSelected(item)) {
+              $scope.internalSelected = _.without($scope.internalSelected, _.findWhere($scope.internalSelected, getFilter(item)));
             } else {
-              if($scope.isItemSelected(item)){
-                  $scope.internalSelected = _.without($scope.internalSelected, _.findWhere($scope.internalSelected, getFilter(item)));
-              } else {
-                $scope.internalSelected.push(item);
-              }
+              $scope.internalSelected.push(item);
             }
           }
         };
 
-        $scope.getLabel = function(item){
+        $scope.getLabel = function (item) {
           return item[$scope.objValue];
         };
 
@@ -576,8 +577,8 @@ angular.module('niceElements')
           // Set internalList
           if ($scope.listIsObj) {
             $scope.internalList = $scope.list;
-          }else{
-            $scope.internalList =_.map($scope.list, function(val) {
+          } else {
+            $scope.internalList = _.map($scope.list, function (val) {
               var obj = {};
               obj[$scope.objKey] = val;
               obj[$scope.objValue] = val;
@@ -588,11 +589,11 @@ angular.module('niceElements')
 
         $scope.$watchCollection('internalSelected', function (value_new, value_old) {
           // Update $scope.selected based on settings
-          if (value_new && (!angular.equals(value_new, value_old) || $scope.checkIfFirstTime())){
-            if ($scope.selectedIsObj){
+          if (value_new && (!angular.equals(value_new, value_old) || $scope.checkIfFirstTime())) {
+            if ($scope.selectedIsObj) {
               $scope.model = value_new;
             } else {
-              if ($scope.multiple){
+              if ($scope.multiple) {
                 $scope.model = _.map(value_new, $scope.objKey);
               } else {
                 $scope.model = value_new[$scope.objKey];
@@ -604,8 +605,8 @@ angular.module('niceElements')
 
         $scope.$watchCollection('model', function (value_new, value_old) {
           if (!angular.equals(value_new, value_old)) {
-            if (!value_new){
-              if(!$scope.multiple)
+            if (!value_new) {
+              if (!$scope.multiple)
                 $scope.internalSelected = $scope.internalList[0];
               else
                 $scope.internalSelected = [];
@@ -626,7 +627,7 @@ angular.module('niceElements')
             }
           }
 
-          if(!value_new){
+          if (!value_new) {
             if (!$scope.multiple) {
               $scope.internalSelected = $scope.internalList[0];
             }
@@ -5563,11 +5564,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
-    "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'checked': model, 'margin-bottom-0' : noMargin }\" ng-click=\"toggle()\">\n" +
-    "<button class=\"btn checkbox\">\n" +
+    "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'checked': model, 'margin-bottom-0' : noMargin, 'nice-checkbox-disabled': isDisabled }\" ng-click=\"toggle()\">\n" +
+    "<button class=\"btn checkbox\" ng-disabled=\"isDisabled\">\n" +
     "<nice-icon class=\"check\" icon=\"icon-check\"></nice-icon>\n" +
     "</button>\n" +
-    "<div ng-if=\"title\" class=\"message\">{{ title }}</div>\n" +
+    "<div ng-if=\"title\" class=\"message\" ng-class=\"{ 'nice-disabled': isDisabled }\">{{ title }}</div>\n" +
     "</div>"
   );
 
@@ -5893,7 +5894,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-dropdown/nice-dropdown.html',
-    "<div class=\"nice-component nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\">\n" +
+    "<div class=\"nice-component nice-dropdown\" ng-class=\"{ 'margin-bottom-0': noMargin, 'nice-component-inline': isInline }\" ng-form=\"formDropdown\">\n" +
     "<div class=\"row\">\n" +
     "<nice-title title=\"title\" help=\"help\" required=\"required\" label-width=\"labelWidth\"></nice-title>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
@@ -5937,7 +5938,6 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "<div ng-form=\"formDropdown\"></div>\n" +
     "</div>"
   );
 

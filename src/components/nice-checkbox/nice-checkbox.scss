@@ -61,4 +61,26 @@
       }
     }
   }
+
+  &.nice-checkbox-disabled {
+    cursor: not-allowed;
+
+    &:hover {
+      .checkbox {
+        border-color: $nice-border-color;
+      }
+
+      .message {
+        color: $nice-font-color;
+      }
+    }
+
+    &.checked {
+      &:hover {
+        .checkbox {
+          border-color: $nice-border-color;
+        }
+      }
+    }
+  }
 }

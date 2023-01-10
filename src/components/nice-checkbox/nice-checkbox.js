@@ -7,7 +7,7 @@
  * # niceCheckbox
  */
 angular.module('niceElements')
-  .directive('niceCheckbox', function() {
+  .directive('niceCheckbox', function () {
     return {
       templateUrl: 'src/components/nice-checkbox/nice-checkbox.html',
       restrict: 'E',
@@ -15,12 +15,14 @@ angular.module('niceElements')
         model: '=',
         title: '@',
         noMargin: '@',
-        onChange: '&?'
+        onChange: '&?',
+        isDisabled: '=',
       },
-      controller: function($scope) {
-        if($scope.model === undefined) $scope.model = false;
+      controller: function ($scope) {
+        if ($scope.model === undefined) $scope.model = false;
 
-        $scope.toggle = function(){
+        $scope.toggle = function () {
+          if ($scope.isDisabled) return;
           $scope.model = !$scope.model;
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
