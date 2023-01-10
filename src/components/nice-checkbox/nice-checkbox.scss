@@ -12,6 +12,7 @@
     background: transparent;
     margin: 0;
     padding: 0;
+    flex-shrink: 0;
 
     .check {
       opacity: 0;
@@ -32,7 +33,7 @@
 
   &:hover {
     .checkbox {
-      border-color: darken($nice-border-color, 15%);
+      border-color: $nice-choice-hover-border;
     }
 
     .message {
@@ -56,7 +57,7 @@
 
     &:hover {
       .checkbox {
-        border-color: darken($nice-border-color, 15%);
+        border-color: $nice-choice-hover-border;
       }
     }
   }
