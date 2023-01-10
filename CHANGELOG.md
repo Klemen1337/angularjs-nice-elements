@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.7.7 (10.1.2023)
+
+- fixed nice-checkbox shrink problem,
+- added isDisabled to nice-checkbox,
+- changed nice-choice to match nice-checkbox,
+- worked on nice-choice disabled state
+
 ## v1.7.6 (9.1.2023)
 
 - added form required check to nice dropdown
