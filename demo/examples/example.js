@@ -97,10 +97,10 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
   }
 
   $scope.listObjs = [
-    { id: 0, iso: "SI", value: "Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia" },
     { id: 1, iso: "ZA", value: "South Africa" },
     { id: 2, iso: "BR", value: "Brazil" },
     { id: 3, iso: "AF", value: "Afganistan" },
+    { id: 0, iso: "SI", value: "Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia" },
     { id: 4, iso: "CA", value: "Canada" },
     { id: 5, iso: "US", value: "United States" }
   ];
