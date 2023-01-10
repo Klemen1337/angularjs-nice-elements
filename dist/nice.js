@@ -5580,7 +5580,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
     "<button class=\"choice-checkbox\" ng-class=\"{'circle' : !multiple }\" ng-disabled=\"isDisabled\">\n" +
-    "<nice-icon icon=\"icon-check\"></nice-icon>\n" +
+    "<nice-icon ng-if=\"multiple\" icon=\"icon-check\"></nice-icon>\n" +
+    "<div ng-if=\"!multiple\" class=\"multiple-circle\"></div>\n" +
     "</button>\n" +
     "<div ng-transclude class=\"choice-label\">{{ getLabel(item) }}</div>\n" +
     "</li>\n" +

@@ -2195,23 +2195,33 @@ p.nice {
 }
 
 .nice-choice li {
-  padding: 5px 0px;
   cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+  padding: 0 !important;
+}
+
+.nice-choice li:last-child {
+  margin-bottom: 0;
+}
+
+.nice-choice li:first-child {
+  margin-top: 7px;
 }
 
 .nice-choice li .choice-checkbox {
   transition: all 0.2s;
   background: white;
   color: white;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #cbd4d9;
-  position: absolute;
   border-radius: 3px;
   padding: 0;
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-shrink: 0;
 }
 
 .nice-choice li .choice-checkbox nice-icon {
@@ -2219,13 +2229,23 @@ p.nice {
 }
 
 .nice-choice li .choice-checkbox svg {
-  height: 18px;
-  width: 18px;
-  margin-top: 1px;
+  height: 16px;
+  width: 16px;
+}
+
+.nice-choice li .choice-checkbox .multiple-circle {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: white;
 }
 
 .nice-choice li:hover .choice-checkbox {
   border-color: #3189ff;
+}
+
+.nice-choice li:hover .choice-label {
+  color: #1a1a1a;
 }
 
 .nice-choice li .circle {
@@ -2233,8 +2253,7 @@ p.nice {
 }
 
 .nice-choice li .choice-label {
-  margin-left: 35px;
-  line-height: 26px;
+  margin-left: 10px;
 }
 
 .nice-datetime-picker .dtp-wrapper .dtp div.dtp-date, .nice-datetime-picker .dtp-wrapper .dtp div.dtp-time {
@@ -4076,6 +4095,7 @@ p.nice {
   background: transparent;
   margin: 0;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .nice-checkbox .checkbox .check {
@@ -4095,7 +4115,7 @@ p.nice {
 }
 
 .nice-checkbox:hover .checkbox {
-  border-color: #9fafb9;
+  border-color: #3189ff;
 }
 
 .nice-checkbox:hover .message {
@@ -4116,7 +4136,7 @@ p.nice {
 }
 
 .nice-checkbox.checked:hover .checkbox {
-  border-color: #9fafb9;
+  border-color: #3189ff;
 }
 
 .nice-upload {
