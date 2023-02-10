@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.8 (10.2.2023)
+
+- worked on nice-quantity component
+
 ## v1.7.7 (10.1.2023)
 
 - fixed nice-checkbox shrink problem,
