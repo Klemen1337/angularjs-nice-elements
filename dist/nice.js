@@ -4382,7 +4382,8 @@ angular.module('niceElements')
       scope: {
         title: '@',
         model: '=',
-        max: '=',
+        min: '=?',
+        max: '=?',
         onChange: '&?',
         noMargin: '@',
         fieldWidth: '@',
@@ -4392,32 +4393,29 @@ angular.module('niceElements')
         help: '@',
       },
       controller: function ($scope) {
-        if (!$scope.model) {
-          $scope.model = 0;
-        }
+        $scope.min = Number($scope.min) || 0;
+        $scope.max = Number($scope.max) || Infinity;
+        if (!$scope.model) $scope.model = Number($scope.min);
 
         $scope.add = function () {
-          if ($scope.max) {
-            if ($scope.max >= $scope.model + 1) {
-              $scope.model += 1;
-              if ($scope.onChange) $scope.onChange({ model: $scope.model });
-            }
-          } else {
-            $scope.model += 1;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
-          }
+          $scope.model += 1;
+          $scope.handleChange();
         };
 
         $scope.sub = function () {
-          if ($scope.model - 1 >= 0) {
-            $scope.model -= 1;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
-          }
+          $scope.model -= 1;
+          $scope.handleChange();
         };
 
         $scope.handleChange = function () {
-          if ($scope.model) {
+          if ($scope.model != undefined) {
             $scope.model = Number($scope.model);
+            if ($scope.model < $scope.min) $scope.model = angular.copy($scope.min);
+            if ($scope.model > $scope.max) $scope.model = angular.copy($scope.max);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
+          } else {
+            $scope.model = angular.copy($scope.min);
+            $scope.handleChange();
           }
         };
       }
@@ -6211,11 +6209,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-title title=\"title\" help=\"help\" required=\"required\" label-width=\"labelWidth\"></nice-title>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
     "<div class=\"input-group\">\n" +
-    "<button class=\"btn btn-default btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">\n" +
+    "<button class=\"btn btn-default btn-left\" ng-click=\"sub()\" type=\"button\" ng-disabled=\"model <= min || isDisabled\" tabindex=\"-1\">\n" +
     "<nice-icon icon=\"icon-minus\"></nice-icon>\n" +
     "</button>\n" +
-    "<input class=\"value form-control\" ng-model=\"model\" type=\"number\" ng-change=\"handleChange()\" ng-disabled=\"isDisabled\">\n" +
-    "<button class=\"btn btn-default btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"isDisabled\" tabindex=\"-1\">\n" +
+    "<input class=\"value form-control\" ng-model=\"model\" type=\"number\" min=\"{{ min }}\" max=\"{{ max }}\" ng-change=\"handleChange()\" ng-disabled=\"isDisabled\">\n" +
+    "<button class=\"btn btn-default btn-right\" ng-click=\"add()\" type=\"button\" ng-disabled=\"model >= max || isDisabled\" tabindex=\"-1\">\n" +
     "<nice-icon icon=\"icon-plus\"></nice-icon>\n" +
     "</button>\n" +
     "</div>\n" +

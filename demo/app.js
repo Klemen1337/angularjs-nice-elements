@@ -35,4 +35,5 @@ angular.module('niceElementsDemo', [
   $routeProvider.when(appPathRoute + 'nice-upload', { templateUrl: pagesPath + 'examples/nice-upload.html' });
   $routeProvider.when(appPathRoute + 'nice-date-input', { templateUrl: pagesPath + 'examples/nice-date-input.html' });
   $routeProvider.when(appPathRoute + 'nice-filters', { templateUrl: pagesPath + 'examples/nice-filters.html' });
+  $routeProvider.when(appPathRoute + 'nice-quantity', { templateUrl: pagesPath + 'examples/nice-quantity.html' });
 }]);

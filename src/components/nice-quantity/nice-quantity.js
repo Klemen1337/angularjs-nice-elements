@@ -14,7 +14,8 @@ angular.module('niceElements')
       scope: {
         title: '@',
         model: '=',
-        max: '=',
+        min: '=?',
+        max: '=?',
         onChange: '&?',
         noMargin: '@',
         fieldWidth: '@',
@@ -24,32 +25,29 @@ angular.module('niceElements')
         help: '@',
       },
       controller: function ($scope) {
-        if (!$scope.model) {
-          $scope.model = 0;
-        }
+        $scope.min = Number($scope.min) || 0;
+        $scope.max = Number($scope.max) || Infinity;
+        if (!$scope.model) $scope.model = Number($scope.min);
 
         $scope.add = function () {
-          if ($scope.max) {
-            if ($scope.max >= $scope.model + 1) {
-              $scope.model += 1;
-              if ($scope.onChange) $scope.onChange({ model: $scope.model });
-            }
-          } else {
-            $scope.model += 1;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
-          }
+          $scope.model += 1;
+          $scope.handleChange();
         };
 
         $scope.sub = function () {
-          if ($scope.model - 1 >= 0) {
-            $scope.model -= 1;
-            if ($scope.onChange) $scope.onChange({ model: $scope.model });
-          }
+          $scope.model -= 1;
+          $scope.handleChange();
         };
 
         $scope.handleChange = function () {
-          if ($scope.model) {
+          if ($scope.model != undefined) {
             $scope.model = Number($scope.model);
+            if ($scope.model < $scope.min) $scope.model = angular.copy($scope.min);
+            if ($scope.model > $scope.max) $scope.model = angular.copy($scope.max);
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
+          } else {
+            $scope.model = angular.copy($scope.min);
+            $scope.handleChange();
           }
         };
       }
