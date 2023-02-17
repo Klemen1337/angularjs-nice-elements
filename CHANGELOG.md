@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.9 (17.2.2023)
+
+- worked on nice dropdown transclude
+
 ## v1.7.8 (10.2.2023)
 
 - worked on nice-quantity component
