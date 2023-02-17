@@ -37,10 +37,8 @@
                                 {{ nullableText }}
                             </div>
                             <div class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected, 'hover': $index == selectedIndex }">
-                                <span class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></span>
-                                <span ng-transclude="option">
-                                    <span ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</span>
-                                </span>
+                                <div class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></div>
+                                <div class="choice-option" ng-transclude="option" ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</div>
                             </div>
                         </div>
                     </div>

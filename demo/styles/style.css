@@ -13,6 +13,14 @@ body {
   gap: 1rem;
 }
 
+.row-title {
+  flex-grow: 1;
+}
+
+.row-value {
+  flex-shrink: 0;
+}
+
 .main-view {
   overflow: auto;
   height: 100vh;

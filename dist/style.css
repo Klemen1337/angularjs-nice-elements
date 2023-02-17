@@ -1600,6 +1600,11 @@ p.nice {
   margin-right: 1rem;
   border-radius: 3px;
   text-align: center;
+  flex-shrink: 0;
+}
+
+.nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item .choice-option, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item .choice-option {
+  flex-grow: 1;
 }
 
 .nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item:hover, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item:hover, .nice-dropdown .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.hover, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-dropdown-items .nice-dropdown-item.hover {
@@ -1636,6 +1641,7 @@ p.nice {
   text-overflow: ellipsis;
   line-height: 1.2;
   margin-top: 1px;
+  flex-grow: 1;
 }
 
 .nice-dropdown .btn-dropdown .caret, .nice-search .nice-dropdown-empty .btn-dropdown .caret {

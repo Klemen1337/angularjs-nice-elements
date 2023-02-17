@@ -5922,10 +5922,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "{{ nullableText }}\n" +
     "</div>\n" +
     "<div class=\"nice-dropdown-item\" ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected, 'hover': $index == selectedIndex }\">\n" +
-    "<span class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></span>\n" +
-    "<span ng-transclude=\"option\">\n" +
-    "<span ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</span>\n" +
-    "</span>\n" +
+    "<div class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></div>\n" +
+    "<div class=\"choice-option\" ng-transclude=\"option\" ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

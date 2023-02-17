@@ -84,13 +84,33 @@
 
 
                 <nice-dropdown title="Search (object)" model="data.dropdownPerson" search-function="searchFunction" nullable="true" is-disabled="data.disabled" help="This is a test" is-inline="isInline">
-                    <nice-dropdown-button>{{ $parent.selected.name }}</nice-dropdown-button>
-                    <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
+                    <nice-dropdown-button>
+                        <div class="d-flex">
+                            <div class="row-title">{{ $parent.selected.name }}</div>
+                            <div class="row-value">{{ $parent.selected.email }}</div>
+                        </div>
+                    </nice-dropdown-button>
+                    <nice-dropdown-option>
+                        <div class="d-flex">
+                            <div class="row-title">{{ $parent.item.name }}</div>
+                            <div class="row-value">{{ $parent.item.email }}</div>
+                        </div>
+                    </nice-dropdown-option>
                 </nice-dropdown>
 
                 <nice-dropdown title="Search (value)" model="data.dropdownPerson2" search-function="searchFunction" is-inline="isInline" is-disabled="data.disabled" selected-is-key="true" required="isRequired">
-                    <nice-dropdown-button>{{ $parent.selected.name }}</nice-dropdown-button>
-                    <nice-dropdown-option>{{ $parent.item.name }}</nice-dropdown-option>
+                    <nice-dropdown-button>
+                        <div class="d-flex">
+                            <div class="row-title">{{ $parent.selected.name }}</div>
+                            <div class="row-value">{{ $parent.selected.email }}</div>
+                        </div>
+                    </nice-dropdown-button>
+                    <nice-dropdown-option>
+                        <div class="d-flex">
+                            <div class="row-title">{{ $parent.item.name }}</div>
+                            <div class="row-value">{{ $parent.item.email }}</div>
+                        </div>
+                    </nice-dropdown-option>
                 </nice-dropdown>
 
                 <nice-dropdown title="Country multiple" model="data.dropdownListObj2" list="countries" obj-value="name" obj-key="iso" is-disabled="data.disabled" help="This is a test" on-change="handleChange(model)" multiple="true" is-inline="isInline" required="isRequired"></nice-dropdown>
