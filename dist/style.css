@@ -2054,12 +2054,12 @@ p.nice {
 
 .nice-yesno .yesno-wrapper .yesno-no-bg {
   left: 50%;
-  right: 0;
+  width: 50%;
 }
 
 .nice-yesno .yesno-wrapper .yesno-yes-bg {
   left: 0;
-  right: 50%;
+  width: 50%;
 }
 
 .nice-yesno .yesno-wrapper .yesno-button {
@@ -2071,8 +2071,9 @@ p.nice {
   line-height: 28px;
   padding: 0;
   top: 2px;
+  bottom: 2px;
   left: 2px;
-  right: 50%;
+  width: calc(50% - 2px);
 }
 
 .nice-yesno .yesno-wrapper .yesno-button:hover {
@@ -2085,21 +2086,15 @@ p.nice {
 
 .nice-yesno .yesno-wrapper .yesno-button-no {
   left: 50%;
-  top: 2px;
-  bottom: 2px;
-  right: 2px;
 }
 
 .nice-yesno .yesno-wrapper .yesno-button-yes {
   left: 2px;
-  top: 2px;
-  bottom: 2px;
-  right: 50%;
 }
 
 .nice-yesno .yesno-wrapper.true .yesno-button {
-  right: 2px;
   left: 50%;
+  width: 50%;
 }
 
 .nice-steps {

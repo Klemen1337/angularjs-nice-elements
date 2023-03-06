@@ -49,12 +49,12 @@
 
     .yesno-no-bg {
       left: 50%;
-      right: 0;
+      width: 50%;
     }
 
     .yesno-yes-bg {
       left: 0;
-      right: 50%;
+      width: 50%;
     }
 
     .yesno-button {
@@ -66,8 +66,9 @@
       line-height: 28px;
       padding: 0;
       top: 2px;
+      bottom: 2px;
       left: 2px;
-      right: 50%;
+      width: calc(50% - 2px);
 
       &:hover {
         background-color: darken($nice-yesno-slider-bg, 5%);
@@ -80,22 +81,16 @@
 
     .yesno-button-no {
       left: 50%;
-      top: 2px;
-      bottom: 2px;
-      right: 2px;
     }
 
     .yesno-button-yes {
       left: 2px;
-      top: 2px;
-      bottom: 2px;
-      right: 50%;
     }
 
     &.true {
       .yesno-button {
-        right: 2px;
         left: 50%;
+        width: 50%;
       }
     }
   }
