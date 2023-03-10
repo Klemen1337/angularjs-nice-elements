@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.7.10 (10.3.2023)
+
+- fixed yesno for firefox,
+- added onSelect callback to nice-dropdown
+
 ## v1.7.9 (17.2.2023)
 
 - worked on nice dropdown transclude
