@@ -39,7 +39,7 @@
                     <!--<td>false</td>-->
                     <!--</tr>-->
                     <tr>
-                        <td>selectedIsObj</td>
+                        <td>selectedIsKey</td>
                         <td></td>
                         <td>false</td>
                     </tr>
@@ -81,13 +81,12 @@
     title="Dropdown"
     model="dropdown"
     list="listObjs"
-    selected-is-obj="true"
     dropdown-distance="0"
     multiple="true">
 &lt;/nice-dropdown></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" selected-is-obj="true" multiple="true"></nice-dropdown>
+                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" multiple="true"></nice-dropdown>
             </div>
             <div class="col-sm-6">
                 <pre>{{ dropdown | json }}</pre>
@@ -102,12 +101,11 @@
     model="dropdown2"
     list="listObjs"
     obj-value="value"
-    list-is-obj="true"
-    selected-is-obj="true">
+    list-is-obj="true">
 &lt;/nice-dropdown></pre>
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Dropdown" model="dropdown2" list="listObjs" selected-is-obj="true"></nice-dropdown>
+                <nice-dropdown title="Dropdown" model="dropdown2" list="listObjs"></nice-dropdown>
             </div>
             <div class="col-sm-6">
                 <pre>{{ dropdown2 | json }}</pre>
@@ -142,6 +140,20 @@
             <div class="col-sm-6">
                 <pre>{{ dropdown4 | json }}</pre>
                 <pre>{{ forma | json }}</pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <pre class="prettyprint">&lt;nice-dropdown title="Dropdown" model="dropdown4" list="listObjs" nullable="true">&lt;/nice-dropdown></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <ng-form name="forma">
+                    <nice-dropdown title="Dropdown" model="dropdown5" list="listObjs" nullable="true" selected-is-key="true" required="true" on-change="dropdownOnChange(model)" on-select="dropdownOnSelect(model)"></nice-dropdown>
+                </ng-form>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dropdown5 | json }}</pre>
             </div>
         </div>
     </div>

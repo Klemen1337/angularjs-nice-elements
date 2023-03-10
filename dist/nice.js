@@ -2316,6 +2316,7 @@ angular.module('niceElements')
         model: '=', // Aka model
         list: '=', // List of options
         onChange: '&?',
+        onSelect: '&?', // Like onChange but always return objects
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -2553,6 +2554,7 @@ angular.module('niceElements')
           // Trigger on change
           $timeout(function () {
             if ($scope.onChange) $scope.onChange({ model: obj });
+            if ($scope.onSelect) $scope.onSelect({ model: angular.copy($scope.selected) });
           })
         };
 

@@ -14,6 +14,14 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     niceDateInputEnd: moment().add("days", 2).hours(3).minutes(0).seconds(0)
   };
 
+  $scope.dropdownOnChange = function () {
+    console.log("Dropdown change:", ...arguments);
+  }
+
+  $scope.dropdownOnSelect = function () {
+    console.log("Dropdown select:", ...arguments);
+  }
+
   $scope.showLoading = false;
   $scope.toggleLoading = function () {
     $scope.showLoading = !$scope.showLoading;
