@@ -7,7 +7,7 @@
         <div class="nice-field col-xs-12" ng-class="[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]" click-outside="close()" is-open="{{ isOpen }}">
             <div class="nice-field-wrapper">
                 <!------------------------- Button ------------------------->
-                <button type="button" class="btn btn-dropdown" ng-ref="dropdown-button" ng-click="toggle()" ng-disabled="isDisabled || emptyList">
+                <button class="btn btn-dropdown" type="button" ng-ref="dropdown-button" ng-click="toggle()" ng-disabled="isDisabled || emptyList">
                     <div class="btn-dropdown-inside" ng-transclude="button" ng-if="selected != null">
                         <span ng-if="!multiple">{{ selected[objValue] }}</span>
                         <span ng-if="multiple">
@@ -29,7 +29,8 @@
                     <div class="nice-dropdown-menu" ng-if="isOpen">
                         <div class="search-bar" ng-if="searchFunction">
                             <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
-                            <span class="icon"><i class="fa fa-search"></i></span>
+                            <div class="count" ng-if="internalList && internalList._metadata">{{ internalList.length }}/{{ internalList._metadata.count }}</div>
+                            <nice-icon class="icon" icon="icon-search"></nice-icon>
                         </div>
                         <div class="nice-dropdown-items">
                             <div class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>

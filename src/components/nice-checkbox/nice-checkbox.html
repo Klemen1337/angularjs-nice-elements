@@ -1,5 +1,5 @@
 <div class="nice-component nice-checkbox" ng-class="{ 'checked': model, 'margin-bottom-0' : noMargin, 'nice-checkbox-disabled': isDisabled }" ng-click="toggle()">
-    <button class="btn checkbox" ng-disabled="isDisabled">
+    <button class="btn checkbox" type="button" ng-disabled="isDisabled">
         <nice-icon class="check" icon="icon-check"></nice-icon>
     </button>
     <div ng-if="title" class="message" ng-class="{ 'nice-disabled': isDisabled }">{{ title }}</div>

@@ -6,9 +6,9 @@
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
             <div class="yesno-wrapper noselect">
-                <button class="yesno-yes-bg" ng-click="switch()" tabindex="-1">{{ yes }}</button>
-                <button class="yesno-no-bg" ng-click="switch()" tabindex="-1">{{ no }}</button>
-                <button class="yesno-button btn btn-primary" ng-class="buttonClass" ng-click="switch()" ng-disabled="isDisabled">{{ state }}</button>
+                <button class="yesno-yes-bg" ng-click="switch()" tabindex="-1" type="button">{{ yes }}</button>
+                <button class="yesno-no-bg" ng-click="switch()" tabindex="-1" type="button">{{ no }}</button>
+                <button class="yesno-button btn btn-primary" ng-class="buttonClass" ng-click="switch()" ng-disabled="isDisabled" type="button">{{ state }}</button>
             </div>
         </div>
     </div>

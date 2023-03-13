@@ -10,9 +10,9 @@
             <div class="nice-calendar-wrapper">
                 <div class="nice-calendar-weeks">
                     <div class="header">
-                        <button class="btn" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}" ng-disabled="isDisabled"><i class="fa fa-angle-left"></i></button>
+                        <button class="btn" type="button" ng-click="previous()" title="{{ 'Previous month' | translate:'Nice' }}" ng-disabled="isDisabled"><i class="fa fa-angle-left"></i></button>
                         <span title="{{ month.format('M.YYYY' )}}">{{ month.format("MMMM, YYYY" )}}</span>
-                        <button class="btn" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}" ng-disabled="isDisabled"><i class="fa fa-angle-right"></i></button>
+                        <button class="btn" type="button" ng-click="next()" title="{{ 'Next month' | translate:'Nice' }}" ng-disabled="isDisabled"><i class="fa fa-angle-right"></i></button>
                     </div>
 
                     <div class="week names">
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="week" ng-repeat="week in weeks">
-                        <button class="day" title="{{ day.date.format('D.M.YYYY') }}" ng-class="{
+                        <button class="day" type="button" title="{{ day.date.format('D.M.YYYY') }}" ng-class="{
                                 today: day.isToday,
                                 'different-month': !day.isCurrentMonth,
                                 'start-selected': isSameDay(day.date, startDate),

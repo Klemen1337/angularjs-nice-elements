@@ -30,9 +30,9 @@
                                 <select class="month-picker" ng-model="innerDate.month" ng-change="handleDateChange()" ng-options="month.value as month.name for month in months" ng-disabled="isDisabled">
                                 </select>
                             </span>
-                            <button class="btn btn-default-naked" ng-disabled="isDisabled" ng-click="previous()"><i class="fa fa-angle-left"></i></button>
-                            <button class="btn btn-default-naked" ng-disabled="isDisabled" ng-click="today()"><i class="fa fa-circle"></i></button>
-                            <button class="btn btn-default-naked" ng-disabled="isDisabled" ng-click="next()"><i class="fa fa-angle-right"></i></button>
+                            <button class="btn btn-default-naked" type="button" ng-disabled="isDisabled" ng-click="previous()"><i class="fa fa-angle-left"></i></button>
+                            <button class="btn btn-default-naked" type="button" ng-disabled="isDisabled" ng-click="today()"><i class="fa fa-circle"></i></button>
+                            <button class="btn btn-default-naked" type="button" ng-disabled="isDisabled" ng-click="next()"><i class="fa fa-angle-right"></i></button>
                         </div>
 
                         <div class="nice-date-week names">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="nice-date-week" role="row" ng-repeat="week in weeks">
-                            <button class="nice-date-day" role="gridcell" title="{{ day.value }}" ng-class="{
+                            <button class="nice-date-day" type="button" role="gridcell" title="{{ day.value }}" ng-class="{
                                     'today': day.isToday,
                                     'different-month': !day.isCurrentMonth,
                                     'selected': isSameDay(model, day.date),

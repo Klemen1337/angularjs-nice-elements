@@ -7,7 +7,7 @@
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
             <ul class="list-unstyled" ng-class="{ 'disabled': isDisabled }">
                 <li ng-repeat="item in internalList" ng-class="{ 'selected' : isItemSelected(item) }" ng-click="toggle(item)">
-                    <button class="choice-checkbox" ng-class="{'circle' : !multiple }" ng-disabled="isDisabled">
+                    <button class="choice-checkbox" type="button" ng-class="{'circle' : !multiple }" ng-disabled="isDisabled">
                         <nice-icon ng-if="multiple" icon="icon-check"></nice-icon>
                         <div ng-if="!multiple" class="multiple-circle"></div>
                     </button>
