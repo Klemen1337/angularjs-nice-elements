@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('niceElementsDemo').controller('HomeCtrl', function ($scope, $http, $q, NiceNotification, $timeout) {
+angular.module('niceElementsDemo').controller('HomeCtrl', function ($scope, $http, $q, NiceNotification, NiceService, $timeout) {
+  $scope.niceService = NiceService;
   $scope.emptyList = [];
   $scope.inputNumber = null;
   $scope.dropdownLoading = true;

@@ -12,8 +12,10 @@ angular.module('niceElementsDemo')
       restrict: 'E',
       replace: true,
       templateUrl: 'demo/components/navigation/navigation.html',
-      controller: function ($scope, $location) {
+      controller: function ($scope, $location, NiceService) {
+        $scope.niceService = NiceService;
         $scope.routes = [
+          { title: "Home", href: "home" },
           { title: "Input", href: "nice-input" },
           { title: "Dropdown", href: "nice-dropdown" },
           { title: "Search", href: "nice-search" },

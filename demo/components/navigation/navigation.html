@@ -2,6 +2,7 @@
     <a href="#" class="logo">
         <img src="/assets/logo-transparent-white.png" alt="Nice elements" />
     </a>
+    <div class="version">v{{ niceService.version }}</div>
     <ul class="links">
         <li ng-repeat="route in routes" ng-class="{ 'active': location == route.href }">
             <a ng-href="#/{{ route.href }}" href>{{ route.title }}</a>
