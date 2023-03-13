@@ -50,8 +50,8 @@ module.exports = function (grunt) {
           src: '<%= yeoman.src %>/components/**/*.html',
           dest: '.tmp/nice.templates.js',
           options: {
-            htmlmin:  {
-              collapseWhitespace: true, 
+            htmlmin: {
+              collapseWhitespace: true,
               preserveLineBreaks: true,
               removeComments: true
             }
@@ -62,9 +62,10 @@ module.exports = function (grunt) {
       concat: {
         build: {
           src: [
-            'src/nice.js', 
-            'src/components/**/*.js', 
+            'src/nice.js',
+            'src/components/**/*.js',
             'src/filters/*.js',
+            'src/services/*.js',
             '.tmp/nice.templates.js'
           ],
           dest: '<%= yeoman.dist %>/nice.js'

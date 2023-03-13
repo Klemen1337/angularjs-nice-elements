@@ -10,7 +10,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.7.11",
+      version: "1.7.12",
       getHeader: function () {
         return {};
       }
