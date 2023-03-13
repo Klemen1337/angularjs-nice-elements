@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.7.11 (13.3.2023)
+
+- fixed button types,
+- added replace to nice-icon,
+- added load more to nice-dropdown,
+- create nice-service
+
 ## v1.7.10 (10.3.2023)
 
 - fixed yesno for firefox,
