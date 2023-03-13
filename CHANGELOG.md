@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.7.12 (13.3.2023)
+
+- fixed build for services
+
 ## v1.7.11 (13.3.2023)
 
 - fixed button types,
