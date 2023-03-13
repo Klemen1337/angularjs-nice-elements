@@ -77,6 +77,82 @@
 
         <hr>
 
+        <pre class="prettyprint">&lt;nice-dropdown 
+    title="Event" 
+    model="dropdown6" 
+    search-function="fetchEvents" 
+    nullable="true"
+    enable-load-more="true"
+>
+    &lt;nice-dropdown-button>
+        &lt;div class="dropdown-event">
+            &lt;img ng-src="&lcub;&lcub; &dollar;parent.selected.thumbnail_photo &rcub;&rcub;" />
+            &lt;div class="info">
+                &lt;label>&lcub;&lcub; &dollar;parent.selected.name &rcub;&rcub;&lt;/label>
+                &lt;small>&lcub;&lcub; &dollar;parent.selected.venue_name &rcub;&rcub;&lt;/small>
+            &lt;/div>
+        &lt;/div>
+    &lt;/nice-dropdown-button>
+    &lt;nice-dropdown-option>
+        &lt;div class="dropdown-event">
+            &lt;img ng-src="&lcub;&lcub; &dollar;parent.item.thumbnail_photo &rcub;&rcub;" />
+            &lt;div class="info">
+                &lt;label>&lcub;&lcub; &dollar;parent.item.name &rcub;&rcub;&lt;/label>
+                &lt;small>&lcub;&lcub; &dollar;parent.item.venue_name &rcub;&rcub;&lt;/small>
+            &lt;/div>
+        &lt;/div>
+    &lt;/nice-dropdown-option>
+&lt;/nice-dropdown></pre>
+        <div class="row">
+            <div class="col-sm-6">
+                <style>
+                    .dropdown-event {
+                        display: flex;
+                        gap: 0.5rem;
+                        align-items: center;
+                    }
+
+                    .dropdown-event img {
+                        flex-shrink: 0;
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .dropdown-event label {
+                        display: block;
+                        margin: 0;
+                    }
+                </style>
+                <nice-dropdown title="Event" model="dropdown6" search-function="fetchEvents" enable-load-more="true" nullable="true">
+                    <nice-dropdown-button>
+                        <div class="dropdown-event">
+                            <img ng-src="{{ $parent.selected.thumbnail_photo }}" />
+                            <div class="info">
+                                <label>{{ $parent.selected.name }}</label>
+                                <small>{{ $parent.selected.venue_name }}</small>
+                            </div>
+                        </div>
+                    </nice-dropdown-button>
+                    <nice-dropdown-option>
+                        <div class="dropdown-event">
+                            <img ng-src="{{ $parent.item.thumbnail_photo }}" />
+                            <div class="info">
+                                <label>{{ $parent.item.name }}</label>
+                                <small>{{ $parent.item.venue_name }}</small>
+                            </div>
+                        </div>
+                    </nice-dropdown-option>
+                </nice-dropdown>
+            </div>
+            <div class="col-sm-6">
+                <pre>{{ dropdown6 | json }}</pre>
+            </div>
+        </div>
+
+        <hr>
+
         <pre class="prettyprint">&lt;nice-dropdown
     title="Dropdown"
     model="dropdown"

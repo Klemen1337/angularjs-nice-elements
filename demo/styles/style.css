@@ -13,6 +13,18 @@ body {
   gap: 1rem;
 }
 
+.alert-primary {
+  background: var(--nice-primary-color);
+}
+
+.version {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
 .row-title {
   flex-grow: 1;
 }
@@ -177,6 +189,7 @@ pre {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  margin-bottom: 2rem;
 }
 
 .sidebar ul li a {

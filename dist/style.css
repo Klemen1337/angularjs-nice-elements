@@ -1564,6 +1564,17 @@ p.nice {
   top: 50%;
   right: 10px;
   transform: translate(0, -50%);
+  height: 16px;
+  width: 16px;
+}
+
+.nice-dropdown .nice-dropdown-menu .search-bar .count, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar .count {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translate(0, -50%);
+  font-size: 0.7em;
+  opacity: 0.5;
 }
 
 .nice-dropdown .nice-dropdown-menu .nice-no-data, .nice-search .nice-dropdown-empty .nice-dropdown-menu .nice-no-data {

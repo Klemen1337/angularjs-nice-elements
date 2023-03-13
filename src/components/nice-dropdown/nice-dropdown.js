@@ -43,9 +43,10 @@ angular.module('niceElements')
         dropdownDistance: '@',
         searchFunction: '=?',
         isInline: '=',
-        clearOnSelect: '@'
+        clearOnSelect: '@',
+        enableLoadMore: '@' // Enable load more
       },
-      controller: function ($scope, $element, $timeout, gettextCatalog) {
+      controller: function ($scope, $http, $element, $timeout, gettextCatalog, NiceService) {
         if (!$scope.dropdownDistance) { $scope.dropdownDistance = 5; }
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
@@ -107,7 +108,8 @@ angular.module('niceElements')
           $scope.setupPopper();
         });
 
-        // -----------------------------------Open -----------------------------------
+
+        // ----------------------------------- Open -----------------------------------
         $scope.toggle = function () {
           if ($scope.isOpen) {
             $scope.close();
@@ -131,8 +133,53 @@ angular.module('niceElements')
           $timeout(function () {
             $scope.focusInput();
             $scope.scrollToHover(true);
+            if ($scope.enableLoadMore) $scope.handleScrollToBottom();
           }, 100);
         };
+
+
+        // ----------------------------------- Handle scroll to bottom -----------------------------------
+        var lastScrollPosition = Infinity;
+        $scope.handleScrollToBottom = function () {
+          lastScrollPosition = Infinity;
+          var element = angular.element($element[0].getElementsByClassName("nice-dropdown-items")[0]);
+          element.bind("scroll mousewheel", function (e) {
+            var scrollPosition = element[0].scrollHeight - element[0].scrollTop;
+            if (scrollPosition === element[0].clientHeight && lastScrollPosition != scrollPosition) {
+              $scope.loadMore();
+            }
+            if (scrollPosition <= lastScrollPosition) lastScrollPosition = scrollPosition;
+          });
+        }
+
+
+        // ----------------------------------- Load more -----------------------------------
+        $scope.loadMore = function () {
+          if (!$scope.internalList || !$scope.internalList._metadata || !$scope.internalList._metadata.next) return;
+          $scope.loading = true;
+          $http({
+            method: 'GET',
+            url: $scope.internalList._metadata.next,
+            headers: NiceService.getHeader()
+          }).then(function (response) {
+            response = response.data;
+            var metadata = {
+              count: response.count,
+              previous: response.previous,
+              next: response.next,
+            };
+            $scope.internalList._metadata = metadata;
+            angular.forEach(response.results, function (item) {
+              $scope.internalList.push(item);
+            });
+            lastScrollPosition = Infinity;
+            $scope.loading = false;
+            return response;
+          }, function (error) {
+            $scope.loading = false;
+            return error;
+          });
+        }
 
 
         // ----------------------------------- Focus input -----------------------------------
@@ -144,6 +191,7 @@ angular.module('niceElements')
             });
           }
         };
+
 
         // ------------------- On blur -------------------
         $scope.onBlur = function () {

@@ -14,6 +14,28 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     niceDateInputEnd: moment().add("days", 2).hours(3).minutes(0).seconds(0)
   };
 
+  $scope.fetchEvents = function (search) {
+    var params = {
+      search,
+      limit: 5
+    };
+    return $http({
+      method: 'GET',
+      url: "https://ticketing.dev.olaii.com/api/v2/events/?" + new URLSearchParams(params)
+    }).then(async function (response) {
+      response = response.data;
+      var metadata = {
+        count: response.count,
+        previous: response.previous,
+        next: response.next,
+      };
+      response = response.results;
+      response._metadata = metadata;
+      console.log("fetchEvents", response);
+      return response;
+    });
+  }
+
   $scope.dropdownOnChange = function () {
     console.log("Dropdown change:", ...arguments);
   }
