@@ -1,6 +1,44 @@
 <div ng-controller='HomeCtrl'>
     <h1>Nice elements</h1>
-    <div class="white-wrapper">
+
+    <!-- Examples -->
+    <nice-wrapper title="Examples" subtitle="Example of a form">
+        <div class="row">
+            <div class="col-sm-6">
+                <form name="forma">
+                    <nice-input title="First name" model="form.first_name" required="true"></nice-input>
+                    <nice-input title="Last name" model="form.last_name"></nice-input>
+                    <nice-dropdown-date title="Birthday" model="form.birthday"></nice-dropdown-date>
+                    <nice-upload title="Avatar" model="form.avatar"></nice-upload>
+                </form>
+            </div>
+
+            <div class="col-sm-6">
+                <pre>{{ form | json }}</pre>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-sm-6">
+                <form name="forma2">
+                    <nice-dropdown title="Nice dropdown" model="form2.dropdown" list="countries" obj-key="iso" obj-value="name"></nice-dropdown>
+                    <nice-date title="Nice date" time="true" model="form2.date" inline="true"></nice-date>
+                    <nice-quantity title="Nice quantity" model="form2.quantity" min="1" max="10" field-width="col-sm-4"></nice-quantity>
+                </form>
+            </div>
+
+            <div class="col-sm-6">
+                <pre>{{ form2 | json }}</pre>
+            </div>
+        </div>
+
+    </nice-wrapper>
+
+
+    <!-- Sandbox -->
+    <nice-wrapper title="Sandbox" subtitle="List of example components" collapsed="true" collapsable="true">
         <div class="row">
             <div ng-form="forme" class="col-sm-6">
                 <nice-date-input title="Date input" model="data.niceDateInput" required="isRequired" is-disabled="data.disabled" is-inline="isInline"></nice-date-input>
@@ -220,11 +258,12 @@
                 <button class="btn btn-sm btn-primary" nice-tooltip="This is a nice tooltip example">Test</button>
             </div>
         </div>
-    </div>
 
-    <div class="white-wrapper" id="common">
-        <h2>All have in common</h2>
+        <nice-wrapper-footer>This is a footer</nice-wrapper-footer>
+    </nice-wrapper>
 
+    <!-- Common -->
+    <nice-wrapper id="common" collapsed="true" collapsable="true" title="All have in common" subtitle="List of all attributes that components share">
         <div class="table-responsive">
             <table class="table nice-table">
                 <thead>
@@ -273,5 +312,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </nice-wrapper>
 </div>

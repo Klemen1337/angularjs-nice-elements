@@ -1,7 +1,78 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice choice</h1>
 
-    <div class="white-wrapper" id="nice-choice">
+    <nice-wrapper>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-choice title="I like fruit" model="model.choiceDemo1" multiple="true" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-choice
+    title="I like fruit"
+    model="choiceDemo1"
+    multiple="true"
+    list-is-obj="true"
+    list="listObjs"
+    obj-value="value"
+    selected-is-obj="true"
+>&lt;/nice-choice></pre>
+                <pre>{{ model.choiceDemo1 | json }}</pre>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-choice title="I like fruit" model="choiceDemo2" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-choice
+    title="I like fruit"
+    model="choiceDemo2"
+    list-is-obj="true"
+    list="listObjs"
+    obj-value="value"
+    selected-is-obj="true">
+&lt;/nice-choice></pre>
+                <pre>{{ choiceDemo2 | json }}</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-choice title="I like fruit" model="choiceDemo3" multiple="true" list="listStrings"></nice-choice>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-choice 
+    title="I like fruit" model="choiceDemo3" 
+    multiple="true" 
+    list="listStrings"
+>&lt;/nice-choice></pre>
+                <pre>{{ choiceDemo3 | json }}</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-choice title="I like fruit" model="choiceDemo4" list="listStrings"></nice-choice>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-choice 
+    title="I like fruit" 
+    model="choiceDemo4" 
+    list="listStrings"
+>&lt;/nice-choice></pre>
+                <pre>{{ choiceDemo4 | json }}</pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+
+    <!-- Attributes -->
+    <nice-wrapper title="Attributes" collapsable="true" collapsed="true">
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -45,72 +116,5 @@
                 </tbody>
             </table>
         </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-choice
-    title="I like fruit"
-    model="choiceDemo1"
-    multiple="true"
-    list-is-obj="true"
-    list="listObjs"
-    obj-value="value"
-    selected-is-obj="true">
-&lt;/nice-choice></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-slot title="I like fruit">
-                    <nice-checkbox title="Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia Slovenia" model="model.checkbox" no-margin="true"></nice-checkbox>
-                </nice-slot>
-                <nice-choice title="I like fruit" model="choiceDemo1" multiple="true" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ choiceDemo1 | json }}</pre>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-choice
-    title="I like fruit"
-    model="choiceDemo2"
-    list-is-obj="true"
-    list="listObjs"
-    obj-value="value"
-    selected-is-obj="true">
-&lt;/nice-choice></pre>
-
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-choice title="I like fruit" model="choiceDemo2" list-is-obj="true" list="listObjs" obj-value="value" selected-is-obj="true"></nice-choice>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ choiceDemo2 | json }}</pre>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-choice title="I like fruit" model="choiceDemo3" multiple="true" list="listStrings">&lt;/nice-choice></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-choice title="I like fruit" model="choiceDemo3" multiple="true" list="listStrings"></nice-choice>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ choiceDemo3 | json }}</pre>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-choice title="I like fruit" model="choiceDemo4" list="listStrings">&lt;/nice-choice></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-choice title="I like fruit" model="choiceDemo4" list="listStrings"></nice-choice>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ choiceDemo4 | json }}</pre>
-            </div>
-        </div>
-    </div>
+    </nice-wrapper>
 </div>

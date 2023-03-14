@@ -1,16 +1,18 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice checkbox</h1>
 
-    <div class="white-wrapper" id="nice-checkbox">
-        <pre class="prettyprint">&lt;nice-checkbox title="I like milk" model="niceCheckbox">&lt;/nice-checkbox></pre>
-
+    <nice-wrapper>
         <div class="row">
             <div class="col-sm-6">
                 <nice-checkbox title="I like milk" model="niceCheckbox"></nice-checkbox>
             </div>
             <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-checkbox 
+    title="I like milk" 
+    model="niceCheckbox"
+>&lt;/nice-checkbox></pre>
                 <code>{{ niceCheckbox }}</code>
             </div>
         </div>
-    </div>
+    </nice-wrapper>
 </div>

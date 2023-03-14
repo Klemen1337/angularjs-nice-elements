@@ -1,21 +1,90 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice number</h1>
 
-    <div class="white-wrapper" id="nice-number">
-        <pre class="prettyprint">&lt;nice-number title="Step 0.1" model="niceNumber" step="0.1" decimals="1" allow-negative="true">&lt;/nice-number></pre>
-
+    <nice-wrapper>
         <div class="row">
             <div class="col-sm-6">
                 <nice-number title="Number" model="niceNumber"></nice-number>
-                <nice-number title="Step 0.1" model="niceNumber" step="0.1" decimals="1"></nice-number>
-                <nice-number title="Step 0.01" model="niceNumber" step="0.01" decimals="2"></nice-number>
-                <nice-number title="5 Decimals" model="niceNumber2" decimals="5"></nice-number>
-                <nice-number title="Negative" model="niceNumber2" allow-negative="true"></nice-number>
+                <nice-slot>
+                    <code>{{ niceNumber }}</code>
+                </nice-slot>
             </div>
             <div class="col-sm-6">
-                <pre>{{ niceNumber }}</pre>
-                <pre>{{ niceNumber2 }}</pre>
+                <pre class="prettyprint">&lt;nice-number 
+    title="Number"
+    model="niceNumber"
+>&lt;/nice-number></pre>
             </div>
         </div>
-    </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-number title="Step 0.1" model="niceNumber" step="0.1" decimals="1"></nice-number>
+                <nice-slot>
+                    <code>{{ niceNumber }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-number 
+    title="Step 0.1" 
+    model="niceNumber" 
+    step="0.1" 
+    decimals="1"
+>&lt;/nice-number></pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-number title="Step 0.01" model="niceNumber" step="0.01" decimals="2"></nice-number>
+                <nice-slot>
+                    <code>{{ niceNumber }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-number 
+    title="Step 0.01" 
+    model="niceNumber" 
+    step="0.01" 
+    decimals="2"
+>&lt;/nice-number></pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-number title="5 Decimals" model="niceNumber2" decimals="5"></nice-number>
+                <nice-slot>
+                    <code>{{ niceNumber2 }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-number 
+    title="5 Decimals" 
+    model="niceNumber2" 
+    decimals="5"
+>&lt;/nice-number></pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-number title="Negative" model="niceNumber2" allow-negative="true"></nice-number>
+                <nice-slot>
+                    <code>{{ niceNumber2 }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-number 
+    title="Negative" 
+    model="niceNumber2" 
+    allow-negative="true"
+>&lt;/nice-number></pre>
+            </div>
+        </div>
+    </nice-wrapper>
 </div>

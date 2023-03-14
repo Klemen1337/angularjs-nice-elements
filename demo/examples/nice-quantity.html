@@ -1,27 +1,39 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice quantity</h1>
 
-    <div class="white-wrapper" id="nice-quantity">
-        <pre class="prettyprint lang-html">&lt;nice-quantity title="Text" model="model.niceQuantity">&lt;/nice-quantity></pre>
+    <nice-wrapper>
         <div class="row">
             <div class="col-sm-6">
                 <nice-quantity title="Text" model="model.niceQuantity"></nice-quantity>
+                <nice-slot>
+                    <code>{{ model.niceQuantity }}</code>
+                </nice-slot>
             </div>
             <div class="col-sm-6">
-                <code>{{ model.niceQuantity }}</code>
+                <pre class="prettyprint lang-html">&lt;nice-quantity 
+    title="Text" 
+    model="model.niceQuantity"
+>&lt;/nice-quantity></pre>
             </div>
         </div>
 
         <hr>
 
-        <pre class="prettyprint lang-html">&lt;nice-quantity title="Text" min="5" max="15" model="model.niceQuantity">&lt;/nice-quantity></pre>
         <div class="row">
             <div class="col-sm-6">
                 <nice-quantity title="Text" model="model.niceQuantity" min="5" max="15"></nice-quantity>
+                <nice-slot>
+                    <code>{{ model.niceQuantity }}</code>
+                </nice-slot>
             </div>
             <div class="col-sm-6">
-                <code>{{ model.niceQuantity }}</code>
+                <pre class="prettyprint lang-html">&lt;nice-quantity 
+    title="Text" 
+    min="5" 
+    max="15" 
+    model="model.niceQuantity"
+>&lt;/nice-quantity></pre>
             </div>
         </div>
-    </div>
+    </nice-wrapper>
 </div>

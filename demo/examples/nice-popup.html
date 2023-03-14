@@ -2,6 +2,39 @@
     <h1>Nice popup</h1>
 
     <div class="white-wrapper" id="nice-button">
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-popup show-arrow="true">
+                    <nice-popup-target>
+                        <button class="btn btn-primary">This is a test button</button>
+                    </nice-popup-target>
+                    <nice-popup-content>
+                        <div class="white-wrapper mb-0 p-2">
+                            <h2>Test popup content</h2>
+                            <nice-input model="data.test" title="Name" is-inline="true"></nice-input>
+                            <nice-input model="data.test2" title="Surname" is-inline="true"></nice-input>
+                            <nice-input model="data.test3" title="Comment" is-inline="true" no-margin="true"></nice-input>
+                        </div>
+                    </nice-popup-content>
+                </nice-popup>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-popup show-arrow="true">
+    &lt;nice-popup-target>
+        &lt;button class="btn btn-primary">This is a test button&lt;/button>
+    &lt;/nice-popup-target>
+    &lt;nice-popup-content>
+        &lt;div class="white-wrapper">
+            Test popup content
+        &lt;/div>
+    &lt;/nice-popup-content>
+&lt;/nice-popup></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attributes -->
+    <nice-wrapper title="Attributes" collapsable="true" collapsed="true">
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -40,34 +73,5 @@
                 </tbody>
             </table>
         </div>
-
-        <hr>
-
-        <pre class="prettyprint">
-&lt;nice-popup show-arrow="true">
-    &lt;nice-popup-target>
-        &lt;button class="btn btn-primary">This is a test button&lt;/button>
-    &lt;/nice-popup-target>
-    &lt;nice-popup-content>
-        &lt;div class="white-wrapper">
-            Test popup content
-        &lt;/div>
-    &lt;/nice-popup-content>
-&lt;/nice-popup>
-</pre>
-
-        <nice-popup show-arrow="true">
-            <nice-popup-target>
-                <button class="btn btn-primary">This is a test button</button>
-            </nice-popup-target>
-            <nice-popup-content>
-                <div class="white-wrapper mb-0 p-2">
-                    <h2>Test popup content</h2>
-                    <nice-input model="data.test" title="Name" is-inline="true"></nice-input>
-                    <nice-input model="data.test2" title="Surname" is-inline="true"></nice-input>
-                    <nice-input model="data.test3" title="Comment" is-inline="true" no-margin="true"></nice-input>
-                </div>
-            </nice-popup-content>
-        </nice-popup>
-    </div>
+    </nice-wrapper>
 </div>

@@ -154,7 +154,7 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     }
   ]
 
-  //$scope.listStrings = ["String 1", "String 2", "String 3"];
+  $scope.listStrings = ["String 1", "String 2", "String 3"];
   $timeout(function () {
     $scope.niceNumber2 = 1.99887;
     $scope.dropdownLoading = false;

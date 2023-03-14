@@ -1,12 +1,101 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice input</h1>
 
-    <div class="white-wrapper" id="nice-input">
+    <!-- Examples -->
+    <nice-wrapper>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Text" model="model.inputText"></nice-input>
+                <nice-slot><code>{{ model.inputText }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint lang-html">&lt;nice-input 
+    title="Text" 
+    model="inputText"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Number" model="model.inputNumber" type="number"></nice-input>
+                <nice-slot><code>{{ model.inputNumber }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-input 
+    title="Number" 
+    model="inputNumber" 
+    type="number"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Email" model="model.inputEmail" type="email"></nice-input>
+                <nice-slot><code>{{ model.inputEmail }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-input 
+    title="Email" 
+    model="inputEmail" 
+    type="email"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Textarea" model="model.inputTextArea" text-area="true"></nice-input>
+                <nice-slot><code>{{ model.inputTextArea }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-input 
+    title="Textarea" 
+    model="inputTextArea" 
+    text-area="true"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Regex (no special charecters)" model="model.inputeTextRegex" regex="^[a-zA-Z0-9]+$" regex-error="Only special characters!"></nice-input>
+                <nice-slot><code>{{ model.inputeTextRegex }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-input 
+    title="Regex (no special charecters)" 
+    model="model.inputeTextRegex" 
+    regex="^[a-zA-Z0-9]+$" 
+    regex-error="Only special characters!"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-input title="Regex (email)" model="model.inputeTextRegexRaw" regex="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" regex-error="Email please!"></nice-input>
+                <nice-slot><code>{{ model.inputeTextRegexRaw }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-input 
+    title="Regex (email)" 
+    model="model.inputeTextRegexRaw" 
+    regex="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+    regex-error="Email please!"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+    <!-- Attributes -->
+    <nice-wrapper title="Attributes" collapsable="true" collapsed="true">
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Command</th>
+                        <th>Attribute</th>
                         <th>Description</th>
                         <th>Default</th>
                     </tr>
@@ -87,68 +176,5 @@
                 </tbody>
             </table>
         </div>
-
-        <hr>
-
-        <pre class="prettyprint lang-html">&lt;nice-input title="Text" model="inputText">&lt;/nice-input></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-input title="Text" model="model.inputText"></nice-input>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ model.inputText }}</code>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-input title="Number" model="inputNumber" type="number">&lt;/nice-input></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-input title="Number" model="model.inputNumber" type="number"></nice-input>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ model.inputNumber }}</code>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-input title="Email" model="inputEmail" type="email">&lt;/nice-input></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-input title="Email" model="model.inputEmail" type="email"></nice-input>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ model.inputEmail }}</code>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-input title="Textarea" model="inputTextArea" text-area="true">&lt;/nice-input></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-input title="Textarea" model="model.inputTextArea" text-area="true"></nice-input>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ model.inputTextArea }}</code>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-input title="Regex" model="model.inputeTextRegex" regex="^[a-zA-Z0-9]+$" regex-error="Only special characters!">&lt;/nice-input></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-input title="Regex (no special charecters)" model="model.inputeTextRegex" regex="^[a-zA-Z0-9]+$" regex-error="Only special characters!"></nice-input>
-                <nice-input title="Regex (email)" model="model.inputeTextRegexRaw" regex="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" regex-error="Email please!"></nice-input>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ model.inputeTextRegex }}</code>
-            </div>
-        </div>
-    </div>
-
-    <pre>{{ model | json }}</pre>
+    </nice-wrapper>
 </div>

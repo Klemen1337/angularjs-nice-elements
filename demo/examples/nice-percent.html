@@ -1,17 +1,20 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice percent</h1>
 
-    <div class="white-wrapper" id="nice-percent">
-        <pre class="prettyprint">&lt;nice-percent title="Percent" model="percentage">&lt;/nice-percent></pre>
+    <nice-wrapper>
         <div class="row">
             <div class="col-sm-6">
                 <nice-percent title="Percent" model="percentage"></nice-percent>
+                <nice-slot>
+                    <code>{{ percentage }}</code>
+                </nice-slot>
             </div>
             <div class="col-sm-6">
-                <div class="col-sm-6">
-                    <code>{{ percentage }}</code>
-                </div>
+                <pre class="prettyprint">&lt;nice-percent 
+    title="Percent" 
+    model="percentage"
+>&lt;/nice-percent></pre>
             </div>
         </div>
-    </div>
+    </nice-wrapper>
 </div>

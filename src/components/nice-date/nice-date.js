@@ -7,7 +7,6 @@
  * # niceDate
  */
 angular.module('niceElements')
-
   .directive('niceDate', function () {
     return {
       restrict: 'E',
@@ -133,7 +132,7 @@ angular.module('niceElements')
             selectedDate.hours($scope.innerDate.hour);
             selectedDate.minutes($scope.innerDate.minute);
 
-            $scope.model = selectedDate;
+            $scope.model = angular.copy(selectedDate);
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.forma.$setDirty();
           }

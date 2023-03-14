@@ -1,7 +1,48 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice yes no</h1>
 
-    <div class="white-wrapper" id="nice-yes-no">
+    <nice-wrapper>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?"></nice-yesno>
+                <nice-slot>
+                    <code>{{ yesNoDemo }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-yesno 
+    yes="Yup" 
+    no="Noup" 
+    model="yesNoDemo" 
+    title="Bloop?"
+>&lt;/nice-yesno></pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-yesno model="yesNoDemo2" yes="Bleerp" no="Woorp" model-value="yesNoModelDemo" options="['PERSON','COMPANY']" title="Bloop?"></nice-yesno>
+                <nice-slot>
+                    <code>{{ yesNoModelDemo }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-yesno
+    model="yesNoDemo2"
+    yes="Bleerp"
+    no="Woorp"
+    model-value="yesNoModelDemo"
+    options="['PERSON','COMPANY']"
+    title="Bloop?">
+&lt;/nice-yesno></pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+
+    <!-- Attributes -->
+    <nice-wrapper title="Attributes" collapsable="true" collapsed="true">
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -40,36 +81,5 @@
                 </tbody>
             </table>
         </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?">&lt;/nice-yesno></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-yesno yes="Yup" no="Noup" model="yesNoDemo" title="Bloop?"></nice-yesno>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ yesNoDemo }}</code>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-yesno
-    model="yesNoDemo2"
-    yes="Bleerp"
-    no="Woorp"
-    model-value="yesNoModelDemo"
-    options="['PERSON','COMPANY']"
-    title="Bloop?">
-&lt;/nice-yesno></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-yesno model="yesNoDemo2" yes="Bleerp" no="Woorp" model-value="yesNoModelDemo" options="['PERSON','COMPANY']" title="Bloop?"></nice-yesno>
-            </div>
-            <div class="col-sm-6">
-                <code>{{ yesNoModelDemo }}</code>
-            </div>
-        </div>
-    </div>
+    </nice-wrapper>
 </div>

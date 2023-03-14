@@ -1,23 +1,22 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice filters</h1>
 
-    <div class="white-wrapper">
-        <h5>Nice highlight</h5>
+    <nice-wrapper title="Nice highlight" collapsable="true">
         <nice-input title="Search" model="filters.search" is-inline="true"></nice-input>
 
         <pre class="prettyprin mb-2">&lt;div ng-bind-html="'Test' | niceHighlight:filters.search">&lt;/div></pre>
         <div ng-bind-html="'Type in the input above to highlight the text' | niceHighlight:filters.search"></div>
         <div ng-bind-html="null | niceHighlight:filters.search"></div>
         <div ng-bind-html="undefined | niceHighlight:filters.search"></div>
-    </div>
+    </nice-wrapper>
 
-    <div class="white-wrapper">
-        <h5>Nice date</h5>
+
+    <nice-wrapper title="Nice date" collapsable="true">
         <nice-date title="Date" time="true" model="model.niceDateInputStart" is-inline="true"></nice-date>
 
         <pre class="prettyprin mb-2">&lt;div&gt;&lcub;&lcub; model.niceDateInputStart &VerticalLine; niceDate &rcub;&rcub;&lt;/div&gt;</pre>
         <div>{{ model.niceDateInputStart | niceDate }}</div>
         <div>{{ model.niceDateInputStart | niceDate:true }}</div>
         <div>{{ model.niceDateInputStart | niceDate:true:true }}</div>
-    </div>
+    </nice-wrapper>
 </div>

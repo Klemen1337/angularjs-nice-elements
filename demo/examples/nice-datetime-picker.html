@@ -1,7 +1,84 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice date time picker</h1>
 
-    <div class="white-wrapper" id="nice-date-time">
+    <nice-wrapper>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetimerange-picker-2 start-date="dateTimePicker2Start" end-date="dateTimePicker2End" title="Date picker v2" date="true" time="true"></nice-datetimerange-picker-2>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-datetimerange-picker-2
+    start-date="dateTimePicker2Start" 
+    end-date="dateTimePicker2End" 
+    title="Date picker v2" 
+    date="true" 
+    time="true">
+&lt;/nice-datetimerange-picker-2></pre>
+
+                <pre>{{ dateTimePicker2Start | json }}</pre>
+                <pre>{{ dateTimePicker2End | json }}</pre>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetimerange-picker-2 start-date="dateTimePicker2Start" end-date="dateTimePicker2End" title="Date picker v2" date="true" time="false"></nice-datetimerange-picker-2>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-datetimerange-picker-2
+    start-date="dateTimePicker2Start" 
+    end-date="dateTimePicker2End" 
+    title="Date picker v2" 
+    date="true" 
+    time="false">
+&lt;/nice-datetimerange-picker-2></pre>
+                <pre>{{ dateTimePicker2Start | json }}</pre>
+                <pre>{{ dateTimePicker2End | json }}</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetime-picker model="dateTimePicker" title="Date picker" date="true" time="false" format="DD.MM.YYYY" model-format="DD-MM-YYYY HH:mmZZ"></nice-datetime-picker>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-datetime-picker
+    model="dateTimePicker"
+    title="Date picker"
+    date="true"
+    time="false"
+    format="DD.MM.YYYY">
+&lt;/nice-datetime-picker></pre>
+                <pre>{{ dateTimePicker | json }}</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-datetime-picker model="dateTimePicker4" title="Datetime picker" date="true" time="true" model-format="DD-MM-YYYY HH:mmZZ" format="DD.MM.YYYY • HH:mm"></nice-datetime-picker>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-datetime-picker
+    model="dateTimePicker"
+    title="Datetime picker"
+    date="true"
+    time="true"
+    format="DD.MM.YYYY • HH:mm">
+&lt;/nice-datetime-picker></pre>
+                <pre>{{ dateTimePicker | json }}</pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+
+    <!-- Attributes -->
+    <nice-wrapper title="Attributes" collapsable="true" collapsed="true">
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -90,81 +167,5 @@
                 </tbody>
             </table>
         </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-datetimerange-picker-2
-    start-date="dateTimePicker2Start" 
-    end-date="dateTimePicker2End" 
-    title="Date picker v2" 
-    date="true" 
-    time="true">
-&lt;/nice-datetimerange-picker-2></pre>
-
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-datetimerange-picker-2 start-date="dateTimePicker2Start" end-date="dateTimePicker2End" title="Date picker v2" date="true" time="true"></nice-datetimerange-picker-2>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ dateTimePicker2Start | json }}</pre>
-                <pre>{{ dateTimePicker2End | json }}</pre>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-datetimerange-picker-2
-    start-date="dateTimePicker2Start" 
-    end-date="dateTimePicker2End" 
-    title="Date picker v2" 
-    date="true" 
-    time="false">
-&lt;/nice-datetimerange-picker-2></pre>
-
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-datetimerange-picker-2 start-date="dateTimePicker2Start" end-date="dateTimePicker2End" title="Date picker v2" date="true" time="false"></nice-datetimerange-picker-2>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ dateTimePicker2Start | json }}</pre>
-                <pre>{{ dateTimePicker2End | json }}</pre>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-datetime-picker
-    model="dateTimePicker"
-    title="Date picker"
-    date="true"
-    time="false"
-    format="DD.MM.YYYY">
-&lt;/nice-datetime-picker></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-datetime-picker model="dateTimePicker" title="Date picker" date="true" time="false" format="DD.MM.YYYY" model-format="DD-MM-YYYY HH:mmZZ"></nice-datetime-picker>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ dateTimePicker | json }}</pre>
-            </div>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-datetime-picker
-    model="dateTimePicker"
-    title="Datetime picker"
-    date="true"
-    time="true"
-    format="DD.MM.YYYY • HH:mm">
-&lt;/nice-datetime-picker></pre>
-        <div class="row">
-            <div class="col-sm-6">
-                <nice-datetime-picker model="dateTimePicker4" title="Datetime picker" date="true" time="true" model-format="DD-MM-YYYY HH:mmZZ" format="DD.MM.YYYY • HH:mm"></nice-datetime-picker>
-            </div>
-            <div class="col-sm-6">
-                <pre>{{ dateTimePicker | json }}</pre>
-            </div>
-        </div>
-    </div>
+    </nice-wrapper>
 </div>
