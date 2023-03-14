@@ -8,6 +8,7 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 
 ## Components
 
+- nice-wrapper
 - nice-button
 - nice-button-toggle
 - nice-calendar

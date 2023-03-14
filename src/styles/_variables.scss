@@ -185,4 +185,9 @@ $nice-table-bg-active: #f5f5f5 !default;
   --nice-disabled-color: #{$nice-disabled-color};
   --nice-disabled-border: #{$nice-disabled-border};
   --nice-disabled-bg: #{$nice-disabled-bg};
+
+  // ---------- Card ----------
+  --nice-card-border: #{$nice-border-color};
+  --nice-card-bg: white;
+  --nice-card-padding: 2rem;
 }

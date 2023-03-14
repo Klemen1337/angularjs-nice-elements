@@ -1,0 +1,13 @@
+<div class="nice-wrapper" ng-class="{ 'collapsable': collapsable, 'has-header': hasHeader, 'has-footer': hasFooter }">
+    <div class="nice-wrapper-header" ng-if="hasHeader" ng-click="toggle()">
+        <div class="nice-wrapper-info">
+            <div class="nice-wrapper-title" ng-transclude="title">{{ title }}</div>
+            <div class="nice-wrapper-subtitle" ng-transclude="subtitle">{{ subtitle }}</div>
+        </div>
+        <button class="nice-wrapper-toggle btn btn-icon btn-default-naked" ng-if="collapsable" ng-class="{ 'is-open': isOpen }">
+            <nice-icon icon="icon-chevron-down"></nice-icon>
+        </button>
+    </div>
+    <div class="nice-wrapper-body" ng-transclude ng-if="isOpen"></div>
+    <div class="nice-wrapper-footer" ng-if="isOpen && hasFooter" ng-transclude="footer"></div>
+</div>

@@ -5364,6 +5364,47 @@ angular.module('niceElements')
 
 /**
  * @ngdoc directive
+ * @name niceElements.directive:niceWrapper
+ * @description
+ * # niceWrapper
+ */
+angular.module('niceElements')
+  .directive('niceWrapper', function () {
+    return {
+      templateUrl: 'src/components/nice-wrapper/nice-wrapper.html',
+      restrict: 'E',
+      transclude: {
+        'title': '?niceWrapperTitle',
+        'subtitle': '?niceWrapperSubtitle',
+        'footer': '?niceWrapperFooter'
+      },
+      scope: {
+        title: '@',
+        subtitle: '@',
+        collapsable: '=',
+        collapsed: '@',
+      },
+      controller: function ($scope, $transclude) {
+        $scope.isOpen = true;
+        if ($scope.collapsed) $scope.isOpen = false;
+
+        $scope.hasTitle = $transclude.isSlotFilled('title');
+        $scope.hasSubtitle = $transclude.isSlotFilled('subtitle');
+        $scope.hasFooter = $transclude.isSlotFilled('footer');
+        $scope.hasHeader = $scope.hasTitle || $scope.hasSubtitle || $scope.title || $scope.subtitle || $scope.collapsable;
+
+        $scope.toggle = function () {
+          if (!$scope.collapsable) return;
+          $scope.isOpen = !$scope.isOpen;
+        }
+      }
+    };
+  });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name niceElements.directive:niceYesno
  * @description
  * # niceYesno
@@ -5517,7 +5558,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.7.11",
+      version: "1.7.12",
       getHeader: function () {
         return {};
       }
@@ -7321,6 +7362,23 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "</ng-form>"
+  );
+
+
+  $templateCache.put('src/components/nice-wrapper/nice-wrapper.html',
+    "<div class=\"nice-wrapper\" ng-class=\"{ 'collapsable': collapsable, 'has-header': hasHeader, 'has-footer': hasFooter }\">\n" +
+    "<div class=\"nice-wrapper-header\" ng-if=\"hasHeader\" ng-click=\"toggle()\">\n" +
+    "<div class=\"nice-wrapper-info\">\n" +
+    "<div class=\"nice-wrapper-title\" ng-transclude=\"title\">{{ title }}</div>\n" +
+    "<div class=\"nice-wrapper-subtitle\" ng-transclude=\"subtitle\">{{ subtitle }}</div>\n" +
+    "</div>\n" +
+    "<button class=\"nice-wrapper-toggle btn btn-icon btn-default-naked\" ng-if=\"collapsable\" ng-class=\"{ 'is-open': isOpen }\">\n" +
+    "<nice-icon icon=\"icon-chevron-down\"></nice-icon>\n" +
+    "</button>\n" +
+    "</div>\n" +
+    "<div class=\"nice-wrapper-body\" ng-transclude ng-if=\"isOpen\"></div>\n" +
+    "<div class=\"nice-wrapper-footer\" ng-if=\"isOpen && hasFooter\" ng-transclude=\"footer\"></div>\n" +
+    "</div>"
   );
 
 
