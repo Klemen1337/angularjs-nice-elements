@@ -26,6 +26,7 @@ angular.module('niceElements')
         onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
+        keyForInputLabel: '@',
         debounceTime: '@',
         isInline: '=',
         help: '@'

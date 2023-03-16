@@ -4747,6 +4747,7 @@ angular.module('niceElements')
         onChange: '&?',
         noMargin: '@',
         tabIndex: '@',
+        keyForInputLabel: '@',
         debounceTime: '@',
         isInline: '=',
         help: '@'
@@ -5565,7 +5566,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.7.12",
+      version: "1.8.0",
       getHeader: function () {
         return {};
       }
@@ -6357,9 +6358,9 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "<div class=\"row\">\n" +
+    "<div class=\"row\" ng-if=\"noResults || results.length\">\n" +
     "<div ng-class=\"labelWidth ? labelWidth : 'col-sm-4'\" ng-if=\"title\"></div>\n" +
-    "<div ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
+    "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"nice-dropdown-empty\" ng-if=\"noResults\">\n" +
     "<div class=\"nice-search-row\" translate translate-context=\"Nice\">No results found.</div>\n" +
     "</div>\n" +

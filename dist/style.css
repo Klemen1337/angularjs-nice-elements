@@ -1953,6 +1953,10 @@ p.nice {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
 
+.nice-search .nice-dropdown-empty .nice-search-row {
+  opacity: 0.4;
+}
+
 .nice-search2 {
   position: relative;
 }

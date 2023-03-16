@@ -1,46 +1,59 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice search</h1>
 
-    <nice-wrapper>
+    <nice-wrapper title="Nice search 2">
+        <div class="row">
+            <div class="col-sm-4">
+                <nice-search2 refresh-function="searchCountry" model="search2Item" is-inline="true" placeholder="Search item" show-dropdown="true" key-for-input-label="name"></nice-search2>
+            </div>
+            <div class="col-sm-8">
+                <pre class="prettyprint">&lt;nice-search2
+    refresh-function="searchCountry" 
+    model="search2Item" 
+    is-inline="true" 
+    placeholder="Search item" 
+    show-dropdown="true" 
+    key-for-input-label="name"
+>&lt;/nice-search2></pre>
+
+                <pre>{{ search2Item | json }}</pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <nice-search2 refresh-function="searchCountry" model="search2Item2" is-inline="true" placeholder="Search item"></nice-search2>
+            </div>
+            <div class="col-sm-8">
+                <pre class="prettyprint">&lt;nice-search2
+    refresh-function="searchCountry" 
+    model="search2Item2" 
+    is-inline="true" 
+>&lt;/nice-search2></pre>
+
+                <pre>{{ search2Item2 | json }}</pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+
+    <nice-wrapper title="Nice search" collapsable="true" collapsed="true">
         <div class="row">
             <div class="col-sm-6">
-                <nice-search refresh-function="getAddresses" model="searchItem" is-inline="true" placeholder="Search item" show-dropdown="true" key-for-input-label="formatted_address">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div ng-if="results" class="nice-dropdown">
-                                <div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
-                                    <span class="text-bold">{{ result.formatted_address }}</span>
-                                    <div>{{ result.geometry.location.lat }}</div>
-                                    <div>{{ result.geometry.location.lng }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nice-search>
+                <nice-search title="Search" refresh-function="searchCountry" model="searchItem" is-inline="true" placeholder="Search item" show-dropdown="true" key-for-input-label="name"></nice-search>
                 <nice-slot>
                     <pre>{{ searchItem | json }}</pre>
                 </nice-slot>
             </div>
             <div class="col-sm-6">
                 <pre class="prettyprint">&lt;nice-search
-    refresh-function="getAddresses" 
+    title="Search" 
+    refresh-function="searchCountry" 
     model="searchItem" 
-    is-inline="true"
+    is-inline="true" 
     placeholder="Search item" 
     show-dropdown="true" 
-    key-for-input-label="formatted_address"
->
-&lt;div class="row">
-    &lt;div class="col-xs-12">
-        &lt;div ng-if="results" class="nice-dropdown">
-            &lt;div ng-repeat="result in results" class="nice-search-row" ng-class="{'active': selectedIndex == $index}" ng-click="selectRow(result)">
-                &lt;span class="text-bold">{{ result.formatted_address }}&lt;/span>
-                &lt;div>{{ result.geometry.location.lat }}&lt;/div>
-                &lt;div>{{ result.geometry.location.lng }}&lt;/div>
-                &lt;/div>
-            &lt;/div>
-        &lt;/div>
-    &lt;/div>
+    key-for-input-label="name"
 >&lt;/nice-search></pre>
             </div>
         </div>
