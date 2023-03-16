@@ -5,7 +5,7 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]" click-outside="close()">
-            <div class="nice-search-button input-group" ng-class="{ 'disabled': isDisabled, 'has-warning': !isDisabled && form.$invalid && form.$dirty, 'has-success': !isDisabled && form.$valid && form.$dirty}">
+            <div class="nice-search-button input-group" ng-class="{ 'disabled': isDisabled }">
                 <input class="form-control" type="text" id="{{ id }}" ng-model="model" placeholder="{{ placeholder }}" ng-disabled="isDisabled" ng-change="updateSearch()" ng-focus="onFocus()" tabindex="{{ tabIndex }}">
 
                 <span class="input-group-addon clickable" ng-click="onFocus()">
