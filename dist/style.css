@@ -3655,42 +3655,22 @@ p.nice {
   opacity: 0.7;
 }
 
-.nice-button .btn {
+.nice-button {
   position: relative;
 }
 
-.nice-button .btn .opacity0 {
-  opacity: 0;
+.nice-button .opacity-0 {
+  opacity: 0.2;
 }
 
-.nice-button .btn .opacity1 {
-  opacity: 1;
+.nice-button .nice-button-loader {
+  background: transparent;
+  color: white;
 }
 
-.nice-button .btn .display0 {
-  display: none;
-}
-
-.nice-button .btn .nice-button-loader-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -10px;
-  margin-top: -10px;
-}
-
-.nice-button .btn .nice-button-loader-wrapper .nice-button-loader {
-  padding: 0 !important;
-}
-
-.nice-button .btn .nice-button-loader-wrapper .nice-button-loader svg {
-  width: 20px !important;
-  height: 20px !important;
-}
-
-.nice-button .btn .nice-button-loader-wrapper .nice-button-loader svg path,
-.nice-button .btn .nice-button-loader-wrapper .nice-button-loader svg rect {
-  fill: white;
+.nice-button .nice-button-loader svg {
+  width: 20px;
+  height: 20px;
 }
 
 .nice-calendar {

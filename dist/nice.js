@@ -38,27 +38,28 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-button/nice-button.html',
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {
-        niceDisabled: '=',
         title: '@',
+        icon: '@?',
         noMargin: '=',
-        fieldWidth: '@',
-        labelWidth: '@',
         niceClick: '&',
+        niceDisabled: '=',
         addClass: '@',
-        isInline: '=',
-        type: '@'
+        type: '@?'
       },
-      link: function postLink(scope, element, attrs) {
-        scope.loading = false;
-        if (!scope.type) scope.type = "button";
+      controller: function ($q, $scope, $transclude) {
+        if ($scope.addClass != undefined) console.warn("[NICE ELEMENTS] Nice button: add-class attribute is deprecated")
+        if (!$scope.type) $scope.type = "button";
+        $scope.showSlot = $transclude().length > 0;
+        $scope.loading = false;
 
-        scope.click = function(){
-          if (scope.loading===false && scope.niceDisabled!==true){
-            scope.loading = true;
+        $scope.click = function () {
+          if ($scope.loading === false && $scope.niceDisabled !== true) {
+            $scope.loading = true;
 
-            $q.when(scope.niceClick()).finally(function(){
-              scope.loading = false;
+            $q.when($scope.niceClick()).finally(function () {
+              $scope.loading = false;
             });
           }
         };
@@ -3857,6 +3858,7 @@ angular.module('niceElements')
       controller: function ($scope, $transclude) {
         $scope.showSlot = $transclude().length > 0;
         if ($scope.visibleWhen != undefined) console.warn("[NICE ELEMENTS] Nice loader: visible-when attribute is deprecated")
+        if ($scope.addClass != undefined) console.warn("[NICE ELEMENTS] Nice loader: add-class attribute is deprecated")
       }
     };
   });
@@ -5588,12 +5590,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-button/nice-button.html',
-    "<div class=\"nice-component nice-button\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\">\n" +
-    "<button type=\"{{ type }}\" class=\"btn btn-primary\" ng-class=\"addClass\" ng-click=\"click()\" ng-disabled=\"niceDisabled===true\">\n" +
-    "<div ng-class=\"{opacity0: loading==true, opacity1: loading==false}\"><ng-transclude></ng-transclude></div>\n" +
-    "<div ng-class=\"{display0: loading==false, opacity1: loading==true}\" class=\"nice-button-loader-wrapper\"><nice-loader add-class=\"nice-button-loader\"></nice-loader></div>\n" +
-    "</button>\n" +
-    "</div>\n"
+    "<button type=\"{{ type }}\" class=\"nice-component nice-button btn btn-primary\" ng-class=\"{ 'margin-bottom-0' : noMargin }\" ng-click=\"click()\" ng-disabled=\"niceDisabled == true\">\n" +
+    "<nice-icon icon=\"{{ icon }}\" ng-if=\"icon\" ng-class=\"{ 'opacity-0': loading }\"></nice-icon>\n" +
+    "<span ng-if=\"showSlot\" ng-transclude ng-class=\"{ 'opacity-0': loading }\"></span>\n" +
+    "<nice-loader ng-if=\"loading\" fulldiv=\"true\" class=\"nice-button-loader\"></nice-loader>\n" +
+    "</button>"
   );
 
 
@@ -6211,7 +6212,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-loader/nice-loader.html',
-    "<div class=\"nice-loader\" ng-class=\"[addClass, { 'nice-loader-fullscreen': fullscreen, 'nice-loader-fulldiv': fulldiv }]\">\n" +
+    "<div class=\"nice-loader\" ng-class=\"{ 'nice-loader-fullscreen': fullscreen, 'nice-loader-fulldiv': fulldiv }\">\n" +
     "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
     "<path d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\n" +
     "</svg>\n" +

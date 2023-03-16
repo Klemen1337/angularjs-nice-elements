@@ -1,48 +1,27 @@
 <div ng-controller='ExampleCtrl'>
     <h1>Nice button</h1>
 
-    <div class="white-wrapper" id="nice-button">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Command</th>
-                        <th>Description</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>nice-click</td>
-                        <td>Set promisified function</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>add-class</td>
-                        <td>Add class to inner button</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>nice-disable</td>
-                        <td>Disable / Enable button</td>
-                        <td>null</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <hr>
-
-        <pre class="prettyprint">&lt;nice-button nice-click="doSomethingLong()" add-class="btn-block"&gt;&lt;/nice-button></pre>
-
+    <nice-wrapper>
         <div class="row">
             <div class="col-sm-6">
-                <nice-button nice-click="doSomethingLong()" add-class="btn-block">This is a test button</nice-button>
+                <nice-input title="test" model="forma.abc"></nice-input>
+                <nice-button nice-click="doSomethingLong()">This is a test button</nice-button>
+                <nice-button nice-click="doSomethingLong()">
+                    <nice-icon icon="icon-coffee"></nice-icon>
+                </nice-button>
+                <nice-button nice-click="doSomethingLong()" class="btn-success" icon="icon-coffee"></nice-button>
+                <nice-button nice-click="doSomethingLong()" class="btn-danger" icon="icon-coffee">Coffe break</nice-button>
+                <nice-button nice-click="doSomethingLong()" class="btn-warning" nice-disabled="true" icon="icon-coffee">Coffe break</nice-button>
             </div>
             <div class="col-sm-6">
-                <div class="col-sm-6">
-                    <code>{{ niceButton }}</code>
-                </div>
+                <pre class="prettyprint">&lt;nice-button nice-click="doSomethingLong()">&lt;/nice-button></pre>
+                <pre class="prettyprint">&lt;nice-button nice-click="doSomethingLong()">
+    &lt;nice-icon icon="icon-coffee">&lt;/nice-icon>
+&lt;/nice-button></pre>
+                <pre class="prettyprint">&lt;nice-button 
+    nice-click="doSomethingLong()"
+    icon="icon-coffee"
+>Coffe break&lt;/nice-button></pre>
             </div>
         </div>
 
@@ -191,5 +170,36 @@
                 <button class="btn btn-lg btn-info-naked" ng-click="copyClass($event)">Info</button>
             </div>
         </div>
-    </div>
+    </nice-wrapper>
+
+    <nice-wrapper>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>nice-click</td>
+                        <td>Set promisified function</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>nice-disable</td>
+                        <td>Disable / Enable button</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>add-class</td>
+                        <td>DEPRECATED. Add class to inner button</td>
+                        <td>null</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </nice-wrapper>
 </div>

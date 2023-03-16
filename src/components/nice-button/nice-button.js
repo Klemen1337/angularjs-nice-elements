@@ -11,27 +11,28 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-button/nice-button.html',
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {
-        niceDisabled: '=',
         title: '@',
+        icon: '@?',
         noMargin: '=',
-        fieldWidth: '@',
-        labelWidth: '@',
         niceClick: '&',
+        niceDisabled: '=',
         addClass: '@',
-        isInline: '=',
-        type: '@'
+        type: '@?'
       },
-      link: function postLink(scope, element, attrs) {
-        scope.loading = false;
-        if (!scope.type) scope.type = "button";
+      controller: function ($q, $scope, $transclude) {
+        if ($scope.addClass != undefined) console.warn("[NICE ELEMENTS] Nice button: add-class attribute is deprecated")
+        if (!$scope.type) $scope.type = "button";
+        $scope.showSlot = $transclude().length > 0;
+        $scope.loading = false;
 
-        scope.click = function(){
-          if (scope.loading===false && scope.niceDisabled!==true){
-            scope.loading = true;
+        $scope.click = function () {
+          if ($scope.loading === false && $scope.niceDisabled !== true) {
+            $scope.loading = true;
 
-            $q.when(scope.niceClick()).finally(function(){
-              scope.loading = false;
+            $q.when($scope.niceClick()).finally(function () {
+              $scope.loading = false;
             });
           }
         };

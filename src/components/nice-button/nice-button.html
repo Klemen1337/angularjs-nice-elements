@@ -1,6 +1,5 @@
-<div class="nice-component nice-button" ng-class="{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }">
-    <button type="{{ type }}" class="btn btn-primary" ng-class="addClass" ng-click="click()" ng-disabled="niceDisabled===true">
-        <div ng-class="{opacity0: loading==true, opacity1: loading==false}"><ng-transclude></ng-transclude></div>
-        <div ng-class="{display0: loading==false, opacity1: loading==true}" class="nice-button-loader-wrapper"><nice-loader add-class="nice-button-loader"></nice-loader></div>
-    </button>
-</div>
+<button type="{{ type }}" class="nice-component nice-button btn btn-primary" ng-class="{ 'margin-bottom-0' : noMargin }" ng-click="click()" ng-disabled="niceDisabled == true">
+    <nice-icon icon="{{ icon }}" ng-if="icon" ng-class="{ 'opacity-0': loading }"></nice-icon>
+    <span ng-if="showSlot" ng-transclude ng-class="{ 'opacity-0': loading }"></span>
+    <nice-loader ng-if="loading" fulldiv="true" class="nice-button-loader"></nice-loader>
+</button>

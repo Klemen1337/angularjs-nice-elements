@@ -23,6 +23,7 @@ angular.module('niceElements')
       controller: function ($scope, $transclude) {
         $scope.showSlot = $transclude().length > 0;
         if ($scope.visibleWhen != undefined) console.warn("[NICE ELEMENTS] Nice loader: visible-when attribute is deprecated")
+        if ($scope.addClass != undefined) console.warn("[NICE ELEMENTS] Nice loader: add-class attribute is deprecated")
       }
     };
   });
