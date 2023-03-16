@@ -6344,15 +6344,11 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"row\">\n" +
     "<nice-title title=\"title\" help=\"help\" required=\"required\" label-width=\"labelWidth\"></nice-title>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\">\n" +
-    "<div class=\"input-group\" ng-class=\"{\n" +
-    "                    'disabled': isDisabled,\n" +
-    "                    'has-warning': !isDisabled && form.$invalid && form.$dirty,\n" +
-    "                    'has-success': !isDisabled && form.$valid && form.$dirty}\n" +
-    "                \">\n" +
+    "<div class=\"input-group\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"modelString\" ng-keypress=\"keypress($event)\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-required=\"required\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"search()\" ng-if=\"!model\">\n" +
-    "<nice-icon ng-show=\"loading\" icon=\"icon-search\"></nice-icon>\n" +
-    "<nice-loader ng-if=\"!loading\"></nice-loader>\n" +
+    "<nice-icon ng-show=\"!loading\" icon=\"icon-search\"></nice-icon>\n" +
+    "<nice-loader ng-if=\"loading\"></nice-loader>\n" +
     "</span>\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"remove()\" ng-if=\"model\">\n" +
     "<nice-icon ng-show=\"!loading\" icon=\"icon-x\"></nice-icon>\n" +
