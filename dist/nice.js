@@ -1010,7 +1010,6 @@ angular.module('niceElements')
  * # niceDate
  */
 angular.module('niceElements')
-
   .directive('niceDate', function () {
     return {
       restrict: 'E',
@@ -1136,7 +1135,7 @@ angular.module('niceElements')
             selectedDate.hours($scope.innerDate.hour);
             selectedDate.minutes($scope.innerDate.minute);
 
-            $scope.model = selectedDate;
+            $scope.model = angular.copy(selectedDate);
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.forma.$setDirty();
           }
@@ -3847,12 +3846,17 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-loader/nice-loader.html',
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {
         visibleWhen: '=',
         message: '@',
         fullscreen: '@',
         fulldiv: '@',
         addClass: '@'
+      },
+      controller: function ($scope, $transclude) {
+        $scope.showSlot = $transclude().length > 0;
+        if ($scope.visibleWhen != undefined) console.warn("[NICE ELEMENTS] Nice loader: visible-when attribute is deprecated")
       }
     };
   });
@@ -5373,6 +5377,7 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-wrapper/nice-wrapper.html',
       restrict: 'E',
+      replace: true,
       transclude: {
         'title': '?niceWrapperTitle',
         'subtitle': '?niceWrapperSubtitle',
@@ -6020,7 +6025,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "<div class=\"not-selected\" ng-if=\"selected == null\">{{ selectText }}</div>\n" +
     "<span class=\"caret\" ng-show=\"!loading\"></span>\n" +
-    "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
+    "<nice-loader ng-if=\"loading\"></nice-loader>\n" +
     "</button>\n" +
     "<div class=\"nice-dropdown-menu-wrapper\">\n" +
     "<div class=\"nice-dropdown-menu\" ng-if=\"isOpen\">\n" +
@@ -6206,12 +6211,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-loader/nice-loader.html',
-    "<div class=\"nice-loader\" ng-if=\"!visibleWhen\" ng-class=\"[addClass, { 'nice-loader-fullscreen': fullscreen, 'nice-loader-fulldiv': fulldiv }]\">\n" +
-    "<svg version=\"1.1\" id=\"loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
-    "<path fill=\"#000\" d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\n" +
+    "<div class=\"nice-loader\" ng-class=\"[addClass, { 'nice-loader-fullscreen': fullscreen, 'nice-loader-fulldiv': fulldiv }]\">\n" +
+    "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"40px\" height=\"40px\" viewBox=\"0 0 50 50\" style=\"enable-background:new 0 0 50 50;\" xml:space=\"preserve\">\n" +
+    "<path d=\"M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z\"></path>\n" +
     "</svg>\n" +
     "<div class=\"nice-loader-message\" ng-if=\"message\">{{ message }}</div>\n" +
-    "<ng-transclude></ng-transclude>\n" +
+    "<ng-transclude ng-if=\"showSlot\"></ng-transclude>\n" +
     "</div>"
   );
 
@@ -6346,8 +6351,8 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                \">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"modelString\" ng-keypress=\"keypress($event)\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-required=\"required\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"search()\" ng-if=\"!model\">\n" +
-    "<nice-icon ng-show=\"!loading\" icon=\"icon-search\"></nice-icon>\n" +
-    "<nice-icon ng-show=\"loading\" icon=\"icon-loader\" class=\"d-block nice-animation-spin\"></nice-icon>\n" +
+    "<nice-icon ng-show=\"loading\" icon=\"icon-search\"></nice-icon>\n" +
+    "<nice-loader ng-if=\"!loading\"></nice-loader>\n" +
     "</span>\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"remove()\" ng-if=\"model\">\n" +
     "<nice-icon ng-show=\"!loading\" icon=\"icon-x\"></nice-icon>\n" +
@@ -6381,13 +6386,13 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"model\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-focus=\"onFocus()\" tabindex=\"{{ tabIndex }}\">\n" +
     "<span class=\"input-group-addon clickable\" ng-click=\"onFocus()\">\n" +
     "<nice-icon ng-show=\"!loading\" icon=\"icon-search\"></nice-icon>\n" +
-    "<nice-icon ng-show=\"loading\" icon=\"icon-loader\" class=\"d-block nice-animation-spin\"></nice-icon>\n" +
+    "<nice-loader ng-if=\"loading\"></nice-loader>\n" +
     "</span>\n" +
     "</div>\n" +
     "<div class=\"nice-search-dropdown-wrapper\">\n" +
     "<div class=\"nice-search-dropdown\" ng-if=\"showDropdown && isOpen\">\n" +
     "<div class=\"nice-search-row nice-search-row-loading\" ng-if=\"loading && results.length == 0\">\n" +
-    "<nice-loader visible-when=\"!loading\"></nice-loader>\n" +
+    "<nice-loader ng-if=\"loading\"></nice-loader>\n" +
     "</div>\n" +
     "<div class=\"nice-search-row nice-search-row-empty\" ng-if=\"!loading && results.length == 0\" translate translate-context=\"Nice\">No results found.</div>\n" +
     "<div ng-repeat=\"result in results\" class=\"nice-search-row\" ng-class=\"{'active': selectedIndex == $index}\" ng-click=\"selectItem(result)\">\n" +

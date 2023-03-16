@@ -1,4 +1,4 @@
-.nice-search{
+.nice-search {
   position: relative;
 
   i.ng-hide {
@@ -6,15 +6,25 @@
   }
 
   .symbol {
-    input{
+    input {
       text-align: left;
     }
-    .form-control{
+
+    .form-control {
       padding-left: 12px;
     }
   }
 
-  .nice-dropdown{
+  .input-group-addon {
+    .nice-loader {
+      svg {
+        height: 18px;
+        width: 18px;
+      }
+    }
+  }
+
+  .nice-dropdown {
     position: absolute;
     z-index: 999;
     //top: 35px;
@@ -34,10 +44,11 @@
     margin: 15px;
     right: 0;
 
-    .nice-search-row{
+    .nice-search-row {
       padding: 10px 15px;
       z-index: 1000;
       width: 100%;
+
       &:hover {
         //color: white !important;
         //background-color: $nice-base-color !important;
@@ -45,7 +56,7 @@
         cursor: pointer;
       }
 
-      &.active{
+      &.active {
         // color: white;
         background-color: $nice-hover-color;
         cursor: pointer;
@@ -54,18 +65,19 @@
       }
     }
 
-    &:hover{
-      .active{
+    &:hover {
+      .active {
         color: $text-color;
         background-color: white;
-        p{
-          color:$text-color;
+
+        p {
+          color: $text-color;
         }
       }
     }
   }
 
-  .nice-dropdown-empty{
+  .nice-dropdown-empty {
     @extend .nice-dropdown;
     top: -13px;
     margin: 15px;

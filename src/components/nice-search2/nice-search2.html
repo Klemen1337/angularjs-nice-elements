@@ -10,7 +10,8 @@
 
                 <span class="input-group-addon clickable" ng-click="onFocus()">
                     <nice-icon ng-show="!loading" icon="icon-search"></nice-icon>
-                    <nice-icon ng-show="loading" icon="icon-loader" class="d-block nice-animation-spin"></nice-icon>
+                    <!-- <nice-icon ng-show="loading" icon="icon-loader" class="d-block nice-animation-spin"></nice-icon> -->
+                    <nice-loader ng-if="loading"></nice-loader>
                     <!-- <i ng-show="!loading" class="fa fa-search"></i>
                     <i ng-show="loading" class="fa fa-refresh fa-spin"></i> -->
                 </span>
@@ -19,7 +20,7 @@
             <div class="nice-search-dropdown-wrapper">
                 <div class="nice-search-dropdown" ng-if="showDropdown && isOpen">
                     <div class="nice-search-row nice-search-row-loading" ng-if="loading && results.length == 0">
-                        <nice-loader visible-when="!loading"></nice-loader>
+                        <nice-loader ng-if="loading"></nice-loader>
                     </div>
 
                     <div class="nice-search-row nice-search-row-empty" ng-if="!loading && results.length == 0" translate translate-context="Nice">No results found.</div>

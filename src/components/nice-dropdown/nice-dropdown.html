@@ -20,7 +20,7 @@
                     <div class="not-selected" ng-if="selected == null">{{ selectText }}</div>
 
                     <span class="caret" ng-show="!loading"></span>
-                    <nice-loader visible-when="!loading"></nice-loader>
+                    <nice-loader ng-if="loading"></nice-loader>
                 </button>
 
 

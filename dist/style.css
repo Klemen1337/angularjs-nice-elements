@@ -409,7 +409,6 @@ p.nice {
 
 .has-success .input-group-addon {
   border-color: #3189ff !important;
-  color: #3189ff !important;
 }
 
 .nice-highligh {
@@ -1899,6 +1898,11 @@ p.nice {
 
 .nice-search .symbol .form-control {
   padding-left: 12px;
+}
+
+.nice-search .input-group-addon .nice-loader svg {
+  height: 18px;
+  width: 18px;
 }
 
 .nice-search .nice-dropdown, .nice-search .nice-dropdown-empty {
@@ -3538,26 +3542,20 @@ p.nice {
 }
 
 .nice-loader {
-  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 3px;
+  color: var(--nice-primary-color);
 }
 
 .nice-loader svg {
-  width: 40px;
-  height: 40px;
-}
-
-.nice-loader svg path,
-.nice-loader svg rect {
-  fill: #3189ff;
-}
-
-.nice-loader #loader {
   animation: spin 0.5s infinite;
   animation-delay: 0s;
+  width: 40px;
+  height: 40px;
+  fill: currentColor;
 }
 
 .nice-loader .nice-loader-message {
@@ -3573,29 +3571,12 @@ p.nice {
   height: 100%;
   background: rgba(255, 255, 255, 0.65);
   z-index: 9999;
+  padding: 0;
 }
 
 .nice-loader.nice-loader-fulldiv {
   position: absolute;
   z-index: auto;
-}
-
-@-moz-keyframes spin {
-  from {
-    -moz-transform: rotate(0deg);
-  }
-  to {
-    -moz-transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes spin {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
 }
 
 @keyframes spin {
@@ -4665,6 +4646,7 @@ p.nice {
   background: var(--nice-card-bg);
   border-radius: var(--nice-border-radius);
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .nice-wrapper.collapsable .nice-wrapper-header {
