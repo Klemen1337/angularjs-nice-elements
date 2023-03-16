@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.8.0 (16.3.2023)
+
+- created nice-wrapper component,
+- created nice loader example page,
+- worked on nice-loader,
+- worked on nice-search and nice-dropdown loading,
+- worked on nice-button,
+- worked on example pages,
+- fixed nice-search and nice-search2 border color,
+- deprecated addClass from nice button and nice loader
+
 ## v1.7.12 (13.3.2023)
 
 - fixed build for services
