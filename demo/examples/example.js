@@ -344,6 +344,7 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
   angular.forEach(symbols, function (s) {
     $scope.icons.push(s.id);
   });
+  $scope.selectedIcon = $scope.icons[Math.floor((Math.random() * $scope.icons.length))]
 
   $scope.countries = [
     { 'iso': 'AF', 'name': 'Afghanistan' },
