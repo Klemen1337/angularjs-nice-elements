@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.8.1 (16.3.2023)
+
+- worked on nice-search and nice-search2
+
 ## v1.8.0 (16.3.2023)
 
 - created nice-wrapper component,
