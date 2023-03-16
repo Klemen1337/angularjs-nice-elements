@@ -3,6 +3,7 @@
   background: var(--nice-card-bg);
   border-radius: var(--nice-border-radius);
   margin-bottom: 2rem;
+  position: relative;
 
   &.collapsable {
     .nice-wrapper-header {

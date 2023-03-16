@@ -12,12 +12,17 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-loader/nice-loader.html',
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {
         visibleWhen: '=',
         message: '@',
         fullscreen: '@',
         fulldiv: '@',
         addClass: '@'
+      },
+      controller: function ($scope, $transclude) {
+        $scope.showSlot = $transclude().length > 0;
+        if ($scope.visibleWhen != undefined) console.warn("[NICE ELEMENTS] Nice loader: visible-when attribute is deprecated")
       }
     };
   });

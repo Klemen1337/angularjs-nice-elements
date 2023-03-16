@@ -11,6 +11,7 @@ angular.module('niceElements')
     return {
       templateUrl: 'src/components/nice-wrapper/nice-wrapper.html',
       restrict: 'E',
+      replace: true,
       transclude: {
         'title': '?niceWrapperTitle',
         'subtitle': '?niceWrapperSubtitle',

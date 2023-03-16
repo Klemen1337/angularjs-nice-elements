@@ -1,23 +1,17 @@
-.nice-loader{
-  padding: 25px;
+.nice-loader {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 3px;
+  color: var(--nice-primary-color);
 
-  svg{
-    width: 40px;
-    height: 40px;
-  }
-
-  svg path,
-  svg rect{
-    fill: $nice-loader-color;
-  }
-
-  #loader{
+  svg {
     animation: spin 0.5s infinite;
     animation-delay: 0s;
+    width: 40px;
+    height: 40px;
+    fill: currentColor;
   }
 
   .nice-loader-message {
@@ -34,6 +28,7 @@
     height: 100%;
     background: rgba(255, 255, 255, 0.65);
     z-index: 9999;
+    padding: 0;
   }
 
   &.nice-loader-fulldiv {
@@ -42,17 +37,12 @@
   }
 }
 
-@-moz-keyframes spin {
-  from { -moz-transform: rotate(0deg); }
-  to { -moz-transform: rotate(360deg); }
-}
-
-@-webkit-keyframes spin {
-  from { -webkit-transform: rotate(0deg); }
-  to { -webkit-transform: rotate(360deg); }
-}
-
 @keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

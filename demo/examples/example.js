@@ -10,8 +10,8 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     search: ""
   }
   $scope.model = {
-    niceDateInputStart: moment().add("days", 1).hours(19).minutes(0).seconds(0),
-    niceDateInputEnd: moment().add("days", 2).hours(3).minutes(0).seconds(0)
+    niceDateInputStart: moment().add(1, "days").hours(19).minutes(0).seconds(0),
+    niceDateInputEnd: moment().add(2, "days").hours(3).minutes(0).seconds(0)
   };
 
   $scope.fetchEvents = function (search) {

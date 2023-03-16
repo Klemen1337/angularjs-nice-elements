@@ -1,0 +1,95 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice loader</h1>
+
+    <nice-wrapper>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <nice-loader></nice-loader>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-loader>&lt;/nice-loader></pre>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <nice-loader message="This is a test message"></nice-loader>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-loader message="This is a test message">&lt;/nice-loader></pre>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <nice-loader>
+                    <small>This is transcluded in nice-loader</small>
+                </nice-loader>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-loader>
+    &lt;p>This is transcluded in nice-loader&lt;/p>
+&lt;/nice-loader></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-wrapper>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <img style="border-radius: 50%;" src="https://picsum.photos/100/100" />
+                        <div>
+                            <div>https://picsum.photos/100/100</div>
+                            <div>This nice loader is inside a wrapper</div>
+                        </div>
+                    </div>
+                    <nice-loader fulldiv="true"></nice-loader>
+                </nice-wrapper>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-loader fulldiv="true">&lt;/nice-loader></pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+    <nice-wrapper>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>message</td>
+                        <td>Display message under the loader</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>fullscreen</td>
+                        <td>Open loader over everything</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>fulldiv</td>
+                        <td>Open loader over full div</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>add-class</td>
+                        <td>Add class to inner div nice-loader</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>visible-when</td>
+                        <td>DEPRECATED. Use ng-if</td>
+                        <td>null</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </nice-wrapper>
+</div>
