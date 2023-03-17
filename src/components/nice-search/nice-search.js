@@ -71,7 +71,7 @@ angular.module('niceElements')
         }
 
         var setValid = function (isValid) {
-          if (scope.required) {
+          if (scope.required && scope.form) {
             scope.form.$setValidity('objectSelected', isValid);
           }
         };

@@ -84,10 +84,12 @@ angular.module('niceElements')
 
         // Check canAdd or canSubtract
         $scope.check = function () {
-          if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
-            $scope.niceNumberForm.$setValidity("no-value", false);
-          } else {
-            $scope.niceNumberForm.$setValidity("no-value", null);
+          if ($scope.niceNumberForm) {
+            if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
+              $scope.niceNumberForm.$setValidity("no-value", false);
+            } else {
+              $scope.niceNumberForm.$setValidity("no-value", null);
+            }
           }
 
           if ($scope.min && parseFloat($scope.model) <= $scope.min) {
@@ -104,10 +106,12 @@ angular.module('niceElements')
             $scope.canAdd = true;
           }
 
-          if ($scope.preventZero && parseFloat($scope.model) == 0) {
-            $scope.niceNumberForm.$setValidity("zero", false);
-          } else {
-            $scope.niceNumberForm.$setValidity("zero", null);
+          if ($scope.niceNumberForm) {
+            if ($scope.preventZero && parseFloat($scope.model) == 0) {
+              $scope.niceNumberForm.$setValidity("zero", false);
+            } else {
+              $scope.niceNumberForm.$setValidity("zero", null);
+            }
           }
 
           if ($scope.onChange) $scope.onChange({ model: $scope.model });

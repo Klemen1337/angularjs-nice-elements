@@ -381,7 +381,7 @@ angular.module('niceElements')
 
           // Handle required
           $timeout(function () {
-            $scope.formDropdown.$setValidity('required', !(!$scope.selected && $scope.required));
+            if ($scope.formDropdown) $scope.formDropdown.$setValidity('required', !(!$scope.selected && $scope.required));
           });
         }
 
