@@ -1848,121 +1848,123 @@ angular.module('niceElements')
  */
 angular.module('niceElements')
   .directive('niceDropdownDate', function (gettextCatalog) {
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: "src/components/nice-dropdown-date/nice-dropdown-date.html",
-    scope: {
-      model: '=',
-      title: '@',
-      fieldWidth: '@',
-      labelWidth: '@',
-      noMargin: '@',
-      isDisabled: '=',
-      numYears: '@',
-      startingYear: '@',
-      mature: '@',
-      help: '@',
-      isInline: '=',
-      onChange: '&?'
-    },
-    link: function ($scope) {
-      $scope.days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
-      $scope.months = [
-        { value: 0, name: gettextCatalog.getString('Jan', null, 'Nice') },
-        { value: 1, name: gettextCatalog.getString('Feb', null, 'Nice') },
-        { value: 2, name: gettextCatalog.getString('Mar', null, 'Nice') },
-        { value: 3, name: gettextCatalog.getString('Apr', null, 'Nice') },
-        { value: 4, name: gettextCatalog.getString('May', null, 'Nice') },
-        { value: 5, name: gettextCatalog.getString('Jun', null, 'Nice') },
-        { value: 6, name: gettextCatalog.getString('Jul', null, 'Nice') },
-        { value: 7, name: gettextCatalog.getString('Aug', null, 'Nice') },
-        { value: 8, name: gettextCatalog.getString('Sep', null, 'Nice') },
-        { value: 9, name: gettextCatalog.getString('Oct', null, 'Nice') },
-        { value: 10, name: gettextCatalog.getString('Nov', null, 'Nice') },
-        { value: 11, name: gettextCatalog.getString('Dec', null, 'Nice') }
-      ];
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: "src/components/nice-dropdown-date/nice-dropdown-date.html",
+      scope: {
+        model: '=',
+        title: '@',
+        fieldWidth: '@',
+        labelWidth: '@',
+        noMargin: '@',
+        isDisabled: '=',
+        numYears: '@',
+        startingYear: '@',
+        mature: '@',
+        help: '@',
+        isInline: '=',
+        onChange: '&?'
+      },
+      link: function ($scope) {
+        $scope.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        $scope.months = [
+          { value: 0, name: gettextCatalog.getString('Jan', null, 'Nice') },
+          { value: 1, name: gettextCatalog.getString('Feb', null, 'Nice') },
+          { value: 2, name: gettextCatalog.getString('Mar', null, 'Nice') },
+          { value: 3, name: gettextCatalog.getString('Apr', null, 'Nice') },
+          { value: 4, name: gettextCatalog.getString('May', null, 'Nice') },
+          { value: 5, name: gettextCatalog.getString('Jun', null, 'Nice') },
+          { value: 6, name: gettextCatalog.getString('Jul', null, 'Nice') },
+          { value: 7, name: gettextCatalog.getString('Aug', null, 'Nice') },
+          { value: 8, name: gettextCatalog.getString('Sep', null, 'Nice') },
+          { value: 9, name: gettextCatalog.getString('Oct', null, 'Nice') },
+          { value: 10, name: gettextCatalog.getString('Nov', null, 'Nice') },
+          { value: 11, name: gettextCatalog.getString('Dec', null, 'Nice') }
+        ];
 
 
-      // Set the years drop down from attributes or defaults
-      var currentYear = parseInt($scope.startingYear, 10) || new Date().getFullYear();
-      var numYears = parseInt($scope.numYears, 10) || 100;
-      var oldestYear = currentYear - numYears;
-      var newestYear = currentYear;
+        // Set the years drop down from attributes or defaults
+        var currentYear = parseInt($scope.startingYear, 10) || new Date().getFullYear();
+        var numYears = parseInt($scope.numYears, 10) || 100;
+        var oldestYear = currentYear - numYears;
+        var newestYear = currentYear;
 
 
-      // If mature
-      if($scope.mature) newestYear -= 17;
+        // If mature
+        if ($scope.mature) newestYear -= 17;
 
 
-      // Create years array
-      $scope.years = [];
-      for(var i = currentYear; i >= oldestYear; i-- ){
-        if (i <= newestYear){
-          $scope.years.push(i);
+        // Create years array
+        $scope.years = [];
+        for (var i = currentYear; i >= oldestYear; i--) {
+          if (i <= newestYear) {
+            $scope.years.push(i);
+          }
         }
-      }
 
 
-      // Split the current date into sections
-      $scope.dateFields = {};
+        // Split the current date into sections
+        $scope.dateFields = {};
 
 
-      // Watch for model change
-      $scope.$watch('model', function ( newDate, oldDate ) {
-        if (newDate && newDate != oldDate){
-          var date = moment(newDate);
+        // Watch for model change
+        $scope.$watch('model', function (newDate, oldDate) {
+          if (newDate && newDate != oldDate) {
+            var date = moment(newDate);
+            $scope.dateFields.day = date.get('date');
+            $scope.dateFields.month = date.get('month');
+            $scope.dateFields.year = date.get('year');
+            $scope.checkDate();
+          }
+        });
+
+
+        // validate that the date selected is accurate
+        $scope.checkDate = function () {
+          var date = moment($scope.dateFields.day + "." + ($scope.dateFields.month + 1) + "." + $scope.dateFields.year, "D.M.YYYY");
+
+          if (date.isValid()) {
+            // Format
+            $scope.model = date.format();
+            if ($scope.onChange) $scope.onChange({ model: $scope.model });
+
+            // Change dates
+            $scope.days = [];
+            for (i = 1; i <= date.daysInMonth(); i++) {
+              $scope.days.push(i);
+            }
+
+            // Valid
+            if ($scope.dropdownDateForm) {
+              $scope.dropdownDateForm.$setValidity('validDate', true);
+              $scope.dropdownDateForm.$setDirty();
+            }
+          } else {
+            // Invalid
+            if ($scope.dropdownDateForm) $scope.dropdownDateForm.$setValidity('validDate', false);
+          }
+        };
+
+
+        // Set current date
+        if (!$scope.model) {
+          var date = moment();
+          $scope.dateFields.day = date.get('date');
+          $scope.dateFields.month = date.get('month');
+          $scope.dateFields.year = date.get('year');
+          if ($scope.mature) $scope.dateFields.year -= 18;
+          $scope.checkDate();
+        } else {
+          var date = moment($scope.model);
           $scope.dateFields.day = date.get('date');
           $scope.dateFields.month = date.get('month');
           $scope.dateFields.year = date.get('year');
           $scope.checkDate();
         }
-      });
-
-
-      // validate that the date selected is accurate
-      $scope.checkDate = function(){
-        var date = moment($scope.dateFields.day + "." + ($scope.dateFields.month + 1) + "." + $scope.dateFields.year, "D.M.YYYY");
-
-        if(date.isValid()){
-          // Format
-          $scope.model = date.format();
-          if ($scope.onChange) $scope.onChange({ model: $scope.model });
-
-          // Change dates
-          $scope.days = [];
-          for(i = 1; i <= date.daysInMonth(); i++){
-            $scope.days.push(i);
-          }
-
-          // Valid
-          $scope.dropdownDateForm.$setValidity('validDate', true);
-          $scope.dropdownDateForm.$setDirty();
-        } else {
-          // Invalid
-          $scope.dropdownDateForm.$setValidity('validDate', false);
-        }
-      };
-
-
-      // Set current date
-      if(!$scope.model){
-        var date = moment();
-        $scope.dateFields.day = date.get('date');
-        $scope.dateFields.month = date.get('month');
-        $scope.dateFields.year = date.get('year');
-        if($scope.mature) $scope.dateFields.year -= 18;
-        $scope.checkDate();
-      } else {
-        var date = moment($scope.model);
-        $scope.dateFields.day = date.get('date');
-        $scope.dateFields.month = date.get('month');
-        $scope.dateFields.year = date.get('year');
-        $scope.checkDate();
       }
-    }
-  };
-});
+    };
+  });
 'use strict';
 
 /**
@@ -2677,7 +2679,7 @@ angular.module('niceElements')
 
           // Handle required
           $timeout(function () {
-            $scope.formDropdown.$setValidity('required', !(!$scope.selected && $scope.required));
+            if ($scope.formDropdown) $scope.formDropdown.$setValidity('required', !(!$scope.selected && $scope.required));
           });
         }
 
@@ -4073,10 +4075,12 @@ angular.module('niceElements')
 
         // Check canAdd or canSubtract
         $scope.check = function () {
-          if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
-            $scope.niceNumberForm.$setValidity("no-value", false);
-          } else {
-            $scope.niceNumberForm.$setValidity("no-value", null);
+          if ($scope.niceNumberForm) {
+            if ($scope.required && ($scope.model == undefined || $scope.model == null)) {
+              $scope.niceNumberForm.$setValidity("no-value", false);
+            } else {
+              $scope.niceNumberForm.$setValidity("no-value", null);
+            }
           }
 
           if ($scope.min && parseFloat($scope.model) <= $scope.min) {
@@ -4093,10 +4097,12 @@ angular.module('niceElements')
             $scope.canAdd = true;
           }
 
-          if ($scope.preventZero && parseFloat($scope.model) == 0) {
-            $scope.niceNumberForm.$setValidity("zero", false);
-          } else {
-            $scope.niceNumberForm.$setValidity("zero", null);
+          if ($scope.niceNumberForm) {
+            if ($scope.preventZero && parseFloat($scope.model) == 0) {
+              $scope.niceNumberForm.$setValidity("zero", false);
+            } else {
+              $scope.niceNumberForm.$setValidity("zero", null);
+            }
           }
 
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
@@ -4552,7 +4558,7 @@ angular.module('niceElements')
         }
 
         var setValid = function (isValid) {
-          if (scope.required) {
+          if (scope.required && scope.form) {
             scope.form.$setValidity('objectSelected', isValid);
           }
         };
@@ -5032,7 +5038,7 @@ angular.module('niceElements')
  * # niceTimePicker
  */
 angular.module('niceElements')
-  .directive('niceTimePicker', function() {
+  .directive('niceTimePicker', function () {
     return {
       scope: {
         model: '=',
@@ -5047,60 +5053,60 @@ angular.module('niceElements')
       },
       restrict: 'E',
       templateUrl: 'src/components/nice-time-picker/nice-time-picker.html',
-      link: function($scope, $element, $attrs) {
-        if(!$scope.model) $scope.model = moment();
+      link: function ($scope, $element, $attrs) {
+        if (!$scope.model) $scope.model = moment();
         $scope.open = false;
 
 
-        $scope.close = function(){
+        $scope.close = function () {
           $scope.open = false;
         };
 
 
-        $scope.validateDate = function(){
+        $scope.validateDate = function () {
           $scope.checkDate($scope.modelString);
         };
 
 
-        $scope.checkDate = function(date){
+        $scope.checkDate = function (date) {
           var parsedDate = moment(date, "HH:mm");
-          if(parsedDate.isValid()){
-            $scope.forma.$setValidity("valid-time", true);
+          if (parsedDate.isValid()) {
+            if ($scope.forma) $scope.forma.$setValidity("valid-time", true);
             $scope.model = parsedDate;
             $scope.refreshTime();
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
           } else {
-            $scope.forma.$setValidity("valid-time", false);
+            if ($scope.forma) $scope.forma.$setValidity("valid-time", false);
             $scope.modelString = "";
           }
         };
 
 
-        $scope.refreshTime = function(){
+        $scope.refreshTime = function () {
           $scope.hours = $scope.model.format("HH");
           $scope.minutes = $scope.model.format("mm");
           $scope.modelString = $scope.model.format("HH:mm");
         };
 
 
-        $scope.changeHour = function(add){
-          if(add) $scope.model.add(1, 'hour');
+        $scope.changeHour = function (add) {
+          if (add) $scope.model.add(1, 'hour');
           else $scope.model.subtract(1, 'hour');
           $scope.refreshTime();
           $scope.forma.$setDirty();
         };
 
-        $scope.changeMinutes = function(add){
-          if(add) $scope.model.add(1, 'minutes');
+        $scope.changeMinutes = function (add) {
+          if (add) $scope.model.add(1, 'minutes');
           else $scope.model.subtract(1, 'minutes');
           $scope.refreshTime();
           $scope.forma.$setDirty();
         };
 
 
-        $scope.$watch("model", function(value, oldValue){
+        $scope.$watch("model", function (value, oldValue) {
           $scope.refreshTime();
-          if(!value.isSame(oldValue)){
+          if (!value.isSame(oldValue)) {
             $scope.checkDate(value);
           }
         })
@@ -5566,7 +5572,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.8.0",
+      version: "1.8.1",
       getHeader: function () {
         return {};
       }
