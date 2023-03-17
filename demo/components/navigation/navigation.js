@@ -12,36 +12,13 @@ angular.module('niceElementsDemo')
       restrict: 'E',
       replace: true,
       templateUrl: 'demo/components/navigation/navigation.html',
-      controller: function ($scope, $location, NiceService) {
+      controller: function ($scope, $route, $location, NiceService) {
         $scope.niceService = NiceService;
-        $scope.routes = [
-          { title: "Home", href: "home" },
-          { title: "Input", href: "nice-input" },
-          { title: "Dropdown", href: "nice-dropdown" },
-          { title: "Search", href: "nice-search" },
-          { title: "Datetime picker", href: "nice-datetime-picker" },
-          { title: "Date range", href: "nice-date-range" },
-          { title: "Time picker", href: "nice-time-picker" },
-          { title: "Choice", href: "nice-choice" },
-          { title: "Yesno", href: "nice-yesno" },
-          { title: "Percent", href: "nice-percent" },
-          { title: "Notifications", href: "nice-notifications" },
-          { title: "Number", href: "nice-number" },
-          { title: "Checkbox", href: "nice-checkbox" },
-          { title: "Button", href: "nice-button" },
-          { title: "Calendar", href: "nice-calendar" },
-          { title: "Popup", href: "nice-popup" },
-          { title: "Icon", href: "nice-icon" },
-          { title: "Upload", href: "nice-upload" },
-          { title: "Date input", href: "nice-date-input" },
-          { title: "Filters", href: "nice-filters" },
-          { title: "Quantity", href: "nice-quantity" },
-          { title: "Loader", href: "nice-loader" },
-        ];
+        $scope.routes = $route.routes;
 
-        $scope.location = $location.path().replace("/", "");
+        $scope.location = $location.path();
         $scope.$on('$routeChangeStart', function (evt, toState, toParams, fromState, fromParams) {
-          $scope.location = $location.path().replace("/", "");
+          $scope.location = $location.path();
         });
       }
     }

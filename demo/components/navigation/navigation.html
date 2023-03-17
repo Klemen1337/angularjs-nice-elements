@@ -4,8 +4,8 @@
     </a>
     <div class="version">v{{ niceService.version }}</div>
     <ul class="links">
-        <li ng-repeat="route in routes" ng-class="{ 'active': location == route.href }">
-            <a ng-href="#/{{ route.href }}" href>{{ route.title }}</a>
+        <li ng-repeat="route in routes" ng-if="route.meta" ng-class="{ 'active': location == route.originalPath }">
+            <a ng-href="#{{ route.originalPath }}" href>{{ route.meta.name }}</a>
         </li>
     </ul>
 </aside>
