@@ -4659,7 +4659,6 @@ p.nice {
 
 .nice-wrapper .nice-wrapper-header .nice-wrapper-info .nice-wrapper-title {
   font-size: 1.2em;
-  font-weight: bold;
   line-height: 1.2;
   color: var(--nice-primary-color);
 }
@@ -4687,6 +4686,22 @@ p.nice {
 
 .nice-wrapper.has-footer .nice-wrapper-body {
   padding-bottom: 0;
+}
+
+.nice-wrapper.nice-wrapper-sticky-footer .nice-wrapper-footer {
+  position: sticky;
+  bottom: calc(-1 * var(--nice-card-padding));
+  background: var(--nice-card-bg);
+}
+
+.nice-wrapper.nice-wrapper-sticky-header .nice-wrapper-header {
+  position: sticky;
+  top: calc(-1 * var(--nice-card-padding));
+  background: var(--nice-card-bg);
+}
+
+.nice-wrapper .no-padding {
+  padding: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

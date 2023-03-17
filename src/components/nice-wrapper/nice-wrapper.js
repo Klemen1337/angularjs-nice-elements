@@ -22,11 +22,13 @@ angular.module('niceElements')
         subtitle: '@',
         collapsable: '=',
         collapsed: '@',
+        noPadding: '@',
+        stickyHeader: '@',
+        stickyFooter: '@',
       },
       controller: function ($scope, $transclude) {
         $scope.isOpen = true;
         if ($scope.collapsed) $scope.isOpen = false;
-
         $scope.hasTitle = $transclude.isSlotFilled('title');
         $scope.hasSubtitle = $transclude.isSlotFilled('subtitle');
         $scope.hasFooter = $transclude.isSlotFilled('footer');

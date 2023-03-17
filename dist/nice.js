@@ -5397,11 +5397,13 @@ angular.module('niceElements')
         subtitle: '@',
         collapsable: '=',
         collapsed: '@',
+        noPadding: '@',
+        stickyHeader: '@',
+        stickyFooter: '@',
       },
       controller: function ($scope, $transclude) {
         $scope.isOpen = true;
         if ($scope.collapsed) $scope.isOpen = false;
-
         $scope.hasTitle = $transclude.isSlotFilled('title');
         $scope.hasSubtitle = $transclude.isSlotFilled('subtitle');
         $scope.hasFooter = $transclude.isSlotFilled('footer');
@@ -7375,7 +7377,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-wrapper/nice-wrapper.html',
-    "<div class=\"nice-wrapper\" ng-class=\"{ 'collapsable': collapsable, 'has-header': hasHeader, 'has-footer': hasFooter }\">\n" +
+    "<div class=\"nice-wrapper\" ng-class=\"{ 'collapsable': collapsable, 'has-header': hasHeader, 'has-footer': hasFooter, 'nice-wrapper-sticky-footer': stickyFooter, 'nice-wrapper-sticky-header': stickyHeader }\">\n" +
     "<div class=\"nice-wrapper-header\" ng-if=\"hasHeader\" ng-click=\"toggle()\">\n" +
     "<div class=\"nice-wrapper-info\">\n" +
     "<div class=\"nice-wrapper-title\" ng-transclude=\"title\">{{ title }}</div>\n" +
@@ -7385,7 +7387,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-icon icon=\"icon-chevron-down\"></nice-icon>\n" +
     "</button>\n" +
     "</div>\n" +
-    "<div class=\"nice-wrapper-body\" ng-transclude ng-if=\"isOpen\"></div>\n" +
+    "<div class=\"nice-wrapper-body\" ng-class=\" {'no-padding': noPadding }\" ng-transclude ng-if=\"isOpen\"></div>\n" +
     "<div class=\"nice-wrapper-footer\" ng-if=\"isOpen && hasFooter\" ng-transclude=\"footer\"></div>\n" +
     "</div>"
   );
