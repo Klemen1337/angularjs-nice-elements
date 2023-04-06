@@ -102,6 +102,12 @@ angular.module('niceElements')
           return filter;
         };
 
+        $scope.itemHover = function (event, item) {
+          if (event.which == 1) {
+            $scope.toggle(item);
+          }
+        }
+
         $scope.setDefault = function () {
           if (!$scope.multiple) {
             $scope.internalSelected = $scope.internalList[0];

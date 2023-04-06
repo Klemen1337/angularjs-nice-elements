@@ -538,6 +538,12 @@ angular.module('niceElements')
           return filter;
         };
 
+        $scope.itemHover = function (event, item) {
+          if (event.which == 1) {
+            $scope.toggle(item);
+          }
+        }
+
         $scope.setDefault = function () {
           if (!$scope.multiple) {
             $scope.internalSelected = $scope.internalList[0];
@@ -5705,7 +5711,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<ul class=\"list-unstyled\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<li ng-repeat=\"item in internalList\" ng-class=\"{ 'selected' : isItemSelected(item) }\" ng-click=\"toggle(item)\">\n" +
-    "<button class=\"choice-checkbox\" type=\"button\" ng-class=\"{'circle' : !multiple }\" ng-disabled=\"isDisabled\">\n" +
+    "<button class=\"choice-checkbox\" type=\"button\" ng-class=\"{'circle' : !multiple }\" ng-mouseenter=\"itemHover($event, item)\" ng-disabled=\"isDisabled\">\n" +
     "<nice-icon ng-if=\"multiple\" icon=\"icon-check\"></nice-icon>\n" +
     "<div ng-if=\"!multiple\" class=\"multiple-circle\"></div>\n" +
     "</button>\n" +
