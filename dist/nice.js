@@ -5580,7 +5580,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.8.1",
+      version: "1.8.2",
       getHeader: function () {
         return {};
       }

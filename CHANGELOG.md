@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.8.2 (6.4.2023)
+
+- added select with mouse down to nice choice,
+- worked on $setValidity errors,
+- worked on nice wrapper,
+- worked on example tables hover,
+- worked on example navigation
+
 ## v1.8.1 (16.3.2023)
 
 - worked on nice-search and nice-search2
