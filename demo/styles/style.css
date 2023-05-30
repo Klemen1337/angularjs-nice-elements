@@ -164,6 +164,10 @@ pre {
   width: 300px;
 }
 
+.w-0 {
+  width: 0%;
+}
+
 .sidebar {
   width: 250px;
   height: 100vh;

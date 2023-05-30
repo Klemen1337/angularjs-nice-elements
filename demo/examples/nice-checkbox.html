@@ -14,5 +14,33 @@
                 <code>{{ niceCheckbox }}</code>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in listObjs" ng-click="row.enabled = !row.enabled">
+                            <td class="w-0"><nice-checkbox click-disabled="true" model="row.enabled" no-margin="true"></nice-checkbox></td>
+                            <td>{{ row.value }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-checkbox 
+    title="I like milk" 
+    model="niceCheckbox"
+    click-disabled="true" 
+>&lt;/nice-checkbox></pre>
+                <pre>{{ listObjs | json }}</pre>
+            </div>
+        </div>
     </nice-wrapper>
 </div>

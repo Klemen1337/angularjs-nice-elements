@@ -15,6 +15,7 @@ angular.module('niceElements')
         model: '=',
         title: '@',
         noMargin: '@',
+        clickDisabled: '@',
         onChange: '&?',
         isDisabled: '=',
       },
@@ -22,7 +23,7 @@ angular.module('niceElements')
         if ($scope.model === undefined) $scope.model = false;
 
         $scope.toggle = function () {
-          if ($scope.isDisabled) return;
+          if ($scope.isDisabled || $scope.clickDisabled) return;
           $scope.model = !$scope.model;
           if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
