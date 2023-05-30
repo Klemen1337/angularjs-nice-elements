@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.8.3 (30.5.2023)
+
+- added clickDisabled prop to nice-checkbox component
+
 ## v1.8.2 (6.4.2023)
 
 - added select with mouse down to nice choice,
