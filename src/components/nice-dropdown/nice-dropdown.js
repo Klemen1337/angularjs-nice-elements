@@ -42,6 +42,7 @@ angular.module('niceElements')
         selectedText: '@',
         dropdownDistance: '@',
         searchFunction: '=?',
+        filterFunction: '=?',
         isInline: '=',
         clearOnSelect: '@',
         enableLoadMore: '@' // Enable load more
@@ -219,7 +220,8 @@ angular.module('niceElements')
         $scope.handleSearch = function () {
           $scope.loading = true;
           $scope.searchFunction($scope.internal.search).then(function (response) {
-            $scope.internalList = response;
+            if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(response);
+            else $scope.internalList = response;
             $scope.loading = false;
             $scope.handleDefault();
           }, function (error) {
@@ -321,7 +323,8 @@ angular.module('niceElements')
 
         // ----------------------------------- Watch for list change -----------------------------------
         $scope.$watchCollection('list', function (value_new, value_old) {
-          $scope.internalList = angular.copy($scope.list);
+          if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(angular.copy($scope.list));
+          else $scope.internalList = angular.copy($scope.list);
           $scope.handleDefault();
         });
 

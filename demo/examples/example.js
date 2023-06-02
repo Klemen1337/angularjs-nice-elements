@@ -37,6 +37,12 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     });
   }
 
+  $scope.filterEvents = function (items) {
+    console.log("filterEvents", items)
+    if (!items) return;
+    return items.filter(item => item.type == "NORMAL");
+  }
+
   $scope.dropdownOnChange = function () {
     console.log("Dropdown change:", ...arguments);
   }

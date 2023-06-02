@@ -82,6 +82,48 @@
 
         <div class="row">
             <div class="col-sm-6">
+                <nice-dropdown title="Filtered events (only NORMAL type)" model="dropdown7" search-function="fetchEvents" filter-function="filterEvents" enable-load-more="true" nullable="true">
+                    <nice-dropdown-button>
+                        <div class="dropdown-event">
+                            <img ng-src="{{ $parent.selected.thumbnail_photo }}" />
+                            <div class="info">
+                                <label>{{ $parent.selected.name }}</label>
+                                <small>{{ $parent.selected.venue_name }}</small>
+                            </div>
+                        </div>
+                    </nice-dropdown-button>
+                    <nice-dropdown-option>
+                        <div class="dropdown-event">
+                            <img ng-src="{{ $parent.item.thumbnail_photo }}" />
+                            <div class="info">
+                                <label>{{ $parent.item.name }}</label>
+                                <small>{{ $parent.item.venue_name }}</small><br />
+                                <small>{{ $parent.item.type }}</small>
+                            </div>
+                        </div>
+                    </nice-dropdown-option>
+                </nice-dropdown>
+                <nice-slot>
+                    <pre>{{ dropdown7 | json }}</pre>
+                </nice-slot>
+            </div>
+
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-dropdown 
+    title="Filtered events" 
+    model="dropdown7" 
+    search-function="fetchEvents" 
+    filter-function="filterEvents"
+    nullable="true"
+    enable-load-more="true"
+>
+                </pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
                 <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" multiple="true"></nice-dropdown>
                 <nice-slot>
                     <pre>{{ dropdown | json }}</pre>
