@@ -5,6 +5,7 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
   $scope.inputNumber = null;
   $scope.dropdownLoading = true;
   $scope.isInline = false;
+  $scope.iconSize = 50;
   $scope.toggleInline = function () { $scope.isInline = !$scope.isInline }
   $scope.filters = {
     search: ""
@@ -340,11 +341,14 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
 
   $scope.selectedIcon = "icon-activity";
   $scope.icons = [];
-  var symbols = document.getElementsByTagName("symbol");
-  angular.forEach(symbols, function (s) {
-    $scope.icons.push(s.id);
-  });
-  $scope.selectedIcon = $scope.icons[Math.floor((Math.random() * $scope.icons.length))]
+
+  $timeout(function () {
+    var symbols = document.getElementsByTagName("symbol");
+    angular.forEach(symbols, function (s) {
+      $scope.icons.push(s.id);
+    });
+    $scope.selectedIcon = $scope.icons[Math.floor((Math.random() * $scope.icons.length))]
+  })
 
   $scope.countries = [
     { 'iso': 'AF', 'name': 'Afghanistan' },

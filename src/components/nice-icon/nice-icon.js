@@ -13,7 +13,8 @@ angular.module('niceElements')
       restrict: 'E',
       replace: true,
       scope: {
-        icon: '@'
+        icon: '@',
+        size: '=',
       },
     };
   });

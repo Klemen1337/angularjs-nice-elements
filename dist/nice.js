@@ -3648,7 +3648,8 @@ angular.module('niceElements')
       restrict: 'E',
       replace: true,
       scope: {
-        icon: '@'
+        icon: '@',
+        size: '=',
       },
     };
   });
@@ -6174,7 +6175,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('src/components/nice-icon/nice-icon.html',
-    "<svg class=\"nice-icon\">\n" +
+    "<svg class=\"nice-icon\" ng-style=\"{ 'width': size + 'px', 'height': size + 'px' }\">\n" +
     "<use ng-attr-xlink:href=\"{{ '#' + icon }}\" xlink:href=\"\"></use>\n" +
     "</svg>"
   );

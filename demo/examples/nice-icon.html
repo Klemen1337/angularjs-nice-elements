@@ -2,9 +2,10 @@
     <h1>Nice icon</h1>
 
     <div class="white-wrapper" id="nice-icon">
-        <pre class="prettyprint">&lt;nice-icon icon="{{ selectedIcon }}">&lt;/nice-icon></pre>
+        <input type="range" ng-model="iconSize" class="mb-2" min="10" max="200" />
+        <pre class="prettyprint">&lt;nice-icon icon="{{ selectedIcon }}" size="{{ iconSize }}">&lt;/nice-icon></pre>
 
-        <nice-icon class="nice-icon-large" icon="{{ selectedIcon }}"></nice-icon>
+        <nice-icon class="nice-icon-large" icon="{{ selectedIcon }}" size="iconSize"></nice-icon>
 
         <hr />
 
@@ -13,8 +14,8 @@
         <nice-search2 model="filters.search" class="mb-1"></nice-search2>
 
         <div class="icons">
-            <button class="btn btn-default-naked icon" ng-repeat="icon in icons | filter:filters.search" ng-class="{ 'active': selectedIcon == icon }" ng-click="selectIcon(icon)">
-                <nice-icon icon="{{ icon }}"></nice-icon>
+            <button class="btn icon" ng-repeat="icon in icons | filter:filters.search" ng-class="{ 'btn-primary': selectedIcon == icon, 'btn-default-naked': selectedIcon != icon }" ng-click="selectIcon(icon)">
+                <nice-icon icon="{{ icon }}" size="iconSize"></nice-icon>
                 <span>{{ icon }}</span>
             </button>
         </div>
