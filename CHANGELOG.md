@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.8.4 (2.6.2023)
+
+- added filterFunction to nice dropdown,
+- worked on nice-datetimerange-picker-2 mobile style,
+- added size param to nice-icon,
+- worked on nice-icon demo view
+
 ## v1.8.3 (30.5.2023)
 
 - added clickDisabled prop to nice-checkbox component
