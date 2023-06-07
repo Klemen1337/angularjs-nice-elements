@@ -128,7 +128,7 @@ angular.module('niceElements')
           $scope.popper.update();
           $timeout(function () {
             $scope.isOpen = true;
-            $scope.handleSearch();
+            if ($scope.filterFunction) $scope.internalList = $scope.filterFunction($scope.internalList);
             $timeout(function () {
               $scope.popper.update();
             });
@@ -202,6 +202,12 @@ angular.module('niceElements')
         };
 
 
+        $scope.handleNewInternalList = function (items) {
+          if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(items);
+          else $scope.internalList = items;
+        }
+
+
         // ----------------------------------- Scroll to hover -----------------------------------
         $scope.scrollToHover = function (notSmooth) {
           var dropdownMenu = $element[0].getElementsByClassName("nice-dropdown-menu")[0];
@@ -223,8 +229,7 @@ angular.module('niceElements')
           if (!$scope.searchFunction) return;
           $scope.loading = true;
           $scope.searchFunction($scope.internal.search).then(function (response) {
-            if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(response);
-            else $scope.internalList = response;
+            $scope.handleNewInternalList(response);
             $scope.loading = false;
             $scope.handleDefault();
           }, function (error) {
@@ -331,8 +336,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Watch for list change -----------------------------------
         $scope.$watchCollection('list', function (value_new, value_old) {
-          if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(angular.copy($scope.list));
-          else $scope.internalList = angular.copy($scope.list);
+          $scope.handleNewInternalList(angular.copy($scope.list));
           $scope.handleDefault();
         });
 
