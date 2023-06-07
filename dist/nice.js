@@ -2353,6 +2353,7 @@ angular.module('niceElements')
         enableLoadMore: '@' // Enable load more
       },
       controller: function ($scope, $http, $element, $timeout, gettextCatalog, NiceService) {
+        $scope.id = Math.random().toString(36).substring(7);
         if (!$scope.dropdownDistance) { $scope.dropdownDistance = 5; }
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
@@ -2369,7 +2370,7 @@ angular.module('niceElements')
         $scope.clearOnSelect = $scope.clearOnSelect === 'true' || $scope.clearOnSelect === true;
         $scope.isOpen = false;
         $scope.selected = null;
-        $scope.selectedIndex = 0;
+        // $scope.selectedIndex = 0;
         $scope.popper = null;
 
         $scope.internal = {
@@ -2432,6 +2433,7 @@ angular.module('niceElements')
           $scope.popper.update();
           $timeout(function () {
             $scope.isOpen = true;
+            $scope.handleSearch();
             $timeout(function () {
               $scope.popper.update();
             });
@@ -2523,6 +2525,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Search -----------------------------------
         $scope.handleSearch = function () {
+          if (!$scope.searchFunction) return;
           $scope.loading = true;
           $scope.searchFunction($scope.internal.search).then(function (response) {
             if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(response);
@@ -2534,6 +2537,11 @@ angular.module('niceElements')
             $scope.loading = false;
           });
         };
+
+        $scope.clearSearch = function () {
+          $scope.internal.search = "";
+          $scope.handleSearch();
+        }
 
 
         // ----------------------------------- Item clicked -----------------------------------
@@ -2652,7 +2660,7 @@ angular.module('niceElements')
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
                     // $scope.selected.push(i);
-                    $scope.selectedIndex = index;
+                    // $scope.selectedIndex = index;
                   }
                 });
               } else {
@@ -2660,7 +2668,7 @@ angular.module('niceElements')
                 if ($scope.selected != null && i[$scope.objKey] == $scope.selected) {
                   i._selected = true;
                   $scope.selected = i;
-                  $scope.selectedIndex = index;
+                  // $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
               }
@@ -2672,7 +2680,7 @@ angular.module('niceElements')
                   if (i[$scope.objKey] == s[$scope.objKey]) {
                     i._selected = true;
                     // $scope.selected.push(i);
-                    $scope.selectedIndex = index;
+                    // $scope.selectedIndex = index;
                   }
                 });
               } else {
@@ -2680,7 +2688,7 @@ angular.module('niceElements')
                 if ($scope.selected != null && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
                   i._selected = true;
                   $scope.selected = i;
-                  $scope.selectedIndex = index;
+                  // $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
               }
@@ -2694,48 +2702,48 @@ angular.module('niceElements')
         }
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------
-        $element.bind("keydown keypress", function (event) {
-          // Arrow Up
-          if (event.keyCode == 38) {
-            event.preventDefault();
-            $timeout(function () {
-              if ($scope.selectedIndex > 0) {
-                $scope.selectedIndex -= 1;
-                $timeout(function () {
-                  $scope.scrollToHover();
-                });
-              }
-            });
-          }
+        // $element.bind("keydown keypress", function (event) {
+        //   // Arrow Up
+        //   if (event.keyCode == 38) {
+        //     event.preventDefault();
+        //     $timeout(function () {
+        //       if ($scope.selectedIndex > 0) {
+        //         $scope.selectedIndex -= 1;
+        //         $timeout(function () {
+        //           $scope.scrollToHover();
+        //         });
+        //       }
+        //     });
+        //   }
 
-          // Arrow Down
-          if (event.keyCode == 40) {
-            event.preventDefault();
-            $timeout(function () {
-              if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
-                $scope.selectedIndex += 1;
-                $timeout(function () {
-                  $scope.scrollToHover();
-                });
-              }
-            });
-          }
+        //   // Arrow Down
+        //   if (event.keyCode == 40) {
+        //     event.preventDefault();
+        //     $timeout(function () {
+        //       if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
+        //         $scope.selectedIndex += 1;
+        //         $timeout(function () {
+        //           $scope.scrollToHover();
+        //         });
+        //       }
+        //     });
+        //   }
 
-          // Enter
-          if (event.keyCode == 13) {
-            event.preventDefault();
-            $timeout(function () {
-              $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
-            });
-          }
+        //   // Enter
+        //   if (event.keyCode == 13) {
+        //     event.preventDefault();
+        //     $timeout(function () {
+        //       $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
+        //     });
+        //   }
 
-          // Escape
-          if (event.keyCode == 27) {
-            $timeout(function () {
-              $scope.close();
-            });
-          }
-        });
+        //   // Escape
+        //   if (event.keyCode == 27) {
+        //     $timeout(function () {
+        //       $scope.close();
+        //     });
+        //   }
+        // });
 
         $scope.handleDefault();
 
@@ -6035,7 +6043,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-title title=\"title\" help=\"help\" required=\"required\" label-width=\"labelWidth\"></nice-title>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]\" click-outside=\"close()\" is-open=\"{{ isOpen }}\">\n" +
     "<div class=\"nice-field-wrapper\">\n" +
-    "<button class=\"btn btn-dropdown\" type=\"button\" ng-ref=\"dropdown-button\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\">\n" +
+    "<button class=\"btn btn-dropdown\" type=\"button\" ng-ref=\"dropdown-button\" ng-click=\"toggle()\" ng-disabled=\"isDisabled || emptyList\" aria-expanded=\"{{ isOpen }}\" aria-haspopup=\"true\" aria-controls=\"menu\" id=\"nice-dropdown-{{ id }}\">\n" +
     "<div class=\"btn-dropdown-inside\" ng-transclude=\"button\" ng-if=\"selected != null\">\n" +
     "<span ng-if=\"!multiple\">{{ selected[objValue] }}</span>\n" +
     "<span ng-if=\"multiple\">\n" +
@@ -6053,17 +6061,18 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"search-bar\" ng-if=\"searchFunction\">\n" +
     "<input ng-model=\"internal.search\" ng-model-options=\"{ debounce: 500 }\" ng-change=\"handleSearch()\" placeholder=\"{{ searchText }}\">\n" +
     "<div class=\"count\" ng-if=\"internalList && internalList._metadata && enableLoadMore\">{{ internalList.length }}/{{ internalList._metadata.count }}</div>\n" +
-    "<nice-icon class=\"icon\" icon=\"icon-search\"></nice-icon>\n" +
+    "<nice-icon ng-if=\"!internal.search\" class=\"icon\" icon=\"icon-search\"></nice-icon>\n" +
+    "<nice-icon ng-if=\"internal.search\" class=\"icon icon-trash\" icon=\"icon-trash\" ng-click=\"clearSearch()\"></nice-icon>\n" +
     "</div>\n" +
-    "<div class=\"nice-dropdown-items\">\n" +
-    "<div class=\"nice-no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
-    "<div class=\"nice-dropdown-item null-item\" ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\">\n" +
+    "<div class=\"nice-dropdown-items\" aria-labelledby=\"nice-dropdown-{{ id }}\" role=\"listbox\">\n" +
+    "<div role=\"none\" class=\"nice-no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
+    "<button role=\"option\" class=\"nice-dropdown-item null-item\" ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\">\n" +
     "{{ nullableText }}\n" +
-    "</div>\n" +
-    "<div class=\"nice-dropdown-item\" ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected, 'hover': $index == selectedIndex }\">\n" +
-    "<div class=\"choice-checkbox\" ng-if=\"multiple\"><i class=\"fa fa-check\"></i></div>\n" +
+    "</button>\n" +
+    "<button role=\"option\" class=\"nice-dropdown-item\" ng-repeat=\"item in internalList\" ng-click=\"handleSelected(item, $index)\" ng-class=\"{ 'selected': item._selected }\">\n" +
+    "<div class=\"choice-checkbox\" ng-if=\"multiple\" role=\"menuitemcheckbox\"><i class=\"fa fa-check\"></i></div>\n" +
     "<div class=\"choice-option\" ng-transclude=\"option\" ng-class=\"{ 'multiple-item': multiple }\">{{ item[objValue] }}</div>\n" +
-    "</div>\n" +
+    "</button>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +

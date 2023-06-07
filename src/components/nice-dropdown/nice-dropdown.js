@@ -48,6 +48,7 @@ angular.module('niceElements')
         enableLoadMore: '@' // Enable load more
       },
       controller: function ($scope, $http, $element, $timeout, gettextCatalog, NiceService) {
+        $scope.id = Math.random().toString(36).substring(7);
         if (!$scope.dropdownDistance) { $scope.dropdownDistance = 5; }
         if (!$scope.objValue) { $scope.objValue = 'value'; }
         if (!$scope.objKey) { $scope.objKey = 'id'; }
@@ -64,7 +65,7 @@ angular.module('niceElements')
         $scope.clearOnSelect = $scope.clearOnSelect === 'true' || $scope.clearOnSelect === true;
         $scope.isOpen = false;
         $scope.selected = null;
-        $scope.selectedIndex = 0;
+        // $scope.selectedIndex = 0;
         $scope.popper = null;
 
         $scope.internal = {
@@ -127,6 +128,7 @@ angular.module('niceElements')
           $scope.popper.update();
           $timeout(function () {
             $scope.isOpen = true;
+            $scope.handleSearch();
             $timeout(function () {
               $scope.popper.update();
             });
@@ -218,6 +220,7 @@ angular.module('niceElements')
 
         // ----------------------------------- Search -----------------------------------
         $scope.handleSearch = function () {
+          if (!$scope.searchFunction) return;
           $scope.loading = true;
           $scope.searchFunction($scope.internal.search).then(function (response) {
             if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(response);
@@ -229,6 +232,11 @@ angular.module('niceElements')
             $scope.loading = false;
           });
         };
+
+        $scope.clearSearch = function () {
+          $scope.internal.search = "";
+          $scope.handleSearch();
+        }
 
 
         // ----------------------------------- Item clicked -----------------------------------
@@ -347,7 +355,7 @@ angular.module('niceElements')
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
                     // $scope.selected.push(i);
-                    $scope.selectedIndex = index;
+                    // $scope.selectedIndex = index;
                   }
                 });
               } else {
@@ -355,7 +363,7 @@ angular.module('niceElements')
                 if ($scope.selected != null && i[$scope.objKey] == $scope.selected) {
                   i._selected = true;
                   $scope.selected = i;
-                  $scope.selectedIndex = index;
+                  // $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
               }
@@ -367,7 +375,7 @@ angular.module('niceElements')
                   if (i[$scope.objKey] == s[$scope.objKey]) {
                     i._selected = true;
                     // $scope.selected.push(i);
-                    $scope.selectedIndex = index;
+                    // $scope.selectedIndex = index;
                   }
                 });
               } else {
@@ -375,7 +383,7 @@ angular.module('niceElements')
                 if ($scope.selected != null && i[$scope.objKey] == $scope.selected[$scope.objKey]) {
                   i._selected = true;
                   $scope.selected = i;
-                  $scope.selectedIndex = index;
+                  // $scope.selectedIndex = index;
                   $scope.scrollToHover();
                 }
               }
@@ -389,48 +397,48 @@ angular.module('niceElements')
         }
 
         // ----------------------------------- Watch for keydown and keypress -----------------------------------
-        $element.bind("keydown keypress", function (event) {
-          // Arrow Up
-          if (event.keyCode == 38) {
-            event.preventDefault();
-            $timeout(function () {
-              if ($scope.selectedIndex > 0) {
-                $scope.selectedIndex -= 1;
-                $timeout(function () {
-                  $scope.scrollToHover();
-                });
-              }
-            });
-          }
+        // $element.bind("keydown keypress", function (event) {
+        //   // Arrow Up
+        //   if (event.keyCode == 38) {
+        //     event.preventDefault();
+        //     $timeout(function () {
+        //       if ($scope.selectedIndex > 0) {
+        //         $scope.selectedIndex -= 1;
+        //         $timeout(function () {
+        //           $scope.scrollToHover();
+        //         });
+        //       }
+        //     });
+        //   }
 
-          // Arrow Down
-          if (event.keyCode == 40) {
-            event.preventDefault();
-            $timeout(function () {
-              if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
-                $scope.selectedIndex += 1;
-                $timeout(function () {
-                  $scope.scrollToHover();
-                });
-              }
-            });
-          }
+        //   // Arrow Down
+        //   if (event.keyCode == 40) {
+        //     event.preventDefault();
+        //     $timeout(function () {
+        //       if ($scope.internalList && $scope.selectedIndex < $scope.internalList.length - 1) {
+        //         $scope.selectedIndex += 1;
+        //         $timeout(function () {
+        //           $scope.scrollToHover();
+        //         });
+        //       }
+        //     });
+        //   }
 
-          // Enter
-          if (event.keyCode == 13) {
-            event.preventDefault();
-            $timeout(function () {
-              $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
-            });
-          }
+        //   // Enter
+        //   if (event.keyCode == 13) {
+        //     event.preventDefault();
+        //     $timeout(function () {
+        //       $scope.handleSelected($scope.internalList[$scope.selectedIndex], $scope.selectedIndex);
+        //     });
+        //   }
 
-          // Escape
-          if (event.keyCode == 27) {
-            $timeout(function () {
-              $scope.close();
-            });
-          }
-        });
+        //   // Escape
+        //   if (event.keyCode == 27) {
+        //     $timeout(function () {
+        //       $scope.close();
+        //     });
+        //   }
+        // });
 
         $scope.handleDefault();
 

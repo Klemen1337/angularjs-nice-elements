@@ -87,6 +87,10 @@
         width: 16px;
       }
 
+      .icon-trash {
+        color: var(--nice-danger-color);
+      }
+
       .count {
         position: absolute;
         top: 50%;
@@ -111,13 +115,17 @@
       padding: 0;
       margin: 0;
 
-
       .nice-dropdown-item {
         padding: 10px;
         position: relative;
         cursor: pointer;
         display: flex;
         align-items: center;
+
+        border: 0 none;
+        background: transparent;
+        text-align: left;
+        width: 100%;
 
         .choice-checkbox {
           transition: all 0.2s;
@@ -138,7 +146,9 @@
         }
 
         &:hover,
-        &.hover {
+        &.hover,
+        &:focus,
+        &.focus {
           background: $nice-hover-color;
         }
 

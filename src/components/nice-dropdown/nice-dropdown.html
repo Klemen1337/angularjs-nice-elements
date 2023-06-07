@@ -7,7 +7,7 @@
         <div class="nice-field col-xs-12" ng-class="[ fieldWidth ? fieldWidth : 'col-sm-8', { 'open': isOpen, 'nice-disabled': isDisabled || emptyList } ]" click-outside="close()" is-open="{{ isOpen }}">
             <div class="nice-field-wrapper">
                 <!------------------------- Button ------------------------->
-                <button class="btn btn-dropdown" type="button" ng-ref="dropdown-button" ng-click="toggle()" ng-disabled="isDisabled || emptyList">
+                <button class="btn btn-dropdown" type="button" ng-ref="dropdown-button" ng-click="toggle()" ng-disabled="isDisabled || emptyList" aria-expanded="{{ isOpen }}" aria-haspopup="true" aria-controls="menu" id="nice-dropdown-{{ id }}">
                     <div class="btn-dropdown-inside" ng-transclude="button" ng-if="selected != null">
                         <span ng-if="!multiple">{{ selected[objValue] }}</span>
                         <span ng-if="multiple">
@@ -30,17 +30,18 @@
                         <div class="search-bar" ng-if="searchFunction">
                             <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
                             <div class="count" ng-if="internalList && internalList._metadata && enableLoadMore">{{ internalList.length }}/{{ internalList._metadata.count }}</div>
-                            <nice-icon class="icon" icon="icon-search"></nice-icon>
+                            <nice-icon ng-if="!internal.search" class="icon" icon="icon-search"></nice-icon>
+                            <nice-icon ng-if="internal.search" class="icon icon-trash" icon="icon-trash" ng-click="clearSearch()"></nice-icon>
                         </div>
-                        <div class="nice-dropdown-items">
-                            <div class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
-                            <div class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
+                        <div class="nice-dropdown-items" aria-labelledby="nice-dropdown-{{ id }}" role="listbox">
+                            <div role="none" class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
+                            <button role="option" class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
                                 {{ nullableText }}
-                            </div>
-                            <div class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected, 'hover': $index == selectedIndex }">
-                                <div class="choice-checkbox" ng-if="multiple"><i class="fa fa-check"></i></div>
+                            </button>
+                            <button role="option" class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }">
+                                <div class="choice-checkbox" ng-if="multiple" role="menuitemcheckbox"><i class="fa fa-check"></i></div>
                                 <div class="choice-option" ng-transclude="option" ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</div>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
