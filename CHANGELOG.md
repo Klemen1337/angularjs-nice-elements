@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.8.5 (7.6.2023)
+
+- added filter again when dropdown is open in nice-dropdown,
+- added clear search button to nice-dropdown,
+- removed keydown and keypress event bind in nice-dropdown,
+- added aria support for nice-dropdown
+
 ## v1.8.4 (2.6.2023)
 
 - added filterFunction to nice dropdown,
