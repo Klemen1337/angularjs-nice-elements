@@ -32,15 +32,31 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
       };
       response = response.results;
       response._metadata = metadata;
-      console.log("fetchEvents", response);
+      // console.log("fetchEvents", response);
       return response;
     });
   }
 
   $scope.filterEvents = function (items) {
-    console.log("filterEvents", items)
+    // console.log("filterEvents", items)
     if (!items) return;
     return items.filter(item => item.type == "NORMAL");
+  }
+
+  $scope.filterEventsFromList = function (items) {
+    if (!items) return;
+    return items.filter(item => !$scope.events.find(event => event.id == item.id));
+  }
+
+  $scope.events = [];
+  $scope.addEventToList = function (item) {
+    if (item) $scope.events.push(item);
+    $scope.model.dropdown8 = null;
+  }
+
+  $scope.removeEvent = function (item) {
+    // console.log("remove", item)
+    $scope.events = $scope.events.filter(event => event.id != item.id);
   }
 
   $scope.dropdownOnChange = function () {

@@ -124,6 +124,44 @@
 
         <div class="row">
             <div class="col-sm-6">
+                <nice-dropdown title="Filtered events from list" model="model.dropdown8" search-function="fetchEvents" filter-function="filterEventsFromList" on-change="addEventToList(model)" select-text="Select" nullable="true" enable-load-more="true">
+                    <nice-dropdown-option>
+                        <div class="dropdown-event">
+                            <img ng-src="{{ $parent.item.thumbnail_photo }}" />
+                            <div class="info">
+                                <label>{{ $parent.item.name }}</label>
+                                <small>{{ $parent.item.venue_name }}</small><br />
+                                <small>{{ $parent.item.type }}</small>
+                            </div>
+                        </div>
+                    </nice-dropdown-option>
+                </nice-dropdown>
+                <nice-slot>
+                    <!-- <pre>{{ dropdown8 | json }}</pre> -->
+                    <div class="nice-pills">
+                        <nice-pill ng-repeat="event in events" model="event" value-key="name" can-delete="true" on-delete="removeEvent">{{ event.name }}</nice-pill>
+                    </div>
+                    <!-- <pre>{{ events | json }}</pre> -->
+                </nice-slot>
+            </div>
+
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-dropdown 
+    title="Filtered events" 
+    model="dropdown8" 
+    search-function="fetchEvents" 
+    filter-function="filterEventsFromList"
+    on-change="addEventToList(model)"
+    enable-load-more="true"
+    nullable="true"
+>
+                </pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
                 <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" multiple="true"></nice-dropdown>
                 <nice-slot>
                     <pre>{{ dropdown | json }}</pre>

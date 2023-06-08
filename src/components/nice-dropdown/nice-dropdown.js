@@ -72,6 +72,10 @@ angular.module('niceElements')
           search: ""
         };
 
+        if ($scope.list) {
+          $scope.originalList = angular.copy($scope.list);
+        }
+
         // Setup popper
         // https://popper.js.org/docs/v2/constructors/
         $scope.setupPopper = function () {
@@ -126,9 +130,9 @@ angular.module('niceElements')
 
         $scope.open = function () {
           $scope.popper.update();
+          if ($scope.filterFunction) $scope.internalList = $scope.filterFunction($scope.originalList);
           $timeout(function () {
             $scope.isOpen = true;
-            if ($scope.filterFunction) $scope.internalList = $scope.filterFunction($scope.internalList);
             $timeout(function () {
               $scope.popper.update();
             });
@@ -203,7 +207,8 @@ angular.module('niceElements')
 
 
         $scope.handleNewInternalList = function (items) {
-          if ($scope.filterFunction) $scope.internalList = $scope.filterFunction(items);
+          $scope.originalList = angular.copy(items);
+          if ($scope.filterFunction) $scope.internalList = $scope.filterFunction($scope.originalList);
           else $scope.internalList = items;
         }
 
