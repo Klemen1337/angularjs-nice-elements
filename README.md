@@ -45,6 +45,7 @@ Nice elements is an AngularJS v1.5.8 module that contains nice form elements lik
 - nice-tooltip
 - nice-upload
 - nice-yesno
+- nice-pill
 - ~~nice-datetime-picker~~ (DEPREACATED)
 - ~~nice-datetimerange-picker~~ (DEPREACATED)
 - ~~nice-dtp~~ (DEPREACATED)

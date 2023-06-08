@@ -1,0 +1,26 @@
+.nice-pills {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.nice-pill {
+  background: var(--nice-primary-color);
+  color: white;
+  border-radius: 1rem;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  .nice-pill-remove {
+    margin: 0;
+    padding: 0;
+    min-height: auto;
+    border: 0 none;
+    color: white;
+  }
+}
