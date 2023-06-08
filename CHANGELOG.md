@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.8.6 (8.6.2023)
+
+- worked on nice-dropdown filter function,
+- created nice-pill component
+
 ## v1.8.5 (7.6.2023)
 
 - added filter again when dropdown is open in nice-dropdown,
