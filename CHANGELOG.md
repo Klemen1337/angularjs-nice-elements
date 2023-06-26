@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.8.7 (26.6.2023)
+
+- changed trash can with x - OLA-639
+
 ## v1.8.6 (8.6.2023)
 
 - worked on nice-dropdown filter function,
