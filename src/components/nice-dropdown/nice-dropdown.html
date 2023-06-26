@@ -31,7 +31,7 @@
                             <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
                             <div class="count" ng-if="internalList && internalList._metadata && enableLoadMore">{{ internalList.length }}/{{ internalList._metadata.count }}</div>
                             <nice-icon ng-if="!internal.search" class="icon" icon="icon-search"></nice-icon>
-                            <nice-icon ng-if="internal.search" class="icon icon-trash" icon="icon-trash" ng-click="clearSearch()"></nice-icon>
+                            <nice-icon ng-if="internal.search" class="icon" icon="icon-x" ng-click="clearSearch()"></nice-icon>
                         </div>
                         <div class="nice-dropdown-items" aria-labelledby="nice-dropdown-{{ id }}" role="listbox">
                             <div role="none" class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>

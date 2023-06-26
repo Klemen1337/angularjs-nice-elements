@@ -141,14 +141,11 @@ label.nice {
         height: 16px;
         width: 16px;
       }
+    }
 
-      &.clickable {
-        &:hover {
-          cursor: pointer;
-          // background-color: $nice-base-color;
-          background-color: var(--nice-hover-color);
-          // color: white;
-        }
+    .clickable {
+      &:hover {
+        cursor: pointer;
       }
     }
   }

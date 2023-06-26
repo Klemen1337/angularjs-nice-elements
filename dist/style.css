@@ -201,10 +201,9 @@ label.nice {
   width: 16px;
 }
 
-.nice-component .input-group .input-group-addon.clickable:hover,
-.nice-component .form-group .input-group-addon.clickable:hover {
+.nice-component .input-group .clickable:hover,
+.nice-component .form-group .clickable:hover {
   cursor: pointer;
-  background-color: var(--nice-hover-color);
 }
 
 .nice-component-inline .nice-title {
@@ -1568,10 +1567,6 @@ p.nice {
   transform: translate(0, -50%);
   height: 16px;
   width: 16px;
-}
-
-.nice-dropdown .nice-dropdown-menu .search-bar .icon-trash, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar .icon-trash {
-  color: var(--nice-danger-color);
 }
 
 .nice-dropdown .nice-dropdown-menu .search-bar .count, .nice-search .nice-dropdown-empty .nice-dropdown-menu .search-bar .count {
