@@ -18,6 +18,21 @@
 
         <div class="row">
             <div class="col-sm-6">
+                <nice-input title="Numbers only" numbers-only="true" model="model.inputNumbersOnly" maxlength="4" minlength="4"></nice-input>
+                <nice-slot><code>{{ model.inputNumbersOnly }}</code></nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-input 
+    numbers-only="true"
+    model="model.inputNumbersOnly"
+    maxlength="4"
+    minlength="4"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
                 <nice-input title="Number" model="model.inputNumber" type="number"></nice-input>
                 <nice-slot><code>{{ model.inputNumber }}</code></nice-slot>
             </div>
@@ -98,6 +113,7 @@
                         <th>Attribute</th>
                         <th>Description</th>
                         <th>Default</th>
+                        <th>Date added</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,55 +121,66 @@
                         <td>type</td>
                         <td>Sets the input field type</td>
                         <td>text</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>regex</td>
                         <td></td>
                         <td>null</td>
+                        <td></td>
                     </tr>
 
                     <tr>
                         <td>regex-error</td>
                         <td>Show this error if regex validation fails</td>
                         <td>null</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>placeholder</td>
                         <td></td>
                         <td>null</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>minlength</td>
                         <td>Sets the max character length</td>
                         <td>null</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>maxlength</td>
                         <td>Sets the min character length</td>
                         <td>null</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>hideValid</td>
                         <td>Hides valid check symbol</td>
                         <td>true</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>showValid</td>
                         <td>wtf</td>
+                        <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>textAreaLines</td>
                         <td>Sets text area number of lines</td>
                         <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>textArea</td>
                         <td>Sets input field to text area</td>
                         <td>false</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>symbol</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -161,17 +188,25 @@
                         <td>help</td>
                         <td></td>
                         <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>name</td>
                         <td></td>
                         <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>minDecimalsCutZeros</td>
-                        <td>Use this field to tell how much decimal places must always be, even if number is ceil.
-                        </td>
+                        <td>Use this field to tell how much decimal places must always be, even if number is ceil.</td>
                         <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>numbersOnly</td>
+                        <td>Allow only 0-9 numbers.</td>
+                        <td>false</td>
+                        <td>28.6.2023</td>
                     </tr>
                 </tbody>
             </table>

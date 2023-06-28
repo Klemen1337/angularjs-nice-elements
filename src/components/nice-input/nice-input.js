@@ -33,7 +33,8 @@ angular.module('niceElements')
         tabIndex: '@',
         isFocused: '@',
         isInline: '=',
-        onChange: '&?'
+        onChange: '&?',
+        numbersOnly: '=', // Allow only numbers in the input
       },
 
       link: function (scope, element, attrs) {
@@ -129,6 +130,15 @@ angular.module('niceElements')
         $scope.id = Math.random().toString(36).substring(7);
 
         $scope.keypress = function (event) {
+          if ($scope.numbersOnly) {
+            if ((event.charCode >= 48 && event.charCode <= 58) || event.charCode == 0) { // Allow only numbers
+              return true;
+            } else { // Prevent everything else
+              event.preventDefault();
+              return false;
+            }
+          }
+
           if ($scope.type == "number" || $scope.type == "integer") {
             if (event.charCode == 46 || event.charCode == 44) { // Handle "." and "," key (only one allowed)
               if ($scope.type == "number") {
