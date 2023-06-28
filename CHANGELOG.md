@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.8.8 (28.6.2023)
+
+- added numbersOnly to nice-input component - OLA-650
+
 ## v1.8.7 (26.6.2023)
 
 - changed trash can with x - OLA-639
