@@ -5,6 +5,23 @@
     <nice-wrapper>
         <div class="row">
             <div class="col-sm-6">
+                <nice-input title="Name (With multilanguage)" model="multilanguage.name" multilanguage="multilanguage.i18n" multilanguage-field="name"></nice-input>
+                <nice-slot>
+                    <pre>{{ multilanguage | json }}</pre>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint lang-html">&lt;nice-input 
+    title="Name (With multilanguage)" 
+    model="multilanguage.name"
+    multilanguage="multilanguage.i8n"
+    multilanguage-field="name"
+>&lt;/nice-input></pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
                 <nice-input title="Text" model="model.inputText"></nice-input>
                 <nice-slot><code>{{ model.inputText }}</code></nice-slot>
             </div>
@@ -33,7 +50,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <nice-input title="Number" model="model.inputNumber" type="number"></nice-input>
+                <nice-input title="Number" model="model.inputNumber" type="number" symbol="Euro"></nice-input>
                 <nice-slot><code>{{ model.inputNumber }}</code></nice-slot>
             </div>
             <div class="col-sm-6">
@@ -207,6 +224,24 @@
                         <td>Allow only 0-9 numbers.</td>
                         <td>false</td>
                         <td>28.6.2023</td>
+                    </tr>
+                    <tr>
+                        <td>onClear</td>
+                        <td>If function is passed button will appear that will call the function on click.</td>
+                        <td>null</td>
+                        <td>5.7.2023</td>
+                    </tr>
+                    <tr>
+                        <td>multilanguage</td>
+                        <td>Pass multilanguage field from parent</td>
+                        <td>null</td>
+                        <td>5.7.2023</td>
+                    </tr>
+                    <tr>
+                        <td>multilanguageField</td>
+                        <td>Pass field name for translations. If set button for languages that open modal will appear.</td>
+                        <td>null</td>
+                        <td>5.7.2023</td>
                     </tr>
                 </tbody>
             </table>

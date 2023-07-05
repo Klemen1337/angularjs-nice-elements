@@ -5,7 +5,7 @@
 
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="fieldWidth ? fieldWidth : 'col-sm-8'">
-            <div class="form-group" ng-class="{
+            <div class="input-group" ng-class="{
                     'has-feedback': showValid && !hideValid,
                     'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,
                     'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,
@@ -13,10 +13,17 @@
                     'nice-disabled': isDisabled
                 }">
 
-                <textarea ng-show="textArea" class="form-control" ng-model="model" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" rows="{{textAreaLines}}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-pattern="regexexp" ng-disabled="isDisabled"></textarea>
-                <input ng-show="!textArea" class="form-control" type="{{ internalType }}" ng-model="model" name="{{ name }}" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-keypress="keypress($event)" ng-pattern="regexexp" ng-disabled="isDisabled" />
+                <textarea ng-if="textArea" class="form-control" ng-model="$parent.model" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" rows="{{textAreaLines}}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-pattern="regexexp" ng-disabled="isDisabled"></textarea>
+                <input ng-if="!textArea" class="form-control" type="{{ internalType }}" ng-model="$parent.model" name="{{ name }}" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-keypress="keypress($event)" ng-pattern="regexexp" ng-disabled="isDisabled" />
 
-                <span class="input-group-addon" ng-if="symbol">{{ symbol }}</span>
+                <div class="input-group-addon" ng-if="symbol">{{ symbol }}</div>
+                <button class="input-group-btn" ng-if="multilanguageField" ng-click="openMultilanguage()">
+                    <nice-icon icon="icon-translate"></nice-icon>
+                    <div class="nice-input-addon-bubble" ng-if="numberOfLanguages > 0">{{ numberOfLanguages }}</div>
+                </button>
+                <button class="input-group-btn" ng-if="onClear" ng-click="onClear()">
+                    <nice-icon icon="icon-x"></nice-icon>
+                </button>
                 <!--<span ng-if="!disabled && showValid && form.$valid && form.$dirty" class="glyphicon glyphicon-ok form-control-feedback feedback-valid" aria-hidden="true"></span>-->
                 <!--<span ng-if="!disabled && !hideValid && form.$invalid && form.$dirty" class="glyphicon glyphicon-remove form-control-feedback feedback-invalid" aria-hidden="true"></span>-->
             </div>

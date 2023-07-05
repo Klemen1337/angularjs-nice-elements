@@ -34,7 +34,10 @@ angular.module('niceElements')
         isFocused: '@',
         isInline: '=',
         onChange: '&?',
+        onClear: '&?',
         numbersOnly: '=', // Allow only numbers in the input
+        multilanguage: '=?', // Multiple languages object
+        multilanguageField: '@?', // Multiple languages field name
       },
 
       link: function (scope, element, attrs) {
@@ -126,8 +129,42 @@ angular.module('niceElements')
         });
       },
 
-      controller: function ($scope) {
+      controller: function ($scope, $rootScope, ngDialog) {
         $scope.id = Math.random().toString(36).substring(7);
+
+        // Handle multiple language field if empty
+        if ($scope.multilanguageField && !$scope.multilanguage) {
+          $scope.multilanguage = {};
+        }
+        if ($scope.multilanguage && $scope.multilanguageField) {
+          if (!$scope.multilanguage[$scope.multilanguageField]) {
+            $scope.multilanguage[$scope.multilanguageField] = {}
+          }
+          $scope.numberOfLanguages = Object.keys($scope.multilanguage[$scope.multilanguageField]).length;
+        }
+
+        $scope.openMultilanguage = function () {
+          var scope = $rootScope.$new(true);
+          var dialog = ngDialog.open({
+            template: '<nice-multilangual-modal model="model" multilanguage="multilanguage" multilanguage-field="{{ multilanguageField }}" callback="callback" dialog="dialog"></nice-multilangual-modal>',
+            plain: true,
+            scope: scope,
+            className: 'ngdialog ngdialog-theme-default nice-ngdialog-theme',
+            showClose: false,
+          });
+          scope.dialog = dialog;
+          scope.model = angular.copy($scope.model);
+          scope.multilanguage = angular.copy($scope.multilanguage);
+          scope.multilanguageField = $scope.multilanguageField;
+          scope.callback = function (newFields) {
+            var filteredFields = {};
+            angular.forEach(newFields, function (value, key) {
+              if (value != '') filteredFields[key] = value;
+            })
+            $scope.multilanguage[$scope.multilanguageField] = filteredFields;
+            $scope.numberOfLanguages = Object.keys($scope.multilanguage[$scope.multilanguageField]).length;
+          };
+        }
 
         $scope.keypress = function (event) {
           if ($scope.numbersOnly) {

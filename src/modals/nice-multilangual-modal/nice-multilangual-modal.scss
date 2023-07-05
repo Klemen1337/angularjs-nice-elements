@@ -1,0 +1,20 @@
+.nice-multilangual-modal {
+  .nice-multilangual-languages {
+    .nice-multilangual-language {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+
+      .nice-multilangual-language-flag {
+        width: 34px;
+        height: 34px;
+      }
+    }
+  }
+
+  .add-language {
+    width: 200px;
+    display: block;
+  }
+}

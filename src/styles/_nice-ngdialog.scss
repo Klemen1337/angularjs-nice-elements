@@ -1,0 +1,86 @@
+.nice-ngdialog-theme {
+  user-select: inherit !important;
+  padding-bottom: 3rem !important;
+  padding-top: 3rem !important;
+
+  .white-wrapper {
+    box-shadow: 0px 0px 0px none;
+  }
+
+  .ngdialog-content {
+    background: white !important;
+    color: var(--nice-font-color);
+    line-height: inherit !important;
+    padding: 0px !important;
+    font-size: inherit !important;
+    background: none;
+    width: 800px;
+    max-width: 90%;
+    border-radius: var(--nice-border-radius);
+    overflow: visible;
+  }
+
+  // ---------------- Dialog Title ----------------
+  .dialog-title {
+    padding: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    color: var(--nice-primary-color);
+
+    .sub-title {
+      font-size: 0.8em;
+      text-transform: uppercase;
+      color: var(--nice-font-color);
+    }
+
+    .title {
+      font-size: 1.5em;
+      text-transform: none;
+      color: var(--nice-primary-color);
+      // font-weight: bold;
+    }
+
+    p {
+      font-size: 1em;
+      text-transform: none;
+      color: var(--nice-font-color);
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  // ---------------- Dialog filters ----------------
+  .dialog-filters {
+    padding: 2rem;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  // ---------------- Dialog Body----------------
+  .dialog-body {
+    padding: 0 2rem;
+  }
+
+  // ---------------- Dialog Footer ----------------
+  .dialog-footer {
+    position: relative;
+    padding: 2rem;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      right: 2rem;
+      content: " ";
+      border-top: 1px solid var(--nice-hr-color);
+    }
+
+    .view-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+  }
+}

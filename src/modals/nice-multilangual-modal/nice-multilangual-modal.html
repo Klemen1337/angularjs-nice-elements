@@ -1,0 +1,31 @@
+<div class="nice-multilangual-modal">
+    <div class="dialog-title" ng-if="!model">
+        <translate translate-context="Nice">Translations</translate>
+    </div>
+    <div class="dialog-title" ng-if="model">
+        <div translate class="sub-title" translate-context="Nice">Translations for</div>
+        <span class="title">{{ model }}</span>
+    </div>
+
+    <div class="dialog-body" ng-form="forma">
+        <div class="nice-multilangual-languages">
+            <div class="nice-multilangual-language" ng-repeat="(key, field) in fields">
+                <!-- <nice-icon class="nice-multilangual-language-flag" icon="{{ 'flag-' + key }}"></nice-icon> -->
+                <nice-input title="{{ languagesMap[key] }}" class="flex-grow" model="fields[key]" is-inline="false" no-margin="true" on-clear="removeLanguage(key)" class="flex-grow"></nice-input>
+                <!-- <button class="btn btn-danger btn-icon" ng-click="removeLanguage(key)">
+                    <nice-icon icon="icon-trash-2"></nice-icon>
+                </button> -->
+            </div>
+        </div>
+
+        <nice-dropdown ng-if="!hide" title="{{ 'Add language' | translate:null:'Nice' }}" is-inline="false" model="selector.newLanguage" list="languages" add-button-function="addLanguage" filter-function="filterLanguages" no-margin="true"></nice-dropdown>
+        <!-- <pre class="mb-0">{{ fields | json }}</pre> -->
+    </div>
+
+    <div class="dialog-footer">
+        <div class="view-actions">
+            <button type="button" class="btn btn-danger btn-navigation" ng-click="close()" translate-context="Nice" translate>Cancel</button>
+            <button class="btn btn-success btn-navigation" ng-click="save()" translate-context="Nice" translate>Save</button>
+        </div>
+    </div>
+</div>

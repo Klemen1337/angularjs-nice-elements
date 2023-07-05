@@ -32,6 +32,12 @@ label.nice {
     }
   }
 
+  // .input-group .form-control:not(:first-child):not(:last-child),
+  // .input-group-addon:not(:first-child):not(:last-child),
+  // .input-group-btn:not(:first-child):not(:last-child) {
+  //   border-radius: var(--nice-border-radius);
+  // }
+
   .input-group,
   .form-group {
     .form-control {
@@ -45,6 +51,8 @@ label.nice {
 
     .form-control:not(:last-child) {
       border-right: 0 none;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
     }
 
     &:focus-within {
@@ -129,8 +137,8 @@ label.nice {
     }
 
     .input-group-addon {
-      border-top-right-radius: $nice-border-radius;
-      border-bottom-right-radius: $nice-border-radius;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
       border: 1px solid $nice-border-color;
       border-left: 0 none;
       background: $nice-input-bg;

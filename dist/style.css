@@ -50,6 +50,10 @@
   user-select: none;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .margin-bottom-0 {
   margin-bottom: 0 !important;
 }
@@ -109,6 +113,8 @@ label.nice {
 .nice-component .input-group .form-control:not(:last-child),
 .nice-component .form-group .form-control:not(:last-child) {
   border-right: 0 none;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 .nice-component .input-group:focus-within,
@@ -186,8 +192,8 @@ label.nice {
 
 .nice-component .input-group .input-group-addon,
 .nice-component .form-group .input-group-addon {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
   border: 1px solid #cbd4d9;
   border-left: 0 none;
   background: white;
@@ -1481,6 +1487,88 @@ p.nice {
   width: 100%;
 }
 
+.nice-ngdialog-theme {
+  user-select: inherit !important;
+  padding-bottom: 3rem !important;
+  padding-top: 3rem !important;
+}
+
+.nice-ngdialog-theme .white-wrapper {
+  box-shadow: 0px 0px 0px none;
+}
+
+.nice-ngdialog-theme .ngdialog-content {
+  background: white !important;
+  color: var(--nice-font-color);
+  line-height: inherit !important;
+  padding: 0px !important;
+  font-size: inherit !important;
+  background: none;
+  width: 800px;
+  max-width: 90%;
+  border-radius: var(--nice-border-radius);
+  overflow: visible;
+}
+
+.nice-ngdialog-theme .dialog-title {
+  padding: 2rem;
+  padding-bottom: 1rem;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  color: var(--nice-primary-color);
+}
+
+.nice-ngdialog-theme .dialog-title .sub-title {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: var(--nice-font-color);
+}
+
+.nice-ngdialog-theme .dialog-title .title {
+  font-size: 1.5em;
+  text-transform: none;
+  color: var(--nice-primary-color);
+}
+
+.nice-ngdialog-theme .dialog-title p {
+  font-size: 1em;
+  text-transform: none;
+  color: var(--nice-font-color);
+  margin: 0;
+  padding: 0;
+}
+
+.nice-ngdialog-theme .dialog-filters {
+  padding: 2rem;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.nice-ngdialog-theme .dialog-body {
+  padding: 0 2rem;
+}
+
+.nice-ngdialog-theme .dialog-footer {
+  position: relative;
+  padding: 2rem;
+}
+
+.nice-ngdialog-theme .dialog-footer:before {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  right: 2rem;
+  content: " ";
+  border-top: 1px solid var(--nice-hr-color);
+}
+
+.nice-ngdialog-theme .dialog-footer .view-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
 .nice-dropdown .disabled, .nice-search .nice-dropdown-empty .disabled {
   cursor: not-allowed !important;
 }
@@ -1866,8 +1954,72 @@ p.nice {
   border-right: 1px solid var(--nice-border-color) !important;
 }
 
-.nice-input .form-group {
+.nice-input .input-group {
   margin-bottom: 0px;
+  width: 100%;
+  display: flex;
+}
+
+.nice-input .input-group-addon,
+.nice-input .input-group-btn {
+  flex-shrink: 0;
+}
+
+.nice-input .input-group-btn {
+  background: transparent;
+  border: 1px solid var(--nice-border-color);
+  border-left: 0 none;
+  border-top-right-radius: var(--nice-border-radius);
+  border-bottom-right-radius: var(--nice-border-radius);
+  width: auto;
+}
+
+.nice-input .input-group-btn:hover {
+  background: var(--nice-hover-color);
+}
+
+.nice-input .input-group-btn:active {
+  background: var(--nice-border-color);
+}
+
+.nice-input .input-group-btn .nice-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.nice-input .input-group-btn .nice-input-addon-bubble {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--nice-success-color);
+  color: #fff;
+  overflow: hidden;
+  font-size: 8px;
+  line-height: 10px;
+  text-align: center;
+}
+
+.nice-input .input-group .form-control:first-child,
+.nice-input .input-group-addon:first-child,
+.nice-input .input-group-btn:first-child > .btn,
+.nice-input .input-group-btn:first-child > .btn-group > .btn,
+.nice-input .input-group-btn:first-child > .dropdown-toggle,
+.nice-input .input-group-btn:last-child > .btn-group:not(:last-child) > .btn,
+.nice-input .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-radius: var(--nice-border-radius);
+}
+
+.nice-input .input-group .form-control:last-child,
+.nice-input .input-group-addon:last-child,
+.nice-input .input-group-btn:first-child > .btn-group:not(:first-child) > .btn,
+.nice-input .input-group-btn:first-child > .btn:not(:first-child),
+.nice-input .input-group-btn:last-child > .btn,
+.nice-input .input-group-btn:last-child > .btn-group > .btn,
+.nice-input .input-group-btn:last-child > .dropdown-toggle {
+  border-radius: var(--nice-border-radius);
 }
 
 .nice-input .symbol {
@@ -4752,6 +4904,23 @@ p.nice {
   min-height: auto;
   border: 0 none;
   color: white;
+}
+
+.nice-multilangual-modal .nice-multilangual-languages .nice-multilangual-language {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.nice-multilangual-modal .nice-multilangual-languages .nice-multilangual-language .nice-multilangual-language-flag {
+  width: 34px;
+  height: 34px;
+}
+
+.nice-multilangual-modal .add-language {
+  width: 200px;
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */

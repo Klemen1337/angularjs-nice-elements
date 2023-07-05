@@ -10,6 +10,10 @@
   user-select: none;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .margin-bottom-0 {
   margin-bottom: 0 !important;
 }
@@ -23,6 +27,7 @@
 @import "nice-common";
 @import "nice-buttons";
 @import "nice-spacing";
+@import "nice-ngdialog";
 @import "../components/nice-dropdown/nice-dropdown";
 @import "../components/nice-dropdown-old/nice-dropdown-old";
 @import "../components/nice-input/nice-input";
@@ -54,6 +59,7 @@
 @import "../components/nice-popup/nice-popup";
 @import "../components/nice-icon/nice-icon";
 @import "../components/nice-toast/nice-toast";
-@import "../components/nice-date-input/nice-date-input.scss";
-@import "../components/nice-wrapper/nice-wrapper.scss";
-@import "../components/nice-pill/nice-pill.scss";
+@import "../components/nice-date-input/nice-date-input";
+@import "../components/nice-wrapper/nice-wrapper";
+@import "../components/nice-pill/nice-pill";
+@import "../modals/nice-multilangual-modal/nice-multilangual-modal";
