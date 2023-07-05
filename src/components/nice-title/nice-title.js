@@ -13,7 +13,7 @@ angular.module('niceElements')
       restrict: 'E',
       scope: {
         labelWidth: '=?',
-        title: '=?',
+        text: '=?',
         required: '=?',
         help: '=?'
       }
