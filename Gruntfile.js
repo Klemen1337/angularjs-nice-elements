@@ -47,7 +47,10 @@ module.exports = function (grunt) {
 
       ngtemplates: {
         niceElements: {
-          src: '<%= yeoman.src %>/components/**/*.html',
+          src: [
+            '<%= yeoman.src %>/components/**/*.html',
+            '<%= yeoman.src %>/modals/**/*.html',
+          ],
           dest: '.tmp/nice.templates.js',
           options: {
             htmlmin: {
@@ -66,6 +69,7 @@ module.exports = function (grunt) {
             'src/components/**/*.js',
             'src/filters/*.js',
             'src/services/*.js',
+            'src/modals/*.js',
             '.tmp/nice.templates.js'
           ],
           dest: '<%= yeoman.dist %>/nice.js'

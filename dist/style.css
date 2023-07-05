@@ -199,6 +199,10 @@ label.nice {
   background: white;
   padding: 0 9px;
   color: var(--nice-font-color);
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nice-component .input-group .input-group-addon svg,

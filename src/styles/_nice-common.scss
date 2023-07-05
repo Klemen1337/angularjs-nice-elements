@@ -145,6 +145,11 @@ label.nice {
       padding: 0 9px;
       color: var(--nice-font-color);
 
+      width: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       svg {
         height: 16px;
         width: 16px;
