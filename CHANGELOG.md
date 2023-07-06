@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.9.1 (6.7.2023)
+
+- fixed nice-input multilangual count refresh,
+- fixed input-group and form-group addons
+
 ## v1.9.0 (6.7.2023)
 
 - added muiltilanguage support for nice-input,

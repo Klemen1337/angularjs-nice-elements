@@ -5687,7 +5687,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.9.0",
+      version: "1.9.1",
       getHeader: function () {
         return {};
       }
