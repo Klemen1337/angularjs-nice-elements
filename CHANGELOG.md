@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.9.0 (6.7.2023)
+
+- added muiltilanguage support for nice-input,
+- added onClear function to nice-input,
+- created nice-multilingual-modal,
+- fixed nice title bug
+
 ## v1.8.8 (28.6.2023)
 
 - added numbersOnly to nice-input component - OLA-650
