@@ -40,6 +40,14 @@ label.nice {
 
   .input-group,
   .form-group {
+    display: flex;
+
+    .input-group-addon,
+    .input-group-btn {
+      width: auto;
+      flex-shrink: 0;
+    }
+
     .form-control {
       z-index: unset;
     }

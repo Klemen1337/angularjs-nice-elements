@@ -15,7 +15,17 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     niceDateInputEnd: moment().add(2, "days").hours(3).minutes(0).seconds(0)
   };
 
-  $scope.multilanguage = {}
+  $scope.multilanguage = {
+
+  }
+
+  $timeout(function () {
+    $scope.multilanguage.i18n = {
+      name: {
+        sl: "Test"
+      }
+    }
+  }, 500)
 
   $scope.fetchEvents = function (search) {
     var params = {

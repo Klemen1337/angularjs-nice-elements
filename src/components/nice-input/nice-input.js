@@ -136,13 +136,19 @@ angular.module('niceElements')
         if ($scope.multilanguageField && !$scope.multilanguage) {
           $scope.multilanguage = {};
         }
-        if ($scope.multilanguage && $scope.multilanguageField) {
-          if (!$scope.multilanguage[$scope.multilanguageField]) {
-            $scope.multilanguage[$scope.multilanguageField] = {}
-          }
-          $scope.numberOfLanguages = Object.keys($scope.multilanguage[$scope.multilanguageField]).length;
+        if ($scope.multilanguage && $scope.multilanguageField && !$scope.multilanguage[$scope.multilanguageField]) {
+          $scope.multilanguage[$scope.multilanguageField] = {};
+          $scope.numberOfLanguages = 0;
         }
 
+        // Watch for multilanguage change
+        $scope.$watch('multilanguage', function () {
+          if ($scope.multilanguage && $scope.multilanguageField) {
+            $scope.numberOfLanguages = Object.keys($scope.multilanguage[$scope.multilanguageField]).length;
+          }
+        });
+
+        // Open multilanguage modal
         $scope.openMultilanguage = function () {
           var scope = $rootScope.$new(true);
           var dialog = ngDialog.open({

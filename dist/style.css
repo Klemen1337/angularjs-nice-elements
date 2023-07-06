@@ -98,6 +98,19 @@ label.nice {
   z-index: 1;
 }
 
+.nice-component .input-group,
+.nice-component .form-group {
+  display: flex;
+}
+
+.nice-component .input-group .input-group-addon,
+.nice-component .input-group .input-group-btn,
+.nice-component .form-group .input-group-addon,
+.nice-component .form-group .input-group-btn {
+  width: auto;
+  flex-shrink: 0;
+}
+
 .nice-component .input-group .form-control,
 .nice-component .form-group .form-control {
   z-index: unset;
@@ -2024,12 +2037,6 @@ p.nice {
 .nice-input .input-group-btn:last-child > .btn-group > .btn,
 .nice-input .input-group-btn:last-child > .dropdown-toggle {
   border-radius: var(--nice-border-radius);
-}
-
-.nice-input .symbol {
-  position: relative;
-  display: table;
-  border-collapse: separate;
 }
 
 .nice-input .symbol .form-control-feedback {
