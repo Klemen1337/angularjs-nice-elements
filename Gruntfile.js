@@ -69,7 +69,7 @@ module.exports = function (grunt) {
             'src/components/**/*.js',
             'src/filters/*.js',
             'src/services/*.js',
-            'src/modals/*.js',
+            'src/modals/**/*.js',
             '.tmp/nice.templates.js'
           ],
           dest: '<%= yeoman.dist %>/nice.js'

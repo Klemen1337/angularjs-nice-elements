@@ -161,6 +161,8 @@ angular.module('niceElements')
             angular.forEach(newFields, function (value, key) {
               if (value != '') filteredFields[key] = value;
             })
+            if (!$scope.multilanguage) $scope.multilanguage = {};
+            if (!$scope.multilanguage[$scope.multilanguageField]) $scope.multilanguage[$scope.multilanguageField] = {};
             $scope.multilanguage[$scope.multilanguageField] = filteredFields;
             $scope.numberOfLanguages = Object.keys($scope.multilanguage[$scope.multilanguageField]).length;
           };

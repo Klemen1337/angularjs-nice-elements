@@ -17,7 +17,8 @@ angular.module('niceElements')
           newLanguage: null
         };
 
-        // $scope.fields = {};
+        if (!$scope.multilanguage) $scope.multilanguage = {};
+        if (!$scope.multilanguage[$scope.multilanguageField]) $scope.multilanguage[$scope.multilanguageField] = {};
         $scope.fields = angular.copy($scope.multilanguage[$scope.multilanguageField]);
 
         $scope.languages = [
