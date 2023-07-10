@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.9.2 (10.7.2023)
+
+- fixed input translations error,
+- fixed nice input type number onchange not beeing called
+
 ## v1.9.1 (6.7.2023)
 
 - fixed nice-input multilangual count refresh,
