@@ -121,6 +121,8 @@ angular.module('niceElements')
               scope.internalModel = value_new.replace(',', '.');
               scope.model = scope.internalModel;
               if (scope.onChange) scope.onChange({ model: scope.model });
+            } else {
+              if (scope.onChange) scope.onChange({ model: scope.model });
             }
           } else {
             scope.model = scope.internalModel;
@@ -143,7 +145,7 @@ angular.module('niceElements')
 
         // Watch for multilanguage change
         $scope.$watch('multilanguage', function () {
-          if ($scope.multilanguage && $scope.multilanguageField) {
+          if ($scope.multilanguage && $scope.multilanguageField && $scope.multilanguage[$scope.multilanguageField]) {
             $scope.numberOfLanguages = Object.keys($scope.multilanguage[$scope.multilanguageField]).length;
           }
         });
