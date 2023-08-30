@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.9.3 (30.8.2023)
+
+- added maxFileSize prop to nice-upload component
+
 ## v1.9.2 (10.7.2023)
 
 - fixed input translations error,
