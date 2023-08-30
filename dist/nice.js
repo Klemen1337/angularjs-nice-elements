@@ -5360,7 +5360,8 @@ angular.module('niceElements')
         callbackUrl: '=',
         isDisabled: '=',
         isInline: '=',
-        help: '@'
+        help: '@',
+        maxFileSize: '@'
       },
 
       link: function (scope, element, attrs) {
@@ -5368,8 +5369,8 @@ angular.module('niceElements')
         if (!attrs.text) { attrs.text = gettextCatalog.getString('Click to upload file', null, 'Nice'); }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
+        if (!attrs.maxFileSize) scope.maxFileSize = 1; // 1MB
         attrs.noMargin = angular.isDefined(attrs.noMargin);
-        var maxImageSize = 1000000; // 1MB
 
         scope.startDragging = function () { $timeout(function () { scope.dragging = true; }); }
         scope.endDragging = function () { $timeout(function () { scope.dragging = false; }); }
@@ -5419,9 +5420,9 @@ angular.module('niceElements')
 
                 reader.onload = function (event) {
                   $timeout(function () {
-                    // file size must be smaller than 1MB.
-                    if (fileSize > maxImageSize) {
-                      scope.error = gettextCatalog.getString("File must be smaller than 1MB", null, "Nice");
+                    // file size must be smaller than XMB.
+                    if (fileSize > (scope.maxFileSize * 1000000)) {
+                      scope.error = gettextCatalog.getString(`File must be smaller than {{size}}MB`, { size: scope.maxFileSize }, "Nice");
                       scope.loading = false;
                       scope.imageSource = null;
                       return;

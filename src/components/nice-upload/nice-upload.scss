@@ -59,16 +59,21 @@
 
       svg {
         opacity: 0.6;
-        margin-bottom: 2px;
+        margin-bottom: 5px;
       }
 
+      .error,
       .text-placeholder {
         font-size: 0.9em;
         opacity: 0.6;
+        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
       }
 
       .error {
         color: $nice-danger-color;
+        opacity: 1;
       }
     }
 
