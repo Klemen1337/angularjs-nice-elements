@@ -9,13 +9,15 @@
                 <input type="text" class="form-control" ng-model="modelDate" ng-blur="dateBlur($event)" ng-disabled="isDisabled">
                 <nice-popup placement="bottom">
                     <nice-popup-target>
-                        <button class="input-group-addon btn btn-default" type="button" tabindex="-1">
-                            <nice-icon icon="icon-calendar"></nice-icon>
-                        </button>
+                        <span class="input-group-btn">
+                            <button class=" btn btn-default btn-right" type="button" tabindex="-1" ng-disabled="isDisabled">
+                                <nice-icon icon="icon-calendar"></nice-icon>
+                            </button>
+                        </span>
                     </nice-popup-target>
 
                     <nice-popup-content>
-                        <nice-date is-inline="true" inline="true" model="inner.dateModel" on-change="dateChanged()" no-margin="true"></nice-date>
+                        <nice-date is-inline="true" inline="true" model="inner.dateModel" on-change="dateChanged()" no-margin="true" is-disabled="isDisabled"></nice-date>
                     </nice-popup-content>
                 </nice-popup>
             </div>
@@ -23,13 +25,15 @@
                 <input type="text" class="form-control" ng-model="modelTime" ng-blur="timeBlur($event)" ng-disabled="isDisabled">
                 <nice-popup placement="bottom">
                     <nice-popup-target>
-                        <button class="input-group-addon btn btn-default" type="button" tabindex="-1">
-                            <nice-icon icon="icon-clock"></nice-icon>
-                        </button>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-right" type="button" tabindex="-1" ng-disabled="isDisabled">
+                                <nice-icon icon="icon-clock"></nice-icon>
+                            </button>
+                        </span>
                     </nice-popup-target>
 
                     <nice-popup-content>
-                        <nice-date is-inline="true" inline="true" model="inner.timeModel" on-change="timeChanged()" time="true" date="false" no-margin="true"></nice-date>
+                        <nice-date is-inline="true" inline="true" model="inner.timeModel" on-change="timeChanged()" time="true" date="false" no-margin="true" is-disabled="isDisabled"></nice-date>
                     </nice-popup-content>
                 </nice-popup>
             </div>

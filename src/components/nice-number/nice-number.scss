@@ -10,31 +10,6 @@
     }
   }
 
-  .input-group-btn {
-    .btn {
-      background: $nice-input-bg;
-      height: 34px;
-      width: 34px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: 0;
-      border: 1px solid $nice-border-color;
-
-      &:focus {
-        outline: 0;
-      }
-
-      &.btn-left {
-        border-right: 0 none;
-      }
-
-      &.btn-right {
-        border-left: 0 none;
-      }
-    }
-  }
-
   .error-messages {
     &.floating-error {
       position: absolute;

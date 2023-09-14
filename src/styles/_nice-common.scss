@@ -48,6 +48,35 @@ label.nice {
       flex-shrink: 0;
     }
 
+    .input-group-btn {
+      .btn {
+        background: $nice-input-bg;
+        height: 34px;
+        width: 34px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 0;
+        border: 1px solid $nice-border-color;
+
+        &:focus {
+          outline: 0;
+        }
+
+        &.btn-left {
+          border-right: 0 none;
+          border-top-left-radius: var(--nice-border-radius);
+          border-bottom-left-radius: var(--nice-border-radius);
+        }
+
+        &.btn-right {
+          border-left: 0 none;
+          border-top-right-radius: var(--nice-border-radius);
+          border-bottom-right-radius: var(--nice-border-radius);
+        }
+      }
+    }
+
     .form-control {
       z-index: unset;
     }
@@ -69,11 +98,15 @@ label.nice {
 
       input {
         outline: 0 none;
-        border-color: var(--nice-border-color) !important;
+        // border-color: var(--nice-border-color) !important;
       }
 
       .input-group-addon {
         border-color: var(--nice-border-color) !important;
+
+        &:focus {
+          outline: 0 none;
+        }
       }
     }
   }
@@ -141,6 +174,7 @@ label.nice {
         background: $nice-input-disabled-bg;
         // border-color: $nice-input-disabled-border;
         opacity: 0.65;
+        cursor: not-allowed;
       }
     }
 
@@ -161,6 +195,12 @@ label.nice {
       svg {
         height: 16px;
         width: 16px;
+      }
+
+      &.btn {
+        &:focus {
+          outline: 0 none;
+        }
       }
     }
 
@@ -372,7 +412,9 @@ p.nice {
 .has-warning {
   outline-color: $nice-input-invalid !important;
 
-  .form-control {
+
+  .form-control,
+  .btn {
     border-color: $nice-input-invalid !important;
   }
 

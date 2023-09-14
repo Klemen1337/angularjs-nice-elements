@@ -35,10 +35,10 @@
                         </div>
                         <div class="nice-dropdown-items" aria-labelledby="nice-dropdown-{{ id }}" role="listbox">
                             <div role="none" class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
-                            <button role="option" class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)">
+                            <button role="option" class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)" ng-disabled="isDisabled">
                                 {{ nullableText }}
                             </button>
-                            <button role="option" class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }">
+                            <button role="option" class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }" ng-disabled="isDisabled">
                                 <div class="choice-checkbox" ng-if="multiple" role="menuitemcheckbox"><i class="fa fa-check"></i></div>
                                 <div class="choice-option" ng-transclude="option" ng-class="{ 'multiple-item': multiple }">{{ item[objValue] }}</div>
                             </button>
@@ -48,7 +48,7 @@
 
 
                 <!------------------------- Add button ------------------------->
-                <button class="btn btn-primary btn-icon add-btn" type="button" ng-if="addButtonFunction && !isDisabled" ng-click="addButtonFunction()">
+                <button class="btn btn-primary btn-icon add-btn" type="button" ng-if="addButtonFunction && !isDisabled" ng-click="addButtonFunction()" ng-disabled="isDisabled">
                     <nice-icon icon="icon-plus"></nice-icon>
                 </button>
             </div>

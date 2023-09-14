@@ -12,9 +12,10 @@
             <!------------------------------ Input ------------------------------>
             <div class="nice-date-button input-group" ng-class="{ 'open': isOpen }" ng-show="!inline" ng-click="toggleOpen()">
                 <input type="text" class="form-control" value="{{ model | niceDate:time }}" readonly="readonly" ng-disabled="isDisabled" />
-                <span class="input-group-addon clickable">
-                    <!-- <i class="fa fa-calendar"></i> -->
-                    <nice-icon icon="icon-calendar"></nice-icon>
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-right" ng-disabled="isDisabled">
+                        <nice-icon icon="icon-calendar"></nice-icon>
+                    </button>
                 </span>
             </div>
 

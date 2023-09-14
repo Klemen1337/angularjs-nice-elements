@@ -10,15 +10,6 @@
         border-right: 0 none;
       }
 
-      .input-group-addon {
-        flex-shrink: 0;
-        width: 34px;
-
-        &:focus {
-          outline: 0 none;
-        }
-      }
-
       .form-control {
         z-index: unset;
         padding-right: 0;
@@ -37,6 +28,10 @@
       &.nice-time-input {
         width: 100px;
         flex-shrink: 0;
+      }
+
+      .nice-popup-target {
+        display: flex;
       }
 
       .nice-popup-content {

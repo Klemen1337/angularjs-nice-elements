@@ -165,6 +165,11 @@ angular.module('niceElements')
           }
         };
 
+        // ------------------------ Button clicked ------------------------
+        $scope.buttonClicked = function () {
+          if (!$scope.loading && $scope.model != '') $scope.clear();
+          if (!$scope.loading && $scope.model == '') $scope.onFocus();
+        }
 
         // ------------------------ If search button is clicked set focus or make request ------------------------
         $scope.search = function () {

@@ -6,13 +6,17 @@
         <!------------------------- Field ------------------------->
         <div class="nice-field col-xs-12" ng-class="[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]">
             <div class="input-group">
-                <button class="btn btn-default btn-left" ng-click="sub()" type="button" ng-disabled="model <= min || isDisabled" tabindex="-1">
-                    <nice-icon icon="icon-minus"></nice-icon>
-                </button>
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-left" ng-click="sub()" type="button" ng-disabled="(model <= min) || isDisabled" tabindex="-1">
+                        <nice-icon icon="icon-minus"></nice-icon>
+                    </button>
+                </span>
                 <input class="value form-control" ng-model="model" type="number" min="{{ min }}" max="{{ max }}" ng-change="handleChange()" ng-disabled="isDisabled" />
-                <button class="btn btn-default btn-right" ng-click="add()" type="button" ng-disabled="model >= max || isDisabled" tabindex="-1">
-                    <nice-icon icon="icon-plus"></nice-icon>
-                </button>
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-right" ng-click="add()" type="button" ng-disabled="(model >= max) || isDisabled" tabindex="-1">
+                        <nice-icon icon="icon-plus"></nice-icon>
+                    </button>
+                </span>
             </div>
         </div>
     </div>

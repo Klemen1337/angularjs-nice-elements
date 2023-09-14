@@ -73,8 +73,8 @@
                 <nice-date title="Nice date no time" min-date="minDate" model="data.niceDate2" is-disabled="data.disabled" help="This is a test This is a test This is a test This is a test This is a test This is a test" is-inline="isInline" required="isRequired"></nice-date>
 
                 <nice-slot is-inline="isInline">
-                    <button class="btn btn-primary" ng-click="changeDate(false)">Prev</button>
-                    <button class="btn btn-primary" ng-click="changeDate(true)">Next</button>
+                    <button class="btn btn-primary" ng-disabled="data.disabled" ng-click="changeDate(false)">Prev</button>
+                    <button class="btn btn-primary" ng-disabled="data.disabled" ng-click="changeDate(true)">Next</button>
                 </nice-slot>
 
                 <div ng-if="showMore">
@@ -83,7 +83,7 @@
                 </div>
 
                 <nice-slot is-inline="isInline">
-                    <button ng-click="toggleShowMore()" class="btn btn-primary">Show more {{ showMore }}</button>
+                    <button ng-click="toggleShowMore()" ng-disabled="data.disabled" class="btn btn-primary">Show more {{ showMore }}</button>
                 </nice-slot>
 
                 <nice-date title="Nice date" time="true" inline="true" model="eeeey" is-disabled="data.disabled" help="<b>Test</b> is a test <a href='https://olaii.com' target='_blank'>Test link</a>" is-inline="isInline" required="isRequired"></nice-date>

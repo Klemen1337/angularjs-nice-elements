@@ -10,9 +10,9 @@
             <div class="nice-daterange-picker-button input-group" ng-class="{ 'open': isOpen }" ng-click="open()">
                 <input type="text" class="form-control" value="{{ modelFormat }}" readonly="readonly" ng-disabled="isDisabled" />
                 <!-- <div class="form-control" title="{{ modelFormat }}">{{ modelFormat }}</div> -->
-                <span class="input-group-addon clickable">
+                <button class="btn input-group-addon" ng-disabled="isDisabled">
                     <nice-icon icon="icon-calendar"></nice-icon>
-                </span>
+                </button>
             </div>
 
             <div class="nice-daterange-picker-wrapper">

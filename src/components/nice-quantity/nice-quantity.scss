@@ -12,15 +12,6 @@
   }
 
   .btn {
-    border: 1px solid $nice-border-color;
-    border-radius: 0;
-    width: 34px;
-    display: flex;
-    background: $nice-input-bg;
-    justify-content: center;
-    align-items: center;
-    line-height: 0;
-
     &:focus {
       outline: 0 none;
     }

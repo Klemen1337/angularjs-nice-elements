@@ -14,9 +14,11 @@
                 <div class="dropdown-toggle" id="dropdown{{randNum}}" role="button" ng-click="openDtpRange()">
                     <div class="input-group">
                         <input type="text" class="form-control" value="{{value}}" ng-disabled="isDisabled" ng-click="openDtpRange()">
-                        <span class="input-group-addon clickable">
-                            <nice-icon ng-if="date != 'false'" icon="icon-calendar"></nice-icon>
-                            <nice-icon ng-if="date == 'false'" icon="icon-clock"></nice-icon>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-right" ng-disabled="isDisabled">
+                                <nice-icon ng-if="date != 'false'" icon="icon-calendar"></nice-icon>
+                                <nice-icon ng-if="date == 'false'" icon="icon-clock"></nice-icon>
+                            </button>
                         </span>
                     </div>
                 </div>

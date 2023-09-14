@@ -213,6 +213,13 @@
       cursor: not-allowed;
       background: $nice-dropdown-disabled-bg !important;
       border-color: var(--nice-border-color);
+
+      &:hover,
+      &:active,
+      &:focus {
+        outline: 0 none;
+        border-color: var(--nice-border-color);
+      }
     }
 
     &:hover {

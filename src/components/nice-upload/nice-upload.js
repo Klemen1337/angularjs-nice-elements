@@ -89,7 +89,7 @@ angular.module('niceElements')
                   $timeout(function () {
                     // file size must be smaller than XMB.
                     if (fileSize > (scope.maxFileSize * 1000000)) {
-                      scope.error = gettextCatalog.getString(`File must be smaller than {{size}}MB`, { size: scope.maxFileSize }, "Nice");
+                      scope.error = gettextCatalog.getString("File must be smaller than {{size}}MB", { size: scope.maxFileSize }, "Nice");
                       scope.loading = false;
                       scope.imageSource = null;
                       return;
