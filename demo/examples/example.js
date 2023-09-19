@@ -79,6 +79,10 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     console.log("Dropdown select:", ...arguments);
   }
 
+  $scope.log = function () {
+    console.log(...arguments)
+  }
+
   $scope.showLoading = false;
   $scope.toggleLoading = function () {
     $scope.showLoading = !$scope.showLoading;

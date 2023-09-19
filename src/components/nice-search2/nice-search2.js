@@ -185,6 +185,7 @@ angular.module('niceElements')
         // ------------------------ Clear search ------------------------
         $scope.clear = function () {
           $scope.model = "";
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
 
 

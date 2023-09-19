@@ -8,7 +8,7 @@
             <div class="nice-search-button input-group" ng-class="{ 'disabled': isDisabled }">
                 <input class="form-control" type="text" id="{{ id }}" ng-model="model" placeholder="{{ placeholder }}" ng-disabled="isDisabled" ng-change="updateSearch()" ng-focus="onFocus()" tabindex="{{ tabIndex }}">
 
-                <button class="btn input-group-addon" ng-disabled="isDisabled" ng-click="buttonClicked">
+                <button class="btn input-group-addon" ng-disabled="isDisabled" ng-click="buttonClicked()">
                     <nice-icon ng-show="!loading && model != ''" icon="icon-x"></nice-icon>
                     <nice-icon ng-show="!loading && model == ''" icon="icon-search"></nice-icon>
                     <nice-loader ng-if="loading"></nice-loader>
