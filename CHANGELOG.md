@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.9.4 (19.9.2023)
+
+- added select all and none button for multiple dropdown select,
+- added onClose and onOpen functions to nice-dropdown,
+- fixed nice-search2 clear button,
+- worked on disabled states
+
 ## v1.9.3 (30.8.2023)
 
 - added maxFileSize prop to nice-upload component
