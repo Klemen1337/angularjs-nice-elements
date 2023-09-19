@@ -2326,6 +2326,8 @@ angular.module('niceElements')
         list: '=', // List of options
         onChange: '&?',
         onSelect: '&?', // Like onChange but always return objects
+        onClose: '&?',
+        onOpen: '&?',
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -2431,6 +2433,7 @@ angular.module('niceElements')
 
         $scope.close = function () {
           $scope.isOpen = false;
+          if ($scope.onClose) $scope.onClose();
         };
 
         $scope.open = function () {
@@ -2438,6 +2441,7 @@ angular.module('niceElements')
           if ($scope.filterFunction) $scope.internalList = $scope.filterFunction($scope.originalList);
           $timeout(function () {
             $scope.isOpen = true;
+            if ($scope.onOpen) $scope.onOpen();
             $timeout(function () {
               $scope.popper.update();
             });
@@ -2584,6 +2588,28 @@ angular.module('niceElements')
 
           $scope.handleSetModel();
         };
+
+
+        // ----------------------------------- Select all -----------------------------------
+        $scope.selectAll = function () {
+          if (!$scope.multiple) return;
+          $scope.selected = $scope.internalList;
+          angular.forEach($scope.internalList, function (o) {
+            o._selected = true;
+          });
+          $scope.handleSetModel();
+        }
+
+
+        // ----------------------------------- Select none -----------------------------------
+        $scope.selectNone = function () {
+          if (!$scope.multiple) return;
+          $scope.selected = [];
+          angular.forEach($scope.internalList, function (o) {
+            o._selected = false;
+          });
+          $scope.handleSetModel();
+        }
 
 
         // ----------------------------------- Handle single slect -----------------------------------
@@ -5027,6 +5053,7 @@ angular.module('niceElements')
         // ------------------------ Clear search ------------------------
         $scope.clear = function () {
           $scope.model = "";
+          if ($scope.onChange) $scope.onChange({ model: $scope.model });
         };
 
 
@@ -6244,6 +6271,10 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<nice-icon ng-if=\"!internal.search\" class=\"icon\" icon=\"icon-search\"></nice-icon>\n" +
     "<nice-icon ng-if=\"internal.search\" class=\"icon\" icon=\"icon-x\" ng-click=\"clearSearch()\"></nice-icon>\n" +
     "</div>\n" +
+    "<div class=\"nice-dropdown-actions\" ng-if=\"multiple\">\n" +
+    "<button class=\"btn btn-default btn-sm\" ng-click=\"selectAll()\" translate translate-context=\"Nice\">All</button>\n" +
+    "<button class=\"btn btn-default btn-sm\" ng-click=\"selectNone()\" translate translate-context=\"Nice\">None</button>\n" +
+    "</div>\n" +
     "<div class=\"nice-dropdown-items\" aria-labelledby=\"nice-dropdown-{{ id }}\" role=\"listbox\">\n" +
     "<div role=\"none\" class=\"nice-no-data\" ng-if=\"internalList && internalList.length == 0\">{{ noDataText }}</div>\n" +
     "<button role=\"option\" class=\"nice-dropdown-item null-item\" ng-if=\"nullable && internalList.length != 0\" ng-click=\"handleSelected(null, -1)\" ng-disabled=\"isDisabled\">\n" +
@@ -6609,7 +6640,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<div class=\"nice-field col-xs-12\" ng-class=\"[fieldWidth ? fieldWidth : 'col-sm-8', { 'nice-disabled': isDisabled }]\" click-outside=\"close()\">\n" +
     "<div class=\"nice-search-button input-group\" ng-class=\"{ 'disabled': isDisabled }\">\n" +
     "<input class=\"form-control\" type=\"text\" id=\"{{ id }}\" ng-model=\"model\" placeholder=\"{{ placeholder }}\" ng-disabled=\"isDisabled\" ng-change=\"updateSearch()\" ng-focus=\"onFocus()\" tabindex=\"{{ tabIndex }}\">\n" +
-    "<button class=\"btn input-group-addon\" ng-disabled=\"isDisabled\" ng-click=\"buttonClicked\">\n" +
+    "<button class=\"btn input-group-addon\" ng-disabled=\"isDisabled\" ng-click=\"buttonClicked()\">\n" +
     "<nice-icon ng-show=\"!loading && model != ''\" icon=\"icon-x\"></nice-icon>\n" +
     "<nice-icon ng-show=\"!loading && model == ''\" icon=\"icon-search\"></nice-icon>\n" +
     "<nice-loader ng-if=\"loading\"></nice-loader>\n" +

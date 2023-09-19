@@ -21,6 +21,8 @@ angular.module('niceElements')
         list: '=', // List of options
         onChange: '&?',
         onSelect: '&?', // Like onChange but always return objects
+        onClose: '&?',
+        onOpen: '&?',
         isDisabled: '=',
         fieldWidth: '@',
         labelWidth: '@',
@@ -126,6 +128,7 @@ angular.module('niceElements')
 
         $scope.close = function () {
           $scope.isOpen = false;
+          if ($scope.onClose) $scope.onClose();
         };
 
         $scope.open = function () {
@@ -133,6 +136,7 @@ angular.module('niceElements')
           if ($scope.filterFunction) $scope.internalList = $scope.filterFunction($scope.originalList);
           $timeout(function () {
             $scope.isOpen = true;
+            if ($scope.onOpen) $scope.onOpen();
             $timeout(function () {
               $scope.popper.update();
             });
@@ -279,6 +283,28 @@ angular.module('niceElements')
 
           $scope.handleSetModel();
         };
+
+
+        // ----------------------------------- Select all -----------------------------------
+        $scope.selectAll = function () {
+          if (!$scope.multiple) return;
+          $scope.selected = $scope.internalList;
+          angular.forEach($scope.internalList, function (o) {
+            o._selected = true;
+          });
+          $scope.handleSetModel();
+        }
+
+
+        // ----------------------------------- Select none -----------------------------------
+        $scope.selectNone = function () {
+          if (!$scope.multiple) return;
+          $scope.selected = [];
+          angular.forEach($scope.internalList, function (o) {
+            o._selected = false;
+          });
+          $scope.handleSetModel();
+        }
 
 
         // ----------------------------------- Handle single slect -----------------------------------

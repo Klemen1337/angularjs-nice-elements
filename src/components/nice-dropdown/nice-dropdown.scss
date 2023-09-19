@@ -103,6 +103,17 @@
       color: #ccc;
     }
 
+    .nice-dropdown-actions {
+      padding: 5px;
+      border-bottom: 1px solid var(--nice-border-color);
+
+      .btn-sm {
+        min-height: auto !important;
+        padding: 2px 4px;
+        line-height: 1;
+      }
+    }
+
     .nice-dropdown-items {
       overflow-y: auto;
       overflow-x: hidden;

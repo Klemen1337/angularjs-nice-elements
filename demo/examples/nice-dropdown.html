@@ -25,7 +25,7 @@
                         margin: 0;
                     }
                 </style>
-                <nice-dropdown title="Event" model="dropdown6" search-function="fetchEvents" enable-load-more="true" nullable="true">
+                <nice-dropdown title="Event" model="dropdown6" search-function="fetchEvents" enable-load-more="true" nullable="true" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)">
                     <nice-dropdown-button>
                         <div class="dropdown-event">
                             <img ng-src="{{ $parent.selected.thumbnail_photo }}" />
@@ -82,7 +82,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Filtered events (only NORMAL type)" model="dropdown7" search-function="fetchEvents" filter-function="filterEvents" enable-load-more="true" nullable="true">
+                <nice-dropdown title="Filtered events (only NORMAL type)" model="dropdown7" search-function="fetchEvents" filter-function="filterEvents" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)" enable-load-more="true" nullable="true">
                     <nice-dropdown-button>
                         <div class="dropdown-event">
                             <img ng-src="{{ $parent.selected.thumbnail_photo }}" />
@@ -162,7 +162,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" multiple="true"></nice-dropdown>
+                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)" multiple="true"></nice-dropdown>
                 <nice-slot>
                     <pre>{{ dropdown | json }}</pre>
                 </nice-slot>

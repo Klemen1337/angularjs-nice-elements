@@ -33,6 +33,10 @@
                             <nice-icon ng-if="!internal.search" class="icon" icon="icon-search"></nice-icon>
                             <nice-icon ng-if="internal.search" class="icon" icon="icon-x" ng-click="clearSearch()"></nice-icon>
                         </div>
+                        <div class="nice-dropdown-actions" ng-if="multiple">
+                            <button class="btn btn-default btn-sm" ng-click="selectAll()" translate translate-context="Nice">All</button>
+                            <button class="btn btn-default btn-sm" ng-click="selectNone()" translate translate-context="Nice">None</button>
+                        </div>
                         <div class="nice-dropdown-items" aria-labelledby="nice-dropdown-{{ id }}" role="listbox">
                             <div role="none" class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
                             <button role="option" class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)" ng-disabled="isDisabled">
