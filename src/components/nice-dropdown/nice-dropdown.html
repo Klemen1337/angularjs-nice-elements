@@ -35,11 +35,11 @@
                         </div>
                         <div class="nice-dropdown-actions" ng-if="multiple">
                             <button class="btn btn-default btn-sm" ng-click="selectAll()" translate translate-context="Nice">All</button>
-                            <button class="btn btn-default btn-sm" ng-click="selectNone()" translate translate-context="Nice">None</button>
+                            <button class="btn btn-default btn-sm" ng-click="selectNone()">{{ nullableText }}</button>
                         </div>
                         <div class="nice-dropdown-items" aria-labelledby="nice-dropdown-{{ id }}" role="listbox">
                             <div role="none" class="nice-no-data" ng-if="internalList && internalList.length == 0">{{ noDataText }}</div>
-                            <button role="option" class="nice-dropdown-item null-item" ng-if="nullable && internalList.length != 0" ng-click="handleSelected(null, -1)" ng-disabled="isDisabled">
+                            <button role="option" class="nice-dropdown-item null-item" ng-if="!multiple && nullable && internalList.length != 0" ng-click="handleSelected(null, -1)" ng-disabled="isDisabled">
                                 {{ nullableText }}
                             </button>
                             <button role="option" class="nice-dropdown-item" ng-repeat="item in internalList" ng-click="handleSelected(item, $index)" ng-class="{ 'selected': item._selected }" ng-disabled="isDisabled">

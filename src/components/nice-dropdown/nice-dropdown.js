@@ -321,19 +321,21 @@ angular.module('niceElements')
 
           if ($scope.selected != null) {
             // Remove selected flag
-            if ($scope.multiple) {
-              angular.forEach(obj, function (o) {
-                o._selected = undefined;
-              });
-            } else {
-              obj._selected = undefined;
+            if (!$scope.selectedIsKey) {
+              if ($scope.multiple) {
+                angular.forEach(obj, function (o) {
+                  o._selected = undefined;
+                });
+              } else {
+                obj._selected = undefined;
+              }
             }
 
             // Selected is object
             if ($scope.selectedIsKey) {
               if ($scope.multiple) {
-                angular.forEach(obj, function (o) {
-                  o = o[$scope.objKey];
+                obj = obj.map(function (o) {
+                  return o[$scope.objKey];
                 });
               } else {
                 obj = obj[$scope.objKey];
@@ -386,10 +388,11 @@ angular.module('niceElements')
               // Not object
               if ($scope.multiple) {
                 // Multiple
-                angular.forEach($scope.selected, function (s) {
+                angular.forEach($scope.selected, function (s, index) {
                   if (i[$scope.objKey] == s) {
                     i._selected = true;
                     // $scope.selected.push(i);
+                    $scope.selected[index] = i
                     // $scope.selectedIndex = index;
                   }
                 });
