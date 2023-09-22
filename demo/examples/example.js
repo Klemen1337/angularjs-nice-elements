@@ -6,6 +6,12 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
   $scope.dropdownLoading = true;
   $scope.isInline = false;
   $scope.iconSize = 50;
+  $scope.dropdownMultipleKeyOnly2 = [
+    496,
+    815
+  ]
+  $scope.dropdownMultipleKeyOnly = ['AF', 'SI']
+  $scope.dropdownKeyOnly = "SI";
   $scope.toggleInline = function () { $scope.isInline = !$scope.isInline }
   $scope.filters = {
     search: ""

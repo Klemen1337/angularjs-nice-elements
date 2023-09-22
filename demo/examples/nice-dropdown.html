@@ -25,6 +25,22 @@
                         margin: 0;
                     }
                 </style>
+
+                <nice-dropdown title="Event multiple selectediskey2" model="dropdownMultipleKeyOnly2" search-function="fetchEvents" obj-value="name" obj-key="id" enable-load-more="true" multiple="true" selected-is-key="true" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)"></nice-dropdown>
+                <nice-slot>
+                    <pre>{{ dropdownMultipleKeyOnly2 | json }}</pre>
+                </nice-slot>
+
+                <nice-dropdown title="Event multiple selectediskey" model="dropdownMultipleKeyOnly" list="countries" obj-value="name" obj-key="iso" enable-load-more="true" multiple="true" selected-is-key="true" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)"></nice-dropdown>
+                <nice-slot>
+                    <pre>{{ dropdownMultipleKeyOnly | json }}</pre>
+                </nice-slot>
+
+                <nice-dropdown title="Event selectediskey" model="dropdownKeyOnly" list="countries" obj-value="name" obj-key="iso" enable-load-more="true" selected-is-key="true" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)"></nice-dropdown>
+                <nice-slot>
+                    <pre>{{ dropdownKeyOnly | json }}</pre>
+                </nice-slot>
+
                 <nice-dropdown title="Event" model="dropdown6" search-function="fetchEvents" enable-load-more="true" nullable="true" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)">
                     <nice-dropdown-button>
                         <div class="dropdown-event">
@@ -162,7 +178,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" on-close="log('on-close')" on-open="log('on-open')" on-change="log('on-change', model)" multiple="true"></nice-dropdown>
+                <nice-dropdown title="Multi dropdown" model="dropdown" list="listObjs" dropdown-distance="0" on-close="log('on-close')" nullable="false" on-open="log('on-open')" on-change="log('on-change', model)" multiple="true"></nice-dropdown>
                 <nice-slot>
                     <pre>{{ dropdown | json }}</pre>
                 </nice-slot>
