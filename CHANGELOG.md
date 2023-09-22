@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.9.5 (22.9.2023)
+
+- fixed multiple select key only in nice dropdown
+
 ## v1.9.4 (19.9.2023)
 
 - added select all and none button for multiple dropdown select,
