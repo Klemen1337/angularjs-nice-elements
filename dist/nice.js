@@ -18,7 +18,7 @@ angular.module('niceElements')
         label: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (angular.isDefined(scope.model)){
+        if (angular.isDefined(scope.model)) {
           scope.model = false;
         }
       }
@@ -655,14 +655,14 @@ angular.module('niceElements')
  * # clickOutside
  */
 angular.module('niceElements')
-  .directive('clickOutside', function($document, $parse, $timeout){
+  .directive('clickOutside', function ($document, $parse, $timeout) {
     return {
       restrict: 'A',
       link: function ($scope, elem, attr) {
         $scope.isOpen = false;
 
         // watch for is open
-        attr.$observe('isOpen', function(value){
+        attr.$observe('isOpen', function (value) {
           $scope.isOpen = value == 'true';
         });
 
@@ -717,7 +717,7 @@ angular.module('niceElements')
               // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
               $timeout(function () {
                 fn = $parse(attr['clickOutside']);
-                fn($scope, {event: e});
+                fn($scope, { event: e });
               });
             }
           }
@@ -751,7 +751,7 @@ angular.module('niceElements')
         });
       }
     };
-});
+  });
 'use strict';
 
 /**
@@ -942,7 +942,7 @@ angular.module('niceElements')
  */
 angular.module('niceElements')
 
-  .directive('niceDateRange', function() {
+  .directive('niceDateRange', function () {
     return {
       restrict: 'E',
       transclude: true,
@@ -962,16 +962,16 @@ angular.module('niceElements')
         onChange: '&?'
       },
 
-      link: function(scope, attrs){
+      link: function (scope, attrs) {
         if (!attrs.title) { attrs.title = ''; }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
 
-        if(!angular.isDefined(scope.model)) {
+        if (!angular.isDefined(scope.model)) {
           var model = null;
-          if(!angular.isDefined(scope.startOfTheYear)){
+          if (!angular.isDefined(scope.startOfTheYear)) {
             model = {
               startDate: moment().format(),
               endDate: moment().format()
@@ -987,7 +987,7 @@ angular.module('niceElements')
         }
       },
 
-      controller: function($scope) {
+      controller: function ($scope) {
         $scope.opts = {
           locale: {
             applyClass: 'btn-green',
@@ -1003,7 +1003,7 @@ angular.module('niceElements')
         $scope.opts.ranges[gettextCatalog.getString("Last 30 days", null, "Nice")] = [moment().subtract(30, 'days'), moment()];
         $scope.opts.ranges[gettextCatalog.getString("This month", null, "Nice")] = [moment().startOf('month'), moment().endOf('month')];
 
-        if(angular.isDefined($scope.format)) $scope.opts.format = format;
+        if (angular.isDefined($scope.format)) $scope.opts.format = format;
       }
 
     };
@@ -3998,42 +3998,42 @@ angular.module('niceElements')
 
     var messageElements = [];
 
-    var notify = function(args, t){
+    var notify = function (args, t) {
 
-      if (typeof args !== 'object'){
-        args = {message:args};
+      if (typeof args !== 'object') {
+        args = { message: args };
       }
 
       args.template = args.template ? args.template : 'src/components/nice-notification/nice-notification.html';
       args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
       args.type = t ? t : '';
 
-      $http.get(args.template,{cache: $templateCache}).success(function(template) {
+      $http.get(args.template, { cache: $templateCache }).success(function (template) {
 
         var scope = $rootScope.$new();
         scope.message = $sce.trustAsHtml(args.message);
         scope.title = $sce.trustAsHtml(args.title);
-        scope.t = args.type.substr(0,1);
+        scope.t = args.type.substr(0, 1);
         scope.delay = args.delay;
 
-        if (typeof args.scope === 'object'){
-          for (var key in args.scope){
+        if (typeof args.scope === 'object') {
+          for (var key in args.scope) {
             scope[key] = args.scope[key];
           }
         }
 
-        var reposite = function() {
+        var reposite = function () {
           var j = 0;
           var k = 0;
           var lastTop = startTop;
           var lastRight = startRight;
-          for(var i = messageElements.length - 1; i >= 0; i --) {
+          for (var i = messageElements.length - 1; i >= 0; i--) {
             var element = messageElements[i];
             var elHeight = parseInt(element[0].offsetHeight);
             var elWidth = parseInt(element[0].offsetWidth);
             if ((top + elHeight) > window.innerHeight) {
               lastTop = startTop;
-              k ++;
+              k++;
               j = 0;
             }
             var top = lastTop + (j === 0 ? 0 : verticalSpacing);
@@ -4043,22 +4043,22 @@ angular.module('niceElements')
             element.css('right', right + 'px');
 
             lastTop = top + elHeight;
-            j ++;
+            j++;
           }
         };
 
         var templateElement = $compile(template)(scope);
         templateElement.addClass(args.type);
-        templateElement.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd click', function(e){
+        templateElement.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd click', function (e) {
           e = e.originalEvent || e;
-          if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 0.4)){
+          if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 0.4)) {
             templateElement.remove();
             messageElements.splice(messageElements.indexOf(templateElement), 1);
             reposite();
           }
         });
 
-        $timeout(function() {
+        $timeout(function () {
           templateElement.addClass('killed');
           templateElement.remove();
           messageElements.splice(messageElements.indexOf(templateElement), 1);
@@ -4070,34 +4070,34 @@ angular.module('niceElements')
 
         $timeout(reposite);
 
-      }).error(function(data){
-        throw new Error('Template ('+args.template+') could not be loaded. ' + data);
+      }).error(function (data) {
+        throw new Error('Template (' + args.template + ') could not be loaded. ' + data);
       });
 
     };
 
-    notify.config = function(args){
-		  startTop = args.top ? args.top : startTop;
-		  verticalSpacing = args.verticalSpacing ? args.verticalSpacing : verticalSpacing;
+    notify.config = function (args) {
+      startTop = args.top ? args.top : startTop;
+      verticalSpacing = args.verticalSpacing ? args.verticalSpacing : verticalSpacing;
     };
 
-    notify.primary = function() {
+    notify.primary = function () {
       this(args, '');
     };
 
-    notify.error = function(args) {
+    notify.error = function (args) {
       this(args, 'error');
     };
 
-    notify.success = function(args) {
+    notify.success = function (args) {
       this(args, 'success');
     };
 
-    notify.info = function(args) {
+    notify.info = function (args) {
       this(args, 'info');
     };
 
-    notify.warning = function(args) {
+    notify.warning = function (args) {
       this(args, 'warning');
     };
 
@@ -4528,7 +4528,7 @@ angular.module('niceElements')
  * # niceProgressBar
  */
 angular.module('niceElements')
-  .directive('niceProgressBar', function() {
+  .directive('niceProgressBar', function () {
     return {
       restrict: 'E',
       replace: true,
@@ -4543,29 +4543,29 @@ angular.module('niceElements')
         help: '@'
       },
 
-      controller: function($scope, $element, $timeout) {
+      controller: function ($scope, $element, $timeout) {
         $scope.width = 0;
-        $scope.resize = function(){
-          $timeout(function() {
+        $scope.resize = function () {
+          $timeout(function () {
             $scope.width = $element[0].getElementsByClassName("progress")[0].offsetWidth;
-          },100);
+          }, 100);
         };
-        window.onresize = function() {
+        window.onresize = function () {
           $scope.resize();
         };
         $scope.resize();
 
-        
 
-        $scope.$watch("value", function(valueNew, valueOld){
+
+        $scope.$watch("value", function (valueNew, valueOld) {
           $scope.calculate();
         });
 
-        $scope.$watch("max", function(valueNew, valueOld){
+        $scope.$watch("max", function (valueNew, valueOld) {
           $scope.calculate();
         });
 
-        $scope.calculate = function(){
+        $scope.calculate = function () {
           $scope.percentage = ($scope.value / $scope.max) * 100;
         };
 
@@ -5600,24 +5600,24 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function($scope, gettextCatalog) {
+      controller: function ($scope, gettextCatalog) {
         if (!$scope.yes) { $scope.yes = gettextCatalog.getString('Yes', null, "Nice"); }
         if (!$scope.no) { $scope.no = gettextCatalog.getString('No', null, "Nice"); }
         if (!$scope.title) { $scope.title = ''; }
         if (!$scope.fieldWidth) { $scope.fieldWidth = 'col-sm-8'; }
         if (!$scope.labelWidth) { $scope.labelWidth = 'col-sm-4'; }
-        if(!angular.isDefined($scope.model) && !angular.isDefined($scope.options)) $scope.model = !angular.isDefined($scope.defaultFalse);
-        if(!angular.isDefined($scope.modelValue) && angular.isDefined($scope.options)) $scope.modelValue = $scope.options[0];
+        if (!angular.isDefined($scope.model) && !angular.isDefined($scope.options)) $scope.model = !angular.isDefined($scope.defaultFalse);
+        if (!angular.isDefined($scope.modelValue) && angular.isDefined($scope.options)) $scope.modelValue = $scope.options[0];
 
         $scope.defaultFalse = angular.isDefined($scope.defaultFalse);
         $scope.noMargin = angular.isDefined($scope.noMargin);
 
         $scope.buttonClass = "";
-        
+
 
         // ------------------------- Set overlay button position based on passed state in $scope.model -------------------------
-        $scope.setButtonPosition = function(state) {
-          if(state) {
+        $scope.setButtonPosition = function (state) {
+          if (state) {
             $scope.buttonClass = "yesno-button-yes";
           } else {
             $scope.buttonClass = "yesno-button-no";
@@ -5625,48 +5625,48 @@ angular.module('niceElements')
         };
 
         // ------------------------- Watch for changes from outside -------------------------
-        $scope.$watch('model', function(value_new, value_old){
-          if(angular.isDefined($scope.model)){
+        $scope.$watch('model', function (value_new, value_old) {
+          if (angular.isDefined($scope.model)) {
             $scope.setButtonLabel($scope.model);
             $scope.setButtonPosition($scope.model);
           }
         });
 
         // ------------------------- Watch for model value -------------------------
-        $scope.$watch('modelValue', function(value_new, value_old){
-          if($scope.options){
+        $scope.$watch('modelValue', function (value_new, value_old) {
+          if ($scope.options) {
             $scope.model = $scope.modelValue == $scope.options[0];
           }
         });
 
         // ------------------------- Set button label -------------------------
-        $scope.setButtonLabel = function(state){
+        $scope.setButtonLabel = function (state) {
           if (state) {
             $scope.state = $scope.yes;
           } else {
             $scope.state = $scope.no;
           }
         };
-        
+
         // ------------------------- Set width -------------------------
-        $scope.setWidth = function(width, el){
+        $scope.setWidth = function (width, el) {
           el.style.width = width;
         };
-  
+
 
         // ------------------------- Switch -------------------------
-        $scope.switch = function(){
-          if(!$scope.isDisabled){
+        $scope.switch = function () {
+          if (!$scope.isDisabled) {
             $scope.model = !$scope.model;
-            
-            if($scope.options){
-              if($scope.model){
+
+            if ($scope.options) {
+              if ($scope.model) {
                 $scope.modelValue = $scope.options[0];
               } else {
                 $scope.modelValue = $scope.options[1];
               }
             }
-            
+
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.formYesno.$setDirty();
           }
@@ -5728,7 +5728,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.9.6",
+      version: "1.9.7",
       getHeader: function () {
         return {};
       }
@@ -5804,7 +5804,7 @@ angular.module('niceElements')
     };
   });
 
-angular.module('niceElements').run(['$templateCache', function($templateCache) {
+angular.module('niceElements').run(['$templateCache', function ($templateCache) {
   'use strict';
 
   $templateCache.put('src/components/nice-button-toggle/nice-button-toggle.html',
@@ -7625,12 +7625,12 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "<path d=\"m364 102.4-1.8-1.4c.4 0 .7 0 1-.2.1-.1.3-.4.3-.8l1.1 1 .6.5v.4a.5.5 0 0 1 0 .2.6.6 0 0 1-.4.2h-.7z\"/>\n" +
     "<path d=\"M366.2 103.8a11.8 11.8 0 0 1-2-1.3h.7a.8.8 0 0 0 .4-.2l.1-.4a1 1 0 0 0 0-.2 10.5 10.5 0 0 0 2.1 1.4c0 .3 0 .4-.3.5a3 3 0 0 1-1 .1z\"/>\n" +
     "<path d=\"M368.4 104.7a11.9 11.9 0 0 1-2-.8c.4 0 .7 0 1-.2.2 0 .3-.2.3-.5a10.8 10.8 0 0 0 1.3.6v.4l-.5.4s-.1 0 0 0z\"/>\n" +
-    "<path d=\"M373.2 104.2s.4-.1.2 0c-1.4 1-3.1 1-4.8.5.3-.1.5-.2.6-.4a.6.6 0 0 0 0-.5l1.7.4a.4.4 0 0 1-.1.3l-.5.3s-.1 0 0 .1c0 .1 0 0 0 0 .3 0 .5-.2.6-.3a.6.6 0 0 0 .2-.4 9 9 0 0 0 2 0zm-9.7 24-.2.4-1.2.3c0 .3 0 .4.3.4l.7-.3c.1 0 0 .5-.5.8v.1c.4.6 1.4.4 1.9.3a3 3 0 0 0 1.3-1l-.3-.6c-.4.1-.6 0-.5-.2a3.9 3.9 0 0 0-1.5-.2zm-15.1-4.8c-.3.3-.7.5-1 .6-.2 0-.6.1-.6.3 0 .1.2.3.4.2.4-.5.7-.2.2.2v.3c.5.4 1.6.5 2.2.2.3-.2.6-.5.2-.9a1.7 1.7 0 0 1 0-.2h-.6l-.4-.3-.4-.4zm10 3.5h-.1c-.2.2.3.2.6.3.2.1.2.3.2.5-.3.7-1.9.6-2.4.2-.2-.1-.2-.3-.2-.5h.3c.2 0 .4 0 .6-.2v-.2h-.2a1.3 1.3 0 0 1-.4.2 2.6 2.6 0 0 1-.5 0l-.2-.2h.2l.7-.2.1-.1c.5 0 1 0 1.3.2zm-7.2-.4-.2.3a2.7 2.7 0 0 1-.9.6c-.2.1 0 .2.2.4.2.1.5-.2.6-.4.2-.3.3-.2.2 0l-.2.7.7.3c.4 0 1-.4 1.2-.6.3-.2.2-.5.1-.8a2 2 0 0 1-.5 0 3.4 3.4 0 0 1-.5-.3l-.7-.2zm2.8-26.4h.3l.6.1a4.5 4.5 0 0 1 1.7-.3 5.7 5.7 0 0 1 1.7-.2v-.2c.3-.3.4-.6.3-.9-.1-.2-.4-.5-.8-.7h-1.3a4 4 0 0 0-.8.1l.6.4.4 1c-.2.1-.2 0-.2 0 0-.4-.2-.6-.3-.9l-.8-.4a9 9 0 0 0-1.3.2c-.3 0-.5.2-.7.3l.8.1c.3.1.5.4.6.8-.1.1-.1 0-.1 0a1 1 0 0 0-.5-.6c-.4-.2-1.3 0-1.7.2a4.2 4.2 0 0 0-.6.6l2 .4zm-2.3-.4v-.1l.7-.6.7-.4a2 2 0 0 1 1-.5l1.3-.2a1 1 0 0 0-.5-.5l-.8-.1-1.5.8h.5l.1.2h-.4a1.4 1.4 0 0 0-.4 0h-.1l-1.3 1c.3.1.6.2.7.4z\"/>\n" +
+    "<path d=\"M373.2 104.2s.4-.1.2 0c-1.4 1-3.1 1-4.8.5.3-.1.5-.2.6-.4a.6.6 0 0 0 0-.5l1.7.4a.4.4 0 0 1-.1.3l-.5.3s-.1 0 0 .1c0 .1 0 0 0 0 .3 0 .5-.2.6-.3a.6.6 0 0 0 .2-.4 9 9 0 0 0 2 0zm-9.7 24-.2.4-1.2.3c0 .3 0 .4.3.4l.7-.3c.1 0 0 .5-.5.8v.1c.4.6 1.4.4 1.9.3a3 3 0 0 0 1.3-1l-.3-.6c-.4.1-.6 0-.5-.2a3.9 3.9 0 0 0-1.5-.2zm-15.1-4.8c-.3.3-.7.5-1 .6-.2 0-.6.1-.6.3 0 .1.2.3.4.2.4-.5.7-.2.2.2v.3c.5.4 1.6.5 2.2.2.3-.2.6-.5.2-.9a1.7 1.7 0 0 1 0-.2h-.6l-.4-.3-.4-.4zm10 3.5h-.1c-.2.2.3.2.6.3.2.1.2.3.2.5-.3.7-1.9.7-2.4.2-.2-.1-.2-.3-.2-.5h.3c.2 0 .4 0 .6-.2v-.2h-.2a1.3 1.3 0 0 1-.4.2 2.6 2.6 0 0 1-.5 0l-.2-.2h.2l.7-.2.1-.1c.5 0 1 0 1.3.2zm-7.2-.4-.2.3a2.7 2.7 0 0 1-.9.6c-.2.1 0 .2.2.4.2.1.5-.2.6-.4.2-.3.3-.2.2 0l-.2.7.7.3c.4 0 1-.4 1.2-.6.3-.2.2-.5.1-.8a2 2 0 0 1-.5 0 3.4 3.4 0 0 1-.5-.3l-.7-.2zm2.8-26.4h.3l.6.1a4.5 4.5 0 0 1 1.7-.3 5.7 5.7 0 0 1 1.7-.2v-.2c.3-.3.4-.6.3-.9-.1-.2-.4-.5-.8-.7h-1.3a4 4 0 0 0-.8.1l.6.4.4 1c-.2.1-.2 0-.2 0 0-.4-.2-.6-.3-.9l-.8-.4a9 9 0 0 0-1.3.2c-.3 0-.5.2-.7.3l.8.1c.3.1.5.4.6.8-.1.1-.1 0-.1 0a1 1 0 0 0-.5-.6c-.4-.2-1.3 0-1.7.2a4.2 4.2 0 0 0-.6.6l2 .4zm-2.3-.4v-.1l.7-.6.7-.4a2 2 0 0 1 1-.5l1.3-.2a1 1 0 0 0-.5-.5l-.8-.1-1.5.8h.5l.1.2h-.4a1.4 1.4 0 0 0-.4 0h-.1l-1.3 1c.3.1.6.2.7.4z\"/>\n" +
     "</g>\n" +
     "<path fill=\"#0093dd\" d=\"m409 156.5 20.8-47-15.3-24.7-27.3 10-12.7 49.8a219.4 219.4 0 0 1 34.5 11.9z\"/>\n" +
     "<path fill=\"#fff\" d=\"M382.6 113a251.7 251.7 0 0 1 39.6 13.7l-8 18.2a232 232 0 0 0-36.5-12.7z\"/>\n" +
     "<path fill=\"red\" d=\"m415.4 142 5.4-12.2a248.6 248.6 0 0 0-39-13.5l-3.2 12.4a235.9 235.9 0 0 1 37 12.8l-.1.4z\"/>\n" +
-    "<path d=\"M385.6 125.8c.3-.3.7-.2 1.1-.1.3-.2.7-.2 1-.2l.6-.2c.2 0 .2-.2 0-.3a.6.6 0 0 1 0-.3c-.7-.4-1-1-1.2-1.5-.3 0-.5-.2-.5-.3h-.5c-.8 0-1-.3-1.3-.5a1 1 0 0 1-.6-.4l-.3-.3c-.2-.3-.1-.7.2-.7h.7a2 2 0 0 1 .9-.1c.3 0 .5-.3.9-.6v-.4s0-.2.2-.1a1 1 0 0 1 .8.5c.5 0 1 .3 1.2.7.7 0 1.1.3 1.2.5 0 .2-.2.4-.5.6v.2l.4.4 1 .7c1-.1 2.6.6 4.8 2a18.6 18.6 0 0 1 4.1 1.2h.9c2.4-.4 4.7 0 6.8 1.5.8.1 1.5.4 2.2.7.5.2 1 .3 1.6.3a8 8 0 0 1 2.6.7c1 .2 1.9.6 2.4 1.2.4.5.3 1-.2 1.2-.3.6-.9.6-1.8.3-.6.1-1.3-.4-2-.9-.8-.2-1.6-.8-2.4-1.3l-1.3-.6h-.8v.2c.2.2.4.4.4.8v1c0 .4.3.6.7.9l1 .4c.2 0 .3.1.3.3l.4 1.7.4.3c.6.5.2 1-.3 1a3.1 3.1 0 0 1-1.3.8c-.4.2-.6 0-.7-.2a.5.5 0 0 1-.4-.2c-.5-.4-.1-1 1-.7l.2-.2a1.5 1.5 0 0 1 0-.9l-.3-.2a2.8 2.8 0 0 1-1-.6c-.6-.5-1.5-1-2.4-1.4-.7 0-1.2-.4-1.8-.7h-.8c-.2 0-.4 0-.5.2-.2.3-.5.2-.8.2h-1.6c-.4 0-.7 0-1 .3-.2.2-.4.2-.7 0a1 1 0 0 1-.3-.2c-.3 0-.5 0-.5-.2-.5-.1-.6-.2-.6-.4-.6-.1-.3-.6 0-.6l1.4.1c.4.1 1 0 1.2-.2l.5-.5a4 4 0 0 1-1.8-.5c-1.1-.7-2-.9-2.8-.3-.2.2-.3.2-.6.1a1 1 0 0 0-.5 0c-.5.1-.9 0-1.3-.1a4 4 0 0 1-1.8 0c-.6.3-1 .4-1.2.2a8.6 8.6 0 0 1-.6-.4c-.4-.1-.5-.2-.5-.3-.4 0-.5-.2-.5-.4-.2-.2 0-.3 0-.4.4-.2.7-.2 1 0 .3 0 .5.2.6.3h.6c.1-.2.5-.2 1-.2l.7-.2v-.2c-.4 0-.6-.4-.9-.7a3 3 0 0 1-1.5-.5c-.4 0-.7-.1-1-.3h-.7a2.5 2.5 0 0 1-1.4 0h-.8a1 1 0 0 1-1 .2 1.5 1.5 0 0 0-.8-.5c-.3-.1-.4-.2-.4-.4-.4-.2-.3-.4 0-.5.3-.1.5-.2 1 0l.5.2z\"/>\n" +
+    "<path d=\"M385.6 125.8c.3-.3.7-.2 1.1-.1.3-.2.7-.2 1-.2l.6-.2c.2 0 .2-.2 0-.3a.6.6 0 0 1 0-.3c-.7-.4-1-1-1.2-1.5-.3 0-.5-.2-.5-.3h-.5c-.8 0-1-.3-1.3-.5a1 1 0 0 1-.6-.4l-.3-.3c-.2-.3-.1-.7.2-.7h.7a2 2 0 0 1 .9-.1c.3 0 .5-.3.9-.6v-.4s0-.2.2-.1a1 1 0 0 1 .8.5c.5 0 1 .3 1.2.7.7 0 1.1.3 1.2.5 0 .2-.2.4-.5.6v.2l.4.4 1 .7c1-.1 2.6.6 4.8 2a18.6 18.6 0 0 1 4.1 1.2h.9c2.4-.4 4.7 0 6.8 1.5.8.1 1.5.4 2.2.7.5.2 1 .3 1.6.3a8 8 0 0 1 2.6.7c1 .2 1.9.7 2.4 1.2.4.5.3 1-.2 1.2-.3.6-.9.6-1.8.3-.6.1-1.3-.4-2-.9-.8-.2-1.6-.8-2.4-1.3l-1.3-.6h-.8v.2c.2.2.4.4.4.8v1c0 .4.3.6.7.9l1 .4c.2 0 .3.1.3.3l.4 1.7.4.3c.6.5.2 1-.3 1a3.1 3.1 0 0 1-1.3.8c-.4.2-.6 0-.7-.2a.5.5 0 0 1-.4-.2c-.5-.4-.1-1 1-.7l.2-.2a1.5 1.5 0 0 1 0-.9l-.3-.2a2.8 2.8 0 0 1-1-.6c-.6-.5-1.5-1-2.4-1.4-.7 0-1.2-.4-1.8-.7h-.8c-.2 0-.4 0-.5.2-.2.3-.5.2-.8.2h-1.6c-.4 0-.7 0-1 .3-.2.2-.4.2-.7 0a1 1 0 0 1-.3-.2c-.3 0-.5 0-.5-.2-.5-.1-.6-.2-.6-.4-.6-.1-.3-.6 0-.6l1.4.1c.4.1 1 0 1.2-.2l.5-.5a4 4 0 0 1-1.8-.5c-1.1-.7-2-.9-2.8-.3-.2.2-.3.2-.6.1a1 1 0 0 0-.5 0c-.5.1-.9 0-1.3-.1a4 4 0 0 1-1.8 0c-.6.3-1 .4-1.2.2a8.6 8.6 0 0 1-.6-.4c-.4-.1-.5-.2-.5-.3-.4 0-.5-.2-.5-.4-.2-.2 0-.3 0-.4.4-.2.7-.2 1 0 .3 0 .5.2.6.3h.6c.1-.2.5-.2 1-.2l.7-.2v-.2c-.4 0-.6-.4-.9-.7a3 3 0 0 1-1.5-.5c-.4 0-.7-.1-1-.3h-.7a2.5 2.5 0 0 1-1.4 0h-.8a1 1 0 0 1-1 .2 1.5 1.5 0 0 0-.8-.5c-.3-.1-.4-.2-.4-.4-.4-.2-.3-.4 0-.5.3-.1.5-.2 1 0l.5.2z\"/>\n" +
     "<path fill=\"#fff\" d=\"M401.2 130.5s0-.2-.3 0c-.8 0-1.6 0-2.2-.4-.7-.4-1.3-.8-2-.8l.7-.4h1.5c.7 0 1.4.2 2 .4.4.2.8.5 1 .8a3.4 3.4 0 0 1 .8.7 2.5 2.5 0 0 1-.7 0 2.9 2.9 0 0 1-.8-.3z\"/>\n" +
     "<path d=\"M403 94.7v.2l.9 4.9-3.7 3.2-.2.1.2.1 4.7 1.6 1 4.9v.2l.2-.1 3.7-3.3 4.6 1.6h.3v-.1l-1-4.9 3.7-3.2.2-.2h-.3l-4.6-1.6-1-4.9V93l-.2.1-3.7 3.3-4.7-1.6z\"/>\n" +
     "<path fill=\"#f7db17\" d=\"m400.6 103 3.5-3 4.4 1.4zm8.5-1.7 3.4-3 4.4 1.5zm7.8-1.3-3.4 3-4.4-1.5zm-8.4 1.6-3.5 3-4.3-1.5zm-5-6.4 4.3 1.4.8 4.6zm5.5 6.4 4.4 1.5.9 4.5zm5.1 6.1-4.3-1.5-.9-4.5zm-5.6-6.4-4.3-1.5-.9-4.5zm3-7.7 1 4.6-3.5 3zm-2.7 8.1.8 4.6-3.4 3zm-2.8 7.5-.9-4.5 3.5-3zm2.8-8-.9-4.6 3.5-3z\"/>\n" +
