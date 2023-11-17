@@ -39,4 +39,5 @@ angular.module('niceElementsDemo', [
   $routeProvider.when(appPathRoute + 'nice-quantity', { templateUrl: pagesPath + 'examples/nice-quantity.html', meta: { name: "Quantity" } });
   $routeProvider.when(appPathRoute + 'nice-loader', { templateUrl: pagesPath + 'examples/nice-loader.html', meta: { name: "Loader" } });
   $routeProvider.when(appPathRoute + 'nice-wrapper', { templateUrl: pagesPath + 'examples/nice-wrapper.html', meta: { name: "Wrapper" } });
+  $routeProvider.when(appPathRoute + 'nice-toggle', { templateUrl: pagesPath + 'examples/nice-toggle.html', meta: { name: "Toggle" } });
 }]);

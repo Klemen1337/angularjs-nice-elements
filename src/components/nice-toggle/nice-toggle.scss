@@ -1,0 +1,68 @@
+.nice-toggle {
+  &:focus-within {
+    .nice-toggle-field {
+      @extend .nice-focus;
+    }
+  }
+
+  .nice-title {
+    min-height: 27px;
+  }
+
+  &.nice-component-inline {
+    .row {
+      display: flex;
+      align-items: center;
+      margin: 0;
+
+      nice-title {
+        order: 2;
+      }
+
+      .nice-title {
+        margin: 0;
+        padding: 0;
+        margin-left: 1rem;
+        line-height: 25px;
+      }
+
+      .nice-field {
+        margin: 0;
+        padding: 0;
+        width: auto;
+        order: 1;
+      }
+    }
+  }
+
+  .nice-toggle-field {
+    border: 1px solid var(--nice-border-color);
+    background: var(--nice-input-bg);
+    border-radius: 1rem;
+    position: relative;
+    width: 50px;
+    height: 25px;
+
+    // &:hover {
+    //   .nice-toggle-field-handle {
+    //     background: var(--nice-primary-color-darker);
+    //   }
+    // }
+
+    .nice-toggle-field-handle {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 19px;
+      height: 19px;
+      background: var(--nice-border-color);
+      border-radius: 50%;
+      transition: left 0.3s ease-in-out;
+
+      &.active {
+        background: var(--nice-primary-color);
+        left: calc(100% - 22px);
+      }
+    }
+  }
+}

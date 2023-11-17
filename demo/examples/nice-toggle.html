@@ -1,0 +1,64 @@
+<div ng-controller='ExampleCtrl'>
+    <h1>Nice toggle</h1>
+
+    <nice-wrapper>
+        <div class="row">
+            <div class="col-sm-6">
+                <nice-toggle model="toggleModel" title="Hey look at me I am a toggler"></nice-toggle>
+                <nice-toggle model="toggleModel" is-inline="true" title="Hey look at me I am a toggler"></nice-toggle>
+                <nice-slot>
+                    <code>{{ toggleModel }}</code>
+                </nice-slot>
+            </div>
+            <div class="col-sm-6">
+                <pre class="prettyprint">&lt;nice-toggle 
+    model="toggleModel" 
+    title="Hey look at me I am a toggler"
+>&lt;/nice-toggle></pre>
+            </div>
+        </div>
+    </nice-wrapper>
+
+
+    <!-- Attributes -->
+    <nice-wrapper title="Attributes" collapsable="true" collapsed="true">
+        <div class="table-responsive">
+            <table class="table table-hover nice-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>yes</td>
+                        <td>Set the yes text</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>no</td>
+                        <td>Set the no text</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>options</td>
+                        <td>Custom options instead of true/false, format:['yes','no']</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>model-value</td>
+                        <td>Gets the custom option instead of true/false</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>defaultFalse</td>
+                        <td>sets default value to false</td>
+                        <td>false</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </nice-wrapper>
+</div>

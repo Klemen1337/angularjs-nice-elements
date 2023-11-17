@@ -39,6 +39,7 @@
   --nice-card-border: #cbd4d9;
   --nice-card-bg: white;
   --nice-card-padding: 2rem;
+  --nice-input-bg: white;
 }
 
 .noselect, .nice-choice li {
@@ -78,7 +79,7 @@ label.nice {
 }
 
 .nice-focus, .nice-component .input-group:focus-within,
-.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-yesno .yesno-wrapper:focus-within, .nice-choice li .choice-checkbox:focus, .nice-dropdown-date select:active, .nice-dropdown-date select:focus, .nice-upload .nice-field:focus-within .input-area {
+.nice-component .form-group:focus-within, .btn.focus, .btn.active.focus, .nice-table.nice-table-settings .btn.focus.nice-table-row:hover, .btn.active:focus, .nice-table.nice-table-settings .btn.nice-table-row:focus:hover, .btn.focus:active, .btn:active:focus, .btn:focus, .nice-dropdown .btn-dropdown:active, .nice-search .nice-dropdown-empty .btn-dropdown:active, .nice-dropdown .btn-dropdown:focus, .nice-search .nice-dropdown-empty .btn-dropdown:focus, .nice-dropdown-old .btn-dropdown:active, .nice-dropdown-old .btn-dropdown:focus, .nice-yesno .yesno-wrapper:focus-within, .nice-choice li .choice-checkbox:focus, .nice-dropdown-date select:active, .nice-dropdown-date select:focus, .nice-upload .nice-field:focus-within .input-area, .nice-toggle:focus-within .nice-toggle-field {
   outline: 2px solid;
   outline-color: var(--nice-primary-color);
   outline-offset: 2px;
@@ -4943,6 +4944,59 @@ p.nice {
   min-height: auto;
   border: 0 none;
   color: white;
+}
+
+.nice-toggle .nice-title {
+  min-height: 27px;
+}
+
+.nice-toggle.nice-component-inline .row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.nice-toggle.nice-component-inline .row nice-title {
+  order: 2;
+}
+
+.nice-toggle.nice-component-inline .row .nice-title {
+  margin: 0;
+  padding: 0;
+  margin-left: 1rem;
+  line-height: 25px;
+}
+
+.nice-toggle.nice-component-inline .row .nice-field {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  order: 1;
+}
+
+.nice-toggle .nice-toggle-field {
+  border: 1px solid var(--nice-border-color);
+  background: var(--nice-input-bg);
+  border-radius: 1rem;
+  position: relative;
+  width: 50px;
+  height: 25px;
+}
+
+.nice-toggle .nice-toggle-field .nice-toggle-field-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 19px;
+  height: 19px;
+  background: var(--nice-border-color);
+  border-radius: 50%;
+  transition: left 0.3s ease-in-out;
+}
+
+.nice-toggle .nice-toggle-field .nice-toggle-field-handle.active, .nice-toggle .nice-toggle-field .nice-table.nice-table-settings .nice-toggle-field-handle.nice-table-row:hover, .nice-table.nice-table-settings .nice-toggle .nice-toggle-field .nice-toggle-field-handle.nice-table-row:hover {
+  background: var(--nice-primary-color);
+  left: calc(100% - 22px);
 }
 
 .nice-multilangual-modal .nice-multilangual-languages .nice-multilangual-language {

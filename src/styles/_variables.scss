@@ -190,4 +190,7 @@ $nice-table-bg-active: #f5f5f5 !default;
   --nice-card-border: #{$nice-border-color};
   --nice-card-bg: white;
   --nice-card-padding: 2rem;
+
+  // ---------- Input ----------
+  --nice-input-bg: #{$nice-input-bg};
 }
