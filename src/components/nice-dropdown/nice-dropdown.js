@@ -40,6 +40,7 @@ angular.module('niceElements')
         noDataText: '@',
         selectText: '@',
         searchText: '@',
+        noSearch: '=',
         nullableText: '@',
         selectedText: '@',
         dropdownDistance: '@',

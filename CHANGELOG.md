@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.9.7 (26.10.2023)
+
+- fixed nice search on update
+
+## v1.9.6 (26.10.2023)
+
+- added no search prop to nice dropdown
+
 ## v1.9.5 (22.9.2023)
 
 - fixed multiple select key only in nice dropdown

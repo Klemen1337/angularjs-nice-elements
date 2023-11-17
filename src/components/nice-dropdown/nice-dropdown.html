@@ -27,7 +27,7 @@
                 <!------------------------- Dropdown menu ------------------------->
                 <div class="nice-dropdown-menu-wrapper">
                     <div class="nice-dropdown-menu" ng-if="isOpen">
-                        <div class="search-bar" ng-if="searchFunction">
+                        <div class="search-bar" ng-if="!noSearch && searchFunction">
                             <input ng-model="internal.search" ng-model-options="{ debounce: 500 }" ng-change="handleSearch()" placeholder="{{ searchText }}" />
                             <div class="count" ng-if="internalList && internalList._metadata && enableLoadMore">{{ internalList.length }}/{{ internalList._metadata.count }}</div>
                             <nice-icon ng-if="!internal.search" class="icon" icon="icon-search"></nice-icon>
