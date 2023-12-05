@@ -3810,7 +3810,7 @@ angular.module('niceElements')
           scope.valid = scope.form;
         }
 
-        if (angular.isDefined(attrs.minDecimalsCutZeros) && attrs.type == 'number') {
+        if (scope.model && angular.isDefined(attrs.minDecimalsCutZeros) && attrs.type == 'number') {
           scope.model = Number(scope.model);
           if (scope.model.toString().split('.').length < 2 || scope.model.toString().split('.')[1].length < parseInt(attrs.minDecimalsCutZeros)) {
             scope.model = Number((Number(scope.model)).toFixed(parseInt(attrs.minDecimalsCutZeros)));
