@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar" ng-class="{ 'open': isOpen }">
     <a href="#" class="logo">
         <img src="/assets/logo-transparent-white.png" alt="Nice elements" />
     </a>
@@ -8,4 +8,8 @@
             <a ng-href="#{{ route.originalPath }}" href>{{ route.meta.name }}</a>
         </li>
     </ul>
+    <button class="btn btn-icon btn-primary sidebar-handle" ng-click="toggle()">
+        <nice-icon icon="icon-list"></nice-icon>
+    </button>
 </aside>
+<div class="sidebar-overlay" ng-if="isOpen" ng-click="close()"></div>
