@@ -14,7 +14,7 @@
                 }">
 
                 <textarea ng-if="textArea" class="form-control" ng-model="$parent.model" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" rows="{{textAreaLines}}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-pattern="regexexp" ng-disabled="isDisabled"></textarea>
-                <input ng-if="!textArea" class="form-control" type="{{ internalType }}" ng-model="$parent.model" name="{{ name }}" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-keypress="keypress($event)" ng-pattern="regexexp" ng-disabled="isDisabled" />
+                <input ng-if="!textArea" class="form-control" type="{{ internalType }}" inputmode="{{ inputMode }}" ng-model="$parent.model" name="{{ name }}" id="{{ id }}" tabindex="{{ tabIndex }}" placeholder="{{ placeholder }}" max="{{ max }}" min="{{ min }}" ng-minlength="minlength" ng-maxlength="maxlength" ng-required="required" ng-keypress="keypress($event)" ng-pattern="regexexp" ng-disabled="isDisabled" />
 
                 <div class="input-group-addon" ng-if="symbol">{{ symbol }}</div>
                 <button class="input-group-btn" ng-if="multilanguageField" ng-click="openMultilanguage()">

@@ -59,6 +59,7 @@ angular.module('niceElements')
         attrs.textArea = angular.isDefined(attrs.textArea);
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         attrs.required = attrs.required === 'true';
+        scope.inputMode = null;
         //attrs.required = angular.isDefined(attrs.required);
 
         if (!scope.textArea) {
@@ -72,13 +73,19 @@ angular.module('niceElements')
           if (input) input.focus();
         }
 
+        if (scope.numbersOnly) {
+          scope.inputMode = "numeric";
+        }
+
         // Set internal type
         scope.internalType = attrs.type;
         if (attrs.type == "percent") {
           scope.internalType = "percent";
+          scope.inputMode = "decimal";
           attrs.symbol = '%';
         } else if (attrs.type == "number") {
-          scope.internalType = "number";
+          scope.internalType = "text";
+          scope.inputMode = "decimal";
           if (scope.model) {
             scope.model = Number(scope.model);
           } else {
@@ -86,8 +93,10 @@ angular.module('niceElements')
           }
         } else if (attrs.type == "integer") {
           scope.internalType = "text";
+          scope.inputMode = "numeric";
           scope.model = Number(scope.model);
         } else if (attrs.type == "email") {
+          scope.inputMode = "email";
           // TODO: get rid of the errors
           scope.regexexp = new RegExp('^[_a-zA-Z0-9]+(.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+(.[a-zA-Z]{2,4})');
         }
