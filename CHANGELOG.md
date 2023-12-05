@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.9.10 (5.12.2023)
+
+- fixed default number is null instead of 0
+
 ## v1.9.9 (5.12.2023)
 
 - changed input internal type to text if type is number,
