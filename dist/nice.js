@@ -3764,6 +3764,7 @@ angular.module('niceElements')
         attrs.textArea = angular.isDefined(attrs.textArea);
         attrs.noMargin = angular.isDefined(attrs.noMargin);
         attrs.required = attrs.required === 'true';
+        scope.inputMode = null;
         //attrs.required = angular.isDefined(attrs.required);
 
         if (!scope.textArea) {
@@ -3777,13 +3778,19 @@ angular.module('niceElements')
           if (input) input.focus();
         }
 
+        if (scope.numbersOnly) {
+          scope.inputMode = "numeric";
+        }
+
         // Set internal type
         scope.internalType = attrs.type;
         if (attrs.type == "percent") {
           scope.internalType = "percent";
+          scope.inputMode = "decimal";
           attrs.symbol = '%';
         } else if (attrs.type == "number") {
-          scope.internalType = "number";
+          scope.internalType = "text";
+          scope.inputMode = "decimal";
           if (scope.model) {
             scope.model = Number(scope.model);
           } else {
@@ -3791,8 +3798,10 @@ angular.module('niceElements')
           }
         } else if (attrs.type == "integer") {
           scope.internalType = "text";
+          scope.inputMode = "numeric";
           scope.model = Number(scope.model);
         } else if (attrs.type == "email") {
+          scope.inputMode = "email";
           // TODO: get rid of the errors
           scope.regexexp = new RegExp('^[_a-zA-Z0-9]+(.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+(.[a-zA-Z]{2,4})');
         }
@@ -5824,7 +5833,7 @@ angular.module('niceElements')
   .service('NiceService', function () {
     var service = {
       name: "Nice elements",
-      version: "1.9.8",
+      version: "1.9.9",
       getHeader: function () {
         return {};
       }
@@ -6519,7 +6528,7 @@ angular.module('niceElements').run(['$templateCache', function($templateCache) {
     "                    'nice-disabled': isDisabled\n" +
     "                }\">\n" +
     "<textarea ng-if=\"textArea\" class=\"form-control\" ng-model=\"$parent.model\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" rows=\"{{textAreaLines}}\" max=\"{{ max }}\" min=\"{{ min }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\"></textarea>\n" +
-    "<input ng-if=\"!textArea\" class=\"form-control\" type=\"{{ internalType }}\" ng-model=\"$parent.model\" name=\"{{ name }}\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" max=\"{{ max }}\" min=\"{{ min }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\">\n" +
+    "<input ng-if=\"!textArea\" class=\"form-control\" type=\"{{ internalType }}\" inputmode=\"{{ inputMode }}\" ng-model=\"$parent.model\" name=\"{{ name }}\" id=\"{{ id }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ placeholder }}\" max=\"{{ max }}\" min=\"{{ min }}\" ng-minlength=\"minlength\" ng-maxlength=\"maxlength\" ng-required=\"required\" ng-keypress=\"keypress($event)\" ng-pattern=\"regexexp\" ng-disabled=\"isDisabled\">\n" +
     "<div class=\"input-group-addon\" ng-if=\"symbol\">{{ symbol }}</div>\n" +
     "<button class=\"input-group-btn\" ng-if=\"multilanguageField\" ng-click=\"openMultilanguage()\">\n" +
     "<nice-icon icon=\"icon-translate\"></nice-icon>\n" +

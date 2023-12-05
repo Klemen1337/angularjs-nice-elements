@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.9.9 (5.12.2023)
+
+- changed input internal type to text if type is number,
+- added input modes to nice input,
+- worked on demo page
+
+## v1.9.8 (17.11.2023)
+
+-
+
 ## v1.9.7 (26.10.2023)
 
 - fixed nice search on update
