@@ -2,7 +2,6 @@
 
 angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScope, $scope, $http, $q, NiceNotification, $timeout) {
   $scope.emptyList = [];
-  $scope.inputNumber = null;
   $scope.dropdownLoading = true;
   $scope.isInline = false;
   $scope.iconSize = 50;
@@ -17,6 +16,7 @@ angular.module('niceElementsDemo').controller('ExampleCtrl', function ($rootScop
     search: ""
   }
   $scope.model = {
+    inputNumber: 0,
     niceDateInputStart: moment().add(1, "days").hours(19).minutes(0).seconds(0),
     niceDateInputEnd: moment().add(2, "days").hours(3).minutes(0).seconds(0)
   };

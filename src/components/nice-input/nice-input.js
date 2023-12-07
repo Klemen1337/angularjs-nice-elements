@@ -86,7 +86,7 @@ angular.module('niceElements')
         } else if (attrs.type == "number") {
           scope.internalType = "text";
           scope.inputMode = "decimal";
-          if (scope.model) {
+          if (scope.model != null) {
             scope.model = Number(scope.model);
           } else {
             scope.model = null;
