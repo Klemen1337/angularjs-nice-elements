@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.9.12 (7.12.2023)
+
+- added title on left prop to nice checkbox,
+- added responsive spacings
+
 ## v1.9.11 (7.12.2023)
 
 - fixed nice input model default 0
