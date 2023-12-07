@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.9.11 (7.12.2023)
+
+- fixed nice input model default 0
+
 ## v1.9.10 (5.12.2023)
 
 - fixed default number is null instead of 0
