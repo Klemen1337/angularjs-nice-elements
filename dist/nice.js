@@ -18,7 +18,7 @@ angular.module('niceElements')
         label: '@'
       },
       link: function postLink(scope, element, attrs) {
-        if (angular.isDefined(scope.model)) {
+        if (angular.isDefined(scope.model)){
           scope.model = false;
         }
       }
@@ -418,6 +418,7 @@ angular.module('niceElements')
       scope: {
         model: '=',
         title: '@',
+        titleOnLeft: '=',
         noMargin: '@',
         clickDisabled: '@',
         onChange: '&?',
@@ -655,14 +656,14 @@ angular.module('niceElements')
  * # clickOutside
  */
 angular.module('niceElements')
-  .directive('clickOutside', function ($document, $parse, $timeout) {
+  .directive('clickOutside', function($document, $parse, $timeout){
     return {
       restrict: 'A',
       link: function ($scope, elem, attr) {
         $scope.isOpen = false;
 
         // watch for is open
-        attr.$observe('isOpen', function (value) {
+        attr.$observe('isOpen', function(value){
           $scope.isOpen = value == 'true';
         });
 
@@ -717,7 +718,7 @@ angular.module('niceElements')
               // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
               $timeout(function () {
                 fn = $parse(attr['clickOutside']);
-                fn($scope, { event: e });
+                fn($scope, {event: e});
               });
             }
           }
@@ -751,7 +752,7 @@ angular.module('niceElements')
         });
       }
     };
-  });
+});
 'use strict';
 
 /**
@@ -942,7 +943,7 @@ angular.module('niceElements')
  */
 angular.module('niceElements')
 
-  .directive('niceDateRange', function () {
+  .directive('niceDateRange', function() {
     return {
       restrict: 'E',
       transclude: true,
@@ -962,16 +963,16 @@ angular.module('niceElements')
         onChange: '&?'
       },
 
-      link: function (scope, attrs) {
+      link: function(scope, attrs){
         if (!attrs.title) { attrs.title = ''; }
         if (!attrs.fieldWidth) { attrs.fieldWidth = 'col-sm-8'; }
         if (!attrs.labelWidth) { attrs.labelWidth = 'col-sm-4'; }
         if (!attrs.format) { attrs.format = 'dd.MM.yyyy'; }
         attrs.noMargin = angular.isDefined(attrs.noMargin);
 
-        if (!angular.isDefined(scope.model)) {
+        if(!angular.isDefined(scope.model)) {
           var model = null;
-          if (!angular.isDefined(scope.startOfTheYear)) {
+          if(!angular.isDefined(scope.startOfTheYear)){
             model = {
               startDate: moment().format(),
               endDate: moment().format()
@@ -987,7 +988,7 @@ angular.module('niceElements')
         }
       },
 
-      controller: function ($scope) {
+      controller: function($scope) {
         $scope.opts = {
           locale: {
             applyClass: 'btn-green',
@@ -1003,7 +1004,7 @@ angular.module('niceElements')
         $scope.opts.ranges[gettextCatalog.getString("Last 30 days", null, "Nice")] = [moment().subtract(30, 'days'), moment()];
         $scope.opts.ranges[gettextCatalog.getString("This month", null, "Nice")] = [moment().startOf('month'), moment().endOf('month')];
 
-        if (angular.isDefined($scope.format)) $scope.opts.format = format;
+        if(angular.isDefined($scope.format)) $scope.opts.format = format;
       }
 
     };
@@ -3709,6 +3710,7 @@ angular.module('niceElements')
       templateUrl: 'src/components/nice-input/nice-input.html',
       restrict: 'E',
       transclude: true,
+      // replace: true,
       scope: {
         model: '=',
         valid: '=',
@@ -4007,42 +4009,42 @@ angular.module('niceElements')
 
     var messageElements = [];
 
-    var notify = function (args, t) {
+    var notify = function(args, t){
 
-      if (typeof args !== 'object') {
-        args = { message: args };
+      if (typeof args !== 'object'){
+        args = {message:args};
       }
 
       args.template = args.template ? args.template : 'src/components/nice-notification/nice-notification.html';
       args.delay = !angular.isUndefined(args.delay) ? args.delay : delay;
       args.type = t ? t : '';
 
-      $http.get(args.template, { cache: $templateCache }).success(function (template) {
+      $http.get(args.template,{cache: $templateCache}).success(function(template) {
 
         var scope = $rootScope.$new();
         scope.message = $sce.trustAsHtml(args.message);
         scope.title = $sce.trustAsHtml(args.title);
-        scope.t = args.type.substr(0, 1);
+        scope.t = args.type.substr(0,1);
         scope.delay = args.delay;
 
-        if (typeof args.scope === 'object') {
-          for (var key in args.scope) {
+        if (typeof args.scope === 'object'){
+          for (var key in args.scope){
             scope[key] = args.scope[key];
           }
         }
 
-        var reposite = function () {
+        var reposite = function() {
           var j = 0;
           var k = 0;
           var lastTop = startTop;
           var lastRight = startRight;
-          for (var i = messageElements.length - 1; i >= 0; i--) {
+          for(var i = messageElements.length - 1; i >= 0; i --) {
             var element = messageElements[i];
             var elHeight = parseInt(element[0].offsetHeight);
             var elWidth = parseInt(element[0].offsetWidth);
             if ((top + elHeight) > window.innerHeight) {
               lastTop = startTop;
-              k++;
+              k ++;
               j = 0;
             }
             var top = lastTop + (j === 0 ? 0 : verticalSpacing);
@@ -4052,22 +4054,22 @@ angular.module('niceElements')
             element.css('right', right + 'px');
 
             lastTop = top + elHeight;
-            j++;
+            j ++;
           }
         };
 
         var templateElement = $compile(template)(scope);
         templateElement.addClass(args.type);
-        templateElement.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd click', function (e) {
+        templateElement.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd click', function(e){
           e = e.originalEvent || e;
-          if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 0.4)) {
+          if (e.type === 'click' || (e.propertyName === 'opacity' && e.elapsedTime >= 0.4)){
             templateElement.remove();
             messageElements.splice(messageElements.indexOf(templateElement), 1);
             reposite();
           }
         });
 
-        $timeout(function () {
+        $timeout(function() {
           templateElement.addClass('killed');
           templateElement.remove();
           messageElements.splice(messageElements.indexOf(templateElement), 1);
@@ -4079,34 +4081,34 @@ angular.module('niceElements')
 
         $timeout(reposite);
 
-      }).error(function (data) {
-        throw new Error('Template (' + args.template + ') could not be loaded. ' + data);
+      }).error(function(data){
+        throw new Error('Template ('+args.template+') could not be loaded. ' + data);
       });
 
     };
 
-    notify.config = function (args) {
-      startTop = args.top ? args.top : startTop;
-      verticalSpacing = args.verticalSpacing ? args.verticalSpacing : verticalSpacing;
+    notify.config = function(args){
+		  startTop = args.top ? args.top : startTop;
+		  verticalSpacing = args.verticalSpacing ? args.verticalSpacing : verticalSpacing;
     };
 
-    notify.primary = function () {
+    notify.primary = function() {
       this(args, '');
     };
 
-    notify.error = function (args) {
+    notify.error = function(args) {
       this(args, 'error');
     };
 
-    notify.success = function (args) {
+    notify.success = function(args) {
       this(args, 'success');
     };
 
-    notify.info = function (args) {
+    notify.info = function(args) {
       this(args, 'info');
     };
 
-    notify.warning = function (args) {
+    notify.warning = function(args) {
       this(args, 'warning');
     };
 
@@ -4537,7 +4539,7 @@ angular.module('niceElements')
  * # niceProgressBar
  */
 angular.module('niceElements')
-  .directive('niceProgressBar', function () {
+  .directive('niceProgressBar', function() {
     return {
       restrict: 'E',
       replace: true,
@@ -4552,29 +4554,29 @@ angular.module('niceElements')
         help: '@'
       },
 
-      controller: function ($scope, $element, $timeout) {
+      controller: function($scope, $element, $timeout) {
         $scope.width = 0;
-        $scope.resize = function () {
-          $timeout(function () {
+        $scope.resize = function(){
+          $timeout(function() {
             $scope.width = $element[0].getElementsByClassName("progress")[0].offsetWidth;
-          }, 100);
+          },100);
         };
-        window.onresize = function () {
+        window.onresize = function() {
           $scope.resize();
         };
         $scope.resize();
 
+        
 
-
-        $scope.$watch("value", function (valueNew, valueOld) {
+        $scope.$watch("value", function(valueNew, valueOld){
           $scope.calculate();
         });
 
-        $scope.$watch("max", function (valueNew, valueOld) {
+        $scope.$watch("max", function(valueNew, valueOld){
           $scope.calculate();
         });
 
-        $scope.calculate = function () {
+        $scope.calculate = function(){
           $scope.percentage = ($scope.value / $scope.max) * 100;
         };
 
@@ -5705,24 +5707,24 @@ angular.module('niceElements')
         isInline: '=',
         help: '@'
       },
-      controller: function ($scope, gettextCatalog) {
+      controller: function($scope, gettextCatalog) {
         if (!$scope.yes) { $scope.yes = gettextCatalog.getString('Yes', null, "Nice"); }
         if (!$scope.no) { $scope.no = gettextCatalog.getString('No', null, "Nice"); }
         if (!$scope.title) { $scope.title = ''; }
         if (!$scope.fieldWidth) { $scope.fieldWidth = 'col-sm-8'; }
         if (!$scope.labelWidth) { $scope.labelWidth = 'col-sm-4'; }
-        if (!angular.isDefined($scope.model) && !angular.isDefined($scope.options)) $scope.model = !angular.isDefined($scope.defaultFalse);
-        if (!angular.isDefined($scope.modelValue) && angular.isDefined($scope.options)) $scope.modelValue = $scope.options[0];
+        if(!angular.isDefined($scope.model) && !angular.isDefined($scope.options)) $scope.model = !angular.isDefined($scope.defaultFalse);
+        if(!angular.isDefined($scope.modelValue) && angular.isDefined($scope.options)) $scope.modelValue = $scope.options[0];
 
         $scope.defaultFalse = angular.isDefined($scope.defaultFalse);
         $scope.noMargin = angular.isDefined($scope.noMargin);
 
         $scope.buttonClass = "";
-
+        
 
         // ------------------------- Set overlay button position based on passed state in $scope.model -------------------------
-        $scope.setButtonPosition = function (state) {
-          if (state) {
+        $scope.setButtonPosition = function(state) {
+          if(state) {
             $scope.buttonClass = "yesno-button-yes";
           } else {
             $scope.buttonClass = "yesno-button-no";
@@ -5730,48 +5732,48 @@ angular.module('niceElements')
         };
 
         // ------------------------- Watch for changes from outside -------------------------
-        $scope.$watch('model', function (value_new, value_old) {
-          if (angular.isDefined($scope.model)) {
+        $scope.$watch('model', function(value_new, value_old){
+          if(angular.isDefined($scope.model)){
             $scope.setButtonLabel($scope.model);
             $scope.setButtonPosition($scope.model);
           }
         });
 
         // ------------------------- Watch for model value -------------------------
-        $scope.$watch('modelValue', function (value_new, value_old) {
-          if ($scope.options) {
+        $scope.$watch('modelValue', function(value_new, value_old){
+          if($scope.options){
             $scope.model = $scope.modelValue == $scope.options[0];
           }
         });
 
         // ------------------------- Set button label -------------------------
-        $scope.setButtonLabel = function (state) {
+        $scope.setButtonLabel = function(state){
           if (state) {
             $scope.state = $scope.yes;
           } else {
             $scope.state = $scope.no;
           }
         };
-
+        
         // ------------------------- Set width -------------------------
-        $scope.setWidth = function (width, el) {
+        $scope.setWidth = function(width, el){
           el.style.width = width;
         };
-
+  
 
         // ------------------------- Switch -------------------------
-        $scope.switch = function () {
-          if (!$scope.isDisabled) {
+        $scope.switch = function(){
+          if(!$scope.isDisabled){
             $scope.model = !$scope.model;
-
-            if ($scope.options) {
-              if ($scope.model) {
+            
+            if($scope.options){
+              if($scope.model){
                 $scope.modelValue = $scope.options[0];
               } else {
                 $scope.modelValue = $scope.options[1];
               }
             }
-
+            
             if ($scope.onChange) $scope.onChange({ model: $scope.model });
             $scope.formYesno.$setDirty();
           }
@@ -5909,7 +5911,7 @@ angular.module('niceElements')
     };
   });
 
-angular.module('niceElements').run(['$templateCache', function ($templateCache) {
+angular.module('niceElements').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('src/components/nice-button-toggle/nice-button-toggle.html',
@@ -6016,11 +6018,11 @@ angular.module('niceElements').run(['$templateCache', function ($templateCache) 
 
 
   $templateCache.put('src/components/nice-checkbox/nice-checkbox.html',
-    "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'checked': model, 'margin-bottom-0' : noMargin, 'nice-checkbox-disabled': isDisabled }\" ng-click=\"toggle()\">\n" +
-    "<button class=\"btn checkbox\" type=\"button\" ng-disabled=\"isDisabled\">\n" +
-    "<nice-icon class=\"check\" icon=\"icon-check\"></nice-icon>\n" +
+    "<div class=\"nice-component nice-checkbox\" ng-class=\"{ 'nice-checkbox-checked': model, 'margin-bottom-0' : noMargin, 'nice-checkbox-disabled': isDisabled, 'nice-checkbox-left': titleOnLeft }\" ng-click=\"toggle()\">\n" +
+    "<button class=\"btn nice-checkbox-checkbox\" type=\"button\" ng-disabled=\"isDisabled\">\n" +
+    "<nice-icon class=\"nice-checkbox-check\" icon=\"icon-check\"></nice-icon>\n" +
     "</button>\n" +
-    "<div ng-if=\"title\" class=\"message\" ng-class=\"{ 'nice-disabled': isDisabled }\">{{ title }}</div>\n" +
+    "<div ng-if=\"title\" class=\"nice-checkbox-message\" ng-class=\"{ 'nice-disabled': isDisabled }\">{{ title }}</div>\n" +
     "</div>"
   );
 
@@ -6516,14 +6518,14 @@ angular.module('niceElements').run(['$templateCache', function ($templateCache) 
 
 
   $templateCache.put('src/components/nice-input/nice-input.html',
-    "<ng-form class=\"nice-component nice-input\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" name=\"forma\">\n" +
+    "<div class=\"nice-component nice-input\" ng-class=\"{ 'margin-bottom-0' : noMargin, 'nice-component-inline': isInline }\" ng-form=\"inputForm\">\n" +
     "<div class=\"row\">\n" +
     "<nice-title text=\"title\" help=\"help\" required=\"required\" label-width=\"labelWidth\"></nice-title>\n" +
     "<div class=\"nice-field col-xs-12\" ng-class=\"fieldWidth ? fieldWidth : 'col-sm-8'\">\n" +
     "<div class=\"input-group\" ng-class=\"{\n" +
     "                    'has-feedback': showValid && !hideValid,\n" +
-    "                    'has-warning': !isDisabled && forma.$invalid && forma.$dirty && !hideValid,\n" +
-    "                    'has-success': !isDisabled && forma.$valid && forma.$dirty && showValid,\n" +
+    "                    'has-warning': !isDisabled && inputForm.$invalid && inputForm.$dirty && !hideValid,\n" +
+    "                    'has-success': !isDisabled && inputForm.$valid && inputForm.$dirty && showValid,\n" +
     "                    'symbol': symbol,\n" +
     "                    'nice-disabled': isDisabled\n" +
     "                }\">\n" +
@@ -6538,22 +6540,22 @@ angular.module('niceElements').run(['$templateCache', function ($templateCache) 
     "<nice-icon icon=\"icon-x\"></nice-icon>\n" +
     "</button>\n" +
     "</div>\n" +
-    "<div ng-if=\"forma.$error && forma.$dirty\">\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.email\" translate translate-context=\"Nice\">Email is not valid.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$dirty && forma.$error.pattern\">\n" +
+    "<div ng-if=\"inputForm.$error && inputForm.$dirty\">\n" +
+    "<div class=\"error-message\" ng-if=\"inputForm.$dirty && inputForm.$error.email\" translate translate-context=\"Nice\">Email is not valid.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"inputForm.$dirty && inputForm.$error.pattern\">\n" +
     "<span ng-if=\"regexError\">{{ regexError }}</span>\n" +
     "<span ng-if=\"!regexError\" translate translate-context=\"Nice\">This field requires a specific pattern.</span>\n" +
     "</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.minlength\">\n" +
+    "<div class=\"error-message\" ng-if=\"inputForm.$error.minlength\">\n" +
     "<translate translate-context=\"Nice\">Your input is too short. It must contain at least</translate>&nbsp;{{ minlength }}&nbsp;<translate translate-context=\"Nice\">characters</translate>.\n" +
     "</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.maxlength\" translate translate-context=\"Nice\">Your input is too long</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.required\" ng-if=\"forma.$dirty\" translate translate-context=\"Nice\">This field is required.</div>\n" +
-    "<div class=\"error-message\" ng-if=\"forma.$error.unique\" translate translate-context=\"Nice\">This field must be unique.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"inputForm.$error.maxlength\" translate translate-context=\"Nice\">Your input is too long</div>\n" +
+    "<div class=\"error-message\" ng-if=\"inputForm.$error.required\" ng-if=\"inputForm.$dirty\" translate translate-context=\"Nice\">This field is required.</div>\n" +
+    "<div class=\"error-message\" ng-if=\"inputForm.$error.unique\" translate translate-context=\"Nice\">This field must be unique.</div>\n" +
     "</div>\n" +
     "</div>\n" +
     "</div>\n" +
-    "</ng-form>"
+    "</div>"
   );
 
 

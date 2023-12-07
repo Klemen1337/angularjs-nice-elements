@@ -14,6 +14,7 @@ angular.module('niceElements')
       scope: {
         model: '=',
         title: '@',
+        titleOnLeft: '=',
         noMargin: '@',
         clickDisabled: '@',
         onChange: '&?',
